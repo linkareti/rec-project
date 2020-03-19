@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<reCFaceConfig usersListRefreshRateMs="10000"
+	splashIconLocationBundleKey="ReCUI$rec.ui.icon.splash" showVideoFrame="false"
+	showUserList="true" showChatFrame="true" iconSponsorLocationBundleKey="bundleName#bundleKey"
+	iconLocationBundleKey="ReCUI$rec.ui.icon.frame"
+	helpPageLocationBundleKey="ReCUI$rec.ui.url.help" frameTitleBundleKey="ReCUI$rec.ui.title.frame"
+	enterApparatusChatRoom="true" enableVideoFrame="false" enableUsersList="true"
+	enableLoginPassword="false" enableChatFrame="true" autoConnectLab="false"
+	appPreferredWidth="848" appPreferredHeight="478"
+	aboutPageLocationBundleKey="ReCUI$rec.ui.url.about" xmlns="http://rec.linkare.com/client/config">
+	<localizationBundle name="ReCUI"
+		location="recresource:///com/linkare/rec/impl/newface/resources/ReCUI" />
+	<localizationBundle name="ReCLabeLab"
+		location="recresource:///pt/utl/ist/elab/resources/ReCLabeLab" />
+	<webResource toolTipLocationBundleKey="ReCUI$rec.url.tip.linkare"
+		displayStringBundleKey="ReCUI$rec.url.title.linkare"
+		locationBundleKey="ReCUI$rec.url.href.linkare" iconLocationBundleKey=""
+		order="0" enabled="true" internalBrowser="false" />
+	<!--Start Lab configuration -->
+	
+					<lab
+	location="corbaloc:iiop:1.2@elab1.ist.utl.pt:9001/MultiCastController"
+	labId="LAB_ME_BASIC" labIdStringBundleKey="ReCLabeLab$rec.lab.name.elab.LAB_ME_BASIC"
+	displayStringBundleKey="ReCLabeLab$rec.lab.title.elab.LAB_ME_BASIC"
+	toolTipBundleKey="ReCLabeLab$rec.lab.tip.elab.LAB_ME_BASIC"
+	iconLocationBundleKey="ReCLabeLab$rec.lab.icon.elab.LAB_ME_BASIC"
+	desktopLocationBundleKey="ReCLabeLab$rec.lab.image.desktop.LAB_ME_BASIC" xmlns="http://rec.linkare.com/client/config">
+	<webResource toolTipLocationBundleKey="ReCLabeLab$rec.url.tip.elab.LAB_ME_BASIC"
+		displayStringBundleKey="ReCLabeLab$rec.url.title.elab.LAB_ME_BASIC"
+		locationBundleKey="ReCLabeLab$rec.url.href.elab.LAB_ME_BASIC"
+		iconLocationBundleKey="" order="0" enabled="true" internalBrowser="false" />
+	<!--Start basic Apparatus configuration -->
+	
+					<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="fotovoltaico$rec.exp.tip.fotovoltaico" location="ELAB_PAINEL-FOTOVOLTAICO_DSPIC_V3" iconLocationBundleKey="fotovoltaico$rec.exp.icon.fotovoltaico" headerDisplayClassLocationBundleKey="" displayStringBundleKey="fotovoltaico$rec.exp.title.fotovoltaico" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="fotovoltaico$rec.exp.background.fotovoltaico" descriptionStringBundleKey="fotovoltaico$rec.exp.description.fotovoltaico" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="fotovoltaico$rec.exp.customizer.fotovoltaico" order="0">
+    <defaultAcquisitionConfig toolTipBundleKey="fotovoltaico$rec.exp.dftcfg.fotovoltaico.tip.1" iconLocationBundleKey="ReCUI$rec.ui.icon.customize" displayStringBundleKey="fotovoltaico$rec.exp.dftcfg.fotovoltaico.title.1" classLocationBundleKey="fotovoltaico$rec.exp.dftcfg.fotovoltaico.loc.1" order="0"/>
+    <display toolTipBundleKey="fotovoltaico$rec.exp.display.fotovoltaico.tip.1" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="fotovoltaico$rec.exp.display.fotovoltaico.title.1" classLocationBundleKey="fotovoltaico$rec.exp.display.fotovoltaico.loc.1" order="0"/>
+    <display toolTipBundleKey="fotovoltaico$rec.exp.display.fotovoltaico.tip.2" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="fotovoltaico$rec.exp.display.fotovoltaico.title.2" classLocationBundleKey="fotovoltaico$rec.exp.display.fotovoltaico.loc.2" order="0"/>
+    <localizationBundle name="fotovoltaico" location="recresource:///pt/utl/ist/elab/client/fotovoltaico/resources/messages"/>
+    <mediaConfig videoLocation="fotovoltaico$rec.exp.url.fotovoltaico.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+    <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+    <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+</apparatus>
+
+			
+					<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="planoinclinado$rec.exp.tip.planoinclinado" location="ELAB_PLANO-INCLINADO_DSPIC_V1" iconLocationBundleKey="planoinclinado$rec.exp.icon.planoinclinado" headerDisplayClassLocationBundleKey="" displayStringBundleKey="planoinclinado$rec.exp.title.planoinclinado" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="planoinclinado$rec.exp.background.planoinclinado" descriptionStringBundleKey="planoinclinado$rec.exp.description.planoinclinado" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="planoinclinado$rec.exp.customizer.planoinclinado" order="0">
+    <defaultAcquisitionConfig toolTipBundleKey="planoinclinado$rec.exp.dftcfg.planoinclinado.tip.1" iconLocationBundleKey="ReCUI$rec.ui.icon.customize" displayStringBundleKey="planoinclinado$rec.exp.dftcfg.planoinclinado.title.1" classLocationBundleKey="planoinclinado$rec.exp.dftcfg.planoinclinado.loc.1" order="0"/>
+    <display toolTipBundleKey="planoinclinado$rec.exp.display.planoinclinado.tip.1" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="planoinclinado$rec.exp.display.planoinclinado.title.1" classLocationBundleKey="planoinclinado$rec.exp.display.planoinclinado.loc.1" order="0"/>
+    <display toolTipBundleKey="planoinclinado$rec.exp.display.planoinclinado.tip.2" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="planoinclinado$rec.exp.display.planoinclinado.title.2" classLocationBundleKey="planoinclinado$rec.exp.display.planoinclinado.loc.2" order="0"/>
+    <localizationBundle name="planoinclinado" location="recresource:///pt/utl/ist/elab/client/planoinclinado/resources/messages"/>
+    <mediaConfig videoLocation="planoinclinado$rec.exp.url.planoinclinado.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+    <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+    <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+</apparatus>
+
+			<!--End basic Apparatus configuration -->
+</lab>
+			
+					<lab
+	location="corbaloc:iiop:1.2@elab1.ist.utl.pt:9002/MultiCastController"
+	labId="LAB_ME_INTERMEDIATE" labIdStringBundleKey="ReCLabeLab$rec.lab.name.elab.LAB_ME_INTERMEDIATE"
+	displayStringBundleKey="ReCLabeLab$rec.lab.title.elab.LAB_ME_INTERMEDIATE"
+	toolTipBundleKey="ReCLabeLab$rec.lab.tip.elab.LAB_ME_INTERMEDIATE"
+	iconLocationBundleKey="ReCLabeLab$rec.lab.icon.elab.LAB_ME_INTERMEDIATE"
+	desktopLocationBundleKey="ReCLabeLab$rec.lab.image.desktop.LAB_ME_INTERMEDIATE" xmlns="http://rec.linkare.com/client/config">
+	<webResource toolTipLocationBundleKey="ReCLabeLab$rec.url.tip.elab.LAB_ME_INTERMEDIATE"
+		displayStringBundleKey="ReCLabeLab$rec.url.title.elab.LAB_ME_INTERMEDIATE"
+		locationBundleKey="ReCLabeLab$rec.url.href.elab.LAB_ME_INTERMEDIATE"
+		iconLocationBundleKey="" order="0" enabled="true" internalBrowser="false" />
+	<!--Start intermediate Apparatus configuration -->
+	<!--End intermediate Apparatus configuration -->
+</lab>
+			
+					<lab
+	location="corbaloc:iiop:1.2@elab1.ist.utl.pt:9010/MultiCastController"
+	labId="PENDULUM_LAB" labIdStringBundleKey="ReCLabeLab$rec.lab.name.elab.PENDULUM_LAB"
+	displayStringBundleKey="ReCLabeLab$rec.lab.title.elab.PENDULUM_LAB"
+	toolTipBundleKey="ReCLabeLab$rec.lab.tip.elab.PENDULUM_LAB"
+	iconLocationBundleKey="ReCLabeLab$rec.lab.icon.elab.PENDULUM_LAB"
+	desktopLocationBundleKey="ReCLabeLab$rec.lab.image.desktop.PENDULUM_LAB" xmlns="http://rec.linkare.com/client/config">
+	<webResource toolTipLocationBundleKey="ReCLabeLab$rec.url.tip.elab.PENDULUM_LAB"
+		displayStringBundleKey="ReCLabeLab$rec.url.title.elab.PENDULUM_LAB"
+		locationBundleKey="ReCLabeLab$rec.url.href.elab.PENDULUM_LAB"
+		iconLocationBundleKey="" order="0" enabled="true" internalBrowser="false" />
+	<!--Start pendulum Apparatus configuration -->
+	
+					
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="wpprague$tip.wpprague" location="WP_PRG" iconLocationBundleKey="wpprague$icon.wpprague" headerDisplayClassLocationBundleKey="" displayStringBundleKey="wpprague$title.wpprague" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="wpprague$background.wpprague" descriptionStringBundleKey="wpprague$description.wpprague" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="wpprague$customizer.wpprague" order="0">
+    <display toolTipBundleKey="wpprague$display.table.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="wpprague$display.table.title" classLocationBundleKey="wpprague$display.table.loc" order="0"/>
+	<display toolTipBundleKey="wpprague$display.graph.histogram.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpprague$display.graph.histogram.title" classLocationBundleKey="wpprague$display.graph.histogram.loc" order="0"/>
+    <display toolTipBundleKey="wpprague$display.graph.period.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpprague$display.graph.period.title" classLocationBundleKey="wpprague$display.graph.period.loc" order="0"/>
+    <display toolTipBundleKey="wpprague$display.graph.g.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpprague$display.graph.g.title" classLocationBundleKey="wpprague$display.graph.g.loc" order="0"/>
+    <localizationBundle name="wpprague" location="recresource:///pt/utl/ist/elab/client/wpprague/resources/messages"/>
+    <mediaConfig videoLocation="wpprague$url.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="http://groups.ist.utl.pt/wwwelab/wiki/index.php?title=P%C3%AAndulo_Mundial" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+</apparatus>
+
+			
+					<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="wpplanetarium$tip.wpplanetarium" location="WP_PLANETARIUM" iconLocationBundleKey="wpplanetarium$icon.wpplanetarium" headerDisplayClassLocationBundleKey="" displayStringBundleKey="wpplanetarium$title.wpplanetarium" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="wpplanetarium$background.wpplanetarium" descriptionStringBundleKey="wpplanetarium$description.wpplanetarium" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="wpplanetarium$customizer.wpplanetarium" order="0">
+	<display toolTipBundleKey="wpplanetarium$display.table.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="wpplanetarium$display.table.title" classLocationBundleKey="wpplanetarium$display.table.loc" order="0"/>
+    <display toolTipBundleKey="wpplanetarium$display.graph.histogram.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpplanetarium$display.graph.histogram.title" classLocationBundleKey="wpplanetarium$display.graph.histogram.loc" order="0"/>
+    <display toolTipBundleKey="wpplanetarium$display.graph.period.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpplanetarium$display.graph.period.title" classLocationBundleKey="wpplanetarium$display.graph.period.loc" order="0"/>
+    <display toolTipBundleKey="wpplanetarium$display.graph.g.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpplanetarium$display.graph.g.title" classLocationBundleKey="wpplanetarium$display.graph.g.loc" order="0"/>
+    <localizationBundle name="wpplanetarium"    location="recresource:///pt/utl/ist/elab/client/wpplanetarium/resources/messages"/>
+    <mediaConfig videoLocation="wpplanetarium$url.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="http://groups.ist.utl.pt/wwwelab/wiki/index.php?title=P%C3%AAndulo_Mundial" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+</apparatus>
+
+			
+					<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="wpmaputo$tip.wpmaputo" location="WP_EPM" iconLocationBundleKey="wpmaputo$icon.wpmaputo" headerDisplayClassLocationBundleKey="" displayStringBundleKey="wpmaputo$title.wpmaputo" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="wpmaputo$background.wpmaputo" descriptionStringBundleKey="wpmaputo$description.wpmaputo" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="wpmaputo$customizer.wpmaputo" order="0">
+	<display toolTipBundleKey="wpmaputo$display.table.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="wpmaputo$display.table.title" classLocationBundleKey="wpmaputo$display.table.loc" order="0"/>
+    <display toolTipBundleKey="wpmaputo$display.graph.histogram.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpmaputo$display.graph.histogram.title" classLocationBundleKey="wpmaputo$display.graph.histogram.loc" order="0"/>
+    <display toolTipBundleKey="wpmaputo$display.graph.period.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpmaputo$display.graph.period.title" classLocationBundleKey="wpmaputo$display.graph.period.loc" order="0"/>
+    <display toolTipBundleKey="wpmaputo$display.graph.g.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpmaputo$display.graph.g.title" classLocationBundleKey="wpmaputo$display.graph.g.loc" order="0"/>
+    <localizationBundle name="wpmaputo"    location="recresource:///pt/utl/ist/elab/client/wpmaputo/resources/messages"/>
+    <mediaConfig videoLocation="wpmaputo$url.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="http://groups.ist.utl.pt/wwwelab/wiki/index.php?title=P%C3%AAndulo_Mundial" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+</apparatus>
+
+			
+					
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="wpsaotome$tip.wpsaotome" location="WP_SAOTOME" iconLocationBundleKey="wpsaotome$icon.wpsaotome" headerDisplayClassLocationBundleKey="" displayStringBundleKey="wpsaotome$title.wpsaotome" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="wpsaotome$background.wpsaotome" descriptionStringBundleKey="wpsaotome$description.wpsaotome" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="wpsaotome$customizer.wpsaotome" order="0">
+    <display toolTipBundleKey="wpsaotome$display.table.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="wpsaotome$display.table.title" classLocationBundleKey="wpsaotome$display.table.loc" order="0"/>
+	<display toolTipBundleKey="wpsaotome$display.graph.histogram.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpsaotome$display.graph.histogram.title" classLocationBundleKey="wpsaotome$display.graph.histogram.loc" order="0"/>
+    <display toolTipBundleKey="wpsaotome$display.graph.period.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpsaotome$display.graph.period.title" classLocationBundleKey="wpsaotome$display.graph.period.loc" order="0"/>
+    <display toolTipBundleKey="wpsaotome$display.graph.g.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpsaotome$display.graph.g.title" classLocationBundleKey="wpsaotome$display.graph.g.loc" order="0"/>
+    <localizationBundle name="wpsaotome" location="recresource:///pt/utl/ist/elab/client/wpsaotome/resources/messages"/>
+    <mediaConfig videoLocation="wpsaotome$url.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="http://groups.ist.utl.pt/wwwelab/wiki/index.php?title=P%C3%AAndulo_Mundial" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+</apparatus>
+
+			
+					
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="wpbarcelona$tip.wpbarcelona" location="WP_BCN" iconLocationBundleKey="wpbarcelona$icon.wpbarcelona" headerDisplayClassLocationBundleKey="" displayStringBundleKey="wpbarcelona$title.wpbarcelona" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="wpbarcelona$background.wpbarcelona" descriptionStringBundleKey="wpbarcelona$description.wpbarcelona" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="wpbarcelona$customizer.wpbarcelona" order="0">
+    <display toolTipBundleKey="wpbarcelona$display.table.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="wpbarcelona$display.table.title" classLocationBundleKey="wpbarcelona$display.table.loc" order="0"/>
+	<display toolTipBundleKey="wpbarcelona$display.graph.histogram.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpbarcelona$display.graph.histogram.title" classLocationBundleKey="wpbarcelona$display.graph.histogram.loc" order="0"/>
+    <display toolTipBundleKey="wpbarcelona$display.graph.period.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpbarcelona$display.graph.period.title" classLocationBundleKey="wpbarcelona$display.graph.period.loc" order="0"/>
+    <display toolTipBundleKey="wpbarcelona$display.graph.g.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpbarcelona$display.graph.g.title" classLocationBundleKey="wpbarcelona$display.graph.g.loc" order="0"/>
+    <localizationBundle name="wpbarcelona" location="recresource:///pt/utl/ist/elab/client/wpbarcelona/resources/messages"/>
+    <mediaConfig videoLocation="wpbarcelona$url.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="http://groups.ist.utl.pt/wwwelab/wiki/index.php?title=P%C3%AAndulo_Mundial" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+</apparatus>
+
+			
+					
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="wpmarseille$tip.wpmarseille" location="WP_MRS" iconLocationBundleKey="wpmarseille$icon.wpmarseille" headerDisplayClassLocationBundleKey="" displayStringBundleKey="wpmarseille$title.wpmarseille" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="wpmarseille$background.wpmarseille" descriptionStringBundleKey="wpmarseille$description.wpmarseille" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="wpmarseille$customizer.wpmarseille" order="0">
+    <display toolTipBundleKey="wpmarseille$display.table.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="wpmarseille$display.table.title" classLocationBundleKey="wpmarseille$display.table.loc" order="0"/>
+	<display toolTipBundleKey="wpmarseille$display.graph.histogram.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpmarseille$display.graph.histogram.title" classLocationBundleKey="wpmarseille$display.graph.histogram.loc" order="0"/>
+    <display toolTipBundleKey="wpmarseille$display.graph.period.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpmarseille$display.graph.period.title" classLocationBundleKey="wpmarseille$display.graph.period.loc" order="0"/>
+    <display toolTipBundleKey="wpmarseille$display.graph.g.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpmarseille$display.graph.g.title" classLocationBundleKey="wpmarseille$display.graph.g.loc" order="0"/>
+    <localizationBundle name="wpmarseille" location="recresource:///pt/utl/ist/elab/client/wpmarseille/resources/messages"/>
+    <mediaConfig videoLocation="wpmarseille$url.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="http://groups.ist.utl.pt/wwwelab/wiki/index.php?title=P%C3%AAndulo_Mundial" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+</apparatus>
+
+			
+					
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="wpunbbsb$tip.wpunbbsb" location="WP_UNB_BSB" iconLocationBundleKey="wpunbbsb$icon.wpunbbsb" headerDisplayClassLocationBundleKey="" displayStringBundleKey="wpunbbsb$title.wpunbbsb" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="wpunbbsb$background.wpunbbsb" descriptionStringBundleKey="wpunbbsb$description.wpunbbsb" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="wpunbbsb$customizer.wpunbbsb" order="0">
+    <display toolTipBundleKey="wpunbbsb$display.table.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="wpunbbsb$display.table.title" classLocationBundleKey="wpunbbsb$display.table.loc" order="0"/>
+	<display toolTipBundleKey="wpunbbsb$display.graph.histogram.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpunbbsb$display.graph.histogram.title" classLocationBundleKey="wpunbbsb$display.graph.histogram.loc" order="0"/>
+    <display toolTipBundleKey="wpunbbsb$display.graph.period.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpunbbsb$display.graph.period.title" classLocationBundleKey="wpunbbsb$display.graph.period.loc" order="0"/>
+    <display toolTipBundleKey="wpunbbsb$display.graph.g.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpunbbsb$display.graph.g.title" classLocationBundleKey="wpunbbsb$display.graph.g.loc" order="0"/>
+    <localizationBundle name="wpunbbsb" location="recresource:///pt/utl/ist/elab/client/wpunbbsb/resources/messages"/>
+    <mediaConfig videoLocation="wpunbbsb$url.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="http://groups.ist.utl.pt/wwwelab/wiki/index.php?title=P%C3%AAndulo_Mundial" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+</apparatus>
+
+			
+					
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="wpuescios$tip.wpuescios" location="WP_UESC_IOS" iconLocationBundleKey="wpuescios$icon.wpuescios" headerDisplayClassLocationBundleKey="" displayStringBundleKey="wpuescios$title.wpuescios" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="wpuescios$background.wpuescios" descriptionStringBundleKey="wpuescios$description.wpuescios" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="wpuescios$customizer.wpuescios" order="0">
+    <display toolTipBundleKey="wpuescios$display.table.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="wpuescios$display.table.title" classLocationBundleKey="wpuescios$display.table.loc" order="0"/>
+	<display toolTipBundleKey="wpuescios$display.graph.histogram.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpuescios$display.graph.histogram.title" classLocationBundleKey="wpuescios$display.graph.histogram.loc" order="0"/>
+    <display toolTipBundleKey="wpuescios$display.graph.period.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpuescios$display.graph.period.title" classLocationBundleKey="wpuescios$display.graph.period.loc" order="0"/>
+    <display toolTipBundleKey="wpuescios$display.graph.g.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpuescios$display.graph.g.title" classLocationBundleKey="wpuescios$display.graph.g.loc" order="0"/>
+    <localizationBundle name="wpuescios" location="recresource:///pt/utl/ist/elab/client/wpuescios/resources/messages"/>
+    <mediaConfig videoLocation="wpuescios$url.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="http://groups.ist.utl.pt/wwwelab/wiki/index.php?title=P%C3%AAndulo_Mundial" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+</apparatus>
+
+			
+					
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="wppucrio$tip.wppucrio" location="WP_PUC_RIO" iconLocationBundleKey="wppucrio$icon.wppucrio" headerDisplayClassLocationBundleKey="" displayStringBundleKey="wppucrio$title.wppucrio" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="wppucrio$background.wppucrio" descriptionStringBundleKey="wppucrio$description.wppucrio" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="wppucrio$customizer.wppucrio" order="0">
+    <display toolTipBundleKey="wppucrio$display.table.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="wppucrio$display.table.title" classLocationBundleKey="wppucrio$display.table.loc" order="0"/>
+	<display toolTipBundleKey="wppucrio$display.graph.histogram.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wppucrio$display.graph.histogram.title" classLocationBundleKey="wppucrio$display.graph.histogram.loc" order="0"/>
+    <display toolTipBundleKey="wppucrio$display.graph.period.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wppucrio$display.graph.period.title" classLocationBundleKey="wppucrio$display.graph.period.loc" order="0"/>
+    <display toolTipBundleKey="wppucrio$display.graph.g.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wppucrio$display.graph.g.title" classLocationBundleKey="wppucrio$display.graph.g.loc" order="0"/>
+    <localizationBundle name="wppucrio" location="recresource:///pt/utl/ist/elab/client/wppucrio/resources/messages"/>
+    <mediaConfig videoLocation="wppucrio$url.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="http://groups.ist.utl.pt/wwwelab/wiki/index.php?title=P%C3%AAndulo_Mundial" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+</apparatus>
+
+			
+					
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="wpuchilescl$tip.wpuchilescl" location="WP_UCHILE_SCL" iconLocationBundleKey="wpuchilescl$icon.wpuchilescl" headerDisplayClassLocationBundleKey="" displayStringBundleKey="wpuchilescl$title.wpuchilescl" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="wpuchilescl$background.wpuchilescl" descriptionStringBundleKey="wpuchilescl$description.wpuchilescl" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="wpuchilescl$customizer.wpuchilescl" order="0">
+    <display toolTipBundleKey="wpuchilescl$display.table.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="wpuchilescl$display.table.title" classLocationBundleKey="wpuchilescl$display.table.loc" order="0"/>
+	<display toolTipBundleKey="wpuchilescl$display.graph.histogram.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpuchilescl$display.graph.histogram.title" classLocationBundleKey="wpuchilescl$display.graph.histogram.loc" order="0"/>
+    <display toolTipBundleKey="wpuchilescl$display.graph.period.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpuchilescl$display.graph.period.title" classLocationBundleKey="wpuchilescl$display.graph.period.loc" order="0"/>
+    <display toolTipBundleKey="wpuchilescl$display.graph.g.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpuchilescl$display.graph.g.title" classLocationBundleKey="wpuchilescl$display.graph.g.loc" order="0"/>
+    <localizationBundle name="wpuchilescl" location="recresource:///pt/utl/ist/elab/client/wpuchilescl/resources/messages"/>
+    <mediaConfig videoLocation="wpuchilescl$url.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="http://groups.ist.utl.pt/wwwelab/wiki/index.php?title=P%C3%AAndulo_Mundial" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+</apparatus>
+
+			
+					
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="wputfsmvap$tip.wputfsmvap" location="WP_UTFSM_VAP" iconLocationBundleKey="wputfsmvap$icon.wputfsmvap" headerDisplayClassLocationBundleKey="" displayStringBundleKey="wputfsmvap$title.wputfsmvap" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="wputfsmvap$background.wputfsmvap" descriptionStringBundleKey="wputfsmvap$description.wputfsmvap" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="wputfsmvap$customizer.wputfsmvap" order="0">
+    <display toolTipBundleKey="wputfsmvap$display.table.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="wputfsmvap$display.table.title" classLocationBundleKey="wputfsmvap$display.table.loc" order="0"/>
+	<display toolTipBundleKey="wputfsmvap$display.graph.histogram.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wputfsmvap$display.graph.histogram.title" classLocationBundleKey="wputfsmvap$display.graph.histogram.loc" order="0"/>
+    <display toolTipBundleKey="wputfsmvap$display.graph.period.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wputfsmvap$display.graph.period.title" classLocationBundleKey="wputfsmvap$display.graph.period.loc" order="0"/>
+    <display toolTipBundleKey="wputfsmvap$display.graph.g.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wputfsmvap$display.graph.g.title" classLocationBundleKey="wputfsmvap$display.graph.g.loc" order="0"/>
+    <localizationBundle name="wputfsmvap" location="recresource:///pt/utl/ist/elab/client/wputfsmvap/resources/messages"/>
+    <mediaConfig videoLocation="wputfsmvap$url.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="http://groups.ist.utl.pt/wwwelab/wiki/index.php?title=P%C3%AAndulo_Mundial" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+</apparatus>
+
+			
+					
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="wpuniandesbog$tip.wpuniandesbog" location="WP_UNIANDES_BOG" iconLocationBundleKey="wpuniandesbog$icon.wpuniandesbog" headerDisplayClassLocationBundleKey="" displayStringBundleKey="wpuniandesbog$title.wpuniandesbog" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="wpuniandesbog$background.wpuniandesbog" descriptionStringBundleKey="wpuniandesbog$description.wpuniandesbog" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="wpuniandesbog$customizer.wpuniandesbog" order="0">
+    <display toolTipBundleKey="wpuniandesbog$display.table.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="wpuniandesbog$display.table.title" classLocationBundleKey="wpuniandesbog$display.table.loc" order="0"/>
+	<display toolTipBundleKey="wpuniandesbog$display.graph.histogram.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpuniandesbog$display.graph.histogram.title" classLocationBundleKey="wpuniandesbog$display.graph.histogram.loc" order="0"/>
+    <display toolTipBundleKey="wpuniandesbog$display.graph.period.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpuniandesbog$display.graph.period.title" classLocationBundleKey="wpuniandesbog$display.graph.period.loc" order="0"/>
+    <display toolTipBundleKey="wpuniandesbog$display.graph.g.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpuniandesbog$display.graph.g.title" classLocationBundleKey="wpuniandesbog$display.graph.g.loc" order="0"/>
+    <localizationBundle name="wpuniandesbog" location="recresource:///pt/utl/ist/elab/client/wpuniandesbog/resources/messages"/>
+    <mediaConfig videoLocation="wpuniandesbog$url.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="http://groups.ist.utl.pt/wwwelab/wiki/index.php?title=P%C3%AAndulo_Mundial" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+</apparatus>
+
+			
+					
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="wpunadbog$tip.wpunadbog" location="WP_UNAD_BOG" iconLocationBundleKey="wpunadbog$icon.wpunadbog" headerDisplayClassLocationBundleKey="" displayStringBundleKey="wpunadbog$title.wpunadbog" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="wpunadbog$background.wpunadbog" descriptionStringBundleKey="wpunadbog$description.wpunadbog" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="wpunadbog$customizer.wpunadbog" order="0">
+    <display toolTipBundleKey="wpunadbog$display.table.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="wpunadbog$display.table.title" classLocationBundleKey="wpunadbog$display.table.loc" order="0"/>
+	<display toolTipBundleKey="wpunadbog$display.graph.histogram.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpunadbog$display.graph.histogram.title" classLocationBundleKey="wpunadbog$display.graph.histogram.loc" order="0"/>
+    <display toolTipBundleKey="wpunadbog$display.graph.period.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpunadbog$display.graph.period.title" classLocationBundleKey="wpunadbog$display.graph.period.loc" order="0"/>
+    <display toolTipBundleKey="wpunadbog$display.graph.g.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpunadbog$display.graph.g.title" classLocationBundleKey="wpunadbog$display.graph.g.loc" order="0"/>
+    <localizationBundle name="wpunadbog" location="recresource:///pt/utl/ist/elab/client/wpunadbog/resources/messages"/>
+    <mediaConfig videoLocation="wpunadbog$url.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="http://groups.ist.utl.pt/wwwelab/wiki/index.php?title=P%C3%AAndulo_Mundial" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+</apparatus>
+
+			
+					
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="wputppty$tip.wputppty" location="WP_UTP_PTY" iconLocationBundleKey="wputppty$icon.wputppty" headerDisplayClassLocationBundleKey="" displayStringBundleKey="wputppty$title.wputppty" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="wputppty$background.wputppty" descriptionStringBundleKey="wputppty$description.wputppty" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="wputppty$customizer.wputppty" order="0">
+    <display toolTipBundleKey="wputppty$display.table.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="wputppty$display.table.title" classLocationBundleKey="wputppty$display.table.loc" order="0"/>
+	<display toolTipBundleKey="wputppty$display.graph.histogram.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wputppty$display.graph.histogram.title" classLocationBundleKey="wputppty$display.graph.histogram.loc" order="0"/>
+    <display toolTipBundleKey="wputppty$display.graph.period.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wputppty$display.graph.period.title" classLocationBundleKey="wputppty$display.graph.period.loc" order="0"/>
+    <display toolTipBundleKey="wputppty$display.graph.g.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wputppty$display.graph.g.title" classLocationBundleKey="wputppty$display.graph.g.loc" order="0"/>
+    <localizationBundle name="wputppty" location="recresource:///pt/utl/ist/elab/client/wputppty/resources/messages"/>
+    <mediaConfig videoLocation="wputppty$url.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="http://groups.ist.utl.pt/wwwelab/wiki/index.php?title=P%C3%AAndulo_Mundial" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+</apparatus>
+
+			
+					
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="wpusmapty$tip.wpusmapty" location="WP_USMA_PTY" iconLocationBundleKey="wpusmapty$icon.wpusmapty" headerDisplayClassLocationBundleKey="" displayStringBundleKey="wpusmapty$title.wpusmapty" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="wpusmapty$background.wpusmapty" descriptionStringBundleKey="wpusmapty$description.wpusmapty" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="wpusmapty$customizer.wpusmapty" order="0">
+    <display toolTipBundleKey="wpusmapty$display.table.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="wpusmapty$display.table.title" classLocationBundleKey="wpusmapty$display.table.loc" order="0"/>
+	<display toolTipBundleKey="wpusmapty$display.graph.histogram.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpusmapty$display.graph.histogram.title" classLocationBundleKey="wpusmapty$display.graph.histogram.loc" order="0"/>
+    <display toolTipBundleKey="wpusmapty$display.graph.period.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpusmapty$display.graph.period.title" classLocationBundleKey="wpusmapty$display.graph.period.loc" order="0"/>
+    <display toolTipBundleKey="wpusmapty$display.graph.g.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpusmapty$display.graph.g.title" classLocationBundleKey="wpusmapty$display.graph.g.loc" order="0"/>
+    <localizationBundle name="wpusmapty" location="recresource:///pt/utl/ist/elab/client/wpusmapty/resources/messages"/>
+    <mediaConfig videoLocation="wpusmapty$url.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="http://groups.ist.utl.pt/wwwelab/wiki/index.php?title=P%C3%AAndulo_Mundial" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+</apparatus>
+
+			
+					
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="wpunicvrai$tip.wpunicvrai" location="WP_UNICV_RAI" iconLocationBundleKey="wpunicvrai$icon.wpunicvrai" headerDisplayClassLocationBundleKey="" displayStringBundleKey="wpunicvrai$title.wpunicvrai" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="wpunicvrai$background.wpunicvrai" descriptionStringBundleKey="wpunicvrai$description.wpunicvrai" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="wpunicvrai$customizer.wpunicvrai" order="0">
+    <display toolTipBundleKey="wpunicvrai$display.table.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="wpunicvrai$display.table.title" classLocationBundleKey="wpunicvrai$display.table.loc" order="0"/>
+	<display toolTipBundleKey="wpunicvrai$display.graph.histogram.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpunicvrai$display.graph.histogram.title" classLocationBundleKey="wpunicvrai$display.graph.histogram.loc" order="0"/>
+    <display toolTipBundleKey="wpunicvrai$display.graph.period.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpunicvrai$display.graph.period.title" classLocationBundleKey="wpunicvrai$display.graph.period.loc" order="0"/>
+    <display toolTipBundleKey="wpunicvrai$display.graph.g.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpunicvrai$display.graph.g.title" classLocationBundleKey="wpunicvrai$display.graph.g.loc" order="0"/>
+    <localizationBundle name="wpunicvrai" location="recresource:///pt/utl/ist/elab/client/wpunicvrai/resources/messages"/>
+    <mediaConfig videoLocation="wpunicvrai$url.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="http://groups.ist.utl.pt/wwwelab/wiki/index.php?title=P%C3%AAndulo_Mundial" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+</apparatus>
+
+			
+					
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="wpumagpuq$tip.wpumagpuq" location="WP_UMAG_PUQ" iconLocationBundleKey="wpumagpuq$icon.wpumagpuq" headerDisplayClassLocationBundleKey="" displayStringBundleKey="wpumagpuq$title.wpumagpuq" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="wpumagpuq$background.wpumagpuq" descriptionStringBundleKey="wpumagpuq$description.wpumagpuq" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="wpumagpuq$customizer.wpumagpuq" order="0">
+    <display toolTipBundleKey="wpumagpuq$display.table.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="wpumagpuq$display.table.title" classLocationBundleKey="wpumagpuq$display.table.loc" order="0"/>
+	<display toolTipBundleKey="wpumagpuq$display.graph.histogram.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpumagpuq$display.graph.histogram.title" classLocationBundleKey="wpumagpuq$display.graph.histogram.loc" order="0"/>
+    <display toolTipBundleKey="wpumagpuq$display.graph.period.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpumagpuq$display.graph.period.title" classLocationBundleKey="wpumagpuq$display.graph.period.loc" order="0"/>
+    <display toolTipBundleKey="wpumagpuq$display.graph.g.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpumagpuq$display.graph.g.title" classLocationBundleKey="wpumagpuq$display.graph.g.loc" order="0"/>
+    <localizationBundle name="wpumagpuq" location="recresource:///pt/utl/ist/elab/client/wpumagpuq/resources/messages"/>
+    <mediaConfig videoLocation="wpumagpuq$url.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="http://groups.ist.utl.pt/wwwelab/wiki/index.php?title=P%C3%AAndulo_Mundial" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+</apparatus>
+
+			
+					
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="wppucrio2$tip.wppucrio2" location="WP_PUC_RIO2" iconLocationBundleKey="wppucrio2$icon.wppucrio2" headerDisplayClassLocationBundleKey="" displayStringBundleKey="wppucrio2$title.wppucrio2" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="wppucrio2$background.wppucrio2" descriptionStringBundleKey="wppucrio2$description.wppucrio2" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="wppucrio2$customizer.wppucrio2" order="0">
+    <display toolTipBundleKey="wppucrio2$display.table.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="wppucrio2$display.table.title" classLocationBundleKey="wppucrio2$display.table.loc" order="0"/>
+	<display toolTipBundleKey="wppucrio2$display.graph.histogram.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wppucrio2$display.graph.histogram.title" classLocationBundleKey="wppucrio2$display.graph.histogram.loc" order="0"/>
+    <display toolTipBundleKey="wppucrio2$display.graph.period.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wppucrio2$display.graph.period.title" classLocationBundleKey="wppucrio2$display.graph.period.loc" order="0"/>
+    <display toolTipBundleKey="wppucrio2$display.graph.g.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wppucrio2$display.graph.g.title" classLocationBundleKey="wppucrio2$display.graph.g.loc" order="0"/>
+    <localizationBundle name="wppucrio2" location="recresource:///pt/utl/ist/elab/client/wppucrio2/resources/messages"/>
+    <mediaConfig videoLocation="wppucrio2$url.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="http://groups.ist.utl.pt/wwwelab/wiki/index.php?title=P%C3%AAndulo_Mundial" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+</apparatus>
+
+			
+					
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="wpuniandesbog$tip.wpuniandesbog" location="WP_UNIANDES_BOG" iconLocationBundleKey="wpuniandesbog$icon.wpuniandesbog" headerDisplayClassLocationBundleKey="" displayStringBundleKey="wpuniandesbog$title.wpuniandesbog" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="wpuniandesbog$background.wpuniandesbog" descriptionStringBundleKey="wpuniandesbog$description.wpuniandesbog" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="wpuniandesbog$customizer.wpuniandesbog" order="0">
+    <display toolTipBundleKey="wpuniandesbog$display.table.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="wpuniandesbog$display.table.title" classLocationBundleKey="wpuniandesbog$display.table.loc" order="0"/>
+	<display toolTipBundleKey="wpuniandesbog$display.graph.histogram.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpuniandesbog$display.graph.histogram.title" classLocationBundleKey="wpuniandesbog$display.graph.histogram.loc" order="0"/>
+    <display toolTipBundleKey="wpuniandesbog$display.graph.period.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpuniandesbog$display.graph.period.title" classLocationBundleKey="wpuniandesbog$display.graph.period.loc" order="0"/>
+    <display toolTipBundleKey="wpuniandesbog$display.graph.g.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpuniandesbog$display.graph.g.title" classLocationBundleKey="wpuniandesbog$display.graph.g.loc" order="0"/>
+    <localizationBundle name="wpuniandesbog" location="recresource:///pt/utl/ist/elab/client/wpuniandesbog/resources/messages"/>
+    <mediaConfig videoLocation="wpuniandesbog$url.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="http://groups.ist.utl.pt/wwwelab/wiki/index.php?title=P%C3%AAndulo_Mundial" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+</apparatus>
+
+			<!--End pendulum Apparatus configuration -->
+</lab>
+			<!--End Lab configuration -->
+</reCFaceConfig>

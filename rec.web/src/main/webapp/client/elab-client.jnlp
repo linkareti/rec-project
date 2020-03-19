@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE jnlp PUBLIC "-//Sun Microsystems, Inc//DTD JNLP Descriptor 6.0//EN" "http://java.sun.com/dtd/JNLP-6.0.dtd"><jnlp spec="6.0+" codebase="http://elab1.ist.utl.pt/rec.web/client" href="elab-client.jnlp">    
+    <information>        
+        <title>e-lab</title>        
+        <vendor>IST</vendor>        
+        <homepage href="http://elab.ist.utl.pt" />        
+        <description>Laboratórios Online do Instituto Superior Técnico - disponibilizados para o Ministério da Educação de Portugal</description>        
+        <description kind="one-line">Labs Online</description>        
+        <description kind="tooltip">Laboratórios Online</description>        
+        <description kind="short">Labs Online</description>        
+        <icon href="images/icon_elab_32.png" />        
+        <icon kind="splash" href="images/splash.png" />        
+        <offline-allowed />        
+        <shortcut online="true">            
+            <desktop />            
+            <menu submenu="e-lab" />        
+        </shortcut>        
+        <association extensions="elab" mime-type="application/elab" />    
+    </information>    
+    <information locale="en">        
+        <title>e-lab</title>        
+        <vendor>IST</vendor>        
+        <homepage href="http://elab.ist.utl.pt" />        
+        <description>Instituto Superior Técnico's online laboratories</description>        
+        <description kind="one-line">Online Labs</description>        
+        <description kind="tooltip">Online Laboratories</description>        
+        <description kind="short">Online Labs</description>    
+    </information>    
+    <security>        
+        <all-permissions />    
+    </security>    
+    <update check="always" policy="always" />    
+    <resources>        
+        <j2se version="1.6+" />
+        <jar href="ELabClient_sig.jar" main="true" />
+        <jar href="ELabCommon_sig.jar" />
+        <!--Start Experiment Jars -->
+        <jar href="fotovoltaicoClient_sig.jar" /><jar href="planoinclinadoClient_sig.jar" /><jar href="wppragueClient_sig.jar" /><jar href="wpplanetariumClient_sig.jar" /><jar href="wpmaputoClient_sig.jar" /><jar href="wpsaotomeClient_sig.jar" /><jar href="wpbarcelonaClient_sig.jar" /><jar href="wpmarseilleClient_sig.jar" /><jar href="wpunbbsbClient_sig.jar" /><jar href="wpuesciosClient_sig.jar" /><jar href="wppucrioClient_sig.jar" /><jar href="wpuchilesclClient_sig.jar" /><jar href="wputfsmvapClient_sig.jar" /><jar href="wpuniandesbogClient_sig.jar" /><jar href="wpunadbogClient_sig.jar" /><jar href="wputpptyClient_sig.jar" /><jar href="wpusmaptyClient_sig.jar" /><jar href="wpunicvraiClient_sig.jar" /><jar href="wpumagpuqClient_sig.jar" /><jar href="wppucrio2Client_sig.jar" /><jar href="wpuniandesbogClient_sig.jar" /><!--End Experiment Jars -->
+        <extension name="JFreeChartClient" href="jfreechart.jnlp" />        
+        <extension name="OpenORBClient" href="openorb.jnlp" />        
+        <extension name="ReCFramework" href="rec-framework.jnlp" />         
+        <extension name="Java3D" href="j3d.jnlp" /><!--<extension name="JHelp" href="jhelp.jnlp"/> -->        
+        <property name="jnlp.packEnabled" value="true" />      
+        <property name="rec.face.config" value="http://elab1.ist.utl.pt/rec.web/client/etc/ReCFaceConfig.xml" />        
+        <property name="rec.multicastcontroller.bindname" value="MultiCastController" />        
+        <property name="org.omg.CORBA.ORBClass" value="org.openorb.orb.core.ORB" />        
+        <property name="org.omg.CORBA.ORBSingletonClass" value="org.openorb.orb.core.ORBSingleton" />        
+        <property name="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="com.sun.corba.se.impl.presentation.rmi.StubFactoryFactoryStaticImpl" />        
+        <property name="openorb.config" value="http://elab1.ist.utl.pt/rec.web/client/etc/openorb.xml" />        
+        <property name="openorb.profile" value="ReCClient" />        
+        <property name="java.net.preferIPv4Stack" value="true" /><!-- change this value to disable video -->        
+        <property name="video.enabled" value="yes" /><!-- rec.web Service -->        
+        <property name="rec.web.endpoint" value="http://elab1.ist.utl.pt:8080/rec-services" /><!-- Processing manager thread pool -->        
+        <property name="rec.processingmanager.threadPool.coresize" value="2" />        
+        <property name="rec.processingmanager.threadPool.maxsize" value="4" />        
+        <property name="rec.processingmanager.thread.idletime" value="11" />    
+    </resources>    
+    <application-desc main-class="pt.utl.ist.elab.client.FullClientNewInterface" />
+</jnlp>

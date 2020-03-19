@@ -1,0 +1,10 @@
+
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="wpumagpuq$tip.wpumagpuq" location="WP_UMAG_PUQ" iconLocationBundleKey="wpumagpuq$icon.wpumagpuq" headerDisplayClassLocationBundleKey="" displayStringBundleKey="wpumagpuq$title.wpumagpuq" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="wpumagpuq$background.wpumagpuq" descriptionStringBundleKey="wpumagpuq$description.wpumagpuq" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="wpumagpuq$customizer.wpumagpuq" order="0">
+    <display toolTipBundleKey="wpumagpuq$display.table.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="wpumagpuq$display.table.title" classLocationBundleKey="wpumagpuq$display.table.loc" order="0"/>
+	<display toolTipBundleKey="wpumagpuq$display.graph.histogram.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpumagpuq$display.graph.histogram.title" classLocationBundleKey="wpumagpuq$display.graph.histogram.loc" order="0"/>
+    <display toolTipBundleKey="wpumagpuq$display.graph.period.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpumagpuq$display.graph.period.title" classLocationBundleKey="wpumagpuq$display.graph.period.loc" order="0"/>
+    <display toolTipBundleKey="wpumagpuq$display.graph.g.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpumagpuq$display.graph.g.title" classLocationBundleKey="wpumagpuq$display.graph.g.loc" order="0"/>
+    <localizationBundle name="wpumagpuq" location="recresource:///pt/utl/ist/elab/client/wpumagpuq/resources/messages"/>
+    <mediaConfig videoLocation="wpumagpuq$url.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="http://groups.ist.utl.pt/wwwelab/wiki/index.php?title=P%C3%AAndulo_Mundial" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+</apparatus>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HardwareInfo PUBLIC "-//Linkare/ReC/HardwareInfo//-" "http://rec.linkare.com/HardwareInfoSchema.dtd">
+<HardwareInfo id="ELAB_PLANO-INCLINADO_DSPIC_V1" familiarName="Plano Inclinado" name="Basic STAMP"
+	version="BS2" manufacturer="Parallax" driverVersion="v2">
+
+	<!-- This elements are still just for test -->
+
+	<description>
+        <![CDATA[ 
+        Esta experiência serve para - não esquecer de alterar esta descrição
+        <b>Penso que pode ter coisas maradas aqui como html</b>
+        ]]>
+	</description>
+	
+	<parameter name="protocol" type="ContinuousValue" value="1">
+		<selection-list>
+			<value order="1">1</value>
+			<value order="2">2</value>
+			<value order="3">1</value>
+		</selection-list>
+	</parameter>
+
+	<parameter name="n_samples" type="ContinuousValue" value="10000">
+		<selection-list>
+			<value order="1">1</value>
+			<value order="2">10000</value>
+			<value order="3">1</value>
+		</selection-list>
+	</parameter>
+
+	<parameter name="tb_samples" type="ContinuousValue" value="50">
+		<selection-list>
+			<value order="1">2</value>
+			<value order="2">100</value>
+			<value order="3">1</value>
+		</selection-list>
+	</parameter>
+
+	<frequency-scale label="Sampling Interval">
+		<min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">2</Frequency></min-frequency>
+		<max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">100</Frequency></max-frequency>
+		<step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></step-frequency>
+	</frequency-scale>
+	<Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency>
+
+	<sampling-scale>
+		<min-samples>1</min-samples>
+		<max-samples>10000</max-samples>
+		<step-samples>1</step-samples>
+	</sampling-scale>
+
+	<ChannelInfo name="planoinclinado$rec.exp.planoinclinado.hardwareinfo.channel.0.name" independent="false" direction="CHANNEL_INPUT">
+		<scale label="planoinclinado$rec.exp.planoinclinado.hardwareinfo.channel.0.label" physicsunitname="planoinclinado$rec.exp.planoinclinado.hardwareinfo.channel.0.physicsunitname" physicsunitsymbol="s" multiplier="milli" selected="true">
+			<min><PhysicsVal type="int">0</PhysicsVal></min>
+			<max><PhysicsVal type="int">20000</PhysicsVal></max>
+			<step><PhysicsVal type="int">1</PhysicsVal></step>
+			<errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
+		</scale>
+	</ChannelInfo>
+
+	<ChannelInfo name="planoinclinado$rec.exp.planoinclinado.hardwareinfo.channel.1.name" independent="false" direction="CHANNEL_INPUT">
+		<scale label="planoinclinado$rec.exp.planoinclinado.hardwareinfo.channel.1.label" physicsunitname="planoinclinado$rec.exp.planoinclinado.hardwareinfo.channel.1.physicsunitname" physicsunitsymbol="m" multiplier="milli" selected="true">
+			<min><PhysicsVal type="int">485</PhysicsVal></min>
+			<max><PhysicsVal type="int">2100</PhysicsVal></max>
+			<step><PhysicsVal type="int">1</PhysicsVal></step>
+			<errordefault><PhysicsVal type="int">50</PhysicsVal></errordefault>
+		</scale>
+	</ChannelInfo>
+
+</HardwareInfo>

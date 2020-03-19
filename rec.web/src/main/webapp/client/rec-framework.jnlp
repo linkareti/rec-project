@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jnlp PUBLIC "-//Sun Microsystems, Inc//DTD JNLP Descriptor 6.0//EN" "http://java.sun.com/dtd/JNLP-6.0.dtd">
+<jnlp spec="6.0+" codebase="http://elab1.ist.utl.pt/rec.web/client" href="rec-framework.jnlp">	
+    <information>		
+        <title>Framework ReC</title>		
+        <vendor>Linkare TI</vendor>		
+        <homepage href="http://www.linkare.com/rec" />		
+        <description>'Remote Experienced Control' sistema distribuído de controle e aquisição de dados para suporte de experimentação online, telemedicina e soluções industriais</description>		
+        <description kind="one-line">Framework Remote Experienced Control</description>		
+        <description kind="tooltip">Framework distribuída de controle de aquisição de dados</description>		
+        <description kind="short">Framework ReC</description>		
+        <icon href="images/ReCIconHand16.jpg" />		
+        <icon kind="splash" href="images/RecLogo2Gray.png" />		
+        <offline-allowed />		
+        <related-content href="http://www.linkare.com">			
+            <title>Homepage Linkare TI</title>			
+            <description>Página de entrada do sítio da internet do fornecedor da framework 'Remote Experienced Control', Linkare TI.</description>			
+            <icon href="images/linkare_logo_small.jpg" />		
+        </related-content>	
+    </information>	
+    <information locale="en">		
+        <title>ReC Framework</title>		
+        <vendor>Linkare TI</vendor>		
+        <homepage href="http://www.linkare.com/en/rec" />		
+        <description>'Remote Experienced Control' distributed data acquisition and control framework for online experiments, telemedicine and industrial solutions</description>		
+        <description kind="one-line">Remote Experienced Control Framework</description>		
+        <description kind="tooltip">Data acquisition and control distributed Framework</description>		
+        <description kind="short">ReC Framework</description>		
+        <related-content href="http://www.linkare.com/en">			
+            <title>Linkare TI's Homepage</title>			
+            <description>Linkare TI's webSite, the provider of Remote Experienced Control Framework</description>			
+            <icon href="images/linkare_logo_small.jpg" />		
+        </related-content>	
+    </information>	
+    <security>		
+        <all-permissions />	
+    </security>	
+    <update check="always" policy="always" />	
+    <resources>
+        <j2se version="1.6+" />                
+        <jar href="ReCClient_sig.jar" main="true" />            		
+        <jar href="lib/fits1.3_sig.jar" />		
+        <jar href="lib/appframework-1.0.3_sig.jar" />		
+        <jar href="lib/swing-worker-1.1_sig.jar" />		
+        <jar href="lib/swingx_sig.jar" />		
+        <jar href="lib/commons-lang-2.4_sig.jar" />		
+        <jar href="lib/commons-codec-1.6_sig.jar" />		
+        <jar href="lib/joda-time-1.6_sig.jar" />		
+        <jar href="lib/jlatexmath-0.9.7_sig.jar" />		
+        <jar href="lib/JCFN_sig.jar" />		
+        <jar href="lib/jmf_sig.jar" />		
+        <jar href="lib/jna-3.5.2_sig.jar" />		
+        <jar href="lib/platform-3.5.2_sig.jar" />		
+        <jar href="lib/vlcj-2.3.0-SNAPSHOT_sig.jar" />				
+        <jar href="lib/OSP_sig.jar" />		
+        <jar href="lib/OSP3D_sig.jar" />		
+        <jar href="lib/vecmath_sig.jar" />		
+        <jar href="lib/commons-i18n_sig.jar" />		
+        <jar href="lib/commons-net_sig.jar" />		
+        <jar href="lib/rec.web-api_sig.jar" />			
+        <jar href="ReCCommon_sig.jar"/>		
+        <!-- property name="rec.percent.freememory.threshold.serialization" value="80" / -->		
+        <property name="jnlp.packEnabled" value="true" />	
+    </resources>	
+    <!-- ******************************************************************* 		****************** Resources por SO / Arch ************************ ******************************************************************* -->	
+    <!-- falta archs x86-64 (ou x86_64?), amd64 e amd -->	<!--  resources arch="x86" os="Windows">		
+<extension href="windows-vlc-installer.jnlp" name="WindowsInstaller" />	
+</resources>	<resources arch="x86_64" os="Windows">		
+<extension href="windows-vlc-installer.jnlp" name="WindowsInstaller" />	
+</resources>	
+<resources arch="amd" os="Windows">		
+<extension href="windows-vlc-installer.jnlp" name="WindowsInstaller" />	
+</resources>	<resources arch="amd64" os="Windows">		
+<extension href="windows-vlc-installer.jnlp" name="windowsInstaller" />	
+</resources>	
+<resources arch="i386" os="Linux">		
+<extension href="linux-vlc-installer.jnlp" name="linuxInstaller" />	
+</resources>	
+<resources arch="i586" os="Linux">		
+<extension href="linux-vlc-installer.jnlp" name="linuxInstaller" />	
+</resources>	<resources arch="i686" os="Linux">		
+<extension href="linux-vlc-installer.jnlp" name="linuxInstaller" />	
+</resources>	
+<resources arch="amd64" os="Linux">		
+<extension href="linux-vlc-installer.jnlp" name="linuxInstaller" />	
+</resources>	
+<resources arch="ppc" os="Mac OS X">		
+<jar href="lib/vlcplugins_mac_ppc_sig.jar" />	
+</resources>	
+<resources arch="ppc64" os="Mac OS X">		
+<jar href="lib/vlcplugins_mac_ppc64_sig.jar" />	
+</resources>	
+<resources arch="x86" os="Mac OS X">		
+<jar href="lib/vlcplugins_mac_ppc64_sig.jar" />	
+</resources>	
+<resources arch="x86_64" os="Mac OS X">		
+<jar href="lib/vlcplugins_mac_ppc64_sig.jar" />	
+</resources-->	
+    <component-desc />
+</jnlp>

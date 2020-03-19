@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE jnlp PUBLIC "-//Sun Microsystems, Inc//DTD JNLP Descriptor 6.0//EN" "http://java.sun.com/dtd/JNLP-6.0.dtd"><jnlp spec="6.0+" codebase="http://elab1.ist.utl.pt/rec.web/client" href="jfreechart.jnlp">	
+    <information>		
+        <title>JFreeChart Library</title>		
+        <vendor>JFree.org - David Gilbert (Object Refinery Limited)</vendor>		
+        <homepage href="http://www.jfree.org/jfreechart" />		
+        <description>JFreeChart is a free 100% Java chart library that makes it easy for developers to display professional quality charts in their applications.</description>		
+        <description kind="one-line">JFreeChart charting library</description>		
+        <description kind="tooltip">JFreeChart Library </description>		
+        <description kind="short">Charting library</description>		
+        <icon href="images/jfreechart_icon.png" />		
+        <icon kind="splash" href="images/jfreechart_splash.png" />		
+        <offline-allowed />	
+    </information>	
+    <security>		
+        <all-permissions />	
+    </security>	
+    <update check="always" policy="always" />	
+    <resources>
+        <j2se version="1.6+" />		
+        <jar href="lib/jfreechart-1.0.9_sig.jar" main="true" />		
+        <jar href="lib/jcommon-1.0.12_sig.jar" />
+        <property name="jnlp.packEnabled" value="true" />	
+    </resources>	
+    <component-desc />
+</jnlp>

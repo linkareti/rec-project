@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE jnlp PUBLIC "-//Sun Microsystems, Inc//DTD JNLP Descriptor 6.0//EN" "http://java.sun.com/dtd/JNLP-6.0.dtd"><jnlp spec="6.0+" codebase="http://elab1.ist.utl.pt/rec.web/client" href="openorb.jnlp">	
+    <information>		
+        <title>Community OpenORB</title>		
+        <vendor>The Community OpenORB community - see http://openorb.sourceforge.net/who-we-are.html</vendor>		
+        <homepage href="http://openorb.sourceforge.net/" />		
+        <description>OpenORB provides a Java implementation of the OMG CORBA 2.4.2 specification.</description>		
+        <description kind="one-line">OpenORB Implementation of OMG CORBA 2.4.2 ORB		</description>		
+        <description kind="tooltip">Community OpenORB		</description>		
+        <description kind="short">OpenSource CORBA ORB		</description>		
+        <offline-allowed />	
+    </information>	
+    <security>		
+        <all-permissions />	
+    </security>	
+    <update check="always" policy="always" />	
+    <resources>
+        <j2se version="1.6+" />		
+        <jar href="lib/openorb_orb-1.4.0_sig.jar" main="true"/>		
+        <jar href="lib/openorb_orb_omg-1.4.0_sig.jar"/>		
+        <jar href="lib/avalon-framework_sig.jar" />		
+        <jar href="lib/xercesImpl_sig.jar" />		
+        <jar href="lib/logkit_sig.jar" />		
+        <jar href="lib/tools-1.4.0_sig.jar" />		
+        <jar href="lib/xml-apis_sig.jar" />		
+        <jar href="lib/openorb_ots-1.4.0_sig.jar" />		
+        <jar href="lib/openorb_pss-1.4.0_sig.jar" />		
+        <jar href="lib/commons-csv-1.0-SNAPSHOT_sig.jar" />		
+        <property name="jnlp.packEnabled" value="true" />	
+    </resources>	
+    <component-desc />	
+</jnlp>
