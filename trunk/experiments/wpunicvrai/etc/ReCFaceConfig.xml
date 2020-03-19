@@ -1,0 +1,10 @@
+
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="wpunicvrai$tip.wpunicvrai" location="WP_UNICV_RAI" iconLocationBundleKey="wpunicvrai$icon.wpunicvrai" headerDisplayClassLocationBundleKey="" displayStringBundleKey="wpunicvrai$title.wpunicvrai" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="wpunicvrai$background.wpunicvrai" descriptionStringBundleKey="wpunicvrai$description.wpunicvrai" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="wpunicvrai$customizer.wpunicvrai" order="0">
+    <display toolTipBundleKey="wpunicvrai$display.table.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="wpunicvrai$display.table.title" classLocationBundleKey="wpunicvrai$display.table.loc" order="0"/>
+	<display toolTipBundleKey="wpunicvrai$display.graph.histogram.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpunicvrai$display.graph.histogram.title" classLocationBundleKey="wpunicvrai$display.graph.histogram.loc" order="0"/>
+    <display toolTipBundleKey="wpunicvrai$display.graph.period.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpunicvrai$display.graph.period.title" classLocationBundleKey="wpunicvrai$display.graph.period.loc" order="0"/>
+    <display toolTipBundleKey="wpunicvrai$display.graph.g.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpunicvrai$display.graph.g.title" classLocationBundleKey="wpunicvrai$display.graph.g.loc" order="0"/>
+    <localizationBundle name="wpunicvrai" location="recresource:///pt/utl/ist/elab/client/wpunicvrai/resources/messages"/>
+    <mediaConfig videoLocation="wpunicvrai$url.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="http://groups.ist.utl.pt/wwwelab/wiki/index.php?title=P%C3%AAndulo_Mundial" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+</apparatus>

@@ -1,0 +1,10 @@
+
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="wpunbbsb$tip.wpunbbsb" location="WP_UNB_BSB" iconLocationBundleKey="wpunbbsb$icon.wpunbbsb" headerDisplayClassLocationBundleKey="" displayStringBundleKey="wpunbbsb$title.wpunbbsb" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="wpunbbsb$background.wpunbbsb" descriptionStringBundleKey="wpunbbsb$description.wpunbbsb" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="wpunbbsb$customizer.wpunbbsb" order="0">
+    <display toolTipBundleKey="wpunbbsb$display.table.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="wpunbbsb$display.table.title" classLocationBundleKey="wpunbbsb$display.table.loc" order="0"/>
+	<display toolTipBundleKey="wpunbbsb$display.graph.histogram.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpunbbsb$display.graph.histogram.title" classLocationBundleKey="wpunbbsb$display.graph.histogram.loc" order="0"/>
+    <display toolTipBundleKey="wpunbbsb$display.graph.period.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpunbbsb$display.graph.period.title" classLocationBundleKey="wpunbbsb$display.graph.period.loc" order="0"/>
+    <display toolTipBundleKey="wpunbbsb$display.graph.g.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpunbbsb$display.graph.g.title" classLocationBundleKey="wpunbbsb$display.graph.g.loc" order="0"/>
+    <localizationBundle name="wpunbbsb" location="recresource:///pt/utl/ist/elab/client/wpunbbsb/resources/messages"/>
+    <mediaConfig videoLocation="wpunbbsb$url.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="http://groups.ist.utl.pt/wwwelab/wiki/index.php?title=P%C3%AAndulo_Mundial" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+</apparatus>
