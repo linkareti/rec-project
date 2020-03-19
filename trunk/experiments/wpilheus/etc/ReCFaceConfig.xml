@@ -1,0 +1,10 @@
+
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="wpilheus$tip.wpilheus" location="WORLDPENDULUM_ILHEUS" iconLocationBundleKey="wpilheus$icon.wpilheus" headerDisplayClassLocationBundleKey="" displayStringBundleKey="wpilheus$title.wpilheus" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="wpilheus$background.wpilheus" descriptionStringBundleKey="wpilheus$description.wpilheus" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="wpilheus$customizer.wpilheus" order="0">
+    <display toolTipBundleKey="wpilheus$display.table.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="wpilheus$display.table.title" classLocationBundleKey="wpilheus$display.table.loc" order="0"/>
+	<display toolTipBundleKey="wpilheus$display.graph.histogram.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpilheus$display.graph.histogram.title" classLocationBundleKey="wpilheus$display.graph.histogram.loc" order="0"/>
+    <display toolTipBundleKey="wpilheus$display.graph.period.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpilheus$display.graph.period.title" classLocationBundleKey="wpilheus$display.graph.period.loc" order="0"/>
+    <display toolTipBundleKey="wpilheus$display.graph.g.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpilheus$display.graph.g.title" classLocationBundleKey="wpilheus$display.graph.g.loc" order="0"/>
+    <localizationBundle name="wpilheus" location="recresource:///pt/utl/ist/elab/client/wpilheus/resources/messages"/>
+    <mediaConfig videoLocation="wpilheus$url.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="http://groups.ist.utl.pt/wwwelab/wiki/index.php?title=P%C3%AAndulo_Mundial" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+</apparatus>

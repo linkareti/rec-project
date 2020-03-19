@@ -1,0 +1,10 @@
+
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="wpuniandesbog$tip.wpuniandesbog" location="WP_UNIANDES_BOG" iconLocationBundleKey="wpuniandesbog$icon.wpuniandesbog" headerDisplayClassLocationBundleKey="" displayStringBundleKey="wpuniandesbog$title.wpuniandesbog" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="wpuniandesbog$background.wpuniandesbog" descriptionStringBundleKey="wpuniandesbog$description.wpuniandesbog" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="wpuniandesbog$customizer.wpuniandesbog" order="0">
+    <display toolTipBundleKey="wpuniandesbog$display.table.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="wpuniandesbog$display.table.title" classLocationBundleKey="wpuniandesbog$display.table.loc" order="0"/>
+	<display toolTipBundleKey="wpuniandesbog$display.graph.histogram.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpuniandesbog$display.graph.histogram.title" classLocationBundleKey="wpuniandesbog$display.graph.histogram.loc" order="0"/>
+    <display toolTipBundleKey="wpuniandesbog$display.graph.period.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpuniandesbog$display.graph.period.title" classLocationBundleKey="wpuniandesbog$display.graph.period.loc" order="0"/>
+    <display toolTipBundleKey="wpuniandesbog$display.graph.g.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpuniandesbog$display.graph.g.title" classLocationBundleKey="wpuniandesbog$display.graph.g.loc" order="0"/>
+    <localizationBundle name="wpuniandesbog" location="recresource:///pt/utl/ist/elab/client/wpuniandesbog/resources/messages"/>
+    <mediaConfig videoLocation="wpuniandesbog$url.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="http://groups.ist.utl.pt/wwwelab/wiki/index.php?title=P%C3%AAndulo_Mundial" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+</apparatus>
