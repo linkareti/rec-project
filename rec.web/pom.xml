@@ -14,9 +14,9 @@
 	<description>Module containing the web interface of the ReC project, containing also an integration with Moodle</description>
 	<version>1.0.0-SNAPSHOT</version>
 	<scm>
-		<connection>scm:svn:https://svn.linkare.com/internal/rec-project/rec/trunk/rec.web</connection>
-		<developerConnection>scm:svn:https://svn.linkare.com/internal/rec-project/rec/trunk/rec.web</developerConnection>
-		<url>https://sventon.linkare.com/repos/svnroot/list/internal/rec-project/rec/trunk/rec.web</url>
+		<connection>scm:svn:https://svn.linkare.com/internal/rec-project/rec/branches/jdk11-migration/rec.web</connection>
+		<developerConnection>scm:svn:https://svn.linkare.com/internal/rec-project/rec/branches/jdk11-migration/rec.web</developerConnection>
+		<url>https://sventon.linkare.com/repos/svnroot/list/internal/rec-project/rec/branches/jdk11-migration/rec.web</url>
 	</scm>
 	<properties>
 		<!-- Explicitly declaring the source encoding eliminates the following 
@@ -27,12 +27,12 @@
 			jboss.home property in an active profile in the Maven 2 settings.xml file -->
 		<jboss.home>${env.JBOSS_HOME}</jboss.home>
 		<jboss.domain>default</jboss.domain>
-		<!-- The version of Weld extensions in use -->
+		<!-- The version of Weld extensions in use-->
 		<weld.extensions.version>1.0.0-CR2</weld.extensions.version>
                 <aspectj.version>1.8.2</aspectj.version>
-		<aspectj-maven-plugin.version>1.7</aspectj-maven-plugin.version>
-    <maven.compiler.source>1.6</maven.compiler.source>
-    <maven.compiler.target>1.6</maven.compiler.target>
+		<aspectj-maven-plugin.version>1.8</aspectj-maven-plugin.version>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
 	</properties>
 
 	<dependencyManagement>
@@ -272,6 +272,63 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
+    <groupId>fish.payara.arquillian</groupId>
+    <artifactId>payara-client-ee7</artifactId>
+    <version>2.2</version>
+    <exclusions>
+				<exclusion>
+					<groupId>org.glassfish.jersey.core</groupId>
+					<artifactId> jersey-client</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.glassfish.jersey.ext.microprofile</groupId>
+					<artifactId>jersey-mp-rest-client</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.glassfish.jersey.media</groupId>
+					<artifactId>jersey-media-json-jackson</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.glassfish.jersey.media</groupId>
+					<artifactId>jersey-media-json-processing</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.glassfish.jersey.media</groupId>
+					<artifactId>jersey-media-jaxb</artifactId>
+				</exclusion>
+			</exclusions>
+</dependency>
+
+<dependency>
+					<groupId>org.glassfish.jersey.core</groupId>
+					<artifactId> jersey-client</artifactId>
+					<version>2.30.1</version>
+				</dependency>
+				<dependency>
+					<groupId>org.glassfish.jersey.ext.microprofile</groupId>
+					<artifactId>jersey-mp-rest-client</artifactId>
+					<version>2.30.1</version>
+				</dependency>
+				<dependency>
+					<groupId>org.glassfish.jersey.media</groupId>
+					<artifactId>jersey-media-json-jackson</artifactId>
+					<version>2.30.1</version>
+				</dependency>
+				<dependency>
+					<groupId>org.glassfish.jersey.media</groupId>
+					<artifactId>jersey-media-json-processing</artifactId>
+					<version>2.30.1</version>
+				</dependency>
+				<dependency>
+					<groupId>org.glassfish.jersey.media</groupId>
+					<artifactId>jersey-media-jaxb</artifactId>
+					<version>2.30.1</version>
+				</dependency>
+
+
+
+
+		<!-- dependency>
 			<groupId>org.glassfish.appclient</groupId>
 			<artifactId>gf-client</artifactId>
 			<version>3.2-b06</version>
@@ -306,7 +363,7 @@
 					<artifactId>org.eclipse.persistence.asm</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency>
+		</dependency-->
 		<dependency>
 			<groupId>org.jboss.weld</groupId>
 			<artifactId>weld-logger</artifactId>
@@ -445,21 +502,32 @@
 		</resources>
 		<finalName>${project.artifactId}</finalName>
 		<plugins>
+
+
+<plugin>
+    <groupId>org.codehaus.mojo</groupId>
+    <artifactId>versions-maven-plugin</artifactId>
+    <version>2.7</version>
+    <configuration>
+        <generateBackupPoms>false</generateBackupPoms>
+    </configuration>
+</plugin>
+
+
 			<!-- Compiler plugin enforces Java 1.6 compatiblity -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.0</version>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-				</configuration>
+				<version>3.8.0</version>
+				<!-- <configuration>
+					<release>11</release>
+			    </configuration> -->
 			</plugin>
 			<!-- Eclipse plugin can force download of source and JavaDoc jars -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
-				<version>2.9</version>
+				<version>2.10</version>
 				<configuration>
 					<wtpversion>2.0</wtpversion>
 					<!-- <downloadSources>true</downloadSources> <downloadJavadocs>true</downloadJavadocs> -->
@@ -482,7 +550,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>sql-maven-plugin</artifactId>
-				<version>1.4</version>
+				<version>1.5</version>
 
 				<dependencies>
 					<!-- MySQL JDBC driver -->
@@ -532,7 +600,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>2.0.2</version>
+				<version>3.2.3</version>
 				<configuration>
 					<webResources>
 						<resource>
@@ -554,19 +622,15 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
+				<groupId>com.nickwongdev</groupId>
 				<artifactId>aspectj-maven-plugin</artifactId>
-				<version>${aspectj-maven-plugin.version}</version>
-				<configuration>
-                                        <complianceLevel>1.6</complianceLevel>
-					<target>1.6</target>
-					<source>1.6</source>
-				</configuration>
-				<executions>
+				<version>1.12.1</version>
+				
+				<!-- <executions>
 					<execution>
 						<goals>
-							<goal>compile</goal>       <!-- use this goal to weave all your main classes -->
-							<goal>test-compile</goal>  <!-- use this goal to weave all your test classes -->
+							<goal>compile</goal>       use this goal to weave all your main classes
+							<goal>test-compile</goal>  use this goal to weave all your test classes
 						</goals>
 					</execution>
 				</executions>
@@ -576,11 +640,11 @@
                                     <artifactId>aspectjtools</artifactId>
                                     <version>${aspectj.version}</version>
                                 </dependency>
-                    </dependencies>
+                    </dependencies> -->
 			</plugin>
 			<plugin>
 				<artifactId>maven-release-plugin</artifactId>
-				<version>2.3.2</version>
+				<version>3.0.0-M1</version>
 				<configuration>
 					<tagNameFormat>rel-web-@{project.version}</tagNameFormat>
 				</configuration>
@@ -588,7 +652,7 @@
 			<plugin>
 				<groupId>org.liquibase</groupId>
 				<artifactId>liquibase-maven-plugin</artifactId>
-				<version>2.0.3</version>
+				<version>3.8.8</version>
 				<inherited>false</inherited>
 				<configuration>
 					<propertyFileWillOverride>true</propertyFileWillOverride>
@@ -767,7 +831,7 @@
 				<configuration>
 					<verbose>true</verbose>
 					<privateScope>true</privateScope>
-					<complianceLevel>1.6</complianceLevel>
+					<complianceLevel>11</complianceLevel>
 				</configuration>
 				<reportSets>
 					<reportSet>
