@@ -24,7 +24,7 @@ public final class CompositeSecurityManager implements ISecurityManager {
 			for (final String className : classNames) {
 				try {
 					securityManagers.add((ISecurityManager) Thread.currentThread().getContextClassLoader()
-							.loadClass(className).newInstance());
+							.loadClass(className).getDeclaredConstructor().newInstance());
 				} catch (final Exception e) {
 					LOGGER.log(Level.WARNING, "Unable to load SecurityManager defined at system : " + className
 							+ " - ignoring!", e);

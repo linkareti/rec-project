@@ -378,8 +378,8 @@ public class ReadWrite extends javax.swing.JFrame {
 		serialComm.write(80);
 		serialComm.write(87);
 		serialComm.write(77);
-		serialComm.write(new Integer(jTextField1.getText()).intValue());
-		serialComm.write(new Integer(jTextField2.getText()).intValue());
+		serialComm.write(Integer.valueOf(jTextField1.getText()).intValue());
+		serialComm.write(Integer.valueOf(jTextField2.getText()).intValue());
 	}// GEN-LAST:event_jButtonWriteActionPerformed
 
 	/** Exit the Application */

@@ -40,11 +40,11 @@ public class StampPVProcessor extends AbstractStampProcessor {
 				&& splitedStr[0] != null) {
 			try {
 				pressure = Integer.parseInt(splitedStr[0]);
-				final Integer oPressure = new Integer(pressure);
+				final Integer oPressure = Integer.valueOf(pressure);
 				command.addCommandData(StampPVProcessor.PRESSAO, oPressure);
 
 				volume = Integer.parseInt(splitedStr[2]);
-				final Float oVolume = new Float((float) volume / 1000);
+				final Float oVolume = Float.valueOf((float) volume / 1000);
 				command.addCommandData(StampPVProcessor.VOLUME, oVolume);
 
 				command.setData(true);

@@ -52,7 +52,7 @@ public class JPanelAnalogic extends javax.swing.JPanel implements ExpDataModelLi
 		jProgressBarA1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 153)));
 		jProgressBarA1.setMinimumSize(new java.awt.Dimension(10, 21));
 		jProgressBarA1.setPreferredSize(new java.awt.Dimension(150, 21));
-		jProgressBarA1.setString(new Integer(A1).toString());
+		jProgressBarA1.setString(Integer.valueOf(A1).toString());
 		jProgressBarA1.setStringPainted(true);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 8;
@@ -67,7 +67,7 @@ public class JPanelAnalogic extends javax.swing.JPanel implements ExpDataModelLi
 		jProgressBarA2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 153)));
 		jProgressBarA2.setMinimumSize(new java.awt.Dimension(10, 21));
 		jProgressBarA2.setPreferredSize(new java.awt.Dimension(150, 21));
-		jProgressBarA2.setString(new Integer(A2).toString());
+		jProgressBarA2.setString(Integer.valueOf(A2).toString());
 		jProgressBarA2.setStringPainted(true);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 8;
@@ -82,7 +82,7 @@ public class JPanelAnalogic extends javax.swing.JPanel implements ExpDataModelLi
 		jProgressBarA3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 153)));
 		jProgressBarA3.setMinimumSize(new java.awt.Dimension(10, 21));
 		jProgressBarA3.setPreferredSize(new java.awt.Dimension(150, 21));
-		jProgressBarA3.setString(new Integer(A3).toString());
+		jProgressBarA3.setString(Integer.valueOf(A3).toString());
 		jProgressBarA3.setStringPainted(true);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 8;
@@ -97,7 +97,7 @@ public class JPanelAnalogic extends javax.swing.JPanel implements ExpDataModelLi
 		jProgressBarA4.setMaximum(255);
 		jProgressBarA4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 153)));
 		jProgressBarA4.setPreferredSize(new java.awt.Dimension(150, 21));
-		jProgressBarA4.setString(new Integer(A4).toString());
+		jProgressBarA4.setString(Integer.valueOf(A4).toString());
 		jProgressBarA4.setStringPainted(true);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 8;
@@ -166,7 +166,7 @@ public class JPanelAnalogic extends javax.swing.JPanel implements ExpDataModelLi
 	public void setA1(final int A1) {
 		this.A1 = A1;
 		jProgressBarA1.setValue(A1);
-		jProgressBarA1.setString(new Integer(A1).toString());
+		jProgressBarA1.setString(Integer.valueOf(A1).toString());
 	}
 
 	/**
@@ -186,7 +186,7 @@ public class JPanelAnalogic extends javax.swing.JPanel implements ExpDataModelLi
 	public void setA2(final int A2) {
 		this.A2 = A2;
 		jProgressBarA2.setValue(A2);
-		jProgressBarA2.setString(new Integer(A2).toString());
+		jProgressBarA2.setString(Integer.valueOf(A2).toString());
 	}
 
 	/**
@@ -206,7 +206,7 @@ public class JPanelAnalogic extends javax.swing.JPanel implements ExpDataModelLi
 	public void setA3(final int A3) {
 		this.A3 = A3;
 		jProgressBarA3.setValue(A3);
-		jProgressBarA3.setString(new Integer(A3).toString());
+		jProgressBarA3.setString(Integer.valueOf(A3).toString());
 	}
 
 	/**
@@ -226,7 +226,7 @@ public class JPanelAnalogic extends javax.swing.JPanel implements ExpDataModelLi
 	public void setA4(final int A4) {
 		this.A4 = A4;
 		jProgressBarA4.setValue(A4);
-		jProgressBarA4.setString(new Integer(A4).toString());
+		jProgressBarA4.setString(Integer.valueOf(A4).toString());
 	}
 
 	public void dataModelRunning() {

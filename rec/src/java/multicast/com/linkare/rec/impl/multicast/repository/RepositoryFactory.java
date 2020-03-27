@@ -25,7 +25,7 @@ public final class RepositoryFactory {
 		try {
 			LOGGER.log(Level.FINE, "Trying to load the Repository class [" + repositoryClassName + "]");
                                                
-			REPOSITORY = (IRepository) ClassUtils.findClass(repositoryClassName, RepositoryFactory.class.getClassLoader()).newInstance();
+			REPOSITORY = (IRepository) ClassUtils.findClass(repositoryClassName, RepositoryFactory.class.getClassLoader()).getDeclaredConstructor().newInstance();
 
 		} catch (Exception e) {
 			LOGGER.log(Level.INFO,

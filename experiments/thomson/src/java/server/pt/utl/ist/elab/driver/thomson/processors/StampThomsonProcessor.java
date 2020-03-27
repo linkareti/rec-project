@@ -43,11 +43,11 @@ public class StampThomsonProcessor extends AbstractStampProcessor {
 				&& splitedStr[0] != null) {
 			try {
 				corrente = Integer.parseInt(splitedStr[0]) * 2000 / 170;
-				final Integer oCorrente = new Integer(corrente);
+				final Integer oCorrente = Integer.valueOf(corrente);
 				command.addCommandData(StampThomsonProcessor.CORRENTE, oCorrente);
 
 				tensao = (Integer.parseInt(splitedStr[1]) * 5 * 40000 / 255) / 27;
-				final Integer oTensao = new Integer(tensao);
+				final Integer oTensao = Integer.valueOf(tensao);
 				command.addCommandData(StampThomsonProcessor.TENSAO, oTensao);
 
 				command.setData(true);

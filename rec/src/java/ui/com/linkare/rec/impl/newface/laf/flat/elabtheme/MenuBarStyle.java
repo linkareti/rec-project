@@ -44,7 +44,7 @@ public class MenuBarStyle extends DefaultStyle {
 		super.updatePropertyMap(map);
 		map.put(AbstractStyle.BORDER, DefaultStyle.EMPTY_BORDER);
 		map.put("gradient",
-				Arrays.asList(new Object[] { new Float(1f), new Float(0f), new ColorUIResource(0x0c1011),
+				Arrays.asList(new Object[] { Float.valueOf(1f), Float.valueOf(0f), new ColorUIResource(0x0c1011),
 						new ColorUIResource(0x2a3436), new ColorUIResource(0x2a3436) }));
 	}
 

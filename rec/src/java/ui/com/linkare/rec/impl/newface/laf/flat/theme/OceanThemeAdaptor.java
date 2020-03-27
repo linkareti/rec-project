@@ -22,7 +22,7 @@ public class OceanThemeAdaptor extends OceanTheme {
 		super.addCustomEntriesToTable(table);
 
 		// .30 0 DDE8F3 white secondary2
-		final java.util.List<Object> buttonGradient = Arrays.asList(new Object[] { new Float(.3f), new Float(0f),
+		final java.util.List<Object> buttonGradient = Arrays.asList(new Object[] { Float.valueOf(.3f), Float.valueOf(0f),
 				new ColorUIResource(0xd6e2e0), getWhite(), new ColorUIResource(0xd6e2e0) });
 
 		final Object[] defaults = new Object[] {
@@ -31,7 +31,7 @@ public class OceanThemeAdaptor extends OceanTheme {
 
 				// 0c1011 -> 2a3436
 				"MenuBar.gradient",
-				Arrays.asList(new Object[] { new Float(1f), new Float(0f), new ColorUIResource(0x0c1011),
+				Arrays.asList(new Object[] { Float.valueOf(1f), Float.valueOf(0f), new ColorUIResource(0x0c1011),
 						new ColorUIResource(0x2a3436), new ColorUIResource(0x2a3436) }), };
 		table.putDefaults(defaults);
 	}

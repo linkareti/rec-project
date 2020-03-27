@@ -29,16 +29,16 @@ public class MomInerciaCustomizer  extends AbstractCustomizer {
 	public MomInerciaCustomizer() {
 		initComponents();
 		Hashtable slidersLabels = new Hashtable(10);
-		slidersLabels.put(new Integer(0), new JLabel("0.0"));
-		slidersLabels.put(new Integer(10000), new JLabel("10.0"));
-		slidersLabels.put(new Integer(20000), new JLabel("20.0"));
-		slidersLabels.put(new Integer(30000), new JLabel("30.0"));
-		slidersLabels.put(new Integer(40000), new JLabel("40.0"));
-		slidersLabels.put(new Integer(50000), new JLabel("50.0"));
-		slidersLabels.put(new Integer(60000), new JLabel("60.0"));
-		slidersLabels.put(new Integer(70000), new JLabel("70.0"));
-		slidersLabels.put(new Integer(80000), new JLabel("80.0"));
-		slidersLabels.put(new Integer(90000), new JLabel("90.0"));
+		slidersLabels.put(Integer.valueOf(0), new JLabel("0.0"));
+		slidersLabels.put(Integer.valueOf(10000), new JLabel("10.0"));
+		slidersLabels.put(Integer.valueOf(20000), new JLabel("20.0"));
+		slidersLabels.put(Integer.valueOf(30000), new JLabel("30.0"));
+		slidersLabels.put(Integer.valueOf(40000), new JLabel("40.0"));
+		slidersLabels.put(Integer.valueOf(50000), new JLabel("50.0"));
+		slidersLabels.put(Integer.valueOf(60000), new JLabel("60.0"));
+		slidersLabels.put(Integer.valueOf(70000), new JLabel("70.0"));
+		slidersLabels.put(Integer.valueOf(80000), new JLabel("80.0"));
+		slidersLabels.put(Integer.valueOf(90000), new JLabel("90.0"));
 
 		jSliderLaunch.setLabelTable(slidersLabels);
 		jSliderStop.setLabelTable(slidersLabels);

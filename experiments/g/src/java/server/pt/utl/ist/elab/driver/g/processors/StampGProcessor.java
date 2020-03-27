@@ -40,7 +40,7 @@ public class StampGProcessor extends AbstractStampProcessor {
 				&& splitedStr[0] != null) {
 			try {
 				height = Integer.parseInt(splitedStr[0]);
-				final Float oHeight = new Float(0.000346F * height);
+				final Float oHeight = Float.valueOf(0.000346F * height);
 				command.addCommandData(StampGProcessor.ALTURA, oHeight);
 
 				command.setData(true);

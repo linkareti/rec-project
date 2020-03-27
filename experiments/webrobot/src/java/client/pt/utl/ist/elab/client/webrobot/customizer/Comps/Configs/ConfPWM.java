@@ -307,12 +307,12 @@ public class ConfPWM extends javax.swing.JDialog {
 
 	private void jTextFieldPWM2KeyReleased(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextFieldPWM2KeyReleased
 		try {
-			if (new Integer(jTextFieldPWM2.getText()).intValue() < 1) {
+			if (Integer.valueOf(jTextFieldPWM2.getText()).intValue() < 1) {
 				jTextFieldPWM2.setText("" + 1);
-			} else if (new Integer(jTextFieldPWM2.getText()).intValue() > 255) {
+			} else if (Integer.valueOf(jTextFieldPWM2.getText()).intValue() > 255) {
 				jTextFieldPWM2.setText("" + 255);
 			}
-			jSliderPWM2.setValue(new Integer(jTextFieldPWM2.getText()).intValue());
+			jSliderPWM2.setValue(Integer.valueOf(jTextFieldPWM2.getText()).intValue());
 		} catch (final NumberFormatException nfe) {
 		}
 	}// GEN-LAST:event_jTextFieldPWM2KeyReleased
@@ -323,12 +323,12 @@ public class ConfPWM extends javax.swing.JDialog {
 
 	private void jTextFieldPWM1KeyReleased(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextFieldPWM1KeyReleased
 		try {
-			if (new Integer(jTextFieldPWM1.getText()).intValue() < 1) {
+			if (Integer.valueOf(jTextFieldPWM1.getText()).intValue() < 1) {
 				jTextFieldPWM1.setText("" + 1);
-			} else if (new Integer(jTextFieldPWM1.getText()).intValue() > 255) {
+			} else if (Integer.valueOf(jTextFieldPWM1.getText()).intValue() > 255) {
 				jTextFieldPWM1.setText("" + 255);
 			}
-			jSliderPWM1.setValue(new Integer(jTextFieldPWM1.getText()).intValue());
+			jSliderPWM1.setValue(Integer.valueOf(jTextFieldPWM1.getText()).intValue());
 		} catch (final NumberFormatException nfe) {
 		}
 	}// GEN-LAST:event_jTextFieldPWM1KeyReleased
@@ -349,16 +349,16 @@ public class ConfPWM extends javax.swing.JDialog {
 	private void jButtonOkMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonOkMousePressed
 		if (checkTextValues.isOK(jTextFieldPWM1) && checkTextValues.isOK(jTextFieldPWM2)) {
 			if (jCheckBoxPWM1.isSelected() && jCheckBoxPWM2.isSelected()) {
-				model.setValor(new Integer(jTextFieldPWM1.getText()).intValue());
-				model.setValor2(new Integer(jTextFieldPWM2.getText()).intValue());
+				model.setValor(Integer.valueOf(jTextFieldPWM1.getText()).intValue());
+				model.setValor2(Integer.valueOf(jTextFieldPWM2.getText()).intValue());
 				model.setFlag(1);
 			} else if (jCheckBoxPWM1.isSelected() && !jCheckBoxPWM2.isSelected()) {
-				model.setValor(new Integer(jTextFieldPWM1.getText()).intValue());
+				model.setValor(Integer.valueOf(jTextFieldPWM1.getText()).intValue());
 				model.setValor2(0);
 				model.setFlag(2);
 			} else if (!jCheckBoxPWM1.isSelected() && jCheckBoxPWM2.isSelected()) {
 				model.setValor(0);
-				model.setValor2(new Integer(jTextFieldPWM2.getText()).intValue());
+				model.setValor2(Integer.valueOf(jTextFieldPWM2.getText()).intValue());
 				model.setFlag(3);
 			} else {
 				model.setValor(0);

@@ -54,13 +54,13 @@ public class ThomsonStampDriver extends AbstractStampDriver<ThomsonStampDataSour
 
 		stampConfig.addCommandData(
 				StampConfigTranslator.V_ACELERACAO_STR,
-				new Integer(Defaults.defaultIfEmpty(
+				Integer.valueOf(Defaults.defaultIfEmpty(
 						config.getSelectedHardwareParameterValue(StampConfigTranslator.V_ACELERACAO_STR),
 						info.getHardwareParameterValue(StampConfigTranslator.V_ACELERACAO_STR))));
 
 		stampConfig.addCommandData(
 				StampConfigTranslator.I_BOBINES_STR,
-				new Integer(Defaults.defaultIfEmpty(
+				Integer.valueOf(Defaults.defaultIfEmpty(
 						config.getSelectedHardwareParameterValue(StampConfigTranslator.I_BOBINES_STR),
 						info.getHardwareParameterValue(StampConfigTranslator.I_BOBINES_STR))));
 
@@ -70,7 +70,7 @@ public class ThomsonStampDriver extends AbstractStampDriver<ThomsonStampDataSour
 						config.getSelectedHardwareParameterValue(StampConfigTranslator.MODO_STR),
 						info.getHardwareParameterValue(StampConfigTranslator.MODO_STR))));
 
-		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, new Integer(config.getTotalSamples()));
+		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, Integer.valueOf(config.getTotalSamples()));
 
 		final StampTranslator translator = StampTranslatorProcessorManager.getTranslator(stampConfig);
 		if (!translator.translate(stampConfig)) {

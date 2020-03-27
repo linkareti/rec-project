@@ -41,7 +41,7 @@ public final class SecurityManagerFactory {
 				}
 				final Class<?> clazz = Thread.currentThread().getContextClassLoader().loadClass(secManagerClassName);
 				if (clazz != null) {                                    
-					secManager = (ISecurityManager) ClassUtils.findClass(secManagerClassName, getClass().getClassLoader()).newInstance();
+					secManager = (ISecurityManager) ClassUtils.findClass(secManagerClassName, getClass().getClassLoader()).getDeclaredConstructor().newInstance();
 				}
 			} catch (final Exception e) {
 				LOGGER.log(Level.WARNING, "Unable to load SecurityManager defined at system : " + secManagerClassName

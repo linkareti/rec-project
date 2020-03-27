@@ -36,25 +36,25 @@ public class MMCustomizer extends AbstractCustomizer {
 		// Maneira classica de alterar os labels do slider
 		final java.util.Hashtable<Integer, JLabel> htK = new java.util.Hashtable<Integer, JLabel>(10);
 		for (int i = 0; i < 21; i += 2) {
-			htK.put(new Integer(i), new javax.swing.JLabel("" + i / 10F));
+			htK.put(Integer.valueOf(i), new javax.swing.JLabel("" + i / 10F));
 		}
 		jSliderK.setLabelTable(htK);
 
 		final java.util.Hashtable<Integer, JLabel> htM = new java.util.Hashtable<Integer, JLabel>(20);
 		for (int i = 0; i < 51; i += 5) {
-			htM.put(new Integer(i), new javax.swing.JLabel("" + i / 10F));
+			htM.put(Integer.valueOf(i), new javax.swing.JLabel("" + i / 10F));
 		}
 		jSliderM.setLabelTable(htM);
 
 		final java.util.Hashtable<Integer, JLabel> htFric = new java.util.Hashtable<Integer, JLabel>(10);
 		for (int i = 0; i < 11; i++) {
-			htFric.put(new Integer(i), new javax.swing.JLabel("" + i / 10F));
+			htFric.put(Integer.valueOf(i), new javax.swing.JLabel("" + i / 10F));
 		}
 		jSliderFric.setLabelTable(htFric);
 
 		final java.util.Hashtable<Integer, JLabel> htX0 = new java.util.Hashtable<Integer, JLabel>(10);
 		for (int i = -20; i < 21; i += 5) {
-			htX0.put(new Integer(i), new javax.swing.JLabel("" + i / 10F));
+			htX0.put(Integer.valueOf(i), new javax.swing.JLabel("" + i / 10F));
 		}
 		jSliderX0.setLabelTable(htX0);
 

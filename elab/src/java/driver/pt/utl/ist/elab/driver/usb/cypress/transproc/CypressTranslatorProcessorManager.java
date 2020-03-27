@@ -56,7 +56,7 @@ public class CypressTranslatorProcessorManager {
 	public static void initCypressProcessorTranslator(final String className) {
 		try {
 			final Class<?> c = ClassUtils.findClass(className, CypressTranslatorProcessorManager.class.getClassLoader());
-			c.newInstance();
+			c.getDeclaredConstructor().newInstance();
 		} catch (final Exception e) {
 			LOGGER.log(Level.SEVERE, "Unable to load class:" + className, e);
 		}
@@ -66,7 +66,7 @@ public class CypressTranslatorProcessorManager {
 		for (final String className : classNames) {
 			try {
 				final Class<?> c = ClassUtils.findClass(className, CypressTranslatorProcessorManager.class.getClassLoader());
-				c.newInstance();
+				c.getDeclaredConstructor().newInstance();
 			} catch (final Exception e) {
 				LOGGER.log(Level.SEVERE, "Unable to load class:" + className, e);
 			}

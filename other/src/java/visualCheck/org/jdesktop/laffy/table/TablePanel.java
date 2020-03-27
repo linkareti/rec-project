@@ -251,12 +251,12 @@ public class TablePanel extends OptionsSettablePanel {
 
 		jTable1.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 		/*
-		 * {new Integer(234523), "Rupert", new Double(253.23), null}, {new Integer(392923), "Clara", new Double(-98.78),
-		 * new Boolean(true)}, {new Integer(811233), "Nick", new Double(-88.45), new Boolean(true)}
+		 * {Integer.valueOf(234523), "Rupert", Double.valueOf(253.23), null}, {Integer.valueOf(392923), "Clara", Double.valueOf(-98.78),
+		 * new Boolean(true)}, {Integer.valueOf(811233), "Nick", Double.valueOf(-88.45), new Boolean(true)}
 		 */
-		{ new Integer(234523), I18nResourceHandler.getMessage("Rupert"), new Double(253.23), null },
-				{ new Integer(392923), I18nResourceHandler.getMessage("Clara"), new Double(-98.78), new Boolean(true) },
-				{ new Integer(811233), I18nResourceHandler.getMessage("Nick"), new Double(-88.45), new Boolean(true) } }, new String[] {
+		{ Integer.valueOf(234523), I18nResourceHandler.getMessage("Rupert"), Double.valueOf(253.23), null },
+				{ Integer.valueOf(392923), I18nResourceHandler.getMessage("Clara"), Double.valueOf(-98.78), new Boolean(true) },
+				{ Integer.valueOf(811233), I18nResourceHandler.getMessage("Nick"), Double.valueOf(-88.45), new Boolean(true) } }, new String[] {
 				//"ID", "Name", "Balance", "Boolean"
 				I18nResourceHandler.getMessage("ID"), I18nResourceHandler.getMessage("Name"), I18nResourceHandler.getMessage("Balance"),
 				I18nResourceHandler.getMessage("Boolean") }) {
@@ -281,12 +281,12 @@ public class TablePanel extends OptionsSettablePanel {
 
 		jTable2.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 		/*
-		 * {new Integer(234523), "Rupert", new Double(253.23)}, {new Integer(392923), "Clara", new Double(-98.78)}, {new
-		 * Integer(811233), "Nick", new Double(-88.45)}
+		 * {Integer.valueOf(234523), "Rupert", Double.valueOf(253.23)}, {Integer.valueOf(392923), "Clara", Double.valueOf(-98.78)}, {new
+		 * Integer(811233), "Nick", Double.valueOf(-88.45)}
 		 */
-		{ new Integer(234523), I18nResourceHandler.getMessage("Rupert"), new Double(253.23) },
-				{ new Integer(392923), I18nResourceHandler.getMessage("Clara"), new Double(-98.78) },
-				{ new Integer(811233), I18nResourceHandler.getMessage("Nick"), new Double(-88.45) } }, new String[] {
+		{ Integer.valueOf(234523), I18nResourceHandler.getMessage("Rupert"), Double.valueOf(253.23) },
+				{ Integer.valueOf(392923), I18nResourceHandler.getMessage("Clara"), Double.valueOf(-98.78) },
+				{ Integer.valueOf(811233), I18nResourceHandler.getMessage("Nick"), Double.valueOf(-88.45) } }, new String[] {
 		//"ID", "Name", "Balance"
 				I18nResourceHandler.getMessage("ID"), I18nResourceHandler.getMessage("Name"), I18nResourceHandler.getMessage("Balance") }) {
 			Class[] types = new Class[] { java.lang.Integer.class, java.lang.String.class, java.lang.Double.class };
@@ -316,12 +316,12 @@ public class TablePanel extends OptionsSettablePanel {
 
 		jTable4.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 		/*
-		 * {new Integer(234523), "Rupert", new Double(253.23), null}, {new Integer(392923), "Clara", new Double(-98.78),
-		 * new Boolean(true)}, {new Integer(811233), "Nick", new Double(-88.45), new Boolean(true)}
+		 * {Integer.valueOf(234523), "Rupert", Double.valueOf(253.23), null}, {Integer.valueOf(392923), "Clara", Double.valueOf(-98.78),
+		 * new Boolean(true)}, {Integer.valueOf(811233), "Nick", Double.valueOf(-88.45), new Boolean(true)}
 		 */
-		{ new Integer(234523), I18nResourceHandler.getMessage("Rupert"), new Double(253.23), null },
-				{ new Integer(392923), I18nResourceHandler.getMessage("Clara"), new Double(-98.78), new Boolean(true) },
-				{ new Integer(811233), I18nResourceHandler.getMessage("Nick"), new Double(-88.45), new Boolean(true) } }, new String[] {
+		{ Integer.valueOf(234523), I18nResourceHandler.getMessage("Rupert"), Double.valueOf(253.23), null },
+				{ Integer.valueOf(392923), I18nResourceHandler.getMessage("Clara"), Double.valueOf(-98.78), new Boolean(true) },
+				{ Integer.valueOf(811233), I18nResourceHandler.getMessage("Nick"), Double.valueOf(-88.45), new Boolean(true) } }, new String[] {
 				//"ID", "Name", "Balance", "Boolean"
 				I18nResourceHandler.getMessage("ID"), I18nResourceHandler.getMessage("Name"), I18nResourceHandler.getMessage("Balance"),
 				I18nResourceHandler.getMessage("Boolean") }) {
@@ -349,12 +349,12 @@ public class TablePanel extends OptionsSettablePanel {
 
 		jTable5.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 		/*
-		 * {new Integer(234523), "Rupert", new Double(253.23)}, {new Integer(392923), "Clara", new Double(-98.78)}, {new
-		 * Integer(811233), "Nick", new Double(-88.45)}
+		 * {Integer.valueOf(234523), "Rupert", Double.valueOf(253.23)}, {Integer.valueOf(392923), "Clara", Double.valueOf(-98.78)}, {new
+		 * Integer(811233), "Nick", Double.valueOf(-88.45)}
 		 */
-		{ new Integer(234523), I18nResourceHandler.getMessage("Rupert"), new Double(253.23) },
-				{ new Integer(392923), I18nResourceHandler.getMessage("Clara"), new Double(-98.78) },
-				{ new Integer(811233), I18nResourceHandler.getMessage("Nick"), new Double(-88.45) } }, new String[] {
+		{ Integer.valueOf(234523), I18nResourceHandler.getMessage("Rupert"), Double.valueOf(253.23) },
+				{ Integer.valueOf(392923), I18nResourceHandler.getMessage("Clara"), Double.valueOf(-98.78) },
+				{ Integer.valueOf(811233), I18nResourceHandler.getMessage("Nick"), Double.valueOf(-88.45) } }, new String[] {
 		//"ID", "Name", "Balance"
 				I18nResourceHandler.getMessage("ID"), I18nResourceHandler.getMessage("Name"), I18nResourceHandler.getMessage("Balance") }) {
 			Class[] types = new Class[] { java.lang.Integer.class, java.lang.String.class, java.lang.Double.class };
@@ -387,12 +387,12 @@ public class TablePanel extends OptionsSettablePanel {
 
 		jTable6.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 		/*
-		 * {new Integer(234523), "Rupert", new Double(253.23)}, {new Integer(392923), "Clara", new Double(-98.78)}, {new
-		 * Integer(811233), "Nick", new Double(-88.45)}
+		 * {Integer.valueOf(234523), "Rupert", Double.valueOf(253.23)}, {Integer.valueOf(392923), "Clara", Double.valueOf(-98.78)}, {new
+		 * Integer(811233), "Nick", Double.valueOf(-88.45)}
 		 */
-		{ new Integer(234523), I18nResourceHandler.getMessage("Rupert"), new Double(253.23) },
-				{ new Integer(392923), I18nResourceHandler.getMessage("Clara"), new Double(-98.78) },
-				{ new Integer(811233), I18nResourceHandler.getMessage("Nick"), new Double(-88.45) } }, new String[] {
+		{ Integer.valueOf(234523), I18nResourceHandler.getMessage("Rupert"), Double.valueOf(253.23) },
+				{ Integer.valueOf(392923), I18nResourceHandler.getMessage("Clara"), Double.valueOf(-98.78) },
+				{ Integer.valueOf(811233), I18nResourceHandler.getMessage("Nick"), Double.valueOf(-88.45) } }, new String[] {
 		//"ID", "Name", "Balance"
 				I18nResourceHandler.getMessage("ID"), I18nResourceHandler.getMessage("Name"), I18nResourceHandler.getMessage("Balance") }) {
 			Class[] types = new Class[] { java.lang.Integer.class, java.lang.String.class, java.lang.Double.class };
@@ -427,12 +427,12 @@ public class TablePanel extends OptionsSettablePanel {
 		jTable8.setForeground(java.awt.Color.red);
 		jTable8.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 		/*
-		 * {new Integer(234523), "Rupert", new Double(253.23)}, {new Integer(392923), "Clara", new Double(-98.78)}, {new
-		 * Integer(811233), "Nick", new Double(-88.45)}
+		 * {Integer.valueOf(234523), "Rupert", Double.valueOf(253.23)}, {Integer.valueOf(392923), "Clara", Double.valueOf(-98.78)}, {new
+		 * Integer(811233), "Nick", Double.valueOf(-88.45)}
 		 */
-		{ new Integer(234523), I18nResourceHandler.getMessage("Rupert"), new Double(253.23) },
-				{ new Integer(392923), I18nResourceHandler.getMessage("Clara"), new Double(-98.78) },
-				{ new Integer(811233), I18nResourceHandler.getMessage("Nick"), new Double(-88.45) } }, new String[] {
+		{ Integer.valueOf(234523), I18nResourceHandler.getMessage("Rupert"), Double.valueOf(253.23) },
+				{ Integer.valueOf(392923), I18nResourceHandler.getMessage("Clara"), Double.valueOf(-98.78) },
+				{ Integer.valueOf(811233), I18nResourceHandler.getMessage("Nick"), Double.valueOf(-88.45) } }, new String[] {
 		//"ID", "Name", "Balance"
 				I18nResourceHandler.getMessage("ID"), I18nResourceHandler.getMessage("Name"), I18nResourceHandler.getMessage("Balance") }) {
 			Class[] types = new Class[] { java.lang.Integer.class, java.lang.String.class, java.lang.Double.class };
@@ -468,12 +468,12 @@ public class TablePanel extends OptionsSettablePanel {
 		jTable9.setForeground(java.awt.Color.red);
 		jTable9.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 		/*
-		 * {new Integer(234523), "Rupert", new Double(253.23)}, {new Integer(392923), "Clara", new Double(-98.78)}, {new
-		 * Integer(811233), "Nick", new Double(-88.45)}
+		 * {Integer.valueOf(234523), "Rupert", Double.valueOf(253.23)}, {Integer.valueOf(392923), "Clara", Double.valueOf(-98.78)}, {new
+		 * Integer(811233), "Nick", Double.valueOf(-88.45)}
 		 */
-		{ new Integer(234523), I18nResourceHandler.getMessage("Rupert"), new Double(253.23) },
-				{ new Integer(392923), I18nResourceHandler.getMessage("Clara"), new Double(-98.78) },
-				{ new Integer(811233), I18nResourceHandler.getMessage("Nick"), new Double(-88.45) } }, new String[] {
+		{ Integer.valueOf(234523), I18nResourceHandler.getMessage("Rupert"), Double.valueOf(253.23) },
+				{ Integer.valueOf(392923), I18nResourceHandler.getMessage("Clara"), Double.valueOf(-98.78) },
+				{ Integer.valueOf(811233), I18nResourceHandler.getMessage("Nick"), Double.valueOf(-88.45) } }, new String[] {
 		//"ID", "Name", "Balance"
 				I18nResourceHandler.getMessage("ID"), I18nResourceHandler.getMessage("Name"), I18nResourceHandler.getMessage("Balance") }) {
 			Class[] types = new Class[] { java.lang.Integer.class, java.lang.String.class, java.lang.Double.class };
@@ -507,12 +507,12 @@ public class TablePanel extends OptionsSettablePanel {
 
 		jTable10.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 		/*
-		 * {new Integer(234523), "Rupert", new Double(253.23)}, {new Integer(392923), "Clara", new Double(-98.78)}, {new
-		 * Integer(811233), "Nick", new Double(-88.45)}
+		 * {Integer.valueOf(234523), "Rupert", Double.valueOf(253.23)}, {Integer.valueOf(392923), "Clara", Double.valueOf(-98.78)}, {new
+		 * Integer(811233), "Nick", Double.valueOf(-88.45)}
 		 */
-		{ new Integer(234523), I18nResourceHandler.getMessage("Rupert"), new Double(253.23) },
-				{ new Integer(392923), I18nResourceHandler.getMessage("Clara"), new Double(-98.78) },
-				{ new Integer(811233), I18nResourceHandler.getMessage("Nick"), new Double(-88.45) } }, new String[] {
+		{ Integer.valueOf(234523), I18nResourceHandler.getMessage("Rupert"), Double.valueOf(253.23) },
+				{ Integer.valueOf(392923), I18nResourceHandler.getMessage("Clara"), Double.valueOf(-98.78) },
+				{ Integer.valueOf(811233), I18nResourceHandler.getMessage("Nick"), Double.valueOf(-88.45) } }, new String[] {
 		//"ID", "Name", "Balance"
 				I18nResourceHandler.getMessage("ID"), I18nResourceHandler.getMessage("Name"), I18nResourceHandler.getMessage("Balance") }) {
 			Class[] types = new Class[] { java.lang.Integer.class, java.lang.String.class, java.lang.Double.class };
@@ -547,12 +547,12 @@ public class TablePanel extends OptionsSettablePanel {
 
 		jTable12.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 		/*
-		 * {new Integer(234523), "Rupert", new Double(253.23)}, {new Integer(392923), "Clara", new Double(-98.78)}, {new
-		 * Integer(811233), "Nick", new Double(-88.45)}
+		 * {Integer.valueOf(234523), "Rupert", Double.valueOf(253.23)}, {Integer.valueOf(392923), "Clara", Double.valueOf(-98.78)}, {new
+		 * Integer(811233), "Nick", Double.valueOf(-88.45)}
 		 */
-		{ new Integer(234523), I18nResourceHandler.getMessage("Rupert"), new Double(253.23) },
-				{ new Integer(392923), I18nResourceHandler.getMessage("Clara"), new Double(-98.78) },
-				{ new Integer(811233), I18nResourceHandler.getMessage("Nick"), new Double(-88.45) } }, new String[] {
+		{ Integer.valueOf(234523), I18nResourceHandler.getMessage("Rupert"), Double.valueOf(253.23) },
+				{ Integer.valueOf(392923), I18nResourceHandler.getMessage("Clara"), Double.valueOf(-98.78) },
+				{ Integer.valueOf(811233), I18nResourceHandler.getMessage("Nick"), Double.valueOf(-88.45) } }, new String[] {
 		//"ID", "Name", "Balance"
 				I18nResourceHandler.getMessage("ID"), I18nResourceHandler.getMessage("Name"), I18nResourceHandler.getMessage("Balance") }) {
 			Class[] types = new Class[] { java.lang.Integer.class, java.lang.String.class, java.lang.Double.class };
@@ -586,12 +586,12 @@ public class TablePanel extends OptionsSettablePanel {
 
 		normalCustomRenderer.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 		/*
-		 * {new Integer(234523), "Rupert", new Double(253.23)}, {new Integer(392923), "Clara", new Double(-98.78)}, {new
-		 * Integer(811233), "Nick", new Double(-88.45)}
+		 * {Integer.valueOf(234523), "Rupert", Double.valueOf(253.23)}, {Integer.valueOf(392923), "Clara", Double.valueOf(-98.78)}, {new
+		 * Integer(811233), "Nick", Double.valueOf(-88.45)}
 		 */
-		{ new Integer(234523), I18nResourceHandler.getMessage("Rupert"), new Double(253.23) },
-				{ new Integer(392923), I18nResourceHandler.getMessage("Clara"), new Double(-98.78) },
-				{ new Integer(811233), I18nResourceHandler.getMessage("Nick"), new Double(-88.45) } }, new String[] {
+		{ Integer.valueOf(234523), I18nResourceHandler.getMessage("Rupert"), Double.valueOf(253.23) },
+				{ Integer.valueOf(392923), I18nResourceHandler.getMessage("Clara"), Double.valueOf(-98.78) },
+				{ Integer.valueOf(811233), I18nResourceHandler.getMessage("Nick"), Double.valueOf(-88.45) } }, new String[] {
 		//"ID", "Name", "Balance"
 				I18nResourceHandler.getMessage("ID"), I18nResourceHandler.getMessage("Name"), I18nResourceHandler.getMessage("Balance") }) {
 			Class[] types = new Class[] { java.lang.Integer.class, java.lang.String.class, java.lang.Double.class };
@@ -623,12 +623,12 @@ public class TablePanel extends OptionsSettablePanel {
 
 		disabledCustomRenderer.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 		/*
-		 * {new Integer(234523), "Rupert", new Double(253.23)}, {new Integer(392923), "Clara", new Double(-98.78)}, {new
-		 * Integer(811233), "Nick", new Double(-88.45)}
+		 * {Integer.valueOf(234523), "Rupert", Double.valueOf(253.23)}, {Integer.valueOf(392923), "Clara", Double.valueOf(-98.78)}, {new
+		 * Integer(811233), "Nick", Double.valueOf(-88.45)}
 		 */
-		{ new Integer(234523), I18nResourceHandler.getMessage("Rupert"), new Double(253.23) },
-				{ new Integer(392923), I18nResourceHandler.getMessage("Clara"), new Double(-98.78) },
-				{ new Integer(811233), I18nResourceHandler.getMessage("Nick"), new Double(-88.45) } }, new String[] {
+		{ Integer.valueOf(234523), I18nResourceHandler.getMessage("Rupert"), Double.valueOf(253.23) },
+				{ Integer.valueOf(392923), I18nResourceHandler.getMessage("Clara"), Double.valueOf(-98.78) },
+				{ Integer.valueOf(811233), I18nResourceHandler.getMessage("Nick"), Double.valueOf(-88.45) } }, new String[] {
 		//"ID", "Name", "Balance"
 				I18nResourceHandler.getMessage("ID"), I18nResourceHandler.getMessage("Name"), I18nResourceHandler.getMessage("Balance") }) {
 			Class[] types = new Class[] { java.lang.Integer.class, java.lang.String.class, java.lang.Double.class };
@@ -659,12 +659,12 @@ public class TablePanel extends OptionsSettablePanel {
 
 		jTable18.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 		/*
-		 * {new Integer(234523), "Rupert", new Double(253.23)}, {new Integer(392923), "Clara", new Double(-98.78)}, {new
-		 * Integer(811233), "Nick", new Double(-88.45)}
+		 * {Integer.valueOf(234523), "Rupert", Double.valueOf(253.23)}, {Integer.valueOf(392923), "Clara", Double.valueOf(-98.78)}, {new
+		 * Integer(811233), "Nick", Double.valueOf(-88.45)}
 		 */
-		{ new Integer(234523), I18nResourceHandler.getMessage("Rupert"), new Double(253.23) },
-				{ new Integer(392923), I18nResourceHandler.getMessage("Clara"), new Double(-98.78) },
-				{ new Integer(811233), I18nResourceHandler.getMessage("Nick"), new Double(-88.45) } }, new String[] {
+		{ Integer.valueOf(234523), I18nResourceHandler.getMessage("Rupert"), Double.valueOf(253.23) },
+				{ Integer.valueOf(392923), I18nResourceHandler.getMessage("Clara"), Double.valueOf(-98.78) },
+				{ Integer.valueOf(811233), I18nResourceHandler.getMessage("Nick"), Double.valueOf(-88.45) } }, new String[] {
 		//"ID", "Name", "Balance"
 				I18nResourceHandler.getMessage("ID"), I18nResourceHandler.getMessage("Name"), I18nResourceHandler.getMessage("Balance") }) {
 			Class[] types = new Class[] { java.lang.Integer.class, java.lang.String.class, java.lang.Double.class };

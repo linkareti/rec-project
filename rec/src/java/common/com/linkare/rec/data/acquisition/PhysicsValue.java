@@ -142,15 +142,15 @@ public final class PhysicsValue implements org.omg.CORBA.portable.IDLEntity {
 	}
 
 	public Number getValueNumber() {
-		return new Double(the_value.toDouble());
+		return Double.valueOf(the_value.toDouble());
 	}
 
 	public Number getValuePlusErrorNumber() {
-		return new Double(the_value.toDouble() + the_error.toDouble());
+		return Double.valueOf(the_value.toDouble() + the_error.toDouble());
 	}
 
 	public Number getValueMinusErrorNumber() {
-		return new Double(the_value.toDouble() - the_error.toDouble());
+		return Double.valueOf(the_value.toDouble() - the_error.toDouble());
 	}
 
 	public String toScientificNotation() {

@@ -29,7 +29,7 @@ public class ButtonStyle extends DefaultStyle {
 	// private static final FontUIResource FONT_BUTTON = new
 	// FontUIResource(DEFAULT_FONT.getFontName(), Font.PLAIN, 12);
 	// private static final List BUTTON_GRADIENT = Arrays.asList(new Object[] {
-	// new Float(.1f), new Float(0f), new ColorUIResource(0xF3F3F3),
+	// Float.valueOf(.1f), Float.valueOf(0f), new ColorUIResource(0xF3F3F3),
 	// new ColorUIResource(0xF3F3F3), new ColorUIResource(0xFEFEFE) });
 	// private static final Border COLOR_BORDER =
 	// BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new
@@ -40,7 +40,7 @@ public class ButtonStyle extends DefaultStyle {
 	// New Button
 	private static final FontUIResource FONT_BUTTON = new FontUIResource(DefaultStyle.DEFAULT_FONT.getFontName(),
 			Font.PLAIN, 12);
-	private static final List<Object> BUTTON_GRADIENT = Arrays.asList(new Object[] { new Float(.1f), new Float(0f),
+	private static final List<Object> BUTTON_GRADIENT = Arrays.asList(new Object[] { Float.valueOf(.1f), Float.valueOf(0f),
 			new ColorUIResource(0xD8E8F6), new ColorUIResource(0xEDF5FB), new ColorUIResource(0xD8F0FF) });
 	private static final Border COLOR_BORDER = BorderFactory.createCompoundBorder(
 			BorderFactory.createLineBorder(new Color(0x636767)), BorderFactory.createEmptyBorder(4, 16, 4, 16));

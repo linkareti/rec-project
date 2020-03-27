@@ -56,20 +56,20 @@ public class MomInerciaStampDriver extends AbstractStampDriver {
 
 		stampConfig.addCommandData(
 				StampConfigTranslator.LAUNCH_STR,
-				new Integer(Defaults.defaultIfEmpty(
+				Integer.valueOf(Defaults.defaultIfEmpty(
 						config.getSelectedHardwareParameterValue(StampConfigTranslator.LAUNCH_STR),
 						info.getHardwareParameterValue(StampConfigTranslator.LAUNCH_STR))));
 
 		stampConfig.addCommandData(
 				StampConfigTranslator.STOP_STR,
-				new Integer(Defaults.defaultIfEmpty(
+				Integer.valueOf(Defaults.defaultIfEmpty(
 						config.getSelectedHardwareParameterValue(StampConfigTranslator.STOP_STR),
 						info.getHardwareParameterValue(StampConfigTranslator.STOP_STR))));
 
-		stampConfig.addCommandData(StampConfigTranslator.TBS_STR, new Integer((int) config.getSelectedFrequency()
+		stampConfig.addCommandData(StampConfigTranslator.TBS_STR, Integer.valueOf((int) config.getSelectedFrequency()
 				.getFrequency()));
 
-		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, new Integer(config.getTotalSamples()));
+		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, Integer.valueOf(config.getTotalSamples()));
 
 		StampTranslator translator = StampTranslatorProcessorManager.getTranslator(stampConfig);
 		if (!translator.translate(stampConfig))

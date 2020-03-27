@@ -13,11 +13,11 @@ public abstract class MultiCastControllerPOA extends org.omg.PortableServer.Serv
 
 	private static java.util.Hashtable _methods = new java.util.Hashtable();
 	static {
-		MultiCastControllerPOA._methods.put("enumerateHardware", new java.lang.Integer(0));
-		MultiCastControllerPOA._methods.put("registerDataClient", new java.lang.Integer(1));
-		MultiCastControllerPOA._methods.put("getClientList", new java.lang.Integer(2));
-		MultiCastControllerPOA._methods.put("sendMessage", new java.lang.Integer(3));
-		MultiCastControllerPOA._methods.put("registerHardware", new java.lang.Integer(4));
+		MultiCastControllerPOA._methods.put("enumerateHardware", Integer.valueOf(0));
+		MultiCastControllerPOA._methods.put("registerDataClient", Integer.valueOf(1));
+		MultiCastControllerPOA._methods.put("getClientList", Integer.valueOf(2));
+		MultiCastControllerPOA._methods.put("sendMessage", Integer.valueOf(3));
+		MultiCastControllerPOA._methods.put("registerHardware", Integer.valueOf(4));
 	}
 
 	@Override

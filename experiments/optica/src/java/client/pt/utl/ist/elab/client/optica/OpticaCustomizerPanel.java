@@ -1773,13 +1773,13 @@ public class OpticaCustomizerPanel  extends AbstractCustomizer {
 			// Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("UserPosLow"));
 			// int pos1 = (int) Math.floor(pos1f * 1000.F);
 			// sldPos1.setValue(pos1);
-			// tfPos1.setValue(new Float(pos1f));
+			// tfPos1.setValue(Float.valueOf(pos1f));
 			//
 			// float pos2f =
 			// Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("UserPosHigh"));
 			// int pos2 = (int) Math.floor(pos2f * 1000.F);
 			// sldPos2.setValue(pos2);
-			// tfPos2.setValue(new Float(pos2f));
+			// tfPos2.setValue(Float.valueOf(pos2f));
 		}
 	}
 
@@ -1826,31 +1826,31 @@ public class OpticaCustomizerPanel  extends AbstractCustomizer {
 		jLabelSnellDelta.setVisible(false);
 
 		final Dictionary<Integer, JLabel> slidersAngle0360Labels = new Hashtable<Integer, JLabel>();
-		slidersAngle0360Labels.put(new Integer(0), new JLabel("0.0"));
-		slidersAngle0360Labels.put(new Integer(900), new JLabel("90.0"));
-		slidersAngle0360Labels.put(new Integer(1800), new JLabel("180.0"));
-		slidersAngle0360Labels.put(new Integer(2700), new JLabel("270.0"));
-		slidersAngle0360Labels.put(new Integer(3600), new JLabel("360.0"));
+		slidersAngle0360Labels.put(Integer.valueOf(0), new JLabel("0.0"));
+		slidersAngle0360Labels.put(Integer.valueOf(900), new JLabel("90.0"));
+		slidersAngle0360Labels.put(Integer.valueOf(1800), new JLabel("180.0"));
+		slidersAngle0360Labels.put(Integer.valueOf(2700), new JLabel("270.0"));
+		slidersAngle0360Labels.put(Integer.valueOf(3600), new JLabel("360.0"));
 
 		final Dictionary<Integer, JLabel> slidersAngle02360Labels = new Hashtable<Integer, JLabel>();
-		slidersAngle02360Labels.put(new Integer(2), new JLabel("0.2"));
-		slidersAngle02360Labels.put(new Integer(900), new JLabel("90.0"));
-		slidersAngle02360Labels.put(new Integer(1800), new JLabel("180.0"));
-		slidersAngle02360Labels.put(new Integer(2700), new JLabel("270.0"));
-		slidersAngle02360Labels.put(new Integer(3600), new JLabel("360.0"));
+		slidersAngle02360Labels.put(Integer.valueOf(2), new JLabel("0.2"));
+		slidersAngle02360Labels.put(Integer.valueOf(900), new JLabel("90.0"));
+		slidersAngle02360Labels.put(Integer.valueOf(1800), new JLabel("180.0"));
+		slidersAngle02360Labels.put(Integer.valueOf(2700), new JLabel("270.0"));
+		slidersAngle02360Labels.put(Integer.valueOf(3600), new JLabel("360.0"));
 
 		final Dictionary<Integer, JLabel> slidersAngle90Labels = new Hashtable<Integer, JLabel>();
-		slidersAngle90Labels.put(new Integer(0), new JLabel("0.0"));
-		slidersAngle90Labels.put(new Integer(450), new JLabel("45.0"));
-		slidersAngle90Labels.put(new Integer(900), new JLabel("90.0"));
+		slidersAngle90Labels.put(Integer.valueOf(0), new JLabel("0.0"));
+		slidersAngle90Labels.put(Integer.valueOf(450), new JLabel("45.0"));
+		slidersAngle90Labels.put(Integer.valueOf(900), new JLabel("90.0"));
 
 		final Dictionary<Integer, JLabel> slidersDelayLabels = new Hashtable<Integer, JLabel>();
-		slidersDelayLabels.put(new Integer(0), new JLabel("0.0"));
-		slidersDelayLabels.put(new Integer(10), new JLabel("1.0"));
-		slidersDelayLabels.put(new Integer(20), new JLabel("2.0"));
-		slidersDelayLabels.put(new Integer(30), new JLabel("3.0"));
-		slidersDelayLabels.put(new Integer(40), new JLabel("4.0"));
-		slidersDelayLabels.put(new Integer(50), new JLabel("5.0"));
+		slidersDelayLabels.put(Integer.valueOf(0), new JLabel("0.0"));
+		slidersDelayLabels.put(Integer.valueOf(10), new JLabel("1.0"));
+		slidersDelayLabels.put(Integer.valueOf(20), new JLabel("2.0"));
+		slidersDelayLabels.put(Integer.valueOf(30), new JLabel("3.0"));
+		slidersDelayLabels.put(Integer.valueOf(40), new JLabel("4.0"));
+		slidersDelayLabels.put(Integer.valueOf(50), new JLabel("5.0"));
 
 		jSliderSnellAngleVarationMin.setLabelTable(slidersAngle0360Labels);
 		jSliderSnellAngleVarationMax.setLabelTable(slidersAngle0360Labels);

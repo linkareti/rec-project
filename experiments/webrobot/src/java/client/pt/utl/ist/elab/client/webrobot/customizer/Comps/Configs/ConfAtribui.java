@@ -220,7 +220,7 @@ public class ConfAtribui extends javax.swing.JDialog {
 				model.setFlag(0);
 			} else {
 				model.setD3("");
-				model.setValor(new Integer(jTextFieldD3.getText()).intValue());
+				model.setValor(Integer.valueOf(jTextFieldD3.getText()).intValue());
 				model.setFlag(1);
 			}
 			closeDialog(null);

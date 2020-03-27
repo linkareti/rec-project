@@ -58,12 +58,12 @@ public class CCStampDriver extends AbstractStampDriver<CCStampDataSource> {
 		stampConfig = new StampCommand(AbstractStampDriver.CONFIG_OUT_STRING);
 
 		stampConfig.addCommandData(StampConfigTranslator.START_POS_STR,
-				new Integer(Defaults.defaultIfEmpty(initPosConfig, initPosInfo)));
+				Integer.valueOf(Defaults.defaultIfEmpty(initPosConfig, initPosInfo)));
 
 		stampConfig.addCommandData(StampConfigTranslator.END_POS_STR,
-				new Integer(Defaults.defaultIfEmpty(endPosConfig, endPosInfo)));
+				Integer.valueOf(Defaults.defaultIfEmpty(endPosConfig, endPosInfo)));
 
-		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, new Integer(totalSamples));
+		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, Integer.valueOf(totalSamples));
 
 		final StampTranslator translator = StampTranslatorProcessorManager.getTranslator(stampConfig);
 		if (!translator.translate(stampConfig)) {

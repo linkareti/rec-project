@@ -163,10 +163,10 @@ public class DateCustomizer extends javax.swing.JPanel implements java.beans.Cus
 
 	private void actualizeSelectors() {
 		actualizingSelectors = true;
-		daySelector.setValue(new Integer(mybean.getDay()));
+		daySelector.setValue(Integer.valueOf(mybean.getDay()));
 		monthSelector.setValue(com.linkare.rec.data.synch.base.MonthMap.getMonthNamefromNumber(mybean.getMonth()
 				+ java.util.Calendar.JANUARY - 1));
-		yearSelector.setValue(new Integer(mybean.getYear()));
+		yearSelector.setValue(Integer.valueOf(mybean.getYear()));
 		dateShowLbl.setText(mybean.toString());
 		actualizingSelectors = false;
 	}
@@ -189,9 +189,9 @@ public class DateCustomizer extends javax.swing.JPanel implements java.beans.Cus
 			mybean.setYear((short) (cl.get(java.util.Calendar.YEAR)));
 
 			firePropertyChange("date", null, mybean);
-			firePropertyChange("year", null, new Short(mybean.getYear()));
-			firePropertyChange("month", null, new Byte(mybean.getMonth()));
-			firePropertyChange("day", null, new Byte(mybean.getDay()));
+			firePropertyChange("year", null, Short.valueOf(mybean.getYear()));
+			firePropertyChange("month", null, Byte.valueOf(mybean.getMonth()));
+			firePropertyChange("day", null, Byte.valueOf(mybean.getDay()));
 
 			actualizeSelectors();
 

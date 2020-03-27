@@ -457,8 +457,8 @@ public class ConfAddNewElement extends javax.swing.JDialog {
 				temp.append('0');
 			}
 			returnObj[0] = temp.toString();
-			returnObj[1] = new Integer(jTextFieldPWM1.getText());
-			returnObj[2] = new Integer(jTextFieldPWM2.getText());
+			returnObj[1] = Integer.valueOf(jTextFieldPWM1.getText());
+			returnObj[2] = Integer.valueOf(jTextFieldPWM2.getText());
 			closeDialog(null);
 		}
 	}// GEN-LAST:event_jButtonOkMousePressed

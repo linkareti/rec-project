@@ -173,13 +173,13 @@ public class SCustomizer  extends AbstractCustomizer {
 
 		// Hashtable para o Slider
 		Hashtable concsLabelTable = new Hashtable();
-		concsLabelTable.put(new Integer(1300), new JLabel("<html>10<sup>13</sup>"));
-		concsLabelTable.put(new Integer(1400), new JLabel("<html>10<sup>14</sup>"));
-		concsLabelTable.put(new Integer(1500), new JLabel("<html>10<sup>15</sup>"));
-		concsLabelTable.put(new Integer(1600), new JLabel("<html>10<sup>16</sup>"));
-		concsLabelTable.put(new Integer(1700), new JLabel("<html>10<sup>17</sup>"));
-		concsLabelTable.put(new Integer(1800), new JLabel("<html>10<sup>18</sup>"));
-		concsLabelTable.put(new Integer(1900), new JLabel("<html>10<sup>19</sup>"));
+		concsLabelTable.put(Integer.valueOf(1300), new JLabel("<html>10<sup>13</sup>"));
+		concsLabelTable.put(Integer.valueOf(1400), new JLabel("<html>10<sup>14</sup>"));
+		concsLabelTable.put(Integer.valueOf(1500), new JLabel("<html>10<sup>15</sup>"));
+		concsLabelTable.put(Integer.valueOf(1600), new JLabel("<html>10<sup>16</sup>"));
+		concsLabelTable.put(Integer.valueOf(1700), new JLabel("<html>10<sup>17</sup>"));
+		concsLabelTable.put(Integer.valueOf(1800), new JLabel("<html>10<sup>18</sup>"));
+		concsLabelTable.put(Integer.valueOf(1900), new JLabel("<html>10<sup>19</sup>"));
 		sliderConcDadores.setLabelTable(concsLabelTable);
 		sliderConcDadores.setPaintLabels(true);
 
@@ -200,7 +200,7 @@ public class SCustomizer  extends AbstractCustomizer {
 				// a mudan�a)
 				if (!source.getValueIsAdjusting()) { // Se o utilizador acabou
 					// de ajustar o valor
-					txtConcDadores.setValue(new Double(valor / 100)); // Actualiza-se
+					txtConcDadores.setValue(Double.valueOf(valor / 100)); // Actualiza-se
 					// o
 					// valor
 					// na
@@ -236,9 +236,9 @@ public class SCustomizer  extends AbstractCustomizer {
 		 * com cada caso individual).
 		 */
 		NumberFormatter concsFormatador = new NumberFormatter(concsFormat);
-		concsFormatador.setMinimum(new Double(13)); // Valor m�nimo aceite pelo
+		concsFormatador.setMinimum(Double.valueOf(13)); // Valor m�nimo aceite pelo
 		// formatador
-		concsFormatador.setMaximum(new Double(19)); // Valor m�ximo aceite pelo
+		concsFormatador.setMaximum(Double.valueOf(19)); // Valor m�ximo aceite pelo
 		// formatador
 
 		/**
@@ -249,7 +249,7 @@ public class SCustomizer  extends AbstractCustomizer {
 		 * anteriormente.
 		 */
 		txtConcDadores = new JFormattedTextField(concsFormatador);
-		txtConcDadores.setValue(new Double(15)); // Valor inicial da caixa de
+		txtConcDadores.setValue(Double.valueOf(15)); // Valor inicial da caixa de
 		// texto.
 		txtConcDadores.setColumns(5); // N�mero de colunas da caixa (para ganhar
 		// algum espa�o).
@@ -367,7 +367,7 @@ public class SCustomizer  extends AbstractCustomizer {
 				JSlider source = (JSlider) e.getSource();
 				double valor = (double) source.getValue();
 				if (!source.getValueIsAdjusting()) {
-					txtConcAceitadores.setValue(new Double(valor / 100));
+					txtConcAceitadores.setValue(Double.valueOf(valor / 100));
 				} else {
 					txtConcAceitadores.setText(String.valueOf(valor / 100));
 				}
@@ -376,7 +376,7 @@ public class SCustomizer  extends AbstractCustomizer {
 		});
 
 		txtConcAceitadores = new JFormattedTextField(concsFormatador);
-		txtConcAceitadores.setValue(new Double(15));
+		txtConcAceitadores.setValue(Double.valueOf(15));
 		txtConcAceitadores.setColumns(5);
 		txtConcAceitadores.setMaximumSize(txtFieldDim);
 
@@ -422,12 +422,12 @@ public class SCustomizer  extends AbstractCustomizer {
 		sliderTemperatura = new JSlider(JSlider.HORIZONTAL, 10000, 60000, 30000);
 
 		Hashtable temperaturaLabelTable = new Hashtable();
-		temperaturaLabelTable.put(new Integer(10000), new JLabel("100"));
-		temperaturaLabelTable.put(new Integer(20000), new JLabel("200"));
-		temperaturaLabelTable.put(new Integer(30000), new JLabel("300"));
-		temperaturaLabelTable.put(new Integer(40000), new JLabel("400"));
-		temperaturaLabelTable.put(new Integer(50000), new JLabel("500"));
-		temperaturaLabelTable.put(new Integer(60000), new JLabel("600"));
+		temperaturaLabelTable.put(Integer.valueOf(10000), new JLabel("100"));
+		temperaturaLabelTable.put(Integer.valueOf(20000), new JLabel("200"));
+		temperaturaLabelTable.put(Integer.valueOf(30000), new JLabel("300"));
+		temperaturaLabelTable.put(Integer.valueOf(40000), new JLabel("400"));
+		temperaturaLabelTable.put(Integer.valueOf(50000), new JLabel("500"));
+		temperaturaLabelTable.put(Integer.valueOf(60000), new JLabel("600"));
 		sliderTemperatura.setLabelTable(temperaturaLabelTable);
 		sliderTemperatura.setPaintLabels(true);
 
@@ -440,7 +440,7 @@ public class SCustomizer  extends AbstractCustomizer {
 				JSlider source = (JSlider) e.getSource();
 				double valor = (double) source.getValue();
 				if (!source.getValueIsAdjusting()) {
-					txtTemperatura.setValue(new Double(valor / 100.0));
+					txtTemperatura.setValue(Double.valueOf(valor / 100.0));
 				} else {
 					txtTemperatura.setText(String.valueOf(valor / 100.0));
 				}
@@ -452,10 +452,10 @@ public class SCustomizer  extends AbstractCustomizer {
 		temperaturaFormat.setMaximumFractionDigits(2);
 		temperaturaFormat.setMinimumFractionDigits(0);
 		NumberFormatter temperaturaFormatador = new NumberFormatter(temperaturaFormat);
-		temperaturaFormatador.setMinimum(new Double(100));
-		temperaturaFormatador.setMaximum(new Double(600));
+		temperaturaFormatador.setMinimum(Double.valueOf(100));
+		temperaturaFormatador.setMaximum(Double.valueOf(600));
 		txtTemperatura = new JFormattedTextField(temperaturaFormatador);
-		txtTemperatura.setValue(new Double(300));
+		txtTemperatura.setValue(Double.valueOf(300));
 		txtTemperatura.setColumns(5);
 		txtTemperatura.setMaximumSize(txtFieldDim);
 
@@ -501,11 +501,11 @@ public class SCustomizer  extends AbstractCustomizer {
 		sliderTempoAmostras = new JSlider(JSlider.HORIZONTAL, 100, 500, 200);
 
 		Hashtable tempoAmostrasLabelTable = new Hashtable();
-		tempoAmostrasLabelTable.put(new Integer(100), new JLabel("100"));
-		tempoAmostrasLabelTable.put(new Integer(200), new JLabel("200"));
-		tempoAmostrasLabelTable.put(new Integer(300), new JLabel("300"));
-		tempoAmostrasLabelTable.put(new Integer(400), new JLabel("400"));
-		tempoAmostrasLabelTable.put(new Integer(500), new JLabel("500"));
+		tempoAmostrasLabelTable.put(Integer.valueOf(100), new JLabel("100"));
+		tempoAmostrasLabelTable.put(Integer.valueOf(200), new JLabel("200"));
+		tempoAmostrasLabelTable.put(Integer.valueOf(300), new JLabel("300"));
+		tempoAmostrasLabelTable.put(Integer.valueOf(400), new JLabel("400"));
+		tempoAmostrasLabelTable.put(Integer.valueOf(500), new JLabel("500"));
 		sliderTempoAmostras.setLabelTable(tempoAmostrasLabelTable);
 		sliderTempoAmostras.setPaintLabels(true);
 
@@ -518,7 +518,7 @@ public class SCustomizer  extends AbstractCustomizer {
 				JSlider source = (JSlider) e.getSource();
 				int valor = (int) source.getValue();
 				if (!source.getValueIsAdjusting()) {
-					txtTempoAmostras.setValue(new Integer(valor));
+					txtTempoAmostras.setValue(Integer.valueOf(valor));
 				} else {
 					txtTempoAmostras.setText(String.valueOf(valor));
 				}
@@ -530,10 +530,10 @@ public class SCustomizer  extends AbstractCustomizer {
 		tempoAmostrasFormat.setMaximumFractionDigits(0);
 		tempoAmostrasFormat.setMinimumFractionDigits(0);
 		NumberFormatter tempoAmostrasFormatador = new NumberFormatter(tempoAmostrasFormat);
-		tempoAmostrasFormatador.setMinimum(new Integer(100));
-		tempoAmostrasFormatador.setMaximum(new Integer(500));
+		tempoAmostrasFormatador.setMinimum(Integer.valueOf(100));
+		tempoAmostrasFormatador.setMaximum(Integer.valueOf(500));
 		txtTempoAmostras = new JFormattedTextField(tempoAmostrasFormatador);
-		txtTempoAmostras.setValue(new Double(200));
+		txtTempoAmostras.setValue(Double.valueOf(200));
 		txtTempoAmostras.setColumns(5);
 		txtTempoAmostras.setMaximumSize(txtFieldDim);
 
@@ -587,7 +587,7 @@ public class SCustomizer  extends AbstractCustomizer {
 				JSlider source = (JSlider) e.getSource();
 				double valor = (double) source.getValue();
 				if (!source.getValueIsAdjusting()) {
-					txtNumAmostras.setValue(new Integer((int) valor));
+					txtNumAmostras.setValue(Integer.valueOf((int) valor));
 				} else {
 					txtNumAmostras.setText(String.valueOf(valor));
 				}
@@ -596,7 +596,7 @@ public class SCustomizer  extends AbstractCustomizer {
 		});
 
 		txtNumAmostras = new JFormattedTextField(tempoAmostrasFormatador);
-		txtNumAmostras.setValue(new Integer(10));
+		txtNumAmostras.setValue(Integer.valueOf(10));
 		txtNumAmostras.setColumns(5);
 		txtNumAmostras.setMaximumSize(txtFieldDim);
 
@@ -640,11 +640,11 @@ public class SCustomizer  extends AbstractCustomizer {
 		sliderCampoElectrico = new JSlider(JSlider.HORIZONTAL, -1000, 1000, -100);
 
 		Hashtable campoElectricoLabelTable = new Hashtable();
-		campoElectricoLabelTable.put(new Integer(-1000), new JLabel("-10"));
-		campoElectricoLabelTable.put(new Integer(-500), new JLabel("-5"));
-		campoElectricoLabelTable.put(new Integer(0), new JLabel("0"));
-		campoElectricoLabelTable.put(new Integer(500), new JLabel("+5"));
-		campoElectricoLabelTable.put(new Integer(1000), new JLabel("+10"));
+		campoElectricoLabelTable.put(Integer.valueOf(-1000), new JLabel("-10"));
+		campoElectricoLabelTable.put(Integer.valueOf(-500), new JLabel("-5"));
+		campoElectricoLabelTable.put(Integer.valueOf(0), new JLabel("0"));
+		campoElectricoLabelTable.put(Integer.valueOf(500), new JLabel("+5"));
+		campoElectricoLabelTable.put(Integer.valueOf(1000), new JLabel("+10"));
 		sliderCampoElectrico.setLabelTable(campoElectricoLabelTable);
 		sliderCampoElectrico.setPaintLabels(true);
 
@@ -657,7 +657,7 @@ public class SCustomizer  extends AbstractCustomizer {
 				JSlider source = (JSlider) e.getSource();
 				double valor = (double) source.getValue();
 				if (!source.getValueIsAdjusting()) {
-					txtCampoElectrico.setValue(new Double(valor / 100));
+					txtCampoElectrico.setValue(Double.valueOf(valor / 100));
 				} else {
 					txtCampoElectrico.setText(String.valueOf(valor / 100));
 				}
@@ -669,10 +669,10 @@ public class SCustomizer  extends AbstractCustomizer {
 		campoElectricoFormat.setMaximumFractionDigits(2);
 		campoElectricoFormat.setMinimumFractionDigits(0);
 		NumberFormatter campoElectricoFormatador = new NumberFormatter(campoElectricoFormat);
-		campoElectricoFormatador.setMinimum(new Double(-10));
-		campoElectricoFormatador.setMaximum(new Double(10));
+		campoElectricoFormatador.setMinimum(Double.valueOf(-10));
+		campoElectricoFormatador.setMaximum(Double.valueOf(10));
 		txtCampoElectrico = new JFormattedTextField(campoElectricoFormatador);
-		txtCampoElectrico.setValue(new Double(-1));
+		txtCampoElectrico.setValue(Double.valueOf(-1));
 		txtCampoElectrico.setColumns(5);
 		txtCampoElectrico.setMaximumSize(txtFieldDim);
 
@@ -744,7 +744,7 @@ public class SCustomizer  extends AbstractCustomizer {
 				// a mudan�a)
 				if (!source.getValueIsAdjusting()) { // Se o utilizador acabou
 					// de ajustar o valor
-					txtConcDadoresFinal.setValue(new Double(valor / 100));// Actualiza-se
+					txtConcDadoresFinal.setValue(Double.valueOf(valor / 100));// Actualiza-se
 					// o
 					// valor
 					// na
@@ -772,7 +772,7 @@ public class SCustomizer  extends AbstractCustomizer {
 		 * anteriormente.
 		 */
 		txtConcDadoresFinal = new JFormattedTextField(concsFormatador);
-		txtConcDadoresFinal.setValue(new Double(17)); // Valor inicial da caixa
+		txtConcDadoresFinal.setValue(Double.valueOf(17)); // Valor inicial da caixa
 		// de texto.
 		txtConcDadoresFinal.setColumns(5); // N�mero de colunas da caixa (para
 		// ganhar algum espa�o).
@@ -916,7 +916,7 @@ public class SCustomizer  extends AbstractCustomizer {
 				JSlider source = (JSlider) e.getSource();
 				double valor = (double) source.getValue();
 				if (!source.getValueIsAdjusting()) {
-					txtConcAceitadoresFinal.setValue(new Double(valor / 100));
+					txtConcAceitadoresFinal.setValue(Double.valueOf(valor / 100));
 				} else {
 					txtConcAceitadoresFinal.setText(String.valueOf(valor / 100));
 				}
@@ -925,7 +925,7 @@ public class SCustomizer  extends AbstractCustomizer {
 		});
 
 		txtConcAceitadoresFinal = new JFormattedTextField(concsFormatador);
-		txtConcAceitadoresFinal.setValue(new Double(17));
+		txtConcAceitadoresFinal.setValue(Double.valueOf(17));
 		txtConcAceitadoresFinal.setColumns(5);
 		txtConcAceitadoresFinal.setMaximumSize(txtFieldDim);
 
@@ -1002,7 +1002,7 @@ public class SCustomizer  extends AbstractCustomizer {
 				JSlider source = (JSlider) e.getSource();
 				double valor = (double) source.getValue();
 				if (!source.getValueIsAdjusting()) {
-					txtTemperaturaFinal.setValue(new Double(valor / 100.0));
+					txtTemperaturaFinal.setValue(Double.valueOf(valor / 100.0));
 				} else {
 					txtTemperaturaFinal.setText(String.valueOf(valor / 100.0));
 				}
@@ -1011,7 +1011,7 @@ public class SCustomizer  extends AbstractCustomizer {
 		});
 
 		txtTemperaturaFinal = new JFormattedTextField(temperaturaFormatador);
-		txtTemperaturaFinal.setValue(new Double(400));
+		txtTemperaturaFinal.setValue(Double.valueOf(400));
 		txtTemperaturaFinal.setColumns(5);
 		txtTemperaturaFinal.setMaximumSize(txtFieldDim);
 
@@ -1088,7 +1088,7 @@ public class SCustomizer  extends AbstractCustomizer {
 				JSlider source = (JSlider) e.getSource();
 				double valor = (double) source.getValue();
 				if (!source.getValueIsAdjusting()) {
-					txtCampoElectricoFinal.setValue(new Double(valor / 100));
+					txtCampoElectricoFinal.setValue(Double.valueOf(valor / 100));
 				} else {
 					txtCampoElectricoFinal.setText(String.valueOf(valor / 100));
 				}
@@ -1097,7 +1097,7 @@ public class SCustomizer  extends AbstractCustomizer {
 		});
 
 		txtCampoElectricoFinal = new JFormattedTextField(campoElectricoFormatador);
-		txtCampoElectricoFinal.setValue(new Double(1));
+		txtCampoElectricoFinal.setValue(Double.valueOf(1));
 		txtCampoElectricoFinal.setColumns(5);
 		txtCampoElectricoFinal.setMaximumSize(txtFieldDim);
 
@@ -1165,11 +1165,11 @@ public class SCustomizer  extends AbstractCustomizer {
 
 		// Hashtable para o Slider
 		Hashtable gradienteLabelTable = new Hashtable();
-		gradienteLabelTable.put(new Integer(1900), new JLabel("<html>10<sup>19</sup>"));
-		gradienteLabelTable.put(new Integer(2000), new JLabel("<html>10<sup>20</sup>"));
-		gradienteLabelTable.put(new Integer(2100), new JLabel("<html>10<sup>21</sup>"));
-		gradienteLabelTable.put(new Integer(2200), new JLabel("<html>10<sup>22</sup>"));
-		gradienteLabelTable.put(new Integer(2300), new JLabel("<html>10<sup>23</sup>"));
+		gradienteLabelTable.put(Integer.valueOf(1900), new JLabel("<html>10<sup>19</sup>"));
+		gradienteLabelTable.put(Integer.valueOf(2000), new JLabel("<html>10<sup>20</sup>"));
+		gradienteLabelTable.put(Integer.valueOf(2100), new JLabel("<html>10<sup>21</sup>"));
+		gradienteLabelTable.put(Integer.valueOf(2200), new JLabel("<html>10<sup>22</sup>"));
+		gradienteLabelTable.put(Integer.valueOf(2300), new JLabel("<html>10<sup>23</sup>"));
 		sliderGradienteImpurezas.setLabelTable(gradienteLabelTable);
 		sliderGradienteImpurezas.setPaintLabels(true);
 
@@ -1190,7 +1190,7 @@ public class SCustomizer  extends AbstractCustomizer {
 				// a mudan�a)
 				if (!source.getValueIsAdjusting()) { // Se o utilizador acabou
 					// de ajustar o valor
-					txtGradienteImpurezas.setValue(new Double(valor / 100)); // Actualiza-se
+					txtGradienteImpurezas.setValue(Double.valueOf(valor / 100)); // Actualiza-se
 					// o
 					// valor
 					// na
@@ -1226,9 +1226,9 @@ public class SCustomizer  extends AbstractCustomizer {
 		 * com cada caso individual).
 		 */
 		NumberFormatter gradienteFormatador = new NumberFormatter(gradienteFormat);
-		gradienteFormatador.setMinimum(new Double(19)); // Valor m�nimo aceite
+		gradienteFormatador.setMinimum(Double.valueOf(19)); // Valor m�nimo aceite
 		// pelo formatador
-		gradienteFormatador.setMaximum(new Double(23)); // Valor m�ximo aceite
+		gradienteFormatador.setMaximum(Double.valueOf(23)); // Valor m�ximo aceite
 		// pelo formatador
 
 		/**
@@ -1239,7 +1239,7 @@ public class SCustomizer  extends AbstractCustomizer {
 		 * anteriormente.
 		 */
 		txtGradienteImpurezas = new JFormattedTextField(gradienteFormatador);
-		txtGradienteImpurezas.setValue(new Double(21)); // Valor inicial da
+		txtGradienteImpurezas.setValue(Double.valueOf(21)); // Valor inicial da
 		// caixa de texto.
 		txtGradienteImpurezas.setColumns(5); // N�mero de colunas da caixa (para
 		// ganhar algum espa�o).
@@ -1529,17 +1529,17 @@ public class SCustomizer  extends AbstractCustomizer {
 		// ActionPerformed para o bot�o de limpeza
 		limparButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				txtConcDadores.setValue(new Integer(15));
-				txtConcDadoresFinal.setValue(new Integer(17));
-				txtConcAceitadores.setValue(new Integer(15));
-				txtConcAceitadoresFinal.setValue(new Integer(17));
-				txtTemperatura.setValue(new Double(300));
-				txtTemperaturaFinal.setValue(new Double(400));
-				txtCampoElectrico.setValue(new Double(-1));
-				txtCampoElectricoFinal.setValue(new Double(1));
-				txtNumAmostras.setValue(new Integer(200));
-				txtTempoAmostras.setValue(new Integer(200));
-				txtGradienteImpurezas.setValue(new Double(21));
+				txtConcDadores.setValue(Integer.valueOf(15));
+				txtConcDadoresFinal.setValue(Integer.valueOf(17));
+				txtConcAceitadores.setValue(Integer.valueOf(15));
+				txtConcAceitadoresFinal.setValue(Integer.valueOf(17));
+				txtTemperatura.setValue(Double.valueOf(300));
+				txtTemperaturaFinal.setValue(Double.valueOf(400));
+				txtCampoElectrico.setValue(Double.valueOf(-1));
+				txtCampoElectricoFinal.setValue(Double.valueOf(1));
+				txtNumAmostras.setValue(Integer.valueOf(200));
+				txtTempoAmostras.setValue(Integer.valueOf(200));
+				txtGradienteImpurezas.setValue(Double.valueOf(21));
 				portuguesButton.doClick();
 				silicioButton.doClick();
 				abruptaButton.doClick();

@@ -87,7 +87,7 @@ public class AVReceive3 implements ReceiveStreamListener, SessionListener,
 
 		System.err.println("  - Open RTP session for: addr: " + session.addr + " port: " + session.port + " ttl: " + session.ttl);
 
-		mgrs[i] = (RTPManager) RTPManager.newInstance();
+		mgrs[i] = (RTPManager) RTPManager.getDeclaredConstructor().newInstance();
 		mgrs[i].addSessionListener(this);
 		mgrs[i].addReceiveStreamListener(this);
 

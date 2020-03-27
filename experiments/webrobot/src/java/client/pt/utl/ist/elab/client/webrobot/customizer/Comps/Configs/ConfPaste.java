@@ -179,7 +179,7 @@ public class ConfPaste extends javax.swing.JDialog {
 		int cp = -1;
 		int rp = -1;
 		try {
-			cp = new Integer(jTextFieldCol.getText()).intValue();
+			cp = Integer.valueOf(jTextFieldCol.getText()).intValue();
 		} catch (final NumberFormatException nfe) {
 			javax.swing.JOptionPane.showMessageDialog(this, "Por favor, introduza um n�mero inteiro", "Erro!",
 					javax.swing.JOptionPane.ERROR_MESSAGE);
@@ -188,7 +188,7 @@ public class ConfPaste extends javax.swing.JDialog {
 			return;
 		}
 		try {
-			rp = new Integer(jTextFieldRow.getText()).intValue();
+			rp = Integer.valueOf(jTextFieldRow.getText()).intValue();
 		} catch (final NumberFormatException nfe) {
 			javax.swing.JOptionPane.showMessageDialog(this, "Por favor, introduza um n�mero inteiro", "Erro!",
 					javax.swing.JOptionPane.ERROR_MESSAGE);

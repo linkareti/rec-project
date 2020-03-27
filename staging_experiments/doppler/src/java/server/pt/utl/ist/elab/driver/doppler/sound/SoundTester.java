@@ -374,7 +374,7 @@ public class SoundTester extends javax.swing.JFrame {
 		}
 
 		public Number getX(int param, int param1) {
-			return new Double(getXValue(param, param1));
+			return Double.valueOf(getXValue(param, param1));
 		}
 
 		public double getXValue(int param, int param1) {
@@ -382,7 +382,7 @@ public class SoundTester extends javax.swing.JFrame {
 		}
 
 		public Number getY(int param, int param1) {
-			return new Double(getYValue(param, param1));
+			return Double.valueOf(getYValue(param, param1));
 		}
 
 		public double getYValue(int param, int param1) {
@@ -423,7 +423,7 @@ public class SoundTester extends javax.swing.JFrame {
 		}
 
 		public Number getX(int param, int param1) {
-			return new Double(getXValue(param, param1));
+			return Double.valueOf(getXValue(param, param1));
 		}
 
 		public double getXValue(int param, int param1) {
@@ -434,7 +434,7 @@ public class SoundTester extends javax.swing.JFrame {
 		}
 
 		public Number getY(int param, int param1) {
-			return new Double(getYValue(param, param1));
+			return Double.valueOf(getYValue(param, param1));
 		}
 
 		public double getYValue(int param, int param1) {

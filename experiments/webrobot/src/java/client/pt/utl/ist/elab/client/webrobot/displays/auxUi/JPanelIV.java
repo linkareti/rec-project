@@ -59,7 +59,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 		jProgressBarIR0.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 153)));
 		jProgressBarIR0.setMinimumSize(new java.awt.Dimension(10, 21));
 		jProgressBarIR0.setPreferredSize(new java.awt.Dimension(300, 21));
-		jProgressBarIR0.setString(new Integer(IR0).toString());
+		jProgressBarIR0.setString(Integer.valueOf(IR0).toString());
 		jProgressBarIR0.setStringPainted(true);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 8;
@@ -74,7 +74,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 		jProgressBarIR1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 153)));
 		jProgressBarIR1.setMinimumSize(new java.awt.Dimension(10, 21));
 		jProgressBarIR1.setPreferredSize(new java.awt.Dimension(300, 21));
-		jProgressBarIR1.setString(new Integer(IR1).toString());
+		jProgressBarIR1.setString(Integer.valueOf(IR1).toString());
 		jProgressBarIR1.setStringPainted(true);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 8;
@@ -89,7 +89,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 		jProgressBarIR2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 153)));
 		jProgressBarIR2.setMinimumSize(new java.awt.Dimension(10, 21));
 		jProgressBarIR2.setPreferredSize(new java.awt.Dimension(300, 21));
-		jProgressBarIR2.setString(new Integer(IR2).toString());
+		jProgressBarIR2.setString(Integer.valueOf(IR2).toString());
 		jProgressBarIR2.setStringPainted(true);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 8;
@@ -104,7 +104,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 		jProgressBarIR3.setMaximum(255);
 		jProgressBarIR3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 153)));
 		jProgressBarIR3.setPreferredSize(new java.awt.Dimension(300, 21));
-		jProgressBarIR3.setString(new Integer(IR3).toString());
+		jProgressBarIR3.setString(Integer.valueOf(IR3).toString());
 		jProgressBarIR3.setStringPainted(true);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 8;
@@ -118,7 +118,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 		jProgressBarIR4.setMaximum(255);
 		jProgressBarIR4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 153)));
 		jProgressBarIR4.setPreferredSize(new java.awt.Dimension(300, 21));
-		jProgressBarIR4.setString(new Integer(IR4).toString());
+		jProgressBarIR4.setString(Integer.valueOf(IR4).toString());
 		jProgressBarIR4.setStringPainted(true);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 8;
@@ -132,7 +132,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 		jProgressBarIR5.setMaximum(255);
 		jProgressBarIR5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 153)));
 		jProgressBarIR5.setPreferredSize(new java.awt.Dimension(300, 21));
-		jProgressBarIR5.setString(new Integer(IR5).toString());
+		jProgressBarIR5.setString(Integer.valueOf(IR5).toString());
 		jProgressBarIR5.setStringPainted(true);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 8;
@@ -146,7 +146,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 		jProgressBarIR6.setMaximum(255);
 		jProgressBarIR6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 153)));
 		jProgressBarIR6.setPreferredSize(new java.awt.Dimension(300, 21));
-		jProgressBarIR6.setString(new Integer(IR6).toString());
+		jProgressBarIR6.setString(Integer.valueOf(IR6).toString());
 		jProgressBarIR6.setStringPainted(true);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 8;
@@ -160,7 +160,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 		jProgressBarIR7.setMaximum(255);
 		jProgressBarIR7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 153)));
 		jProgressBarIR7.setPreferredSize(new java.awt.Dimension(300, 21));
-		jProgressBarIR7.setString(new Integer(IR7).toString());
+		jProgressBarIR7.setString(Integer.valueOf(IR7).toString());
 		jProgressBarIR7.setStringPainted(true);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 8;
@@ -269,7 +269,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 	public void setIR0(final int IR0) {
 		this.IR0 = IR0;
 		jProgressBarIR0.setValue(IR0);
-		jProgressBarIR0.setString(new Integer(IR0).toString());
+		jProgressBarIR0.setString(Integer.valueOf(IR0).toString());
 	}
 
 	/**
@@ -289,7 +289,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 	public void setIR1(final int IR1) {
 		this.IR1 = IR1;
 		jProgressBarIR1.setValue(IR1);
-		jProgressBarIR1.setString(new Integer(IR1).toString());
+		jProgressBarIR1.setString(Integer.valueOf(IR1).toString());
 	}
 
 	/**
@@ -309,7 +309,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 	public void setIR2(final int IR2) {
 		this.IR2 = IR2;
 		jProgressBarIR2.setValue(IR2);
-		jProgressBarIR2.setString(new Integer(IR2).toString());
+		jProgressBarIR2.setString(Integer.valueOf(IR2).toString());
 	}
 
 	/**
@@ -329,7 +329,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 	public void setIR3(final int IR3) {
 		this.IR3 = IR3;
 		jProgressBarIR3.setValue(IR3);
-		jProgressBarIR3.setString(new Integer(IR3).toString());
+		jProgressBarIR3.setString(Integer.valueOf(IR3).toString());
 	}
 
 	/**
@@ -349,7 +349,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 	public void setIR4(final int IR4) {
 		this.IR4 = IR4;
 		jProgressBarIR4.setValue(IR4);
-		jProgressBarIR4.setString(new Integer(IR4).toString());
+		jProgressBarIR4.setString(Integer.valueOf(IR4).toString());
 	}
 
 	/**
@@ -369,7 +369,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 	public void setIR5(final int IR5) {
 		this.IR5 = IR5;
 		jProgressBarIR5.setValue(IR5);
-		jProgressBarIR5.setString(new Integer(IR5).toString());
+		jProgressBarIR5.setString(Integer.valueOf(IR5).toString());
 	}
 
 	/**
@@ -389,7 +389,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 	public void setIR6(final int IR6) {
 		this.IR6 = IR6;
 		jProgressBarIR6.setValue(IR6);
-		jProgressBarIR6.setString(new Integer(IR6).toString());
+		jProgressBarIR6.setString(Integer.valueOf(IR6).toString());
 	}
 
 	/**
@@ -409,7 +409,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 	public void setIR7(final int IR7) {
 		this.IR7 = IR7;
 		jProgressBarIR7.setValue(IR7);
-		jProgressBarIR7.setString(new Integer(IR7).toString());
+		jProgressBarIR7.setString(Integer.valueOf(IR7).toString());
 	}
 
 	public void dataModelRunning() {

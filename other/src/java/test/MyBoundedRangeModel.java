@@ -51,7 +51,7 @@ public class MyBoundedRangeModel extends DefaultBoundedRangeModel
     
     public Integer getValueInteger()
     {
-	return new Integer(getValue());
+	return Integer.valueOf(getValue());
     }
     
     /** Getter for property step.

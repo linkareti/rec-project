@@ -186,13 +186,13 @@ public class StatsoundChartDataSetProxy extends org.jfree.data.xy.AbstractXYData
 		}
 		if (getChannelDisplayYArray().length == 0) {
 			if (expDataModel.getValueAt(item, getChannelDisplayY()) == null) {
-				// return new Double(0);
+				// return Double.valueOf(0);
 				return 0;
 			}
 			return expDataModel.getValueAt(item, getChannelDisplayY()).getValueNumber().doubleValue();
 		} else {
 			if (expDataModel.getValueAt(item, getChannelDisplayAtYArray(series)) == null) {
-				// return new Double(0);
+				// return Double.valueOf(0);
 				return 0;
 			}
 			return expDataModel.getValueAt(item, getChannelDisplayAtYArray(series)).getValueNumber().doubleValue();
@@ -318,12 +318,12 @@ public class StatsoundChartDataSetProxy extends org.jfree.data.xy.AbstractXYData
 
 	@Override
 	public Number getX(final int param, final int param1) {
-		return new Double(getXValue(param, param1));
+		return Double.valueOf(getXValue(param, param1));
 	}
 
 	@Override
 	public Number getY(final int param, final int param1) {
-		return new Double(getYValue(param, param1));
+		return Double.valueOf(getYValue(param, param1));
 	}
 
 	@Override

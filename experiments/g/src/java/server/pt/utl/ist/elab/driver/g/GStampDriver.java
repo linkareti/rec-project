@@ -51,14 +51,14 @@ public class GStampDriver extends AbstractStampDriver<GStampDataSource> {
 
 		stampConfig.addCommandData(
 				StampConfigTranslator.POWER_STR,
-				new Integer(Defaults.defaultIfEmpty(
+				Integer.valueOf(Defaults.defaultIfEmpty(
 						config.getSelectedHardwareParameterValue(StampConfigTranslator.POWER_STR),
 						info.getHardwareParameterValue(StampConfigTranslator.POWER_STR))));
 
-		stampConfig.addCommandData(StampConfigTranslator.DELAY_STR, new Integer((int) config.getSelectedFrequency()
+		stampConfig.addCommandData(StampConfigTranslator.DELAY_STR, Integer.valueOf((int) config.getSelectedFrequency()
 				.getFrequency()));
 
-		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, new Integer(config.getTotalSamples()));
+		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, Integer.valueOf(config.getTotalSamples()));
 
 		final StampTranslator translator = StampTranslatorProcessorManager.getTranslator(stampConfig);
 		if (!translator.translate(stampConfig)) {

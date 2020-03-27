@@ -499,11 +499,11 @@ public class ConfInOut extends javax.swing.JDialog {
 			ConfInOut.modelConfInOut.setA2(booleanInt(jCheckBoxA2.isSelected()));
 			ConfInOut.modelConfInOut.setA3(booleanInt(jCheckBoxA3.isSelected()));
 			ConfInOut.modelConfInOut.setA4(booleanInt(jCheckBoxA4.isSelected()));
-			ConfInOut.modelConfInOut.setV1(new Integer(jTextFieldV1.getText()).intValue());
-			ConfInOut.modelConfInOut.setV2(new Integer(jTextFieldV2.getText()).intValue());
-			ConfInOut.modelConfInOut.setV3(new Integer(jTextFieldV3.getText()).intValue());
-			ConfInOut.modelConfInOut.setV4(new Integer(jTextFieldV4.getText()).intValue());
-			ConfInOut.modelConfInOut.setV5(new Integer(jTextFieldV5.getText()).intValue());
+			ConfInOut.modelConfInOut.setV1(Integer.valueOf(jTextFieldV1.getText()).intValue());
+			ConfInOut.modelConfInOut.setV2(Integer.valueOf(jTextFieldV2.getText()).intValue());
+			ConfInOut.modelConfInOut.setV3(Integer.valueOf(jTextFieldV3.getText()).intValue());
+			ConfInOut.modelConfInOut.setV4(Integer.valueOf(jTextFieldV4.getText()).intValue());
+			ConfInOut.modelConfInOut.setV5(Integer.valueOf(jTextFieldV5.getText()).intValue());
 			ConfInOut.modelConfInOut.setB0(booleanInt(jRadioButtonB0Out.isSelected()));
 			ConfInOut.modelConfInOut.setB1(booleanInt(jRadioButtonB1Out.isSelected()));
 			ConfInOut.modelConfInOut.setB2(booleanInt(jRadioButtonB2Out.isSelected()));

@@ -38,7 +38,7 @@ public class StampPenduloProcessor extends AbstractStampProcessor {
 				&& splitedStr[0] != null) {
 			try {
 				angle_vel = Float.parseFloat(splitedStr[0]);
-				final Float oangle_vel = new Float(5. * (angle_vel - 2048.) / 4096.);
+				final Float oangle_vel = Float.valueOf(5. * (angle_vel - 2048.) / 4096.);
 				command.addCommandData(StampPenduloProcessor.ANGLE_VEL, oangle_vel);
 
 				command.setData(true);

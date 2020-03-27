@@ -44,9 +44,9 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	private char esquerda = 'b';
 
 	/** Holds value of property iValues. */
-	private Object[][] iValues = { { "00000000", new Integer(155), new Integer(155) },
-			{ "00000100", new Integer(136), new Integer(155) }, { "00001000", new Integer(136), new Integer(155) },
-			{ "00001100", new Integer(136), new Integer(155) } };
+	private Object[][] iValues = { { "00000000", Integer.valueOf(155), Integer.valueOf(155) },
+			{ "00000100", Integer.valueOf(136), Integer.valueOf(155) }, { "00001000", Integer.valueOf(136), Integer.valueOf(155) },
+			{ "00001100", Integer.valueOf(136), Integer.valueOf(155) } };
 
 	/** Holds value of property i0Value. */
 	private int i0Value = 123;

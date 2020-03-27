@@ -60,35 +60,35 @@ public class PolaroidStampDriver extends AbstractStampDriver<PolaroidStampDataSo
 
 		stampConfig.addCommandData(
 				StampConfigTranslator.POS_INI_POL_STR,
-				new Integer(Defaults.defaultIfEmpty(
+				Integer.valueOf(Defaults.defaultIfEmpty(
 						config.getSelectedHardwareParameterValue(StampConfigTranslator.POS_INI_POL_STR),
 						info.getHardwareParameterValue(StampConfigTranslator.POS_INI_POL_STR))));
 
 		stampConfig.addCommandData(
 				StampConfigTranslator.POS_END_POL_STR,
-				new Integer(Defaults.defaultIfEmpty(
+				Integer.valueOf(Defaults.defaultIfEmpty(
 						config.getSelectedHardwareParameterValue(StampConfigTranslator.POS_END_POL_STR),
 						info.getHardwareParameterValue(StampConfigTranslator.POS_END_POL_STR))));
 
 		stampConfig.addCommandData(
 				StampConfigTranslator.POS_FIXO_STR,
-				new Integer(Defaults.defaultIfEmpty(
+				Integer.valueOf(Defaults.defaultIfEmpty(
 						config.getSelectedHardwareParameterValue(StampConfigTranslator.POS_FIXO_STR),
 						info.getHardwareParameterValue(StampConfigTranslator.POS_FIXO_STR))));
 
 		stampConfig.addCommandData(
 				StampConfigTranslator.LUZ_POL_STR,
-				new Integer(Defaults.defaultIfEmpty(
+				Integer.valueOf(Defaults.defaultIfEmpty(
 						config.getSelectedHardwareParameterValue(StampConfigTranslator.LUZ_POL_STR),
 						info.getHardwareParameterValue(StampConfigTranslator.LUZ_POL_STR))));
 
 		stampConfig.addCommandData(
 				StampConfigTranslator.CALIB_STR,
-				new Integer(Defaults.defaultIfEmpty(
+				Integer.valueOf(Defaults.defaultIfEmpty(
 						config.getSelectedHardwareParameterValue(StampConfigTranslator.CALIB_STR),
 						info.getHardwareParameterValue(StampConfigTranslator.CALIB_STR))));
 
-		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, new Integer(config.getTotalSamples()));
+		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, Integer.valueOf(config.getTotalSamples()));
 
 		final StampTranslator translator = StampTranslatorProcessorManager.getTranslator(stampConfig);
 		if (!translator.translate(stampConfig)) {

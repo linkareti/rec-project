@@ -173,7 +173,7 @@ public class DefaultPropertySheetCustomizer extends JPanel implements Customizer
 					final String displayName = desc.getDisplayName();
 					PropertyEditor editor = null;
 					try {
-						editor = (PropertyEditor) desc.getPropertyEditorClass().newInstance();
+						editor = (PropertyEditor) desc.getPropertyEditorClass().getDeclaredConstructor().newInstance();
 					} catch (final Exception e) {
 						editor = PropertyEditorManager.findEditor(desc.getPropertyType());
 					}

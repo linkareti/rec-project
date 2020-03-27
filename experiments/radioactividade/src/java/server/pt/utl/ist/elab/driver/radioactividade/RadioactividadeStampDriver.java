@@ -64,7 +64,7 @@ public class RadioactividadeStampDriver extends AbstractStampDriver<Radioactivid
 				config.getSelectedHardwareParameterValue(StampConfigTranslator.MATERIAL_STR),
 				info.getHardwareParameterValue(StampConfigTranslator.MATERIAL_STR)));
 
-		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, new Integer(config.getTotalSamples()));
+		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, Integer.valueOf(config.getTotalSamples()));
 
 		final StampTranslator translator = StampTranslatorProcessorManager.getTranslator(stampConfig);
 		if (!translator.translate(stampConfig)) {

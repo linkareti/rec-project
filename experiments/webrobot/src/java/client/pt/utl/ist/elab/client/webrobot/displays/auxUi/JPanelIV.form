@@ -27,7 +27,7 @@
           <Dimension value="[300, 21]"/>
         </Property>
         <Property name="string" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new Integer(IR0).toString()" type="code"/>
+          <Connection code="Integer.valueOf(IR0).toString()" type="code"/>
         </Property>
         <Property name="stringPainted" type="boolean" value="true"/>
       </Properties>
@@ -57,7 +57,7 @@
           <Dimension value="[300, 21]"/>
         </Property>
         <Property name="string" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new Integer(IR1).toString()" type="code"/>
+          <Connection code="Integer.valueOf(IR1).toString()" type="code"/>
         </Property>
         <Property name="stringPainted" type="boolean" value="true"/>
       </Properties>
@@ -87,7 +87,7 @@
           <Dimension value="[300, 21]"/>
         </Property>
         <Property name="string" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new Integer(IR2).toString()" type="code"/>
+          <Connection code="Integer.valueOf(IR2).toString()" type="code"/>
         </Property>
         <Property name="stringPainted" type="boolean" value="true"/>
       </Properties>
@@ -114,7 +114,7 @@
           <Dimension value="[300, 21]"/>
         </Property>
         <Property name="string" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new Integer(IR3).toString()" type="code"/>
+          <Connection code="Integer.valueOf(IR3).toString()" type="code"/>
         </Property>
         <Property name="stringPainted" type="boolean" value="true"/>
       </Properties>
@@ -141,7 +141,7 @@
           <Dimension value="[300, 21]"/>
         </Property>
         <Property name="string" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new Integer(IR4).toString()" type="code"/>
+          <Connection code="Integer.valueOf(IR4).toString()" type="code"/>
         </Property>
         <Property name="stringPainted" type="boolean" value="true"/>
       </Properties>
@@ -168,7 +168,7 @@
           <Dimension value="[300, 21]"/>
         </Property>
         <Property name="string" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new Integer(IR5).toString()" type="code"/>
+          <Connection code="Integer.valueOf(IR5).toString()" type="code"/>
         </Property>
         <Property name="stringPainted" type="boolean" value="true"/>
       </Properties>
@@ -195,7 +195,7 @@
           <Dimension value="[300, 21]"/>
         </Property>
         <Property name="string" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new Integer(IR6).toString()" type="code"/>
+          <Connection code="Integer.valueOf(IR6).toString()" type="code"/>
         </Property>
         <Property name="stringPainted" type="boolean" value="true"/>
       </Properties>
@@ -222,7 +222,7 @@
           <Dimension value="[300, 21]"/>
         </Property>
         <Property name="string" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new Integer(IR7).toString()" type="code"/>
+          <Connection code="Integer.valueOf(IR7).toString()" type="code"/>
         </Property>
         <Property name="stringPainted" type="boolean" value="true"/>
       </Properties>

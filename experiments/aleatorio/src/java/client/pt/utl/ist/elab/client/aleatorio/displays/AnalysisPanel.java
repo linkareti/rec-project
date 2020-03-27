@@ -811,7 +811,7 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 
 			if (centerIndex == 0) {
 				vDie[0] = new java.util.Vector(center_counter);
-				vDie[0].addElement(new Integer(0));
+				vDie[0].addElement(Integer.valueOf(0));
 				vClusters.addElement(vDie[0]);
 			} else {
 				for (int clusterIndex = 0; clusterIndex < vClusters.size(); clusterIndex++) {
@@ -837,7 +837,7 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 						// System.out.println("esta pinta pertence ao dado " +
 						// clusterIndex);
 						belongsToClusters = true;
-						vDie[clusterIndex].addElement(new Integer(centerIndex));
+						vDie[clusterIndex].addElement(Integer.valueOf(centerIndex));
 						break;
 					}// if
 
@@ -848,7 +848,7 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 				}// for
 				if (!belongsToClusters) {
 					vDie[vClusters.size()] = new java.util.Vector(center_counter);
-					vDie[vClusters.size()].addElement(new Integer(centerIndex));
+					vDie[vClusters.size()].addElement(Integer.valueOf(centerIndex));
 					vClusters.addElement(vDie[vClusters.size()]);
 					belongsToDie = true;
 					belongsToClusters = true;
@@ -1266,7 +1266,7 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 
 			if (centerIndex == 0) {
 				vDie[0] = new java.util.Vector<Integer>(center_counter);
-				vDie[0].addElement(new Integer(0));
+				vDie[0].addElement(Integer.valueOf(0));
 				vClusters.addElement(vDie[0]);
 			} else {
 				for (int clusterIndex = 0; clusterIndex < vClusters.size(); clusterIndex++) {
@@ -1290,7 +1290,7 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 						// System.out.println("esta pinta pertence ao dado " +
 						// clusterIndex);
 						belongsToClusters = true;
-						vDie[clusterIndex].addElement(new Integer(centerIndex));
+						vDie[clusterIndex].addElement(Integer.valueOf(centerIndex));
 						break;
 					} else if (clusterIndex == vClusters.size() - 1) {
 						belongsToClusters = false;
@@ -1300,7 +1300,7 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 				}
 				if (belongsToClusters == false) {
 					vDie[vClusters.size()] = new java.util.Vector<Integer>(center_counter);
-					vDie[vClusters.size()].addElement(new Integer(centerIndex));
+					vDie[vClusters.size()].addElement(Integer.valueOf(centerIndex));
 					vClusters.addElement(vDie[vClusters.size()]);
 					belongsToDie = true;
 					belongsToClusters = true;
@@ -3199,7 +3199,7 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 		toReturn.add(1, x);
 		toReturn.add(2, y);
 		toReturn.add(3, pixelIndex);
-		toReturn.add(4, new Integer(vDieIndex));
+		toReturn.add(4, Integer.valueOf(vDieIndex));
 		final double maxTwoDist = maxClusterSize / 2.1257;// 15.524174696260024;
 		// if we have a two, it may be a part of a six (or a five, but this is
 		// unlikely to happen)
@@ -3268,7 +3268,7 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 		toReturn.set(1, x);
 		toReturn.set(2, y);
 		toReturn.set(3, pixelIndex);
-		toReturn.set(4, new Integer(vDieIndex));
+		toReturn.set(4, Integer.valueOf(vDieIndex));
 		return toReturn;
 	}// checkForSpotsThatReallyBelongToThis
 
@@ -5294,7 +5294,7 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 			vDieXYpI.add(1, x);
 			vDieXYpI.add(2, y);
 			vDieXYpI.add(3, pixelIndex);
-			vDieXYpI.add(4, new Integer(vDieIndex));
+			vDieXYpI.add(4, Integer.valueOf(vDieIndex));
 			vDieXYpI.add(5, Boolean.TRUE);
 			return vDieXYpI;
 		}// if
@@ -5391,7 +5391,7 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 							vDieXYpI.add(1, x);
 							vDieXYpI.add(2, y);
 							vDieXYpI.add(3, pixelIndex);
-							vDieXYpI.add(4, new Integer(vDieIndex));
+							vDieXYpI.add(4, Integer.valueOf(vDieIndex));
 							vDieXYpI.add(5, Boolean.FALSE);
 							return vDieXYpI;
 						}// if
@@ -5435,7 +5435,7 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 					vDieXYpI.add(1, x);
 					vDieXYpI.add(2, y);
 					vDieXYpI.add(3, pixelIndex);
-					vDieXYpI.add(4, new Integer(vDieIndex));
+					vDieXYpI.add(4, Integer.valueOf(vDieIndex));
 					vDieXYpI.add(5, Boolean.FALSE);
 
 					return vDieXYpI;
@@ -5458,7 +5458,7 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 					vDieXYpI.add(1, x);
 					vDieXYpI.add(2, y);
 					vDieXYpI.add(3, pixelIndex);
-					vDieXYpI.add(4, new Integer(vDieIndex));
+					vDieXYpI.add(4, Integer.valueOf(vDieIndex));
 					vDieXYpI.add(5, new Boolean(true));
 
 					return vDieXYpI;
@@ -5476,7 +5476,7 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 		vDieXYpI.add(1, x);
 		vDieXYpI.add(2, y);
 		vDieXYpI.add(3, pixelIndex);
-		vDieXYpI.add(4, new Integer(vDieIndex));
+		vDieXYpI.add(4, Integer.valueOf(vDieIndex));
 		vDieXYpI.add(5, new Boolean(false));
 
 		return vDieXYpI;

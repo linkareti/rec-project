@@ -22,7 +22,7 @@ public class CheckTextValues {
 	public boolean isOK(final javax.swing.JTextField jTextField) {
 		int value = -1;
 		try {
-			value = new Integer(jTextField.getText()).intValue();
+			value = Integer.valueOf(jTextField.getText()).intValue();
 		} catch (final NumberFormatException nfe) {
 			javax.swing.JOptionPane.showMessageDialog(parent, "Por favor, introduza um numero inteiro", "Erro!",
 					javax.swing.JOptionPane.ERROR_MESSAGE);

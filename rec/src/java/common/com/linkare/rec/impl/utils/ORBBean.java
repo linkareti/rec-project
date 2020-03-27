@@ -6,7 +6,6 @@
 
 package com.linkare.rec.impl.utils;
 
-import java.applet.Applet;
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -65,19 +64,11 @@ public class ORBBean {
 		return ORBBean.this_object;
 	}
 
-	public static ORBBean getORBBean(final Applet applet) {
-		if (ORBBean.this_object == null) {
-			ORBBean.this_object = new ORBBean(applet);
-		}
 
-		return ORBBean.this_object;
-	}
 
 	/* Singleton Pattern */
 	private static ORBBean this_object = null;
 
-	/** Holds value of property applet. */
-	private Applet applet;
 
 	private org.omg.CORBA.ORB the_orb = null;
 
@@ -87,10 +78,6 @@ public class ORBBean {
 		initORB();
 	}
 
-	private ORBBean(final Applet applet) {
-		this.applet = applet;
-		initORB();
-	}
 
 	private final java.lang.Object orb_synch = new java.lang.Object();
 
@@ -100,12 +87,9 @@ public class ORBBean {
 				return;
 			}
 
-			if (applet != null) {
-				the_orb = ORB.init(applet, null);
-			} else {
-				final Properties props = System.getProperties();
-				the_orb = ORB.init(new String[] {}, props);
-			}
+
+			final Properties props = System.getProperties();
+			the_orb = ORB.init(new String[] {}, props);
 
 			final ORBRunner runner = new ORBRunner(the_orb);
 			try {
@@ -625,7 +609,7 @@ public class ORBBean {
 				// JDK 1.4
 				// create an instance of _NamingContextStub (default
 				// constructor)
-				result = clz.newInstance();
+				result = clz.getDeclaredConstructor().newInstance();
 				final Method setDelegate = clz.getMethod("_set_delegate", new java.lang.Class[] { Delegate.class });
 				setDelegate.invoke(result, new java.lang.Object[] { ((ObjectImpl) obj)._get_delegate() });
 			} catch (final InstantiationException ex) {

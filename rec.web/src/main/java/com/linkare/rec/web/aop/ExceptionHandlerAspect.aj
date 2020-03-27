@@ -55,7 +55,7 @@ public abstract aspect ExceptionHandlerAspect {
 	for (final ExceptionHandleCase exceptionHandleCase : exceptionHandleCases) {
 	    if (exceptionHandleCase.exceptionType().isAssignableFrom(e.getClass())) {
 		try {
-		    return exceptionHandleCase.exceptionHandler().newInstance().execute(target, result, e);
+		    return exceptionHandleCase.exceptionHandler().getDeclaredConstructor().newInstance().execute(target, result, e);
 		} catch (Exception e1) {
 		    e1.printStackTrace();
 		}

@@ -54,14 +54,14 @@ public class GammaStampDriver extends AbstractStampDriver<GammaStampDataSource> 
 
 		stampConfig.addCommandData(
 				StampConfigTranslator.VOLUME_STR,
-				new Integer(Defaults.defaultIfEmpty(
+				Integer.valueOf(Defaults.defaultIfEmpty(
 						config.getSelectedHardwareParameterValue(StampConfigTranslator.VOLUME_STR),
 						info.getHardwareParameterValue(StampConfigTranslator.VOLUME_STR))));
 
-		stampConfig.addCommandData(StampConfigTranslator.FREQ_STR, new Integer((int) config.getSelectedFrequency()
+		stampConfig.addCommandData(StampConfigTranslator.FREQ_STR, Integer.valueOf((int) config.getSelectedFrequency()
 				.getFrequency()));
 
-		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, new Integer(config.getTotalSamples()));
+		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, Integer.valueOf(config.getTotalSamples()));
 
 		final StampTranslator translator = StampTranslatorProcessorManager.getTranslator(stampConfig);
 		if (!translator.translate(stampConfig)) {

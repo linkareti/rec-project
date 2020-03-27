@@ -38,7 +38,7 @@ public class YoungInterfCustomizer  extends AbstractCustomizer {
 		for (int i = 0; i <= 600; i += 100) {
 			htDFendas.put(i, new javax.swing.JLabel("" + i / 100F));
 		}
-		htDFendas.put(new Integer(10), new javax.swing.JLabel("0.10"));
+		htDFendas.put(Integer.valueOf(10), new javax.swing.JLabel("0.10"));
 		jSliderDFendas.setLabelTable(htDFendas);
 
 		final java.util.Hashtable<Integer, JLabel> htDPlanos = new java.util.Hashtable<Integer, JLabel>(10);

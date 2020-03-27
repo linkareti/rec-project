@@ -47,23 +47,23 @@ public class StampScubaProcessor extends AbstractStampProcessor {
 				&& splitedStr[0] != null) {
 			try {
 				pressure0 = Float.parseFloat(splitedStr[0]);
-				Float oPressure = new Float(10. * (pressure0 / 2048.));
+				Float oPressure = Float.valueOf(10. * (pressure0 / 2048.));
 				command.addCommandData(StampScubaProcessor.PRESSAO_CH_0, oPressure);
 
 				pressure1 = Float.parseFloat(splitedStr[1]);
-				oPressure = new Float(10. * (pressure1 / 2048.));
+				oPressure = Float.valueOf(10. * (pressure1 / 2048.));
 				command.addCommandData(StampScubaProcessor.PRESSAO_CH_1, oPressure);
 
 				pressure2 = Float.parseFloat(splitedStr[2]);
-				oPressure = new Float(10. * (pressure2 / 2048.));
+				oPressure = Float.valueOf(10. * (pressure2 / 2048.));
 				command.addCommandData(StampScubaProcessor.PRESSAO_CH_2, oPressure);
 
 				pressure3 = Float.parseFloat(splitedStr[3]);
-				oPressure = new Float(10. * (pressure3 / 2048.));
+				oPressure = Float.valueOf(10. * (pressure3 / 2048.));
 				command.addCommandData(StampScubaProcessor.PRESSAO_CH_3, oPressure);
 
 				profundidade = Integer.parseInt(splitedStr[4]);
-				final Integer oProfundidade = new Integer(profundidade);
+				final Integer oProfundidade = Integer.valueOf(profundidade);
 				command.addCommandData(StampScubaProcessor.PROFUNDIDADE, oProfundidade);
 
 				command.setData(true);

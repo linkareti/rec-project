@@ -13,11 +13,11 @@ public abstract class DataClientPOA extends org.omg.PortableServer.Servant imple
 
 	private static java.util.Hashtable _methods = new java.util.Hashtable();
 	static {
-		DataClientPOA._methods.put("getUserInfo", new java.lang.Integer(0));
-		DataClientPOA._methods.put("hardwareStateChange", new java.lang.Integer(1));
-		DataClientPOA._methods.put("hardwareChange", new java.lang.Integer(2));
-		DataClientPOA._methods.put("hardwareLockable", new java.lang.Integer(3));
-		DataClientPOA._methods.put("receiveMessage", new java.lang.Integer(4));
+		DataClientPOA._methods.put("getUserInfo", Integer.valueOf(0));
+		DataClientPOA._methods.put("hardwareStateChange", Integer.valueOf(1));
+		DataClientPOA._methods.put("hardwareChange", Integer.valueOf(2));
+		DataClientPOA._methods.put("hardwareLockable", Integer.valueOf(3));
+		DataClientPOA._methods.put("receiveMessage", Integer.valueOf(4));
 	}
 
 	@Override

@@ -36,7 +36,7 @@ public class StampStatSoundTempProcessor extends AbstractStampProcessor {
 				&& splitedStr[0] != null) {
 			try {
 				temp = Integer.parseInt(splitedStr[0]);
-				final Integer oTemp = new Integer(temp);
+				final Integer oTemp = Integer.valueOf(temp);
 				command.addCommandData(StampStatSoundTempProcessor.COMMAND_IDENTIFIER, oTemp);
 				command.setData(true);
 				return true;

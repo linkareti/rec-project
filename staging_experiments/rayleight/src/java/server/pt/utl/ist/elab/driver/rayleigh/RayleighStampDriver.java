@@ -54,7 +54,7 @@ public class RayleighStampDriver extends AbstractStampDriver<RayleighStampDataSo
 						config.getSelectedHardwareParameterValue(StampConfigTranslator.DELTAX_STR),
 						info.getHardwareParameterValue(StampConfigTranslator.DELTAX_STR))));
 
-		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, new Integer(config.getTotalSamples()));
+		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, Integer.valueOf(config.getTotalSamples()));
 
 		StampTranslator translator = StampTranslatorProcessorManager.getTranslator(stampConfig);
 		if (!translator.translate(stampConfig))

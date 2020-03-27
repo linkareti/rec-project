@@ -962,8 +962,8 @@ public class ConfIVPWM extends javax.swing.JDialog {
 	private void jButtonNewElemMouseClicked(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonNewElemMouseClicked
 		final Object[] send = new Object[3];
 		send[0] = new String("00000000");
-		send[1] = new Integer(0);
-		send[2] = new Integer(0);
+		send[1] = Integer.valueOf(0);
+		send[2] = Integer.valueOf(0);
 		confAddNewElement = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfAddNewElement(this, true,
 				jRadioButtonI0.isSelected(), jRadioButtonI1.isSelected(), jRadioButtonI2.isSelected(),
 				jRadioButtonI3.isSelected(), jRadioButtonI4.isSelected(), jRadioButtonI5.isSelected(),
@@ -1034,12 +1034,12 @@ public class ConfIVPWM extends javax.swing.JDialog {
 
 	private void setTextFieldText(final javax.swing.JTextField jTextField, final javax.swing.JSlider jSlider) {
 		try {
-			if (new Integer(jTextField.getText()).intValue() < 1) {
+			if (Integer.valueOf(jTextField.getText()).intValue() < 1) {
 				jTextField.setText("" + 1);
-			} else if (new Integer(jTextField.getText()).intValue() > 255) {
+			} else if (Integer.valueOf(jTextField.getText()).intValue() > 255) {
 				jTextField.setText("" + 255);
 			}
-			jSlider.setValue(new Integer(jTextField.getText()).intValue());
+			jSlider.setValue(Integer.valueOf(jTextField.getText()).intValue());
 		} catch (final NumberFormatException nfe) {
 		}
 	}
@@ -1158,12 +1158,12 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		final Object[] tempObj = new Object[3];
 		for (int i = 0; i < defaultTableModel.getRowCount(); i++) {
 			temp = (String) defaultTableModel.getValueAt(i, 0);
-			orderTable[i][0] = new Integer(temp.substring(7, 8)).intValue() * 1
-					+ new Integer(temp.substring(6, 7)).intValue() * 2 + new Integer(temp.substring(5, 6)).intValue()
-					* 4 + new Integer(temp.substring(4, 5)).intValue() * 8
-					+ new Integer(temp.substring(3, 4)).intValue() * 16 + new Integer(temp.substring(2, 3)).intValue()
-					* 32 + new Integer(temp.substring(1, 2)).intValue() * 64
-					+ new Integer(temp.substring(0, 1)).intValue() * 128;
+			orderTable[i][0] = Integer.valueOf(temp.substring(7, 8)).intValue() * 1
+					+ Integer.valueOf(temp.substring(6, 7)).intValue() * 2 + Integer.valueOf(temp.substring(5, 6)).intValue()
+					* 4 + Integer.valueOf(temp.substring(4, 5)).intValue() * 8
+					+ Integer.valueOf(temp.substring(3, 4)).intValue() * 16 + Integer.valueOf(temp.substring(2, 3)).intValue()
+					* 32 + Integer.valueOf(temp.substring(1, 2)).intValue() * 64
+					+ Integer.valueOf(temp.substring(0, 1)).intValue() * 128;
 			orderTable[i][1] = i;
 		}
 		for (int j = 0; j < defaultTableModel.getRowCount(); j++) {

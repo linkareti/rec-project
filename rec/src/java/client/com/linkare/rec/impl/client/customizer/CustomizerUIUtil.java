@@ -36,7 +36,7 @@ public class CustomizerUIUtil {
 			final String className = url;
                         final Class<?> c = ClassUtils.findClass(className, CustomizerUIUtil.class.getClassLoader());
 
-			final Object o = c.newInstance();
+			final Object o = c.getDeclaredConstructor().newInstance();
 
 			if (o instanceof ICustomizer) {
 				return (ICustomizer) o;

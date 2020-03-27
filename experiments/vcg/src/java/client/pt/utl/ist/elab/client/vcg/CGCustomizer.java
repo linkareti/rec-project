@@ -76,11 +76,11 @@ public class CGCustomizer extends AbstractCustomizer {
 		add(reg, gridBagConstraints);
 
 		final java.util.Hashtable<Integer, JLabel> htK = new java.util.Hashtable<Integer, JLabel>(9);
-		htK.put(new Integer(-89), new javax.swing.JLabel("" + (-89)));
+		htK.put(Integer.valueOf(-89), new javax.swing.JLabel("" + (-89)));
 		for (int i = -70; i <= 70; i += 20) {
-			htK.put(new Integer(i), new javax.swing.JLabel("" + i));
+			htK.put(Integer.valueOf(i), new javax.swing.JLabel("" + i));
 		}
-		htK.put(new Integer(89), new javax.swing.JLabel("" + 89));
+		htK.put(Integer.valueOf(89), new javax.swing.JLabel("" + 89));
 		angInitSlider.setLabelTable(htK);
 	}
 

@@ -179,7 +179,7 @@ public class ConfCopy extends javax.swing.JDialog {
 		int cc = -1;
 		int rc = -1;
 		try {
-			cc = new Integer(jTextFieldCol.getText()).intValue();
+			cc = Integer.valueOf(jTextFieldCol.getText()).intValue();
 		} catch (final NumberFormatException nfe) {
 			javax.swing.JOptionPane.showMessageDialog(this, "Por favor, introduza um n�mero inteiro", "Erro!",
 					javax.swing.JOptionPane.ERROR_MESSAGE);
@@ -195,7 +195,7 @@ public class ConfCopy extends javax.swing.JDialog {
 			return;
 		}
 		try {
-			rc = new Integer(jTextFieldRow.getText()).intValue();
+			rc = Integer.valueOf(jTextFieldRow.getText()).intValue();
 		} catch (final NumberFormatException nfe) {
 			javax.swing.JOptionPane.showMessageDialog(this, "Por favor, introduza um n�mero inteiro", "Erro!",
 					javax.swing.JOptionPane.ERROR_MESSAGE);

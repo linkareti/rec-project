@@ -283,13 +283,13 @@ public class TimeCustomizer extends javax.swing.JPanel implements java.beans.Cus
 
 	private void actualizeSelectors() {
 		actualizingSelectors = true;
-		picoSelector.setValue(new Integer(mybean.getPicos()));
-		nanoSelector.setValue(new Integer(mybean.getNanos()));
-		microSelector.setValue(new Integer(mybean.getMicros()));
-		miliSelector.setValue(new Integer(mybean.getMilis()));
-		secondSelector.setValue(new Integer(mybean.getSeconds()));
-		minuteSelector.setValue(new Integer(mybean.getMinutes()));
-		hourSelector.setValue(new Integer(mybean.getHours()));
+		picoSelector.setValue(Integer.valueOf(mybean.getPicos()));
+		nanoSelector.setValue(Integer.valueOf(mybean.getNanos()));
+		microSelector.setValue(Integer.valueOf(mybean.getMicros()));
+		miliSelector.setValue(Integer.valueOf(mybean.getMilis()));
+		secondSelector.setValue(Integer.valueOf(mybean.getSeconds()));
+		minuteSelector.setValue(Integer.valueOf(mybean.getMinutes()));
+		hourSelector.setValue(Integer.valueOf(mybean.getHours()));
 		actualizingSelectors = false;
 	}
 

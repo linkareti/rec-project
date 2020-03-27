@@ -40,39 +40,39 @@ public class LoopingCustomizer extends AbstractCustomizer {
 
 		java.util.Hashtable<Integer, JLabel> ht = new java.util.Hashtable<Integer, JLabel>(7);
 		for (int i = 0; i <= 980; i += 200) {
-			ht.put(new Integer(i), new javax.swing.JLabel("" + i / 10F));
+			ht.put(Integer.valueOf(i), new javax.swing.JLabel("" + i / 10F));
 		}
-		ht.put(new Integer(980), new javax.swing.JLabel("98"));
+		ht.put(Integer.valueOf(980), new javax.swing.JLabel("98"));
 		jSliderG.setLabelTable(ht);
 
 		ht = new java.util.Hashtable<Integer, JLabel>(7);
 		for (int i = 0; i <= 200; i += 50) {
-			ht.put(new Integer(i), new javax.swing.JLabel("" + i / 10F));
+			ht.put(Integer.valueOf(i), new javax.swing.JLabel("" + i / 10F));
 		}
 		jSliderVi.setLabelTable(ht);
 
 		ht = new java.util.Hashtable<Integer, JLabel>(7);
 		for (int i = 0; i <= 1000; i += 200) {
-			ht.put(new Integer(i), new javax.swing.JLabel("" + i / 10F));
+			ht.put(Integer.valueOf(i), new javax.swing.JLabel("" + i / 10F));
 		}
 		jSliderH1.setLabelTable(ht);
 		jSliderH2.setLabelTable(ht);
 
 		ht = new java.util.Hashtable<Integer, JLabel>(7);
 		for (int i = 0; i <= 500; i += 100) {
-			ht.put(new Integer(i), new javax.swing.JLabel("" + i / 10F));
+			ht.put(Integer.valueOf(i), new javax.swing.JLabel("" + i / 10F));
 		}
 		jSliderR.setLabelTable(ht);
 
 		ht = new java.util.Hashtable<Integer, JLabel>(7);
 		for (int i = 0; i <= 500; i += 100) {
-			ht.put(new Integer(i), new javax.swing.JLabel("" + i / 10F));
+			ht.put(Integer.valueOf(i), new javax.swing.JLabel("" + i / 10F));
 		}
 		jSliderR.setLabelTable(ht);
 
 		ht = new java.util.Hashtable<Integer, JLabel>(7);
 		for (int i = 0; i <= 150; i += 25) {
-			ht.put(new Integer(i), new javax.swing.JLabel("" + i / 10F));
+			ht.put(Integer.valueOf(i), new javax.swing.JLabel("" + i / 10F));
 		}
 		jSliderXi.setLabelTable(ht);
 

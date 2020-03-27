@@ -35,10 +35,10 @@ public class CondensadorCustomizer  extends AbstractCustomizer {
 
 		Hashtable<Integer, JLabel> slidersPosLabels = new Hashtable<Integer, JLabel>(4);
 		// TODO por as distancias reais
-		slidersPosLabels.put(new Integer(2000), new JLabel("2.0"));
-		slidersPosLabels.put(new Integer(3000), new JLabel("3.0"));
-		slidersPosLabels.put(new Integer(4000), new JLabel("4.0"));
-		slidersPosLabels.put(new Integer(5000), new JLabel("5.0"));
+		slidersPosLabels.put(Integer.valueOf(2000), new JLabel("2.0"));
+		slidersPosLabels.put(Integer.valueOf(3000), new JLabel("3.0"));
+		slidersPosLabels.put(Integer.valueOf(4000), new JLabel("4.0"));
+		slidersPosLabels.put(Integer.valueOf(5000), new JLabel("5.0"));
 
 		sldPos1.setLabelTable(slidersPosLabels);
 		sldPos2.setLabelTable(slidersPosLabels);
@@ -331,9 +331,9 @@ public class CondensadorCustomizer  extends AbstractCustomizer {
 			if (Pos2 <= sldPos2.getMaximum() && Pos2 > sldPos2.getMinimum())
 				sldPos2.setValue(Pos2);
 			else
-				tfPos2.setValue(new Float(((float) sldPos2.getValue() / 1000.F)));
+				tfPos2.setValue(Float.valueOf(((float) sldPos2.getValue() / 1000.F)));
 		} catch (Exception e) {
-			tfPos2.setValue(new Float(((float) sldPos2.getValue() / 1000.F)));
+			tfPos2.setValue(Float.valueOf(((float) sldPos2.getValue() / 1000.F)));
 		}
 		checkPosOverlap();
 		checkMaxNumSamples();
@@ -351,10 +351,10 @@ public class CondensadorCustomizer  extends AbstractCustomizer {
 			if (Pos1 <= sldPos1.getMaximum() && Pos1 > sldPos1.getMinimum())
 				sldPos1.setValue(Pos1);
 			else
-				tfPos1.setValue(new Float(((float) sldPos1.getValue() / 1000.F)));
+				tfPos1.setValue(Float.valueOf(((float) sldPos1.getValue() / 1000.F)));
 
 		} catch (Exception e) {
-			tfPos1.setValue(new Float(((float) sldPos1.getValue() / 1000.F)));
+			tfPos1.setValue(Float.valueOf(((float) sldPos1.getValue() / 1000.F)));
 		}
 		checkPosOverlap();
 		checkMaxNumSamples();
@@ -364,7 +364,7 @@ public class CondensadorCustomizer  extends AbstractCustomizer {
 	private void sldPos1StateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldPos1StateChanged
 	{// GEN-HEADEREND:event_sldPos1StateChanged
 		// TODO actualizar os valores para a escala real
-		tfPos1.setValue(new Float(((float) sldPos1.getValue() / 1000.F)));
+		tfPos1.setValue(Float.valueOf(((float) sldPos1.getValue() / 1000.F)));
 		checkPosOverlap();
 		checkMaxNumSamples();
 
@@ -373,7 +373,7 @@ public class CondensadorCustomizer  extends AbstractCustomizer {
 	private void sldPos2StateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldPos2StateChanged
 	{// GEN-HEADEREND:event_sldPos2StateChanged
 		// TODO actualizar os valores para a escala real
-		tfPos2.setValue(new Float(((float) sldPos2.getValue() / 1000.F)));
+		tfPos2.setValue(Float.valueOf(((float) sldPos2.getValue() / 1000.F)));
 		checkPosOverlap();
 		checkMaxNumSamples();
 
@@ -428,9 +428,9 @@ public class CondensadorCustomizer  extends AbstractCustomizer {
 		sldNumSamples.setValue(150);
 		tfNumSamples.setText("150");
 		sldPos1.setValue(2000);
-		tfPos1.setValue(new Float(2.0));
+		tfPos1.setValue(Float.valueOf(2.0));
 		sldPos2.setValue(5000);
-		tfPos2.setValue(new Float(5.0));
+		tfPos2.setValue(Float.valueOf(5.0));
 	}// GEN-LAST:event_btnDefaultsActionPerformed
 
 	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
@@ -545,12 +545,12 @@ public class CondensadorCustomizer  extends AbstractCustomizer {
 			float pos1f = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("UserPosLow"));
 			int pos1 = (int) Math.floor(pos1f * 1000.F);
 			sldPos1.setValue(pos1);
-			tfPos1.setValue(new Float(pos1f));
+			tfPos1.setValue(Float.valueOf(pos1f));
 
 			float pos2f = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("UserPosHigh"));
 			int pos2 = (int) Math.floor(pos2f * 1000.F);
 			sldPos2.setValue(pos2);
-			tfPos2.setValue(new Float(pos2f));
+			tfPos2.setValue(Float.valueOf(pos2f));
 		}
 	}
 

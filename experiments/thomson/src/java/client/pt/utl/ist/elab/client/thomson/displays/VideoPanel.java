@@ -237,7 +237,7 @@ public class VideoPanel extends javax.swing.JPanel implements com.linkare.rec.im
 		}
 		for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
 			if (model.getValueAt(i, model.getChannelIndex("Video")) != null) {
-				indexes.add(new Integer(i));
+				indexes.add(Integer.valueOf(i));
 				im_index = new int[indexes.size()];
 				for (int a = 0; a < im_index.length; a++) {
 					im_index[a] = ((Integer) indexes.get(a)).intValue();

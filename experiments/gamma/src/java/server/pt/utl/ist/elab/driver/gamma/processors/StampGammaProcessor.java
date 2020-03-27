@@ -50,15 +50,15 @@ public class StampGammaProcessor extends AbstractStampProcessor {
 					StampGammaProcessor.period = Integer.parseInt(splitedStr[3]);
 
 				} else {
-					final Float oTime = new Float((StampGammaProcessor.period * 1F) / StampGammaProcessor.clock_freq);
+					final Float oTime = Float.valueOf((StampGammaProcessor.period * 1F) / StampGammaProcessor.clock_freq);
 					command.addCommandData(StampGammaProcessor.TIME, oTime);
 
 					pressao = Integer.parseInt(splitedStr[0]);
-					final Float oPressao = new Float(pressao * 0.4476 + 35);
+					final Float oPressao = Float.valueOf(pressao * 0.4476 + 35);
 					command.addCommandData(StampGammaProcessor.PRESSAO, oPressao);
 
 					ondamic = Integer.parseInt(splitedStr[1]);
-					final Float oOndamic = new Float((ondamic) * 5);
+					final Float oOndamic = Float.valueOf((ondamic) * 5);
 					command.addCommandData(StampGammaProcessor.ONDA_MIC, oOndamic);
 				}
 				command.setData(true);

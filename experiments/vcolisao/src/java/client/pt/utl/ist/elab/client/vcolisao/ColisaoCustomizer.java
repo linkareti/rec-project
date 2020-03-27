@@ -38,23 +38,23 @@ public class ColisaoCustomizer extends AbstractCustomizer {
 		java.util.Hashtable<Integer, JLabel> ht = new java.util.Hashtable<Integer, JLabel>(7);
 		ht = new java.util.Hashtable<Integer, JLabel>(7);
 		for (int i = 2; i <= 500; i += 83) {
-			ht.put(new Integer(i), new javax.swing.JLabel("" + i / 10F));
+			ht.put(Integer.valueOf(i), new javax.swing.JLabel("" + i / 10F));
 		}
 		jSliderM1.setLabelTable(ht);
 		jSliderM2.setLabelTable(ht);
 
 		ht = new java.util.Hashtable<Integer, JLabel>(7);
 		for (int i = 0; i <= 200; i += 50) {
-			ht.put(new Integer(i), new javax.swing.JLabel("" + i / 10F));
+			ht.put(Integer.valueOf(i), new javax.swing.JLabel("" + i / 10F));
 		}
 		jSliderV2.setLabelTable(ht);
 		jSliderV1.setLabelTable(ht);
 
 		ht = new java.util.Hashtable<Integer, JLabel>(7);
 		for (int i = 5; i <= 100; i += 20) {
-			ht.put(new Integer(i), new javax.swing.JLabel("" + i / 100F));
+			ht.put(Integer.valueOf(i), new javax.swing.JLabel("" + i / 100F));
 		}
-		ht.put(new Integer(100), new javax.swing.JLabel("1.0"));
+		ht.put(Integer.valueOf(100), new javax.swing.JLabel("1.0"));
 		jSliderR1.setLabelTable(ht);
 		jSliderR2.setLabelTable(ht);
 

@@ -120,7 +120,7 @@
                     <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSliderPWM1StateChanged"/>
                   </Events>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="java.util.Hashtable labelTable = new java.util.Hashtable();&#xa;labelTable.put(new Integer(0), new javax.swing.JLabel(&quot;Atrás&quot;));&#xa;labelTable.put(new Integer(128), new javax.swing.JLabel(&quot;Parado&quot;));&#xa;labelTable.put(new Integer(255), new javax.swing.JLabel(&quot;Frente&quot;));&#xa;jSliderPWM1.setLabelTable(labelTable);&#xa;if(jCheckBoxPWM1.isSelected())&#xa;{&#xa;    jSliderPWM1.setEnabled(true);&#xa;}&#xa;else&#xa;{&#xa;    jSliderPWM1.setEnabled(false);&#xa;}&#xa;"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="java.util.Hashtable labelTable = new java.util.Hashtable();&#xa;labelTable.put(Integer.valueOf(0), new javax.swing.JLabel(&quot;Atrás&quot;));&#xa;labelTable.put(Integer.valueOf(128), new javax.swing.JLabel(&quot;Parado&quot;));&#xa;labelTable.put(Integer.valueOf(255), new javax.swing.JLabel(&quot;Frente&quot;));&#xa;jSliderPWM1.setLabelTable(labelTable);&#xa;if(jCheckBoxPWM1.isSelected())&#xa;{&#xa;    jSliderPWM1.setEnabled(true);&#xa;}&#xa;else&#xa;{&#xa;    jSliderPWM1.setEnabled(false);&#xa;}&#xa;"/>
                   </AuxValues>
                 </Component>
               </SubComponents>

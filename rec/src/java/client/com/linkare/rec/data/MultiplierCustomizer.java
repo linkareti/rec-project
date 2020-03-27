@@ -63,9 +63,9 @@ public class MultiplierCustomizer extends javax.swing.JPanel implements java.bea
 	private void multiplierEditorPropertyChange(final java.beans.PropertyChangeEvent evt)// GEN-FIRST:event_multiplierEditorPropertyChange
 	{// GEN-HEADEREND:event_multiplierEditorPropertyChange
 		if (mybean != null) {
-			final Byte oldValue = new Byte(mybean.getValue());
+			final Byte oldValue = Byte.valueOf(mybean.getValue());
 			mybean.setValue(((Multiplier) multiplierEditor.getValue()).getValue());
-			firePropertyChange("value", oldValue, new Byte(mybean.getValue()));
+			firePropertyChange("value", oldValue, Byte.valueOf(mybean.getValue()));
 		}
 	}// GEN-LAST:event_multiplierEditorPropertyChange
 

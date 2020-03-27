@@ -174,7 +174,7 @@ public class MultSeriesXYInBlockDataSetProxy extends org.jfree.data.xy.AbstractX
 				x = expDataModel.getValueAt(item - 1, getChannelDisplayX()).getValueNumber();
 				itemCount--;
 			} else {
-				x = new Double(0);
+				x = Double.valueOf(0);
 			}
 		}
 
@@ -203,7 +203,7 @@ public class MultSeriesXYInBlockDataSetProxy extends org.jfree.data.xy.AbstractX
 					y = expDataModel.getValueAt(item + series * blockSize, getChannelDisplayY()).getValueNumber();
 					itemCount--;
 				} else {
-					y = new Double(0);
+					y = Double.valueOf(0);
 				}
 			}
 
@@ -295,12 +295,12 @@ public class MultSeriesXYInBlockDataSetProxy extends org.jfree.data.xy.AbstractX
 
 	@Override
 	public Number getX(final int param, final int param1) {
-		return new Double(getXValue(param, param1));
+		return Double.valueOf(getXValue(param, param1));
 	}
 
 	@Override
 	public Number getY(final int param, final int param1) {
-		return new Double(getYValue(param, param1));
+		return Double.valueOf(getYValue(param, param1));
 	}
 
 	@Override

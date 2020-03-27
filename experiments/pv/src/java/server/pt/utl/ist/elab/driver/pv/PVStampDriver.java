@@ -50,19 +50,19 @@ public class PVStampDriver extends AbstractStampDriver<PVStampDataSource> {
 
 		stampConfig.addCommandData(
 				StampConfigTranslator.USER_POS_HIGH_STR,
-				new Float(Defaults.defaultIfEmpty(
+				Float.valueOf(Defaults.defaultIfEmpty(
 						config.getSelectedHardwareParameterValue(StampConfigTranslator.USER_POS_HIGH_STR),
 						info.getHardwareParameterValue(StampConfigTranslator.USER_POS_HIGH_STR))));
 
 		stampConfig.addCommandData(
 				StampConfigTranslator.USER_POS_LOW_STR,
-				new Float(Defaults.defaultIfEmpty(
+				Float.valueOf(Defaults.defaultIfEmpty(
 						config.getSelectedHardwareParameterValue(StampConfigTranslator.USER_POS_LOW_STR),
 						info.getHardwareParameterValue(StampConfigTranslator.USER_POS_LOW_STR))));
 
-		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, new Integer(config.getTotalSamples()));
+		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, Integer.valueOf(config.getTotalSamples()));
 
-		stampConfig.addCommandData(StampConfigTranslator.FREQ_INTERVAL_STR, new Integer((int) config
+		stampConfig.addCommandData(StampConfigTranslator.FREQ_INTERVAL_STR, Integer.valueOf((int) config
 				.getSelectedFrequency().getFrequency()));
 
 		final StampTranslator translator = StampTranslatorProcessorManager.getTranslator(stampConfig);

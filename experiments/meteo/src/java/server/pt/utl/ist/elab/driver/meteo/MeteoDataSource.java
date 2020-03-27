@@ -74,7 +74,7 @@ public class MeteoDataSource implements SerialDataListener {
 		this.conn = conn;
 
 		rainArray = new Float[120];
-		java.util.Arrays.fill(rainArray, new Float(0));
+		java.util.Arrays.fill(rainArray, Float.valueOf(0));
 
 		readProps();
 
@@ -217,38 +217,38 @@ public class MeteoDataSource implements SerialDataListener {
 	private boolean checkWeather() {
 		final boolean weather = true;
 
-		if (!MathUtils.isInScale(new Float(temp), new Float(MeteoDataSource.MIN_TEMP), new Float(
+		if (!MathUtils.isInScale(Float.valueOf(temp), Float.valueOf(MeteoDataSource.MIN_TEMP), Float.valueOf(
 				MeteoDataSource.MAX_TEMP))) {
 			System.out.println("Temp out of scale!");
 			return false;
 		}
-		if (!MathUtils.isInScale(new Float(rain), new Float(MeteoDataSource.MIN_RAIN), new Float(
+		if (!MathUtils.isInScale(Float.valueOf(rain), Float.valueOf(MeteoDataSource.MIN_RAIN), Float.valueOf(
 				MeteoDataSource.MAX_RAIN))) {
 			System.out.println("Rain out of scale!");
 			return false;
 		}
-		if (!MathUtils.isInScale(new Float(windDir), new Float(MeteoDataSource.MIN_WIND_DIR), new Float(
+		if (!MathUtils.isInScale(Float.valueOf(windDir), Float.valueOf(MeteoDataSource.MIN_WIND_DIR), Float.valueOf(
 				MeteoDataSource.MAX_WIND_DIR))) {
 			System.out.println("windDir out of scale!");
 			return false;
 		}
-		if (!MathUtils.isInScale(new Float(windVel), new Float(MeteoDataSource.MIN_WIND_VEL), new Float(
+		if (!MathUtils.isInScale(Float.valueOf(windVel), Float.valueOf(MeteoDataSource.MIN_WIND_VEL), Float.valueOf(
 				MeteoDataSource.MAX_WIND_VEL))) {
 			System.out.println("windVel out of scale!");
 			return false;
 		}
-		if (!MathUtils.isInScale(new Float(cond), new Float(MeteoDataSource.MIN_COND), new Float(
+		if (!MathUtils.isInScale(Float.valueOf(cond), Float.valueOf(MeteoDataSource.MIN_COND), Float.valueOf(
 				MeteoDataSource.MAX_COND))) {
 			System.out.println("cond out of scale!");
 			return false;
 		}
-		if (!MathUtils.isInScale(new Float(pression), new Float(MeteoDataSource.MIN_PRESSION), new Float(
+		if (!MathUtils.isInScale(Float.valueOf(pression), Float.valueOf(MeteoDataSource.MIN_PRESSION), Float.valueOf(
 				MeteoDataSource.MAX_PRESSION))) {
 			System.out.println("pression out of scale!");
 			return false;
 		}
-		if (!MathUtils.isInScale(new Float((lum / getMaxLumValue()) * 100f), new Float(MeteoDataSource.MIN_LUM),
-				new Float(MeteoDataSource.MAX_LUM))) {
+		if (!MathUtils.isInScale(Float.valueOf((lum / getMaxLumValue()) * 100f), Float.valueOf(MeteoDataSource.MIN_LUM),
+				Float.valueOf(MeteoDataSource.MAX_LUM))) {
 			System.out.println("lum out of scale!");
 			return false;
 		}
@@ -292,7 +292,7 @@ public class MeteoDataSource implements SerialDataListener {
 		state = Byte.parseByte(st.nextToken());
 
 		MathUtils.shiftArray(rainArray, MathUtils.SHIFT_LEFT);
-		rainArray[rainArray.length - 1] = new Float(rain);
+		rainArray[rainArray.length - 1] = Float.valueOf(rain);
 
 		return rain + "," + temp + "," + humidity + "," + windDir + "," + windVel + "," + cond + "," + pression + ","
 				+ lum;

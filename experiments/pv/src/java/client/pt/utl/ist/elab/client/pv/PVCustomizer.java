@@ -40,10 +40,10 @@ public class PVCustomizer extends AbstractCustomizer {
 		initComponents();
 
 		final Hashtable<Integer,JLabel> slidersPosLabels = new Hashtable<Integer, JLabel>(4);
-		slidersPosLabels.put(new Integer(4000), new JLabel("4.0"));
-		slidersPosLabels.put(new Integer(5000), new JLabel("5.0"));
-		slidersPosLabels.put(new Integer(6000), new JLabel("6.0"));
-		slidersPosLabels.put(new Integer(7000), new JLabel("7.0"));
+		slidersPosLabels.put(Integer.valueOf(4000), new JLabel("4.0"));
+		slidersPosLabels.put(Integer.valueOf(5000), new JLabel("5.0"));
+		slidersPosLabels.put(Integer.valueOf(6000), new JLabel("6.0"));
+		slidersPosLabels.put(Integer.valueOf(7000), new JLabel("7.0"));
 
 		sldPos1.setLabelTable(slidersPosLabels);
 		sldPos2.setLabelTable(slidersPosLabels);
@@ -440,10 +440,10 @@ public class PVCustomizer extends AbstractCustomizer {
 			if (Pos2 <= sldPos2.getMaximum() && Pos2 > sldPos2.getMinimum()) {
 				sldPos2.setValue(Pos2);
 			} else {
-				tfPos2.setValue(PVCustomizer.decimalFormat.format(new Float((sldPos2.getValue() / 1000.F))));
+				tfPos2.setValue(PVCustomizer.decimalFormat.format(Float.valueOf((sldPos2.getValue() / 1000.F))));
 			}
 		} catch (final Exception e) {
-			tfPos2.setValue(PVCustomizer.decimalFormat.format(new Float((sldPos2.getValue() / 1000.F))));
+			tfPos2.setValue(PVCustomizer.decimalFormat.format(Float.valueOf((sldPos2.getValue() / 1000.F))));
 		}
 		checkPosOverlap();
 		checkMaxNumSamples();
@@ -461,11 +461,11 @@ public class PVCustomizer extends AbstractCustomizer {
 			if (Pos1 <= sldPos1.getMaximum() && Pos1 > sldPos1.getMinimum()) {
 				sldPos1.setValue(Pos1);
 			} else {
-				tfPos1.setValue(PVCustomizer.decimalFormat.format(new Float((sldPos1.getValue() / 1000.F))));
+				tfPos1.setValue(PVCustomizer.decimalFormat.format(Float.valueOf((sldPos1.getValue() / 1000.F))));
 			}
 
 		} catch (final Exception e) {
-			tfPos1.setValue(PVCustomizer.decimalFormat.format(new Float((sldPos1.getValue() / 1000.F))));
+			tfPos1.setValue(PVCustomizer.decimalFormat.format(Float.valueOf((sldPos1.getValue() / 1000.F))));
 		}
 		checkPosOverlap();
 		checkMaxNumSamples();
@@ -475,7 +475,7 @@ public class PVCustomizer extends AbstractCustomizer {
 	private void sldPos1StateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldPos1StateChanged
 	{// GEN-HEADEREND:event_sldPos1StateChanged
 
-		tfPos1.setValue(PVCustomizer.decimalFormat.format(new Float((sldPos1.getValue() / 1000.F))));
+		tfPos1.setValue(PVCustomizer.decimalFormat.format(Float.valueOf((sldPos1.getValue() / 1000.F))));
 		checkPosOverlap();
 		checkMaxNumSamples();
 
@@ -484,7 +484,7 @@ public class PVCustomizer extends AbstractCustomizer {
 	private void sldPos2StateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldPos2StateChanged
 	{// GEN-HEADEREND:event_sldPos2StateChanged
 
-		tfPos2.setValue(PVCustomizer.decimalFormat.format(new Float((sldPos2.getValue() / 1000.F))));
+		tfPos2.setValue(PVCustomizer.decimalFormat.format(Float.valueOf((sldPos2.getValue() / 1000.F))));
 		checkPosOverlap();
 		checkMaxNumSamples();
 
@@ -543,9 +543,9 @@ public class PVCustomizer extends AbstractCustomizer {
 		sldNumSamples.setValue(18);
 		tfNumSamples.setText("18");
 		sldPos1.setValue(4000);
-		tfPos1.setValue(PVCustomizer.decimalFormat.format(new Float(4.0)));
+		tfPos1.setValue(PVCustomizer.decimalFormat.format(Float.valueOf(4.0)));
 		sldPos2.setValue(7000);
-		tfPos2.setValue(PVCustomizer.decimalFormat.format(new Float(7.0)));
+		tfPos2.setValue(PVCustomizer.decimalFormat.format(Float.valueOf(7.0)));
 		sldFreq.setValue(150);
 		tfFreq.setText("150");
 	}// GEN-LAST:event_btnDefaultsActionPerformed
@@ -608,12 +608,12 @@ public class PVCustomizer extends AbstractCustomizer {
 			final float pos1f = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("UserPosLow"));
 			final int pos1 = (int) Math.floor(pos1f * 1000.F);
 			sldPos1.setValue(pos1);
-			tfPos1.setValue(PVCustomizer.decimalFormat.format(new Float(pos1f)));
+			tfPos1.setValue(PVCustomizer.decimalFormat.format(Float.valueOf(pos1f)));
 
 			final float pos2f = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("UserPosHigh"));
 			final int pos2 = (int) Math.floor(pos2f * 1000.F);
 			sldPos2.setValue(pos2);
-			tfPos2.setValue(PVCustomizer.decimalFormat.format(new Float(pos2f)));
+			tfPos2.setValue(PVCustomizer.decimalFormat.format(Float.valueOf(pos2f)));
 		}
 	}
 

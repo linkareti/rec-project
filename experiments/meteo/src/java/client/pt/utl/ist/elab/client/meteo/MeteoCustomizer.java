@@ -941,7 +941,7 @@ public class MeteoCustomizer extends AbstractCustomizer {
 		box.removeAllItems();
 		box.removeAllItems();
 		for (int i = 1; i <= nDays; i++) {
-			box.addItem(new Integer(i));
+			box.addItem(Integer.valueOf(i));
 		}
 	}
 

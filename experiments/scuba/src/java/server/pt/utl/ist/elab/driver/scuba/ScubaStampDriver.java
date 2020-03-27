@@ -53,23 +53,23 @@ public class ScubaStampDriver extends AbstractStampDriver<ScubaStampDataSource> 
 
 		stampConfig.addCommandData(
 				StampConfigTranslator.XINI_STR,
-				new Integer(Defaults.defaultIfEmpty(
+				Integer.valueOf(Defaults.defaultIfEmpty(
 						config.getSelectedHardwareParameterValue(StampConfigTranslator.XINI_STR),
 						info.getHardwareParameterValue(StampConfigTranslator.XINI_STR))));
 
 		stampConfig.addCommandData(
 				StampConfigTranslator.XFIN_STR,
-				new Integer(Defaults.defaultIfEmpty(
+				Integer.valueOf(Defaults.defaultIfEmpty(
 						config.getSelectedHardwareParameterValue(StampConfigTranslator.XFIN_STR),
 						info.getHardwareParameterValue(StampConfigTranslator.XFIN_STR))));
 
 		stampConfig.addCommandData(
 				StampConfigTranslator.CALIB_STR,
-				new Integer(Defaults.defaultIfEmpty(
+				Integer.valueOf(Defaults.defaultIfEmpty(
 						config.getSelectedHardwareParameterValue(StampConfigTranslator.CALIB_STR),
 						info.getHardwareParameterValue(StampConfigTranslator.CALIB_STR))));
 
-		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, new Integer(config.getTotalSamples()));
+		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, Integer.valueOf(config.getTotalSamples()));
 
 		final StampTranslator translator = StampTranslatorProcessorManager.getTranslator(stampConfig);
 		if (!translator.translate(stampConfig)) {

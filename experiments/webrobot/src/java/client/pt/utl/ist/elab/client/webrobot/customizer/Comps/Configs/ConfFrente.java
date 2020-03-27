@@ -197,12 +197,12 @@ public class ConfFrente extends javax.swing.JDialog {
 
 	private void jTextFieldSecsKeyReleased(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextFieldSecsKeyReleased
 		try {
-			if (new Integer(jTextFieldSecs.getText()).intValue() < 1) {
+			if (Integer.valueOf(jTextFieldSecs.getText()).intValue() < 1) {
 				jTextFieldSecs.setText("" + 1);
-			} else if (new Integer(jTextFieldSecs.getText()).intValue() > 255) {
+			} else if (Integer.valueOf(jTextFieldSecs.getText()).intValue() > 255) {
 				jTextFieldSecs.setText("" + 255);
 			}
-			jScrollBarSecs.setValue(new Integer(jTextFieldSecs.getText()).intValue());
+			jScrollBarSecs.setValue(Integer.valueOf(jTextFieldSecs.getText()).intValue());
 			jTextFieldTotalSecs.setText("" + df.format((double) jScrollBarSecs.getValue() / 4));
 		} catch (final NumberFormatException nfe) {
 		}
@@ -224,7 +224,7 @@ public class ConfFrente extends javax.swing.JDialog {
 
 	private void jButtonOkMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonOkMousePressed
 		if (checkTextValues.isOK(jTextFieldSecs)) {
-			model.setValor(new Integer(jTextFieldSecs.getText()).intValue());
+			model.setValor(Integer.valueOf(jTextFieldSecs.getText()).intValue());
 			closeDialog(null);
 		}
 	}// GEN-LAST:event_jButtonOkMousePressed

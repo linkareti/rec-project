@@ -87,11 +87,11 @@ public class AleatorioCustomizerComponent extends AbstractCustomizer {
 		numberOfSamplesSlider.setName("numberOfSamplesSlider");
 		// Cria a tabela com as labels para a barra do numberOfSamples
 		final java.util.Hashtable<Integer, JLabel> hSamples = new java.util.Hashtable<Integer, JLabel>();
-		hSamples.put(new Integer(1), new javax.swing.JLabel("1"));
-		hSamples.put(new Integer(5), new javax.swing.JLabel("5"));
-		hSamples.put(new Integer(10), new javax.swing.JLabel("10"));
-		hSamples.put(new Integer(15), new javax.swing.JLabel("15"));
-		hSamples.put(new Integer(20), new javax.swing.JLabel("20"));
+		hSamples.put(Integer.valueOf(1), new javax.swing.JLabel("1"));
+		hSamples.put(Integer.valueOf(5), new javax.swing.JLabel("5"));
+		hSamples.put(Integer.valueOf(10), new javax.swing.JLabel("10"));
+		hSamples.put(Integer.valueOf(15), new javax.swing.JLabel("15"));
+		hSamples.put(Integer.valueOf(20), new javax.swing.JLabel("20"));
 		// associa a tabela de labels com a barra do numberOfSamples
 		numberOfSamplesSlider.setLabelTable(hSamples);
 		numberOfSamplesSlider.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -456,7 +456,7 @@ public class AleatorioCustomizerComponent extends AbstractCustomizer {
 			numberOfSamplesSlider.setValue(acqConfig.getTotalSamples());
 			numberOfSamplesText.setText("" + acqConfig.getTotalSamples());
 
-			Integer soundDurationI = new Integer(-1);
+			Integer soundDurationI = Integer.valueOf(-1);
 			try {
 				soundDurationI = Integer.valueOf(acqConfig.getSelectedHardwareParameterValue("SoundWaveDuration"));
 			} catch (final Exception e) {
@@ -471,7 +471,7 @@ public class AleatorioCustomizerComponent extends AbstractCustomizer {
 
 			watchMovieCheckBox.setSelected(movieOn == "1");
 
-			Integer frequencyI = new Integer(-1);
+			Integer frequencyI = Integer.valueOf(-1);
 			try {
 				frequencyI = Integer.valueOf(acqConfig.getSelectedHardwareParameterValue("InitialFrequency"));
 				System.out.println("frequencyI: " + frequencyI);
@@ -539,9 +539,9 @@ public class AleatorioCustomizerComponent extends AbstractCustomizer {
 
 	private void initComponentsManual() {
 		final Dictionary<Integer, JLabel> sliderLabels = new Hashtable<Integer, JLabel>();
-		sliderLabels.put(new Integer(1500), new JLabel("1500"));
-		sliderLabels.put(new Integer(5000), new JLabel("5000"));
-		sliderLabels.put(new Integer(10000), new JLabel("10000"));
+		sliderLabels.put(Integer.valueOf(1500), new JLabel("1500"));
+		sliderLabels.put(Integer.valueOf(5000), new JLabel("5000"));
+		sliderLabels.put(Integer.valueOf(10000), new JLabel("10000"));
 		soundDurationSlider.setLabelTable(sliderLabels);
 	}
 }

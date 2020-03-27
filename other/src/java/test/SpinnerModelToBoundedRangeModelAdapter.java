@@ -31,10 +31,10 @@ public class SpinnerModelToBoundedRangeModelAdapter extends SpinnerNumberModel
 	if(step+value<=max)
 	{
 	    System.out.println("Next Value="+(value+step));
-	    return new Integer(step+value);
+	    return Integer.valueOf(step+value);
 	}
 	else
-	    return new Integer(max);
+	    return Integer.valueOf(max);
 	
 	
     }
@@ -48,11 +48,11 @@ public class SpinnerModelToBoundedRangeModelAdapter extends SpinnerNumberModel
 	if(value-step>=min)
 	{
 	    System.out.println("Previous Value="+(value-step));
-	    return new Integer(value-step);
+	    return Integer.valueOf(value-step);
 	    
 	}
 	else
-	    return new Integer(min);
+	    return Integer.valueOf(min);
     }
     
     
@@ -66,7 +66,7 @@ public class SpinnerModelToBoundedRangeModelAdapter extends SpinnerNumberModel
     
     public Object getValue()
     {
-	return new Integer(rangeModelDelegate.getValue());
+	return Integer.valueOf(rangeModelDelegate.getValue());
     }
     /** Getter for property rangeModelDelegate.
      * @return Value of property rangeModelDelegate.
@@ -107,7 +107,7 @@ public class SpinnerModelToBoundedRangeModelAdapter extends SpinnerNumberModel
     {
 	updating=true;
 	if(!rangeModelDelegate.getValueIsAdjusting())
-	    setValue(new Integer(rangeModelDelegate.getValue()));
+	    setValue(Integer.valueOf(rangeModelDelegate.getValue()));
 	updating=false;
     }
     

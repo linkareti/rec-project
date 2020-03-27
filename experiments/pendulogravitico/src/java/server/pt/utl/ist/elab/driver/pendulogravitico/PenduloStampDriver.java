@@ -54,19 +54,19 @@ public class PenduloStampDriver extends AbstractStampDriver<PenduloStampDataSour
 
 		stampConfig.addCommandData(
 				StampConfigTranslator.TETA_INIT_STR,
-				new Float(Defaults.defaultIfEmpty(
+				Float.valueOf(Defaults.defaultIfEmpty(
 						config.getSelectedHardwareParameterValue(StampConfigTranslator.TETA_INIT_STR),
 						info.getHardwareParameterValue(StampConfigTranslator.TETA_INIT_STR))));
 
 		stampConfig.addCommandData(
 				StampConfigTranslator.HEIGHT_INIT_STR,
-				new Float(Defaults.defaultIfEmpty(
+				Float.valueOf(Defaults.defaultIfEmpty(
 						config.getSelectedHardwareParameterValue(StampConfigTranslator.HEIGHT_INIT_STR),
 						info.getHardwareParameterValue(StampConfigTranslator.HEIGHT_INIT_STR))));
 
-		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, new Integer(config.getTotalSamples()));
+		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, Integer.valueOf(config.getTotalSamples()));
 
-		stampConfig.addCommandData(StampConfigTranslator.FREQ_INTERVAL_STR, new Integer((int) config
+		stampConfig.addCommandData(StampConfigTranslator.FREQ_INTERVAL_STR, Integer.valueOf((int) config
 				.getSelectedFrequency().getFrequency()));
 
 		final StampTranslator translator = StampTranslatorProcessorManager.getTranslator(stampConfig);

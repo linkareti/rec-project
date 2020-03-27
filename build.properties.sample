@@ -17,7 +17,7 @@ javac.debug=true
 #Optimize the java code, acording to javac optimization tecnhiques
 javac.optimize=true
 #The source level of compilation. Currently, JSE6 is assumed
-javac.sourcelevel=1.6
+javac.sourcelevel=11
 
 #The encoding to use when copying files. Please make sure all created files in the project are UTF-8
 copy.encoding=UTF-8

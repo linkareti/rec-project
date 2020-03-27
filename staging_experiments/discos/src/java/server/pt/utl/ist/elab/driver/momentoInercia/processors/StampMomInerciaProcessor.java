@@ -42,9 +42,9 @@ public class StampMomInerciaProcessor extends AbstractStampProcessor {
 				velocity = Integer.parseInt(splitedStr[1]);
 				Float oVelocity = null;
 				if (velocity == 0) {
-					oVelocity = new Float(0);
+					oVelocity = Float.valueOf(0);
 				} else {
-					oVelocity = new Float(60000000f / (velocity * 4 * 2));
+					oVelocity = Float.valueOf(60000000f / (velocity * 4 * 2));
 				}
 
 				command.addCommandData(VELOCITY, oVelocity);
@@ -54,7 +54,7 @@ public class StampMomInerciaProcessor extends AbstractStampProcessor {
 				potential = Integer.parseInt(splitedStr[2]);
 				float power = (potential * 5f / 4096f) * (potential * 5 / 4096f) * 3f / 4.7f;
 
-				Float oPotential = new Float((power));
+				Float oPotential = Float.valueOf((power));
 				command.addCommandData(POWER, oPotential);
 
 				command.setData(true);

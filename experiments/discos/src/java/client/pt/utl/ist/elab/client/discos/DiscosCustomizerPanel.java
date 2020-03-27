@@ -586,13 +586,13 @@ public class DiscosCustomizerPanel extends AbstractCustomizer {
 			// Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("UserPosLow"));
 			// int pos1 = (int) Math.floor(pos1f * 1000.F);
 			// sldPos1.setValue(pos1);
-			// tfPos1.setValue(new Float(pos1f));
+			// tfPos1.setValue(Float.valueOf(pos1f));
 			//
 			// float pos2f =
 			// Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("UserPosHigh"));
 			// int pos2 = (int) Math.floor(pos2f * 1000.F);
 			// sldPos2.setValue(pos2);
-			// tfPos2.setValue(new Float(pos2f));
+			// tfPos2.setValue(Float.valueOf(pos2f));
 		}
 	}
 

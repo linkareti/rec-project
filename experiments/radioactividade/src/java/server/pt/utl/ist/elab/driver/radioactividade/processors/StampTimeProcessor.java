@@ -47,9 +47,9 @@ public class StampTimeProcessor extends AbstractStampProcessor {
 					time = Integer.parseInt(splitedStr[1]);
 					height = Integer.parseInt(splitedStr[2]);
 
-					final Integer nHits = new Integer(countedHits);
-					final Integer Time = new Integer(time);
-					final Integer Height = new Integer(height);
+					final Integer nHits = Integer.valueOf(countedHits);
+					final Integer Time = Integer.valueOf(time);
+					final Integer Height = Integer.valueOf(height);
 
 					command.addCommandData(StampTimeProcessor.HITS, nHits);
 					command.addCommandData(StampTimeProcessor.TIMER, Time);

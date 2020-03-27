@@ -125,7 +125,7 @@ public class AnalogTableModelProxy extends javax.swing.table.DefaultTableModel i
 			return df.format(elapsedMilis);
 		} else {
 			final PhysicsValue value = expDataModel.getValueAt(rowIndex, columnIndex - 1 + 16);
-			return new Integer(value.getValue().getIntValue());
+			return Integer.valueOf(value.getValue().getIntValue());
 		}
 	}
 

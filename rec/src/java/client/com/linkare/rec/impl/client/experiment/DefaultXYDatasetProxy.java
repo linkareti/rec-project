@@ -257,12 +257,12 @@ public class DefaultXYDatasetProxy extends org.jfree.data.xy.AbstractXYDataset i
 
 	@Override
 	public Number getX(final int series, final int item) {
-		return new Double(getXValue(series, item));
+		return Double.valueOf(getXValue(series, item));
 	}
 
 	@Override
 	public Number getY(final int series, final int item) {
-		return new Double(getYValue(series, item));
+		return Double.valueOf(getYValue(series, item));
 	}
 
 	@Override

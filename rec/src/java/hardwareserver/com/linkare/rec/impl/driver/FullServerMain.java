@@ -45,7 +45,7 @@ public class FullServerMain {
 			String driverClassName = ReCSystemProperty.HARDWARE_DRIVER_CLASS.getValue();
 			if (driverClassName != null) {                            
 				Class<?> driverClass = ClassUtils.findClass(driverClassName, FullServerMain.class.getClassLoader());
-				new BaseHardware((IDriver) driverClass.newInstance());
+				new BaseHardware((IDriver) driverClass.getDeclaredConstructor().newInstance());
 
 				try {
 					Thread.currentThread().join();

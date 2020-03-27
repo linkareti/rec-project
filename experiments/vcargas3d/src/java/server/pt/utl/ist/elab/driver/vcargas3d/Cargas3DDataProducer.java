@@ -160,9 +160,9 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
 							final int modulo = i * razao + EFFmin;
 							// adicione-se a lista
 							if (modulo > EFF - meio && modulo < EFF + meio && EFF < EFFmax) {
-								listax.get(i - 1).add(new Float(x));
-								listay.get(i - 1).add(new Float(y));
-								listaz.get(i - 1).add(new Float(z));
+								listax.get(i - 1).add(Float.valueOf(x));
+								listay.get(i - 1).add(Float.valueOf(y));
+								listaz.get(i - 1).add(Float.valueOf(z));
 							}
 						}
 					}
@@ -269,9 +269,9 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
 
 				// adicione-se ponto ao traco
 				final Float[] linhaXYZ = new Float[3];
-				linhaXYZ[0] = new Float(x);
-				linhaXYZ[1] = new Float(y);
-				linhaXYZ[2] = new Float(z);
+				linhaXYZ[0] = Float.valueOf(x);
+				linhaXYZ[1] = Float.valueOf(y);
+				linhaXYZ[2] = Float.valueOf(z);
 				linha.add(linhaXYZ);
 
 				// se a linha for de encontro a uma carga, pare-se o calculo

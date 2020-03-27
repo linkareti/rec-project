@@ -56,10 +56,10 @@ public class VariablePanel extends JPanel {
 
 		// Hashtables para os sliders
 		final Hashtable<Integer, JLabel> labelTable = new Hashtable<Integer, JLabel>();
-		labelTable.put(new Integer(sliderMin), new JLabel("" + min));
-		labelTable.put(new Integer((sliderMin + sliderMax) / 2),
+		labelTable.put(Integer.valueOf(sliderMin), new JLabel("" + min));
+		labelTable.put(Integer.valueOf((sliderMin + sliderMax) / 2),
 				new JLabel("" + arredondar((min + max) / 2.0, multiplier)));
-		labelTable.put(new Integer(sliderMax), new JLabel("" + max));
+		labelTable.put(Integer.valueOf(sliderMax), new JLabel("" + max));
 		slider.setLabelTable(labelTable);
 		slider.setPaintLabels(true);
 
@@ -75,7 +75,7 @@ public class VariablePanel extends JPanel {
 				final double valor = source.getValue();
 				if (!source.getValueIsAdjusting()) { // Se o utilizador acabou
 					// de ajustar o valor
-					text.setValue(new Double(valor / (Math.pow(10, multiplier)))); // Actualiza-se
+					text.setValue(Double.valueOf(valor / (Math.pow(10, multiplier)))); // Actualiza-se
 					// o
 					// valor
 				} else { // Se nao, mostramos apenas o valor no ecran
@@ -92,10 +92,10 @@ public class VariablePanel extends JPanel {
 		format.setMaximumFractionDigits(multiplier);
 		format.setMinimumFractionDigits(0);
 		final NumberFormatter formatador = new NumberFormatter(format);
-		formatador.setMinimum(new Double(min));
-		formatador.setMaximum(new Double(max));
+		formatador.setMinimum(Double.valueOf(min));
+		formatador.setMaximum(Double.valueOf(max));
 		text = new JFormattedTextField(formatador);
-		text.setValue(new Double(init));
+		text.setValue(Double.valueOf(init));
 		text.setColumns(5);
 		text.setPreferredSize(VariablePanel.textDim);
 
@@ -165,7 +165,7 @@ public class VariablePanel extends JPanel {
 	}
 
 	public void setCurrentValue(final double newValue) {
-		text.setValue(new Double(newValue));
+		text.setValue(Double.valueOf(newValue));
 	}
 
 	public void reset() {

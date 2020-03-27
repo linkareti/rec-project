@@ -8,16 +8,16 @@ public abstract class HardwarePOA extends org.omg.PortableServer.Servant impleme
 
 	private static java.util.Hashtable _methods = new java.util.Hashtable();
 	static {
-		HardwarePOA._methods.put("getHardwareInfo", new java.lang.Integer(0));
-		HardwarePOA._methods.put("getHardwareState", new java.lang.Integer(1));
-		HardwarePOA._methods.put("registerDataClient", new java.lang.Integer(2));
-		HardwarePOA._methods.put("getDataClient", new java.lang.Integer(3));
-		HardwarePOA._methods.put("configure", new java.lang.Integer(4));
-		HardwarePOA._methods.put("start", new java.lang.Integer(5));
-		HardwarePOA._methods.put("startOutput", new java.lang.Integer(6));
-		HardwarePOA._methods.put("stop", new java.lang.Integer(7));
-		HardwarePOA._methods.put("reset", new java.lang.Integer(8));
-		HardwarePOA._methods.put("getDataProducer", new java.lang.Integer(9));
+		HardwarePOA._methods.put("getHardwareInfo", Integer.valueOf(0));
+		HardwarePOA._methods.put("getHardwareState", Integer.valueOf(1));
+		HardwarePOA._methods.put("registerDataClient", Integer.valueOf(2));
+		HardwarePOA._methods.put("getDataClient", Integer.valueOf(3));
+		HardwarePOA._methods.put("configure", Integer.valueOf(4));
+		HardwarePOA._methods.put("start", Integer.valueOf(5));
+		HardwarePOA._methods.put("startOutput", Integer.valueOf(6));
+		HardwarePOA._methods.put("stop", Integer.valueOf(7));
+		HardwarePOA._methods.put("reset", Integer.valueOf(8));
+		HardwarePOA._methods.put("getDataProducer", Integer.valueOf(9));
 	}
 
 	@Override

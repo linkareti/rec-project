@@ -40,7 +40,7 @@ public abstract class FlatTheme extends OceanThemeAdaptor {
 		final Set<Class<? extends AbstractStyle>> styleClasses = registerStyles();
 		for (final Class<? extends AbstractStyle> clazz : styleClasses) {
 			try {
-				final AbstractStyle newInstance = clazz.newInstance();
+				final AbstractStyle newInstance = clazz.getDeclaredConstructor().newInstance();
 				stylesList.add(newInstance);
 			} catch (final Exception e) {
 				FlatTheme.log.log(Level.SEVERE, "Error creating style.", e);

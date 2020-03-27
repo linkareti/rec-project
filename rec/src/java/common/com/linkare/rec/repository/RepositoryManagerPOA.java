@@ -24,8 +24,8 @@ public abstract class RepositoryManagerPOA extends Servant implements Repository
 
 	private static Hashtable<String, Integer> _methods = new Hashtable<String, Integer>();
 	static {
-		RepositoryManagerPOA._methods.put("getDataProducer", new java.lang.Integer(0));
-		RepositoryManagerPOA._methods.put("listDataProducers", new java.lang.Integer(1));
+		RepositoryManagerPOA._methods.put("getDataProducer", Integer.valueOf(0));
+		RepositoryManagerPOA._methods.put("listDataProducers", Integer.valueOf(1));
 	}
 
 	@Override

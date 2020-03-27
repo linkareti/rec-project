@@ -38,7 +38,7 @@ public class StampCounterProcessor extends AbstractStampProcessor {
 				&& splitedStr[0] != null) {
 			try {
 				countedHits = Integer.parseInt(splitedStr[0]);
-				final Integer nHits = new Integer(countedHits);
+				final Integer nHits = Integer.valueOf(countedHits);
 				command.addCommandData(StampCounterProcessor.COUNTER, nHits);
 				command.setData(true);
 

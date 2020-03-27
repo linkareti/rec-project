@@ -72,7 +72,7 @@ public class LocalizeHardwareInfo {
 			apparatusMarshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
 			
 			
-			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.getDeclaredConstructor().newInstance();
 			dbf.setNamespaceAware(true);
 			dbf.setValidating(false);
 

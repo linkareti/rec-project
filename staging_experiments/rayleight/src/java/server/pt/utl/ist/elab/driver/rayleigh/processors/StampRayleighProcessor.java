@@ -43,12 +43,12 @@ public class StampRayleighProcessor extends AbstractStampProcessor {
 				sinal = Integer.parseInt(splitedStr[0]);
 				sinald = 5d * sinal / 1023d;
 
-				Double oSinal = new Double(sinald);
+				Double oSinal = Double.valueOf(sinald);
 
 				command.addCommandData(SIGNAL, oSinal);
 
 				pos = Integer.parseInt(splitedStr[1]);
-				Integer oPos = new Integer(pos);
+				Integer oPos = Integer.valueOf(pos);
 
 				command.addCommandData(POSITION, oPos);
 

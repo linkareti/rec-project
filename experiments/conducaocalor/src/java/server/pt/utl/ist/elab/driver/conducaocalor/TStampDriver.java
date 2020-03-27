@@ -66,7 +66,7 @@ public class TStampDriver extends AbstractStampDriver<TStampDataSource> {
 
 		stampConfig.addCommandData(
 				StampConfigTranslator.HEAT_TIME_STR,
-				new Integer(Defaults.defaultIfEmpty(
+				Integer.valueOf(Defaults.defaultIfEmpty(
 						config.getSelectedHardwareParameterValue(StampConfigTranslator.HEAT_TIME_STR),
 						info.getHardwareParameterValue(StampConfigTranslator.HEAT_TIME_STR))));
 
@@ -74,18 +74,18 @@ public class TStampDriver extends AbstractStampDriver<TStampDataSource> {
 
 		stampConfig.addCommandData(
 				StampConfigTranslator.MAX_HEAT_STR,
-				new Integer(Defaults.defaultIfEmpty(
+				Integer.valueOf(Defaults.defaultIfEmpty(
 						config.getSelectedHardwareParameterValue(StampConfigTranslator.MAX_HEAT_STR),
 						info.getHardwareParameterValue(StampConfigTranslator.MAX_HEAT_STR))));
 
 		LOGGER.log(Level.INFO, info.getHardwareParameterValue(StampConfigTranslator.MAX_HEAT_STR));
 
-		stampConfig.addCommandData(StampConfigTranslator.TBS_STR, new Integer((int) config.getSelectedFrequency()
+		stampConfig.addCommandData(StampConfigTranslator.TBS_STR, Integer.valueOf((int) config.getSelectedFrequency()
 				.getFrequency()));
 
 		LOGGER.log(Level.INFO, "" + (int) config.getSelectedFrequency().getFrequency());
 
-		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, new Integer(config.getTotalSamples()));
+		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, Integer.valueOf(config.getTotalSamples()));
 
 		LOGGER.log(Level.INFO, "" + config.getTotalSamples());
 

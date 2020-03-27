@@ -125,7 +125,7 @@ public class IRTableModelProxy extends javax.swing.table.DefaultTableModel imple
 			return df.format(elapsedMilis);
 		} else {
 			final PhysicsValue value = expDataModel.getValueAt(rowIndex, columnIndex - 1);
-			return new Integer(value.getValue().getIntValue());
+			return Integer.valueOf(value.getValue().getIntValue());
 		}
 	}
 

@@ -41,7 +41,7 @@ public class testCastsAndArrays
 	
 	String[] revertValues=(String[])valuesPlus;
 	
-	objIntArr=addArrayEntrance(arrInt, new Integer(10));
+	objIntArr=addArrayEntrance(arrInt, Integer.valueOf(10));
 	
 	int[] newIntArr=(int[])objIntArr;
 	
@@ -56,7 +56,7 @@ public class testCastsAndArrays
 	}
 	
 	int [] size0intArray=new int[0];
-	Object objIntArr1=addArrayEntrance(size0intArray,  new Integer(1));
+	Object objIntArr1=addArrayEntrance(size0intArray,  Integer.valueOf(1));
 	
 	int[] newIntArr1=(int[])objIntArr1;
 	

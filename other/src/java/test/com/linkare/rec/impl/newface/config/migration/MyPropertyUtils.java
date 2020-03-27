@@ -109,7 +109,7 @@ public class MyPropertyUtils extends PropertyUtilsBean {
 			// Iterate origin Array elements
 			for (int i = 0; i < origArrayLength; i++) {
 				Object origArrayProperty = Array.get(origProperty, i);
-				Object newDestObject = destListParameterizedClass.newInstance();
+				Object newDestObject = destListParameterizedClass.getDeclaredConstructor().newInstance();
 				log.info("Value copy: Array -> List " + origArrayProperty + " => " + newDestObject);
 
 				deepCopyPropertiesRecursive(newDestObject, origArrayProperty, discardDestProperties);

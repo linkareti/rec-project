@@ -24,7 +24,7 @@ public class EntityConverter implements Converter, Serializable {
 	if (value == null || value.length() == 0) {
 	    return null;
 	}
-	final Long pk = new Long(value);
+	final Long pk = Long.valueOf(value);
 	return em.find(getClazz(context, component), pk);
     }
 

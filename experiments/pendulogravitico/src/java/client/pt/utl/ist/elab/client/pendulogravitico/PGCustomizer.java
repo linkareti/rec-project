@@ -33,34 +33,34 @@ public class PGCustomizer extends AbstractCustomizer {
 	public PGCustomizer() {
 		initComponents();
 		final Hashtable<Integer, JLabel> slidersHLabels = new Hashtable<Integer, JLabel>(11);
-		slidersHLabels.put(new Integer(152), new JLabel("15.2"));
-		slidersHLabels.put(new Integer(160), new JLabel("16.0"));
-		slidersHLabels.put(new Integer(170), new JLabel("17.0"));
-		slidersHLabels.put(new Integer(180), new JLabel("18.0"));
-		slidersHLabels.put(new Integer(190), new JLabel("19.0"));
-		slidersHLabels.put(new Integer(200), new JLabel("20.0"));
-		slidersHLabels.put(new Integer(210), new JLabel("21.0"));
-		slidersHLabels.put(new Integer(220), new JLabel("22.0"));
-		slidersHLabels.put(new Integer(230), new JLabel("23.0"));
-		slidersHLabels.put(new Integer(240), new JLabel("24.0"));
-		slidersHLabels.put(new Integer(248), new JLabel("24.8"));
+		slidersHLabels.put(Integer.valueOf(152), new JLabel("15.2"));
+		slidersHLabels.put(Integer.valueOf(160), new JLabel("16.0"));
+		slidersHLabels.put(Integer.valueOf(170), new JLabel("17.0"));
+		slidersHLabels.put(Integer.valueOf(180), new JLabel("18.0"));
+		slidersHLabels.put(Integer.valueOf(190), new JLabel("19.0"));
+		slidersHLabels.put(Integer.valueOf(200), new JLabel("20.0"));
+		slidersHLabels.put(Integer.valueOf(210), new JLabel("21.0"));
+		slidersHLabels.put(Integer.valueOf(220), new JLabel("22.0"));
+		slidersHLabels.put(Integer.valueOf(230), new JLabel("23.0"));
+		slidersHLabels.put(Integer.valueOf(240), new JLabel("24.0"));
+		slidersHLabels.put(Integer.valueOf(248), new JLabel("24.8"));
 
 		sldHeight.setLabelTable(slidersHLabels);
 
 		final Hashtable<Integer, JLabel> slidersTLabels = new Hashtable<Integer, JLabel>(12);
-		slidersTLabels.put(new Integer(11), new JLabel("1.1"));
-		slidersTLabels.put(new Integer(20), new JLabel("2.0"));
-		slidersTLabels.put(new Integer(30), new JLabel("3.0"));
-		slidersTLabels.put(new Integer(40), new JLabel("4.0"));
-		slidersTLabels.put(new Integer(50), new JLabel("5.0"));
-		slidersTLabels.put(new Integer(60), new JLabel("6.0"));
-		slidersTLabels.put(new Integer(70), new JLabel("7.0"));
-		slidersTLabels.put(new Integer(80), new JLabel("8.0"));
-		slidersTLabels.put(new Integer(90), new JLabel("9.0"));
-		slidersTLabels.put(new Integer(100), new JLabel("10.0"));
-		slidersTLabels.put(new Integer(110), new JLabel("11.0"));
-		slidersTLabels.put(new Integer(120), new JLabel("12.0"));
-		slidersTLabels.put(new Integer(135), new JLabel("13.5"));
+		slidersTLabels.put(Integer.valueOf(11), new JLabel("1.1"));
+		slidersTLabels.put(Integer.valueOf(20), new JLabel("2.0"));
+		slidersTLabels.put(Integer.valueOf(30), new JLabel("3.0"));
+		slidersTLabels.put(Integer.valueOf(40), new JLabel("4.0"));
+		slidersTLabels.put(Integer.valueOf(50), new JLabel("5.0"));
+		slidersTLabels.put(Integer.valueOf(60), new JLabel("6.0"));
+		slidersTLabels.put(Integer.valueOf(70), new JLabel("7.0"));
+		slidersTLabels.put(Integer.valueOf(80), new JLabel("8.0"));
+		slidersTLabels.put(Integer.valueOf(90), new JLabel("9.0"));
+		slidersTLabels.put(Integer.valueOf(100), new JLabel("10.0"));
+		slidersTLabels.put(Integer.valueOf(110), new JLabel("11.0"));
+		slidersTLabels.put(Integer.valueOf(120), new JLabel("12.0"));
+		slidersTLabels.put(Integer.valueOf(135), new JLabel("13.5"));
 
 		sldAngle.setLabelTable(slidersTLabels);
 	}

@@ -235,12 +235,12 @@ public class DefaultTimeDatasetProxy extends org.jfree.data.xy.AbstractXYDataset
 
 	@Override
 	public Number getX(final int param, final int param1) {
-		return new Double(getXValue(param, param1));
+		return Double.valueOf(getXValue(param, param1));
 	}
 
 	@Override
 	public Number getY(final int param, final int param1) {
-		return new Double(getYValue(param, param1));
+		return Double.valueOf(getYValue(param, param1));
 	}
 
 	@Override

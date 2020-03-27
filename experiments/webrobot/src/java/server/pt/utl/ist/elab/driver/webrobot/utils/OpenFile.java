@@ -245,8 +245,8 @@ public class OpenFile {
 		if (counter2 < iValuesSize) {
 			final java.util.StringTokenizer st = new java.util.StringTokenizer(data, "\t");
 			iValues[counter2][0] = st.nextToken();
-			iValues[counter2][1] = new Integer(st.nextToken().trim());
-			iValues[counter2][2] = new Integer(st.nextToken().trim());
+			iValues[counter2][1] = Integer.valueOf(st.nextToken().trim());
+			iValues[counter2][2] = Integer.valueOf(st.nextToken().trim());
 			counter2++;
 			counter = 7;
 			return;

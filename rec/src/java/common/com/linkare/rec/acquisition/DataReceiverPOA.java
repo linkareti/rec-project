@@ -13,9 +13,9 @@ public abstract class DataReceiverPOA extends org.omg.PortableServer.Servant imp
 
 	private static java.util.Hashtable _methods = new java.util.Hashtable();
 	static {
-		DataReceiverPOA._methods.put("newSamples", new java.lang.Integer(0));
-		DataReceiverPOA._methods.put("stateChanged", new java.lang.Integer(1));
-		DataReceiverPOA._methods.put("clientsListChanged", new java.lang.Integer(2));
+		DataReceiverPOA._methods.put("newSamples", Integer.valueOf(0));
+		DataReceiverPOA._methods.put("stateChanged", Integer.valueOf(1));
+		DataReceiverPOA._methods.put("clientsListChanged", Integer.valueOf(2));
 	}
 
 	@Override

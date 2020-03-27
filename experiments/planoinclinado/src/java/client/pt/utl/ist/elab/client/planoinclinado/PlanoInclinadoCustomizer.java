@@ -41,10 +41,10 @@ public class PlanoInclinadoCustomizer extends AbstractCustomizer {
         initComponents();
 
         Hashtable<Integer, JLabel> slidersPosLabels = new Hashtable<Integer, JLabel>(4);
-        slidersPosLabels.put(new Integer(3000), new JLabel("3.0"));
-        slidersPosLabels.put(new Integer(5000), new JLabel("5.0"));
-        slidersPosLabels.put(new Integer(6000), new JLabel("6.0"));
-        slidersPosLabels.put(new Integer(7500), new JLabel("7.5"));
+        slidersPosLabels.put(Integer.valueOf(3000), new JLabel("3.0"));
+        slidersPosLabels.put(Integer.valueOf(5000), new JLabel("5.0"));
+        slidersPosLabels.put(Integer.valueOf(6000), new JLabel("6.0"));
+        slidersPosLabels.put(Integer.valueOf(7500), new JLabel("7.5"));
 
         NumberFormatter formatterUserPos1 = new NumberFormatter(decimalFormat);
         NumberFormatter formatterUserPos2 = new NumberFormatter(decimalFormat);

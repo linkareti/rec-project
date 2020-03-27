@@ -568,24 +568,24 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
 	private void initComponentsManual() {
 
 		final Dictionary<Integer, JLabel> slidersVoltageLabels = new Hashtable<Integer, JLabel>();
-		slidersVoltageLabels.put(new Integer(0), new JLabel("0.0"));
-		slidersVoltageLabels.put(new Integer(500), new JLabel("0.5"));
-		slidersVoltageLabels.put(new Integer(1000), new JLabel("1.0"));
-		slidersVoltageLabels.put(new Integer(1500), new JLabel("1.5"));
-		slidersVoltageLabels.put(new Integer(2000), new JLabel("2.0"));
-		slidersVoltageLabels.put(new Integer(2500), new JLabel("2.5"));
-		slidersVoltageLabels.put(new Integer(3000), new JLabel("3.0"));
+		slidersVoltageLabels.put(Integer.valueOf(0), new JLabel("0.0"));
+		slidersVoltageLabels.put(Integer.valueOf(500), new JLabel("0.5"));
+		slidersVoltageLabels.put(Integer.valueOf(1000), new JLabel("1.0"));
+		slidersVoltageLabels.put(Integer.valueOf(1500), new JLabel("1.5"));
+		slidersVoltageLabels.put(Integer.valueOf(2000), new JLabel("2.0"));
+		slidersVoltageLabels.put(Integer.valueOf(2500), new JLabel("2.5"));
+		slidersVoltageLabels.put(Integer.valueOf(3000), new JLabel("3.0"));
 		
 		sldSig1.setLabelTable(slidersVoltageLabels);
 		sldSig2.setLabelTable(slidersVoltageLabels);
 
 		final Dictionary<Integer, JLabel> slidersPressLabels = new Hashtable<Integer, JLabel>();
-		slidersPressLabels.put(new Integer(0), new JLabel("0.0"));
-		slidersPressLabels.put(new Integer(20), new JLabel("1.0"));
-		slidersPressLabels.put(new Integer(40), new JLabel("2.0"));
-		slidersPressLabels.put(new Integer(60), new JLabel("3.0"));
-		slidersPressLabels.put(new Integer(80), new JLabel("4.0"));
-		slidersPressLabels.put(new Integer(100), new JLabel("5.0"));
+		slidersPressLabels.put(Integer.valueOf(0), new JLabel("0.0"));
+		slidersPressLabels.put(Integer.valueOf(20), new JLabel("1.0"));
+		slidersPressLabels.put(Integer.valueOf(40), new JLabel("2.0"));
+		slidersPressLabels.put(Integer.valueOf(60), new JLabel("3.0"));
+		slidersPressLabels.put(Integer.valueOf(80), new JLabel("4.0"));
+		slidersPressLabels.put(Integer.valueOf(100), new JLabel("5.0"));
 		
 		sldSig3.setLabelTable(slidersPressLabels);
 

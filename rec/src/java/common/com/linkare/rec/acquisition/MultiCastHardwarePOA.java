@@ -15,18 +15,18 @@ public abstract class MultiCastHardwarePOA extends org.omg.PortableServer.Servan
 
 	private static java.util.Hashtable _methods = new java.util.Hashtable();
 	static {
-		MultiCastHardwarePOA._methods.put("getHardwareInfo", new java.lang.Integer(0));
-		MultiCastHardwarePOA._methods.put("getHardwareState", new java.lang.Integer(1));
-		MultiCastHardwarePOA._methods.put("requireLock", new java.lang.Integer(2));
-		MultiCastHardwarePOA._methods.put("registerDataClient", new java.lang.Integer(3));
-		MultiCastHardwarePOA._methods.put("configure", new java.lang.Integer(4));
-		MultiCastHardwarePOA._methods.put("start", new java.lang.Integer(5));
-		MultiCastHardwarePOA._methods.put("startOutput", new java.lang.Integer(6));
-		MultiCastHardwarePOA._methods.put("stop", new java.lang.Integer(7));
-		MultiCastHardwarePOA._methods.put("reset", new java.lang.Integer(8));
-		MultiCastHardwarePOA._methods.put("getDataProducer", new java.lang.Integer(9));
-		MultiCastHardwarePOA._methods.put("getClientList", new java.lang.Integer(10));
-		MultiCastHardwarePOA._methods.put("sendMessage", new java.lang.Integer(11));
+		MultiCastHardwarePOA._methods.put("getHardwareInfo", Integer.valueOf(0));
+		MultiCastHardwarePOA._methods.put("getHardwareState", Integer.valueOf(1));
+		MultiCastHardwarePOA._methods.put("requireLock", Integer.valueOf(2));
+		MultiCastHardwarePOA._methods.put("registerDataClient", Integer.valueOf(3));
+		MultiCastHardwarePOA._methods.put("configure", Integer.valueOf(4));
+		MultiCastHardwarePOA._methods.put("start", Integer.valueOf(5));
+		MultiCastHardwarePOA._methods.put("startOutput", Integer.valueOf(6));
+		MultiCastHardwarePOA._methods.put("stop", Integer.valueOf(7));
+		MultiCastHardwarePOA._methods.put("reset", Integer.valueOf(8));
+		MultiCastHardwarePOA._methods.put("getDataProducer", Integer.valueOf(9));
+		MultiCastHardwarePOA._methods.put("getClientList", Integer.valueOf(10));
+		MultiCastHardwarePOA._methods.put("sendMessage", Integer.valueOf(11));
 	}
 
 	@Override

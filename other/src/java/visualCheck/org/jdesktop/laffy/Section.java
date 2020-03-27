@@ -76,7 +76,7 @@ public class Section extends JPanel {
 		this(name);
 		this.demoPanelClass = demoPanelClass;
 		try {
-			contentPanel.setContent(demoPanelClass.newInstance());
+			contentPanel.setContent(demoPanelClass.getDeclaredConstructor().newInstance());
 		} catch (Exception e) {
 			// System.err.println("Error createing instance of demo panel");
 			System.err.println(I18nResourceHandler.getMessage("Error_createing_instance_of_demo_panel"));
@@ -206,7 +206,7 @@ public class Section extends JPanel {
 			JFrame frame = new JFrame(getName() + I18nResourceHandler.getMessage("Resize_Test_Window"));
 			frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			try {
-				frame.getContentPane().add(demoPanelClass.newInstance(), BorderLayout.CENTER);
+				frame.getContentPane().add(demoPanelClass.getDeclaredConstructor().newInstance(), BorderLayout.CENTER);
 			} catch (Exception e) {
 				// System.err.println("Error createing instance of demo panel");
 				System.err.println(I18nResourceHandler.getMessage("Error_createing_instance_of_demo_panel"));

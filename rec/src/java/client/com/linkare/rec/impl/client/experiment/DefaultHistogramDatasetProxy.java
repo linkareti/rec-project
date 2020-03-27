@@ -90,7 +90,7 @@ public class DefaultHistogramDatasetProxy extends org.jfree.data.xy.AbstractInte
 
 		oCountHits = new Vector<Long>(nClasses);
 		for (int i = 0; i < nClasses; i++) {
-			oCountHits.add(i, new Long(0));// iniciar contagens a zero...
+			oCountHits.add(i, Long.valueOf(0));// iniciar contagens a zero...
 		}
 
 		for (int i = 0; i < nSamples; i++) {
@@ -121,7 +121,7 @@ public class DefaultHistogramDatasetProxy extends org.jfree.data.xy.AbstractInte
 				if (block_to_add >= nClasses) {
 					block_to_add = nClasses - 1;
 				}
-				oCountHits.set(block_to_add, new Long((oCountHits.get(block_to_add)).longValue() + 1));// adicionar
+				oCountHits.set(block_to_add, Long.valueOf((oCountHits.get(block_to_add)).longValue() + 1));// adicionar
 				// ao
 				// valor
 				// anterior...
@@ -349,32 +349,32 @@ public class DefaultHistogramDatasetProxy extends org.jfree.data.xy.AbstractInte
 
 	@Override
 	public Number getEndX(final int series, final int item) {
-		return new Double(getEndXValue(series, item));
+		return Double.valueOf(getEndXValue(series, item));
 	}
 
 	@Override
 	public Number getEndY(final int series, final int item) {
-		return new Double(getEndYValue(series, item));
+		return Double.valueOf(getEndYValue(series, item));
 	}
 
 	@Override
 	public Number getStartX(final int series, final int item) {
-		return new Double(getStartXValue(series, item));
+		return Double.valueOf(getStartXValue(series, item));
 	}
 
 	@Override
 	public Number getStartY(final int series, final int item) {
-		return new Double(getStartYValue(series, item));
+		return Double.valueOf(getStartYValue(series, item));
 	}
 
 	@Override
 	public Number getX(final int series, final int item) {
-		return new Double(getXValue(series, item));
+		return Double.valueOf(getXValue(series, item));
 	}
 
 	@Override
 	public Number getY(final int series, final int item) {
-		return new Double(getYValue(series, item));
+		return Double.valueOf(getYValue(series, item));
 	}
 
 	@Override

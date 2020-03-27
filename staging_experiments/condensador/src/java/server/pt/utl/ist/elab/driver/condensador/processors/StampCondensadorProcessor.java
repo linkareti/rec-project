@@ -40,11 +40,11 @@ public class StampCondensadorProcessor extends AbstractStampProcessor {
 		if (command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER) && splitedStr[0] != null) {
 			try {
 				frequency = Integer.parseInt(splitedStr[0]);
-				Integer oFrequency = new Integer(frequency);
+				Integer oFrequency = Integer.valueOf(frequency);
 				command.addCommandData(FREQUENCIA, oFrequency);
 
 				position = Integer.parseInt(splitedStr[2]);
-				Float oPosition = new Float((float) position / 1000);
+				Float oPosition = Float.valueOf((float) position / 1000);
 				command.addCommandData(POSICAO, oPosition);
 
 				command.setData(true);

@@ -223,7 +223,7 @@ public class ConfCompInt extends javax.swing.JDialog {
 				modelCompInt.setFlag(0);
 			} else {
 				modelCompInt.setD3("");
-				modelCompInt.setValor(new Integer(jTextFieldD3.getText()).intValue());
+				modelCompInt.setValor(Integer.valueOf(jTextFieldD3.getText()).intValue());
 				modelCompInt.setFlag(1);
 			}
 			closeDialog(null);

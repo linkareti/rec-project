@@ -15,12 +15,12 @@ public abstract class DataProducerPOA extends org.omg.PortableServer.Servant imp
 
 	private static java.util.Hashtable _methods = new java.util.Hashtable();
 	static {
-		DataProducerPOA._methods.put("getAcquisitionHeader", new java.lang.Integer(0));
-		DataProducerPOA._methods.put("getSamples", new java.lang.Integer(1));
-		DataProducerPOA._methods.put("getDataProducerName", new java.lang.Integer(2));
-		DataProducerPOA._methods.put("getDataProducerState", new java.lang.Integer(3));
-		DataProducerPOA._methods.put("getMaxPacketNum", new java.lang.Integer(4));
-		DataProducerPOA._methods.put("registerDataReceiver", new java.lang.Integer(5));
+		DataProducerPOA._methods.put("getAcquisitionHeader", Integer.valueOf(0));
+		DataProducerPOA._methods.put("getSamples", Integer.valueOf(1));
+		DataProducerPOA._methods.put("getDataProducerName", Integer.valueOf(2));
+		DataProducerPOA._methods.put("getDataProducerState", Integer.valueOf(3));
+		DataProducerPOA._methods.put("getMaxPacketNum", Integer.valueOf(4));
+		DataProducerPOA._methods.put("registerDataReceiver", Integer.valueOf(5));
 	}
 
 	@Override

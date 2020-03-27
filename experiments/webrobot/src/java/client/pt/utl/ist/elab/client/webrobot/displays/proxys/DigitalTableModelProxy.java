@@ -125,7 +125,7 @@ public class DigitalTableModelProxy extends javax.swing.table.DefaultTableModel 
 			return df.format(elapsedMilis);
 		} else {
 			final PhysicsValue value = expDataModel.getValueAt(rowIndex, columnIndex - 1 + 8);
-			return new Integer(convertBooleanInt(value.getValue().isBooleanValue()));
+			return Integer.valueOf(convertBooleanInt(value.getValue().isBooleanValue()));
 		}
 	}
 

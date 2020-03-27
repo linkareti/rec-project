@@ -20,12 +20,12 @@ public class ExpHistoryCounter {
 
 	public static long getExperimentNumber(final String apparatusName) {
 		if (ExpHistoryCounter.expCounter.get(apparatusName) == null) {
-			ExpHistoryCounter.expCounter.put(apparatusName, new Long(1));
+			ExpHistoryCounter.expCounter.put(apparatusName, Long.valueOf(1));
 		}
 
 		final Long counter = ExpHistoryCounter.expCounter.get(apparatusName);
 		final long retorna = counter.longValue();
-		ExpHistoryCounter.expCounter.put(apparatusName, new Long(retorna + 1));
+		ExpHistoryCounter.expCounter.put(apparatusName, Long.valueOf(retorna + 1));
 
 		return retorna;
 	}

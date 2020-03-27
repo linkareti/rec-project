@@ -156,15 +156,15 @@ public class AleatorioDataSource extends BaseDataSource {
 		// System.out.println(">> getting props!");
 
 		try {
-			numDice = new Integer(aleatorioDriver.getProps().getProperty("numberOfDice")).intValue();
+			numDice = Integer.valueOf(aleatorioDriver.getProps().getProperty("numberOfDice")).intValue();
 		} catch (final NumberFormatException nfe) {
 		}
 		try {
-			minValueOfDie = new Integer(aleatorioDriver.getProps().getProperty("minValueOfDie")).intValue();
+			minValueOfDie = Integer.valueOf(aleatorioDriver.getProps().getProperty("minValueOfDie")).intValue();
 		} catch (final NumberFormatException nfe) {
 		}
 		try {
-			maxValueOfDie = new Integer(aleatorioDriver.getProps().getProperty("maxValueOfDie")).intValue();
+			maxValueOfDie = Integer.valueOf(aleatorioDriver.getProps().getProperty("maxValueOfDie")).intValue();
 		} catch (final NumberFormatException nfe) {
 		}
 

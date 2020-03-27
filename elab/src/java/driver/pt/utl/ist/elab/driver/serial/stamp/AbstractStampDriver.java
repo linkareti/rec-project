@@ -5,6 +5,8 @@ import gnu.io.SerialPort;
 import java.lang.reflect.ParameterizedType;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.lang.NoSuchMethodException;
+import java.lang.reflect.InvocationTargetException;
 
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommandListener;
@@ -244,7 +246,13 @@ public abstract class AbstractStampDriver<T extends AbstractStampDataSource> ext
 					&& genericSuperType.getActualTypeArguments().length > 0) {
 				@SuppressWarnings("unchecked")
 				Class<T> parameterClass = (Class<T>) genericSuperType.getActualTypeArguments()[0];
-				return parameterClass.newInstance();
+				try{
+					return parameterClass.getDeclaredConstructor().newInstance();
+				}catch(InvocationTargetException | NoSuchMethodException e){
+					throw new InstantiationException("Unable to find generic super class of datasource for driver "
+							+ getClass().getName());
+				}
+
 			} else {
 				genericSuperType = null;
 				while (superClass != Object.class && genericSuperType == null) {

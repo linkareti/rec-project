@@ -288,29 +288,29 @@ public class DefaultDatasetProxy extends org.jfree.data.xy.AbstractXYDataset imp
 	}
 
 	public Number getEndX(final int series, final int item) {
-		return new Double(getEndXValue(series, item));
+		return Double.valueOf(getEndXValue(series, item));
 	}
 
 	public Number getEndY(final int series, final int item) {
-		return new Double(getEndYValue(series, item));
+		return Double.valueOf(getEndYValue(series, item));
 	}
 
 	public Number getStartX(final int series, final int item) {
-		return new Double(getStartXValue(series, item));
+		return Double.valueOf(getStartXValue(series, item));
 	}
 
 	public Number getStartY(final int series, final int item) {
-		return new Double(getStartYValue(series, item));
+		return Double.valueOf(getStartYValue(series, item));
 	}
 
 	@Override
 	public Number getX(final int series, final int item) {
-		return new Double(getXValue(series, item));
+		return Double.valueOf(getXValue(series, item));
 	}
 
 	@Override
 	public Number getY(final int series, final int item) {
-		return new Double(getYValue(series, item));
+		return Double.valueOf(getYValue(series, item));
 	}
 
 	@Override

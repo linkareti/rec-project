@@ -706,12 +706,12 @@ public class PinHoleCustomizerPanel extends AbstractCustomizer {
 //			float pos1f = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("UserPosLow"));
 //			int pos1 = (int) Math.floor(pos1f * 1000.F);
 //			sldPos1.setValue(pos1);
-//			tfPos1.setValue(new Float(pos1f));
+//			tfPos1.setValue(Float.valueOf(pos1f));
 //
 //			float pos2f = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("UserPosHigh"));
 //			int pos2 = (int) Math.floor(pos2f * 1000.F);
 //			sldPos2.setValue(pos2);
-//			tfPos2.setValue(new Float(pos2f));
+//			tfPos2.setValue(Float.valueOf(pos2f));
         }
     }
 
@@ -759,30 +759,30 @@ public class PinHoleCustomizerPanel extends AbstractCustomizer {
         jLabelCalibration.setVisible(false);
 
         Dictionary<Integer, JLabel> sliderLedDistanceInitialLabels = new Hashtable<Integer, JLabel>();
-        sliderLedDistanceInitialLabels.put(new Integer(1480), new JLabel("148"));
-        sliderLedDistanceInitialLabels.put(new Integer(2030), new JLabel("203"));
-        sliderLedDistanceInitialLabels.put(new Integer(2580), new JLabel("258"));
-        sliderLedDistanceInitialLabels.put(new Integer(3130), new JLabel("313"));
-        sliderLedDistanceInitialLabels.put(new Integer(3680), new JLabel("368"));
+        sliderLedDistanceInitialLabels.put(Integer.valueOf(1480), new JLabel("148"));
+        sliderLedDistanceInitialLabels.put(Integer.valueOf(2030), new JLabel("203"));
+        sliderLedDistanceInitialLabels.put(Integer.valueOf(2580), new JLabel("258"));
+        sliderLedDistanceInitialLabels.put(Integer.valueOf(3130), new JLabel("313"));
+        sliderLedDistanceInitialLabels.put(Integer.valueOf(3680), new JLabel("368"));
 
         Dictionary<Integer, JLabel> sliderLedDistanceFinalLabels = new Hashtable<Integer, JLabel>();
-        sliderLedDistanceFinalLabels.put(new Integer(1480), new JLabel("148"));
-        sliderLedDistanceFinalLabels.put(new Integer(2030), new JLabel("203"));
-        sliderLedDistanceFinalLabels.put(new Integer(2580), new JLabel("258"));
-        sliderLedDistanceFinalLabels.put(new Integer(3130), new JLabel("313"));
-        sliderLedDistanceFinalLabels.put(new Integer(3680), new JLabel("368"));
+        sliderLedDistanceFinalLabels.put(Integer.valueOf(1480), new JLabel("148"));
+        sliderLedDistanceFinalLabels.put(Integer.valueOf(2030), new JLabel("203"));
+        sliderLedDistanceFinalLabels.put(Integer.valueOf(2580), new JLabel("258"));
+        sliderLedDistanceFinalLabels.put(Integer.valueOf(3130), new JLabel("313"));
+        sliderLedDistanceFinalLabels.put(Integer.valueOf(3680), new JLabel("368"));
 
         Dictionary<Integer, JLabel> sliderDistanceSamplesLabels = new Hashtable<Integer, JLabel>();
-        sliderDistanceSamplesLabels.put(new Integer(10), new JLabel("1.0"));
-        sliderDistanceSamplesLabels.put(new Integer(740), new JLabel("74.0"));
-        sliderDistanceSamplesLabels.put(new Integer(1470), new JLabel("147.0"));
-        sliderDistanceSamplesLabels.put(new Integer(2200), new JLabel("220.0"));
+        sliderDistanceSamplesLabels.put(Integer.valueOf(10), new JLabel("1.0"));
+        sliderDistanceSamplesLabels.put(Integer.valueOf(740), new JLabel("74.0"));
+        sliderDistanceSamplesLabels.put(Integer.valueOf(1470), new JLabel("147.0"));
+        sliderDistanceSamplesLabels.put(Integer.valueOf(2200), new JLabel("220.0"));
 
         Dictionary<Integer, JLabel> sliderTimeSamplesLabels = new Hashtable<Integer, JLabel>();
-        sliderTimeSamplesLabels.put(new Integer(0), new JLabel("0.0"));
-        sliderTimeSamplesLabels.put(new Integer(100), new JLabel("10.0"));
-        sliderTimeSamplesLabels.put(new Integer(200), new JLabel("20.0"));
-        sliderTimeSamplesLabels.put(new Integer(300), new JLabel("30.0"));
+        sliderTimeSamplesLabels.put(Integer.valueOf(0), new JLabel("0.0"));
+        sliderTimeSamplesLabels.put(Integer.valueOf(100), new JLabel("10.0"));
+        sliderTimeSamplesLabels.put(Integer.valueOf(200), new JLabel("20.0"));
+        sliderTimeSamplesLabels.put(Integer.valueOf(300), new JLabel("30.0"));
 
         jSliderLedDistanceInitial.setLabelTable(sliderLedDistanceInitialLabels);
         jSliderLedDistanceFinal.setLabelTable(sliderLedDistanceFinalLabels);

@@ -749,9 +749,9 @@ public class LangmuirCustomizer extends AbstractCustomizer {
 		sldNumSamples.setValue(18);
 		tfNumSamples.setText("18");
 		sldPos1.setValue(0);
-		tfPos1.setValue(new Float(0.0));
+		tfPos1.setValue(Float.valueOf(0.0));
 		sldPos2.setValue(3600);
-		tfPos2.setValue(new Float(360.0));
+		tfPos2.setValue(Float.valueOf(360.0));
 		sldNumPeriod.setValue(150);
 		tfNumPeriod.setText("150");
 		*/
@@ -914,12 +914,12 @@ public class LangmuirCustomizer extends AbstractCustomizer {
 	private void initComponentsManual() {
 
 		final Dictionary<Integer, JLabel> slidersPressLabels = new Hashtable<Integer, JLabel>();
-		slidersPressLabels.put(new Integer(0), new JLabel("0"));
-		slidersPressLabels.put(new Integer(10), new JLabel("1"));
-		slidersPressLabels.put(new Integer(20), new JLabel("2"));
-		slidersPressLabels.put(new Integer(30), new JLabel("3"));
-		slidersPressLabels.put(new Integer(40), new JLabel("4"));
-		slidersPressLabels.put(new Integer(50), new JLabel("5"));
+		slidersPressLabels.put(Integer.valueOf(0), new JLabel("0"));
+		slidersPressLabels.put(Integer.valueOf(10), new JLabel("1"));
+		slidersPressLabels.put(Integer.valueOf(20), new JLabel("2"));
+		slidersPressLabels.put(Integer.valueOf(30), new JLabel("3"));
+		slidersPressLabels.put(Integer.valueOf(40), new JLabel("4"));
+		slidersPressLabels.put(Integer.valueOf(50), new JLabel("5"));
 		
 		sldPress.setLabelTable(slidersPressLabels);
 		sldPress2.setLabelTable(slidersPressLabels);

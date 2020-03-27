@@ -25,11 +25,11 @@ public class ColisioneCustomizer extends AbstractCustomizer {
 		initComponents();
 
 		final Dictionary<Integer, JLabel> slidersPosLabels = new Hashtable<Integer, JLabel>(4);
-		slidersPosLabels.put(new Integer(0), new JLabel("0.0"));
-		slidersPosLabels.put(new Integer(900), new JLabel("90.0"));
-		slidersPosLabels.put(new Integer(1800), new JLabel("180.0"));
-		slidersPosLabels.put(new Integer(2700), new JLabel("270.0"));
-		slidersPosLabels.put(new Integer(3600), new JLabel("360.0"));
+		slidersPosLabels.put(Integer.valueOf(0), new JLabel("0.0"));
+		slidersPosLabels.put(Integer.valueOf(900), new JLabel("90.0"));
+		slidersPosLabels.put(Integer.valueOf(1800), new JLabel("180.0"));
+		slidersPosLabels.put(Integer.valueOf(2700), new JLabel("270.0"));
+		slidersPosLabels.put(Integer.valueOf(3600), new JLabel("360.0"));
 
 		sldPos1.setLabelTable(slidersPosLabels);
 		sldPos2.setLabelTable(slidersPosLabels);
@@ -434,10 +434,10 @@ public class ColisioneCustomizer extends AbstractCustomizer {
 			if (Pos2 <= sldPos2.getMaximum() && Pos2 > sldPos2.getMinimum()) {
 				sldPos2.setValue(Pos2);
 			} else {
-				tfPos2.setValue(new Float((sldPos2.getValue() / 10.F)));
+				tfPos2.setValue(Float.valueOf((sldPos2.getValue() / 10.F)));
 			}
 		} catch (final Exception e) {
-			tfPos2.setValue(new Float((sldPos2.getValue() / 10.F)));
+			tfPos2.setValue(Float.valueOf((sldPos2.getValue() / 10.F)));
 		}
 		// checkPosOverlap();
 		// checkMaxNumSamples();
@@ -458,11 +458,11 @@ public class ColisioneCustomizer extends AbstractCustomizer {
 			if (Pos1 <= sldPos1.getMaximum() && Pos1 > sldPos1.getMinimum()) {
 				sldPos1.setValue(Pos1);
 			} else {
-				tfPos1.setValue(new Float((sldPos1.getValue() / 10.F)));
+				tfPos1.setValue(Float.valueOf((sldPos1.getValue() / 10.F)));
 			}
 
 		} catch (final Exception e) {
-			tfPos1.setValue(new Float((sldPos1.getValue() / 10.F)));
+			tfPos1.setValue(Float.valueOf((sldPos1.getValue() / 10.F)));
 		}
 		// checkPosOverlap();
 		// checkMaxNumSamples();
@@ -473,7 +473,7 @@ public class ColisioneCustomizer extends AbstractCustomizer {
 	{// GEN-HEADEREND:event_sldPos1StateChanged
 
 		// TODO
-		tfPos1.setValue(new Float((sldPos1.getValue() / 10.F)));
+		tfPos1.setValue(Float.valueOf((sldPos1.getValue() / 10.F)));
 		// checkPosOverlap();
 		// checkMaxNumSamples();
 
@@ -483,7 +483,7 @@ public class ColisioneCustomizer extends AbstractCustomizer {
 	{// GEN-HEADEREND:event_sldPos2StateChanged
 
 		// TODO
-		tfPos2.setValue(new Float((sldPos2.getValue() / 10.F)));
+		tfPos2.setValue(Float.valueOf((sldPos2.getValue() / 10.F)));
 		// checkPosOverlap();
 		// checkMaxNumSamples();
 
@@ -547,9 +547,9 @@ public class ColisioneCustomizer extends AbstractCustomizer {
 		sldNumSamples.setValue(18);
 		tfNumSamples.setText("18");
 		sldPos1.setValue(0);
-		tfPos1.setValue(new Float(0.0));
+		tfPos1.setValue(Float.valueOf(0.0));
 		sldPos2.setValue(3600);
-		tfPos2.setValue(new Float(360.0));
+		tfPos2.setValue(Float.valueOf(360.0));
 		sldFreq.setValue(150);
 		tfFreq.setText("150");
 	}// GEN-LAST:event_btnDefaultsActionPerformed
@@ -626,13 +626,13 @@ public class ColisioneCustomizer extends AbstractCustomizer {
 			// Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("UserPosLow"));
 			// int pos1 = (int) Math.floor(pos1f * 1000.F);
 			// sldPos1.setValue(pos1);
-			// tfPos1.setValue(new Float(pos1f));
+			// tfPos1.setValue(Float.valueOf(pos1f));
 			//
 			// float pos2f =
 			// Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("UserPosHigh"));
 			// int pos2 = (int) Math.floor(pos2f * 1000.F);
 			// sldPos2.setValue(pos2);
-			// tfPos2.setValue(new Float(pos2f));
+			// tfPos2.setValue(Float.valueOf(pos2f));
 		}
 	}
 
