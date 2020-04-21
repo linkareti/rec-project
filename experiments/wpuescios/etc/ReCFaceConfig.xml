@@ -1,0 +1,10 @@
+
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="wpuescios$tip.wpuescios" location="WP_UESC_IOS" iconLocationBundleKey="wpuescios$icon.wpuescios" headerDisplayClassLocationBundleKey="" displayStringBundleKey="wpuescios$title.wpuescios" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="wpuescios$background.wpuescios" descriptionStringBundleKey="wpuescios$description.wpuescios" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="wpuescios$customizer.wpuescios" order="0">
+    <display toolTipBundleKey="wpuescios$display.table.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="wpuescios$display.table.title" classLocationBundleKey="wpuescios$display.table.loc" order="0"/>
+	<display toolTipBundleKey="wpuescios$display.graph.histogram.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpuescios$display.graph.histogram.title" classLocationBundleKey="wpuescios$display.graph.histogram.loc" order="0"/>
+    <display toolTipBundleKey="wpuescios$display.graph.period.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpuescios$display.graph.period.title" classLocationBundleKey="wpuescios$display.graph.period.loc" order="0"/>
+    <display toolTipBundleKey="wpuescios$display.graph.g.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpuescios$display.graph.g.title" classLocationBundleKey="wpuescios$display.graph.g.loc" order="0"/>
+    <localizationBundle name="wpuescios" location="recresource:///pt/utl/ist/elab/client/wpuescios/resources/messages"/>
+    <mediaConfig videoLocation="wpuescios$url.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="http://groups.ist.utl.pt/wwwelab/wiki/index.php?title=P%C3%AAndulo_Mundial" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+</apparatus>

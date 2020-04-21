@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jnlp PUBLIC "-//Sun Microsystems, Inc//DTD JNLP Descriptor 6.0//EN" "http://java.sun.com/dtd/JNLP-6.0.dtd">
+<jnlp codebase="http://elab.ist.utl.pt/rec.web/client" href="macosx-vlc-installer.jnlp" spec="6.0+">
+	<information>
+		<title>Instalador VLC para MaCOSX</title>
+		<vendor>Linkare TI</vendor>
+		<homepage href="http://www.linkare.com" />
+		<description>Instalador do Videolan MediaPlayer e plugins</description>
+		<description kind="one-line">Instalador VLC para MaCOSX
+		</description>
+		<description kind="tooltip">Instalador VLC para MaCOSX
+		</description>
+		<description kind="short">Instalador VLC para MaCOSX
+		</description>
+		<icon href="images/vlc_icon.png" />
+		<icon kind="splash" href="images/vlc_splash.jpg" />
+		<offline-allowed />
+		<related-content href="http://www.videolan.org/">
+			<title>Videolan Media Player</title>
+			<description>A Multimedia Player based on opensource GPL License and other underlying software such as gstreamer, ffmpeg and alike</description>
+			<icon href="images/vlc_icon.png" />
+		</related-content>
+	</information>
+	<information locale="en">
+		<title>mac VLC Installer</title>
+		<vendor>Linkare TI</vendor>
+		<homepage href="http://www.linkare.com" />
+		<description>Videolan MediaPlayer and plugins installer</description>
+		<description kind="one-line">VLC Installer for MaCOSX
+		</description>
+		<description kind="tooltip">VLC Installer for MaCOSX
+		</description>
+		<description kind="short">VLC Installer for MaCOSX
+		</description>
+		<related-content href="http://www.videolan.org/">
+			<title>Videolan Media Player</title>
+			<description>A Multimedia Player based on opensource GPL License and other underlying software such as gstreamer, ffmpeg and alike</description>
+			<icon href="images/vlc_icon.png" />
+		</related-content>
+	</information>
+	<security>
+		<all-permissions />
+	</security>
+	<update check="always" policy="always" />
+	<resources>
+		<j2se version="1.6+" />
+		<jar download="eager" href="ReCClient_sig.jar" main="true" />
+		<jar download="eager" href="ReCCommon_sig.jar" />
+		<property name="jnlp.packEnabled" value="true" />
+		<property name="vlc.plugins.destdir" value=".eLab/native/plugins" />
+		<property name="vlc.plugins.filename" value="vlcplugins.zip" />
+	</resources>
+
+	<!-- <resources arch="ppc" os="Mac OS X"> <jar href="lib/vlcplugins_mac_ppc.jar"/> 
+		</resources> <resources arch="ppc64" os="Mac OS X"> <jar href="lib/vlcplugins_mac_ppc64.jar"/> 
+		</resources> <resources arch="x86" os="Mac OS X"> <jar href="lib/vlcplugins_mac_ppc64.jar"/> 
+		</resources> <resources arch="x86_64" os="Mac OS X"> <jar href="lib/vlcplugins_mac_ppc64.jar"/> 
+		</resources> -->
+
+	<installer-desc
+		main-class="com.linkare.rec.impl.newface.installer.mac.MacInstaller" />
+</jnlp>

@@ -1,0 +1,465 @@
+/* 
+    Document   : style
+    Created on : 4/Jul/2012, 15:15:34
+    Author     : Gedsimon
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+
+html, body, div, h1, h2, h3, h4, h5, h6, p, img, dl, dt, dd, ol, ul, li, table, tr, td, form, object, embed, article, aside, canvas, command, details, fieldset, figcaption, figure, footer, group, header, hgroup, legend, mark, menu, meter, nav, output, progress, section, summary, time, audio, video {
+    border: 0 none;
+    margin: 0;
+    padding: 0;
+}
+html, body {
+    height: 100%;
+    min-width: 100%;
+    position: absolute;
+    font-family: Arial,Tahoma,Helvetica,sans-serif;
+    font-size: 12px;
+}
+
+.wrapper {
+    min-height: 100%;
+    position: relative;
+}
+.wrapper + style + iframe {
+    display: none;
+}
+
+.header {
+    background: none repeat scroll 0 0 #F1F1F1;
+    border-bottom: 1px solid #E5E5E5;
+    height: 71px;
+    overflow: hidden;
+}
+
+.banner {
+    float: left;
+}
+.welcome {
+    border-right: 1px solid;
+    color: #455660;
+    float: right;
+    font-weight: bold;
+    margin: 30px 0 0;
+    padding-right: 10px;
+}
+.logout {
+    color: #455660;
+    float: right;
+    font-weight: bold;
+    margin: 30px 0 0;
+    padding-left: 10px;
+    text-decoration: none;
+}
+
+.clearfix:after {
+    clear: both;
+    content: ".";
+    display: block;
+    font-size: 0;
+    height: 40px;
+    visibility: hidden;
+}
+.main {
+    margin: 0 auto;
+    padding-bottom: 100px;
+    padding-top: 23px;
+    max-width: 1000px;
+    min-width: 780px;
+    width: auto;
+}
+.main h1:first-child {
+    margin: 0 0 0.92em;
+    font-size: 23px;
+    font-weight: bold;
+    color: #455660;
+    margin: 4% 0 0.92em;
+}
+
+.footer-bar {
+    border-top: 1px solid #EBEBEB;
+    bottom: 0;
+    height: 60px;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+}
+
+.footer {
+    font-size: 0.85em;
+    padding-top: 9px;
+    white-space: nowrap;
+}
+.footer ul {
+    color: #999999;
+    /*    float: left;*/
+    max-width: 80%;
+    margin-left: 10%;
+    text-align: center;
+}
+.footer ul li {
+    display: inline;
+    padding: 0 1.5em 0 0;
+}
+.footer a {
+    color: #333333;
+    text-decoration: none;
+    margin-top:8%;
+}
+
+.footer img {
+    height: 50px;
+}
+
+.content {
+    padding: 0 44px;
+    margin-top: 0.5%;
+    margin-bottom: 0.5%;
+}
+
+/*-------- Login Definitions --------*/
+#login {
+    min-height: 550px;
+    width: 100%;
+}
+
+#login form.elab_launch {
+    float: right;
+    height: 495px;
+    margin-right: 8%;
+    min-width: 65%;
+    overflow: hidden;
+    width: 65%;
+    border: 0px;
+    margin-top: 2%;
+}
+
+#login form.elab_launch h1 {
+    text-align: center;
+    color: #455660;
+}
+
+#login form.elab_launch_client {
+    border: medium dotted #E5E5E5;
+    display: inline-block;
+    float: right;
+    height: 145px;
+    margin-right: 1%;
+    min-width: 25%;
+    overflow: hidden;
+    width: 24%;
+    margin-top: -35%;
+    text-align: center;
+}
+
+#login form.elab_launch_client h1 {
+    text-align: center;
+    color: #455660;
+    margin-top: 16%;
+}
+
+#login form.elab_launch_client ul li a{
+    text-align: center;
+    font-weight: bold;
+    color: #455660; 
+}
+
+#login form.am_login {
+    border: medium dotted #E5E5E5;
+    display: inline-block;
+    float: right;
+    height: 152px;
+    margin-top: 3%;
+    margin-right: 1%;
+    min-width: 25%;
+    overflow: hidden;
+    width: 24%;
+
+}
+
+#login form.elab_launch ul li a{
+    text-align: center;
+    font-weight: bold;
+    color: #4F4F4F; 
+}
+
+#login form.am_login h1 {
+    text-align: center;
+    color: #455660;
+}
+
+#login table {
+    color: #455660;
+    font-weight: bold;
+    padding: 12px 0 0 45px;
+    margin-left: -8%;
+}
+
+#login ul {
+    list-style: none outside none;
+    padding-top: 5px;
+    margin-right: 14%;
+}
+
+#login ul li {
+    margin-left: -40px;
+    padding-top: 5px;
+    margin-left: 20%;
+}
+
+#login ul li a {
+    color: #bdd2d0;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/*-------- Submit Button Definitions --------*/
+.submit {
+    color: #455660;
+    float: right;
+    font-weight: bold;
+    height: 25px;
+    width: 70%;
+
+}
+
+/*-------- loginDomain Selector Definitions --------*/
+.loginDomain {
+    height: 24px;
+    width: 145px;
+    margin-left: 7%;
+}
+
+/*-------- username box Definitions --------*/
+.username {
+    width: 140px;
+    height: 18px;
+    margin-left: 7%;
+}
+
+/*-------- password box Definitions --------*/
+.password {
+    width: 140px;
+    height: 18px;
+    margin-left: 7%;
+}
+
+.elab_error {
+    color: red;
+}
+
+.elab_info {
+    color: white;
+}
+
+/*--------Calendar Definitions----------*/
+.fc-header-center {color:#283234;}
+.fc-view.month table tbody tr td {height:50px !important;width:75px !important;}
+.bd td input,.bd td select{border:#283234 1px solid !important;}
+/*-------- Status Panel Definitions --------*/
+.statusPanelFooter{
+    text-align: center;
+}
+.statusPanelFooter a{
+    color: #455660;
+    text-decoration: none;
+}
+
+/*-------- Scroll Panel Definitions --------*/
+.scrollPanel{
+    height: auto;
+    max-height: 350px;
+    background: white; 
+    border-color: white;
+}
+
+.scrollPanelSchedule{
+    height: auto;
+    max-height: 430px;
+    background: white; 
+    border-color: white;
+}
+
+.scrollPanelChat{
+    width:350px;
+    max-height:200px;
+    min-height:200px;
+    background: white; 
+    border-color: white;
+}
+/*------------- Tab Definitions -------*/
+.ui-icon-unavailable {
+    background-image: url("../../resources/images/unavailable.gif");
+    background-repeat: no-repeat;
+    background-position: 95% 6px;
+}
+
+.ui-icon-available  {
+    background-image: url("../../resources/images/available.gif");
+    background-repeat: no-repeat;
+    background-position: 95% 6px;
+}
+
+.ui-icon-user {
+    background-image: url("../../resources/images/people.png");
+    background-repeat: no-repeat;
+}
+
+/*-------- Contents Area Definitions --------*/
+#center {
+    min-height: 415px;
+    width: 62%;
+    text-align: left;
+    margin-left: 19.5%;
+    margin-top: -0.5%;
+    max-height: 420px;
+    color: #455660;
+}
+#center a {
+    color: #283234;
+    text-decoration: none;
+}
+
+#center form#j_idt46 a {
+    font-weight:bold !important;
+    text-decoration: none;
+}
+
+#center form#j_idt46 table tbody tr td label {color:#283234 !important;font-weight:bold;font-size:12px;}
+#center form#j_idt46 table {background:#cfd7d6 !important;margin-left:2px !important;border-collapse: collapse !important;}
+#center form#j_idt46 table tbody tr td {border-top:#bdd2d0 2px solid !important;padding:0 5px 0 5px;text-align:left !important;}
+#center form#j_idt46 table tbody tr td input{margin:5px 2px 5px 2px;border:#283234 1px solid !important;font-size:12px;color:#283234 !important;width:300px !important;}
+#center form#j_idt46 table tbody tr td div.ft input{width:auto !important;}
+#center form#j_idt46 table tbody tr td select{margin:5px 0 5px 0;border:#283234 1px solid !important;font-size:12px;color:#283234 !important;}
+
+#content div.pf-panel-hd {
+    background: #283234;
+    color: #bdd2d0;
+    border: 0px;
+    font-size: 10pt;
+}
+
+#content div.pf-panel-bd {
+    border: 0px;
+    margin:0;
+}
+/*-------- Navigation Definitions --------*/
+#nav {
+    height: 30px;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+#main_nav {
+    margin: 0;
+    padding: 0;
+    height: 30px;
+    float: left;
+}
+
+#ext_nav {
+    margin: 0;
+    padding: 0;
+    height: 30px;
+    float: right;
+}
+
+#main_nav li,#ext_nav li {
+    list-style-type: none;
+    display: inline;
+    float: left;
+    padding: 0;
+    margin: 0;
+    height: 30px;
+}
+
+#main_nav li a,#ext_nav li a {
+    font-weight: bold;
+    text-decoration: none;
+    color: #455660;
+    display: block;
+    padding: 8px 8px 7px 8px;
+}
+
+/*-------- Left Column Definitions --------*/
+#left_col {
+    clear: both;
+    float: left;
+    margin-left: 3.5%;
+    margin-right: 1%;
+    width: 15%;
+}
+#left_col ul {margin:1px 1px 0 1px;padding:0;}
+
+#left_col ul li {
+    list-style-type: none;
+    padding: 0px;
+    margin:0 0 1px 0;
+}
+
+#left_col ul li a {
+    font-weight: bold;
+    text-decoration: none;
+    color: #283234;
+    padding:3px 3px 3px 7px;
+    display:block;
+    background: #cfd7d6;
+}
+
+#left_col ul li a:hover {
+    color: #bdd2d0;
+    background: #283234;
+}
+
+
+
+/*-------- Right Column Definitions --------*/
+#right_col {
+    clear: both;
+    float: right;
+    margin-right: 2.5%;
+    margin-top: -29.8%;
+    min-height: 416px;
+    width: 15%;
+}
+
+.ui-wizard-content{
+	margin-top: -18%;
+}
+
+.messageReceived{
+    overflow :auto; 
+    border-style:hidden; 
+    margin:0px; 
+    padding:0px;
+}
+
+.fc-event-skin {
+    background-color: transparent !important;
+    border-color: transparent !important;
+    color: #FFFFFF;
+}
+
+.myevents .fc-event-skin {
+	background-color: #CFD7D6 !important;
+	border-color: #CFD7D6 !important;
+	color: #283234 !important;
+}
+
+.others_events .fc-event-skin {
+	background-color: #87CEFA !important;
+	border-color: #87CEFA !important;
+	color: #000000 !important;
+}
+
+.hide-column-names table thead tr {
+    display: none;
+}

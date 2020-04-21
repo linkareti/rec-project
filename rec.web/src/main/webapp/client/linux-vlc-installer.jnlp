@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jnlp PUBLIC "-//Sun Microsystems, Inc//DTD JNLP Descriptor 6.0//EN" "http://java.sun.com/dtd/JNLP-6.0.dtd">
+<jnlp codebase="http://elab.ist.utl.pt/rec.web/client" href="linux-vlc-installer.jnlp" spec="6.0+">
+	<information>
+		<title>Instalador VLC para Linux</title>
+		<vendor>Linkare TI</vendor>
+		<homepage href="http://www.linkare.com" />
+		<description>Instalador do Videolan MediaPlayer e plugins</description>
+		<description kind="one-line">Instalador VLC para Linux
+		</description>
+		<description kind="tooltip">Instalador VLC para Linux
+		</description>
+		<description kind="short">Instalador VLC para Linux
+		</description>
+		<icon href="images/vlc_icon.png" />
+		<icon kind="splash" href="images/vlc_splash.jpg" />
+		<offline-allowed />
+		<related-content href="http://www.videolan.org/">
+			<title>Videolan Media Player</title>
+			<description>A Multimedia Player based on opensource GPL License and other underlying software such as gstreamer, ffmpeg and alike</description>
+			<icon href="images/vlc_icon.png" />
+		</related-content>
+	</information>
+	<information locale="en">
+		<title>Linux VLC Installer</title>
+		<vendor>Linkare TI</vendor>
+		<homepage href="http://www.linkare.com" />
+		<description>Videolan MediaPlayer and plugins installer</description>
+		<description kind="one-line">VLC Installer for Linux
+		</description>
+		<description kind="tooltip">VLC Installer for Linux
+		</description>
+		<description kind="short">VLC Installer for Linux
+		</description>
+		<related-content href="http://www.videolan.org/">
+			<title>Videolan Media Player</title>
+			<description>A Multimedia Player based on opensource GPL License and other underlying software such as gstreamer, ffmpeg and alike</description>
+			<icon href="images/vlc_icon.png" />
+		</related-content>
+	</information>
+	<security>
+		<all-permissions />
+	</security>
+	<update check="always" policy="always" />
+	<resources>
+		<j2se version="1.6+" />
+		<jar download="eager" href="ReCClient_sig.jar" main="true" />
+		<jar download="eager" href="ReCCommon_sig.jar" />
+		<property name="jnlp.packEnabled" value="true" />
+		<property name="vlc.plugins.destdir" value=".eLab/native/plugins" />
+		<property name="vlc.plugins.filename" value="vlcplugins.zip" />
+	</resources>
+
+	<!-- hopefully funciona para todas as archs e windows -->
+	<resources arch="i386" os="Linux">
+		<jar download="lazy" href="lib/vlcplugins_linux_i386_sig.jar" />
+	</resources>
+
+	<resources arch="i586" os="Linux">
+		<jar download="lazy" href="lib/vlcplugins_linux_i686_sig.jar" />
+	</resources>
+
+	<resources arch="i686" os="Linux">
+		<jar download="lazy" href="lib/vlcplugins_linux_i686_sig.jar" />
+	</resources>
+
+	<resources arch="amd64" os="Linux">
+		<jar download="lazy" href="lib/vlcplugins_linux_amd64_sig.jar" />
+	</resources>
+
+	<installer-desc
+		main-class="com.linkare.rec.impl.newface.installer.linux.LinuxInstaller" />
+</jnlp>
