@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1" ?>
-<hardware id="ELAB_PAINEL-FOTOVOLTAICO_DSPIC_V3" num_channels="2" minfrequency="0.1Hz" maxfrequency="1000Hz">
+<hardware id="ELAB_PAINEL-FOTOVOLTAICO_DSPIC_V3" num_channels="5" minfrequency="0.1Hz" maxfrequency="1000Hz">
   <rs232 baud="115200" stopbits="1" paritybits="0" numbits="8" ports_restrict="/dev/ttyS0">
 	<parameters>
 		<!-- protocol -->
