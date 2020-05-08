@@ -78,7 +78,6 @@ public class PlanoInclinadoCustomizer extends AbstractCustomizer {
         samplesPanel = new javax.swing.JPanel();
         sldNumSamples = new javax.swing.JSlider();
         tfNumSamples = new javax.swing.JTextField();
-        lblErrorTooManySamples = new javax.swing.JLabel();
         heightPanel = new javax.swing.JPanel();
         sldHeight = new javax.swing.JSlider();
         tfHeight = new javax.swing.JTextField();
@@ -176,16 +175,6 @@ public class PlanoInclinadoCustomizer extends AbstractCustomizer {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         samplesPanel.add(tfNumSamples, gridBagConstraints);
-
-        lblErrorTooManySamples.setForeground(new java.awt.Color(255, 0, 0));
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/planoinclinado/resources/messages"); // NOI18N
-        lblErrorTooManySamples.setText(bundle.getString("rec.exp.planoinclinado.lbl.maxsamples")); // NOI18N
-        lblErrorTooManySamples.setEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 2;
-        samplesPanel.add(lblErrorTooManySamples, gridBagConstraints);
 
         slidersPanel.add(samplesPanel);
         samplesPanel.getAccessibleContext().setAccessibleName(ReCResourceBundle.findStringOrDefault("fotovoltaico$rec.exp.planoinclinado.lbl.nsamples","fotovoltaico$rec.exp.planoinclinado.lbl.nsamples")); // NOI18N
@@ -301,7 +290,6 @@ public class PlanoInclinadoCustomizer extends AbstractCustomizer {
             sldNumSamples.setValue(1);
         }
         tfNumSamples.setText("" + sldNumSamples.getValue());
-        checkNsamples();
     }//GEN-LAST:event_sldNumSamplesStateChanged
 
     private void tfNumSamplesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNumSamplesActionPerformed
@@ -323,7 +311,7 @@ public class PlanoInclinadoCustomizer extends AbstractCustomizer {
         } catch (Exception e) {
             tfNumSamples.setText("" + sldNumSamples.getValue());
         }
-        checkNsamples();
+        
     }//GEN-LAST:event_tfNumSamplesFocusLost
 
     private void tfTbsFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfAngleFocusLost
@@ -346,7 +334,6 @@ public class PlanoInclinadoCustomizer extends AbstractCustomizer {
         } catch (Exception e) {
             tfTbs.setText("" + sldTbs.getValue());
         }
-        checkNsamples();
     }// GEN-LAST:event_tfAngleFocusLost
 
     private void tfHeightFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfCoilCurrentFocusLost
@@ -381,11 +368,6 @@ public class PlanoInclinadoCustomizer extends AbstractCustomizer {
         tfHeight.setText("" + sldHeight.getValue());
 
     }// GEN-LAST:event_sldCoilCurrentStateChanged
-
-    private void checkNsamples() {
-        lblErrorTooManySamples.setEnabled((sldNumSamples.getValue() * sldTbs.getValue()) > 120000); // checks if the number of samples is too big 
-        btnOK.setEnabled(!lblErrorTooManySamples.isEnabled());
-    }
 
     private void btnDefaultsActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnDefaultsActionPerformed
     {// GEN-HEADEREND:event_btnDefaultsActionPerformed
@@ -425,7 +407,6 @@ public class PlanoInclinadoCustomizer extends AbstractCustomizer {
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JPanel heightPanel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel lblErrorTooManySamples;
     private javax.swing.JPanel samplesPanel;
     private javax.swing.JSlider sldHeight;
     private javax.swing.JSlider sldNumSamples;
