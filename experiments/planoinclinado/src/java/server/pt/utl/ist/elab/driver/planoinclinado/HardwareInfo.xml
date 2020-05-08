@@ -20,7 +20,7 @@
 		</selection-list>
 	</parameter>
 
-	<parameter name="n_samples" type="ContinuousValue" value="10000">
+	<parameter name="n_samples" type="ContinuousValue" value="100">
 		<selection-list>
 			<value order="1">1</value>
 			<value order="2">10000</value>
@@ -35,6 +35,14 @@
 			<value order="3">1</value>
 		</selection-list>
 	</parameter>
+
+	<parameter name="height" type="ContinuousValue" value="100">
+                <selection-list>
+                        <value order="1">0</value>
+                        <value order="2">235</value>
+                        <value order="3">1</value>
+                </selection-list>
+        </parameter>
 
 	<frequency-scale label="Sampling Interval">
 		<min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">2</Frequency></min-frequency>

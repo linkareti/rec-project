@@ -26,7 +26,7 @@
 	<timeout>
 	    <default_timeout time="45000" />
 	    <id time="5000" />
-	    <cfg time="10000" />
+	    <cfg time="180000" />
 	    <cur time="5000" />
 	    <str time="5000" />
 	    <dat_bin time="210000" />

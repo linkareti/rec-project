@@ -383,7 +383,7 @@ public class PlanoInclinadoCustomizer extends AbstractCustomizer {
     }// GEN-LAST:event_sldCoilCurrentStateChanged
 
     private void checkNsamples() {
-        lblErrorTooManySamples.setEnabled((sldNumSamples.getValue() * sldTbs.getValue()) > 10000); // checks if the number of samples is too big 
+        lblErrorTooManySamples.setEnabled((sldNumSamples.getValue() * sldTbs.getValue()) > 120000); // checks if the number of samples is too big 
         btnOK.setEnabled(!lblErrorTooManySamples.isEnabled());
     }
 
@@ -451,9 +451,13 @@ public class PlanoInclinadoCustomizer extends AbstractCustomizer {
             sldHeight.setValue(height);
             tfHeight.setText("" + height);
 
-            int freq = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("freq"));
+            int freq = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("tb_samples"));
             sldTbs.setValue(freq);
             tfTbs.setText("" + freq);
+
+            int nSamples = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("n_samples"));
+            sldNumSamples.setValue(nSamples);
+            tfNumSamples.setText("" + nSamples);
 
         }
     }
