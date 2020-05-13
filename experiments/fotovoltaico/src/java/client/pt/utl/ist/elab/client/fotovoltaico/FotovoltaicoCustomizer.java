@@ -1,5 +1,5 @@
 /*
- * Mag3DCustomizer.java
+ * FotovoltaicoCustomizer.java
  *
  * Created on 13 de Outubro de 2017
  */
@@ -180,6 +180,7 @@ public class FotovoltaicoCustomizer extends AbstractCustomizer {
         sldAngle.setPaintTrack(false);
         sldAngle.setToolTipText("");
         sldAngle.setValue(0);
+        sldAngle.setEnabled(false);
         sldAngle.setMaximumSize(new java.awt.Dimension(1000, 32767));
         sldAngle.setMinimumSize(new java.awt.Dimension(250, 42));
         sldAngle.setPreferredSize(new java.awt.Dimension(250, 42));
@@ -200,6 +201,7 @@ public class FotovoltaicoCustomizer extends AbstractCustomizer {
         tfAngle.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         tfAngle.setText("0");
         tfAngle.setToolTipText("");
+        tfAngle.setEnabled(false);
         tfAngle.setMaximumSize(new java.awt.Dimension(30, 16));
         tfAngle.setMinimumSize(new java.awt.Dimension(30, 16));
         tfAngle.setPreferredSize(new java.awt.Dimension(37, 16));

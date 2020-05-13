@@ -216,6 +216,7 @@
                     <Property name="paintTrack" type="boolean" value="false"/>
                     <Property name="toolTipText" type="java.lang.String" value=""/>
                     <Property name="value" type="int" value="0"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                     <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[1000, 32767]"/>
                     </Property>
@@ -241,6 +242,7 @@
                     <Property name="horizontalAlignment" type="int" value="4"/>
                     <Property name="text" type="java.lang.String" value="0"/>
                     <Property name="toolTipText" type="java.lang.String" value=""/>
+                    <Property name="enabled" type="boolean" value="false"/>
                     <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[30, 16]"/>
                     </Property>
