@@ -111,6 +111,12 @@
 			<artifactId>el-impl</artifactId>
 			<version>2.2</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
+		    <dependency>
+			<groupId>org.glassfi.web</groupId>
+			<artifactId>el-impl</artifactId>
+			<version>2.2</version><!--$NO-MVN-MAN-VER$-->
+		</dependency>
+		
 
 		<dependency>
 			<groupId>org.primefaces</groupId>
@@ -548,6 +554,10 @@
 						</fileName>
 					</fileNames>
 				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.2</version>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
