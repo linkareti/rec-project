@@ -96,9 +96,8 @@
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>5.10</version><!--$NO-MVN-MAN-VER$-->
+			<version>6.8</version><!--$NO-MVN-MAN-VER$-->
 			<scope>test</scope>
-			<classifier>jdk15</classifier>
 		</dependency>
 
 		<dependency>
