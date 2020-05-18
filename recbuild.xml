@@ -26,7 +26,7 @@
         <mkdir dir="${rec.common.classes.dir}" />
         <mkdir dir="${rec.common.classes.dir}/META-INF" />
 
-        <javac srcdir="${rec.common.src.java.dir}" destdir="${rec.common.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
+        <javac srcdir="${rec.common.src.java.dir}" destdir="${rec.common.classes.dir}" fork="true" executable="/var/jenkins_home/tools/jdk-11.0.2/bin/javac" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
             <include name="**/*.java" />
             <classpath refid="rec.common.libs.classpath" />			
         </javac>
