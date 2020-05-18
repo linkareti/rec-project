@@ -98,7 +98,7 @@
 			<artifactId>testng</artifactId>
 			<version>5.10</version><!--$NO-MVN-MAN-VER$-->
 			<scope>test</scope>
-			<classifier>jdk15</classifier>
+			<classifier>jdk111</classifier>
 		</dependency>
 
 		<dependency>
@@ -621,6 +621,9 @@
 							</includes>
 						</resource>
 					</webResources>
+					<fork>true</fork>
+					<executable>${JAVA_11_HOME}/bin/javac</executable>
+					<compilerVersion>11</compilerVersion>
 				</configuration>
 			</plugin>
 			<plugin>
