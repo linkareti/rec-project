@@ -704,6 +704,27 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-toolchains-plugin</artifactId>
+				<version>1.0</version>
+				<executions>
+				  <execution>
+				    <phase>validate</phase>
+				    <goals>
+				      <goal>toolchain</goal>
+				    </goals>
+				  </execution>
+				</executions>
+				<configuration>
+				  <toolchains>
+				    <jdk>
+				      <version>11.0</version>
+				      <vendor>openjdk</vendor>
+				    </jdk>
+				  </toolchains>
+				</configuration>
+				</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
