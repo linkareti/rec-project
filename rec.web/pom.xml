@@ -98,7 +98,7 @@
 			<artifactId>testng</artifactId>
 			<version>5.10</version><!--$NO-MVN-MAN-VER$-->
 			<scope>test</scope>
-			<classifier>jdk111</classifier>
+			<classifier>jdk15</classifier>
 		</dependency>
 
 		<dependency>
