@@ -531,7 +531,7 @@
 							<compilerVersion>11</compilerVersion>
 				    		<compilerArgument>-proc:none</compilerArgument>
 	                        <includes>
-	                            <include>fun/n/learn/annotation/LogMeCustomAnnotationProcessor.java</include>
+	                            <include>org/eclipse/persistence/internal/jpa/modelgen/CanonicalModelProcessor</include>
 	                            <!--include dependencies required for LogMeCustomAnnotationProcessor -->
 	                        </includes>
 				    	</configuration>
