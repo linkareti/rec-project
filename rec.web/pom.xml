@@ -526,6 +526,7 @@
 							<goal>compile</goal>
 						</goals>
 						<configuration>
+							<forkCount>0</forkCount>
 							<fork>true</fork>
 							<executable>${JAVA_11_HOME}/bin/javac</executable>
 							<compilerVersion>11</compilerVersion>
