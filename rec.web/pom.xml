@@ -555,7 +555,7 @@
 								<goal>compile</goal>
 							</goals>
 						 </execution>
-				</executions>
+			</executions>
 			     
 			</plugin>
 			<!-- Eclipse plugin can force download of source and JavaDoc jars -->
@@ -685,11 +685,11 @@
 				<artifactId>aspectj-maven-plugin</artifactId>
 				<version>1.12.1</version>
 				
-				<!-- <executions>
+				 <executions>
 					<execution>
 						<goals>
-							<goal>compile</goal>       use this goal to weave all your main classes
-							<goal>test-compile</goal>  use this goal to weave all your test classes
+							<goal>compile</goal>       <!--use this goal to weave all your main classes-->
+							<goal>test-compile</goal>  <!--use this goal to weave all your test classes-->
 						</goals>
 					</execution>
 				</executions>
@@ -699,8 +699,8 @@
                                     <artifactId>aspectjtools</artifactId>
                                     <version>${aspectj.version}</version>
                                 </dependency>
-                    </dependencies> -->
-			</plugin>
+                    </dependencies> 
+      		</plugin>
 			<plugin>
 				<artifactId>maven-release-plugin</artifactId>
 				<version>3.0.0-M1</version>
