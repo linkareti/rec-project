@@ -684,13 +684,14 @@
 				<groupId>com.nickwongdev</groupId>
 				<artifactId>aspectj-maven-plugin</artifactId>
 				<version>1.12.6</version>
-				<configuration>
-					<fork>true</fork>
-					<executable>${JAVA_11_HOME}/bin/javac</executable>
-					<compilerVersion>11</compilerVersion>
-				</configuration>
+				
 				<executions>
 					<execution>
+						<configuration>
+							<fork>true</fork>
+							<executable>${JAVA_11_HOME}/bin/javac</executable>
+							<compilerVersion>11</compilerVersion>
+						</configuration>
 						<goals>
 							<goal>compile</goal>       <!-- use this goal to weave all your main classes -->
 							<goal>test-compile</goal>  <!-- use this goal to weave all your test classes -->
