@@ -917,13 +917,12 @@
 				<configuration>
 					<verbose>true</verbose>
 					<privateScope>true</privateScope>
-					<complianceLevel>11</complianceLevel>
+					<complianceLevel>1.11</complianceLevel>
 					<fork>true</fork>
 					<executable>${JAVA_11_HOME}/bin/javac</executable>
 					<compilerVersion>11</compilerVersion>
 					<source>11</source> 
                     <target>11</target> 
-                    <complianceLevel>11</complianceLevel>
 				</configuration>
 				<reportSets>
 					<reportSet>
