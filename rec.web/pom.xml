@@ -577,7 +577,19 @@
 					<fork>true</fork>
 					<executable>${JAVA_11_HOME}/bin/javac</executable>
 					<compilerVersion>11</compilerVersion>
+					<useFile>false</useFile>
+					<includes>
+						<include>**/*Test.java</include>
+						<include>**/*Spec.java</include>
+					</includes>
 			        </configuration>
+			    <dependencies>
+					<dependency>
+						<groupId>org.apache.maven.surefire</groupId>
+						<artifactId>surefire-junit47</artifactId>
+						<version>3.0.0-M3</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
