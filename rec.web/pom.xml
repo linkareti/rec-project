@@ -917,6 +917,9 @@
 					<verbose>true</verbose>
 					<privateScope>true</privateScope>
 					<complianceLevel>11</complianceLevel>
+					<fork>true</fork>
+					<executable>${JAVA_11_HOME}/bin/javac</executable>
+					<compilerVersion>11</compilerVersion>
 				</configuration>
 				<reportSets>
 					<reportSet>
