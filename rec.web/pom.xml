@@ -30,7 +30,7 @@
 		<!-- The version of Weld extensions in use-->
 		<weld.extensions.version>1.0.0-CR2</weld.extensions.version>
                 <aspectj.version>1.9.5</aspectj.version>
-		<aspectj-maven-plugin.version>1.8</aspectj-maven-plugin.version>
+		<aspectj-maven-plugin.version>1.11</aspectj-maven-plugin.version>
                 <maven.compiler.source>11</maven.compiler.source>
                 <maven.compiler.target>11</maven.compiler.target>
 	</properties>
