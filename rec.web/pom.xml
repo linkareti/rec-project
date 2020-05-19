@@ -684,7 +684,7 @@
 				<groupId>com.nickwongdev</groupId>
 				<artifactId>aspectj-maven-plugin</artifactId>
 				<version>1.12.1</version>
-				<<executions>
+				<executions>
 					<execution>
 						<goals>
 							<goal>compile</goal>       <!-- use this goal to weave all your main classes -->
