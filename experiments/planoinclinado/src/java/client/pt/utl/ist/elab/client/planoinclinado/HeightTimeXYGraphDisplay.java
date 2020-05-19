@@ -20,8 +20,8 @@ public class HeightTimeXYGraphDisplay extends com.linkare.rec.impl.ui.graph.Defa
 	/** Creates a new instance of PVXYGraphDisplay */
 	public HeightTimeXYGraphDisplay() {
 		super();
-		setChannelDisplayX(1);
-		setChannelDisplayY(0);
+		setChannelDisplayX(0);
+		setChannelDisplayY(1);
 	}
 
 }
