@@ -920,8 +920,8 @@
 					<fork>true</fork>
 					<executable>${JAVA_11_HOME}/bin/javac</executable>
 					<compilerVersion>11</compilerVersion>
-					<source>${project.build.source}</source> 
-                    <target>${project.build.target}</target> 
+					<source>11</source> 
+                    <target>11</target> 
 				</configuration>
 				<reportSets>
 					<reportSet>
