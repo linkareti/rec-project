@@ -535,11 +535,6 @@
 							<fork>true</fork>
 							<executable>${JAVA_11_HOME}/bin/javac</executable>
 							<compilerVersion>11</compilerVersion>
-				    		<compilerArgument>-proc:none</compilerArgument>
-	                        <includes>
-	                            <include>org/eclipse/persistence/internal/jpa/modelgen/CanonicalModelProcessor</include>
-	                            <!--include dependencies required for LogMeCustomAnnotationProcessor -->
-	                        </includes>
 				    	</configuration>
 					</execution>
 						<execution>
