@@ -33,6 +33,7 @@
 		<aspectj-maven-plugin.version>1.11</aspectj-maven-plugin.version>
                 <maven.compiler.source>11</maven.compiler.source>
                 <maven.compiler.target>11</maven.compiler.target>
+        <project.build.java.target>11</project.build.java.target>
 	</properties>
 
 	<dependencyManagement>
