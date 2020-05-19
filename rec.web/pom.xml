@@ -923,6 +923,7 @@
 					<compilerVersion>11</compilerVersion>
 					<source>11</source> 
                     <target>11</target> 
+                    <complianceLevel>11</complianceLevel>
 				</configuration>
 				<reportSets>
 					<reportSet>
