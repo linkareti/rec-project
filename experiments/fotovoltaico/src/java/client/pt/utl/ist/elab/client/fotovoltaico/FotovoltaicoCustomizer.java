@@ -501,7 +501,7 @@ public class FotovoltaicoCustomizer extends AbstractCustomizer {
     }//GEN-LAST:event_angleSweepRadioButtonStateChanged
 
     private void buckSweepRadioButtonStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_buckSweepRadioButtonStateChanged
-        if (buckSweepRadioButton.isSelected()) {
+        if (buckSweepRadioButton.isSelected() || buckFindMaxRadioButton.isSelected()) {
             sldBuck.setEnabled(false);
             tfBuck.setEnabled(false);
         } else {
@@ -570,19 +570,23 @@ public class FotovoltaicoCustomizer extends AbstractCustomizer {
     {// GEN-HEADEREND:event_btnOKActionPerformed
 
         String protocol = "1";
+        int nsamples = 120;
 
         if (buckSweepRadioButton.isSelected()) {
             protocol = "2";
+            nsamples = 100;
         } else if (buckFindMaxRadioButton.isSelected()) {
             protocol = "3";
+            nsamples = 24;
         }
 
         getAcquisitionConfig().getSelectedHardwareParameter("protocol").setParameterValue(protocol);
         getAcquisitionConfig().getSelectedHardwareParameter("red_comp").setParameterValue("" + sldRedComponent.getValue());
         getAcquisitionConfig().getSelectedHardwareParameter("green_comp").setParameterValue("" + sldBlueComponent.getValue());
         getAcquisitionConfig().getSelectedHardwareParameter("blue_comp").setParameterValue("" + sldBlueComponent.getValue());
-        getAcquisitionConfig().getSelectedHardwareParameter("angle").setParameterValue("" + sldAngle.getValue());
         getAcquisitionConfig().getSelectedHardwareParameter("buck").setParameterValue("" + sldBuck.getValue());
+        getAcquisitionConfig().getSelectedHardwareParameter("angle").setParameterValue("" + sldAngle.getValue());
+        getAcquisitionConfig().setTotalSamples(nsamples);
 
         fireICustomizerListenerDone();
     }// GEN-LAST:event_btnOKActionPerformed

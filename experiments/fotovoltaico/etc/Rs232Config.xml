@@ -14,10 +14,10 @@
 		<!-- blue_comp -->
 	    <parameter output="##0" input="##0" maxvalue="255" minvalue="0" order="3">
 	    </parameter>
-	    <!-- angle -->
-	    <parameter output="##0" input="##0" maxvalue="100" minvalue="0" order="4">
-	    </parameter>
 	    <!-- buck -->
+	    <parameter output="##0" input="##0" maxvalue="100" minvalue="1" order="4">
+	    </parameter>
+	    <!-- angle -->
 	    <parameter output="##0" input="##0" maxvalue="100" minvalue="0" order="5">
 	    </parameter>
 	</parameters>

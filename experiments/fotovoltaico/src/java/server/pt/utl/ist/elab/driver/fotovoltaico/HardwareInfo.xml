@@ -44,14 +44,6 @@
 		</selection-list>
 	</parameter>
 
-	<parameter name="angle" type="ContinuousValue" value="75">
-		<selection-list>
-			<value order="1">0</value>
-			<value order="2">100</value>
-			<value order="3">1</value>
-		</selection-list>
-	</parameter>
-
 	<parameter name="buck" type="ContinuousValue" value="5">
 		<selection-list>
 			<value order="1">1</value>
@@ -60,12 +52,20 @@
 		</selection-list>
 	</parameter>
 
+	<parameter name="angle" type="ContinuousValue" value="75">
+		<selection-list>
+			<value order="1">0</value>
+			<value order="2">100</value>
+			<value order="3">1</value>
+		</selection-list>
+	</parameter>
+
 	<frequency-scale label="Sampling Interval">
-		<min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">3</Frequency></min-frequency>
-		<max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">55</Frequency></max-frequency>
+		<min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">300</Frequency></min-frequency>
+		<max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">550</Frequency></max-frequency>
 		<step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></step-frequency>
 	</frequency-scale>
-	<Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency>
+	<Frequency type="SamplingIntervalType" multiplier="milli">500</Frequency>
 
 	<sampling-scale>
 		<min-samples>1</min-samples>
@@ -75,7 +75,7 @@
 
 	<ChannelInfo name="fotovoltaico$rec.exp.fotovoltaico.hardwareinfo.channel.0.name" independent="false" direction="CHANNEL_INPUT">
 		<scale label="fotovoltaico$rec.exp.fotovoltaico.hardwareinfo.channel.0.label" physicsunitname="fotovoltaico$rec.exp.fotovoltaico.hardwareinfo.channel.0.physicsunitname" physicsunitsymbol="º" multiplier="none" selected="true">
-			<min><PhysicsVal type="int">0</PhysicsVal></min>
+			<min><PhysicsVal type="int">-20</PhysicsVal></min>
 			<max><PhysicsVal type="int">100</PhysicsVal></max>
 			<step><PhysicsVal type="int">1</PhysicsVal></step>
 			<errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
@@ -84,7 +84,7 @@
 
 	<ChannelInfo name="fotovoltaico$rec.exp.fotovoltaico.hardwareinfo.channel.1.name" independent="false" direction="CHANNEL_INPUT">
 		<scale label="fotovoltaico$rec.exp.fotovoltaico.hardwareinfo.channel.1.label" physicsunitname="fotovoltaico$rec.exp.fotovoltaico.hardwareinfo.channel.1.physicsunitname" physicsunitsymbol="%" multiplier="none" selected="true">
-			<min><PhysicsVal type="int">1</PhysicsVal></min>
+			<min><PhysicsVal type="int">0</PhysicsVal></min>
 			<max><PhysicsVal type="int">100</PhysicsVal></max>
 			<step><PhysicsVal type="int">1</PhysicsVal></step>
 			<errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
@@ -111,7 +111,7 @@
 
 	<ChannelInfo name="fotovoltaico$rec.exp.fotovoltaico.hardwareinfo.channel.4.name" independent="false" direction="CHANNEL_INPUT">
 		<scale label="fotovoltaico$rec.exp.fotovoltaico.hardwareinfo.channel.4.label" physicsunitname="fotovoltaico$rec.exp.fotovoltaico.hardwareinfo.channel.4.physicsunitname" physicsunitsymbol="W" multiplier="milli" selected="true">
-			<min><PhysicsVal type="float">0.0</PhysicsVal></min>
+			<min><PhysicsVal type="float">-60.0</PhysicsVal></min>
 			<max><PhysicsVal type="float">600.0</PhysicsVal></max>
 			<step><PhysicsVal type="float">0.000001</PhysicsVal></step>
 			<errordefault><PhysicsVal type="float">0.000001</PhysicsVal></errordefault>
