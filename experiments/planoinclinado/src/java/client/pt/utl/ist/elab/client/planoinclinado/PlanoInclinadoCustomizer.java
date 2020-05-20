@@ -343,10 +343,12 @@ public class PlanoInclinadoCustomizer extends AbstractCustomizer {
                 sldTbs.setValue(2);
                 tfTbs.setText("2");
             } else {
-                tfTbs.setText("" + sldTbs.getValue());
+                sldTbs.setValue(tbs);
+                //tfTbs.setText("" + sldTbs.getValue());
             }
         } catch (Exception e) {
-            tfTbs.setText("" + sldTbs.getValue());
+            //tfTbs.setText("" + sldTbs.getValue());
+            tfTbs.setText("2");
         }
         checkNsamples();
     }// GEN-LAST:event_tfAngleFocusLost
@@ -375,6 +377,7 @@ public class PlanoInclinadoCustomizer extends AbstractCustomizer {
             sldTbs.setValue(2);
         }
         tfTbs.setText("" + sldTbs.getValue());
+        checkNsamples()
 
     }// GEN-LAST:event_sldAngleStateChanged
 
@@ -385,8 +388,8 @@ public class PlanoInclinadoCustomizer extends AbstractCustomizer {
     }// GEN-LAST:event_sldCoilCurrentStateChanged
 
     private void checkNsamples() {
-        lblErrorTooManySamples.setEnabled((sldNumSamples.getValue() * sldTbs.getValue()) > 10000); // checks if the number of samples is too big 
-        lblErrorTooManySamples.setText(ReCResourceBundle.findStringOrDefault("planoinclinado$rec.exp.planoinclinado.lbl.maxsamples","The maximum number of samples is") + " " + (10000/sldTbs.getValue()));
+        lblErrorTooManySamples.setEnabled((sldNumSamples.getValue() * sldTbs.getValue()) > 20000); // checks if the number of samples is too big 
+        lblErrorTooManySamples.setText(ReCResourceBundle.findStringOrDefault("planoinclinado$rec.exp.planoinclinado.lbl.maxsamples","The maximum number of samples is ") + (20000/sldTbs.getValue()));
         btnOK.setEnabled(!lblErrorTooManySamples.isEnabled());
     }
 
@@ -398,6 +401,7 @@ public class PlanoInclinadoCustomizer extends AbstractCustomizer {
         tfTbs.setText("50");
         sldNumSamples.setValue(120);
         tfNumSamples.setText("120");
+        checkNsamples();
     }// GEN-LAST:event_btnDefaultsActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed

@@ -20,7 +20,7 @@
 	    <channel format="####0" order="0">
 	    </channel>
 	    <!-- position -->
-	    <channel format="###0" order="1">
+	    <channel format="####0" order="1">
 	    </channel>
 	</channels>
 	<timeout>
