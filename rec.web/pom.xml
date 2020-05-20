@@ -532,6 +532,7 @@
 							<fork>true</fork>
 							<executable>${JAVA_11_HOME}/bin/javac</executable>
 							<compilerVersion>11</compilerVersion>
+							<release>11</release>
 				    	</configuration>
 					</execution>
 						<execution>
@@ -547,6 +548,7 @@
 								<fork>true</fork>
 								<executable>${JAVA_11_HOME}/bin/javac</executable>
 								<compilerVersion>11</compilerVersion>
+								<release>11</release>
 						    </configuration>
 						</execution>
 						<execution>
