@@ -526,7 +526,6 @@
 							<goal>compile</goal>
 						</goals>
 						<configuration>
-							<forkCount>0</forkCount>
 							<fork>true</fork>
 							<executable>${JAVA_11_HOME}/bin/javac</executable>
 							<compilerVersion>11</compilerVersion>
@@ -582,6 +581,9 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.0.0-M3</version>
 				<configuration>
+					<argLine>
+					    --illegal-access=permit
+					</argLine>
 					<fork>true</fork>
 					<executable>${JAVA_11_HOME}/bin/javac</executable>
 					<compilerVersion>11</compilerVersion>
