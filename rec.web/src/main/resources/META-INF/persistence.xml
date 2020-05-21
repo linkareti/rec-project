@@ -6,7 +6,7 @@
       http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
 	<persistence-unit name="RecPU"
 		transaction-type="JTA">
-		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<jta-data-source>jdbc/rec</jta-data-source>
 
 		<class>com.linkare.commons.jpa.security.Subject</class>
