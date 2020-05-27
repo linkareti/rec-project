@@ -22,22 +22,22 @@ public class NoValidRecipientsFoundForMessage extends Exception {
     }
 
     /**
-     * @param message
+     * @param message ...
      */
     public NoValidRecipientsFoundForMessage(String message) {
 	super(message);
     }
 
     /**
-     * @param cause
+     * @param cause ...
      */
     public NoValidRecipientsFoundForMessage(Throwable cause) {
 	super(cause);
     }
 
     /**
-     * @param message
-     * @param cause
+     * @param message ...
+     * @param cause ...
      */
     public NoValidRecipientsFoundForMessage(String message, Throwable cause) {
 	super(message, cause);
