@@ -3,12 +3,17 @@
 	<parent>
 		<artifactId>parent</artifactId>
 		<groupId>com.linkare.maven</groupId>
-		<version>1.0.1</version>
+		<version>1.0.4</version>
 	</parent>
 	<groupId>com.linkare</groupId>
 	<artifactId>rec.web-api</artifactId>
 	<name>rec.web-api</name>
 	<version>1.1.1-SNAPSHOT</version>
+  <properties>
+    <keystore.path>/path/to/the/keystore</keystore.path>
+    <keystore.password>Store password</keystore.password>
+    <keystore.alias>Alias name</keystore.alias>
+  </properties>
 	<scm>
 		<connection>scm:svn:https://svn.linkare.com/internal/rec-project/rec/branches/rel-web-api-1.1.x</connection>
 		<developerConnection>scm:svn:https://svn.linkare.com/internal/rec-project/rec/branches/rel-web-api-1.1.x</developerConnection>
@@ -80,6 +85,38 @@
 					</execution>
 				</executions>
 			</plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.7.1</version>
+      </plugin>
 		</plugins>
 	</build>
+  <profiles>
+    <profile>
+      <id>linkare-release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jarsigner-plugin</artifactId>
+            <version>3.0.0</version>
+            <executions>
+              <execution>
+                <id>sign</id>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <keystore>${keystore.path}</keystore>
+              <alias>${keystore.alias}</alias>
+              <storepass>${keystore.password}</storepass>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
