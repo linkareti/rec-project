@@ -8,16 +8,16 @@
 	<groupId>com.linkare</groupId>
 	<artifactId>rec.web-api</artifactId>
 	<name>rec.web-api</name>
-	<version>1.1.3-SNAPSHOT</version>
+	<version>1.1.3</version>
   <properties>
     <keystore.path>/path/to/the/keystore</keystore.path>
     <keystore.password>Store password</keystore.password>
     <keystore.alias>Alias name</keystore.alias>
   </properties>
 	<scm>
-		<connection>scm:svn:https://svn.linkare.com/internal/rec-project/rec/branches/rel-web-api-1.1.x</connection>
-		<developerConnection>scm:svn:https://svn.linkare.com/internal/rec-project/rec/branches/rel-web-api-1.1.x</developerConnection>
-		<url>https://sventon.linkare.com/repos/svnroot/list/internal/rec-project/rec/branches/rel-web-api-1.1.x</url>
+		<connection>scm:svn:https://svn.linkare.com/internal/rec-project/rec/tags/rel-web-api-1.1.3</connection>
+		<developerConnection>scm:svn:https://svn.linkare.com/internal/rec-project/rec/tags/rel-web-api-1.1.3</developerConnection>
+		<url>https://sventon.linkare.com/repos/svnroot/list/internal/rec-project/rec/tags/rel-web-api-1.1.3</url>
 	</scm>
 	<build>
 		<plugins>
