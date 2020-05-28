@@ -13,6 +13,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import java.rmi.server.UnicastRemoteObject;
+
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
@@ -37,10 +39,14 @@ import com.linkare.rec.web.util.ConstantUtils;
  * @author Paulo Zenida - Linkare TI
  * 
  */
-@Remote(AllocationManager.class)
+//@Remote(AllocationManager.class)
 @Stateless(name = "AllocationManager")
-public class AllocationManagerBean implements AllocationManager {
+public class AllocationManagerBean extends UnicastRemoteObject implements AllocationManager {
 
+	public AllocationManagerBean ()throws RemoteException {
+		super();
+	} 
+	
     @PersistenceContext(unitName = "RecPU")
     private EntityManager entityManager;
 

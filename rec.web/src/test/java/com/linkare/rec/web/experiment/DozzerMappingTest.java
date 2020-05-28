@@ -488,7 +488,7 @@ public class DozzerMappingTest {
     public static void main(String[] args) throws NamingException, RemoteException {
 	InitialContext ic = new InitialContext();
 
-	RepositoryFacade ejb = (RepositoryFacade) ic.lookup("java:global/rec.web/ExperimentResultsManagerBean");
+	RepositoryFacade ejb = (RepositoryFacade) ic.lookup("java:global/rec.webExperimentResultsManagerBean");
 
 	try {
 	    DataProducerDTO dto = new DozzerMappingTest().getDataProducerDTO();

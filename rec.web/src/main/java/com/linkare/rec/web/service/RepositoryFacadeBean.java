@@ -1,6 +1,7 @@
 package com.linkare.rec.web.service;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -25,10 +26,15 @@ import com.linkare.rec.web.service.interceptor.TracingInterceptor;
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
-@Remote(RepositoryFacade.class)
+//@Remote(RepositoryFacade.class)
 @Interceptors({ TracingInterceptor.class })
-public class RepositoryFacadeBean implements RepositoryFacade {
+public class RepositoryFacadeBean extends UnicastRemoteObject implements RepositoryFacade {
 
+	public RepositoryFacadeBean()throws RemoteException {
+		super();
+	}
+	
+	
     private static final Log LOG = LogFactory.getLog(RepositoryFacadeBean.class);
 
     @PersistenceContext(unitName = "RecPU")

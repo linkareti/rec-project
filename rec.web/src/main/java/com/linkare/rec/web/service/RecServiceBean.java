@@ -16,15 +16,21 @@ import javax.jws.WebService;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import java.rmi.server.UnicastRemoteObject;
+
 /**
  *
  * @author Gedsimon Pereira
  */
 @Stateless(name = "RecService")
-@Remote(value = RecServiceRemote.class)
+//@Remote(value = RecServiceRemote.class)
 @WebService(endpointInterface = "com.linkare.rec.web.RecServiceRemote", name = "RecServiceWS", serviceName = "rec-services", portName = "recservice", targetNamespace = "http://webservices.linkare.com/rec")
-public class RecServiceBean implements RecServiceRemote {
+public class RecServiceBean extends UnicastRemoteObject implements RecServiceRemote {
 
+	public RecServiceBean ()throws RemoteException {
+		super();
+	}
+	
     @PersistenceContext(unitName = "RecPU")
     private EntityManager entityManager;
 

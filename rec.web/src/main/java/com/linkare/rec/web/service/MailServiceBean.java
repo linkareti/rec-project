@@ -26,6 +26,8 @@ import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import java.rmi.server.UnicastRemoteObject;
+
 import javax.activation.DataHandler;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
@@ -83,11 +85,15 @@ import com.linkare.rec.web.repository.SamplesPacketDTO;
  * 
  */
 @Stateless(name = "mailService")
-@Remote(value = MailServiceRemote.class)
+//@Remote(value = MailServiceRemote.class)
 @Local(value = MailServiceLocal.class)
 @WebService(endpointInterface = "com.linkare.rec.web.mail.MailServiceRemote", name = "MailServiceWS", serviceName = "rec-services", portName = "mail", targetNamespace = "http://webservices.linkare.com/rec")
-public class MailServiceBean implements MailServiceRemote, MailServiceLocal {
+public class MailServiceBean extends UnicastRemoteObject implements MailServiceRemote, MailServiceLocal {
 
+	public MailServiceBean ()throws RemoteException {
+		super();
+	}
+	
 	private final static Logger LOGGER = java.util.logging.Logger
 			.getLogger(MailServiceBean.class.getName());
 
