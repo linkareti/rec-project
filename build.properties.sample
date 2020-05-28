@@ -186,7 +186,7 @@ video.enabled=yes
 #Please define the codebase without the trailing slash... It will be added automagically when needed!
 ##remote build key/value
 #application-library-allowable-codebase=http://elab1.ist.utl.pt/*
-#application-library-allowable-codebase=http://elab.ist.utl.pt/*
+#application-library-allowable-codebase=http://localhost/*
 ##local key/value
 application-library-allowable-codebase=*
 
@@ -198,7 +198,7 @@ codebase=file://localhost/home/rvaz/NetBeansProjects/rec/build/java/jars/client
 href=elab-client.jnlp
 title=e-lab - Full Laboratory
 vendor=I.S.T. - U.T.L.
-homepage=http://elab.ist.utl.pt/rec
+homepage=http://localhost/rec
 one-line=Laboratório e-lab - ME
 tooltip=Laboratório e-lab - ME
 short=Laboratório e-lab - ME
@@ -218,7 +218,7 @@ experiment.driver.main-class=com.linkare.rec.impl.driver.FullServerMain
 #The following properties are for the elab application title.
 elab.title=e-lab
 elab.vendor=IST
-elab.homepage=http://elab.ist.utl.pt
+elab.homepage=http://localhost
 elab.description=Laboratórios Online do Instituto Superior Técnico
 elab.description.oneline=Labs Online
 elab.description.tooltip=Laboratórios Online
@@ -226,7 +226,7 @@ elab.description.short=Labs Online
 elab.icon=images/icon_elab_32.png
 elab.icon.splash=images/splash.png
 elab.title.en=e-lab
-elab.homepage.en=http://elab.ist.utl.pt
+elab.homepage.en=http://localhost
 elab.description.en=Instituto Superior Técnico's online laboratories
 elab.description.oneline.en=Online Labs
 elab.description.tooltip.en=Online Laboratories
