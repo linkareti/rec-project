@@ -506,7 +506,7 @@ public class FotovoltaicoCustomizer extends AbstractCustomizer {
     }//GEN-LAST:event_angleSweepRadioButtonStateChanged
 
     private void buckSweepRadioButtonStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_buckSweepRadioButtonStateChanged
-        if (buckSweepRadioButton.isSelected()) {
+        if (buckSweepRadioButton.isSelected() || buckFindMaxRadioButton.isSelected()) {
             sldBuck.setEnabled(false);
             tfBuck.setEnabled(false);
         } else {
@@ -516,7 +516,7 @@ public class FotovoltaicoCustomizer extends AbstractCustomizer {
     }//GEN-LAST:event_buckSweepRadioButtonStateChanged
 
     private void buckFindMaxRadioButtonStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_buckFindMaxRadioButtonStateChanged
-        if (buckFindMaxRadioButton.isSelected()) {
+        if (buckFindMaxRadioButton.isSelected() || buckSweepRadioButton.isSelected()) {
             sldBuck.setEnabled(false);
             tfBuck.setEnabled(false);
         } else {
