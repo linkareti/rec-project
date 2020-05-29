@@ -353,7 +353,7 @@ public class PlanoInclinadoCustomizer extends AbstractCustomizer {
                 sldTbs.setValue(sldTbs.getMinimum());
                 tfTbs.setText("" + sldTbs.getMinimum());
             } else {
-                tfTbs.setText("" + sldTbs.getValue());
+                 sldTbs.setValue(tbs);
             }
         } catch (Exception e) {
             tfTbs.setText("" + sldTbs.getValue());
