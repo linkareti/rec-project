@@ -2,7 +2,7 @@
     <information>        
         <title>elab - fotovoltaico</title>        
         <vendor>IST - UTL</vendor>        
-        <homepage href="http://elab.ist.utl.pt/" />        
+        <homepage href="http://localhost/" />        
         <description>Laboratórios Online do Instituto Superior Técnico - disponibilizados para o Ministério da Educação de Portugal</description>        
         <description kind="one-line">fotovoltaico</description>        
         <description kind="tooltip">fotovoltaico</description>        
@@ -19,7 +19,7 @@
     <information locale="en">        
         <title>photovoltaic</title>        
         <vendor>IST - UTL</vendor>        
-        <homepage href="http://elab.ist.utl.pt" />        
+        <homepage href="http://localhost" />        
         <description>fotovoltaico</description>        
         <description kind="one-line">photovoltaic</description>        
         <description kind="tooltip">fotovoltaico</description>        

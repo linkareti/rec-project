@@ -2,7 +2,7 @@
     <information>        
         <title>Pêndulo Mundial Algarve</title>        
         <vendor>IST - UTL</vendor>        
-        <homepage href="http://elab.ist.utl.pt/" />        
+        <homepage href="http://localhost/" />        
         <description>Laboratórios Online do Instituto Superior Técnico - disponibilizados para o Ministério da Educação de Portugal</description>        
         <description kind="one-line">Pêndulo Mundial disponível em Ilhéus, Brasil</description>        
         <description kind="tooltip">Pêndulo Ilhéus</description>        
@@ -19,7 +19,7 @@
     <information locale="en">        
         <title>World Pendulum Ilheus</title>        
         <vendor>IST - UTL</vendor>        
-        <homepage href="http://elab.ist.utl.pt" />        
+        <homepage href="http://localhost" />        
         <description>World Pendulum assembled at Ilheus, Brazil</description>        
         <description kind="one-line">World Pendulum assembled at Ilheus, Brazil</description>        
         <description kind="tooltip">Pendulum Ilheus</description>        

@@ -2,7 +2,7 @@
     <information>        
         <title>Pendulo Mundial Planetario Calouste Gulbenkian.</title>        
         <vendor>IST - UTL</vendor>        
-        <homepage href="http://www.elab.ist.utl.pt/" />        
+        <homepage href="http://www.localhost/" />        
         <description>Laboratórios Online do Instituto Superior Técnico - disponibilizados para o Ministério da Educação de Portugal</description>        
         <description kind="one-line">Pendulo Mundial disponivel no Planetario Calouste Gulbenkian em Lisboa</description>        
         <description kind="tooltip">Pendulo Planetario</description>        
@@ -19,7 +19,7 @@
     <information locale="en">        
         <title>Calouste Gulbenkian World Pendulum</title>        
         <vendor>IST - UTL</vendor>        
-        <homepage href="http://elab.ist.utl.pt" />        
+        <homepage href="http://localhost" />        
         <description>World Pendulum assembled at the Calouste Gulbenkian Planetatium in Lisbon</description>        
         <description kind="one-line">World Pendulum assembled at Calouste Gulbenkian Planetarium, Lisbon</description>        
         <description kind="tooltip">Pendulum Planetarium Lisbon</description>        

@@ -2,7 +2,7 @@
     <information>        
         <title>elab - planoinclinado</title>        
         <vendor>IST - UTL</vendor>        
-        <homepage href="http://elab.ist.utl.pt/" />        
+        <homepage href="http://localhost/" />        
         <description>Laboratórios Online do Instituto Superior Técnico - disponibilizados para o Ministério da Educação de Portugal</description>        
         <description kind="one-line">planoinclinado</description>        
         <description kind="tooltip">planoinclinado</description>        
@@ -19,7 +19,7 @@
     <information locale="en">        
         <title>planoinclinado</title>        
         <vendor>IST - UTL</vendor>        
-        <homepage href="http://elab.ist.utl.pt" />        
+        <homepage href="http://localhost" />        
         <description>planoinclinado</description>        
         <description kind="one-line">planoinclinado</description>        
         <description kind="tooltip">planoinclinado</description>        

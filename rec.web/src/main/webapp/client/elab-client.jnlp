@@ -2,7 +2,7 @@
     <information>        
         <title>e-lab</title>        
         <vendor>IST</vendor>        
-        <homepage href="http://elab.ist.utl.pt" />        
+        <homepage href="http://localhost" />        
         <description>Laboratórios Online do Instituto Superior Técnico - disponibilizados para o Ministério da Educação de Portugal</description>        
         <description kind="one-line">Labs Online</description>        
         <description kind="tooltip">Laboratórios Online</description>        
@@ -19,7 +19,7 @@
     <information locale="en">        
         <title>e-lab</title>        
         <vendor>IST</vendor>        
-        <homepage href="http://elab.ist.utl.pt" />        
+        <homepage href="http://localhost" />        
         <description>Instituto Superior Técnico's online laboratories</description>        
         <description kind="one-line">Online Labs</description>        
         <description kind="tooltip">Online Laboratories</description>        

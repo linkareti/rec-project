@@ -2,7 +2,7 @@
     <information>        
         <title>elab - Pendulo Mundial Maputo</title>        
         <vendor>IST - UTL</vendor>        
-        <homepage href="http://elab.ist.utl.pt/" />        
+        <homepage href="http://localhost/" />        
         <description>Laboratórios Online do Instituto Superior Técnico - disponibilizados para o Ministério da Educação de Portugal</description>        
         <description kind="one-line">Pendulo Mundial disponivel em Maputo, Mocambique</description>        
         <description kind="tooltip">Pendulo Maputo</description>        
@@ -19,7 +19,7 @@
     <information locale="en">        
         <title>World Pendulum Maputo</title>        
         <vendor>IST - UTL</vendor>        
-        <homepage href="http://elab.ist.utl.pt" />        
+        <homepage href="http://localhost" />        
         <description>World Pendulum assembled at Maputo, Mozambique</description>        
         <description kind="one-line">World Pendulum assembled at Maputo, Mozambique</description>        
         <description kind="tooltip">Pendulum Maputo</description>        
