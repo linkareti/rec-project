@@ -163,6 +163,11 @@ public class FotovoltaicoCustomizer extends AbstractCustomizer {
 
         protocolButtonGroup.add(buckFindMaxRadioButton);
         buckFindMaxRadioButton.setText(bundle.getString("rec.exp.fotovoltaico.lbl.protocol.buckfindmax")); // NOI18N
+        buckFindMaxRadioButton.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                buckFindMaxRadioButtonStateChanged(evt);
+            }
+        });
         protocolPanel.add(buckFindMaxRadioButton, new java.awt.GridBagConstraints());
 
         slidersPanel.add(protocolPanel, java.awt.BorderLayout.PAGE_START);
@@ -501,7 +506,7 @@ public class FotovoltaicoCustomizer extends AbstractCustomizer {
     }//GEN-LAST:event_angleSweepRadioButtonStateChanged
 
     private void buckSweepRadioButtonStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_buckSweepRadioButtonStateChanged
-        if (buckSweepRadioButton.isSelected() || buckFindMaxRadioButton.isSelected()) {
+        if (buckSweepRadioButton.isSelected()) {
             sldBuck.setEnabled(false);
             tfBuck.setEnabled(false);
         } else {
@@ -509,6 +514,16 @@ public class FotovoltaicoCustomizer extends AbstractCustomizer {
             tfBuck.setEnabled(true);
         }
     }//GEN-LAST:event_buckSweepRadioButtonStateChanged
+
+    private void buckFindMaxRadioButtonStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_buckFindMaxRadioButtonStateChanged
+        if (buckFindMaxRadioButton.isSelected()) {
+            sldBuck.setEnabled(false);
+            tfBuck.setEnabled(false);
+        } else {
+            sldBuck.setEnabled(true);
+            tfBuck.setEnabled(true);
+        }
+    }//GEN-LAST:event_buckFindMaxRadioButtonStateChanged
 
     private void tfBuckFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfAngleFocusLost
     {// GEN-HEADEREND:event_tfAngleFocusLost
