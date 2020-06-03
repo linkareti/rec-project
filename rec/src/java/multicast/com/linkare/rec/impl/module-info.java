@@ -1,4 +1,4 @@
 module com.linkare.rec.impl{
-	requires transitive org.omg.PortableServer;
+	requires org.omg.PortableServer;
 }
 
