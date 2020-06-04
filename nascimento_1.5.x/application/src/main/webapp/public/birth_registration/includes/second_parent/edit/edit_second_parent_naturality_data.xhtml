@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:o="http://omnifaces.org/ui">
+
+	<p:panel>
+		<f:facet name="header">
+			<legend>
+				<h:outputText
+					value="#{messages['birthRegistration.parent.naturalityData']}" />
+			</legend>
+		</f:facet>
+
+		<!-- Third row -->
+		<div class="row">
+			<div class="col-md-4">
+				<p:outputLabel value="#{messages['parent.naturalityType']}"
+					for="secondParentNaturalityType" />
+				<p:selectOneMenu id="secondParentNaturalityType"
+					value="#{birthRegistrationController.birthRegistration.secondParent.naturalityType}"
+					styleClass="col-md-12" style="width: none;">
+					<f:selectItem noSelectionOption="true"
+						itemLabel="#{messages['label.selectOne']}" />
+					<f:selectItems value="#{applicationFactory.naturalityTypes}"
+						var="naturalityType" itemLabel="#{messages[naturalityType.key]}"
+						itemValue="#{naturalityType}" />
+					<f:param name="disableValidation" value="#{true}" />
+					<p:ajax process="@this" update="secondParentNaturalityGroup"
+						listener="#{birthRegistrationController.onNaturalityTypeChange(birthRegistrationController.birthRegistration.secondParent)}"
+						partialSubmit="true" />
+				</p:selectOneMenu>
+				<div class="clearfix" />
+				<p:message for="secondParentNaturalityType" />
+			</div>
+
+			<!-- Fourth row -->
+			<h:panelGroup id="secondParentNaturalityGroup" layout="block">
+				<ui:fragment
+					rendered="#{birthRegistrationController.birthRegistration.secondParent.naturalityType eq 'PORTUGUESE'}">
+					<div class="col-md-8">
+						<p:outputLabel value="#{messages['naturality.parish']}"
+							for="secondParentNaturalityParish" />
+						<p:autoComplete id="secondParentNaturalityParish"
+							value="#{birthRegistrationController.birthRegistration.secondParent.naturality.parish}"
+							completeMethod="#{birthRegistrationController.completeAnyParish}"
+							var="parish" itemLabel="#{parish.name}" itemValue="#{parish}"
+							converter="#{parishConverter}" forceSelection="true"
+							minQueryLength="2"
+							maxResults="#{birthRegistrationController.numberOfParishesToShow}"
+							inputStyleClass="col-md-12" style="width: 100%;"
+							scrollHeight="300"
+							placeholder="#{messages['naturality.parish.placeholder']}">
+							<p:column>
+								<h:outputText value="#{parish.county.district.name}" /> &gt; <h:outputText
+									value="#{parish.county.name}" /> &gt; <h:outputText
+									value="#{parish.name}" />
+								<ui:fragment rendered="#{not parish.active}">
+									<span class="badge">EXTINTA</span>
+								</ui:fragment>
+							</p:column>
+						</p:autoComplete>
+						<div class="clearfix" />
+						<p:message for="secondParentNaturalityParish" />
+					</div>
+				</ui:fragment>
+
+				<ui:fragment
+					rendered="#{birthRegistrationController.birthRegistration.secondParent.naturalityType eq 'FOREIGN'}">
+					<div class="col-md-4">
+						<p:outputLabel value="#{messages['naturality.country']}"
+							for="secondParentForeignNaturalityCountry" />
+						<p:selectOneMenu id="secondParentForeignNaturalityCountry"
+							value="#{birthRegistrationController.birthRegistration.secondParent.naturality.country}"
+							styleClass="col-md-12" style="width: none;"
+							converter="#{countryConverter}">
+							<f:selectItem noSelectionOption="true"
+								itemLabel="#{messages['label.selectOne']}" />
+							<f:selectItems
+								value="#{applicationFactory.nonPortugueseCountries}"
+								var="country" itemLabel="#{country.name}" itemValue="#{country}" />
+						</p:selectOneMenu>
+						<div class="clearfix" />
+						<p:message for="secondParentForeignNaturalityCountry" />
+					</div>
+					<div class="col-md-4">
+						<p:outputLabel value="#{messages['naturality.location']}"
+							for="secondParentNaturalityLocation" />
+						<p:inputText id="secondParentNaturalityLocation" required="#{birthRegistrationController.birthRegistration.secondParent.naturalityType eq 'FOREIGN'}"
+							value="#{birthRegistrationController.birthRegistration.secondParent.naturality.location}"
+							styleClass="col-md-12"
+							placeholder="#{messages['naturality.location.placeholder']}" />
+						<div class="clearfix" />
+						<p:message for="secondParentNaturalityLocation" />
+					</div>
+				</ui:fragment>
+
+				<ui:fragment
+					rendered="#{birthRegistrationController.birthRegistration.secondParent.naturalityType eq 'ON_BOARD'}">
+					<div class="col-md-4">
+						<p:outputLabel value="#{messages['naturality.location']}"
+							for="secontParentOnBoardNaturalityLocation" />
+						<p:inputText id="secontParentOnBoardNaturalityLocation" required="#{birthRegistrationController.birthRegistration.secondParent.naturalityType eq 'ON_BOARD'}"
+							value="#{birthRegistrationController.birthRegistration.secondParent.naturality.location}"
+							styleClass="col-md-12" />
+						<div class="clearfix" />
+						<p:message for="secontParentOnBoardNaturalityLocation" />
+					</div>
+
+					<div class="col-md-8">
+						<div class="row">
+							<div class="col-md-3">
+								<p:outputLabel value="#{messages['naturality.latitude']}"
+									for="secondParentNaturalityLatitudeValue" />
+								<p:inputText id="secondParentNaturalityLatitudeValue"
+									value="#{birthRegistrationController.birthRegistration.secondParent.naturality.latitudeValue}"
+									styleClass="col-md-12"
+									placeholder="#{messages['naturality.latitude.placeholder']}" />
+								<div class="clearfix" />
+								<p:message for="secondParentNaturalityLatitudeValue" />
+							</div>
+							<div class="col-md-2">
+								<p:outputLabel
+									value="#{messages['naturality.latitude.coordinate']}"
+									for="secondParentNaturalityLatitudeCoordinatePosition" />
+								<p:selectOneMenu
+									id="secondParentNaturalityLatitudeCoordinatePosition"
+									value="#{birthRegistrationController.birthRegistration.secondParent.naturality.latitudeCoordinatePosition}"
+									styleClass="col-md-12" style="width: none;">
+									<f:selectItems
+										value="#{applicationFactory.latitudeCoordinatePositions}"
+										var="latitudeCoordinatePosition"
+										itemLabel="#{messages[latitudeCoordinatePosition.key]}"
+										itemValue="#{latitudeCoordinatePosition}" />
+								</p:selectOneMenu>
+								<div class="clearfix" />
+								<p:message
+									for="secondParentNaturalityLatitudeCoordinatePosition" />
+							</div>
+							<div class="col-md-3">
+								<p:outputLabel value="#{messages['naturality.longitude']}"
+									for="secondParentNaturalityLongitudeValue" />
+								<p:inputText id="secondParentNaturalityLongitudeValue"
+									value="#{birthRegistrationController.birthRegistration.secondParent.naturality.longitudeValue}"
+									styleClass="col-md-12"
+									placeholder="#{messages['naturality.longitude.placeholder']}" />
+								<div class="clearfix" />
+								<p:message for="secondParentNaturalityLongitudeValue" />
+							</div>
+							<div class="col-md-2">
+								<p:outputLabel
+									value="#{messages['naturality.longitude.coordinate']}"
+									for="secondParentNaturalityLongitudeCoordinatePosition" />
+								<p:selectOneMenu
+									id="secondParentNaturalityLongitudeCoordinatePosition"
+									value="#{birthRegistrationController.birthRegistration.secondParent.naturality.longitudeCoordinatePosition}"
+									styleClass="col-md-12" style="width: none;">
+									<f:selectItems
+										value="#{applicationFactory.longitudeCoordinatePositions}"
+										var="longitudeCoordinatePosition"
+										itemLabel="#{messages[longitudeCoordinatePosition.key]}"
+										itemValue="#{longitudeCoordinatePosition}" />
+								</p:selectOneMenu>
+								<div class="clearfix" />
+								<p:message
+									for="secondParentNaturalityLongitudeCoordinatePosition" />
+							</div>
+						</div>
+					</div>
+				</ui:fragment>
+			</h:panelGroup>
+		</div>
+	</p:panel>
+
+</ui:composition>

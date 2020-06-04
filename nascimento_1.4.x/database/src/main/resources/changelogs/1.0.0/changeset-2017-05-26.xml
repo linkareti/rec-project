@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+	<changeSet author="pzenida" id="2017-05-25-add-telephone-to-parent">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="parent" columnName="telephone" />
+			</not>
+		</preConditions>
+		<addColumn tableName="parent">
+			<column name="telephone" type="varchar(50)" afterColumn="email" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="pzenida" id="2017-05-26-add-deceased-to-parent">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="parent" columnName="deceased" />
+			</not>
+		</preConditions>
+		<addColumn tableName="parent">
+			<column name="deceased" type="bit(1)" beforeColumn="givenName" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="sbogas"
+		id="2017-05-26-add-saml_authn_request_issuer-configuration">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="configuration" columnName="saml_authn_request_issuer" />
+			</not>
+		</preConditions>
+		<addColumn tableName="configuration">
+			<column name="saml_authn_request_issuer" type="varchar(150)"
+				afterColumn="time_zone" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="sbogas"
+		id="2017-05-26-add-saml_authn_request_provider_name-configuration">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="configuration"
+					columnName="saml_authn_request_provider_name" />
+			</not>
+		</preConditions>
+		<addColumn tableName="configuration">
+			<column name="saml_authn_request_provider_name" type="varchar(50)"
+				afterColumn="saml_authn_request_issuer" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="sbogas"
+		id="2017-05-26-add-saml_authn_request_destination-configuration">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="configuration"
+					columnName="saml_authn_request_destination" />
+			</not>
+		</preConditions>
+		<addColumn tableName="configuration">
+			<column name="saml_authn_request_destination" type="varchar(150)"
+				afterColumn="saml_authn_request_provider_name" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="sbogas"
+		id="2017-05-26-add-saml_authn_request_assertion_consumer_service_url-configuration">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="configuration"
+					columnName="saml_authn_request_assertion_consumer_service_url" />
+			</not>
+		</preConditions>
+		<addColumn tableName="configuration">
+			<column name="saml_authn_request_assertion_consumer_service_url"
+				type="varchar(150)" afterColumn="saml_authn_request_destination" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="sbogas"
+		id="2017-05-26-add-saml_authn_request_assertion_consumer_service_url-configuration">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="configuration"
+					columnName="saml_authn_request_assertion_consumer_service_url" />
+			</not>
+		</preConditions>
+		<addColumn tableName="configuration">
+			<column name="saml_authn_request_assertion_consumer_service_url"
+				type="varchar(150)" afterColumn="saml_authn_request_destination" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="sbogas"
+		id="2017-05-26-add-saml_service_provider_keystore_type-configuration">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="configuration"
+					columnName="saml_service_provider_keystore_type" />
+			</not>
+		</preConditions>
+		<addColumn tableName="configuration">
+			<column name="saml_service_provider_keystore_type" type="varchar(30)"
+				afterColumn="saml_authn_request_assertion_consumer_service_url" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="sbogas"
+		id="2017-05-26-add-saml_service_provider_keystore_name-configuration">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="configuration"
+					columnName="saml_service_provider_keystore_name" />
+			</not>
+		</preConditions>
+		<addColumn tableName="configuration">
+			<column name="saml_service_provider_keystore_name" type="varchar(150)"
+				afterColumn="saml_service_provider_keystore_type" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="sbogas"
+		id="2017-05-26-add-saml_service_provider_Keystore_pass-configuration">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="configuration"
+					columnName="saml_service_provider_Keystore_pass" />
+			</not>
+		</preConditions>
+		<addColumn tableName="configuration">
+			<column name="saml_service_provider_Keystore_pass" type="varchar(30)"
+				afterColumn="saml_service_provider_keystore_name" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="sbogas"
+		id="2017-05-26-add-saml_service_provider_certificate_alias-configuration">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="configuration"
+					columnName="saml_service_provider_certificate_alias" />
+			</not>
+		</preConditions>
+		<addColumn tableName="configuration">
+			<column name="saml_service_provider_certificate_alias" type="varchar(150)"
+				afterColumn="saml_service_provider_Keystore_pass" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="sbogas"
+		id="2017-05-26-add-saml_service_provider_private_key_pass-configuration">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="configuration"
+					columnName="saml_service_provider_private_key_pass" />
+			</not>
+		</preConditions>
+		<addColumn tableName="configuration">
+			<column name="saml_service_provider_private_key_pass" type="varchar(30)"
+				afterColumn="saml_service_provider_certificate_alias" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="sbogas"
+		id="2017-05-26-add-saml_identity_provider_certificate_validation-configuration">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="configuration"
+					columnName="saml_identity_provider_certificate_validation" />
+			</not>
+		</preConditions>
+		<addColumn tableName="configuration">
+			<column name="saml_identity_provider_certificate_validation"
+				type="varchar(150)" afterColumn="saml_service_provider_private_key_pass" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="sbogas"
+		id="2017-05-26-add-saml_identity_provider_certificate_alias-configuration">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="configuration"
+					columnName="saml_identity_provider_certificate_alias" />
+			</not>
+		</preConditions>
+		<addColumn tableName="configuration">
+			<column name="saml_identity_provider_certificate_alias" type="varchar(150)"
+				afterColumn="saml_identity_provider_certificate_validation" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="sbogas"
+		id="2017-05-26-add-saml_identity_provider_keystore_type-configuration">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="configuration"
+					columnName="saml_identity_provider_keystore_type" />
+			</not>
+		</preConditions>
+		<addColumn tableName="configuration">
+			<column name="saml_identity_provider_keystore_type" type="varchar(30)"
+				afterColumn="saml_identity_provider_certificate_alias" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="sbogas"
+		id="2017-05-26-add-saml_identity_provider_keystore_name-configuration">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="configuration"
+					columnName="saml_identity_provider_keystore_name" />
+			</not>
+		</preConditions>
+		<addColumn tableName="configuration">
+			<column name="saml_identity_provider_keystore_name" type="varchar(150)"
+				afterColumn="saml_identity_provider_keystore_type" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="sbogas"
+		id="2017-05-26-add-saml_identity_provider_keystore_pass-configuration">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="configuration"
+					columnName="saml_identity_provider_keystore_pass" />
+			</not>
+		</preConditions>
+		<addColumn tableName="configuration">
+			<column name="saml_identity_provider_keystore_pass" type="varchar(30)"
+				afterColumn="saml_identity_provider_keystore_name" />
+		</addColumn>
+	</changeSet>
+
+</databaseChangeLog>

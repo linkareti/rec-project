@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+	<changeSet author="pzenida"
+		id="2017-07-14-add-second-email-to-organization">
+		<addColumn tableName="organization">
+			<column name="second_email" type="varchar(150)" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="pzenida"
+		id="2017-07-14--insert-NOTIFY_HOSPITAL_UNIT_OF_NEW_BIRTH_REGISTRATION-message-template">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">
+                                <![CDATA[
+select count(*) from message_template where code = 'NOTIFY_HOSPITAL_UNIT_OF_NEW_BIRTH_REGISTRATION'
+                                ]]>
+			</sqlCheck>
+		</preConditions>
+		<sql>
+			<![CDATA[
+insert into message_template (id, creation_date, code, type, subject, content)
+values (9, CURRENT_TIMESTAMP(), 'NOTIFY_HOSPITAL_UNIT_OF_NEW_BIRTH_REGISTRATION', 'EMAIL', 'Declaração de Nascimento Online n.º ${birthRegistration.registrationNumber}',
+'<p>Exmos. Senhores,</p>
+<p>Informamos V. Exas. que foi submetida uma declaração de nascimento online associado à unidade de saúde ${birthRegistration.hospitalUnit.name}, que ficou registado com o 
+n.º ${birthRegistration.registrationNumber}.</p>
+
+<p>Queira por favor aceder ao backoffice para confirmar/rejeitar o parto através do endereço  
+<a href="${configuration.applicationBaseUrl}/login.xhtml">http://nascimento.justica.gov.pt/login.xhtml</a>.</p>
+
+<p>Os nossos melhores cumprimentos,</p>
+<p>A equipa do Nascimento Online</p>')
+			]]>
+		</sql>
+		<rollback>
+			<sql>
+				<![CDATA[
+delete from message_template where code = 'NOTIFY_HOSPITAL_UNIT_OF_NEW_BIRTH_REGISTRATION'
+                ]]>
+			</sql>
+		</rollback>
+	</changeSet>
+
+	<changeSet author="pzenida"
+		id="2017-07-14--insert-NOTIFY_CIVIL_REGISTRATION_OFFICE_OF_NEW_BIRTH_REGISTRATION-message-template">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">
+                                <![CDATA[
+select count(*) from message_template where code = 'NOTIFY_CIVIL_REGISTRATION_OFFICE_OF_NEW_BIRTH_REGISTRATION'
+                                ]]>
+			</sqlCheck>
+		</preConditions>
+		<sql>
+			<![CDATA[
+insert into message_template (id, creation_date, code, type, subject, content)
+values (10, CURRENT_TIMESTAMP(), 'NOTIFY_CIVIL_REGISTRATION_OFFICE_OF_NEW_BIRTH_REGISTRATION', 'EMAIL', 'Declaração de Nascimento Online n.º ${birthRegistration.registrationNumber}',
+'<p>Exmos. Senhores,</p>
+<p>Informamos V. Exas. que foi submetida uma declaração de nascimento online que ficou registado com o n.º ${birthRegistration.registrationNumber}.</p>
+
+<p>O parto foi confirmado pela unidade de saúde ${birthRegistration.hospitalUnit.name} em ${date.format("dd-MM-yyyy HH:mm", $birthRegistration.lastBirthRegistrarionDate)}.</p>
+
+<p>Queira por favor aceder ao backoffice para aceitação da declaração através do endereço 
+<a href="${configuration.applicationBaseUrl}/login.xhtml">http://nascimento.justica.gov.pt/login.xhtml</a>.</p>
+
+<p>Os nossos melhores cumprimentos,</p>
+<p>A equipa do Nascimento Online</p>')
+			]]>
+		</sql>
+		<rollback>
+			<sql>
+				<![CDATA[
+delete from message_template where code = 'NOTIFY_CIVIL_REGISTRATION_OFFICE_OF_NEW_BIRTH_REGISTRATION'
+                ]]>
+			</sql>
+		</rollback>
+	</changeSet>
+
+</databaseChangeLog>

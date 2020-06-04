@@ -1,0 +1,100 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<composite:interface>
+	<composite:attribute name="parentData"
+		shortDescription="The parent whose parents data we want to present"
+		type="com.linkare.irn.nascimento.model.identification.Parent" />
+</composite:interface>
+<composite:implementation>
+
+	<p:panel>
+		<f:facet name="header">
+			<legend>
+				<h:outputText
+					value="#{messages['birthRegistration.identificationData']}" />
+			</legend>
+		</f:facet>
+
+		<div class="row">
+			<!-- First row -->
+			<div class="col-md-4">
+				<p:outputLabel value="#{messages['parent.givenName']}" />
+				<h:outputText value="#{cc.attrs.parentData.givenName}"
+					rendered="#{not empty cc.attrs.parentData.givenName}" />
+				<h:outputText value="#{messages['label.notAvailable']}"
+					styleClass="text-muted"
+					rendered="#{empty cc.attrs.parentData.givenName}" />
+			</div>
+			<div class="col-md-4">
+				<p:outputLabel value="#{messages['parent.familyName']}" />
+				<h:outputText value="#{cc.attrs.parentData.familyName}"
+					rendered="#{not empty cc.attrs.parentData.familyName}" />
+				<h:outputText value="#{messages['label.notAvailable']}"
+					styleClass="text-muted"
+					rendered="#{empty cc.attrs.parentData.familyName}" />
+			</div>
+
+			<div class="col-md-4">
+				<p:outputLabel
+					value="#{messages['parent.identificationCardNumber']}" />
+				<h:outputText
+					value="#{cc.attrs.parentData.identificationCardNumber}"
+					rendered="#{not empty cc.attrs.parentData.identificationCardNumber}" />
+				<h:outputText value="#{messages['label.notAvailable']}"
+					styleClass="text-muted"
+					rendered="#{empty cc.attrs.parentData.identificationCardNumber}" />
+			</div>
+
+
+			<div class="col-md-4">
+				<p:outputLabel value="#{messages['parent.gender']}" />
+				<h:outputText value="#{messages[cc.attrs.parentData.gender.key]}"
+					rendered="#{not empty cc.attrs.parentData.gender}" />
+				<h:outputText value="#{messages['label.notAvailable']}"
+					styleClass="text-muted"
+					rendered="#{empty cc.attrs.parentData.gender}" />
+			</div>
+
+			<div class="col-md-4">
+				<p:outputLabel value="#{messages['parent.maritalStatus']}" />
+				<h:outputText
+					value="#{messages[cc.attrs.parentData.maritalStatus.key]}"
+					rendered="#{not empty cc.attrs.parentData.maritalStatus}" />
+				<h:outputText value="#{messages['label.notAvailable']}"
+					styleClass="text-muted"
+					rendered="#{empty cc.attrs.parentData.gender}" />
+			</div>
+
+			<div class="col-md-4">
+				<p:outputLabel value="#{messages['parent.dateOfBirth']}" />
+				<h:outputText value="#{cc.attrs.parentData.dateOfBirth}"
+					rendered="#{not empty cc.attrs.parentData.dateOfBirth}">
+					<f:convertDateTime
+						timeZone="#{configurationManager.configuration.timeZone}"
+						locale="#{configurationManager.configuration.locale}"
+						pattern="#{configurationManager.configuration.datePattern}" />
+				</h:outputText>
+				<h:outputText value="#{messages['label.notAvailable']}"
+					styleClass="text-muted"
+					rendered="#{empty cc.attrs.parentData.dateOfBirth}" />
+			</div>
+
+			<div class="col-md-4">
+				<p:outputLabel value="#{messages['parent.nationality']}" />
+				<h:outputText value="#{cc.attrs.parentData.nationality.name}"
+					rendered="#{not empty cc.attrs.parentData.nationality}" />
+				<h:outputText value="#{messages['label.notAvailable']}"
+					styleClass="text-muted"
+					rendered="#{empty cc.attrs.parentData.nationality}" />
+			</div>
+
+		</div>
+	</p:panel>
+
+</composite:implementation>
+</html>

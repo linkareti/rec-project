@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:o="http://omnifaces.org/ui">
+
+	<p:panel>
+		<f:facet name="header">
+			<legend>
+				<h:outputText
+					value="#{messages['birthRegistration.hospitalUnitData']}" />
+			</legend>
+		</f:facet>
+
+		<!--  		<ui:remove>-->
+
+		<div class="row">
+			<div class="col-md-12">
+				<p:outputLabel value="#{messages['birthRegistration.hospitalUnit']}"
+					for="registrationHospitalUnit" />
+				<p:selectOneMenu id="registrationHospitalUnit"
+					value="#{birthRegistrationController.birthRegistration.hospitalUnit}"
+					styleClass="col-md-12" style="width: none;" filter="true"
+					filterMatchMode="contains" converter="#{organizationConverter}" required="true">
+					<f:selectItem noSelectionOption="true"
+						itemLabel="#{messages['label.selectOne']}" />
+					<f:selectItems value="#{applicationFactory.hospitalUnits}"
+						var="hospitalUnit" itemLabel="#{hospitalUnit.name}"
+						itemValue="#{hospitalUnit}" />
+					<p:ajax event="change" update="othersHospitalUnitPanel" />
+					<f:param name="disableValidation" value="#{true}" />
+				</p:selectOneMenu>
+				<div class="clearfix" />
+				<p:message for="registrationHospitalUnit" />
+			</div>
+			<div class="col-md-12">
+				<p:outputLabel
+					value="#{messages['birthRegistration.hospital.advice']}" />
+			</div>
+		</div>
+
+
+		<h:panelGroup id="othersHospitalUnitPanel" layout="block">
+			<ui:fragment
+				rendered="#{birthRegistrationController.birthRegistration.hospitalUnit.organizationType eq 'OTHER_HOSPITAL_UNIT'}">
+                            <div class="row">
+                                <div class="col-md-12">
+                                        <p:outputLabel value="#{messages['label.hospital.otherFreeText']}"
+                                                for="othersHospitalUnit" />
+                                        <p:inputText id="othersHospitalUnit"
+                                                value="#{birthRegistrationController.birthRegistration.otherHospitalUnit}"
+                                                styleClass="col-md-12" required="true" />
+                                        <p:message for="othersHospitalUnit" />
+                                    </div>
+                                </div>
+			</ui:fragment>
+		</h:panelGroup>
+
+
+		<h:panelGroup id="documentFileGroup" layout="block" styleClass="row">
+			<div class="col-md-12">
+				<f:event
+					listener="#{birthRegistrationController.documentHelper.validateUploadedDocuments}"
+					type="postValidate" />
+
+				<p:outputLabel value="#{messages['birthRegistration.file']}" />
+				<p class="subtitle">
+					<h:outputFormat
+						value="#{messages['birthRegistration.documents.info']}"
+						escape="false">
+						<f:param value="#{configurationManager.allowedMaxSizeInMB}" />
+						<f:param value="#{configurationManager.allowedFileExtensions}" />
+					</h:outputFormat>
+				</p>
+
+				<p:fileUpload id="uploadingFile"
+					fileUploadListener="#{birthRegistrationController.documentHelper.handleFileUpload}"
+					label="#{messages['label.fileUpload']}" mode="advanced"
+					dragDropSupport="true" auto="true" multiple="false"
+					allowTypes="#{configurationManager.primefacesAllowedFileExtensions}"
+					sizeLimit="#{configurationManager.configuration.maxUploadSizeInBytes}"
+					invalidFileMessage="#{messages['label.invalidFileType']}"
+					invalidSizeMessage="#{messages['label.invalidFileSize']}"
+					showButtons="false" update="form:documentFileGroup" fileLimit="1"
+					fileLimitMessage="#{messages['label.fileLimitExceeded']}">
+
+					<f:attribute name="type" value="BIRTH_PROOF" />
+
+				</p:fileUpload>
+				<p:message for="uploadingFile" />
+
+				<ui:fragment
+					rendered="#{not empty birthRegistrationController.birthRegistration.filename}">
+
+					<div class="clearfix">
+						<i
+							class="#{birthRegistrationController.documentHelper.uploadedFileIcon}" />
+						<h:outputText value="#{' '}" />
+						<h:outputText
+							value="#{birthRegistrationController.documentHelper.uploadedFileName}" />
+
+						<p:commandButton icon="fa fa-times"
+							action="#{birthRegistrationController.documentHelper.clearUploadedDocument('BIRTH_PROOF')}"
+							title="#{messages['button.removeUploadedFile']}" process="@this"
+							update=":form:documentFileGroup" styleClass="pull-right" />
+					</div>
+				</ui:fragment>
+			</div>
+
+		</h:panelGroup>
+		<ui:remove>
+			<h:panelGroup id="babyPhotoGroup" layout="block" styleClass="row">
+
+
+				<!-- :selectBooleanCheckbox id="confirmBabyPhoto"
+						value="#{birthRegistrationController.requiredBabyPhoto}">
+						<p:outputLabel
+							value="#{messages['birthRegistration.documents.babyPhoto.info']}"
+							style="display: inline-block; margin-right: 1%;" />
+						<p:ajax event="change" update="uploadPhotoPanel" />
+					</h:selectBooleanCheckbox-->
+
+
+				<h:panelGrid id="uploadPhotoPanel">
+					<ui:fragment>
+
+						<div class="col-md-12">
+							<p:outputLabel value="Foto do Bebé" />
+							<p class="subtitle">
+								<h:outputFormat
+									value="#{messages['birthRegistration.documents.info']}"
+									escape="false">
+									<f:param value="#{configurationManager.allowedMaxSizeInMB}" />
+									<f:param value="#{configurationManager.allowedFileExtensions}" />
+								</h:outputFormat>
+								<p:outputLabel
+									value="#{messages['birthRegistration.docuemtns.payment']}" />
+							</p>
+
+							<p:fileUpload id="uploadingBabyPhotoFile"
+								fileUploadListener="#{birthRegistrationController.documentHelper.handleFileUpload}"
+								label="#{messages['label.fileUpload']}" mode="advanced"
+								dragDropSupport="true" auto="true" multiple="false"
+								allowTypes="#{configurationManager.primefacesAllowedFileExtensions}"
+								sizeLimit="#{configurationManager.configuration.maxUploadSizeInBytes}"
+								invalidFileMessage="#{messages['label.invalidFileType']}"
+								invalidSizeMessage="#{messages['label.invalidFileSize']}"
+								required="true" showButtons="false"
+								update="form:uploadPhotoPanel" fileLimit="1"
+								fileLimitMessage="#{messages['label.fileLimitExceeded']}">
+
+								<f:attribute name="type" value="BABY_PHOTO" />
+
+							</p:fileUpload>
+							<p:message for="uploadingFile" />
+
+							<ui:fragment
+								rendered="#{not empty birthRegistrationController.birthRegistration.babyPhoto.filename}">
+
+								<div class="clearfix">
+									<i
+										class="#{birthRegistrationController.documentHelper.babyPhotoFileIcon}" />
+									<h:outputText value="#{' '}" />
+									<h:outputText
+										value="#{birthRegistrationController.documentHelper.babyPhotoFileName}" />
+
+									<p:commandButton icon="fa fa-times"
+										action="#{birthRegistrationController.documentHelper.clearUploadedDocument('BABY_PHOTO')}"
+										title="#{messages['button.removeUploadedFile']}"
+										process="@this" update=":form:uploadPhotoPanel"
+										styleClass="pull-right" />
+								</div>
+							</ui:fragment>
+
+						</div>
+					</ui:fragment>
+				</h:panelGrid>
+			</h:panelGroup>
+		</ui:remove>
+	</p:panel>
+
+</ui:composition>

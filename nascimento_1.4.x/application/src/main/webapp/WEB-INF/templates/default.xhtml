@@ -1,0 +1,196 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui">
+<h:head>
+	<title><h:outputText value="#{messages['application.title']}" /></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta content="True" name="HandheldFriendly" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<meta name="viewport" content="width=device-width" />
+
+	<h:outputStylesheet library="webjars"
+		name="bootstrap/3.3.5/css/bootstrap.min.css" />
+	<h:outputStylesheet library="primefaces"
+		name="fileupload/fileupload.css" />
+	<h:outputStylesheet name="css/application.css" />
+	<ui:insert name="pageCss" />
+
+	<link rel="shortcut icon" href="${request.contextPath}/favicon.ico" />
+
+	<h:outputScript library="primefaces" name="jquery/jquery.js"
+		target="head" />
+	<h:outputScript library="primefaces" name="core.js" target="head" />
+	<h:outputScript library="primefaces" name="components.js" target="head" />
+	<h:outputScript library="primefaces" name="validation/validation.js"
+		target="head" />
+	<h:outputScript library="primefaces"
+		name="validation/beanvalidation.js" target="head" />
+	<h:outputScript library="primefaces" name="inputnumber/inputnumber.js"
+		target="head" />
+
+	<h:outputScript library="webjars"
+		name="bootstrap/3.3.5/js/bootstrap.min.js" target="head" />
+
+	<h:outputScript name="js/application.js" target="head" />
+</h:head>
+<h:body class="#{topLevelClass}">
+	<f:view transient="#{transient eq true}" locale="pt">
+
+		<div id="page-top" class="index">
+
+			<!-- Navigation -->
+			<ui:insert name="header">
+				<h:form id="logoutForm">
+					<nav class="navbar navbar-default">
+						<div class="container">
+							<!-- Brand and toggle get grouped for better mobile display -->
+							<div class="navbar-header page-scroll">
+								<ui:fragment
+									rendered="#{not empty loginBean and loginBean.loggedIn}">
+									<button type="button" class="navbar-toggle"
+										data-toggle="collapse" data-target="#navbar-collapse">
+										<span class="sr-only">Toggle navigation</span> <span
+											class="icon-bar"></span> <span class="icon-bar"></span> <span
+											class="icon-bar"></span>
+									</button>
+								</ui:fragment>
+								<h:link outcome="home">
+									<h:graphicImage name="img/logo.png" />
+								</h:link>
+
+							</div>
+
+							<!-- Collect the nav links, forms, and other content for toggling -->
+							<div class="collapse navbar-collapse" id="navbar-collapse">
+								<h:panelGroup id="menuOptions" layout="block">
+									<ul class="nav navbar-nav navbar-right">
+										<ui:fragment
+											rendered="#{not loginBean.loggedIn or (loginBean.loggedIn and loginBean.hasCitizenRole)}">
+											<a href="#{configurationManager.configuration.faqURL}"
+												class="faqs" target="_blank"><h:outputText
+														escape="false" value="#{messages['header.faq']}" />
+											</a>
+										</ui:fragment>
+
+										<li class="hidden"><a href="#page-top"></a></li>
+										<ui:insert name="menu-options">
+
+											<ui:fragment
+												rendered="#{not empty loginBean and loginBean.loggedIn}">
+												<ui:fragment rendered="#{loginBean.hasAdminRole}">
+													<li
+														class="#{currentPage eq 'configurations' ? 'active' : ''}"><h:link
+															outcome="configs"
+															value="#{messages['menu.configurations']}" /></li>
+													<li class="#{currentPage eq 'uploads' ? 'active' : ''}"><h:link
+															outcome="uploads" value="#{messages['menu.uploads']}" /></li>
+												</ui:fragment>
+												<ui:fragment
+													rendered="#{loginBean.hasHospitalUnitRole or loginBean.hasCivilRegistrationOfficeRole}">
+													<li
+														class="#{currentPage eq 'birthregistrations' ? 'active' : ''}"><h:link
+															outcome="birthregistrations"
+															value="#{messages['menu.birthregistrations']}" /></li>
+												</ui:fragment>
+												<li class="logout-action"><p:commandLink
+														value="#{messages['button.logout']}" update="@all"
+														process="@this" action="#{authenticationBean.logout()}"
+														global="false">
+														<f:param name="logout" value="true" />
+													</p:commandLink></li>
+											</ui:fragment>
+										</ui:insert>
+									</ul>
+								</h:panelGroup>
+							</div>
+							<!-- /.navbar-collapse -->
+
+						</div>
+						<!-- /.container-fluid -->
+					</nav>
+				</h:form>
+			</ui:insert>
+			<!-- Content Grid Section -->
+			<ui:insert name="contentWrapper">
+				<section id="content">
+
+					<p:growl globalOnly="true" showDetail="true" showSummary="true"
+						autoUpdate="true" redisplay="true" sticky="false" severity="info"
+						escape="false" life="5000" widgetVar="infoGrowl" />
+
+					<p:growl globalOnly="true" showDetail="true" showSummary="true"
+						autoUpdate="true" redisplay="true" sticky="true"
+						severity="warn,error,fatal" escape="false" />
+<!-- Container -->
+					<div class="">
+
+						<h:form id="form">
+
+							<h:panelGroup id="mainContent" layout="block">
+								<ui:insert name="content">
+                                                        Page content is shown here
+                                                    </ui:insert>
+							</h:panelGroup>
+							<p:blockUI block="mainContent" animate="true"
+								widgetVar="mainContentBUI" trigger="@form">
+								<h:outputText value="#{messages['label.processing']}" />
+							</p:blockUI>
+						</h:form>
+					</div>
+				</section>
+
+				<!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+				<div class="scroll-top page-scroll visible-xs visble-sm">
+					<a class="btn btn-primary" href="#page-top"> <i
+						class="fa fa-chevron-up"></i>
+					</a>
+				</div>
+
+			</ui:insert>
+
+		</div>
+
+		<ui:insert name="footer">
+			<footer id="footer">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-8 col-sm-6">
+                                                        <h:link outcome="home">
+                                                                <h:graphicImage name="img/logo-footer.png" />
+                                                        </h:link>
+							<h:outputText styleClass="footer-brand"
+								value="#{messages['footer.title']}" escape="false" />
+						</div>
+						<div class="col-md-4 col-sm-6 text-right logos">
+
+							<h:outputLink target="blank"
+								value="https://justicamaisproxima.mj.pt/">
+								<h:graphicImage name="img/jproxima.png" />
+							</h:outputLink>
+							<h:outputLink target="blank" value="http://www.portugal.gov.pt/">
+								<h:graphicImage name="img/republicaportuguesa.png" />
+							</h:outputLink>
+
+
+						</div>
+					</div>
+				</div>
+			</footer>
+		</ui:insert>
+
+		<h:outputScript library="primefaces" name="fileupload/fileupload.js"
+			target="head" />
+		<script type="text/javascript">
+			Application.disableReturnOnFields();
+		</script>
+	</f:view>
+</h:body>
+</html>

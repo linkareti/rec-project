@@ -1,0 +1,104 @@
+############################
+## Release ##
+############################
+
+1 - Criar o branch da release
+
+$CONSOLE_PROMPT > mvn release:branch -DautoVersionSubmodules=true -DdevelopmentVersion=1.0.0-SNAPSHOT -DbranchName=rel-1.0.x -B -Dsvn_username=<username> -Dsvn_password=<password> -Drelease_task_id=<tasksId>
+
+2 - Ir ao Job de release no Jenkins e executar a release
+
+############################
+## Database setup ##
+############################
+
+1 - Criar base de dados local em MySQL:
+
+$CONSOLE_PROMT > mysql -uroot
+
+$MYSQL_CLIENT_PROMT > CREATE DATABASE nascimento CHARACTER SET utf8 COLLATE utf8_general_ci;
+$MYSQL_CLIENT_PROMT > use nascimento;
+
+############################
+## Wildfly Configurations ##
+############################
+
+1 - Datasource (ou similar):
+
+<xa-datasource jndi-name="java:/jdbc/nascimento" pool-name="nascimentopool" enabled="true" use-java-context="true">
+    <xa-datasource-property name="ServerName">
+        localhost
+    </xa-datasource-property>
+    <xa-datasource-property name="DatabaseName">
+        nascimento
+    </xa-datasource-property>
+    <driver>mysql</driver>
+    <security>
+        <user-name>root</user-name>
+    </security>
+    <validation>
+        <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLValidConnectionChecker"/>
+        <exception-sorter class-name="org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLExceptionSorter"/>
+    </validation>
+</xa-datasource>
+
+2 - Mail session (ou similar) e respetivo socket binding:
+
+<mail-session name="nascimento" jndi-name="java:jboss/mail/nascimento">
+    <smtp-server outbound-socket-binding-ref="gmail-smtp" ssl="true" username="*********" password="********"/>
+</mail-session>
+
+<outbound-socket-binding name="gmail-smtp" source-port="0" fixed-source-port="false">
+    <remote-destination host="smtp.gmail.com" port="465"/>
+</outbound-socket-binding>
+
+
+############################
+## Project build and deploy on Wildfly ##
+############################
+
+1 - Ir até à pasta raíz do projeto (é necessário ter o Maven 3.2.5 ou superior, assim como o Java 1.8.0_121 ou superior
+
+$COMMAND_PROMT > mvn clean install
+
+O comando anterior deverá inicializar a estrutura da base de dados, de acordo com o conteúdo dos ficheiros changeset-*.xml existentes na pasta src/main/resources/changelog
+
+2 - Se o desenvolvimento for em Linux, onde seja possível criar links simbólicos, a forma recomandada de fazê-lo é através da criação de um link simbólico na pasta de deployment do 
+Wildfly para a pasta contendo o "executável" do projeto, da seguinte forma:
+
+$COMMAND_PROMT > ln -sv $PROJECT_HOME/target/nascimento $WILDFLY_HOME/standalone/deployments/nascimento.war
+
+e neste caso, sempre que pretendemos fazer redeploy da aplicação, o comando a executar para a build do projeto será:
+
+$COMMAND_PROMT > mvn clean install && touch $WILDFLY_HOME/standalone/deployments/nascimento.war.dodeploy
+
+3 - Se o desenvolvimento for feito noutra plataforma, onde links simbólicos não seja possível, o comando poderá ser equivalente a:
+
+$COMMAND_PROMT > mvn clean install && copy /y target/nascimento.war $WILDFLY_HOME/standalone/deployments/
+
+############################
+## Project build and deploy on Docker##
+############################
+
+1 - Ir até à pasta raíz do projeto (é necessário ter o Maven 3.2.5 ou superior, o Java 1.8.0_121 ou superior e ainda o Docker 19.03.6)
+
+$COMMAND_PROMT > mvn clean install -Pdocker-compose
+
+2 - Ir até à pasta target do modulo application ( é necessário docker-compose version 1.24.1)
+
+$COMMAND_PROMT > docker-compose -f docker-compose-runner.yml up || (ou em detached mode) docker-compose -f docker-compose-runner.yml up -d
+
+3 - Ir até /etc/hosts e adicionar
+
+127.0.0.1       localhost nascimento.justica.gov.pt
+
+4 - Ir até ao link e ativar o modo "Dummy" em autenticação CC
+    && Adicionar os csv localizados em application/target/classes/csv/ na aba de carregamentos 
+https://nascimento.justica.gov.pt/nascimento/login.xhtml
+
+Username: admin
+Password: admin
+
+5 - Ir até ao link https://nascimento.justica.gov.pt/nascimento
+
+ 

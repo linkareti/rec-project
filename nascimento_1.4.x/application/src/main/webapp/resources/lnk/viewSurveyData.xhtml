@@ -1,0 +1,415 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<composite:interface>
+	<composite:attribute name="birthRegistration"
+		shortDescription="The birth registration whose survey data we want to present"
+		type="com.linkare.irn.nascimento.model.core.BirthRegistration" />
+	<composite:attribute name="civilRegistrationOffice"
+		shortDescription="Include civilRegistrationOffice on component labels"
+		type="java.lang.Boolean" default="false" />
+</composite:interface>
+<composite:implementation>
+
+	<p:panel>
+		<ui:fragment
+			rendered="#{not empty cc.attrs.birthRegistration.secondParent}">
+			<div class="row">
+				<div class="col-md-6">
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.birthFiliation']}"
+						rendered="#{not cc.attrs.civilRegistrationOffice}" />
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.birthFiliation.civilRegistrationOffice']}"
+						rendered="#{cc.attrs.civilRegistrationOffice}" />
+					<h:outputText
+						value="#{messages[cc.attrs.birthRegistration.birthFiliation.key]}"
+						rendered="#{not empty cc.attrs.birthRegistration.birthFiliation}" />
+					<h:outputText value="#{messages['label.notAvailable']}"
+						styleClass="text-muted"
+						rendered="#{empty cc.attrs.birthRegistration.birthFiliation}" />
+				</div>
+			</div>
+		</ui:fragment>
+		<ui:fragment
+			rendered="#{cc.attrs.birthRegistration.birthFiliation eq 'WITHIN_MARRIAGE'}">
+			<div class="row">
+				<div class="col-md-6">
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.marriageDate']}"
+						rendered="#{not cc.attrs.civilRegistrationOffice}" />
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.marriageDate.civilRegistrationOffice']}"
+						rendered="#{cc.attrs.civilRegistrationOffice}" />
+
+					<h:outputText value="#{cc.attrs.birthRegistration.marriageDate}"
+						rendered="#{not empty cc.attrs.birthRegistration.marriageDate}">
+						<f:convertDateTime
+							timeZone="#{configurationManager.configuration.timeZone}"
+							locale="#{configurationManager.configuration.locale}"
+							pattern="#{configurationManager.configuration.datePattern}" />
+					</h:outputText>
+					<h:outputText value="#{messages['label.notAvailable']}"
+						styleClass="text-muted"
+						rendered="#{empty cc.attrs.birthRegistration.marriageDate}" />
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-4">
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.marriageLiveBirth']}"
+						rendered="#{not cc.attrs.civilRegistrationOffice}" />
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.marriageLiveBirth.civilRegistrationOffice']}"
+						rendered="#{cc.attrs.civilRegistrationOffice}" />
+					<h:outputText
+						value="#{cc.attrs.birthRegistration.marriageLiveBirth}"
+						rendered="#{not empty cc.attrs.birthRegistration.marriageLiveBirth}" />
+					<h:outputText value="#{messages['label.notAvailable']}"
+						styleClass="text-muted"
+						rendered="#{empty cc.attrs.birthRegistration.marriageLiveBirth}" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.marriageStillborn']}"
+						rendered="#{not cc.attrs.civilRegistrationOffice}" />
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.marriageStillborn.civilRegistrationOffice']}"
+						rendered="#{cc.attrs.civilRegistrationOffice}" />
+					<h:outputText
+						value="#{cc.attrs.birthRegistration.marriageStillborn}"
+						rendered="#{not empty cc.attrs.birthRegistration.marriageStillborn}" />
+					<h:outputText value="#{messages['label.notAvailable']}"
+						styleClass="text-muted"
+						rendered="#{empty cc.attrs.birthRegistration.marriageStillborn}" />
+				</div>
+			</div>
+		</ui:fragment>
+
+		<div class="row">
+			<div class="col-md-6">
+				<p:outputLabel
+					value="#{messages['birthRegistration.survey.birthLocation']}"
+					rendered="#{not cc.attrs.civilRegistrationOffice}" />
+				<p:outputLabel
+					value="#{messages['birthRegistration.survey.birthLocation.civilRegistrationOffice']}"
+					rendered="#{cc.attrs.civilRegistrationOffice}" />
+				<h:outputText
+					value="#{messages[cc.attrs.birthRegistration.birthLocation.key]}"
+					rendered="#{not empty cc.attrs.birthRegistration.birthLocation}" />
+				<h:outputText value="#{messages['label.notAvailable']}"
+					styleClass="text-muted"
+					rendered="#{empty cc.attrs.birthRegistration.birthLocation}" />
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<p:outputLabel
+					value="#{messages['birthRegistration.survey.birthNature']}"
+					rendered="#{not cc.attrs.civilRegistrationOffice}" />
+				<p:outputLabel
+					value="#{messages['birthRegistration.survey.birthNature.civilRegistrationOffice']}"
+					rendered="#{cc.attrs.civilRegistrationOffice}" />
+				<h:outputText
+					value="#{messages[cc.attrs.birthRegistration.birthNature.key]}"
+					rendered="#{not empty cc.attrs.birthRegistration.birthNature}" />
+				<h:outputText value="#{messages['label.notAvailable']}"
+					styleClass="text-muted"
+					rendered="#{empty cc.attrs.birthRegistration.birthNature}" />
+			</div>
+		</div>
+
+		<ui:fragment
+			rendered="#{cc.attrs.birthRegistration.birthNature eq 'TWIN'}">
+			<div class="row">
+				<div class="col-md-3">
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.birthTwins']}"
+						rendered="#{not cc.attrs.civilRegistrationOffice}" />
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.birthTwins.civilRegistrationOffice']}"
+						rendered="#{cc.attrs.civilRegistrationOffice}" />
+					<h:outputText
+						value="#{messages[cc.attrs.birthRegistration.birthTwins.key]}"
+						rendered="#{not empty cc.attrs.birthRegistration.birthTwins}" />
+					<h:outputText value="#{messages['label.notAvailable']}"
+						styleClass="text-muted"
+						rendered="#{empty cc.attrs.birthRegistration.birthTwins}" />
+				</div>
+				<div class="col-md-3">
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.birthTwinsNumberOfLiveBirth']}"
+						rendered="#{not cc.attrs.civilRegistrationOffice}" />
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.birthTwinsNumberOfLiveBirth.civilRegistrationOffice']}"
+						rendered="#{cc.attrs.civilRegistrationOffice}" />
+					<h:outputText
+						value="#{cc.attrs.birthRegistration.birthTwinsNumberOfLiveBirth}"
+						rendered="#{not empty cc.attrs.birthRegistration.birthTwinsNumberOfLiveBirth}" />
+					<h:outputText value="#{messages['label.notAvailable']}"
+						styleClass="text-muted"
+						rendered="#{empty cc.attrs.birthRegistration.birthTwinsNumberOfLiveBirth}" />
+				</div>
+				<div class="col-md-3">
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.birthTwinsNumberOfStillBirth']}"
+						rendered="#{not cc.attrs.civilRegistrationOffice}" />
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.birthTwinsNumberOfStillBirth.civilRegistrationOffice']}"
+						rendered="#{cc.attrs.civilRegistrationOffice}" />
+					<h:outputText
+						value="#{cc.attrs.birthRegistration.birthTwinsNumberOfStillBirth}"
+						rendered="#{not empty cc.attrs.birthRegistration.birthTwinsNumberOfStillBirth}" />
+					<h:outputText value="#{messages['label.notAvailable']}"
+						styleClass="text-muted"
+						rendered="#{empty cc.attrs.birthRegistration.birthTwinsNumberOfStillBirth}" />
+				</div>
+				<div class="col-md-3">
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.birthTwinsNumberOfTwins']}"
+						rendered="#{not cc.attrs.civilRegistrationOffice}" />
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.birthTwinsNumberOfTwins.civilRegistrationOffice']}"
+						rendered="#{cc.attrs.civilRegistrationOffice}" />
+					<h:outputText
+						value="#{cc.attrs.birthRegistration.birthTwinsNumberOfTwins}"
+						rendered="#{not empty cc.attrs.birthRegistration.birthTwinsNumberOfTwins}" />
+					<h:outputText value="#{messages['label.notAvailable']}"
+						styleClass="text-muted"
+						rendered="#{empty cc.attrs.birthRegistration.birthTwinsNumberOfTwins}" />
+				</div>
+			</div>
+		</ui:fragment>
+
+		<div class="row">
+			<div class="col-md-6">
+				<p:outputLabel
+					value="#{messages['birthRegistration.survey.weight']}"
+					rendered="#{not cc.attrs.civilRegistrationOffice}" />
+				<p:outputLabel
+					value="#{messages['birthRegistration.survey.weight.civilRegistrationOffice']}"
+					rendered="#{cc.attrs.civilRegistrationOffice}" />
+				<h:outputText value="#{cc.attrs.birthRegistration.weight}"
+					rendered="#{not empty cc.attrs.birthRegistration.weight}" />
+				<h:outputText value="#{messages['label.notAvailable']}"
+					styleClass="text-muted"
+					rendered="#{empty cc.attrs.birthRegistration.weight}" />
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<p:outputLabel
+					value="#{messages['birthRegistration.survey.midwifeType']}"
+					rendered="#{not cc.attrs.civilRegistrationOffice}" />
+				<p:outputLabel
+					value="#{messages['birthRegistration.survey.midwifeType.civilRegistrationOffice']}"
+					rendered="#{cc.attrs.civilRegistrationOffice}" />
+				<h:outputText
+					value="#{messages[cc.attrs.birthRegistration.midwifeType.key]}"
+					rendered="#{not empty cc.attrs.birthRegistration.midwifeType}" />
+				<h:outputText value="#{messages['label.notAvailable']}"
+					styleClass="text-muted"
+					rendered="#{empty cc.attrs.birthRegistration.midwifeType}" />
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<p:outputLabel
+					value="#{messages['birthRegistration.survey.durationOfPregnancy']}"
+					rendered="#{not cc.attrs.civilRegistrationOffice}" />
+				<p:outputLabel
+					value="#{messages['birthRegistration.survey.durationOfPregnancy.civilRegistrationOffice']}"
+					rendered="#{cc.attrs.civilRegistrationOffice}" />
+				<h:outputText
+					value="#{cc.attrs.birthRegistration.durationOfPregnancy}"
+					rendered="#{not empty cc.attrs.birthRegistration.durationOfPregnancy}" />
+				<h:outputText value="#{messages['label.notAvailable']}"
+					styleClass="text-muted"
+					rendered="#{empty cc.attrs.birthRegistration.durationOfPregnancy}" />
+			</div>
+		</div>
+
+		<ui:fragment
+			rendered="#{not empty cc.attrs.birthRegistration.secondParent and cc.attrs.birthRegistration.birthFiliation != 'WITHIN_MARRIAGE'}">
+			<div class="row">
+				<div class="col-md-8">
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.numberOfCommonLiveBirthChildren']}"
+						rendered="#{not cc.attrs.civilRegistrationOffice}" />
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.numberOfCommonLiveBirthChildren.civilRegistrationOffice']}"
+						rendered="#{cc.attrs.civilRegistrationOffice}" />
+					<h:outputText
+						value="#{cc.attrs.birthRegistration.numberOfCommonLiveBirthChildren}"
+						rendered="#{not empty cc.attrs.birthRegistration.numberOfCommonLiveBirthChildren}" />
+					<h:outputText value="#{messages['label.notAvailable']}"
+						styleClass="text-muted"
+						rendered="#{empty cc.attrs.birthRegistration.numberOfCommonLiveBirthChildren}" />
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-8">
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.numberOfCommonStillbornChildren']}"
+						rendered="#{not cc.attrs.civilRegistrationOffice}" />
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.numberOfCommonStillbornChildren.civilRegistrationOffice']}"
+						rendered="#{cc.attrs.civilRegistrationOffice}" />
+					<h:outputText
+						value="#{cc.attrs.birthRegistration.numberOfCommonStillbornChildren}"
+						rendered="#{not empty cc.attrs.birthRegistration.numberOfCommonStillbornChildren}" />
+					<h:outputText value="#{messages['label.notAvailable']}"
+						styleClass="text-muted"
+						rendered="#{empty cc.attrs.birthRegistration.numberOfCommonStillbornChildren}" />
+				</div>
+			</div>
+		</ui:fragment>
+
+		<div class="row">
+			<div class="col-md-8">
+				<p:outputLabel
+					value="#{messages['birthRegistration.survey.numberOfPreviousBirth']}"
+					rendered="#{not cc.attrs.civilRegistrationOffice}" />
+				<p:outputLabel
+					value="#{messages['birthRegistration.survey.numberOfPreviousBirth.civilRegistrationOffice']}"
+					rendered="#{cc.attrs.civilRegistrationOffice}" />
+				<h:outputText
+					value="#{cc.attrs.birthRegistration.numberOfPreviousBirth}"
+					rendered="#{not empty cc.attrs.birthRegistration.numberOfPreviousBirth}" />
+				<h:outputText value="#{messages['label.notAvailable']}"
+					styleClass="text-muted"
+					rendered="#{empty cc.attrs.birthRegistration.numberOfPreviousBirth}" />
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-8">
+				<p:outputLabel
+					value="#{messages['birthRegistration.survey.numberOfLiveBirth']}"
+					rendered="#{not cc.attrs.civilRegistrationOffice}" />
+				<p:outputLabel
+					value="#{messages['birthRegistration.survey.numberOfLiveBirth.civilRegistrationOffice']}"
+					rendered="#{cc.attrs.civilRegistrationOffice}" />
+				<h:outputText
+					value="#{cc.attrs.birthRegistration.numberOfLiveBirth}"
+					rendered="#{not empty cc.attrs.birthRegistration.numberOfLiveBirth}" />
+				<h:outputText value="#{messages['label.notAvailable']}"
+					styleClass="text-muted"
+					rendered="#{empty cc.attrs.birthRegistration.numberOfLiveBirth}" />
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-8">
+				<p:outputLabel
+					value="#{messages['birthRegistration.survey.numberOfStillborn22OrMoreWeeks']}"
+					rendered="#{not cc.attrs.civilRegistrationOffice}" />
+				<p:outputLabel
+					value="#{messages['birthRegistration.survey.numberOfStillborn22OrMoreWeeks.civilRegistrationOffice']}"
+					rendered="#{cc.attrs.civilRegistrationOffice}" />
+				<h:outputText
+					value="#{cc.attrs.birthRegistration.numberOfStillborn22OrMoreWeeks}"
+					rendered="#{not empty cc.attrs.birthRegistration.numberOfStillborn22OrMoreWeeks}" />
+				<h:outputText value="#{messages['label.notAvailable']}"
+					styleClass="text-muted"
+					rendered="#{empty cc.attrs.birthRegistration.numberOfStillborn22OrMoreWeeks}" />
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-8">
+				<p:outputLabel
+					value="#{messages['birthRegistration.survey.numberOfStillbornLessThan22Weeks']}"
+					rendered="#{not cc.attrs.civilRegistrationOffice}" />
+				<p:outputLabel
+					value="#{messages['birthRegistration.survey.numberOfStillbornLessThan22Weeks.civilRegistrationOffice']}"
+					rendered="#{cc.attrs.civilRegistrationOffice}" />
+				<h:outputText
+					value="#{cc.attrs.birthRegistration.numberOfStillbornLessThan22Weeks}"
+					rendered="#{not empty cc.attrs.birthRegistration.numberOfStillbornLessThan22Weeks}" />
+				<h:outputText value="#{messages['label.notAvailable']}"
+					styleClass="text-muted"
+					rendered="#{empty cc.attrs.birthRegistration.numberOfStillbornLessThan22Weeks}" />
+			</div>
+		</div>
+
+		<ui:fragment
+			rendered="#{not empty cc.attrs.birthRegistration.numberOfPreviousBirth and cc.attrs.birthRegistration.numberOfPreviousBirth > 0}">
+
+			<div class="row">
+				<div class="col-md-8">
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.previousBirthDate']}"
+						rendered="#{not cc.attrs.civilRegistrationOffice}" />
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.previousBirthDate.civilRegistrationOffice']}"
+						rendered="#{cc.attrs.civilRegistrationOffice}" />
+					<h:outputText
+						value="#{cc.attrs.birthRegistration.previousBirthDate}"
+						rendered="#{not empty cc.attrs.birthRegistration.previousBirthDate}">
+						<f:convertDateTime
+							timeZone="#{configurationManager.configuration.timeZone}"
+							locale="#{configurationManager.configuration.locale}"
+							pattern="#{configurationManager.configuration.datePattern}" />
+					</h:outputText>
+					<h:outputText value="#{messages['label.notAvailable']}"
+						styleClass="text-muted"
+						rendered="#{empty cc.attrs.birthRegistration.previousBirthDate}" />
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-8">
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.previousLiveBirthDate']}"
+						rendered="#{not cc.attrs.civilRegistrationOffice}" />
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.previousLiveBirthDate.civilRegistrationOffice']}"
+						rendered="#{cc.attrs.civilRegistrationOffice}" />
+					<h:outputText
+						value="#{cc.attrs.birthRegistration.previousLiveBirthDate}"
+						rendered="#{not empty cc.attrs.birthRegistration.previousLiveBirthDate}">
+						<f:convertDateTime
+							timeZone="#{configurationManager.configuration.timeZone}"
+							locale="#{configurationManager.configuration.locale}"
+							pattern="#{configurationManager.configuration.datePattern}" />
+					</h:outputText>
+					<h:outputText value="#{messages['label.notAvailable']}"
+						styleClass="text-muted"
+						rendered="#{empty cc.attrs.birthRegistration.previousLiveBirthDate}" />
+				</div>
+			</div>
+		</ui:fragment>
+
+		<div class="row">
+			<div class="col-md-12">
+				<p:outputLabel
+					value="#{messages['birthRegistration.survey.surveyObservations']}"
+					rendered="#{not cc.attrs.civilRegistrationOffice}" />
+				<p:outputLabel
+					value="#{messages['birthRegistration.survey.surveyObservations.civilRegistrationOffice']}"
+					rendered="#{cc.attrs.civilRegistrationOffice}" />
+				<h:outputText
+					value="#{cc.attrs.birthRegistration.surveyObservations}"
+					rendered="#{not empty cc.attrs.birthRegistration.surveyObservations}"
+					style="word-wrap:break-word;" />
+				<h:outputText value="#{messages['label.notAvailable']}"
+					styleClass="text-muted"
+					rendered="#{empty cc.attrs.birthRegistration.surveyObservations}" />
+			</div>
+		</div>
+	</p:panel>
+
+</composite:implementation>
+</html>

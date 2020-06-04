@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:param name="transient" value="#{true}" />
+
+	<ui:define name="content">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 col-md-offset-4">
+					<section id="login">
+						<p:focus />
+						<h3>
+							<h:outputText value="#{messages['login.title']}" />
+						</h3>
+						<p:outputLabel for="username"
+							value="#{messages['login.username']}" />
+						<p:inputText id="username" value="#{credentials.username}" />
+                                                <br/>
+						<p:outputLabel for="password"
+							value="#{messages['login.password']}" />
+						<p:password id="password" value="#{credentials.password}"
+							feedback="false" />
+						<p:commandButton action="#{authenticationBean.login()}"
+							value="#{messages['button.login']}" process="@form"
+							update="@form" styleClass="btn ui-priority-primary" />
+						<h:link outcome="recover_password"
+							value="#{messages['button.recoverPassword']}"></h:link>
+					</section>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

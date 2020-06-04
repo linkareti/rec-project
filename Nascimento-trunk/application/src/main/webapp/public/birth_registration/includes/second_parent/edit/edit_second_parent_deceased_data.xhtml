@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:o="http://omnifaces.org/ui">
+
+	<p:panel>
+		<div class="row">
+			<div class="col-md-6">
+				<p:outputLabel value="#{messages['parent.deceased']}"
+					for="secondParentDeceased" />
+				<p:selectOneRadio id="secondParentDeceased"
+					value="#{birthRegistrationController.birthRegistration.secondParent.deceased}"
+					layout="responsive" columns="2">
+					<f:selectItem itemValue="#{true}"
+						itemLabel="#{messages['label.yes']}" />
+					<f:selectItem itemValue="#{false}"
+						itemLabel="#{messages['label.no']}" />
+					<f:param name="disableValidation" value="#{true}" />
+					<p:ajax process="@this" update="secondParentData"
+						listener="#{birthRegistrationController.onSecondParentDeceasedChange(birthRegistrationController.birthRegistration.secondParent)}"
+						partialSubmit="true" />
+				</p:selectOneRadio>
+				<div class="clearfix" />
+				<p:message for="secondParentDeceased" />
+			</div>
+		</div>
+	</p:panel>
+
+</ui:composition>

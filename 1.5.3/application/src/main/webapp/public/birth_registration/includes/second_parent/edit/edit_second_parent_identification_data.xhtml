@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:o="http://omnifaces.org/ui">
+
+	<p:panel>
+		<f:facet name="header">
+			<legend>
+				<h:outputText
+					value="#{messages['birthRegistration.parent.identificationData']}" />
+			</legend>
+		</f:facet>
+
+		<div class="row">
+			<!-- First row -->
+			<div class="col-md-4">
+				<p:outputLabel value="#{messages['parent.givenName']}"
+					for="secondParentGivenName" />
+				<p:inputText id="secondParentGivenName"
+					value="#{birthRegistrationController.birthRegistration.secondParent.givenName}"
+					styleClass="col-md-12"
+					placeholder="#{messages['parent.givenName.placeholder']}">
+					<f:validator
+						validatorId="com.linkare.irn.nascimento.web.validator.ForbiddenEmailFieldValidator" />
+				</p:inputText>
+				<div class="clearfix" />
+				<p:message for="secondParentGivenName" />
+			</div>
+			<div class="col-md-4">
+				<p:outputLabel value="#{messages['parent.familyName']}"
+					for="secondParentFamilyName" />
+				<p:inputText id="secondParentFamilyName"
+					value="#{birthRegistrationController.birthRegistration.secondParent.familyName}"
+					styleClass="col-md-12"
+					placeholder="#{messages['parent.familyName.placeholder']}">
+					<f:validator
+						validatorId="com.linkare.irn.nascimento.web.validator.ForbiddenEmailFieldValidator" />
+				</p:inputText>
+				<div class="clearfix" />
+				<p:message for="secondParentFamilyName" />
+			</div>
+			<div class="col-md-4">
+				<p:outputLabel
+					value="#{messages['parent.identificationCardNumber']}"
+					for="secondParentIdentificationCardNumber" />
+				<p:inputText id="secondParentIdentificationCardNumber"
+					value="#{birthRegistrationController.birthRegistration.secondParent.identificationCardNumber}"
+					styleClass="col-md-12"
+					placeholder="#{messages['parent.identificationCardNumber.placeholder']}">
+					<f:attribute name="forbiddenIdentificationNumber"
+						value="#{birthRegistrationController.birthRegistration.firstParent.identificationCardNumber}" />
+					<f:validator
+						validatorId="com.linkare.irn.nascimento.web.validator.ForbiddenIdentificationNumberValidator" />
+				</p:inputText>
+				<div class="clearfix" />
+				<p:message for="secondParentIdentificationCardNumber" />
+			</div>
+
+			<!-- Second row -->
+			<div class="clearfix" />
+			<div class="col-md-4">
+				<p:outputLabel value="#{messages['parent.gender']}"
+					for="secondParentGender" />
+				<p:selectOneMenu id="secondParentGender"
+					value="#{birthRegistrationController.birthRegistration.secondParent.gender}"
+					styleClass="col-md-12" style="width: none;">
+					<f:selectItem noSelectionOption="true"
+						itemLabel="#{messages['label.selectOne']}" />
+					<f:selectItems value="#{applicationFactory.genders}" var="gender"
+						itemLabel="#{messages[gender.key]}" itemValue="#{gender}" />
+				</p:selectOneMenu>
+				<div class="clearfix" />
+				<p:message for="secondParentGender" />
+			</div>
+			<div class="col-md-4">
+				<p:outputLabel value="#{messages['parent.maritalStatus']}"
+					for="secondParentMaritalStatus" />
+				<p:selectOneMenu id="secondParentMaritalStatus"
+					value="#{birthRegistrationController.birthRegistration.secondParent.maritalStatus}"
+					styleClass="col-md-12" style="width: none;"
+					disabled="#{birthRegistrationController.parentsMarriedWithEachOther eq true}">
+					<f:selectItem noSelectionOption="true"
+						itemLabel="#{messages['label.selectOne']}" />
+					<f:selectItems value="#{applicationFactory.maritalStatuses}"
+						var="maritalStatus" itemLabel="#{messages[maritalStatus.key]}"
+						itemValue="#{maritalStatus}" />
+				</p:selectOneMenu>
+				<div class="clearfix" />
+				<p:message for="secondParentMaritalStatus" />
+			</div>
+			<div class="col-md-4">
+				<p:outputLabel value="#{messages['parent.dateOfBirth']}"
+					for="secondParentDateOfBirth" />
+				<p:calendar id="secondParentDateOfBirth"
+					value="#{birthRegistrationController.birthRegistration.secondParent.dateOfBirth}"
+					timeZone="#{configurationManager.configuration.timeZone}"
+					locale="#{configurationManager.configuration.locale}"
+					mask="#{configurationManager.configuration.dateMask}"
+					pattern="#{configurationManager.configuration.datePattern}"
+					showOn="button" size="10" maskAutoClear="false"
+					maxdate="#{currentDate}" navigator="true" yearRange="c-80:c+0"
+					placeholder="#{configurationManager.datePlaceHolder}">
+					<f:attribute name="minAge"
+						value="#{configurationManager.secondParentMinAge}" />
+					<f:attribute name="maxAge"
+						value="#{configurationManager.secondParentMaxAge}" />
+					<f:validator
+						validatorId="com.linkare.irn.nascimento.web.validator.RangeAgeValidator" />
+				</p:calendar>
+				<div class="clearfix" />
+				<p:message for="secondParentDateOfBirth" escape="false" />
+			</div>
+
+			<!-- Third row -->
+			<div class="clearfix" />
+			<div class="col-md-4">
+				<p:outputLabel value="#{messages['parent.nationality']}"
+					for="secondParentNationality" />
+				<p:selectOneMenu id="secondParentNationality"
+					value="#{birthRegistrationController.birthRegistration.secondParent.nationality}"
+					converter="#{countryConverter}" styleClass="col-md-12"
+					style="width: none;">
+					<f:selectItems value="#{applicationFactory.countries}"
+						var="country" itemLabel="#{country.name}" itemValue="#{country}" />
+				</p:selectOneMenu>
+				<div class="clearfix" />
+				<p:message for="secondParentNationality" />
+			</div>
+		</div>
+	</p:panel>
+
+</ui:composition>

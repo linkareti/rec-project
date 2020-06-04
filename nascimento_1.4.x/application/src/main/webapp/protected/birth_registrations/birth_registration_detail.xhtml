@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:lnk="http://java.sun.com/jsf/composite/lnk"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value="#{birthRegistrationDetailController.id}" />
+		<f:viewAction
+			action="#{birthRegistrationDetailController.checkAccess()}" />
+	</f:metadata>
+
+	<ui:define name="content">
+		<div class="container">
+			<div class="birth_registration">
+				<h:panelGroup id="birth_registration_summary_container"
+					layout="block">
+
+					<h:panelGroup id="summary_details_group" layout="block"
+						styleClass="row">
+
+						<div class="col-md-12">
+
+							<f:validateBean disabled="#{param['disableValidation'] eq true}">
+
+								<p:focus context="birth_registration_summary_container"
+									rendered="#{facesContext.validationFailed}" />
+
+								<ui:fragment
+									rendered="#{not empty birthRegistrationDetailController.birthRegistration.observation}">
+									<div class="alert alert-warning">
+										<i class="fa fa-warning" />
+										<h:outputText value="#{' '}" />
+										<strong> <h:outputText
+												value="#{messages['birthRegistration.nonEmptyObservationTitle']}" />
+										</strong> <br />
+										<h:outputText
+											value="#{birthRegistrationDetailController.birthRegistration.observation}" />
+									</div>
+								</ui:fragment>
+
+								<div class="form-content">
+
+									<ui:fragment>
+										<div class="row">
+											<div class="col-md-4">
+												<strong> <p:outputLabel
+														value="#{messages['birthRegistration.registrationNumber']}" />
+													<h:outputText
+														value="#{birthRegistrationDetailController.birthRegistration.registrationNumber}"
+														rendered="#{not empty birthRegistrationDetailController.birthRegistration.registrationNumber}" />
+													<h:outputText value="#{messages['label.notAvailable']}"
+														styleClass="text-muted"
+														rendered="#{empty birthRegistrationDetailController.birthRegistration.registrationNumber}" />
+												</strong>
+											</div>
+											<div class="col-md-4">
+												<p:outputLabel
+													value="#{messages['birthRegistration.lastBirthRegistrationStatusDate']}" />
+												<strong> <h:outputText
+														value="#{birthRegistrationDetailController.birthRegistration.lastBirthRegistrarionDate}"
+														rendered="#{not empty birthRegistrationDetailController.birthRegistration.lastBirthRegistrarionDate}">
+														<f:convertDateTime
+															timeZone="#{configurationManager.configuration.timeZone}"
+															locale="#{configurationManager.configuration.locale}"
+															pattern="#{configurationManager.configuration.dateTimePattern}" />
+													</h:outputText> <h:outputText value="#{messages['label.notAvailable']}"
+														styleClass="text-muted"
+														rendered="#{empty birthRegistrationDetailController.birthRegistration.lastBirthRegistrarionDate}" />
+												</strong>
+											</div>
+											<div class="col-md-4">
+												<p:outputLabel
+													value="#{messages['birthRegistration.birthRegistrationStatus']}" />
+												<strong> <h:outputText
+														value="#{messages[birthRegistrationDetailController.birthRegistration.birthRegistrationStatus.key]}"
+														rendered="#{not empty birthRegistrationDetailController.birthRegistration.birthRegistrationStatus}" />
+													<h:outputText value="#{messages['label.notAvailable']}"
+														styleClass="text-muted"
+														rendered="#{empty birthRegistrationDetailController.birthRegistration.birthRegistrationStatus}" />
+												</strong>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">
+												<strong> <p:outputLabel
+														value="#{messages['birthRegistration.uuid']}" /> <h:outputText
+														value="#{birthRegistrationDetailController.birthRegistration.uuid}"
+														rendered="#{not empty birthRegistrationDetailController.birthRegistration.uuid}" />
+													<h:outputText value="#{messages['label.notAvailable']}"
+														styleClass="text-muted"
+														rendered="#{empty birthRegistrationDetailController.birthRegistration.uuid}" />
+												</strong>
+											</div>
+										</div>
+									</ui:fragment>
+
+									<ui:fragment
+										rendered="#{loginBean.hasCivilRegistrationOfficeRole}">
+										<h3 class="heading">
+											<h:outputText
+												value="#{messages['birthRegistration.registration']}" />
+										</h3>
+									</ui:fragment>
+
+									<ui:fragment
+										rendered="#{loginBean.hasCivilRegistrationOfficeRole}">
+										<lnk:viewBirthRegistrationIdentificationData
+											birthRegistration="#{birthRegistrationDetailController.birthRegistration}" />
+										<lnk:viewBirthRegistrationNaturalityData
+											birthRegistration="#{birthRegistrationDetailController.birthRegistration}" />
+									</ui:fragment>
+									<lnk:viewBirthRegistrationHospitalUnitData
+										birthRegistration="#{birthRegistrationDetailController.birthRegistration}"
+										documentHelper="#{birthRegistrationDetailController.documentHelper}" />
+
+									<ui:fragment
+										rendered="#{loginBean.hasCivilRegistrationOfficeRole or loginBean.hasManagerRole}">
+										<h3 class="heading">
+											<h:outputText
+												value="#{messages['birthRegistration.firstParent']}" />
+										</h3>
+
+										<lnk:viewParentIdentificationData
+											parentData="#{birthRegistrationDetailController.birthRegistration.firstParent}" />
+										<lnk:viewParentNaturalityData
+											parentData="#{birthRegistrationDetailController.birthRegistration.firstParent}" />
+										<lnk:viewParentParentsData
+											parentData="#{birthRegistrationDetailController.birthRegistration.firstParent}" />
+										<lnk:viewParentContactsData
+											parentData="#{birthRegistrationDetailController.birthRegistration.firstParent}" />
+									</ui:fragment>
+
+									<ui:fragment
+										rendered="#{loginBean.hasCivilRegistrationOfficeRole}">
+										<h3 class="heading">
+											<h:outputText
+												value="#{messages['birthRegistration.secondParent']}" />
+										</h3>
+
+										<ui:fragment
+											rendered="#{empty birthRegistrationDetailController.birthRegistration.secondParent}">
+											<div class="alert alert-info">
+												<h:outputText
+													value="#{messages['birthRegistration.secondParent.unknown']}" />
+											</div>
+										</ui:fragment>
+										<ui:fragment
+											rendered="#{not empty birthRegistrationDetailController.birthRegistration.secondParent and birthRegistrationDetailController.birthRegistration.secondParent.deceased eq true}">
+											<div class="alert alert-info">
+												<h:outputText
+													value="#{messages['birthRegistration.secondParent.deceased']}" />
+											</div>
+										</ui:fragment>
+										<ui:fragment
+											rendered="#{not empty birthRegistrationDetailController.birthRegistration.secondParent}">
+
+											<lnk:viewParentIdentificationData
+												parentData="#{birthRegistrationDetailController.birthRegistration.secondParent}" />
+											<lnk:viewParentNaturalityData
+												parentData="#{birthRegistrationDetailController.birthRegistration.secondParent}" />
+											<lnk:viewParentParentsData
+												parentData="#{birthRegistrationDetailController.birthRegistration.secondParent}" />
+											<lnk:viewParentContactsData
+												parentData="#{birthRegistrationDetailController.birthRegistration.secondParent}" />
+										</ui:fragment>
+									</ui:fragment>
+
+									<ui:fragment
+										rendered="#{loginBean.hasCivilRegistrationOfficeRole or loginBean.hasManagerRole}">
+
+										<h3 class="heading">
+											<h:outputText value="#{messages['birthRegistration.survey']}" />
+										</h3>
+
+										<lnk:viewSurveyData
+											birthRegistration="#{birthRegistrationDetailController.birthRegistration}"
+											civilRegistrationOffice="true" />
+										<lnk:viewSurveyParentProfessionalData
+											parentData="#{birthRegistrationDetailController.birthRegistration.firstParent}"
+											birthRegistration="#{birthRegistrationDetailController.birthRegistration}"
+											civilRegistrationOffice="true" />
+										<ui:fragment
+											rendered="#{not empty birthRegistrationDetailController.birthRegistration.secondParent}">
+											<lnk:viewSurveyParentProfessionalData
+												parentData="#{birthRegistrationDetailController.birthRegistration.secondParent}"
+												birthRegistration="#{birthRegistrationDetailController.birthRegistration}"
+												panelTitleKey="birthRegistration.secondParent.professionalData"
+												civilRegistrationOffice="true" />
+										</ui:fragment>
+
+									</ui:fragment>
+
+								</div>
+
+
+							</f:validateBean>
+
+							<div class="row actions">
+								<div class="col-sm-12">
+									<p:button icon="fa fa-chevron-left" iconPos="left"
+										outcome="birth_registrations"
+										value="#{messages['button.back']}"
+										styleClass="ui-priority-default prevstep" type="button"
+										update="@form" onclick="PF('mainContentBUI').show()">
+									</p:button>
+
+									<div class="pull-right">
+										<ui:fragment
+											rendered="#{birthRegistrationDetailController.birthRegistration.birthRegistrationStatus eq 'SUBMITTED' and loginBean.hasHospitalUnitRole}">
+											<p:commandButton icon="fa fa-check"
+												action="#{birthRegistrationDetailController.hospitalUnitAcceptSubmission}"
+												value="#{messages['button.accept']}"
+												styleClass="ui-priority-primary submit" process="@this"
+												update="@none"
+												onstart="PF('mainContentBUI').show();PrimeFaces.scrollTo('page-top')"
+												oncomplete="PF('mainContentBUI').hide()"
+												partialSubmit="true" />
+											<p:commandButton icon="fa fa-check-square-o"
+												value="#{messages['button.observationForCivilRegistrationOffice']}"
+												styleClass="ui-priority-primary submit" process="@this"
+												update="@none"
+												onstart="PF('hospitalUnitObservationWidget').show()"
+												partialSubmit="true" />
+											<p:commandButton icon="fa fa-times"
+												value="#{messages['button.reject']}"
+												styleClass="ui-priority-primary reject" process="@this"
+												onstart="PF('hospitalUnitRejectReasonWidget').show()"
+												partialSubmit="true" />
+										</ui:fragment>
+
+
+										<ui:fragment
+											rendered="#{birthRegistrationDetailController.birthRegistration.birthRegistrationStatus.isElaborating() and (loginBean.hasCivilRegistrationOfficeRole or loginBean.getHasManagerRole())}">
+											<p:commandButton icon="fa fa-check"
+												action="#{birthRegistrationDetailController.civilRegistrationOfficeAcceptSubmission}"
+												value="#{messages['button.accept']}"
+												styleClass="ui-priority-primary submit" process="@this"
+												update="@none"
+												onstart="PF('mainContentBUI').show();PrimeFaces.scrollTo('page-top')"
+												oncomplete="PF('mainContentBUI').hide()"
+												partialSubmit="true" />
+										</ui:fragment>
+
+										<ui:fragment
+											rendered="#{birthRegistrationDetailController.birthRegistration.birthRegistrationStatus.isAccepted() and (loginBean.hasCivilRegistrationOfficeRole or loginBean.getHasManagerRole())}">
+											<p:commandButton icon="fa fa-check"
+												action="#{birthRegistrationDetailController.civilRegistrationOfficeEffectuateSubmission}"
+												value="#{messages['button.effectuate']}"
+												styleClass="ui-priority-primary submit" process="@this"
+												update="@none"
+												onstart="PF('mainContentBUI').show();PrimeFaces.scrollTo('page-top')"
+												oncomplete="PF('mainContentBUI').hide()"
+												partialSubmit="true" />
+										</ui:fragment>
+
+										<ui:fragment
+											rendered="#{birthRegistrationDetailController.birthRegistration.birthRegistrationStatus.isAccepted() and (loginBean.hasCivilRegistrationOfficeRole or loginBean.getHasManagerRole())}">
+											<p:commandButton icon="fa fa-times"
+												value="#{messages['button.reject']}"
+												styleClass="ui-priority-primary reject" process="@this"
+												onstart="PF('civilRegistrationOfficeRejectReasonWidget').show()"
+												partialSubmit="true" />
+
+
+										</ui:fragment>
+
+										<ui:fragment
+											rendered="#{birthRegistrationDetailController.hasManagerRole()}">
+											<ui:fragment
+												rendered="#{not birthRegistrationDetailController.birthRegistration.birthRegistrationStatus.isDeleted()}">
+												<p:commandButton icon="fa fa-times"
+													value="#{messages['button.delete']}"
+													styleClass="ui-priority-primary reject" process="@this"
+													onstart="PF('civilRegistrationOfficeDeleteConfirmationWidget').show()"
+													partialSubmit="true" />
+											</ui:fragment>
+
+											<ui:fragment
+												rendered="#{birthRegistrationDetailController.birthRegistration.birthRegistrationStatus.isDeleted()}">
+												<p:commandButton icon="fa fa-check"
+													action="#{birthRegistrationDetailController.recoverBirthRegistration()}"
+													value="#{messages['button.recover']}"
+													styleClass="ui-priority-primary submit" process="@this"
+													update="@none"
+													onstart="PF('mainContentBUI').show();PrimeFaces.scrollTo('page-top')"
+													oncomplete="PF('mainContentBUI').hide()"
+													partialSubmit="true" />
+											</ui:fragment>
+										</ui:fragment>
+									</div>
+								</div>
+							</div>
+						</div>
+					</h:panelGroup>
+
+					<p:dialog id="hospitalUnitObservationPanel" closable="true"
+						closeOnEscape="true" fitViewport="true" modal="true"
+						visible="false" showHeader="true" responsive="true"
+						widgetVar="hospitalUnitObservationWidget"
+						header="#{messages['label.confirmAction']}" appendTo="@form"
+						dynamic="true">
+						<h:panelGroup id="hospitalUnitObservationPanelContent"
+							layout="block">
+							<p>
+								<h:outputText
+									value="#{messages['birthRegistration.observation.tip']}"
+									escape="false" />
+							</p>
+							<div class="row">
+								<div class="col-md-12">
+									<p:inputTextarea id="hospitalUnitObservation"
+										value="#{birthRegistrationDetailController.birthRegistration.observation}"
+										styleClass="col-md-12"
+										counter="hospitalUnitObservationDisplay"
+										counterTemplate="#{messages['label.counterTemplate']}"
+										placeholder="#{messages['birthRegistration.observation']}"
+										rows="3" maxlength="255"
+										required="#{param['popupConfirmation'] eq true}" />
+									<h:outputText id="hospitalUnitObservationDisplay"
+										styleClass="text-muted" />
+									<div class="clearfix" />
+									<p:message for="hospitalUnitObservation" />
+									<div class="clearfix" />
+								</div>
+							</div>
+
+							<div class="dialog-actions">
+								<p:commandButton icon="fa fa-check"
+									action="#{birthRegistrationDetailController.hospitalUnitAcceptSubmission}"
+									value="#{messages['button.confirm']}"
+									oncomplete="if(args.validationFailed) { PF('hospitalUnitObservationWidget').show(); } else { PF('hospitalUnitObservationWidget').hide(); }"
+									styleClass="ui-priority-primary submit"
+									process="hospitalUnitObservationPanel" update="@form"
+									partialSubmit="true">
+									<f:param name="popupConfirmation" value="#{true}" />
+								</p:commandButton>
+								<p:commandButton icon="fa fa-times"
+									value="#{messages['button.cancel']}"
+									styleClass="ui-priority-primary reject" process="@this"
+									onclick="PF('hospitalUnitObservationWidget').hide()"
+									type="button" />
+							</div>
+						</h:panelGroup>
+					</p:dialog>
+
+					<p:dialog id="hospitalUnitRejectReasonPanel" closable="true"
+						closeOnEscape="true" fitViewport="true" modal="true"
+						visible="false" showHeader="true" responsive="true"
+						widgetVar="hospitalUnitRejectReasonWidget"
+						header="#{messages['label.confirmReject']}" appendTo="@form"
+						focus="hospitalUnitObservationPanelContent" dynamic="true">
+
+						<h:panelGroup id="hospitalUnitRejectReasonPanelContent"
+							layout="block">
+							<p>
+								<h:outputText
+									value="#{messages['birthRegistration.rejectionReason.tip']}"
+									escape="false" />
+							</p>
+							<div class="row">
+								<div class="col-md-12">
+									<p:inputTextarea id="hospitalUnitRejectReason"
+										value="#{birthRegistrationDetailController.birthRegistration.rejectionReason}"
+										styleClass="col-md-12"
+										counter="hospitalUnitRejectReasonDisplay"
+										counterTemplate="#{messages['label.counterTemplate']}"
+										placeholder="#{messages['birthRegistration.rejectionReason']}"
+										rows="3" maxlength="255"
+										required="#{param['popupConfirmation'] eq true}" />
+									<h:outputText id="hospitalUnitRejectReasonDisplay"
+										styleClass="text-muted" />
+									<div class="clearfix" />
+									<p:message for="hospitalUnitRejectReason" />
+									<div class="clearfix" />
+								</div>
+							</div>
+
+							<div class="dialog-actions">
+								<p:commandButton icon="fa fa-check"
+									action="#{birthRegistrationDetailController.hospitalUnitRejectSubmission}"
+									value="#{messages['button.confirm']}"
+									oncomplete="if(args.validationFailed) { PF('hospitalUnitRejectReasonWidget').show(); } else { PF('hospitalUnitRejectReasonWidget').hide(); }"
+									styleClass="ui-priority-primary submit"
+									process="hospitalUnitRejectReasonPanel" update="@form"
+									partialSubmit="true">
+									<f:param name="popupConfirmation" value="#{true}" />
+								</p:commandButton>
+								<p:commandButton icon="fa fa-times"
+									value="#{messages['button.cancel']}"
+									styleClass="ui-priority-primary reject" process="@this"
+									onclick="PF('hospitalUnitRejectReasonWidget').hide()"
+									type="button" />
+							</div>
+						</h:panelGroup>
+					</p:dialog>
+
+					<p:dialog id="civilRegistrationOfficeRejectReasonPanel"
+						closable="true" closeOnEscape="true" fitViewport="true"
+						modal="true" visible="false" showHeader="true" responsive="true"
+						widgetVar="civilRegistrationOfficeRejectReasonWidget"
+						header="#{messages['label.confirmReject']}" appendTo="@form"
+						focus="civilRegistrationOfficeRejectReasonPanelContent"
+						dynamic="true">
+
+						<h:panelGroup id="civilRegistrationOfficeRejectReasonPanelContent"
+							layout="block">
+
+							<p>
+								<h:outputText
+									value="#{messages['birthRegistration.rejectionReason.tip']}"
+									escape="false" />
+							</p>
+							<div class="row">
+								<div class="col-md-12">
+									<p:inputTextarea id="civilRegistrationOfficeRejectReason"
+										value="#{birthRegistrationDetailController.birthRegistration.rejectionReason}"
+										styleClass="col-md-12"
+										counter="civilRegistrationOfficeRejectReasonDisplay"
+										counterTemplate="#{messages['label.counterTemplate']}"
+										placeholder="#{messages['birthRegistration.rejectionReason']}"
+										rows="3" maxlength="255"
+										required="#{param['popupConfirmation'] eq true}" />
+									<h:outputText id="civilRegistrationOfficeRejectReasonDisplay"
+										styleClass="text-muted" />
+									<div class="clearfix" />
+									<p:message for="civilRegistrationOfficeRejectReason" />
+									<div class="clearfix" />
+								</div>
+							</div>
+
+							<div class="dialog-actions">
+								<p:commandButton icon="fa fa-check"
+									action="#{birthRegistrationDetailController.civilRegistrationOfficeRejectSubmission}"
+									value="#{messages['button.confirm']}"
+									oncomplete="if(args.validationFailed) { PF('civilRegistrationOfficeRejectReasonWidget').show(); } else { PF('civilRegistrationOfficeRejectReasonWidget').hide(); }"
+									styleClass="ui-priority-primary submit"
+									process="civilRegistrationOfficeRejectReasonPanel"
+									update="@form" partialSubmit="true">
+									<f:param name="popupConfirmation" value="#{true}" />
+								</p:commandButton>
+								<p:commandButton icon="fa fa-times"
+									value="#{messages['button.cancel']}"
+									styleClass="ui-priority-primary reject" process="@this"
+									onclick="PF('civilRegistrationOfficeRejectReasonWidget').hide()"
+									type="button" />
+							</div>
+						</h:panelGroup>
+					</p:dialog>
+
+					<p:dialog id="civilRegistrationOfficeDeleteConfirmationPanel"
+						closable="true" closeOnEscape="true" fitViewport="true"
+						modal="true" visible="false" showHeader="true" responsive="true"
+						widgetVar="civilRegistrationOfficeDeleteConfirmationWidget"
+						header="#{messages['label.confirmDelete']}" appendTo="@form"
+						dynamic="true">
+
+						<h:panelGroup
+							id="civilRegistrationOfficeDeleteConfirmationPanelContent"
+							layout="block">
+
+							<div class="dialog-actions">
+								<p:commandButton icon="fa fa-check"
+									action="#{birthRegistrationDetailController.assignToDeletedBirthRegistration}"
+									value="#{messages['button.confirm']}"
+									oncomplete="if(args.validationFailed) { PF('civilRegistrationOfficeDeleteConfirmationWidget').show(); } else { PF('civilRegistrationOfficeDeleteConfirmationWidget').hide(); }"
+									styleClass="ui-priority-primary submit"
+									process="civilRegistrationOfficeDeleteConfirmationPanel"
+									update="@form" partialSubmit="true">
+									<f:param name="popupConfirmation" value="#{true}" />
+								</p:commandButton>
+								<p:commandButton icon="fa fa-times"
+									value="#{messages['button.cancel']}"
+									styleClass="ui-priority-primary reject" process="@this"
+									onclick="PF('civilRegistrationOfficeDeleteConfirmationWidget').hide()"
+									type="button" />
+							</div>
+						</h:panelGroup>
+					</p:dialog>
+
+				</h:panelGroup>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

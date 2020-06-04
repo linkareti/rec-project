@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+	<changeSet author="pzenida"
+		id="2017-06-08-insert-notify-parent-of-birth-registration-expiry-template">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">
+                                <![CDATA[
+select count(*) from message_template where code = 'EMAIL_003'
+                                ]]>
+			</sqlCheck>
+		</preConditions>
+		<sql>
+			<![CDATA[
+insert into message_template (id, creation_date, code, type, subject, content)
+VALUES (3, CURRENT_TIMESTAMP(), 'EMAIL_003', 'EMAIL', 'Registo de nascimento expirado',
+'<p>O registo de nascimento do seu bebé ${birthRegistration.name} expirou por falta de confirmação do 2.º progenitor dentro do prazo para tal.</p>')
+			]]>
+		</sql>
+		<rollback>
+			<sql>
+				<![CDATA[
+delete from message_template where code = 'EMAIL_003'
+                ]]>
+			</sql>
+		</rollback>
+	</changeSet>
+
+	<changeSet author="pzenida"
+		id="2017-06-08-add-birth-registration-document">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="birth_registration_document" />
+			</not>
+		</preConditions>
+		<createTable tableName="birth_registration_document">
+			<column name="id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="creation_date" type="datetime(6)" />
+			<column name="uuid" type="VARCHAR(75)" />
+			<column name="filename" type="VARCHAR(150)" />
+			<column name="file_content_type" type="VARCHAR(75)" />
+			<column name="file_size" type="bigint(20)" />
+			<column name="file_content" type="mediumblob" />
+		</createTable>
+	</changeSet>
+
+	<changeSet author="pzenida"
+		id="2017-06-08-add-birth-registration-document-pk">
+		<addPrimaryKey columnNames="id" constraintName="PRIMARY"
+			tableName="birth_registration_document" />
+	</changeSet>
+
+	<changeSet author="pzenida"
+		id="2017-06-08-migrate-file-data-to-new-birth-registration-document-table">
+		<sql>
+			<![CDATA[
+insert into birth_registration_document select id, now(), UUID(), filename, file_content_type, file_size, file_content from birth_registration where filename is not null;
+insert into table_hilo_generator select 'birth_registration_document', next_val from table_hilo_generator where table_name = 'birth_registration';
+			]]>
+		</sql>
+		<rollback>
+			<![CDATA[
+delete from table_hilo_generator where table_name = 'birth_registration_document';
+truncate birth_registration_document;
+			]]>
+		</rollback>
+	</changeSet>
+
+	<changeSet author="pzenida" id="2017-06-08-change-birth-registration">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="birth_registration"
+					columnName="key_document" />
+			</not>
+		</preConditions>
+		<addColumn tableName="birth_registration">
+			<column name="key_document" type="bigint(20)" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="pzenida"
+		id="2017-06-08-add-fk-birth-registration-document">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<foreignKeyConstraintExists
+					foreignKeyName="fk_document_on_birth_registration"
+					foreignKeyTableName="birth_registration" />
+			</not>
+		</preConditions>
+		<addForeignKeyConstraint constraintName="fk_document_on_birth_registration"
+			referencedTableName="birth_registration_document" baseColumnNames="key_document"
+			baseTableName="birth_registration" referencedColumnNames="id" />
+	</changeSet>
+
+	<changeSet author="pzenida"
+		id="2017-06-08-migrate-file-data-to-new-birth-registration-document-table-2">
+		<sql>
+			<![CDATA[
+update birth_registration set key_document = id;
+			]]>
+		</sql>
+		<rollback>
+			<![CDATA[
+update birth_registration set key_document = null;
+			]]>
+		</rollback>
+	</changeSet>
+
+	<changeSet author="pzenida"
+		id="2017-06-08-drop-birth-registration-file-related-columns-1">
+		<dropColumn tableName="birth_registration" columnName="filename" />
+		<rollback>
+			<addColumn tableName="birth_registration">
+				<column name="filename" type="VARCHAR(150)" />
+			</addColumn>
+		</rollback>
+	</changeSet>
+
+	<changeSet author="pzenida"
+		id="2017-06-08-drop-birth-registration-file-related-columns-2">
+		<dropColumn tableName="birth_registration" columnName="file_content_type" />
+		<rollback>
+			<addColumn tableName="birth_registration">
+				<column name="file_content_type" type="VARCHAR(75)" />
+			</addColumn>
+		</rollback>
+	</changeSet>
+
+	<changeSet author="pzenida"
+		id="2017-06-08-drop-birth-registration-file-related-columns-3">
+		<dropColumn tableName="birth_registration" columnName="file_size" />
+		<rollback>
+			<addColumn tableName="birth_registration">
+				<column name="file_size" type="bigint(20)" />
+			</addColumn>
+		</rollback>
+	</changeSet>
+
+	<changeSet author="pzenida"
+		id="2017-06-08-drop-birth-registration-file-related-columns-4">
+		<dropColumn tableName="birth_registration" columnName="file_content" />
+		<rollback>
+			<addColumn tableName="birth_registration">
+				<column name="file_content" type="mediumblob" />
+			</addColumn>
+		</rollback>
+	</changeSet>
+
+	<changeSet author="pzenida" id="2017-06-08-change-birth-registration-2">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="birth_registration"
+					columnName="rejection_reason" />
+			</not>
+		</preConditions>
+		<addColumn tableName="birth_registration">
+			<column name="rejection_reason" type="varchar(250)" />
+		</addColumn>
+	</changeSet>
+	
+	<changeSet author="pzenida"
+		id="2017-06-08-insert-notify-parent-of-birth-registration-rejection-template">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">
+                                <![CDATA[
+select count(*) from message_template where code = 'EMAIL_004'
+                                ]]>
+			</sqlCheck>
+		</preConditions>
+		<sql>
+			<![CDATA[
+insert into message_template (id, creation_date, code, type, subject, content)
+VALUES (4, CURRENT_TIMESTAMP(), 'EMAIL_004', 'EMAIL', 'Registo de nascimento rejeitado',
+'<p>Lamentamos mas o registo de nascimento do seu bebé ${birthRegistration.name} foi rejeitado. devido a:</p>
+<p>${birthRegistration.rejectionReason}</p>')
+			]]>
+		</sql>
+		<rollback>
+			<sql>
+				<![CDATA[
+delete from message_template where code = 'EMAIL_004'
+                ]]>
+			</sql>
+		</rollback>
+	</changeSet>
+
+</databaseChangeLog>

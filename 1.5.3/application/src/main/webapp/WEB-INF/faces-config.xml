@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+
+	<managed-bean>
+		<managed-bean-name>currentDate</managed-bean-name>
+		<managed-bean-class>java.util.Date</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>home</from-outcome>
+			<to-view-id>/public/birth_registration/birth_registration.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>login</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>configs</from-outcome>
+			<to-view-id>/protected/configurations/configurations.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>uploads</from-outcome>
+			<to-view-id>/protected/uploads/upload_modules.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>birthregistrations</from-outcome>
+			<to-view-id>/protected/birth_registrations/birth_registrations.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>configs</from-outcome>
+			<to-view-id>/protected/configurations/configurations.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>birthregistrations</from-outcome>
+			<to-view-id>/protected/birth_registrations/birth_registrations.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<application>
+		<locale-config>
+			<default-locale>pt</default-locale>
+			<supported-locale>pt</supported-locale>
+		</locale-config>
+		<resource-bundle>
+			<base-name>nascimento</base-name>
+			<var>messages</var>
+		</resource-bundle>
+		<message-bundle>Messages</message-bundle>
+
+		<resource-handler>org.omnifaces.resourcehandler.CombinedResourceHandler</resource-handler>
+		<resource-handler>org.omnifaces.resourcehandler.UnmappedResourceHandler</resource-handler>
+
+		<system-event-listener>
+			<system-event-listener-class>com.linkare.irn.nascimento.web.listener.PrimeFacesScriptProcessor</system-event-listener-class>
+			<system-event-class>javax.faces.event.PostAddToViewEvent</system-event-class>
+			<source-class>javax.faces.component.UIViewRoot</source-class>
+		</system-event-listener>
+	</application>
+
+	<lifecycle>
+		<phase-listener>org.omnifaces.eventlistener.ResetInputAjaxActionListener</phase-listener>
+		<phase-listener>com.linkare.irn.nascimento.web.listener.TimePhaseListener</phase-listener>
+		<phase-listener>com.linkare.irn.nascimento.web.listener.PrimeFacesResourceProcessor</phase-listener>
+		<phase-listener>com.linkare.irn.nascimento.web.listener.AuditListener</phase-listener>
+	</lifecycle>
+
+	<factory>
+		<render-kit-factory>org.omnifaces.renderkit.Html5RenderKitFactory</render-kit-factory>
+		<exception-handler-factory>org.omnifaces.exceptionhandler.FullAjaxExceptionHandlerFactory</exception-handler-factory>
+		<exception-handler-factory>com.linkare.irn.nascimento.web.exception.CustomExceptionHandlerFactory</exception-handler-factory>
+	</factory>
+
+	<!-- https://github.com/omnifaces/omnifaces/wiki/Combine-hardcoded-PrimeFaces-resources-using-CombinedResourceHandler -->
+	<render-kit>
+		<renderer>
+			<component-family>javax.faces.Output</component-family>
+			<renderer-type>javax.faces.Head</renderer-type>
+			<renderer-class>com.sun.faces.renderkit.html_basic.HeadRenderer</renderer-class>
+		</renderer>
+	</render-kit>
+
+</faces-config>

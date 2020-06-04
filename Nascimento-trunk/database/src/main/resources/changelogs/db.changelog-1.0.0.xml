@@ -1,0 +1,42 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+	<!-- The files for the version 1.0.0 of the application should be included 
+		in this dataset -->
+	<include file="/changelogs/1.0.0/changeset-initial.xml" />
+	<include file="/changelogs/1.0.0/changeset-2017-05-25.xml" />
+	<include file="/changelogs/1.0.0/changeset-2017-05-26.xml" />
+	<include file="/changelogs/1.0.0/changeset-2017-05-29.xml" />
+	<include file="/changelogs/1.0.0/changeset-2017-05-30.xml" />
+	<include file="/changelogs/1.0.0/changeset-2017-05-31.xml" />
+	<include file="/changelogs/1.0.0/changeset-2017-06-01.xml" />
+	<include file="/changelogs/1.0.0/changeset-2017-06-02.xml" />
+	<include file="/changelogs/1.0.0/changeset-2017-06-04.xml" />
+	<include file="/changelogs/1.0.0/changeset-2017-06-05.xml" />
+	<include file="/changelogs/1.0.0/changeset-2017-06-06.xml" />
+	<include file="/changelogs/1.0.0/changeset-2017-06-08.xml" />
+	<include file="/changelogs/1.0.0/changeset-2017-06-09.xml" />
+	<include file="/changelogs/1.0.0/changeset-2017-06-12.xml" />
+	<include file="/changelogs/1.0.0/changeset-2017-06-14.xml" />
+	<include file="/changelogs/1.0.0/changeset-2017-06-19.xml" />
+	<include file="/changelogs/1.0.0/changeset-2017-06-22.xml" />
+	<include file="/changelogs/1.0.0/changeset-2017-06-29.xml" />
+	<include file="/changelogs/1.0.0/changeset-2017-07-01.xml" />
+	<include file="/changelogs/1.0.0/changeset-2017-07-04.xml" />
+	<include file="/changelogs/1.0.0/changeset-2017-07-12.xml" />
+	<include file="/changelogs/1.0.0/changeset-2017-07-13.xml" />
+	<include file="/changelogs/1.0.0/changeset-2017-07-14.xml" />
+	<include file="/changelogs/1.0.0/changeset-2018-05-10.xml" />
+	<include file="/changelogs/1.0.0/changeset-2018-05-30.xml" />
+	<include file="/changelogs/1.0.0/changeset-2020-04-02.xml" />
+	<include file="/changelogs/1.0.0/changeset-2020-04-03.xml" />
+	<include file="/changelogs/1.0.0/changeset-2020-04-10.xml" />
+	<include file="/changelogs/1.0.0/changeset-2020-04-11.xml" />
+	<include file="/changelogs/1.0.0/changeset-2020-04-12.xml" />
+	<include file="/changelogs/1.0.0/changeset-2020-04-20.xml" />
+	<include file="/changelogs/1.0.0/changeset-2020-04-23.xml" />
+	<include file="/changelogs/1.0.0/changeset-2020-04-27.xml" />
+	<include file="/changelogs/1.0.0/changeset-2020-05-08.xml" />
+</databaseChangeLog>

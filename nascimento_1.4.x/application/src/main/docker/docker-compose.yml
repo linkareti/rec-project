@@ -1,0 +1,8 @@
+version: '3'
+services:
+  # Applies changes to databases
+  wildfly-irn:
+    image: ${repo}/${simplifiedGroupId}/${project.artifactId}:${project.version}
+    build:
+      context: .
+      dockerfile: Dockerfile

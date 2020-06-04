@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:panel id="countryPanel" toggleable="false" collapsed="false"
+		styleClass="configurations">
+		<f:facet name="header">
+			<legend>
+				<h:outputText value="#{messages['countries']}" />
+			</legend>
+		</f:facet>
+
+		<p:messages autoUpdate="true" showDetail="true" showSummary="true"
+			globalOnly="false" closable="true"
+			for="globalCountrySpecificMessages" escape="false" />
+		<h:panelGroup id="globalCountrySpecificMessages" />
+
+		<h:outputText styleClass="tip"
+			value="#{messages['countries.upload.tip']}" escape="false" />
+
+		<ui:include src="/protected/uploads/includes/migration_module.xhtml">
+			<ui:param name="updateId" value=":form:uploadModules" />
+			<ui:param name="title" value="#{messages['upload.country.title']}" />
+			<ui:param name="bean" value="#{countryUploadController}" />
+			<ui:param name="updatePanelId" value="countryPanel" />
+		</ui:include>
+
+		<h:panelGroup id="countriesTableGroup" layout="block"
+			styleClass="row-fluid">
+			<p:dataTable id="countriesTable"
+				value="#{countryUploadController.dataModel}" var="country"
+				paginator="true" rows="#{countryUploadController.rows}"
+				first="#{countryUploadController.first}" lazy="true"
+				paginatorPosition="bottom" reflow="true" editable="true"
+				paginatorAlwaysVisible="false" pageLinks="3"
+				emptyMessage="#{messages['label.noResults']}">
+
+				<f:facet name="header">
+					<div class="results-count">
+						<h:outputFormat value="#{messages['label.resultsCount']}">
+							<f:param value="#{countryUploadController.dataModel.rowCount}" />
+						</h:outputFormat>
+					</div>
+					<div class="clearfix" />
+				</f:facet>
+
+				<p:ajax event="rowEdit"
+					listener="#{countryUploadController.onRowEdit}"
+					update="@none" onstart="PF('mainContentBUI').show()"
+					oncomplete="PF('mainContentBUI').hide()" />
+
+				<p:column headerText="#{messages['country.code']}" colspan="1">
+					<h:outputText value="#{country.code}" />
+				</p:column>
+
+				<p:column headerText="#{messages['country.name']}" colspan="5">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{country.name}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText id="countryNameInput" value="#{country.name}"
+								styleClass="col-md-12" required="true" label="text" />
+							<p:message for="countryNameInput" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="#{messages['country.active']}" colspan="1">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText
+								value="#{country.active ? messages['label.yes'] : messages['label.no']}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:selectBooleanCheckbox id="countryActiveInput"
+								value="#{country.active}" required="true" label="text" />
+							<p:message for="countryActiveInput" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column styleClass="row-edit" width="40">
+					<p:rowEditor />
+				</p:column>
+			</p:dataTable>
+		</h:panelGroup>
+
+	</p:panel>
+</ui:composition>

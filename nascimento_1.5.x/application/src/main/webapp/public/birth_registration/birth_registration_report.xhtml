@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:lnk="http://java.sun.com/jsf/composite/lnk"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:param name="transient" value="#{true}" />
+
+	<f:metadata>
+		<f:viewParam name="uuid"
+			value="#{birthRegistrationPdfController.uuid}" />
+		<f:viewAction action="#{birthRegistrationPdfController.load}" />
+	</f:metadata>
+
+	<ui:define name="content">
+		<div class="container">
+			<div class="birth_registration">
+
+				<div class="form-content summary-content report">
+
+
+					<p:outputLabel
+						value="#{messages['birthRegistration.registrationNumber']}" />
+					<h:outputText
+						value="#{birthRegistrationPdfController.birthRegistration.registrationNumber}"
+						rendered="#{not empty birthRegistrationPdfController.birthRegistration.registrationNumber}" />
+					<h:outputText value="#{messages['label.notAvailable']}"
+						styleClass="text-muted"
+						rendered="#{empty birthRegistrationPdfController.birthRegistration.registrationNumber}" />
+
+					<h3 class="heading">
+						<h:outputText value="#{messages['birthRegistration.firstParent']}" />
+					</h3>
+
+					<lnk:viewParentIdentificationData
+						parentData="#{birthRegistrationPdfController.birthRegistration.firstParent}" />
+					<lnk:viewParentNaturalityData
+						parentData="#{birthRegistrationPdfController.birthRegistration.firstParent}" />
+					<lnk:viewParentParentsData
+						parentData="#{birthRegistrationPdfController.birthRegistration.firstParent}" />
+					<lnk:viewParentContactsData
+						parentData="#{birthRegistrationPdfController.birthRegistration.firstParent}" />
+
+					<h3 class="heading">
+						<h:outputText
+							value="#{messages['birthRegistration.secondParent']}" />
+					</h3>
+
+					<ui:fragment
+						rendered="#{empty birthRegistrationPdfController.birthRegistration.secondParent}">
+						<div class="alert alert-info">
+							<h:outputText
+								value="#{messages['birthRegistration.secondParent.unknown']}" />
+						</div>
+					</ui:fragment>
+					<ui:fragment
+						rendered="#{not empty birthRegistrationPdfController.birthRegistration.secondParent and birthRegistrationPdfController.birthRegistration.secondParent.deceased eq true}">
+						<div class="alert alert-info">
+							<h:outputText
+								value="#{messages['birthRegistration.secondParent.deceased']}" />
+						</div>
+					</ui:fragment>
+					<ui:fragment
+						rendered="#{not empty birthRegistrationPdfController.birthRegistration.secondParent}">
+						<lnk:viewParentIdentificationData
+							parentData="#{birthRegistrationPdfController.birthRegistration.secondParent}" />
+						<lnk:viewParentNaturalityData
+							parentData="#{birthRegistrationPdfController.birthRegistration.secondParent}" />
+						<lnk:viewParentParentsData
+							parentData="#{birthRegistrationPdfController.birthRegistration.secondParent}" />
+						<lnk:viewParentContactsData
+							parentData="#{birthRegistrationPdfController.birthRegistration.secondParent}" />
+
+					</ui:fragment>
+
+					<h3 class="heading">
+						<h:outputText
+							value="#{messages['birthRegistration.registration']}" />
+					</h3>
+
+					<lnk:viewBirthRegistrationIdentificationData
+						birthRegistration="#{birthRegistrationPdfController.birthRegistration}" />
+					<lnk:viewBirthRegistrationNaturalityData
+						birthRegistration="#{birthRegistrationPdfController.birthRegistration}" />
+					<lnk:viewBirthRegistrationHospitalUnitData
+						birthRegistration="#{birthRegistrationPdfController.birthRegistration}" />
+
+					<h3 class="heading">
+						<h:outputText value="#{messages['birthRegistration.survey']}" />
+					</h3>
+
+					<lnk:viewSurveyData
+						birthRegistration="#{birthRegistrationPdfController.birthRegistration}" />
+					<lnk:viewSurveyParentProfessionalData
+						parentData="#{birthRegistrationPdfController.birthRegistration.firstParent}" />
+					<ui:fragment
+						rendered="#{not empty birthRegistrationPdfController.birthRegistration.secondParent}">
+						<lnk:viewSurveyParentProfessionalData
+							parentData="#{birthRegistrationPdfController.birthRegistration.secondParent}"
+							panelTitleKey="birthRegistration.secondParent.professionalData" />
+					</ui:fragment>
+
+				</div>
+
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

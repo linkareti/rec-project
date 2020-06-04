@@ -1,0 +1,34 @@
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+	version="2.1">
+
+	<persistence-unit name="nascimento" transaction-type="JTA">
+		<description>Persistence Unit for the Nascimento model</description>
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<jta-data-source>java:/jdbc/nascimento</jta-data-source>
+
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+
+		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
+
+		<properties>
+			<!-- hibernate -->
+			<property name="hibernate.dialect" value="${hibernate.dialect}" />
+			<property name="hibernate.hbm2ddl.auto" value="${hibernate.hbm2ddl.auto}" />
+			<property name="hibernate.show_sql" value="${hibernate.show_sql}" />
+			<property name="hibernate.format_sql" value="${hibernate.format_sql}" />
+
+			<property name="hibernate.order_updates" value="${hibernate.order_updates}" />
+
+			<!-- Hibernate envers related properties -->
+			<property name="org.hibernate.envers.audit_table_suffix"
+				value="${hibernate.audit_table_suffix}" />
+			<property name="org.hibernate.envers.revision_field_name"
+				value="key_revision" />
+			<property name="org.hibernate.envers.revision_type_field_name"
+				value="revtype" />
+		</properties>
+
+	</persistence-unit>
+</persistence>

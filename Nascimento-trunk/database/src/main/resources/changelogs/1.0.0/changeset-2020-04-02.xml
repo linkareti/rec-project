@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+
+	<changeSet author="rmartins"
+		id="2020-04-02-add-birth-registration-baby-photo-document">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="birth_registration_baby_photo" />
+			</not>
+		</preConditions>
+		<createTable tableName="birth_registration_baby_photo">
+			<column name="id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="creation_date" type="datetime(6)" />
+			<column name="uuid" type="VARCHAR(75)" />
+			<column name="filename" type="VARCHAR(150)" />
+			<column name="file_content_type" type="VARCHAR(75)" />
+			<column name="file_size" type="bigint(20)" />
+			<column name="file_content" type="mediumblob" />
+		</createTable>
+	</changeSet>
+
+	<changeSet author="rmartins"
+		id="2020-04-02-add-birth-registration-baby-photo-document-pk">
+		<addPrimaryKey columnNames="id" constraintName="PRIMARY"
+			tableName="birth_registration_baby_photo" />
+	</changeSet>
+
+	<changeSet author="rmartins"
+		id="2020-04-02-add-baby-photo-field">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="birth_registration"
+					columnName="key_baby_photo" />
+			</not>
+		</preConditions>
+		<addColumn tableName="birth_registration">
+			<column name="key_baby_photo" type="bigint(20)" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="rmartins"
+		id="2020-04-02-add-fk-birth-registration-baby-photo">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<foreignKeyConstraintExists
+					foreignKeyName="fk_baby_photo_on_birth_registration"
+					foreignKeyTableName="birth_registration" />
+			</not>
+		</preConditions>
+		<addForeignKeyConstraint
+			constraintName="fk_baby_photo_on_birth_registration"
+			referencedTableName="birth_registration_baby_photo"
+			baseColumnNames="key_baby_photo" baseTableName="birth_registration"
+			referencedColumnNames="id" />
+	</changeSet>
+
+
+
+
+</databaseChangeLog>

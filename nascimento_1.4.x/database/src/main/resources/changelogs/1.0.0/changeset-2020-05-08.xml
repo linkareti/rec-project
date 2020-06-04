@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+
+	<changeSet author="rmartins"
+		id="2020-05-08-adding-management-organization">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">
+                 <![CDATA[
+							select count(*) from organization where id = 0
+                  ]]>
+			</sqlCheck>
+		</preConditions>
+		<sql>
+			<![CDATA[
+				INSERT INTO organization (id, creation_date, uuid, name, organization_type, email, second_email)
+				VALUES (0, CURRENT_TIMESTAMP(), '52c12531-6b18-483a-87d1-5afb638dcb5e', 'Serviços Centrais do IRN', 'CIVIL_REGISTRATION_OFFICE', 
+						'nascimento.online.helpdesk@irn.mj.pt', '')
+			]]>
+		</sql>
+		<rollback>
+			<sql>
+				<![CDATA[
+					delete from from organization where id = 0
+                ]]>
+			</sql>
+		</rollback>
+	</changeSet>
+	
+	
+	
+		<changeSet author="rmartins" id="2020-05-08-switching-users-profiles">
+		<sql>
+			<![CDATA[
+					UPDATE user SET role_type = 'MANAGER', key_organization = 0 WHERE username IN ('ana.pc.ferreira', 'pedro.m.pinto', 'sonia.i.mata')
+			]]>
+		</sql>
+		<rollback />
+		</changeSet>
+
+
+</databaseChangeLog>
+
+
+

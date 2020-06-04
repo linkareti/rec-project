@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+	<changeSet author="pzenida" id="2017-06-22-change-birth-registration-1">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="birth_registration"
+					columnName="observation" />
+			</not>
+		</preConditions>
+		<addColumn tableName="birth_registration">
+			<column name="observation" type="varchar(250)" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="pzenida" id="2017-06-22-add-email_contacts">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="configuration" columnName="email_contacts_block" />
+			</not>
+		</preConditions>
+		<addColumn tableName="configuration">
+			<column name="email_contacts_block" type="varchar(500)"
+				defaultValue="" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="pzenida" id="2017-06-22-update-message-template-code-1">
+		<update tableName="message_template">
+			<column name="code" value="NOTIFY_SECOND_PARENT_WITH_CONFIRMATION_URL" />
+			<where>code = 'EMAIL_001'</where>
+		</update>
+		<rollback>
+			<update tableName="message_template">
+				<column name="code" value="EMAIL_001" />
+				<where>code = 'NOTIFY_SECOND_PARENT_WITH_CONFIRMATION_URL'</where>
+			</update>
+		</rollback>
+	</changeSet>
+
+	<changeSet author="pzenida" id="2017-06-22-update-message-template-code-2">
+		<update tableName="message_template">
+			<column name="code" value="RECOVER_PASSWORD" />
+			<where>code = 'EMAIL_002'</where>
+		</update>
+		<rollback>
+			<update tableName="message_template">
+				<column name="code" value="EMAIL_002" />
+				<where>code = 'RECOVER_PASSWORD'</where>
+			</update>
+		</rollback>
+	</changeSet>
+
+	<changeSet author="pzenida" id="2017-06-22-update-message-template-code-3">
+		<update tableName="message_template">
+			<column name="code" value="NOTIFY_PARENTS_OF_BIRTH_REGISTRATION_EXPIRY" />
+			<where>code = 'EMAIL_003'</where>
+		</update>
+		<rollback>
+			<update tableName="message_template">
+				<column name="code" value="EMAIL_003" />
+				<where>code = 'NOTIFY_PARENTS_OF_BIRTH_REGISTRATION_EXPIRY'</where>
+			</update>
+		</rollback>
+	</changeSet>
+
+	<changeSet author="pzenida" id="2017-06-22-update-message-template-code-4">
+		<update tableName="message_template">
+			<column name="code" value="NOTIFY_PARENT_OF_BIRTH_REGISTRATION_REJECTION" />
+			<where>code = 'EMAIL_004'</where>
+		</update>
+		<rollback>
+			<update tableName="message_template">
+				<column name="code" value="EMAIL_004" />
+				<where>code = 'NOTIFY_PARENT_OF_BIRTH_REGISTRATION_REJECTION'
+				</where>
+			</update>
+		</rollback>
+	</changeSet>
+
+	<changeSet author="pzenida"
+		id="2017-06-22-update-message-template-email-1">
+		<sql>
+			<![CDATA[
+update message_template set subject = 'Declaração de Nascimento Online n.º ${birthRegistration.registrationNumber}',
+content = '<p>Caro(a) ${birthRegistration.secondParent.name},</p>
+<p>No seguimento da declaração de nascimento online submetida por ${birthRegistration.firstParent.name} no sítio da Internet 
+<a href="${configuration.applicationBaseUrl}/public/birth_registration/birth_registration.xhtml?uuid=${birthRegistration.uuid}">http://nascimento.justica.gov.pt</a>, queira, 
+por favor, aceder ao link abaixo indicado para aceitação/rejeição da declaração até à data limite de ${date.format("dd-MM-yyyy HH:mm", $expirationDate)}.</p>
+
+<p>Ao autenticar-se com o seu Cartão do Cidadão ou Chave Móvel Digital ser-lhe-á apresentada a informação detalhada da declaração, devendo em seguida proceder à sua aceitação/rejeição.</p>
+<p>Só após a aceitação da declaração e confirmação do parto pela unidade da saúde onde o mesmo ocorreu, a declaração será remetida a uma conservatória para elaboração do registo.</p>
+
+#if(${configuration.emailContactsBlock})<p>Para mais esclarecimentos sobre este processo deverá contactar:
+${configuration.emailContactsBlock}</p>#end
+
+<p>Os nossos melhores cumprimentos,</p>
+<p>A equipa do Nascimento Online</p>' where code = 'NOTIFY_SECOND_PARENT_WITH_CONFIRMATION_URL'
+			]]>
+		</sql>
+		<rollback />
+	</changeSet>
+
+	<changeSet author="pzenida"
+		id="2017-06-22-update-message-template-email-2">
+		<sql>
+			<![CDATA[
+update message_template set subject = 'Declaração de Nascimento Online n.º ${birthRegistration.registrationNumber}',
+content ='<p>Caros(as) ${birthRegistration.firstParent.name} e ${birthRegistration.secondParent.name},</p>
+<p>A declaração de nascimento online nº. ${birthRegistration.registrationNumber} submetida por ${birthRegistration.firstParent.name} foi cancelada por falta de
+aceitação/rejeição de ${birthRegistration.secondParent.name} no prazo estipulado.</p>
+
+<p>O cancelamento da declaração inviabiliza o seu envio a uma conservatória para elaboração do registo.</p>
+
+#if(${configuration.emailContactsBlock})<p>Para mais esclarecimentos sobre este processo deverá contactar:
+${configuration.emailContactsBlock}</p>#end
+
+<p>Os nossos melhores cumprimentos,</p>
+<p>A equipa do Nascimento Online</p>' where code = 'NOTIFY_PARENTS_OF_BIRTH_REGISTRATION_EXPIRY'
+			]]>
+		</sql>
+		<rollback />
+	</changeSet>
+
+	<changeSet author="pzenida"
+		id="2017-05-31-insert-notify-first-parent-about-submission-when-confirmation-required-message-template">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">
+                                <![CDATA[
+select count(*) from message_template where code = 'NOTIFY_FIRST_PARENT_ABOUT_SUBMISSION_WHEN_CONFIRMATION_REQUIRED'
+                                ]]>
+			</sqlCheck>
+		</preConditions>
+		<sql>
+			<![CDATA[
+insert into message_template (id, creation_date, code, type, subject, content)
+values (5, CURRENT_TIMESTAMP(), 'NOTIFY_FIRST_PARENT_ABOUT_SUBMISSION_WHEN_CONFIRMATION_REQUIRED', 'EMAIL', 'Declaração de Nascimento Online n.º ${birthRegistration.registrationNumber}',
+'<p>Caro(a) ${birthRegistration.firstParent.name},</p>
+<p>Recebemos com sucesso a sua declaração de nascimento online que ficou registado com o n.º ${birthRegistration.registrationNumber}.</p>
+
+<p>Foi enviada uma mensagem de notificação a ${birthRegistration.secondParent.name} para que aceda ao sítio da Internet 
+<a href="${configuration.applicationBaseUrl}/public/birth_registration/birth_registration.xhtml?uuid=${birthRegistration.uuid}">http://nascimento.justica.gov.pt</a>, e 
+aceite/rejeite a declaração.</p>
+
+<p>Só após a aceitação por parte de ${birthRegistration.secondParent.name}, e confirmação do parto pela unidade da saúde onde o mesmo ocorreu, a declaração será remetida a 
+uma conservatória para elaboração do registo.</p>
+
+<p>Aproveitamos ainda para lhe lembrar que o prazo de confirmação da declaração de nascimento online por parte de ${birthRegistration.secondParent.name} termina em 
+${date.format("dd-MM-yyyy HH:mm", $expirationDate)}, sendo a declaração automaticamente cancelada se o referido prazo for ultrapassado.
+
+#if(${configuration.emailContactsBlock})<p>Para mais esclarecimentos sobre este processo deverá contactar:
+${configuration.emailContactsBlock}</p>#end
+
+<p>Os nossos melhores cumprimentos,</p>
+<p>A equipa do Nascimento Online</p>')
+			]]>
+		</sql>
+		<rollback>
+			<sql>
+				<![CDATA[
+delete from message_template where code = 'NOTIFY_FIRST_PARENT_ABOUT_SUBMISSION_WHEN_CONFIRMATION_REQUIRED'
+                ]]>
+			</sql>
+		</rollback>
+	</changeSet>
+
+	<changeSet author="pzenida"
+		id="2017-05-31-insert-notify-first-parent-about-submission-when-confirmation-not-required-message-template">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">
+                                <![CDATA[
+select count(*) from message_template where code = 'NOTIFY_FIRST_PARENT_ABOUT_SUBMISSION_WHEN_CONFIRMATION_NOT_REQUIRED'
+                                ]]>
+			</sqlCheck>
+		</preConditions>
+		<sql>
+			<![CDATA[
+insert into message_template (id, creation_date, code, type, subject, content)
+values (6, CURRENT_TIMESTAMP(), 'NOTIFY_FIRST_PARENT_ABOUT_SUBMISSION_WHEN_CONFIRMATION_NOT_REQUIRED', 'EMAIL', 'Declaração de Nascimento Online n.º ${birthRegistration.registrationNumber}',
+'<p>Caro(a) ${birthRegistration.firstParent.name},</p>
+<p>Recebemos com sucesso a sua declaração de nascimento online que ficou registado com o n.º ${birthRegistration.registrationNumber}.</p>
+
+<p>Só após confirmação do parto pela unidade da saúde onde o mesmo ocorreu, a declaração será remetida a uma conservatória para elaboração do registo.</p>
+
+#if(${configuration.emailContactsBlock})<p>Para mais esclarecimentos sobre este processo deverá contactar:
+${configuration.emailContactsBlock}</p>#end
+
+<p>Os nossos melhores cumprimentos,</p>
+<p>A equipa do Nascimento Online</p>')
+			]]>
+		</sql>
+		<rollback>
+			<sql>
+				<![CDATA[
+delete from message_template where code = 'NOTIFY_FIRST_PARENT_ABOUT_SUBMISSION_WHEN_CONFIRMATION_NOT_REQUIRED'
+                ]]>
+			</sql>
+		</rollback>
+	</changeSet>
+
+	<changeSet author="pzenida" id="2017-06-22-UPDATE-email_contacts">
+		<preConditions onFail="MARK_RAN">
+			<columnExists tableName="configuration" columnName="email_contacts_block" />
+		</preConditions>
+		<renameColumn tableName="configuration" oldColumnName="email_contacts_block"
+			newColumnName="email_contacts_block" columnDataType="varchar(500)" />
+	</changeSet>
+
+	<changeSet author="pzenida"
+		id="2017-06-22-insert-notify-parents-on-second-parent-confirmation-message-template">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">
+                                <![CDATA[
+select count(*) from message_template where code = 'NOTIFY_PARENTS_ON_SECOND_PARENT_CONFIRMATION'
+                                ]]>
+			</sqlCheck>
+		</preConditions>
+		<sql>
+			<![CDATA[
+insert into message_template (id, creation_date, code, type, subject, content)
+values (7, CURRENT_TIMESTAMP(), 'NOTIFY_PARENTS_ON_SECOND_PARENT_CONFIRMATION', 'EMAIL', 'Declaração de Nascimento Online n.º ${birthRegistration.registrationNumber}',
+'<p>Caros(as) ${birthRegistration.firstParent.name} e ${birthRegistration.secondParent.name},</p>
+<p>A declaração de nascimento online nº. ${birthRegistration.registrationNumber}, submetida por ${birthRegistration.firstParent.name}, foi aceite por ${birthRegistration.secondParent.name}.</p>
+
+<p>Só após confirmação do parto pela unidade da saúde onde o mesmo ocorreu, a declaração será remetida a uma conservatória para elaboração do registo.</p>
+
+#if(${configuration.emailContactsBlock})<p>Para mais esclarecimentos sobre este processo deverá contactar:
+${configuration.emailContactsBlock}</p>#end
+
+<p>Os nossos melhores cumprimentos,</p>
+<p>A equipa do Nascimento Online</p>')
+			]]>
+		</sql>
+		<rollback>
+			<sql>
+				<![CDATA[
+delete from message_template where code = 'NOTIFY_PARENTS_ON_SECOND_PARENT_CONFIRMATION'
+                ]]>
+			</sql>
+		</rollback>
+	</changeSet>
+	
+	<changeSet author="pzenida"
+		id="2017-06-22-insert-notify-parents-on-second-parent-rejection-message-template">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">
+                                <![CDATA[
+select count(*) from message_template where code = 'NOTIFY_PARENTS_ON_SECOND_PARENT_REJECTION'
+                                ]]>
+			</sqlCheck>
+		</preConditions>
+		<sql>
+			<![CDATA[
+insert into message_template (id, creation_date, code, type, subject, content)
+values (8, CURRENT_TIMESTAMP(), 'NOTIFY_PARENTS_ON_SECOND_PARENT_REJECTION', 'EMAIL', 'Declaração de Nascimento Online n.º ${birthRegistration.registrationNumber}',
+'<p>Caros(as) ${birthRegistration.firstParent.name} e ${birthRegistration.secondParent.name},</p>
+<p>A declaração de nascimento online nº. ${birthRegistration.registrationNumber} submetida por ${birthRegistration.firstParent.name}, foi rejeitada por ${birthRegistration.secondParent.name}.</p>
+
+<p>A rejeição da declaração inviabiliza o seu envio a uma conservatória para elaboração do registo.</p>
+
+#if(${configuration.emailContactsBlock})<p>Para mais esclarecimentos sobre este processo deverá contactar:
+${configuration.emailContactsBlock}</p>#end
+
+<p>Os nossos melhores cumprimentos,</p>
+<p>A equipa do Nascimento Online</p>')
+			]]>
+		</sql>
+		<rollback>
+			<sql>
+				<![CDATA[
+delete from message_template where code = 'NOTIFY_PARENTS_ON_SECOND_PARENT_REJECTION'
+                ]]>
+			</sql>
+		</rollback>
+	</changeSet>
+	
+	<changeSet author="pzenida"
+		id="2017-06-22-update-message-template-email-3">
+		<sql>
+			<![CDATA[
+update message_template set subject = 'Declaração de Nascimento Online n.º ${birthRegistration.registrationNumber}',
+content ='<p>Caro(a) ${birthRegistration.firstParent.name}#if(${birthRegistration.secondParent && birthRegistration.secondParent.deceased == false) 
+e ${birthRegistration.secondParent.name}#end,</p>
+<p>A declaração de nascimento online nº. ${birthRegistration.registrationNumber} submetida por ${birthRegistration.firstParent.name} foi rejeitada devido a:</p>
+
+<p>${birthRegistration.rejectionReason}</p>
+
+#if(${configuration.emailContactsBlock})<p>Para mais esclarecimentos sobre este processo deverá contactar:
+${configuration.emailContactsBlock}</p>#end
+
+<p>Os nossos melhores cumprimentos,</p>
+<p>A equipa do Nascimento Online</p>' where code = 'NOTIFY_PARENT_OF_BIRTH_REGISTRATION_REJECTION'
+			]]>
+		</sql>
+		<rollback />
+	</changeSet>
+
+</databaseChangeLog>

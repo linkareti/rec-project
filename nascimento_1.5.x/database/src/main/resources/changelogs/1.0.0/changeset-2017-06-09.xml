@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+	<changeSet author="pzenida" id="2017-06-09-add-message">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="message" />
+			</not>
+		</preConditions>
+		<createTable tableName="message">
+			<column name="instance_type" type="VARCHAR(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="creation_date" type="datetime(6)" />
+			<column name="uuid" type="VARCHAR(75)" />
+			<column name="origin" type="VARCHAR(200)">
+				<constraints nullable="false" />
+			</column>
+			<column name="destinations" type="VARCHAR(1500)">
+				<constraints nullable="false" />
+			</column>
+			<column name="subject" type="VARCHAR(150)">
+				<constraints nullable="false" />
+			</column>
+			<column name="content" type="TEXT">
+				<constraints nullable="false" />
+			</column>
+			<column name="status" type="VARCHAR(50)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet author="pzenida" id="2017-06-09-add-message-pk">
+		<addPrimaryKey columnNames="id" constraintName="PRIMARY"
+			tableName="message" />
+	</changeSet>
+
+	<changeSet author="pzenida" id="2017-06-09-drop-instance-type-on-message">
+		<preConditions onFail="MARK_RAN">
+			<columnExists tableName="message" columnName="instance_type" />
+		</preConditions>
+		<dropColumn tableName="message" columnName="instance_type" />
+		<rollback>
+			<addColumn tableName="message">
+				<column name="instance_type" type="VARCHAR(50)">
+					<constraints nullable="false" />
+				</column>
+			</addColumn>
+		</rollback>
+	</changeSet>
+
+	<changeSet author="pzenida"
+		id="2017-06-09-rename-message-to-email-message">
+		<preConditions onFail="MARK_RAN">
+			<tableExists tableName="message" />
+		</preConditions>
+		<renameTable newTableName="email_message" oldTableName="message" />
+		<rollback>
+			<renameTable newTableName="message" oldTableName="email_message" />
+		</rollback>
+	</changeSet>
+
+	<changeSet author="pzenida"
+		id="2017-06-09-add-index-to-status-on-email-message">
+		<createIndex tableName="email_message" indexName="email_message_status">
+			<column name="status" />
+		</createIndex>
+	</changeSet>
+
+</databaseChangeLog>

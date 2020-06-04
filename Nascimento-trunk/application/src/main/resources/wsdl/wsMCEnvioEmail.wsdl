@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions targetNamespace="http://igfej.mj.pt/schemas/services/mc/envioEmail" xmlns:tns="http://igfej.mj.pt/schemas/services/mc/envioEmail" xmlns:mc="http://igfej.mj.pt/schemas/services/mc/envioEmail/messages" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns="http://schemas.xmlsoap.org/soap/encoding/">
+  <plnk:partnerLinkType name="bpMCEnvioEmail">
+    <plnk:role name="MCEnvioEmailPortType" portType="tns:MCEnvioEmailPortType"/>
+  </plnk:partnerLinkType>
+  <wsp:Policy wsu:Id="wss_username_token_service_policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <sp:SupportingTokens xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+      <wsp:Policy>
+        <sp:UsernameToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+          <wsp:Policy>
+            <sp:WssUsernameToken10/>
+          </wsp:Policy>
+        </sp:UsernameToken>
+      </wsp:Policy>
+    </sp:SupportingTokens>
+  </wsp:Policy>
+  <types>
+    <xsd:schema targetNamespace="http://igfej.mj.pt/schemas/services/mc/envioEmail" elementFormDefault="qualified" xmlns:sc="http://igfej.mj.pt/schemas/services/mc/envioEmail/messages">
+      <xsd:import namespace="http://igfej.mj.pt/schemas/services/mc/envioEmail/messages" schemaLocation="xsdMCEnvioEmailTypes.xsd"/>
+    </xsd:schema>
+  </types>
+  <message name="MCEnvioEmail">
+    <part name="MCEnvioEmail" element="mc:MCEnvioEmail"/>
+  </message>
+  <message name="MCEnvioEmailResponse">
+    <part name="MCEnvioEmailResponse" element="mc:MCEnvioEmailResponse"/>
+  </message>
+  <message name="MCEnvioEmailFault">
+    <part name="MCEnvioEmailFault" element="mc:MCEnvioEmailException"/>
+  </message>
+  <portType name="MCEnvioEmailPortType">
+    <operation name="MCEnvioEmail">
+      <input name="MCEnvioEmail" message="tns:MCEnvioEmail"/>
+      <output name="MCEnvioEmailResponse" message="tns:MCEnvioEmailResponse"/>
+      <fault name="MCEnvioEmailFault" message="tns:MCEnvioEmailFault"/>
+    </operation>
+  </portType>
+  <binding name="MCEnvioEmailBnd" type="tns:MCEnvioEmailPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsp:PolicyReference URI="#wss_username_token_service_policy" required="false" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"/>
+    <operation name="MCEnvioEmail">
+      <soap:operation soapAction="wsMCEnvioEmail" style="document"/>
+      <input name="MCEnvioEmail">
+        <soap:body parts="MCEnvioEmail" use="literal"/>
+      </input>
+      <output name="MCEnvioEmailResponse">
+        <soap:body parts="MCEnvioEmailResponse" use="literal"/>
+      </output>
+      <fault name="MCEnvioEmailFault">
+        <soap:fault name="MCEnvioEmailFault" use="literal"/>
+      </fault>
+    </operation>
+  </binding>
+  <service name="MCEnvioEmailBndQSService">
+    <port name="MCEnvioEmailBndQSPort" binding="tns:MCEnvioEmailBnd">
+      <soap:address location="https://eai.mj.pt:2028/wsMCEnvioEmail"/>
+    </port>
+  </service>
+</definitions>

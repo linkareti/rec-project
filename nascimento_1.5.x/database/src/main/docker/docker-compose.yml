@@ -1,0 +1,7 @@
+version: '3'
+services:
+  # Applies changes to databases
+  ${project.artifactId}:
+    image: ${repo}/${simplifiedGroupId}/${project.artifactId}:${project.version}
+    build:
+      context: .

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:o="http://omnifaces.org/ui">
+
+	<p:panel>
+		<f:facet name="header">
+			<legend>
+				<h:outputText
+					value="#{messages['birthRegistration.firstParent.professionalData']}" />
+			</legend>
+		</f:facet>
+
+		<div class="row">
+			<div class="col-md-4">
+				<p:outputLabel value="#{messages['parent.academicDegree']}"
+					for="firstParentAcademicDegree" />
+				<p:selectOneMenu id="firstParentAcademicDegree"
+					value="#{birthRegistrationController.birthRegistration.firstParent.academicDegree}"
+					styleClass="col-md-12" style="width: none;">
+					<f:param name="disableValidation" value="#{true}" />
+					<p:ajax process="@this" partialSubmit="true" />
+					<f:selectItem noSelectionOption="true"
+						itemLabel="#{messages['label.selectOne']}" />
+					<f:selectItems value="#{applicationFactory.academicDegrees}"
+						var="academicDegree" itemLabel="#{messages[academicDegree.key]}"
+						itemValue="#{academicDegree}" />
+				</p:selectOneMenu>
+				<div class="clearfix" />
+				<p:message for="firstParentAcademicDegree" />
+			</div>
+			<div class="col-md-4">
+				<p:outputLabel value="#{messages['parent.job']}"
+					for="firstParentJob" />
+				<p:selectOneMenu id="firstParentJob"
+					value="#{birthRegistrationController.birthRegistration.firstParent.job}"
+					styleClass="col-md-12" style="width: none;">
+					<f:param name="disableValidation" value="#{true}" />
+					<p:ajax process="@this" partialSubmit="true" />
+					<f:selectItem noSelectionOption="true"
+						itemLabel="#{messages['label.selectOne']}" />
+					<f:selectItems value="#{applicationFactory.jobs}" var="job"
+						itemLabel="#{messages[job.key]}" itemValue="#{job}" />
+				</p:selectOneMenu>
+				<div class="clearfix" />
+				<p:message for="firstParentJob" />
+			</div>
+			<div class="col-md-4">
+				<p:outputLabel value="#{messages['parent.jobCondition']}"
+					for="firstParentJobCondition" />
+				<p:selectOneMenu id="firstParentJobCondition"
+					value="#{birthRegistrationController.birthRegistration.firstParent.jobCondition}"
+					styleClass="col-md-12" style="width: none;">
+					<f:param name="disableValidation" value="#{true}" />
+					<p:ajax process="@this" partialSubmit="true" />
+					<f:selectItem noSelectionOption="true"
+						itemLabel="#{messages['label.selectOne']}" />
+					<f:selectItems value="#{applicationFactory.jobConditions}"
+						var="jobCondition" itemLabel="#{messages[jobCondition.key]}"
+						itemValue="#{jobCondition}" />
+				</p:selectOneMenu>
+				<div class="clearfix" />
+				<p:message for="firstParentJobCondition" />
+			</div>
+                    </div>
+                    <div class="row">
+
+			<div class="col-md-4">
+				<p:outputLabel value="#{messages['parent.jobStatus']}"
+					for="firstParentJobStatus" />
+				<p:selectOneMenu id="firstParentJobStatus"
+					value="#{birthRegistrationController.birthRegistration.firstParent.jobStatus}"
+					styleClass="col-md-12" style="width: none;">
+					<f:param name="disableValidation" value="#{true}" />
+					<p:ajax process="@this" partialSubmit="true" />
+					<f:selectItem noSelectionOption="true"
+						itemLabel="#{messages['label.selectOne']}" />
+					<f:selectItems value="#{applicationFactory.jobStatuses}"
+						var="jobStatus" itemLabel="#{messages[jobStatus.key]}"
+						itemValue="#{jobStatus}" />
+				</p:selectOneMenu>
+				<div class="clearfix" />
+				<p:message for="firstParentJobStatus" />
+			</div>
+
+
+			<ui:fragment
+				rendered="#{not empty birthRegistrationController.birthRegistration.secondParent}">
+				<div class="col-md-4">
+					<p:outputLabel
+						value="#{messages['parent.numberOfChildrenNonCommon']}"
+						for="firstParentNumberOfChildrenNonCommon" />
+					<p:inputNumber id="firstParentNumberOfChildrenNonCommon"
+						value="#{birthRegistrationController.birthRegistration.firstParent.numberOfChildrenNonCommon}"
+						inputStyleClass="col-md-12" decimalPlaces="0" />
+					<div class="clearfix" />
+					<p:message for="firstParentNumberOfChildrenNonCommon" />
+				</div>
+			</ui:fragment>
+		</div>
+	</p:panel>
+</ui:composition>

@@ -1,0 +1,51 @@
+"externalId";"username";"password";"displayName";"email";"roleType";"organizationExternalId"
+111;"ana.pc.ferreira";"JHEWnq8cKr";"Ana Ferreira";"ana.pc.ferreira@irn.mj.pt";"MANAGER";0
+112;"pedro.m.pinto";"Uu4375gpF";"Pedro Pinto";"pedro.m.pinto@irn.mj.pt";"MANAGER";0
+113;"sonia.i.mata";"Jb7vIzYQ";"Sonia Mata";"sonia.i.mata@irn.mj.pt";"MANAGER";0
+400;"iferreria";"oLp9YyMP";"Inês Ferreira";"iferreria@hospitaldaarrabida.pt";"HOSPITAL_UNIT";4
+401;"daniela.fferreira";"IYGxUadLLK";"Daniela Ferreira";"daniela.fferreira@hospitaldaarrabida.pt";"HOSPITAL_UNIT";4
+402;"ana.carolino";"xhR0Gdcttp";"Ana Carolina";"ana.carolino@hospitaldaarrabida.pt";"HOSPITAL_UNIT";4
+1001;"crcAbrantes";"tveshcli";"CRC Abrantes";"civil.abrantes@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";1
+1002;"crcAngraDoHeroismo";"bkiogxvw";"CRC Angra do Heroismo";"civil.aheroismo@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";2
+1003;"crcPontaDelgada";"tmcrngtr";"CRC Ponta Delgada";"civil.pdelgada@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";3
+1004;"crcHorta";"alecpnkk";"Conservatória do Registo Civil, Predial, Comercial e Automóvel";"registos.horta@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";4
+1005;"crcAlmada";"mnoapwit";"CRC Almada";"civil.almada@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";5
+1006;"crcAmadora";"ecworgci";"CRC Amadora";"civil.amadora@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";6
+1007;"crcAveiro";"ccarqqlo";"CRC Aveiro";"civil.aveiro@irn.mj.pt  ";"CIVIL_REGISTRATION_OFFICE";7
+1008;"crcBarreiro";"drxcigtf";"CRC Barreiro";"civil.barreiro@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";8
+1009;"crcBeja";"qeamqbqk";"CRC Beja";"civil.beja@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";9
+1010;"crcBraga";"fmhaommg";"CRC Braga";"civil.braga@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";10
+1011;"crcBraganca";"zvraufkl";"CRC Bragança";"civil.braganca@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";11
+1012;"crcCaldasDaRainha";"nsgwmhhs";"CRC Caldas da Rainha";"civil.crainha@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";12
+1013;"crcCascais";"zejpcoth";"CRC Cascais";"civil.cascais@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";13
+1014;"crcCasteloBranco";"wcttaipy";"CRC Castelo Branco";"civil.cbranco@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";14
+1015;"crcCoimbra";"zgtszdqm";"CRC Coimbra";"civil.coimbra@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";15
+1016;"crcCovilha";"sdkdvueb";"CRC Covilhã";"civil.covilha@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";17
+1017;"crcEvora";"uwgehicj";"CRC Évora";"civil.evora@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";18
+1018;"crcFaro";"dyweiuql";"CRC Faro";"civil.faro@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";19
+1019;"crcGuarda";"ubhememx";"CRC Guarda";"civil.guarda@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";20
+1020;"crcGuimaraes";"mcdfwimt";"CRC Guimarães";"registos.guimaraes@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";21
+1021;"crcLeiria";"lmcmbske";"CRC Leiria";"civil.leiria@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";22
+1022;"crcLisboa";"lrlkvooe";"CRC Lisboa";"civil.lisboa@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";23
+1023;"crcLoures";"fbvoikwd";"CRC Loures";"civil.loures@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";29
+1024;"crcFunchal";"wtipodrf";"CRC Funchal";"civil.funchal@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";30
+1025;"crcMatosinhos";"abfhgavh";"CRC Matosinhos";"civil.matosinhos@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";31
+1026;"crcPenafiel";"jextivkx";"Conservatória do Registo Civil, Predial, Comercial e Automóvel";"registos.penafiel@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";32
+1027;"CRC Portalegre";"frlhbavx";"CRC Portalegre";"civil.portalegre@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";33
+1028;"CRC portimão";"wtdijynt";"CRC portimão";"civil.portimao@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";34
+1029;"3crcPorto";"flsmjeuc";"3.ª CRC Porto";"civil3.porto@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";35
+1030;"2crcPorto";"wtahihqx";"2.ª CRC Porto";"civil2.porto@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";36
+1031;"4crcPorto";"jfqoxtgh";"4.ª CRC Porto";"civil4.porto@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";37
+1032;"crcPovoaDoVarzim";"fuuuolux";"CRC Pòvoa do Varzim";"civil.pvarzim@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";38
+1033;"crcSantarem";"xdfohjjc";"CRC Santarém";"civil.santarem@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";40
+1034;"crcSetubal";"ghparofm";"CRC Setúbal";"civil.setubal@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";41
+1035;"crcVianadoCastelo";"dpzzsnvt";"CRC Viana do Castelo";"civil.vcastelo@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";42
+1036;"crcSantaMariadaFeira";"rbxysngb";"CRC Santa Maria da Feira";"civil.smfeira@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";43
+1037;"crcVilaFrancadeXira";"hufcwavu";"CRC Vila Franca de Xira";"civil.vfxira@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";44
+1038;"crcVilaNovaFamalicao";"rsdvqaad";"CRC Vila Nova Famalicão";"civil.vnfamalicao@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";45
+1039;"crcVilaNovaDeGaia";"zmtnkdww";"CRC Vila Nova de gaia";"civil.vngaia@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";46
+1040;"crcVilaReal";"frckwahr";"CRC Vila Real";"civil.vreal@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";47
+1041;"crcViseu";"qcfiksxf";"CRC Viseu";"civil.viseu@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";48
+1042;"1crcPorto";"jhlfnjax";"1ª CRC Porto";"civil1.porto@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";107
+1043;"crcTrofa";"uircfnzn";"CRC Santo Tirso";"civil.stirso@irn.mj.pt";"CIVIL_REGISTRATION_OFFICE";108
+1044;"linkare-manager";"uircfnzn";"Linkare";"rmartins@linkare.com";"MANAGER";110

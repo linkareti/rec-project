@@ -1,0 +1,1771 @@
+/* FONTS */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Open Sans'), local('OpenSans'), url(../fonts/opensans-regular-webfont.woff) format('woff');
+}
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    src: local('Open Sans Semibold'), local('OpenSans-Semibold'), url(../fonts/opensans-semibold-webfont.woff) format('woff');
+}
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Open Sans Bold'), local('OpenSans-Bold'), url(../fonts/opensans-bold-webfont.woff) format('truetype');
+}
+@font-face {
+    font-family: 'Open Sans';
+    font-style: italic;
+    font-weight: 400;
+    src: local('Open Sans Italic'), local('OpenSans-Italic'), url(../fonts/opensans-italic-webfont.woff) format('woff');
+}
+@font-face {
+    font-family: 'Open Sans';
+    font-style: italic;
+    font-weight: 600;
+    src: local('Open Sans Semibold Italic'), local('OpenSans-SemiboldItalic'), url(../fonts/opensans-semibolditalic-webfont.woff) format('woff');
+}
+@font-face {
+    font-family: 'Open Sans';
+    font-style: italic;
+    font-weight: 700;
+    src: local('Open Sans Bold Italic'), local('OpenSans-BoldItalic'), url(../fonts/opensans-bolditalic-webfont.woff) format('woff');
+}
+
+body {
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+    background: #535353;
+}
+
+#page-top {
+    background: #fff;
+    padding-bottom: 50px;
+}
+
+body .ui-widget {
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+}
+
+a, a:hover, a:focus, a:active, a.active {
+    color: #2980b9;
+    /*
+    outline: 0;
+    outline: 0 !important;
+    box-shadow: none !important;
+    */
+}
+
+body button {
+    outline: none;
+    box-shadow: none ;
+}
+
+.btn-outline {
+    margin-top: 15px;
+    border: solid 2px #fff;
+    font-size: 20px;
+    color: #fff;
+    background: 0 0;
+    transition: all .3s ease-in-out;
+}
+
+.btn-outline:hover, .btn-outline:focus, .btn-outline:active,
+.btn-outline.active {
+    border: solid 2px #fff;
+    color: #18bc9c;
+    background: #fff;
+}
+
+
+.btn:focus, .btn:active, .btn.active {
+    outline: 0;
+}
+
+/* Xavier stuff */
+
+/*Painel*/
+.ui-widget-content {
+    border-style: none;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default {
+    background-image: none;
+    vertical-align: middle;
+}
+
+/*Botão*/
+.btn, .ui-priority-primary, .ui-widget-content .ui-priority-primary,
+.ui-widget-header .ui-priority-primary, .ui-state-default,
+.ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default
+{
+    text-shadow: none;
+    font-weight: normal;
+}
+
+.btn.ui-priority-primary:hover {
+    color: #fff;
+}
+
+body .birth_registration .ui-inputfield {
+    font-size: 15px;
+    padding: 3px 5px;
+    width: 100%;
+}
+
+*:before, *:after {
+    box-sizing: border-box;
+}
+
+*:before, *:after {
+    box-sizing: border-box;
+}
+
+h1, h2, h3 {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+h2 {
+    font-weight: 300;
+}
+
+h4, h5, h6 {
+    margin-top: 40px;
+    margin-bottom: 5px;
+}
+
+body h3 {
+    color: #333;
+    margin-bottom: 0;
+    margin: 30px 0 0;
+    background: none;
+}
+
+body h3 a{
+    color: #333;
+}
+body h3 a:hover{
+    color: #f0b21d;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+body h3 .fa {
+    vertical-align: middle;
+    margin-left: 13px;
+    font-size: .75em;
+}
+
+
+/* HEADER */
+body .navbar {
+    background-color: #fff;
+    border-style: none;
+    padding: 15px 0;
+    margin-bottom: 5px;
+    border-radius: 0;
+}
+
+/* LABELS */
+body #content label {
+    color: #555;
+    margin: 20px 0 4px;
+    display: block;
+    font-weight: normal;
+}
+
+body #content .configurations label {
+    display: inline-block;
+}
+
+body #content .ui-chkbox {
+    width: 100%;
+}
+
+body #content .form-horizontal label {
+    margin: 0;
+}
+
+body label {
+    margin-bottom: 3px;
+}
+
+body #content .ui-selectoneradio label {
+    display: inline;
+    padding-left: 10px;
+    margin-right: 30px;
+}
+
+.ui-selectoneradio label {
+    cursor: pointer;
+}
+
+body .ui-datatable tbody td, body .ui-datatable tfoot td {
+    border-radius: 0;
+    border-style: none;
+    vertical-align: top;
+    font-size: 15px;
+}
+
+/* TABLES */
+body .ui-grid .ui-grid-row {
+    margin-bottom: 20px;
+}
+
+/* INPUTS */
+
+::-webkit-input-placeholder {
+    font-size: 1.5rem;
+    padding-top:2px;
+    font-style: italic;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+    font-size: 1.5rem;
+    padding-top:2px;
+    font-style: italic;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+    font-size: 1.5rem;
+    padding-top:2px;
+    font-style: italic;
+}
+
+:-ms-input-placeholder {  
+    font-size: 1.5rem;
+    padding-top:2px; 
+    font-style: italic;
+}
+
+/* HEADER */
+
+.nav li.no-show {
+    display: none;
+}
+
+.panel {
+    background: none;
+}
+
+.panel-body {
+    margin-top: 10px;
+    padding: 0px 10px;
+}
+
+/* DROPDOWNS */
+
+body table .ui-selectonemenu .ui-selectonemenu-trigger.ui-state-default .ui-icon {
+    margin-top: 6px;
+}
+.ui-selectonemenu label.ui-selectonemenu-label {
+    font-size: 1.4rem;
+    background: none;
+    border: none;
+}
+
+.ui-selectonemenu-trigger.ui-state-default.ui-corner-right {
+    width: 24px;
+}
+
+.ui-selectonemenu-items-wrapper {
+    background: #eee;
+    border-radius: 3px;
+}
+
+
+/* FONTAWESOME */
+.ui-widget .ui-icon.fa, .ui-icon.fa,
+.ui-widget.ui-state-hover .ui-icon.fa,
+.ui-widget.ui-state-active .ui-icon.fa,
+.ui-widget.ui-state-focus .ui-icon.fa,
+.ui-widget.ui-state-default .ui-icon.fa {
+    background-image: none;
+    text-indent: 0;
+    background-repeat: no-repeat;
+    display: block;
+    overflow: visible;
+    text-indent: 0;
+    font-size: 12px;
+    padding-top: 2px;
+}
+
+/* MESSAGES */
+
+body .ui-datalist .ui-datalist-empty-message {
+    text-align: center;
+    color: #777;
+}
+
+body .ui-datalist .ui-datalist-empty-message .fa {
+    display: block;
+    font-size: 4rem;
+    margin: 10px;
+}
+
+.ui-messages-error-icon, .ui-messages-info-icon {
+    display: none;
+}
+
+.ui-messages .ui-messages-error ul,
+.ui-messages .ui-messages-info ul {
+    margin: 0 5px;
+}
+
+.ui-messages-info-summary, .ui-messages-error-summary {
+    margin-left: 0;
+    margin-right: 10px;
+}
+
+body .ui-messages-info-detail, 
+body .ui-messages-warn-detail, 
+body .ui-messages-error-detail, 
+body .ui-messages-fatal-detail,
+body .ui-message-info-detail, 
+body .ui-message-warn-detail, 
+body .ui-message-error-detail, 
+body .ui-message-fatal-detail {
+    margin-left: 0;
+}
+
+body .ui-panel .ui-panel-title {
+    margin: 0;
+} 
+
+body .ui-paginator.ui-paginator-bottom {
+    background: none;
+    border-style: none;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    padding-top: 10px;
+    color: #444;
+    font-weight: normal;
+    text-align: left;
+}
+
+body .ui-paginator.ui-paginator-bottom .ui-icon {
+    height: 20px;
+}
+
+body #content .ui-paginator.ui-paginator-bottom label {
+    display: none;
+}
+
+body a.ui-paginator-page.ui-state-default.ui-corner-all.ui-state-active {
+    background: #999;
+    color: #fff;
+}
+
+body .ui-paginator.ui-paginator-bottom span.ui-paginator-current {
+    margin-left: 0;
+    display: none;
+}
+
+body .ui-selectonemenu {
+    border-color: #ccc;
+    background: #fff;
+    width: 100%;
+    min-width: 0 !important;
+}
+
+body .navbar-default .navbar-collapse {
+    border-style: none;
+}
+
+.navbar-default .navbar-nav li a {
+    display: inline-block;
+    text-transform: uppercase;
+    color: #3399cc;
+    font-size: 1.4rem;
+}
+
+/* LOGIN */
+
+#login {
+    padding: 20px 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    background: #e5e5e5;
+}
+
+#login .captcha {
+    margin-top: 30px;
+}
+
+body #login .ui-button {
+    margin: 30px 0 20px;
+    width: 100%;
+    border-color: #76be2c;
+    border-radius: 0;
+    box-shadow: none;
+    font-size: 1.7rem;
+    background-color: #76be2c;
+    background-color: #1565C0;
+    background: #1565C0;
+    border-color: #1565C0;
+}
+
+body #login .ui-button span,
+body #login .ui-button span:hover {
+    color: #fff !important;
+}
+
+#login h3 {
+    margin: 0;
+}
+
+#login input {
+    width: 100%;
+}
+
+legend {
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    margin: 10px 0 0;
+    color: #444;
+    border-color: #999;
+}
+
+body .ui-panel .ui-panel-content {
+    padding-bottom: 25px;
+    padding-top: 0;
+}
+
+.panel {
+    box-shadow: none;
+}
+
+body .actions button {
+    margin: 10px 20px 20px 0;
+}
+
+body .actions {
+    margin: 0 0 50px;
+}
+
+body .actions button.ui-priority-primary {
+    min-width: 160px;
+}
+
+body button.ui-button.top-action.ui-widget {
+    margin: 0 5px 0 0;
+    float: right;
+}
+
+body .ui-widget-content input.ui-state-disabled {
+    opacity: 1;
+    border-style: none;
+    box-shadow: none;
+    padding-left: 0;
+}
+
+body .ui-selectonemenu {
+    background: #fff !important;
+    border-color: #ccc !important;;
+}
+
+body .ui-selectonemenu-panel .ui-selectonemenu-list {
+    font-size: 1.4rem;
+}
+
+body .ui-selectonemenu-panel .ui-selectonemenu-list .ui-state-highlight {
+    background: #999;
+}
+
+body .ui-datalist.ui-widget {
+    min-height: 270px;
+}
+
+body .ui-selectonemenu-panel .ui-selectonemenu-filter-container,
+body .ui-selectonemenu-panel .ui-selectonemenu-filter {
+    width: 100%;
+}
+
+
+/* IRN CSS */
+
+#registration-state {
+    display: block;
+    font-size: 18px;
+    color: #aaa;
+    vertical-align: bottom;
+    font-weight: normal;
+    margin-bottom: 0;
+    padding: 40px 30px 40px;
+    background: #fff;
+    margin-left: -30px;
+    margin-right: -30px;
+    margin-top: 40px;
+}
+
+#registration-state span {
+    padding: 5px 14px;
+    font-size: 1.8rem;
+    color: #aaa;
+    font-weight: 300;
+}
+
+#registration-state span a{
+    padding: 5px 14px;
+    font-size: 1.8rem;
+    color: #333;
+}
+
+#registration-state span.active {
+    border-bottom: 5px solid #f0b21d;
+    color: #333;
+}
+
+#registration-state .fa {
+    color: #999;
+}
+
+input.ui-inputfield.ui-widget,
+body .ui-selectonemenu {
+    font-size: 1.6rem;
+    border-radius: 0;
+    border-color: #333;
+    padding-left: 11px;
+    height: 34px;
+}
+
+body .ui-selectonemenu.ui-widget {
+    border-radius: 0;
+    border-color: #333 !important;
+}
+
+body .ui-selectonemenu .ui-selectonemenu-trigger .ui-icon {
+    margin-top: 7px;
+}
+
+body .ui-selectonemenu-filter-container {
+    background: #e0e0e0;
+}
+
+body .ui-selectonemenu-panel .ui-selectonemenu-filter-container .ui-icon.ui-icon-search {
+    padding-right: 2rem;
+    top: 14px;
+    color: #888;
+    background: none repeat scroll 0 0 transparent!important;
+    text-indent: 0!important;
+    font: normal normal normal 14px/1 FontAwesome;
+}
+
+body .ui-selectonemenu-panel .ui-selectonemenu-filter-container span.ui-icon.ui-icon-search:before {
+    content: "\f002";
+}
+
+.ui-selectonemenu-trigger.ui-state-default.ui-corner-right {
+    width: 24px;
+    background: none;
+    border: 0;
+    outline: 0 !important;
+    box-shadow: none !important;
+}
+
+body #content .ui-selectonemenu label {
+    font-size: 1.6rem;
+    line-height: 2.6rem;
+    padding-left: 0;
+}
+
+input.ui-inputfield.ui-widget:focus,
+body .ui-selectonemenu.ui-widget:focus,
+body .ui-selectonemenu.ui-widget:active,
+body .ui-inputfield.ui-state-focus, body .ui-widget .ui-inputfield.ui-state-focus {
+    box-shadow: none;
+    border-color: #E5E5E5 !important;
+}
+
+body .ui-selectonemenu label {
+    margin: 0 !important;
+}
+
+body .ui-inputfield.hasDatepicker {
+    width: 100%
+}
+
+body button.ui-datepicker-trigger {
+    height: 34px;
+    position: absolute;
+    right: 14px;
+    background: none !important;
+    border: none !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+    float: right;
+    width: 34px;
+}
+
+p.subtitle {
+    font-style: italic;
+}
+
+.ui-datepicker .ui-datepicker-header {
+    background: none;
+}
+
+.ui-datepicker-trigger.ui-button-icon-only .ui-button-text {
+    background: none !important;
+}
+
+.form-content {
+    background: #e5e5e5;
+    animation: fadein 1s;
+    margin-bottom: 30px;
+    padding: 30px;
+}
+
+body .ui-widget-content, body .ui-panel .ui-panel-titlebar {
+    background: none;
+    border-style: none;
+}
+
+.ui-radiobutton.ui-widget {
+    margin-top: 2px;
+}
+
+.ui-selectoneradio {
+    margin-top: 10px;
+}
+
+span.ui-radiobutton-icon.ui-icon.ui-c.ui-icon-bullet {
+    margin-left: 0px;
+    margin-top: -1px;
+}
+
+.text-muted {
+    font-style: italic;
+}
+
+footer {
+    background: #535353;
+    padding: 50px 0;
+    color: #fff;
+}
+
+.ui-trigger-calendar input {
+    width: 80%;
+}
+
+#ui-datepicker-div {
+    background: #eee;
+}
+
+.ui-datepicker td {
+    min-width: 30px;
+}
+
+.ui-autocomplete-panel .ui-autocomplete-table, body .ui-autocomplete-panel.ui-widget-content {
+    background-color: #fff;
+}
+
+/* ACTIONS */
+
+.actions .col-sm-12 {
+    padding: 0;
+}
+
+body .actions .ui-priority-primary.nextstep,
+body .actions .ui-priority-primary.nextstep:hover,
+body .actions .ui-priority-primary.nextstep:focus {
+    box-shadow: 0 5px #609a21;
+    width: 240px;
+    background: #76be2c;
+    background-color: #76be2c;
+    float: right;
+    padding-right: 0;
+    color: #fff;
+    font-size: 20px;
+    height: 70px;
+    border: none;
+    border-radius: 0;
+    margin-right: 0;
+    text-align: left;
+    padding-left: 2rem;
+    transition: all 0.5s ease;
+}
+
+body .actions .ui-priority-primary.nextstep:hover {
+    background-color: #609a21;
+}
+
+body .actions .ui-priority-primary.nextstep .ui-icon.fa {
+    font-size: 2rem;
+    line-height: 1rem;
+    padding-right: 3rem;
+    transition: all 0.5s ease;
+}
+
+body .actions .ui-priority-primary.nextstep:hover .ui-icon.fa {
+    padding-right: 2rem;
+}
+
+body .actions .ui-priority-default.prevstep,
+body .actions .ui-priority-default.prevstep:hover,
+body .actions .ui-priority-default.prevstep:focus {
+    width: 240px;
+    background: none;
+    float: left;
+    padding-right: 0;
+    color: #3399cc;
+    font-size: 20px;
+    height: 70px;
+    border: none;
+    border-radius: 0;
+    margin-right: 0;
+    text-align: left;
+    padding-left: 2rem;
+    transition: all 0.5s ease;
+    box-shadow: none;
+}
+
+body .actions .ui-priority-default.prevstep:hover {
+    background: #eee;
+}
+
+body .actions .ui-priority-default.prevstep .ui-icon.fa {
+    font-size: 2rem;
+    line-height: 1rem;
+    padding-left: 3rem;
+    transition: all 0.5s ease;
+}
+
+body .actions .ui-priority-default.prevstep:hover .ui-icon.fa {
+    padding-left: 2rem;
+}
+
+body .actions .ui-priority-primary.submit,
+body .actions .ui-priority-primary.submit:hover,
+body .actions .ui-priority-primary.submit:focus {
+    box-shadow: 0 5px #609a21;
+    width: 240px;
+    background-color: #76be2c;
+    padding-right: 0;
+    color: #fff;
+    font-size: 20px;
+    height: 70px;
+    border: none;
+    border-radius: 0;
+    margin-right: 0;
+    text-align: left;
+    padding-left: 2rem;
+    transition: all 0.5s ease;
+    background-image: none;
+}
+
+body .actions button.ui-priority-primary.reject,
+body .actions button.ui-priority-primary.reject:hover,
+body .actions button.ui-priority-primary.reject:focus {
+    box-shadow: 0 5px #D32F2F;
+    min-width: 240px;
+    padding-right: 0;
+    color: #fff;
+    font-size: 20px;
+    height: 70px;
+    border: none;
+    border-radius: 0;
+    margin-right: 0;
+    text-align: left;
+    padding-left: 2rem;
+    transition: all 0.5s ease;
+    margin-left: 20px;
+    background: #F44336;
+    background-color: #F44336;
+}
+
+body .actions button.ui-priority-primary.reject:hover,
+body .actions button.ui-priority-primary.reject:focus {
+    background: #D32F2F;
+    background-color: #D32F2F;
+}
+
+body .actions .ui-priority-primary.submit:hover {
+    background: #609a21;
+    background-color: #609a21;
+}
+
+body .actions .ui-priority-primary.submit .ui-icon.fa,
+body .actions .ui-priority-primary.reject .ui-icon.fa {
+    font-size: 2rem;
+    line-height: 1rem;
+    padding-left: 1.5rem;
+    transition: all 0.5s ease;
+}
+
+body .actions .ui-priority-primary.submit:hover .ui-icon.fa,
+body .actions .ui-priority-primary.reject:hover .ui-icon.fa {
+    padding-left: 2rem;
+}
+
+@keyframes fadein {
+    from {
+        opacity:0;
+
+    }
+    to {
+        opacity:1;
+    }
+}
+
+/* DIALOGS */
+
+.ui-dialog .dialog-actions {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+body .ui-dialog .dialog-actions button {
+    margin: 10px 10px 5px;
+    border-radius: 0;
+    border: 0;
+    background-image: none;
+    font-size: 1.8rem;
+    height: 40px;
+    min-width: 130px;
+}
+
+body .ui-dialog .dialog-actions button .ui-icon {
+    display: none !important; 
+}
+
+body .ui-dialog .dialog-actions button .ui-button-text {
+    padding: 0 20px;
+}
+
+.ui-dialog .dialog-actions button.submit {
+    background-color: #76be2c;
+}
+.ui-dialog .dialog-actions button.submit:focus,
+.ui-dialog .dialog-actions button.submit:hover {
+    background-color: #609a21;
+}
+
+.ui-dialog .dialog-actions button.reject {
+    background-color: #F44336;
+}
+
+.ui-dialog .dialog-actions button.reject:focus,
+.ui-dialog .dialog-actions button.reject:hover {
+    background-color: #D32F2F;
+}
+
+body .ui-dialog.ui-widget-content {
+    max-width: 1140px;
+    margin: 0 auto !important;
+}
+
+/* ERRORS */
+
+body .ui-widget label.ui-state-error {
+    background: none;
+}
+
+body .ui-widget .ui-message-error-detail,
+body .ui-widget .ui-message-error {
+    background: none;
+    padding-left: 0;
+    margin-left: 1px;
+    margin-top: 2px;
+    font-size: 1.2rem;
+    border: none;
+    font-weight: bold;
+}
+
+body .ui-message-error-icon {
+    background: none repeat scroll 0 0 transparent!important;
+    text-indent: 0!important;
+    font: normal normal normal 14px/1 FontAwesome;
+}
+
+body .ui-message-error-icon:before {
+    content: "\f06a";
+    line-height: 1.6rem;
+}
+
+.error-page .fa {
+    margin-top: 25px;
+    font-size: 80px;
+    color: #f0b21d;
+}
+
+body .error-page button.ui-button {
+    margin-top: 20px;
+    background: none;
+    border: #3399cc 1px solid;
+    color: #3399cc;
+    margin-bottom: 50px;
+    padding: 3px 20px 4px;
+}
+
+body .error-page button.ui-button:hover, 
+body .error-page button.ui-button:focus {
+    color: #3399cc;
+    background: #f5f5f5;
+}
+
+.error-page {
+    min-height: 360px;
+}
+
+.form-content .alert-info {
+    border: none;
+    background: none;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.form-content .alert-info button {
+    margin-top: 30px;
+    background-color: #1565C0;
+    color: #fff;
+    box-shadow: none;
+}
+
+.form-content .alert-info .fa {
+    display: block;
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.intro-content {
+    padding-bottom: 50px;
+}
+
+.intro-content p, .intro-content li {
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+}
+
+body .intro-content .actions {
+    margin: 0;
+}
+
+body .form-content.intro {
+    margin-top: 30px;
+    padding: 1px;
+}
+
+body .form-content.intro .actions {
+    margin: 0 0 30px;
+}
+
+body .form-content.intro h3 {
+    font-size: 2.8rem;
+    line-height: 3.2rem;
+}
+
+body .form-content.intro .actions button.ui-priority-primary {
+    float: none;
+}
+
+body .ui-growl-image {
+    display: none;
+}
+
+body .ui-growl-message {
+    float: none;
+    width: 100%;
+}
+
+.ui-growl-icon-close {
+    display: block !important;
+}
+
+body .ui-widget-content input.ui-state-disabled {
+    background: none;
+}
+
+body .ui-selectonemenu.ui-state-disabled {
+    background: none !important;
+    opacity: 1;
+    border-style: none;
+    padding-left: 0;
+}
+
+body #content .ui-selectonemenu.ui-state-disabled label {
+    background: none;
+    box-shadow: none;
+    padding-left: 0;
+    text-transform: uppercase;
+    color: #333;
+}
+
+body .ui-selectonemenu.ui-state-disabled .ui-selectonemenu-trigger .ui-icon {
+    display: none;
+}
+
+body .row textarea.ui-inputfield {
+    border-radius: 0;
+    border-color: #333;
+}
+
+body textarea + .text-muted {
+    font-size: 1.2rem;
+    margin-left: 2px;
+}
+
+.form-content .fa {
+    display: block;
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+body .form-content .alert {
+    text-align: left;
+}
+
+body .alert .actions {
+    margin: 0;
+}
+
+body .completed-content .actions button {
+    margin: 30px 0 0;
+}
+
+/* FILE UPLOAD */
+
+.ui-fileupload-buttonbar {
+    background: none;
+    border: 0;
+    margin: 20px 0 0;
+    padding: 0;
+}
+
+.ui-fileupload .ui-button.ui-fileupload-choose {
+    padding: 1px 5px 7px;
+}
+
+body .ui-fileupload-buttonbar .ui-fileupload-choose input {
+    font-size: 20px;
+}
+
+body .ui-fileupload-buttonbar .ui-button {
+    height: 36px;
+}
+
+body .ui-fileupload-buttonbar .ui-fileupload-choose input {
+    position: absolute;
+    left: 0;
+    height: 100%;
+    max-width: 100%;
+}
+
+/* BACKOFFICE */
+
+body .ui-tabs {
+    margin-top: 30px;
+}
+
+body .ui-tabs .ui-tabs-panel {
+    padding-top: 0;
+}
+
+body .ui-tabs.ui-tabs-left .ui-tabs-nav.ui-widget-header li {
+    margin-bottom: 5px;
+}
+
+body .ui-tabs .ui-tabs-nav.ui-widget-header li.ui-state-active a {
+    font-weight: bold;
+}
+
+body .ui-tabs.ui-tabs-left {
+    border: none;
+}
+
+.ui-tabs-panels span.tip {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #777;
+}
+
+body .ui-tabs-panels .actions button.ui-priority-primary {
+    margin-top: 40px;
+    border-radius: 0;
+    background-color: #1565C0;
+    background: #1565C0;
+    border-color: #1565C0;
+    min-width: 200px;
+    padding: 2px;
+    color: #fff;
+    box-shadow: none;
+}
+
+body .ui-tabs-panels .ui-datatable tr:nth-child(even) {
+    background: #e0e0e0;
+}
+
+body .ui-tabs-panels .ui-datatable .ui-datatable-header {
+    background: none;
+}
+
+body .ui-tabs-panels .ui-datatable thead th {
+    border: 0;
+    box-shadow: none;
+    border-radius: 0;
+    background: #d0d0d0;
+    text-align: left;
+}
+
+.ui-tabs-panel hr {
+    border: 1px dashed #999;
+    border-bottom: 0;
+    margin: 30px 0 10px;
+}
+
+.ui-tabs-panels .ui-chkbox {
+    padding-left: 0;
+    width: auto;
+}
+
+ul.nav.navbar-nav.navbar-right {
+    margin-top: 12px;
+}
+
+.ui-tabs-panels .ui-panel {
+    background: #eee;
+    border-radius: 0;
+    margin-bottom: 30px;
+}
+
+body .ui-tabs-panels .actions {
+    margin: 0;
+}
+
+body .ui-tabs-panels .ui-messages-info-icon {
+    display: none;
+}
+
+.ui-tabs-panel .ui-messages-info-summary {
+    margin-left: 0;
+}
+
+.form-content .clearfix > .fa {
+    display: inline-block;
+    vertical-align: text-top;
+    margin-right: 3px;
+    margin-left: 3px;
+    color: #555;
+}
+
+/* SUMMARY */
+
+body .form-content.summary-content {
+    font-size: 1.2rem;
+}
+
+body #content .form-content.summary-content label {
+    margin: 12px 0 1px;
+}
+
+body .form-content.summary-content legend {
+    font-size: 1.2rem;
+}
+
+body .form-content.summary-content h3.heading {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 16px;
+    font-size: 1.8rem;
+}
+
+body .form-content.summary-content .fa,
+body .birth_registration .form-content .fa {
+    display: inline-block;
+    margin-right: 2px;
+}
+
+body .form-content.summary-content .fa {
+    font-size: 1.4rem;
+}
+
+body .birth_registration .form-content {
+    padding-top: 10px;
+}
+
+body .form-content .ui-panel .ui-panel-content {
+    padding-bottom: 10px;
+}
+
+/* COMPLETED */
+
+body .form-content.completed-content .alert {
+    text-align: center;
+}
+
+body .form-content.completed-content .alert-info .fa {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+a:focus, a:active, a:hover {
+    outline: none;
+}
+
+.footer-brand p {
+    margin: 0;
+    font-weight: bold;
+}
+
+footer .text-right img {
+    margin-left: 40px;
+    margin-bottom: 15px;
+}
+
+.scroll-top a.btn,
+.scroll-top a.btn:focus ,
+.scroll-top a.btn:hover {
+    z-index: 1049;
+    position: fixed;
+    right: 2%;
+    bottom: 2%;
+    width: 40px;
+    height: 40px;
+    line-height: 24px;
+    border-radius: 50%;
+    border-style: none;
+    background: rgba(0,0,0,0.5);
+}
+
+/* FAQS LINK */
+
+a.faqs {
+    margin-top: 3px;
+    display: inline-block;
+}
+
+body a.faqs {
+    display: inline-block;
+    text-transform: uppercase;
+    color: #3399cc;
+    font-size: 1.4rem;
+}
+
+body a.faqs:hover,
+body a.faqs:focus {
+    color: #267298;
+}
+
+img {
+    max-width: 100%;
+}
+
+/* REPORT */
+
+@media print {
+
+    a[href]:after {
+        content: none !important;
+    }
+
+    body .navbar {
+        display: block;
+        border-bottom: 1px dashed #ccc;
+        text-align: center;
+        padding: 0 0 10px;
+        margin: 0 !important;
+        min-height: 0 !important;
+    }
+    body .navbar img {
+        width: 120px;
+    }
+
+    body .form-content.summary-content.report {
+        font-size: 10px;
+        font-weight: bold;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    body .form-content.summary-content.report h3 {
+        font-size: 14px;
+        font-weight: bold;
+        margin: 20px 0 0 0 !important;
+        padding: 0;
+    }
+
+    body .form-content.summary-content.report legend{
+        font-size: 9px;
+        font-weight: normal;
+        color: #666;
+        border-bottom: 1px solid #ccc;
+        margin: 10px 0 0 !important;
+    }
+
+    body .form-content.summary-content.report label{
+        font-weight: normal;
+        margin: 10px 0 0 !important;
+    }
+
+
+
+    footer {
+        font-size: 9px;
+        text-align: center;
+        padding: 10px 0 0;
+        color: #999;
+        margin: 0 !important;
+        border-top: 1px dashed #ccc;
+    }
+
+    footer .col-sm-8, footer .col-sm-4 {
+        width: 100%;
+    }
+
+    footer .logos {
+        display: none;
+    }
+
+    .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9 {
+        float: left;
+    }
+    .col-md-4 {
+        width: 33.33333333%;
+    }
+    .col-md-8 {
+        width: 66.66666667%;
+    }
+    .col-md-12 {
+        width: 100%;
+    }
+
+    body a.faqs, .container-background, footer, body nav.navbar {
+        display: none;
+    }
+}
+/* HOSPITAL BACKOFFICE */
+
+.col-md-3.search {
+    margin-top: 20px;
+}
+
+.search button.ui-button.ui-priority-primary {
+    border-radius: 0;
+    box-shadow: none;
+    background-color: #1565C0;
+    background: #1565C0;
+    border-color: #1565C0;
+    width: 100%;
+    padding: 2px;
+    color: #fff;
+    margin-top: 45px;
+}
+
+.search span.ui-outputlabel-rfi {
+    display: none;
+}
+
+body .ui-outputlabel.ui-state-error {
+    border: none;
+}
+
+body .ui-panel.birthRegistrationsPanel {
+    background: #eee;
+    border-radius: 0;
+    margin-top: 20px;
+}
+
+body .ui-panel.birthRegistrationsPanel h3 {
+    margin: 15px 0;
+}
+
+body .birthRegistrationsPanel .ui-datatable .ui-datatable-header {
+    background: none;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+body .birthRegistrationsPanel .ui-datatable thead th {
+    border: 0;
+    box-shadow: none;
+    border-radius: 0;
+    background: #d0d0d0;
+    text-align: left;
+}
+
+body .birthRegistrationsPanel .ui-datatable tr:nth-child(even) {
+    background: #e0e0e0;
+}
+
+body .birthRegistrationsPanel .ui-datatable a {
+    
+}
+
+body .birthRegistrationsPanel .fa-male {
+    color: #64B5F6;
+}
+
+body .birthRegistrationsPanel .fa-female {
+    color: #F06292;
+}
+
+span.baby {
+    width: 10px;
+    height: 10px;
+    background: #777;
+    display: inline-block;
+    border-radius: 50%;
+    margin: 0 2px 0 0;
+}
+span.male {
+    background: #64B5F6;
+}
+span.female {
+    background: #F06292;
+}
+
+.separator {
+    margin: 0 4px;
+    font-weight: bold;
+}
+
+.ui-reflow-label {
+    display: none !important;
+}
+
+.no-results {
+    padding: 40px 0 20px;
+    font-size: 1.8rem;
+}
+
+.no-results .fa {
+    display: block;
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+body .ui-icon.ui-icon-none.ui-confirm-dialog-severity {
+    display: none;
+}
+
+body .ui-confirm-dialog-message {
+    width: 100%;
+}
+
+.ui-widget-overlay {
+    opacity: 0.3 !important;
+}
+
+body .ui-blockui-content {
+    top: 150px !important;
+    position: fixed !important;
+    background-color: whitesmoke;
+}
+
+body .actions .ui-priority-primary.submit + .ui-priority-primary.submit {
+    margin-left: 20px;
+}
+
+tr.ui-widget-content.ui-datatable-empty-message {
+    text-align: center;
+    font-style: italic;
+}
+.results-count {
+    text-align: left;
+    margin-top: 10px;
+}
+
+body .ui-datatable.birth-registrations tbody td {
+    height: 50px;
+    vertical-align: middle;
+}
+
+body .ui-datatable.birth-registrations  thead th {
+    text-transform: uppercase;
+    font-size: 1.4rem;
+}
+
+
+.home-spinner {
+    text-align: center;
+    min-height: 60vh;
+    padding-top: 10rem;
+    padding-bottom: 10rem;
+    font-size: 7rem;
+    color: #666;
+}
+
+li.hidden + li.logout-action {
+    float: right;
+    margin-left: 30px;
+    border-left: 1px solid #e0e0e0;
+    padding-left: 10px;
+}
+
+li.hidden + li.logout-action a {
+    color: #3399cc;
+    padding: 3px 20px;
+}
+
+li.hidden + li.logout-action a:hover {
+    color: #267298;
+    text-decoration: underline;
+}
+
+footer span.footer-brand {
+    margin-left: 50px;
+    vertical-align: middle;
+    font-size: 1.2rem;
+}
+
+body .container-background {
+    padding: 60px 0 0;
+    background-color: #f0b21d;
+    margin: 0 15px;
+}
+
+.container-background h2 {
+    font-size: 4rem;
+    font-weight: bold;
+    margin-top: 0;
+}
+
+.container-background .responsible {
+    font-size: 1.3rem;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+body .intro-content .actions .ui-priority-primary.nextstep {
+    float: none;
+    margin-top: 20px;
+}
+
+h3.heading + .panel-collapse, h3.heading .fa {
+    display: none;
+}
+
+body h3.heading a, body h3.heading a:hover, body h3.heading a:focus {
+    color: #333;
+    cursor: default;
+}
+
+.ui-autocomplete-panel .ui-autocomplete-item.ui-state-highlight {
+    background: #999;
+}
+
+@media screen and (max-width: 1000px) {
+    footer span.footer-brand {
+        display: block;
+        margin: 20px 0;
+    }
+
+    #registration-state {
+        font-size: 10px;
+        margin: 0;
+        padding: 10px 10px;
+    }
+    #registration-state span{
+        padding: 5px 5px 5px 0;
+        font-size: 1.4rem;
+    }
+    #registration-state span a {
+        font-size: 1.2rem;
+        padding: 0;
+    }
+    #registration-state span.active {
+        border-bottom: none;
+        color: #333;
+        font-weight: bold;
+    }
+    #registration-state {
+        padding-bottom: 8px;
+        margin-bottom: 0;
+    }
+    body h3 {
+        font-size: 2rem;
+    }
+    .ui-priority-primary.nextstep,
+    .ui-priority-default.prevstep,
+    .ui-priority-primary.nextstep:hover,
+    .ui-priority-default.prevstep:hover,
+    .ui-priority-primary.nextstep:focus,
+    .ui-priority-default.prevstep:focus {
+        height: 50px !important;
+    }
+    body .actions .pull-right {
+        width: 100%;
+    }
+    body .actions button {
+        font-size: 1.8rem !important;
+        width: 200px !important;
+    }
+    body .ui-dialog textarea.ui-inputfield {
+        width: 100%;
+    }
+    .container-background h2 {
+        font-size: 3rem;
+    }
+    .navbar-default .navbar-toggle {
+        border-style: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    ul.nav.navbar-nav.navbar-right {
+        margin: 20px 0 10px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .container-background h2 {
+        font-size: 2rem;
+    }
+    .container-background .responsible {
+        font-size: 1.1rem;
+    }
+    .form-content {
+        padding: 5px 0 20px;
+    }
+    #registration-state span {
+        display: inline-block;
+        padding: 3px 2px;
+        font-size: 1.2rem;
+    }
+    #registration-state span.active {
+        border: none;
+        font-weight: bold;
+    }
+    #registration-state {
+        margin-top: 0;
+    }
+    footer {
+        padding: 30px 0 10px;
+        text-align: center;
+    }
+    footer .text-right img {
+        margin: 20px auto;
+        display: block;
+    }
+    .navbar-header.page-scroll a img {
+        margin: 0 auto;
+        display: block;
+    }
+    body .form-content.intro {
+        margin-top: 0;
+    }
+    .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper {
+        max-width: 420px;
+        margin-left: 2px;
+    }
+    .actions button {
+        max-width: 40%;
+    }
+    .actions .ui-button .ui-button-text {
+        display: block;
+        line-height: normal;
+        font-size: 1.8rem;
+    }
+    .actions button .fa {
+        display: none !important;
+    }
+    .intro-content p, .intro-content li {
+        font-size: 1.4rem;
+        line-height: 2.2rem;
+    }
+    .intro-content h2 {
+        font-size: 2.2rem;
+        margin-top: 10px;
+    }
+    .intro-content {
+        padding-bottom: 30px;
+    }
+    body .form-content.intro h3 {
+        font-size: 2.2rem;
+        line-height: 3rem;
+        margin: 5px 0 0 0;
+    }
+    p.copyright {
+        font-size: 1.1rem;
+    }
+    .error-page .text-right {
+        text-align: center;
+    }
+    .error-page .fa {
+        margin-top: 20px;
+        font-size: 60px;
+    }
+    .error-page h2 {
+        font-size: 2.2rem;
+    }
+    .error-page {
+        min-height: auto;
+        text-align: center;
+        font-size: 1.3rem;
+    }
+    body .error-page button.ui-button {
+        margin-bottom: 0;
+        margin-top: 30px;
+    }
+    body .form-content.intro .actions button.ui-priority-primary {
+        float: none;
+        width: 90%;
+        max-width: none;
+        text-align: center;
+        margin: 13px;
+    }
+    body .actions button.ui-button.ui-widget,
+    body .actions button.ui-button.ui-widget:hover,
+    body .actions button.ui-button.ui-widget:focus {
+        text-align: center;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        height: 50px !important;
+        transition: none;
+        display: block;
+        min-width: 100% !important;
+        margin: 20px auto !important;
+    }
+    body .actions button.ui-button.ui-widget .ui-button-text {
+        padding-left: 0;
+        padding-right: 0;
+        font-size: 1.6rem;
+    }
+    .ui-widget .ui-widget {
+        font-size: 1.4rem;
+    }
+    input.ui-inputfield.ui-widget, body .ui-selectonemenu {
+        font-size: 1.4rem;
+    }
+    body #content .ui-selectonemenu label {
+        font-size: 1.4rem;
+        line-height: 2.2rem;
+    }
+    input.ui-inputfield.ui-widget, body .ui-selectonemenu {
+        font-size: 1.4rem;
+        height: 30px;
+    }
+    body #content label {
+        font-size: 1.4rem;
+    }
+    p.subtitle {
+        font-size: 1.2rem;
+    }
+    body .form-content.summary-content .fa, 
+    body .birth_registration .form-content .fa {
+        display: none;
+    }
+    body .actions .ui-priority-default.prevstep {
+        background: #f5f5f5;
+    }
+    body .ui-dialog .dialog-actions button {
+        font-size: 1.8rem;
+        height: 40px;
+        margin: 20px 0 0;
+        width: 100%;
+    }
+    .navbar-header.page-scroll a img {
+        height: 40px;
+        float: left;
+        margin-left: 15px;
+    }
+}

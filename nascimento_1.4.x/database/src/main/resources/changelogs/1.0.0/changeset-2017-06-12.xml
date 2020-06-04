@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+	<changeSet author="pzenida" id="2017-06-12-add-counter">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="counter" />
+			</not>
+		</preConditions>
+		<createTable tableName="counter">
+			<column name="id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="version" type="int(11)" />
+			<column name="creation_date" type="datetime(6)" />
+			<column name="uuid" type="VARCHAR(75)" />
+			<column name="code" type="VARCHAR(30)" />
+			<column name="count" type="bigint(20)" />
+		</createTable>
+	</changeSet>
+
+	<changeSet author="pzenida" id="2017-06-12-add-counter-pk">
+		<addPrimaryKey columnNames="id" constraintName="PRIMARY"
+			tableName="counter" />
+	</changeSet>
+
+	<changeSet author="pzenida" id="2017-06-12-add-unique-code-on-counter">
+		<createIndex tableName="counter" indexName="idx_unique_code"
+			unique="true">
+			<column name="code" />
+		</createIndex>
+	</changeSet>
+
+	<changeSet author="pzenida"
+		id="2017-06-12-add-registration-number-to-birth-registration">
+		<addColumn tableName="birth_registration">
+			<column name="registration_number" type="varchar(20)" />
+		</addColumn>
+	</changeSet>
+
+</databaseChangeLog>

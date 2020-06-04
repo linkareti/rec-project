@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:o="http://omnifaces.org/ui">
+
+	<p:panel>
+		<f:facet name="header">
+			<legend>
+				<h:outputText
+					value="#{messages['birthRegistration.parent.parentsData']}" />
+			</legend>
+		</f:facet>
+
+		<div class="row">
+			<div class="col-md-12">
+				<p:outputLabel value="#{messages['parent.fatherName']}"
+					for="firstParentFatherName" />
+				<p:inputText id="firstParentFatherName"
+					value="#{birthRegistrationController.birthRegistration.firstParent.fatherName}"
+					styleClass="col-md-12"
+					placeholder="#{messages['parent.fatherName.placeholder']}"
+					disabled="#{not empty birthRegistrationController.birthRegistration.firstParent.fatherName}" />
+				<div class="clearfix" />
+				<p:message for="firstParentFatherName" />
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<p:outputLabel value="#{messages['parent.motherName']}"
+					for="firstParentMotherName" />
+				<p:inputText id="firstParentMotherName"
+					value="#{birthRegistrationController.birthRegistration.firstParent.motherName}"
+					styleClass="col-md-12"
+					placeholder="#{messages['parent.motherName.placeholder']}"
+					disabled="#{not empty birthRegistrationController.birthRegistration.firstParent.motherName}" />
+				<div class="clearfix" />
+				<p:message for="firstParentMotherName" />
+			</div>
+		</div>
+	</p:panel>
+
+</ui:composition>

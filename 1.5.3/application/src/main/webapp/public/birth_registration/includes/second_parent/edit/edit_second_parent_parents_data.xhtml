@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:o="http://omnifaces.org/ui">
+
+	<p:panel>
+		<f:facet name="header">
+			<legend>
+				<h:outputText
+					value="#{messages['birthRegistration.parent.parentsData']}" />
+			</legend>
+		</f:facet>
+
+		<div class="row">
+			<div class="col-md-12">
+				<p:outputLabel value="#{messages['parent.fatherName']}"
+					for="secondParentFatherName" />
+				<p:inputText id="secondParentFatherName"
+					value="#{birthRegistrationController.birthRegistration.secondParent.fatherName}"
+					styleClass="col-md-12"
+					placeholder="#{messages['parent.fatherName.placeholder']}" />
+				<div class="clearfix" />
+				<p:message for="secondParentFatherName" />
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<p:outputLabel value="#{messages['parent.motherName']}"
+					for="secondParentMotherName" />
+				<p:inputText id="secondParentMotherName"
+					value="#{birthRegistrationController.birthRegistration.secondParent.motherName}"
+					styleClass="col-md-12"
+					placeholder="#{messages['parent.motherName.placeholder']}" />
+				<div class="clearfix" />
+				<p:message for="secondParentMotherName" />
+			</div>
+		</div>
+	</p:panel>
+
+</ui:composition>

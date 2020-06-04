@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:o="http://omnifaces.org/ui">
+
+	<h:panelGroup id="birth_registration_identification" layout="block"
+		rendered="#{birthRegistrationController.showIdentification}">
+
+		<h:panelGroup id="birth_registration_identification_container"
+			layout="block">
+			<!-- REDIRECT TEST -->
+
+			<ui:fragment
+				rendered="#{configurationManager.configuration.dummyMode eq false and birthRegistrationController.serviceProviderHelper.authnRequestPrepared}">
+				<div class="row">
+					<div class="home-spinner">
+						<i class="fa fa-spinner fa-pulse fa-fw"></i>
+					</div>
+				</div>
+				<input type="hidden" name="SAMLRequest"
+					value="#{birthRegistrationController.serviceProviderHelper.encodedAuthnRequest}" />
+				<input type="hidden" name="RelayState"
+					value="#{birthRegistrationController.serviceProviderHelper.encodedRelayState}" />
+				<h:outputScript>
+					var form = document.getElementById('form');
+					if (form) {
+					        form.action = '#{birthRegistrationController.serviceProviderHelper.idpUrl}';
+					        form.submit();
+					}
+				</h:outputScript>
+			</ui:fragment>
+
+			<ui:fragment
+				rendered="#{configurationManager.configuration.dummyMode eq true}">
+				<!--<div class="alert alert-warning text-center">!!! DUMMY MODE !!!</div>-->
+                                <div class="container-background">
+                                    <div class="container">
+                                        <div class="row">
+                                                <div class="col-md-12">
+                                                        <div class="intro-content">
+                                                                <span class="responsible">
+                                                                        <h:outputText
+                                                                                value="#{messages['birthRegistration.identification.responsible']}" />
+                                                                </span>
+                                                                <h2>
+                                                                        <h:outputText
+                                                                                value="#{messages['birthRegistration.identification.title']}" />
+                                                                </h2>
+                                                                <h:outputText
+                                                                        value="#{messages['birthRegistration.identification.body']}"
+                                                                        escape="false" />
+                                                                
+                                                                <div class="actions">
+                                                                            <p:commandButton icon="fa fa-chevron-right" iconPos="right"
+                                                                                            action="#{birthRegistrationController.dummyAuthenticate()}"
+                                                                                            value="#{messages['button.authenticate']}"
+                                                                                            styleClass="ui-priority-primary nextstep" process="@this"
+                                                                                            update="@form,:logoutForm:menuOptions"
+                                                                                            onstart="PF('mainContentBUI').show();PrimeFaces.scrollTo('page-top')"
+                                                                                            oncomplete="PF('mainContentBUI').hide()" partialSubmit="true"
+                                                                                            rendered="#{birthRegistrationController.serviceProviderHelper.dummyMode}">
+                                                                                    </p:commandButton>
+                                                                </div>
+                                                                
+                                                                
+                                                                
+                                                        </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h5>
+                                                        <h:outputText
+                                                                value="#{messages['birthRegistration.identification.legalNotice']}" />
+                                                </h5>
+                                            </div>
+                                    </div>
+                                </div>
+                                
+			</ui:fragment>
+		</h:panelGroup>
+	</h:panelGroup>
+
+</ui:composition>

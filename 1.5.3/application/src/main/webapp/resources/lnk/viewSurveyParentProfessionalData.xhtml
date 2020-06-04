@@ -1,0 +1,105 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<composite:interface>
+	<composite:attribute name="parentData"
+		shortDescription="The parent whose professional data we want to present"
+		type="com.linkare.irn.nascimento.model.identification.Parent" />
+	<composite:attribute name="birthRegistration"
+		shortDescription="The birth registration whose survey data we want to present"
+		type="com.linkare.irn.nascimento.model.core.BirthRegistration" />
+	<composite:attribute name="panelTitleKey"
+		shortDescription="Title of the panel"
+		default="birthRegistration.firstParent.professionalData" />
+	<composite:attribute name="civilRegistrationOffice"
+		shortDescription="Include civilRegistrationOffice on component labels"
+		type="java.lang.Boolean" default="false" />
+</composite:interface>
+<composite:implementation>
+
+	<p:panel>
+		<f:facet name="header">
+			<legend>
+				<h:outputText value="#{messages[cc.attrs.panelTitleKey]}" />
+			</legend>
+		</f:facet>
+
+		<!-- Tenth row -->
+		<div class="row">
+			<div class="col-md-4">
+				<p:outputLabel value="#{messages['parent.academicDegree']}"
+					rendered="#{not cc.attrs.civilRegistrationOffice}" />
+				<p:outputLabel
+					value="#{messages['parent.academicDegree.civilRegistrationOffice']}"
+					rendered="#{cc.attrs.civilRegistrationOffice}" />
+				<h:outputText
+					value="#{messages[cc.attrs.parentData.academicDegree.key]}"
+					rendered="#{not empty cc.attrs.parentData.academicDegree}" />
+				<h:outputText value="#{messages['label.notAvailable']}"
+					styleClass="text-muted"
+					rendered="#{empty cc.attrs.parentData.academicDegree}" />
+			</div>
+			<div class="col-md-4">
+				<p:outputLabel value="#{messages['parent.job']}"
+					rendered="#{not cc.attrs.civilRegistrationOffice}" />
+				<p:outputLabel
+					value="#{messages['parent.job.civilRegistrationOffice']}"
+					rendered="#{cc.attrs.civilRegistrationOffice}" />
+				<h:outputText value="#{messages[cc.attrs.parentData.job.key]}"
+					rendered="#{not empty cc.attrs.parentData.job}" />
+				<h:outputText value="#{messages['label.notAvailable']}"
+					styleClass="text-muted" rendered="#{empty cc.attrs.parentData.job}" />
+			</div>
+			<div class="col-md-4">
+				<p:outputLabel value="#{messages['parent.jobCondition']}"
+					rendered="#{not cc.attrs.civilRegistrationOffice}" />
+				<p:outputLabel
+					value="#{messages['parent.jobCondition.civilRegistrationOffice']}"
+					rendered="#{cc.attrs.civilRegistrationOffice}" />
+				<h:outputText
+					value="#{messages[cc.attrs.parentData.jobCondition.key]}"
+					rendered="#{not empty cc.attrs.parentData.jobCondition}" />
+				<h:outputText value="#{messages['label.notAvailable']}"
+					styleClass="text-muted"
+					rendered="#{empty cc.attrs.parentData.jobCondition}" />
+			</div>
+
+			<div class="col-md-4">
+				<p:outputLabel value="#{messages['parent.jobStatus']}"
+					rendered="#{not cc.attrs.civilRegistrationOffice}" />
+				<p:outputLabel
+					value="#{messages['parent.jobStatus.civilRegistrationOffice']}"
+					rendered="#{cc.attrs.civilRegistrationOffice}" />
+				<h:outputText value="#{messages[cc.attrs.parentData.jobStatus.key]}"
+					rendered="#{not empty cc.attrs.parentData.jobStatus}" />
+				<h:outputText value="#{messages['label.notAvailable']}"
+					styleClass="text-muted"
+					rendered="#{empty cc.attrs.parentData.jobStatus}" />
+			</div>
+
+			<ui:fragment
+				rendered="#{not empty cc.attrs.birthRegistration.secondParent}">
+				<div class="col-md-4">
+					<p:outputLabel
+						value="#{messages['parent.numberOfChildrenNonCommon']}"
+						rendered="#{not cc.attrs.civilRegistrationOffice}" />
+					<p:outputLabel
+						value="#{messages['parent.numberOfChildrenNonCommon.civilRegistrationOffice']}"
+						rendered="#{cc.attrs.civilRegistrationOffice}" />
+					<h:outputText
+						value="#{cc.attrs.parentData.numberOfChildrenNonCommon}"
+						rendered="#{not empty cc.attrs.parentData.numberOfChildrenNonCommon}" />
+					<h:outputText value="#{messages['label.notAvailable']}"
+						styleClass="text-muted"
+						rendered="#{empty cc.attrs.parentData.numberOfChildrenNonCommon}" />
+				</div>
+			</ui:fragment>
+		</div>
+	</p:panel>
+
+</composite:implementation>
+</html>

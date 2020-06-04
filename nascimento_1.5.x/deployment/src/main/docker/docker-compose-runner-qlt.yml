@@ -1,0 +1,11 @@
+version: '3.1'
+services:
+  httpd:
+    environment:
+      - NASCIMENTO_HOSTNAME=${nascimento.host.name}-qld
+      - NASCIMENTO_DOMAINNAME=${nascimento.domain.name}
+  wildfly-node1:
+    environment:
+      - HTTPS_PROXY_HOST=10.0.230.100
+      - HTTPS_PROXY_PORT=8080
+      - NON_PROXY_HOSTS=qld.eai.mj.pt

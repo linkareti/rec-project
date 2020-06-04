@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<ui:param name="currentPage" value="configurations" />
+
+	<f:metadata>
+		<f:viewAction action="#{configurationController.checkAccess()}" />
+	</f:metadata>
+
+	<ui:define name="content">
+            <div class="container">
+
+		<h:panelGroup id="configuration_container" layout="block"
+			styleClass="configurations">
+
+			<p:focus context="configuration_container"
+				rendered="#{facesContext.validationFailed}" />
+
+			<f:validateBean>
+
+				<p:tabView orientation="left">
+					<p:tab title="#{messages['configurations.generalConfigs']}">
+						<ui:include src="includes/general_configs.xhtml" />
+					</p:tab>
+
+					<p:tab title="#{messages['configurations.dateConfigs']}">
+						<ui:include src="includes/date_configs.xhtml" />
+					</p:tab>
+
+					<p:tab title="#{messages['configurations.emailConfigs']}">
+						<ui:include src="includes/email_configs.xhtml" />
+					</p:tab>
+
+					<p:tab title="#{messages['configurations.uploadFileConfigs']}">
+						<ui:include src="includes/upload_file_configs.xhtml" />
+					</p:tab>
+
+					<p:tab
+						title="#{messages['configurations.citizenCardAuthenticationConfigs']}">
+						<ui:include src="includes/cc_authentication_configs.xhtml" />
+					</p:tab>
+				</p:tabView>
+			</f:validateBean>
+
+
+		</h:panelGroup>
+            </div>
+	</ui:define>
+</ui:composition>

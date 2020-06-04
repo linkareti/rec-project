@@ -1,0 +1,105 @@
+version: '3.1'
+services:
+  # Apache httpd server
+  httpd:
+    image: ${repo}/${simplifiedGroupId}/httpd:${docker.base.image.version}
+    environment:
+      - WILDFLY_NODES=wildfly-node1:8080
+      - NASCIMENTO_CONTEXT=
+#      - WILDFLY_NODES=wildfly-node1:8080 wildfly-node2:8080
+    ports:
+      - "80:80"
+      - "443:443"
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        delay: 30s
+        max_attempts: 3
+        window: 5s
+      resources:
+        limits:
+          memory: 1024M
+    depends_on:
+      - wildfly-node1
+    volumes:
+      - httpd-certs:/etc/ssl/certs:ro
+      - httpd-keys:/etc/ssl/private:ro
+  # Linux MYSQL Server 
+  mysql-server:
+    image: ${repo}/${simplifiedGroupId}/mysql-server:${docker.base.image.version}
+    secrets:
+      - rdb.secret
+    environment:
+      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/rdb.secret
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 5s
+    volumes:
+      - db-nascimento:/var/lib/mysql:rw
+  # Applies changes to databases
+  irn-upgrade-db:
+    image: ${repo}/${simplifiedGroupId}/irn-upgrade-db:${project.version}
+    secrets:
+      - db.secret
+    environment:
+      - TARGET_DB=${irn.db.name}
+      - DB_USER=${irn.db.app.user}
+      - DB_PASS=${irn.db.app.pass}
+      - DB_HOST=${irn.db.host}
+      - DB_PORT=${irn.db.port}
+      - DB_CONTEXT=${liquibase.context}
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: none
+    depends_on:
+      - mysql-server
+  # Application server
+  wildfly-node1:
+    image: ${repo}/${simplifiedGroupId}/nascimento:${project.version}
+    secrets:
+      - db.secret
+    command: --server-config standalone.xml
+    environment:
+      - CONTAINERS_UPGRADE_DB=irn-upgrade-db
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        delay: 5s
+        max_attempts: 3
+        window: 5s
+      resources:
+        limits:
+          memory: 3584M
+    depends_on:
+      - mysql-server
+    volumes:
+      - ama-certs:/home/nascimento/certs:ro
+      - javaks-certs:/resources:ro
+secrets:
+  db.secret:
+    external:
+      name: irn-db.secret
+  rdb.secret:
+    external:
+      name: root-db.secret
+
+volumes:
+  db-nascimento:
+    external: true
+  ama-certs:
+    external: true
+  javaks-certs:
+    external: true
+  httpd-certs:
+    external: true
+  httpd-keys:
+    external: true

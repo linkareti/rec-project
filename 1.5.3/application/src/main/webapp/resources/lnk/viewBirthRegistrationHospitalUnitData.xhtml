@@ -1,0 +1,102 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<composite:interface>
+	<composite:attribute name="birthRegistration"
+		shortDescription="The birth registration whose hospital unit data we want to present"
+		type="com.linkare.irn.nascimento.model.core.BirthRegistration" />
+	<composite:attribute name="documentHelper"
+		shortDescription="Instance of a document helper to make it possible to download files, if necessary"
+		type="com.linkare.irn.nascimento.web.controller.shared.core.DocumentHelper" />
+</composite:interface>
+<composite:implementation>
+
+	<p:panel>
+		<f:facet name="header">
+			<legend>
+				<h:outputText
+					value="#{messages['birthRegistration.hospitalUnitData']}" />
+			</legend>
+		</f:facet>
+
+
+		<div class="row">
+			<div class="col-md-12">
+				<p:outputLabel value="#{messages['birthRegistration.hospitalUnit']}" />
+				<h:outputText
+					value="#{cc.attrs.birthRegistration.hospitalUnit.name}"
+					rendered="#{not empty cc.attrs.birthRegistration.hospitalUnit}" />
+				<h:outputText value="#{messages['label.notAvailable']}"
+					styleClass="text-muted"
+					rendered="#{empty cc.attrs.birthRegistration.hospitalUnit}" />
+			</div>
+		</div>
+
+		<ui:fragment
+			rendered="#{cc.attrs.birthRegistration.hospitalUnit.organizationType eq 'OTHER_HOSPITAL_UNIT'}">
+			<div class="col-md-12">
+				<p:outputLabel value="#{messages['label.hospital.other']}" />
+				<h:outputText
+					value="#{cc.attrs.birthRegistration.otherHospitalUnit}"
+					rendered="#{not empty cc.attrs.birthRegistration.hospitalUnit}" />
+			</div>
+		</ui:fragment>
+
+
+		<div class="row">
+			<div class="col-md-12">
+				<p:outputLabel value="#{messages['birthRegistration.file']}" />
+				<ui:fragment
+					rendered="#{not empty cc.attrs.birthRegistration.filename}">
+					<i class="#{cc.attrs.birthRegistration.fileIcon}" />
+					<h:outputText value="#{' '}" />
+					<h:outputText value="#{cc.attrs.birthRegistration.filename}" />
+					<p:commandButton icon="fa fa-download"
+						title="#{messages['button.download']}" ajax="false"
+						styleClass="pull-right"
+						rendered="#{not empty cc.attrs.documentHelper}">
+						<p:fileDownload value="#{cc.attrs.documentHelper.file}"
+							contentDisposition="attachment" />
+					</p:commandButton>
+				</ui:fragment>
+				<ui:fragment rendered="#{empty cc.attrs.birthRegistration.filename}">
+					<h:outputText value="#{messages['label.notAvailable']}"
+						styleClass="text-muted" />
+				</ui:fragment>
+			</div>
+
+		</div>
+		<ui:remove>
+			<div class="row">
+				<div class="col-md-12">
+					<p:outputLabel value="#{messages['birthRegistration.babyPhoto']}" />
+					<ui:fragment
+						rendered="#{not empty cc.attrs.birthRegistration.babyPhoto.filename}">
+						<i class="#{cc.attrs.birthRegistration.fileIcon}" />
+						<h:outputText value="#{' '}" />
+						<h:outputText
+							value="#{cc.attrs.birthRegistration.babyPhoto.filename}" />
+						<p:commandButton icon="fa fa-download"
+							title="#{messages['button.download']}" ajax="false"
+							styleClass="pull-right"
+							rendered="#{not empty cc.attrs.documentHelper}">
+							<p:fileDownload value="#{cc.attrs.documentHelper.babyPhoto}"
+								contentDisposition="attachment" />
+						</p:commandButton>
+					</ui:fragment>
+					<ui:fragment
+						rendered="#{empty cc.attrs.birthRegistration.babyPhoto.filename}">
+						<h:outputText value="#{messages['label.notAvailable']}"
+							styleClass="text-muted" />
+					</ui:fragment>
+				</div>
+			</div>
+		</ui:remove>
+	</p:panel>
+
+</composite:implementation>
+</html>

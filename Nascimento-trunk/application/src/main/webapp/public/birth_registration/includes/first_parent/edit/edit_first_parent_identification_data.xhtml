@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:o="http://omnifaces.org/ui">
+
+	<p:panel>
+		<f:facet name="header">
+			<legend>
+				<h:outputText
+					value="#{messages['birthRegistration.parent.identificationData']}" />
+			</legend>
+		</f:facet>
+
+		<div class="row">
+			<!-- First row -->
+			<div class="col-md-4">
+				<p:outputLabel value="#{messages['parent.givenName']}"
+					for="firstParentGivenName" />
+				<p:inputText id="firstParentGivenName"
+					value="#{birthRegistrationController.birthRegistration.firstParent.givenName}"
+					styleClass="col-md-12"
+					placeholder="#{messages['parent.givenName.placeholder']}"
+					disabled="#{not empty birthRegistrationController.birthRegistration.firstParent.givenName}" />
+				<div class="clearfix" />
+				<p:message for="firstParentGivenName" />
+			</div>
+			<div class="col-md-4">
+				<p:outputLabel value="#{messages['parent.familyName']}"
+					for="firstParentFamilyName" />
+				<p:inputText id="firstParentFamilyName"
+					value="#{birthRegistrationController.birthRegistration.firstParent.familyName}"
+					styleClass="col-md-12"
+					placeholder="#{messages['parent.familyName.placeholder']}"
+					disabled="#{not empty birthRegistrationController.birthRegistration.firstParent.familyName}" />
+				<div class="clearfix" />
+				<p:message for="firstParentFamilyName" />
+			</div>
+			<div class="col-md-4">
+				<p:outputLabel
+					value="#{messages['parent.identificationCardNumber']}"
+					for="firstParentIdentificationCardNumber" />
+				<p:inputText id="firstParentIdentificationCardNumber"
+					value="#{birthRegistrationController.birthRegistration.firstParent.identificationCardNumber}"
+					styleClass="col-md-12"
+					placeholder="#{messages['parent.identificationCardNumber.placeholder']}"
+					disabled="#{not empty birthRegistrationController.birthRegistration.firstParent.identificationCardNumber}" />
+				<div class="clearfix" />
+				<p:message for="firstParentIdentificationCardNumber" />
+			</div>
+
+			<!-- Second row -->
+			<div class="clearfix" />
+			<div class="col-md-4">
+				<p:outputLabel value="#{messages['parent.gender']}"
+					for="firstParentGender" />
+				<p:selectOneMenu id="firstParentGender"
+					value="#{birthRegistrationController.birthRegistration.firstParent.gender}"
+					styleClass="col-md-12" style="width: none;">
+					<f:selectItem noSelectionOption="true"
+						itemLabel="#{messages['label.selectOne']}" />
+					<f:selectItems value="#{applicationFactory.genders}" var="gender"
+						itemLabel="#{messages[gender.key]}" itemValue="#{gender}" />
+				</p:selectOneMenu>
+				<div class="clearfix" />
+				<p:message for="firstParentGender" />
+			</div>
+			<div class="col-md-4">
+				<p:outputLabel value="#{messages['parent.maritalStatus']}"
+					for="firstParentMaritalStatus" />
+				<p:selectOneMenu id="firstParentMaritalStatus"
+					value="#{birthRegistrationController.birthRegistration.firstParent.maritalStatus}"
+					styleClass="col-md-12" style="width: none;">
+					<f:selectItem noSelectionOption="true"
+						itemLabel="#{messages['label.selectOne']}" />
+					<f:selectItems value="#{applicationFactory.maritalStatuses}"
+						var="maritalStatus" itemLabel="#{messages[maritalStatus.key]}"
+						itemValue="#{maritalStatus}" />
+					<p:ajax process="@this" update="@none"
+						listener="#{birthRegistrationController.onFirstParentMaritalStatusChange}"
+						partialSubmit="true" />
+				</p:selectOneMenu>
+				<div class="clearfix" />
+				<p:message for="firstParentMaritalStatus" />
+			</div>
+			<div class="col-md-4">
+				<p:outputLabel value="#{messages['parent.dateOfBirth']}"
+					for="firstParentDateOfBirth" />
+				<p:calendar id="firstParentDateOfBirth"
+					value="#{birthRegistrationController.birthRegistration.firstParent.dateOfBirth}"
+					timeZone="#{configurationManager.configuration.timeZone}"
+					locale="#{configurationManager.configuration.locale}"
+					mask="#{configurationManager.configuration.dateMask}"
+					pattern="#{configurationManager.configuration.datePattern}"
+					showOn="button" size="10" maskAutoClear="false"
+					yearRange="c-80:c+0"
+					maxdate="#{currentDate}"
+					disabled="#{not empty birthRegistrationController.birthRegistration.firstParent.dateOfBirth}"
+					navigator="true"
+					placeholder="#{configurationManager.datePlaceHolder}" />
+				<h:inputHidden id="hiddenFirstParentDateOfBirth"
+					value="#{birthRegistrationController.birthRegistration.firstParent.dateOfBirth}">
+					<f:attribute name="minAge"
+						value="#{configurationManager.firstParentMinAge}" />
+					<f:attribute name="maxAge"
+						value="#{configurationManager.firstParentMaxAge}" />
+					<f:validator
+						validatorId="com.linkare.irn.nascimento.web.validator.RangeAgeValidator" />
+					<f:convertDateTime
+						timeZone="#{configurationManager.configuration.timeZone}"
+						locale="#{configurationManager.configuration.locale}"
+						pattern="#{configurationManager.configuration.datePattern}" />
+				</h:inputHidden>
+				<div class="clearfix" />
+				<p:message for="hiddenFirstParentDateOfBirth" escape="false" />
+			</div>
+
+			<!-- Third row -->
+			<div class="clearfix" />
+			<div class="col-md-4">
+				<p:outputLabel value="#{messages['parent.nationality']}"
+					for="firstParentNationality" />
+				<p:selectOneMenu id="firstParentNationality"
+					value="#{birthRegistrationController.birthRegistration.firstParent.nationality}"
+					converter="#{countryConverter}" styleClass="col-md-12"
+					style="width: none;"
+					disabled="#{not empty birthRegistrationController.birthRegistration.firstParent.nationality}">
+					<f:selectItems value="#{applicationFactory.countries}"
+						var="country" itemLabel="#{country.name}" itemValue="#{country}" />
+				</p:selectOneMenu>
+				<div class="clearfix" />
+				<p:message for="firstParentNationality" />
+			</div>
+		</div>
+	</p:panel>
+
+</ui:composition>

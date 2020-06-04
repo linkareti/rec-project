@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:lnk="http://java.sun.com/jsf/composite/lnk">
+
+	<h:panelGroup id="birth_registration_registration" layout="block"
+		rendered="#{birthRegistrationController.showSurvey}">
+		<div class="container-background">
+			<div class="container">
+				<span class="responsible"> <h:outputText
+						value="#{messages['birthRegistration.identification.responsible']}" />
+				</span>
+				<h2>
+					<h:outputText
+						value="#{messages['birthRegistration.identification.title']}" />
+				</h2>
+				<h2 id="registration-state">
+					<span> <p:commandLink
+							value="#{messages['birthRegistration.step1']}"
+							action="#{birthRegistrationController.moveToFirstParentSection()}"
+							process="@form" update="@form"
+							onstart="PF('mainContentBUI').show();PrimeFaces.scrollTo('page-top')"
+							oncomplete="PF('mainContentBUI').hide()">
+							<f:param name="disableValidation" value="#{true}" />
+						</p:commandLink>
+					</span> <i class="fa fa-chevron-right" /> <span> <p:commandLink
+							value="#{messages['birthRegistration.step2']}"
+							action="#{birthRegistrationController.moveToSecondParentSection()}"
+							process="@form" update="@form"
+							onstart="PF('mainContentBUI').show();PrimeFaces.scrollTo('page-top')"
+							oncomplete="PF('mainContentBUI').hide()">
+							<f:param name="disableValidation" value="#{true}" />
+						</p:commandLink>
+					</span> <i class="fa fa-chevron-right" /> <span> <p:commandLink
+							value="#{messages['birthRegistration.step3']}"
+							action="#{birthRegistrationController.moveToRegistrationSection()}"
+							process="@form" update="@form"
+							onstart="PF('mainContentBUI').show();PrimeFaces.scrollTo('page-top')"
+							oncomplete="PF('mainContentBUI').hide()">
+							<f:param name="disableValidation" value="#{true}" />
+						</p:commandLink>
+					</span> <i class="fa fa-chevron-right" /> <span class="active"> <h:outputText
+							value="#{messages['birthRegistration.step4']}" />
+					</span> <i class="fa fa-chevron-right" /> <span> <h:outputText
+							value="#{messages['birthRegistration.step5']}" />
+					</span>
+				</h2>
+			</div>
+		</div>
+		<div class="container">
+			<div class="panel">
+				<h3 class="heading">
+
+					<a data-toggle="collapse" data-target="#survey-info"> <h:outputText
+							value="#{messages['birthRegistration.survey']}" /><i
+						class="fa fa-info-circle"></i>
+					</a>
+				</h3>
+				<div id="survey-info" class="panel-collapse collapse">
+					<div class="panel-body info">
+						<div class="row">
+							<div class="col-xs-6">
+								<p>
+									<h:outputText
+										value="#{messages['birthRegistration.survey.help.left-content']}"
+										escape="false" />
+								</p>
+							</div>
+							<div class="col-xs-6">
+								<p>
+									<h:outputText
+										value="#{messages['birthRegistration.survey.help.right-content']}"
+										escape="false" />
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<h:panelGroup id="birth_registration_survey_container" layout="block">
+				<div class="row">
+					<div class="col-md-12">
+
+						<f:validateBean disabled="#{param['disableValidation'] eq true}"
+							validationGroups="com.linkare.irn.nascimento.model.validation.BirthRegistrationSurveyValidation">
+
+							<p:focus context="birth_registration_survey_container"
+								rendered="#{facesContext.validationFailed}" />
+
+							<div class="form-content">
+
+								<ui:fragment rendered="#{birthRegistrationController.editMode}">
+									<ui:include
+										src="includes/survey/edit/edit_registration_survey_data.xhtml" />
+									<ui:include
+										src="includes/survey/edit/edit_registration_survey_first_parent_data.xhtml" />
+									<ui:fragment
+										rendered="#{not empty birthRegistrationController.birthRegistration.secondParent}">
+										<ui:include
+											src="includes/survey/edit/edit_registration_survey_second_parent_data.xhtml" />
+									</ui:fragment>
+								</ui:fragment>
+
+								<ui:fragment
+									rendered="#{not birthRegistrationController.editMode}">
+									<lnk:viewSurveyData
+										birthRegistration="#{birthRegistrationController.birthRegistration}" />
+									<lnk:viewSurveyParentProfessionalData
+										parentData="#{birthRegistrationController.birthRegistration.firstParent}" />
+									<ui:fragment
+										rendered="#{not empty birthRegistrationController.birthRegistration.secondParent}">
+										<lnk:viewSurveyParentProfessionalData
+											parentData="#{birthRegistrationController.birthRegistration.secondParent}"
+											panelTitleKey="birthRegistration.secondParent.professionalData"
+											birthRegistration="#{birthRegistrationController.birthRegistration}" />
+									</ui:fragment>
+								</ui:fragment>
+							</div>
+						</f:validateBean>
+
+						<div class="row actions">
+							<div class="col-sm-12">
+								<p:commandButton icon="fa fa-chevron-left" iconPos="left"
+									action="#{birthRegistrationController.moveToRegistrationSection()}"
+									value="#{messages['button.previous']}"
+									styleClass="ui-priority-default prevstep"
+									process="birth_registration_survey_container" update="@form"
+									onstart="PF('mainContentBUI').show()"
+									oncomplete="PF('mainContentBUI').hide();PrimeFaces.scrollTo('page-top')"
+									partialSubmit="true">
+									<f:param name="disableValidation" value="#{true}" />
+								</p:commandButton>
+								&#160;
+								<p:commandButton icon="fa fa-chevron-right" iconPos="right"
+									action="#{birthRegistrationController.moveToSummarySection()}"
+									value="#{messages['button.next']}"
+									styleClass="ui-priority-primary nextstep"
+									process="birth_registration_survey_container" update="@form"
+									onstart="PF('mainContentBUI').show()"
+									oncomplete="PF('mainContentBUI').hide(); if(!args.validationFailed) { PrimeFaces.scrollTo('page-top'); }"
+									partialSubmit="true">
+								</p:commandButton>
+							</div>
+						</div>
+					</div>
+				</div>
+			</h:panelGroup>
+		</div>
+	</h:panelGroup>
+</ui:composition>

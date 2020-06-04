@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<p:panel id="generalConfigsGroup">
+		<f:facet name="header">
+			<legend>
+				<h:outputText value="#{messages['configurations.generalConfigs']}" />
+			</legend>
+		</f:facet>
+
+		<div class="row">
+			<div class="col-md-12">
+				<p:outputLabel
+					value="#{messages['configuration.applicationBaseUrl']}"
+					for="applicationBaseUrl">
+				</p:outputLabel>
+				<a href="javascript:void(0)" data-toggle="collapse"
+					data-target="#applicationBaseUrl-info" style="margin-left: 5px;">
+					<i class="fa fa-info-circle" />
+				</a>
+				<p:inputText id="applicationBaseUrl"
+					value="#{configurationController.configuration.applicationBaseUrl}"
+					required="true" styleClass="col-md-12">
+				</p:inputText>
+
+				<div class="clearfix" />
+				<p:message for="applicationBaseUrl" />
+				<div id="applicationBaseUrl-info" class="panel-collapse collapse">
+					<h:outputText
+						value="#{messages['configuration.applicationBaseUrl.description']}"
+						escape="false" styleClass="tip" />
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<p:outputLabel
+					value="#{messages['configuration.logoutLandingUrlForCitizen']}"
+					for="logoutLandingUrlForCitizen">
+				</p:outputLabel>
+				<a href="javascript:void(0)" data-toggle="collapse"
+					data-target="#logoutLandingUrlForCitizen-info"
+					style="margin-left: 5px;"> <i class="fa fa-info-circle" />
+				</a>
+				<p:inputText id="logoutLandingUrlForCitizen"
+					value="#{configurationController.configuration.logoutLandingUrlForCitizen}"
+					required="true" styleClass="col-md-12">
+				</p:inputText>
+
+				<div class="clearfix" />
+				<p:message for="logoutLandingUrlForCitizen" />
+				<div id="logoutLandingUrlForCitizen-info"
+					class="panel-collapse collapse">
+					<h:outputText
+						value="#{messages['configuration.logoutLandingUrlForCitizen.description']}"
+						escape="false" styleClass="tip" />
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<p:outputLabel value="#{messages['configuration.faqURL']}"
+					for="faqURL">
+				</p:outputLabel>
+				<a href="javascript:void(0)" data-toggle="collapse"
+					data-target="#faqURL-info" style="margin-left: 5px;"> <i
+					class="fa fa-info-circle" />
+				</a>
+				<p:inputText id="faqURL"
+					value="#{configurationController.configuration.faqURL}"
+					required="true" styleClass="col-md-12">
+				</p:inputText>
+
+				<div class="clearfix" />
+				<p:message for="faqURL" />
+				<div id="faqURL-info" class="panel-collapse collapse">
+					<h:outputText
+						value="#{messages['configuration.faqURL.description']}"
+						escape="false" styleClass="tip" />
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<p:outputLabel
+					value="#{messages['configuration.recoverPasswordTimeoutMillis']}"
+					for="recoverPasswordTimeoutMillis">
+				</p:outputLabel>
+				<p:inputText id="recoverPasswordTimeoutMillis"
+					value="#{configurationController.configuration.recoverPasswordTimeoutMillis}"
+					required="true" styleClass="col-md-12">
+				</p:inputText>
+				<a href="javascript:void(0)" data-toggle="collapse"
+					data-target="#recoverPasswordTimeoutMillis-info"
+					style="margin-left: 5px;"> <i class="fa fa-info-circle" />
+				</a>
+				<div class="clearfix" />
+				<p:message for="recoverPasswordTimeoutMillis" />
+				<div id="recoverPasswordTimeoutMillis-info"
+					class="panel-collapse collapse">
+					<h:outputText
+						value="#{messages['configuration.recoverPasswordTimeoutMillis.description']}"
+						escape="false" styleClass="tip" />
+				</div>
+			</div>
+			<div class="col-md-6">
+				<p:outputLabel
+					value="#{messages['configuration.combinedResourceHandlerDisabled']}"
+					for="combinedResourceHandlerDisabled">
+				</p:outputLabel>
+				<p:selectBooleanCheckbox id="combinedResourceHandlerDisabled"
+					value="#{configurationController.configuration.combinedResourceHandlerDisabled}"
+					required="true" styleClass="col-md-12" />
+				<a href="javascript:void(0)" data-toggle="collapse"
+					data-target="#combinedResourceHandlerDisabled-info"
+					style="margin-left: 5px;"> <i class="fa fa-info-circle" />
+				</a>
+				<div class="clearfix" />
+				<p:message for="combinedResourceHandlerDisabled" />
+				<div id="combinedResourceHandlerDisabled-info"
+					class="panel-collapse collapse">
+					<h:outputText
+						value="#{messages['configuration.combinedResourceHandlerDisabled.description']}"
+						escape="false" styleClass="tip" />
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<p:outputLabel value="#{messages['configuration.captchaPublicKey']}"
+					for="captchaPublicKey">
+				</p:outputLabel>
+				<p:inputText id="captchaPublicKey"
+					value="#{configurationController.configuration.captchaPublicKey}"
+					required="true" styleClass="col-md-12">
+				</p:inputText>
+				<a href="javascript:void(0)" data-toggle="collapse"
+					data-target="#captchaPublicKey-info" style="margin-left: 5px;">
+					<i class="fa fa-info-circle" />
+				</a>
+				<div class="clearfix" />
+				<p:message for="captchaPublicKey" />
+				<div id="captchaPublicKey-info" class="panel-collapse collapse">
+					<h:outputText
+						value="#{messages['configuration.captchaPublicKey.description']}"
+						escape="false" styleClass="tip" />
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<p:outputLabel
+					value="#{messages['configuration.captchaPrivateKey']}"
+					for="captchaPrivateKey">
+				</p:outputLabel>
+				<p:inputText id="captchaPrivateKey"
+					value="#{configurationController.configuration.captchaPrivateKey}"
+					required="true" styleClass="col-md-12">
+				</p:inputText>
+				<a href="javascript:void(0)" data-toggle="collapse"
+					data-target="#captchaPrivateKey-info" style="margin-left: 5px;">
+					<i class="fa fa-info-circle" />
+				</a>
+				<div class="clearfix" />
+				<p:message for="captchaPrivateKey" />
+				<div id="captchaPrivateKey-info" class="panel-collapse collapse">
+					<h:outputText
+						value="#{messages['configuration.captchaPrivateKey.description']}"
+						escape="false" styleClass="tip" />
+				</div>
+			</div>
+		</div>
+
+		<hr />
+
+		<div class="row">
+			<div class="col-md-6">
+				<p:outputLabel
+					value="#{messages['configuration.birthRegistrationMaxAge']}"
+					for="birthRegistrationMaxAge" />
+				<p:inputText id="birthRegistrationMaxAge"
+					value="#{configurationController.configuration.birthRegistrationMaxAge}"
+					required="true" styleClass="col-md-12">
+				</p:inputText>
+				<a href="javascript:void(0)" data-toggle="collapse"
+					data-target="#birthRegistrationMaxAge-info"
+					style="margin-left: 5px;"> <i class="fa fa-info-circle" />
+				</a>
+				<div class="clearfix" />
+				<p:message for="birthRegistrationMaxAge" />
+				<div id="birthRegistrationMaxAge-info"
+					class="panel-collapse collapse">
+					<h:outputText
+						value="#{messages['configuration.birthRegistrationMaxAge.description']}"
+						escape="false" styleClass="tip" />
+				</div>
+			</div>
+			<div class="col-md-6">
+				<p:outputLabel
+					value="#{messages['configuration.birthRegistrationMinAge']}"
+					for="birthRegistrationMinAge" />
+				<p:inputText id="birthRegistrationMinAge"
+					value="#{configurationController.configuration.birthRegistrationMinAge}"
+					required="true" styleClass="col-md-12">
+				</p:inputText>
+				<a href="javascript:void(0)" data-toggle="collapse"
+					data-target="#birthRegistrationMinAge-info"
+					style="margin-left: 5px;"> <i class="fa fa-info-circle" />
+				</a>
+				<div class="clearfix" />
+				<p:message for="birthRegistrationMinAge" />
+				<div id="birthRegistrationMinAge-info"
+					class="panel-collapse collapse">
+					<h:outputText
+						value="#{messages['configuration.birthRegistrationMinAge.description']}"
+						escape="false" styleClass="tip" />
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<p:outputLabel
+					value="#{messages['configuration.firstParentMaxAge']}"
+					for="firstParentMaxAge" />
+				<p:inputText id="firstParentMaxAge"
+					value="#{configurationController.configuration.firstParentMaxAge}"
+					required="true" styleClass="col-md-12">
+				</p:inputText>
+				<a href="javascript:void(0)" data-toggle="collapse"
+					data-target="#firstParentMaxAge-info" style="margin-left: 5px;">
+					<i class="fa fa-info-circle" />
+				</a>
+				<div class="clearfix" />
+				<p:message for="firstParentMaxAge" />
+				<div id="firstParentMaxAge-info" class="panel-collapse collapse">
+					<h:outputText
+						value="#{messages['configuration.firstParentMaxAge.description']}"
+						escape="false" styleClass="tip" />
+				</div>
+			</div>
+			<div class="col-md-6">
+				<p:outputLabel
+					value="#{messages['configuration.firstParentMinAge']}"
+					for="firstParentMinAge" />
+				<p:inputText id="firstParentMinAge"
+					value="#{configurationController.configuration.firstParentMinAge}"
+					required="true" styleClass="col-md-12">
+				</p:inputText>
+				<a href="javascript:void(0)" data-toggle="collapse"
+					data-target="#firstParentMinAge-info" style="margin-left: 5px;">
+					<i class="fa fa-info-circle" />
+				</a>
+				<div class="clearfix" />
+				<p:message for="firstParentMinAge" />
+				<div id="firstParentMinAge-info" class="panel-collapse collapse">
+					<h:outputText
+						value="#{messages['configuration.firstParentMinAge.description']}"
+						escape="false" styleClass="tip" />
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<p:outputLabel
+					value="#{messages['configuration.secondParentMaxAge']}"
+					for="secondParentMaxAge" />
+				<p:inputText id="secondParentMaxAge"
+					value="#{configurationController.configuration.secondParentMaxAge}"
+					required="true" styleClass="col-md-12">
+				</p:inputText>
+				<a href="javascript:void(0)" data-toggle="collapse"
+					data-target="#secondParentMaxAge-info" style="margin-left: 5px;">
+					<i class="fa fa-info-circle" />
+				</a>
+				<div class="clearfix" />
+				<p:message for="secondParentMaxAge" />
+				<div id="secondParentMaxAge-info" class="panel-collapse collapse">
+					<h:outputText
+						value="#{messages['configuration.secondParentMaxAge.description']}"
+						escape="false" styleClass="tip" />
+				</div>
+			</div>
+			<div class="col-md-6">
+				<p:outputLabel
+					value="#{messages['configuration.secondParentMinAge']}"
+					for="secondParentMinAge" />
+				<p:inputText id="secondParentMinAge"
+					value="#{configurationController.configuration.secondParentMinAge}"
+					required="true" styleClass="col-md-12">
+				</p:inputText>
+				<a href="javascript:void(0)" data-toggle="collapse"
+					data-target="#secondParentMinAge-info" style="margin-left: 5px;">
+					<i class="fa fa-info-circle" />
+				</a>
+				<div class="clearfix" />
+				<p:message for="secondParentMinAge" />
+				<div id="secondParentMinAge-info" class="panel-collapse collapse">
+					<h:outputText
+						value="#{messages['configuration.secondParentMinAge.description']}"
+						escape="false" styleClass="tip" />
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<p:outputLabel
+					value="#{messages['configuration.numberOfDaysOfInactivityToExpireBirthRegistrations']}"
+					for="numberOfDaysOfInactivityToExpireBirthRegistrations">
+				</p:outputLabel>
+				<p:inputText id="numberOfDaysOfInactivityToExpireBirthRegistrations"
+					value="#{configurationController.configuration.numberOfDaysOfInactivityToExpireBirthRegistrations}"
+					required="true" styleClass="col-md-12">
+				</p:inputText>
+				<a href="javascript:void(0)" data-toggle="collapse"
+					data-target="#numberOfDaysOfInactivityToExpireBirthRegistrations-info"
+					style="margin-left: 5px;"> <i class="fa fa-info-circle" />
+				</a>
+				<div class="clearfix" />
+				<p:message for="numberOfDaysOfInactivityToExpireBirthRegistrations" />
+				<div id="numberOfDaysOfInactivityToExpireBirthRegistrations-info"
+					class="panel-collapse collapse">
+					<h:outputText
+						value="#{messages['configuration.numberOfDaysOfInactivityToExpireBirthRegistrations.description']}"
+						escape="false" styleClass="tip" />
+				</div>
+			</div>
+		</div>
+
+		<div class="row actions">
+			<div class="col-sm-12">
+				<p:commandButton action="#{configurationController.save}"
+					value="#{messages['button.save']}" styleClass="ui-priority-primary"
+					process="generalConfigsGroup" update="generalConfigsGroup"
+					partialSubmit="true" validateClient="false" />
+			</div>
+		</div>
+	</p:panel>
+</ui:composition>

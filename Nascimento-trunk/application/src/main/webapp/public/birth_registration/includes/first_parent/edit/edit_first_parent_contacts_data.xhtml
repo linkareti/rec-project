@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:o="http://omnifaces.org/ui">
+
+	<p:panel>
+		<f:facet name="header">
+			<legend>
+				<h:outputText
+					value="#{messages['birthRegistration.parent.contactsData']}" />
+			</legend>
+		</f:facet>
+
+		<!-- Fifth row -->
+		<div class="row">
+			<div class="col-md-4">
+				<p:outputLabel value="#{messages['address.addressType']}"
+					for="firstParentAddressType" />
+				<p:selectOneMenu id="firstParentAddressType"
+					value="#{birthRegistrationController.birthRegistration.firstParent.address.addressType}"
+					styleClass="col-md-12" style="width: none;">
+					<f:selectItem noSelectionOption="true"
+						itemLabel="#{messages['label.selectOne']}" />
+					<f:selectItems value="#{applicationFactory.addressTypes}"
+						var="addressType" itemLabel="#{messages[addressType.key]}"
+						itemValue="#{addressType}" />
+					<f:param name="disableValidation" value="#{true}" />
+					<p:ajax process="@this" update="firstParentAddressGroup"
+						listener="#{birthRegistrationController.onFirstParentAddressTypeChange()}"
+						partialSubmit="true" />
+				</p:selectOneMenu>
+				<div class="clearfix" />
+				<p:message for="firstParentAddressType" />
+			</div>
+		</div>
+
+		<h:panelGroup id="firstParentAddressGroup" layout="block">
+			<!-- Eighth row -->
+			<ui:fragment
+				rendered="#{birthRegistrationController.birthRegistration.firstParent.address.addressType eq 'PORTUGUESE'}">
+				<div class="row">
+					<div class="col-md-12">
+						<p:outputLabel value="#{messages['address.street']}"
+							for="firstParentAddressPortugueseStreet" />
+						<p:inputTextarea id="firstParentAddressPortugueseStreet"
+							value="#{birthRegistrationController.birthRegistration.firstParent.address.street}"
+							styleClass="col-md-12"
+							counter="firstParentAddressPortugueseDisplayStreet"
+							counterTemplate="#{messages['label.counterTemplate']}"
+							placeholder="#{messages['address.street.placeholder']}" rows="2"
+							maxlength="255" />
+						<h:outputText id="firstParentAddressPortugueseDisplayStreet"
+							styleClass="text-muted" />
+						<div class="clearfix" />
+						<p:message for="firstParentAddressPortugueseStreet" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<p:outputLabel value="#{messages['address.parish']}"
+							for="firstParentAddressParish" />
+						<p:autoComplete id="firstParentAddressParish"
+							value="#{birthRegistrationController.birthRegistration.firstParent.address.parish}"
+							completeMethod="#{birthRegistrationController.completeActiveParish}"
+							var="parish" itemLabel="#{parish.name}" itemValue="#{parish}"
+							converter="#{parishConverter}" forceSelection="true"
+							minQueryLength="2"
+							maxResults="#{birthRegistrationController.numberOfParishesToShow}"
+							inputStyleClass="col-md-12" style="width: 100%;"
+							scrollHeight="300"
+							placeholder="#{messages['address.parish.placeholder']}">
+							<p:column>
+								<h:outputText value="#{parish.county.district.name}" /> &gt; <h:outputText
+									value="#{parish.county.name}" /> &gt; <h:outputText
+									value="#{parish.name}" />
+							</p:column>
+						</p:autoComplete>
+						<div class="clearfix" />
+						<p:message for="firstParentAddressParish" />
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-4">
+						<p:outputLabel value="#{messages['address.zipCode']}"
+							for="firstParentPortugueseAddressZipCode" />
+						<p:inputMask id="firstParentPortugueseAddressZipCode"
+							value="#{birthRegistrationController.birthRegistration.firstParent.address.zipCode}"
+							styleClass="col-md-12" mask="9999-999" autoClear="false"
+							placeholder="#{messages['address.zipCode.placeholder']}" />
+						<div class="clearfix" />
+						<p:message for="firstParentPortugueseAddressZipCode" />
+					</div>
+					<div class="col-md-8">
+						<p:outputLabel value="#{messages['address.location']}"
+							for="firstParentPortugueseAddressLocation" />
+						<p:inputText id="firstParentPortugueseAddressLocation"
+							value="#{birthRegistrationController.birthRegistration.firstParent.address.location}"
+							styleClass="col-md-12"
+							placeholder="#{messages['address.location.placeholder']}" />
+						<div class="clearfix" />
+						<p:message for="firstParentPortugueseAddressLocation" />
+					</div>
+				</div>
+			</ui:fragment>
+
+			<ui:fragment
+				rendered="#{birthRegistrationController.birthRegistration.firstParent.address.addressType eq 'FOREIGN'}">
+				<div class="row">
+					<div class="col-md-12">
+						<p:outputLabel value="#{messages['address.street']}"
+							for="firstParentAddressForeignStreet" />
+						<p:inputTextarea id="firstParentAddressForeignStreet"
+							value="#{birthRegistrationController.birthRegistration.firstParent.address.street}"
+							styleClass="col-md-12"
+							counter="firstParentAddressForeignDisplayStreet"
+							counterTemplate="#{messages['label.counterTemplate']}"
+							placeholder="#{messages['address.street.placeholder']}" rows="2"
+							maxlength="255" />
+						<h:outputText id="firstParentAddressForeignDisplayStreet"
+							styleClass="text-muted" />
+						<div class="clearfix" />
+						<p:message for="firstParentAddressForeignStreet" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<p:outputLabel value="#{messages['address.country']}"
+							for="firstParentForeignAddressCountry" />
+						<p:selectOneMenu id="firstParentForeignAddressCountry"
+							value="#{birthRegistrationController.birthRegistration.firstParent.address.country}"
+							styleClass="col-md-12" style="width: none;"
+							converter="#{countryConverter}">
+							<f:selectItem noSelectionOption="true"
+								itemLabel="#{messages['label.selectOne']}" />
+							<f:selectItems
+								value="#{applicationFactory.nonPortugueseCountries}"
+								var="country" itemLabel="#{country.name}" itemValue="#{country}" />
+						</p:selectOneMenu>
+						<div class="clearfix" />
+						<p:message for="firstParentForeignAddressCountry" />
+					</div>
+					<div class="col-md-4">
+						<p:outputLabel value="#{messages['address.zipCode']}"
+							for="firstParentForeignAddressZipCode" />
+						<p:inputText id="firstParentForeignAddressZipCode"
+							value="#{birthRegistrationController.birthRegistration.firstParent.address.zipCode}"
+							styleClass="col-md-12"
+							placeholder="#{messages['address.zipCode.placeholder']}" />
+						<div class="clearfix" />
+						<p:message for="firstParentForeignAddressZipCode" />
+					</div>
+					<div class="col-md-4">
+						<p:outputLabel value="#{messages['address.location']}"
+							for="firstParentForeignAddressLocation" />
+						<p:inputText id="firstParentForeignAddressLocation"
+							value="#{birthRegistrationController.birthRegistration.firstParent.address.location}"
+							styleClass="col-md-12"
+							placeholder="#{messages['address.location.placeholder']}" />
+						<div class="clearfix" />
+						<p:message for="firstParentForeignAddressLocation" />
+					</div>
+				</div>
+			</ui:fragment>
+		</h:panelGroup>
+
+		<!-- Ninth row -->
+		<div class="row">
+			<div class="col-md-4">
+				<p:outputLabel value="#{messages['parent.telephone']}"
+					for="firstParentTelephone" />
+				<p:inputText id="firstParentTelephone"
+					value="#{birthRegistrationController.birthRegistration.firstParent.telephone}"
+					styleClass="col-md-12"
+					placeholder="#{messages['parent.telephone.placeholder']}" />
+				<div class="clearfix" />
+				<p:message for="firstParentTelephone" />
+			</div>
+			<div class="col-md-8">
+				<p:outputLabel value="#{messages['parent.email']}"
+					for="firstParentEmail" />
+				<p:inputText id="firstParentEmail"
+					value="#{birthRegistrationController.birthRegistration.firstParent.email}"
+					styleClass="col-md-12"
+					placeholder="#{messages['parent.email.placeholder']}">
+					<f:param name="disableValidation" value="#{true}" />
+					<p:ajax process="@this" partialSubmit="true" />
+				</p:inputText>
+				<div class="clearfix" />
+				<p:message for="firstParentEmail" />
+			</div>
+		</div>
+	</p:panel>
+
+</ui:composition>

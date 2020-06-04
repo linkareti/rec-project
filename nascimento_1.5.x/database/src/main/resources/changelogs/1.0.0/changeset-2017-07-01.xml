@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+	<changeSet author="sbogas" id="2017-07-01-change-birth-registration-1">
+		<preConditions onFail="MARK_RAN">
+			<columnExists tableName="birth_registration" columnName="marriage_date" />
+		</preConditions>
+		<modifyDataType tableName="birth_registration"
+			columnName="marriage_date" newDataType="date" />
+	</changeSet>
+
+	<changeSet author="sbogas" id="2017-07-01-change-birth-registration-2">
+		<preConditions onFail="MARK_RAN">
+			<columnExists tableName="birth_registration" columnName="number_of_children_non_common" />
+		</preConditions>
+		<renameColumn tableName="birth_registration"
+			oldColumnName="number_of_children_non_common" newColumnName="number_of_common_live_birth_children" columnDataType="int(11)"/>
+	</changeSet>
+
+	<changeSet author="sbogas" id="2017-07-01-change-birth-registration-3">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="birth_registration"
+					columnName="number_of_common_stillborn_children" />
+			</not>
+		</preConditions>
+		<addColumn tableName="birth_registration">
+			<column name="number_of_common_stillborn_children" type="int(11)" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="sbogas" id="2017-07-01-change-birth-registration-4">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="birth_registration"
+					columnName="number_of_previous_birth" />
+			</not>
+		</preConditions>
+		<addColumn tableName="birth_registration">
+			<column name="number_of_previous_birth" type="int(11)" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="sbogas" id="2017-07-01-change-birth-registration-5">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="birth_registration"
+					columnName="number_of_live_birth" />
+			</not>
+		</preConditions>
+		<addColumn tableName="birth_registration">
+			<column name="number_of_live_birth" type="int(11)" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="sbogas" id="2017-07-01-change-birth-registration-6">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="birth_registration"
+					columnName="number_of_stillborn_22_or_more_weeks" />
+			</not>
+		</preConditions>
+		<addColumn tableName="birth_registration">
+			<column name="number_of_stillborn_22_or_more_weeks" type="int(11)" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="sbogas" id="2017-07-01-change-birth-registration-7">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="birth_registration"
+					columnName="number_of_stillborn_less_than_22_weeks" />
+			</not>
+		</preConditions>
+		<addColumn tableName="birth_registration">
+			<column name="number_of_stillborn_less_than_22_weeks" type="int(11)" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="sbogas" id="2017-07-01-change-birth-registration-8">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="birth_registration"
+					columnName="previous_birth_date" />
+			</not>
+		</preConditions>
+		<addColumn tableName="birth_registration">
+			<column name="previous_birth_date" type="date" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="sbogas" id="2017-07-01-change-birth-registration-9">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="birth_registration"
+					columnName="previous_live_birth_date" />
+			</not>
+		</preConditions>
+		<addColumn tableName="birth_registration">
+			<column name="previous_live_birth_date" type="date" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="sbogas" id="2017-07-01-change-birth-registration-10">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="birth_registration"
+					columnName="survey_observations" />
+			</not>
+		</preConditions>
+		<addColumn tableName="birth_registration">
+			<column name="survey_observations" type="varchar(500)" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="sbogas" id="2017-07-01-change-parent-1">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="parent" columnName="number_of_children_non_common" />
+			</not>
+		</preConditions>
+		<addColumn tableName="parent">
+			<column name="number_of_children_non_common" type="int(11)" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="sbogas" id="2017-07-01-change-birth-registration-11">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="birth_registration"
+					columnName="last_birth_registration_status_date" />
+			</not>
+		</preConditions>
+		<addColumn tableName="birth_registration">
+			<column name="last_birth_registration_status_date" type="datetime(6)" />
+		</addColumn>
+	</changeSet>
+
+</databaseChangeLog>

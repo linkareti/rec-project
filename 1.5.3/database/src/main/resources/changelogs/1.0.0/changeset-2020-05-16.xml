@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+
+
+	<changeSet author="rmartins" id="2020-05-16-update-message-statistics">
+		<sql>
+			<![CDATA[
+				update message_template set content = '<p>Exmos. Srs.</p>
+				
+				<p>Seguem dados relativos aos pedidos de Declaração de Nascimento.<p>
+				
+				<p>${statistics}</>
+				
+				<p>Os nossos melhores cumprimentos,</p>
+				<p>A equipa do Nascimento Online</p>' where code = 'NOTIFY_IRN_OF_STATISTICS'
+			]]>
+		</sql>
+		<rollback />
+	</changeSet>
+	
+		<changeSet author="rmartins"
+		id="2020-05-18-add-comment-column">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="birth_registration"
+					columnName="comment" />
+			</not>
+		</preConditions>
+		<addColumn tableName="birth_registration">
+			<column name="comment" type="varchar(250)"
+				defaultValue="" />
+		</addColumn>
+	</changeSet>
+
+</databaseChangeLog>
+
+
+

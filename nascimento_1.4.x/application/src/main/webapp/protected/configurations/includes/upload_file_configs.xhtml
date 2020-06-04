@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<p:panel id="uploadFileConfigsGroup">
+		<f:facet name="header">
+			<legend>
+				<h:outputText value="#{messages['configurations.dateConfigs']}" />
+			</legend>
+		</f:facet>
+
+		<!-- First row -->
+		<div class="row">
+			<div class="col-md-6">
+				<p:outputLabel
+					value="#{messages['configuration.maxUploadSizeInBytes']}"
+					for="maxUploadSizeInBytes" />
+				<p:inputNumber id="maxUploadSizeInBytes"
+					value="#{configurationController.configuration.maxUploadSizeInBytes}"
+					required="true" inputStyleClass="col-md-12" thousandSeparator=""
+					decimalPlaces="0">
+				</p:inputNumber>
+				<a href="javascript:void(0)" data-toggle="collapse"
+					data-target="#maxUploadSizeInBytes-info" style="margin-left: 5px;">
+					<i class="fa fa-info-circle" />
+				</a>
+				<div class="clearfix" />
+				<p:message for="maxUploadSizeInBytes" />
+				<div id="maxUploadSizeInBytes-info" class="panel-collapse collapse">
+					<h:outputText
+						value="#{messages['configuration.maxUploadSizeInBytes.description']}"
+						escape="false" styleClass="tip" />
+				</div>
+			</div>
+			<div class="col-md-6">
+				<p:outputLabel
+					value="#{messages['configuration.allowedFileExtension']}"
+					for="allowedFileExtension" />
+				<p:inputText id="allowedFileExtension"
+					value="#{configurationController.configuration.allowedFileExtension}"
+					required="true" styleClass="col-md-12">
+				</p:inputText>
+				<a href="javascript:void(0)" data-toggle="collapse"
+					data-target="#allowedFileExtension-info" style="margin-left: 5px;">
+					<i class="fa fa-info-circle" />
+				</a>
+				<div class="clearfix" />
+				<p:message for="allowedFileExtension" />
+				<div id="allowedFileExtension-info" class="panel-collapse collapse">
+					<h:outputText
+						value="#{messages['configuration.allowedFileExtension.description']}"
+						escape="false" styleClass="tip" />
+				</div>
+			</div>
+		</div>
+
+		<div class="row actions">
+			<div class="col-sm-12">
+				<p:commandButton action="#{configurationController.save}"
+					value="#{messages['button.save']}"
+					styleClass="btn ui-priority-primary"
+					process="uploadFileConfigsGroup" update="uploadFileConfigsGroup"
+					partialSubmit="true" validateClient="false" />
+			</div>
+		</div>
+	</p:panel>
+</ui:composition>

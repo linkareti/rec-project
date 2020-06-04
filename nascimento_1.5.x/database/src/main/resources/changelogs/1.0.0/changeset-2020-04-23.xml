@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+	<changeSet author="rmartins"
+			id="2020-04-23-insert-notify-irn-of-statistics-template">
+			<preConditions onFail="MARK_RAN">
+				<sqlCheck expectedResult="0">
+                 <![CDATA[
+							select count(*) from message_template where code = 'NOTIFY_IRN_OF_STATISTICS'
+                  ]]>
+				</sqlCheck>
+			</preConditions>
+			<sql>
+				<![CDATA[
+					insert into message_template (id, creation_date, code, type, subject, content)
+					VALUES (11, CURRENT_TIMESTAMP(), 'NOTIFY_IRN_OF_STATISTICS', 'EMAIL', 'Estatisticas Nascimento',
+					'
+					
+					<p>Exmos. Srs.</p>
+
+					<p>Seguem alguns dados relativos ao registo de Nascimentos, na data ${date.format("dd-MM-yyyy", $statistic.date)}</p>
+					
+					<p>Número total de Pedidos Pendentes de aceitação pelo segundo progenitor: ${statistic.pendingForefather}</p>
+					<p>Número total de Pedidos Submetidos: ${statistic.elaborating}</p>
+					<p>Número total de Pedidos Expirados: ${statistic.expired}</p>
+					<p>Número total de Pedidos Recusados: ${statistic.rejected}</p>
+					<p>Número total de Pedidos Efetuados: ${statistic.concluded}</p>
+					<p>Número total de Pedidos Submetidos Bebé Feminino: ${statistic.female}</p>
+					<p>Número total de Pedidos Submetidos Bebé Masculino: ${statistic.male}</p>
+					<p>Número total de Pedidos Submetidos Bebé Indeterminado: ${statistic.undetermined}</p>
+					
+					<p>Os nossos melhores cumprimentos,</p>
+					<p>A equipa do Nascimento Online</p>')
+				]]>
+			</sql>
+			<rollback>
+				<sql>
+					<![CDATA[
+						delete from message_template where code = 'NOTIFY_IRN_OF_STATISTICS'
+	                ]]>
+				</sql>
+			</rollback>
+		</changeSet>
+		
+	
+	
+</databaseChangeLog>
+
+
+

@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:o="http://omnifaces.org/ui">
+
+	<h:panelGroup id="surveyBirthFiliationGroup" layout="block">
+
+		<p:panel>
+			<f:facet name="header">
+				<legend>
+					<h:outputText
+						value="#{messages['birthRegistration.survey.surveyData']}" />
+				</legend>
+			</f:facet>
+
+			<ui:fragment
+				rendered="#{not empty birthRegistrationController.birthRegistration.secondParent}">
+				<div class="row">
+					<div class="col-md-6">
+						<p:outputLabel
+							value="#{messages['birthRegistration.survey.birthFiliation']}"
+							for="registrationSurveyBirthFiliation" />
+						<p:selectOneMenu id="registrationSurveyBirthFiliation"
+							value="#{birthRegistrationController.birthRegistration.birthFiliation}"
+							styleClass="col-md-12" style="width: none">
+							<f:selectItem noSelectionOption="true"
+								itemLabel="#{messages['label.selectOne']}" />
+							<f:selectItems value="#{applicationFactory.birthFiliations}"
+								var="birthFiliation" itemLabel="#{messages[birthFiliation.key]}"
+								itemValue="#{birthFiliation}" />
+							<p:ajax process="@this" update="surveyBirthFiliationGroup"
+								listener="#{birthRegistrationController.onBirthFiliationChange()}"
+								partialSubmit="true" />
+							<f:param name="disableValidation" value="#{true}" />
+						</p:selectOneMenu>
+						<div class="clearfix" />
+						<p:message for="registrationSurveyBirthFiliation" />
+					</div>
+				</div>
+			</ui:fragment>
+
+			<ui:fragment
+				rendered="#{birthRegistrationController.birthRegistration.birthFiliation eq 'WITHIN_MARRIAGE'}">
+				<div class="row">
+					<div class="col-md-6">
+						<p:outputLabel
+							value="#{messages['birthRegistration.survey.marriageDate']}"
+							for="registrationSurveyMarriageDate" />
+						<p:calendar id="registrationSurveyMarriageDate"
+							value="#{birthRegistrationController.birthRegistration.marriageDate}"
+							timeZone="#{configurationManager.configuration.timeZone}"
+							locale="#{configurationManager.configuration.locale}"
+							mask="#{configurationManager.configuration.dateMask}"
+							pattern="#{configurationManager.configuration.datePattern}"
+							showOn="button" size="16" timeControlType="select"
+							maskAutoClear="false"
+							yearRange="c-80:c+0"
+							placeholder="#{configurationManager.datePlaceHolder}"
+							maxdate="#{currentDate}" navigator="true">
+							<f:attribute name="minDate"
+								value="#{configurationManager.minDate}" />
+							<f:attribute name="maxDate"
+								value="#{configurationManager.maxDate}" />
+							<f:validator
+								validatorId="com.linkare.irn.nascimento.web.validator.DateRangeValidator" />
+							<p:ajax process="@this" update="@none" partialSubmit="true" />
+							<f:param name="disableValidation" value="#{true}" />
+						</p:calendar>
+						<div class="clearfix" />
+						<p:message for="registrationSurveyMarriageDate" escape="false" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<p:outputLabel
+							value="#{messages['birthRegistration.survey.marriageLiveBirth']}"
+							for="registrationSurveyMarriageLiveBirth" />
+						<p:inputNumber id="registrationSurveyMarriageLiveBirth"
+							value="#{birthRegistrationController.birthRegistration.marriageLiveBirth}"
+							inputStyleClass="col-md-12" decimalPlaces="0">
+							<p:ajax process="@this" update="@none" partialSubmit="true" />
+							<f:param name="disableValidation" value="#{true}" />
+						</p:inputNumber>
+						<div class="clearfix" />
+						<p:message for="registrationSurveyMarriageLiveBirth" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<p:outputLabel
+							value="#{messages['birthRegistration.survey.marriageStillborn']}"
+							for="registrationSurveyMarriageStillborn" />
+						<p:inputNumber id="registrationSurveyMarriageStillborn"
+							value="#{birthRegistrationController.birthRegistration.marriageStillborn}"
+							inputStyleClass="col-md-12" decimalPlaces="0">
+							<p:ajax process="@this" update="@none" partialSubmit="true" />
+							<f:param name="disableValidation" value="#{true}" />
+						</p:inputNumber>
+						<div class="clearfix" />
+						<p:message for="registrationSurveyMarriageStillborn" />
+					</div>
+				</div>
+			</ui:fragment>
+
+			<div class="row">
+				<div class="col-md-6">
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.birthLocation']}"
+						for="registrationSurveybirthLocation" />
+					<p:selectOneMenu id="registrationSurveybirthLocation"
+						value="#{birthRegistrationController.birthRegistration.birthLocation}"
+						styleClass="col-md-12" style="width: none" disabled="true">
+						<f:selectItem noSelectionOption="true"
+							itemLabel="#{messages['label.selectOne']}" />
+						<f:selectItems value="#{applicationFactory.birthLocations}"
+							var="birthLocation" itemLabel="#{messages[birthLocation.key]}"
+							itemValue="#{birthLocation}" />
+						<p:ajax process="@this" update="@none" partialSubmit="true" />
+						<f:param name="disableValidation" value="#{true}" />
+					</p:selectOneMenu>
+					<div class="clearfix" />
+					<p:message for="registrationSurveybirthLocation" />
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6">
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.birthNature']}"
+						for="registrationSurveyBirthNature" />
+					<p:selectOneMenu id="registrationSurveyBirthNature"
+						value="#{birthRegistrationController.birthRegistration.birthNature}"
+						styleClass="col-md-12" style="width: none">
+						<f:selectItem noSelectionOption="true"
+							itemLabel="#{messages['label.selectOne']}" />
+						<f:selectItems value="#{applicationFactory.birthNatures}"
+							var="birthNature" itemLabel="#{messages[birthNature.keyUser]}"
+							itemValue="#{birthNature}" />
+						<p:ajax process="@this" update="surveyBirthFiliationGroup"
+							listener="#{birthRegistrationController.onBirthNatureChange()}"
+							partialSubmit="true" />
+						<f:param name="disableValidation" value="#{true}" />
+					</p:selectOneMenu>
+					<div class="clearfix" />
+					<p:message for="registrationSurveyBirthNature" />
+				</div>
+			</div>
+
+			<ui:fragment
+				rendered="#{birthRegistrationController.birthRegistration.birthNature eq 'TWIN'}">
+
+				<div class="row">
+					<div class="col-md-6">
+						<p:outputLabel
+							value="#{messages['birthRegistration.survey.birthTwinsNumberOfTwins']}"
+							for="registrationSurveyBirthTwinsNumberOfTwins" />
+						<p:inputNumber id="registrationSurveyBirthTwinsNumberOfTwins"
+							value="#{birthRegistrationController.birthRegistration.birthTwinsNumberOfTwins}"
+							inputStyleClass="col-md-12" decimalPlaces="0">
+							<p:ajax process="@this" update="@none" partialSubmit="true" />
+							<f:param name="disableValidation" value="#{true}" />
+						</p:inputNumber>
+						<div class="clearfix" />
+						<p:message for="registrationSurveyBirthTwinsNumberOfTwins" />
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-6">
+						<p:outputLabel
+							value="#{messages['birthRegistration.survey.birthTwins']}"
+							for="registrationSurveyBirthTwins" />
+						<p:selectOneMenu id="registrationSurveyBirthTwins"
+							value="#{birthRegistrationController.birthRegistration.birthTwins}"
+							styleClass="col-md-12" style="width: none">
+							<f:selectItem noSelectionOption="true"
+								itemLabel="#{messages['label.selectOne']}" />
+							<f:selectItems value="#{applicationFactory.birthTwins}"
+								var="birthTwins" itemLabel="#{messages[birthTwins.keyUser]}"
+								itemValue="#{birthTwins}" />
+							<p:ajax process="@this" update="@none" partialSubmit="true" />
+							<f:param name="disableValidation" value="#{true}" />
+						</p:selectOneMenu>
+						<div class="clearfix" />
+						<p:message for="registrationSurveyBirthTwins" />
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-6">
+						<p:outputLabel
+							value="#{messages['birthRegistration.survey.birthTwinsNumberOfLiveBirth']}"
+							for="registrationSurveyBirthTwinsNumberOfLiveBirth" />
+						<p:inputNumber id="registrationSurveyBirthTwinsNumberOfLiveBirth"
+							value="#{birthRegistrationController.birthRegistration.birthTwinsNumberOfLiveBirth}"
+							inputStyleClass="col-md-12" decimalPlaces="0">
+							<p:ajax process="@this" update="@none" partialSubmit="true" />
+							<f:param name="disableValidation" value="#{true}" />
+						</p:inputNumber>
+						<div class="clearfix" />
+						<p:message for="registrationSurveyBirthTwinsNumberOfLiveBirth" />
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-6">
+						<p:outputLabel
+							value="#{messages['birthRegistration.survey.birthTwinsNumberOfStillBirth']}"
+							for="registrationSurveyBirthTwinsNumberOfStillBirth" />
+						<p:inputNumber id="registrationSurveyBirthTwinsNumberOfStillBirth"
+							value="#{birthRegistrationController.birthRegistration.birthTwinsNumberOfStillBirth}"
+							inputStyleClass="col-md-12" decimalPlaces="0">
+							<p:ajax process="@this" update="@none" partialSubmit="true" />
+							<f:param name="disableValidation" value="#{true}" />
+						</p:inputNumber>
+						<div class="clearfix" />
+						<p:message for="registrationSurveyBirthTwinsNumberOfStillBirth" />
+					</div>
+				</div>
+			</ui:fragment>
+
+			<div class="row">
+				<div class="col-md-6">
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.weight']}"
+						for="registrationSurveyWeight" />
+					<p:inputNumber id="registrationSurveyWeight"
+						value="#{birthRegistrationController.birthRegistration.weight}"
+						inputStyleClass="col-md-12" decimalPlaces="0">
+						<p:ajax process="@this" update="@none" partialSubmit="true" />
+						<f:param name="disableValidation" value="#{true}" />
+					</p:inputNumber>
+					<div class="clearfix" />
+					<p:message for="registrationSurveyWeight" />
+				</div>
+
+			</div>
+
+			<div class="row">
+				<div class="col-md-6">
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.midwifeType']}"
+						for="registrationSurveyMidwifeType" />
+					<p:selectOneMenu id="registrationSurveyMidwifeType"
+						value="#{birthRegistrationController.birthRegistration.midwifeType}"
+						styleClass="col-md-12" style="width: none">
+						<f:selectItem noSelectionOption="true"
+							itemLabel="#{messages['label.selectOne']}" />
+						<f:selectItems value="#{applicationFactory.midwifeTypes}"
+							var="midwifeType" itemLabel="#{messages[midwifeType.key]}"
+							itemValue="#{midwifeType}" />
+						<p:ajax process="@this" update="@none" partialSubmit="true" />
+						<f:param name="disableValidation" value="#{true}" />
+					</p:selectOneMenu>
+					<div class="clearfix" />
+					<p:message for="registrationSurveyMidwifeType" />
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6">
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.durationOfPregnancy']}"
+						for="registrationSurveyDurationOfPregnancy" />
+					<p:inputNumber id="registrationSurveyDurationOfPregnancy"
+						value="#{birthRegistrationController.birthRegistration.durationOfPregnancy}"
+						inputStyleClass="col-md-12" decimalPlaces="0">
+						<p:ajax process="@this" update="@none" partialSubmit="true" />
+						<f:param name="disableValidation" value="#{true}" />
+					</p:inputNumber>
+					<div class="clearfix" />
+					<p:message for="registrationSurveyDurationOfPregnancy" />
+				</div>
+			</div>
+
+
+			<ui:fragment
+				rendered="#{not empty birthRegistrationController.birthRegistration.secondParent and birthRegistrationController.birthRegistration.birthFiliation != 'WITHIN_MARRIAGE'}">
+				<div class="row">
+					<div class="col-md-6">
+						<p:outputLabel
+							value="#{messages['birthRegistration.survey.numberOfCommonLiveBirthChildren']}"
+							for="registrationSurveyNumberOfCommonLiveBirthChildren" />
+						<p:inputNumber
+							id="registrationSurveyNumberOfCommonLiveBirthChildren"
+							value="#{birthRegistrationController.birthRegistration.numberOfCommonLiveBirthChildren}"
+							inputStyleClass="col-md-12" decimalPlaces="0">
+							<p:ajax process="@this" update="@none" partialSubmit="true" />
+							<f:param name="disableValidation" value="#{true}" />
+						</p:inputNumber>
+						<div class="clearfix" />
+						<p:message for="registrationSurveyNumberOfCommonLiveBirthChildren" />
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-6">
+						<p:outputLabel
+							value="#{messages['birthRegistration.survey.numberOfCommonStillbornChildren']}"
+							for="registrationSurveyNumberOfCommonStillbornChildren" />
+						<p:inputNumber
+							id="registrationSurveyNumberOfCommonStillbornChildren"
+							value="#{birthRegistrationController.birthRegistration.numberOfCommonStillbornChildren}"
+							inputStyleClass="col-md-12" decimalPlaces="0">
+							<p:ajax process="@this" update="@none" partialSubmit="true" />
+							<f:param name="disableValidation" value="#{true}" />
+						</p:inputNumber>
+						<div class="clearfix" />
+						<p:message for="registrationSurveyNumberOfCommonStillbornChildren" />
+					</div>
+				</div>
+			</ui:fragment>
+
+			<div class="row">
+				<div class="col-md-6">
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.numberOfPreviousBirth']}"
+						for="registrationSurveyNumberOfPreviousBirth" />
+					<p:inputNumber id="registrationSurveyNumberOfPreviousBirth"
+						value="#{birthRegistrationController.birthRegistration.numberOfPreviousBirth}"
+						inputStyleClass="col-md-12" decimalPlaces="0">
+						<p:ajax process="@this" update="surveyBirthFiliationGroup"
+							partialSubmit="true" />
+						<f:param name="disableValidation" value="#{true}" />
+					</p:inputNumber>
+					<div class="clearfix" />
+					<p:message for="registrationSurveyNumberOfPreviousBirth" />
+				</div>
+
+			</div>
+
+			<div class="row">
+				<div class="col-md-6">
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.numberOfLiveBirth']}"
+						for="registrationSurveyNumberOfLiveBirth" />
+					<p:inputNumber id="registrationSurveyNumberOfLiveBirth"
+						value="#{birthRegistrationController.birthRegistration.numberOfLiveBirth}"
+						inputStyleClass="col-md-12" decimalPlaces="0">
+						<p:ajax process="@this" update="@none" partialSubmit="true" />
+						<f:param name="disableValidation" value="#{true}" />
+					</p:inputNumber>
+					<div class="clearfix" />
+					<p:message for="registrationSurveyNumberOfLiveBirth" />
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6">
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.numberOfStillborn22OrMoreWeeks']}"
+						for="registrationSurveyNumberOfStillborn22OrMoreWeeks" />
+					<p:inputNumber
+						id="registrationSurveyNumberOfStillborn22OrMoreWeeks"
+						value="#{birthRegistrationController.birthRegistration.numberOfStillborn22OrMoreWeeks}"
+						inputStyleClass="col-md-12" decimalPlaces="0">
+						<p:ajax process="@this" update="@none" partialSubmit="true" />
+						<f:param name="disableValidation" value="#{true}" />
+					</p:inputNumber>
+					<div class="clearfix" />
+					<p:message for="registrationSurveyNumberOfStillborn22OrMoreWeeks" />
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6">
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.numberOfStillbornLessThan22Weeks']}"
+						for="registrationSurveyNumberOfStillbornLessThan22Weeks" />
+					<p:inputNumber
+						id="registrationSurveyNumberOfStillbornLessThan22Weeks"
+						value="#{birthRegistrationController.birthRegistration.numberOfStillbornLessThan22Weeks}"
+						inputStyleClass="col-md-12" decimalPlaces="0">
+						<p:ajax process="@this" update="@none" partialSubmit="true" />
+						<f:param name="disableValidation" value="#{true}" />
+					</p:inputNumber>
+					<div class="clearfix" />
+					<p:message for="registrationSurveyNumberOfStillbornLessThan22Weeks" />
+				</div>
+			</div>
+
+
+			<ui:fragment
+				rendered="#{not empty birthRegistrationController.birthRegistration.numberOfPreviousBirth and birthRegistrationController.birthRegistration.numberOfPreviousBirth > 0}">
+				<div class="row">
+					<div class="col-md-6">
+						<p:outputLabel
+							value="#{messages['birthRegistration.survey.previousBirthDate']}"
+							for="registrationSurveyPreviousBirthDate" />
+						<p:calendar id="registrationSurveyPreviousBirthDate"
+							value="#{birthRegistrationController.birthRegistration.previousBirthDate}"
+							timeZone="#{configurationManager.configuration.timeZone}"
+							locale="#{configurationManager.configuration.locale}"
+							mask="#{configurationManager.configuration.dateMask}"
+							pattern="#{configurationManager.configuration.datePattern}"
+							showOn="button" size="16" timeControlType="select"
+							maskAutoClear="false"
+							placeholder="#{configurationManager.datePlaceHolder}"
+							mindate="#{configurationManager.minDate}" maxdate="#{configurationManager.maxDate}" navigator="true">
+							<f:attribute name="minDate"
+								value="#{configurationManager.minDate}" />
+							<f:attribute name="maxDate"
+								value="#{configurationManager.maxDate}" />
+							<f:validator
+								validatorId="com.linkare.irn.nascimento.web.validator.DateRangeValidator" />
+							<p:ajax process="@this" update="@none" partialSubmit="true" />
+							<f:param name="disableValidation" value="#{true}" />
+						</p:calendar>
+						<div class="clearfix" />
+						<p:message for="registrationSurveyPreviousBirthDate" escape="false" />
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-6">
+						<p:outputLabel
+							value="#{messages['birthRegistration.survey.previousLiveBirthDate']}"
+							for="registrationSurveyPreviousLiveBirthDate" />
+						<p:calendar id="registrationSurveyPreviousLiveBirthDate"
+							value="#{birthRegistrationController.birthRegistration.previousLiveBirthDate}"
+							timeZone="#{configurationManager.configuration.timeZone}"
+							locale="#{configurationManager.configuration.locale}"
+							mask="#{configurationManager.configuration.dateMask}"
+							pattern="#{configurationManager.configuration.datePattern}"
+							showOn="button" size="16" timeControlType="select"
+							maskAutoClear="false"
+							placeholder="#{configurationManager.datePlaceHolder}"
+							mindate="#{configurationManager.minDate}" maxdate="#{configurationManager.maxDate}" navigator="true">
+							<f:attribute name="minDate"
+								value="#{configurationManager.minDate}" />
+							<f:attribute name="maxDate"
+								value="#{configurationManager.maxDate}" />
+							<f:validator
+								validatorId="com.linkare.irn.nascimento.web.validator.DateRangeValidator" />
+							<p:ajax process="@this" update="@none" partialSubmit="true" />
+							<f:param name="disableValidation" value="#{true}" />
+						</p:calendar>
+						<div class="clearfix" />
+						<p:message for="registrationSurveyPreviousLiveBirthDate" escape="false" />
+					</div>
+				</div>
+			</ui:fragment>
+
+			<div class="row">
+				<div class="col-md-12">
+					<p:outputLabel
+						value="#{messages['birthRegistration.survey.surveyObservations']}"
+						for="registrationSurveyObservations" />
+					<p:inputTextarea id="registrationSurveyObservations"
+						value="#{birthRegistrationController.birthRegistration.surveyObservations}"
+						styleClass="col-md-12"
+						counter="registrationSurveyObservationsDisplay"
+						counterTemplate="#{messages['label.counterTemplate']}"
+						maxlength="500">
+						<p:ajax process="@this" update="@none" partialSubmit="true" />
+						<f:param name="disableValidation" value="#{true}" />
+					</p:inputTextarea>
+					<h:outputText id="registrationSurveyObservationsDisplay"
+						styleClass="text-muted" />
+					<div class="clearfix" />
+					<p:message for="registrationSurveyObservations" />
+				</div>
+			</div>
+		</p:panel>
+
+	</h:panelGroup>
+</ui:composition>

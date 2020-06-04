@@ -1,0 +1,65 @@
+version: '3.1'
+services:
+  # Apache httpd server
+  httpd:
+    image: ${repo}/${simplifiedGroupId}/httpd:${docker.base.image.version}
+    container_name: irn_httpd_dev
+    environment:
+      - NASCIMENTO_CONTEXT=${project.artifactId}
+      - NASCIMENTO_HOSTNAME=nascimento
+      - NASCIMENTO_DOMAINNAME=justica.gov.pt
+      - WILDFLY_NODES=wildfly-node1:8080
+#      - WILDFLY_NODES=wildfly-node1:8080 wildfly-node2:8080
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - wildfly-node1
+  # Linux MYSQL Server 
+  mysql-server:
+    image: ${repo}/${simplifiedGroupId}/mysql-server:${docker.base.image.version}
+    container_name: irn_mysql_dev
+    ports:
+      - "3306:3306"
+    secrets:
+      - rdb.secret
+    environment:
+      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/rdb.secret
+  # Applies changes to databases
+  irn-upgrade-db:
+    image: ${repo}/${simplifiedGroupId}/irn-upgrade-db:${project.version}
+    container_name: irn_upgrade-db_dev
+    secrets:
+      - db.secret
+    environment:
+      - TARGET_DB={{DOCKER-SECRET:db.secret}}
+      - DB_HOST={{DOCKER-SECRET:db.secret}}
+      - DB_PORT={{DOCKER-SECRET:db.secret}}
+      - DB_USER={{DOCKER-SECRET:db.secret}}
+      - DB_PASS={{DOCKER-SECRET:db.secret}}
+      - DB_CONTEXT=prd
+#      - RESET_CKSUMS=1
+    depends_on:
+      - mysql-server
+  # Application server
+  wildfly-node1:
+    image: ${repo}/${simplifiedGroupId}/${project.artifactId}:${project.version}
+    container_name: irn_wildfly_dev
+    ports:
+      - "8080:8080"
+      - "8787:8787"
+    secrets:
+      - db.secret
+    command: --server-config standalone.xml
+#    volumes:
+#      - /home/jcortes/workspace/nascimento-irn/implementation/webapp/src/main/docker/resources:/home/nascimento/certs:ro
+    environment:
+      - CONTAINERS_UPGRADE_DB=irn-upgrade-db
+      - DEBUG_MODE=1
+    depends_on:
+      - mysql-server
+secrets:
+  db.secret:
+    file: irn-db.secret
+  rdb.secret:
+    file: root-db.secret
