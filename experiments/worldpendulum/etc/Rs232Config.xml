@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" ?>
 <hardware id="ELAB_WORLD_PENDULUM_CCVALG" num_channels="5"
 	minfrequency="10Hz" maxfrequency="1000Hz">
-	<rs232 baud="115200" stopbits="1" paritybits="0" numbits="8"
-		ports_restrict="/dev/ttyS0">
+	<rs232 baud="115200" stopbits="1" paritybits="0" numbits="8">
 		<parameters>
 			<!-- displacement -->
 			<parameter output="0" input="0" maxvalue="20"

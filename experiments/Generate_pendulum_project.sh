@@ -21,7 +21,8 @@ find $2 -name 'worldpendulum' -exec rename 's/worldpendulum/'$2'/g' {} + > /dev/
 #find $1 -iname '*world_pendulum*' -exec rename 's/world_pendulum*/'$2'/g' {} + > /dev/null 2>&1
 #find $1 -iname '*worldpendulum*' -exec rename 's/*worldpendulum*/'$2'/g' {} + > /dev/null 2>&1
 
-
+mv ./$2/src/java/client/pt/utl/ist/elab/client/$2/resources/worldpendulum_background.jpg ./$2/src/java/client/pt/utl/ist/elab/client/$2/resources/$2_background.jpg
+mv ./$2/src/java/client/pt/utl/ist/elab/client/$2/resources/worldpendulum_iconified.jpg ./$2/src/java/client/pt/utl/ist/elab/client/$2/resources/$2_iconified.jpg
 find $2 -type f -exec sed -i 's/worldpendulum_ccvalg.sdp/'$1'/g' {} + > /dev/null 2>&1
 find $2 -type f -exec sed -i 's/worldpendulum/'$2'/g' {} + > /dev/null 2>&1
 find $2 -type f -exec sed -i 's/ELAB_WORLD_PENDULUM_CCVALG/'$3'/g' {} + > /dev/null 2>&1
