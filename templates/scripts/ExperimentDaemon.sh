@@ -5,7 +5,7 @@
 
 
 EXPERIMENT_NAME=@experiment.name@
-CURDIR=`pwd`
+CURDIR=`"$( cd "$(dirname "$0")" ; pwd -P )"`
 CURUSER=`id -nu`
 ADDITIONAL_SERVICE_START="@additional.service.start.script@"
 ADDITIONAL_SERVICE_STOP="@additional.service.stop.script@"
