@@ -17,7 +17,7 @@
 BASE_USER=@daemon.user@
 BASE_USER_HOMEDIR=~@daemon.user@
 BASE_DIR="@install.dir@@deployment.subdir@/@lab.name@/multicast"
-CURDIR=`pwd`
+CURDIR="$( cd "$(dirname "$0")" ; pwd -P )"
 CURUSER=`id -nu`
 
 RETVAL=0
