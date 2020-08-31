@@ -416,7 +416,7 @@
 			</exclusions>
 			<optional>false</optional>
 		</dependency>
-		<dependency>
+		<!--dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-jpamodelgen</artifactId>
                 	<version>5.4.21.Final</version>
@@ -435,7 +435,7 @@
 				</exclusion>
 			</exclusions>
 			<optional>false</optional>
-		</dependency>
+		</dependency-->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
