@@ -436,6 +436,11 @@
 			</exclusions>
 			<optional>false</optional>
 		</dependency-->
+                <dependency>
+   			<groupId>org.glassfish.main.ejb</groupId>
+   			<artifactId>ejb-timer-service-app</artifactId>
+   			<version>6.0.0-M1</version>
+		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
