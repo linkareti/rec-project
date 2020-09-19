@@ -597,7 +597,7 @@ public class FotovoltaicoCustomizer extends AbstractCustomizer {
 
         getAcquisitionConfig().getSelectedHardwareParameter("protocol").setParameterValue(protocol);
         getAcquisitionConfig().getSelectedHardwareParameter("red_comp").setParameterValue("" + sldRedComponent.getValue());
-        getAcquisitionConfig().getSelectedHardwareParameter("green_comp").setParameterValue("" + sldBlueComponent.getValue());
+        getAcquisitionConfig().getSelectedHardwareParameter("green_comp").setParameterValue("" + sldGreenComponent.getValue());
         getAcquisitionConfig().getSelectedHardwareParameter("blue_comp").setParameterValue("" + sldBlueComponent.getValue());
         getAcquisitionConfig().getSelectedHardwareParameter("buck").setParameterValue("" + sldBuck.getValue());
         getAcquisitionConfig().getSelectedHardwareParameter("angle").setParameterValue("" + sldAngle.getValue());
@@ -651,7 +651,7 @@ public class FotovoltaicoCustomizer extends AbstractCustomizer {
     @Override
     public javax.swing.ImageIcon getCustomizerIcon() {
         return new javax.swing.ImageIcon(getClass().getResource(
-                "/pt/utl/ist/elab/client/planoinclinado/resources/fotovoltaico_iconified.gif"));
+                "/pt/utl/ist/elab/client/fotovoltaico/resources/fotovoltaico_iconified.gif"));
     }
 
     @Override
