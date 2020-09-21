@@ -38,7 +38,7 @@ lab.list=basic
 #advanced.experiment.list=paschen,langmuir,optica,conducaocalor,discos,condensadorcilindrico,aleatorio
 #new_exps.experiment.list=boylemariotte,colisione,pendulo,pendulogravitico,polaroid,hidrostat,worldpendulummaputo,vtiro
 ##local build key/value
-basic.experiment.list=vtiro
+basic.experiment.list=rollpaper
 
 #In case you wish to run a specific experiment
 #please define the following property to enable
