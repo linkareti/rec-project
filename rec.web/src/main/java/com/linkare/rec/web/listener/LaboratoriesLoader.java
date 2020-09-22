@@ -114,6 +114,7 @@ public class LaboratoriesLoader implements ServletContextListener {
 			System.out.println("dbLab="+dbLab);
 			if (dbLab == null) {
 				createLaboratoryFromLab(lab);
+				System.out.println("Lab="+lab);
 				
 			} else {
 				changedLabs.put(labId, dbLab);
@@ -315,6 +316,8 @@ public class LaboratoriesLoader implements ServletContextListener {
 		newLab.setJmxUser(DEFAULT_JMX_USER);
 		newLab.setJmxPass(DEFAULT_JMX_PASS);
 
+		
+		System.out.println("newLab="+newLab);
 		labService.create(newLab);
 	}
 
