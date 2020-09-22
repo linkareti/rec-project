@@ -242,8 +242,8 @@ public class LaboratoriesLoader implements ServletContextListener {
 
 	private Laboratory inactivateLaboratory(Laboratory laboratory) {
 		laboratory.getState().setActive(false);
-		return labService.edit(laboratory);
 		System.out.println("Laboratory="+laboratory);
+		return labService.edit(laboratory);
 	}
 
 	private Laboratory updateLaboratoryFromLab(Laboratory dbLab, Lab lab) {
