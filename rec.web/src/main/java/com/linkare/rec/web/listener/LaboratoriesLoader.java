@@ -305,6 +305,7 @@ public class LaboratoriesLoader implements ServletContextListener {
 
 		final String name = lab.getLabId();
 		newLab.setName(name);
+		System.out.println("newLab.getname()="+newLab.getName());
 
 		State stateInfo = new State();
 		stateInfo.setUrl(lab.getLocation());
