@@ -140,11 +140,12 @@ public class LaboratoriesLoader implements ServletContextListener {
 		Map<String, Laboratory> dbLabsMap = new HashMap<String, Laboratory>();
 
 		for (Lab lab : labs) {
+			System.out.println("dbLabs="+dbLabs);
+			System.out.println("lab.getLabId()="+lab.getLabId());
 			Laboratory laboratory = findByLabName(dbLabs, lab.getLabId());
 			apparatusesPerLaboratory.put(laboratory.getName(),
 					lab.getApparatus());
-			System.out.println("dbLabs="+dbLabs);
-			System.out.println("lab.getLabId()="+lab.getLabId());
+
 			
 			for (Apparatus apparatus : lab.getApparatus()) {
 				allApparatuses.put(apparatus.getLocation(), apparatus);
