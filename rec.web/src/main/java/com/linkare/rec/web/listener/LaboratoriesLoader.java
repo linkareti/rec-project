@@ -143,6 +143,9 @@ public class LaboratoriesLoader implements ServletContextListener {
 			Laboratory laboratory = findByLabName(dbLabs, lab.getLabId());
 			apparatusesPerLaboratory.put(laboratory.getName(),
 					lab.getApparatus());
+			System.out.println("dbLabs="+dbLabs);
+			System.out.println("lab.getLabId()="+lab.getLabId());
+			
 			for (Apparatus apparatus : lab.getApparatus()) {
 				allApparatuses.put(apparatus.getLocation(), apparatus);
 				for (LocalizationBundle locationBundle : apparatus
