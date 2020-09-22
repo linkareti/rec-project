@@ -95,7 +95,7 @@ public class LaboratoriesLoader implements ServletContextListener {
 		System.out.println("recFaceConfigFilePath="+recFaceConfigFilePath);
 		ReCFaceConfig faceConfig = ReCFaceConfig
 				.unmarshall(new FileInputStream(recFaceConfigFilePath));
-		System.out.println("faceConfig="+faceConfig);
+		System.out.println("faceConfig233="+faceConfig);
 
 
 		for (LocalizationBundle l10nBundle : faceConfig.getLocalizationBundle()) {
