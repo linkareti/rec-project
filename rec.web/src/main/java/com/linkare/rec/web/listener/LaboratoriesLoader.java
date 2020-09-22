@@ -111,7 +111,7 @@ public class LaboratoriesLoader implements ServletContextListener {
 			String labId = lab.getLabId();
 			System.out.println("labId="+labId);
 			Laboratory dbLab = findByLabName(dbLabs, labId);
-			System.out.println("dbLab="+labId);
+			System.out.println("dbLab="+dbLab);
 			if (dbLab == null) {
 				createLaboratoryFromLab(lab);
 				
@@ -164,6 +164,7 @@ public class LaboratoriesLoader implements ServletContextListener {
 		// 2. activate experiments found
 		// 3. change experiment to the correct lab
 		for (Experiment experiment : experiments) {
+			System.out.println("Entra no For ");
 			Apparatus correspondingApparatus = allApparatuses.get(experiment
 					.getExternalId());
 			experiment.getState().setActive(correspondingApparatus != null);
