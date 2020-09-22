@@ -92,13 +92,16 @@ public class LaboratoriesLoader implements ServletContextListener {
 			throws FileNotFoundException, JAXBException {
 		String recFaceConfigFilePath = ctx
 				.getRealPath("/client/etc/ReCFaceConfig.xml");
-
+		System.out.println("recFaceConfigFilePath="+recFaceConfigFilePath);
 		ReCFaceConfig faceConfig = ReCFaceConfig
 				.unmarshall(new FileInputStream(recFaceConfigFilePath));
+		System.out.println("faceConfig="+faceConfig);
+
 
 		for (LocalizationBundle l10nBundle : faceConfig.getLocalizationBundle()) {
 			ReCResourceBundle.loadResourceBundle(l10nBundle.getName(),
 					l10nBundle.getLocation());
+			System.out.println("ReCResourceBundle="+ReCResourceBundle);
 		}
 
 		List<Laboratory> dbLabs = labService.findAll();
@@ -107,9 +110,12 @@ public class LaboratoriesLoader implements ServletContextListener {
 
 		for (Lab lab : faceConfig.getLab()) {
 			String labId = lab.getLabId();
+			System.out.println("labId="+labId);
 			Laboratory dbLab = findByLabName(dbLabs, labId);
+			System.out.println("dbLab="+labId);
 			if (dbLab == null) {
 				createLaboratoryFromLab(lab);
+				
 			} else {
 				changedLabs.put(labId, dbLab);
 				updateLaboratoryFromLab(dbLab, lab);
@@ -137,6 +143,7 @@ public class LaboratoriesLoader implements ServletContextListener {
 			Laboratory laboratory = findByLabName(dbLabs, lab.getLabId());
 			apparatusesPerLaboratory.put(laboratory.getName(),
 					lab.getApparatus());
+			System.out.println("Laboratory="+Laboratory);
 			for (Apparatus apparatus : lab.getApparatus()) {
 				allApparatuses.put(apparatus.getLocation(), apparatus);
 				for (LocalizationBundle locationBundle : apparatus
@@ -149,6 +156,7 @@ public class LaboratoriesLoader implements ServletContextListener {
 		}
 		for (Laboratory laboratory : dbLabs) {
 			dbLabsMap.put(laboratory.getName(), laboratory);
+			System.out.println("dbLabsMap="+dbLabsMap);
 		}
 
 		final List<Experiment> experiments = experimentService.findAll();
