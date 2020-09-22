@@ -101,7 +101,6 @@ public class LaboratoriesLoader implements ServletContextListener {
 		for (LocalizationBundle l10nBundle : faceConfig.getLocalizationBundle()) {
 			ReCResourceBundle.loadResourceBundle(l10nBundle.getName(),
 					l10nBundle.getLocation());
-			System.out.println("ReCResourceBundle="+ReCResourceBundle);
 		}
 
 		List<Laboratory> dbLabs = labService.findAll();
@@ -143,7 +142,6 @@ public class LaboratoriesLoader implements ServletContextListener {
 			Laboratory laboratory = findByLabName(dbLabs, lab.getLabId());
 			apparatusesPerLaboratory.put(laboratory.getName(),
 					lab.getApparatus());
-			System.out.println("Laboratory="+Laboratory);
 			for (Apparatus apparatus : lab.getApparatus()) {
 				allApparatuses.put(apparatus.getLocation(), apparatus);
 				for (LocalizationBundle locationBundle : apparatus
