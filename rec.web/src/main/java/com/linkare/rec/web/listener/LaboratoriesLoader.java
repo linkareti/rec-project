@@ -166,23 +166,28 @@ public class LaboratoriesLoader implements ServletContextListener {
 				String labId = findLabIdForApparatusId(
 						apparatusesPerLaboratory,
 						correspondingApparatus.getLocation());
+				System.out.println("labId="+labId);
 
 				if (experiment.getState().getHelpMessage() == null) {
 					String toolTipBundleKey = correspondingApparatus
 							.getToolTipBundleKey();
 					experiment.getState().setHelpMessage(toolTipBundleKey);
+					System.out.println("toolTipBundleKey="+toolTipBundleKey);
 				}
 				if (experiment.getState().getLabel() == null) {
 					experiment.getState().setLabel(
 							correspondingApparatus.getDisplayStringBundleKey());
+					System.out.println("Experiment Label="+experiment.getState().getLabel());
 				}
 				if (experiment.getState().getUrl() == null) {
 					experiment.getState().setUrl(
 							correspondingApparatus.getLocation());
+					System.out.println("Experiment Label="+experiment.getState().getUrl());
 				}
 				if (labId != null) {
 					Laboratory laboratory = dbLabsMap.get(labId);
 					experiment.setLaboratory(laboratory);
+					System.out.println("Laboratory="+laboratory);
 				}
 			}
 			experiment = experimentService.edit(experiment);
@@ -238,6 +243,7 @@ public class LaboratoriesLoader implements ServletContextListener {
 	private Laboratory inactivateLaboratory(Laboratory laboratory) {
 		laboratory.getState().setActive(false);
 		return labService.edit(laboratory);
+		System.out.println("Laboratory="+laboratory);
 	}
 
 	private Laboratory updateLaboratoryFromLab(Laboratory dbLab, Lab lab) {
@@ -326,6 +332,7 @@ public class LaboratoriesLoader implements ServletContextListener {
 			host = matcher.group(MATCH_GROUP_HOSTNAME);
 			try {
 				port = Integer.parseInt(matcher.group(MATCH_GROUP_PORT));
+				System.out.println("port="+port);
 			} catch (Exception ignored) {
 
 			}
