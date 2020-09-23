@@ -9,6 +9,8 @@ import java.util.List;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.persistence.Query;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 
 import com.linkare.rec.web.model.Laboratory;
 
