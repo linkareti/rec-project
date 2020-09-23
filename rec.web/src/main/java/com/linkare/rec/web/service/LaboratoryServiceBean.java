@@ -18,13 +18,15 @@ import com.linkare.rec.web.model.Laboratory;
  */
 @Local(LaboratoryServiceLocal.class)
 @Stateless(name = "LaboratoryService")
+@TransactionManagement(TransactionManagementType.CONTAINER)
 public class LaboratoryServiceBean extends BusinessServiceBean<Laboratory, Long> implements LaboratoryService {
 
     @Override
     public void create(final Laboratory laboratory) {
 	getEntityManager().persist(laboratory);
+	getEntityManager().flush();
     }
-
+    
     @Override
     public Laboratory find(final Long id) {
 	return getEntityManager().find(Laboratory.class, id);
