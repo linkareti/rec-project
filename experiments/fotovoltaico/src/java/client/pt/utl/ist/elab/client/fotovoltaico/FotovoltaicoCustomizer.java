@@ -420,7 +420,7 @@ public class FotovoltaicoCustomizer extends AbstractCustomizer {
         }
         try {
             int red = Integer.parseInt(strRedComp);
-            if (red <= sldRedComponent.getMaximum() && red > 0) {
+            if (red <= sldRedComponent.getMaximum() && red >= 0) {
                 sldRedComponent.setValue(red);
             } else {
                 tfRedComponent.setText("" + sldRedComponent.getValue());
@@ -445,7 +445,7 @@ public class FotovoltaicoCustomizer extends AbstractCustomizer {
         }
         try {
             int green = Integer.parseInt(strGreenComp);
-            if (green <= sldGreenComponent.getMaximum() && green > 0) {
+            if (green <= sldGreenComponent.getMaximum() && green >= 0) {
                 sldGreenComponent.setValue(green);
             } else {
                 tfGreenComponent.setText("" + sldGreenComponent.getValue());
@@ -470,7 +470,7 @@ public class FotovoltaicoCustomizer extends AbstractCustomizer {
         }
         try {
             int blue = Integer.parseInt(strBlueComp);
-            if (blue <= sldBlueComponent.getMaximum() && blue > 0) {
+            if (blue <= sldBlueComponent.getMaximum() && blue >= 0) {
                 sldBlueComponent.setValue(blue);
             } else {
                 tfBlueComponent.setText("" + sldBlueComponent.getValue());

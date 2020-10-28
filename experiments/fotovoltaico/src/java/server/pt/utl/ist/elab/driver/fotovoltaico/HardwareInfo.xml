@@ -65,7 +65,7 @@
 		<max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">550</Frequency></max-frequency>
 		<step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></step-frequency>
 	</frequency-scale>
-	<Frequency type="SamplingIntervalType" multiplier="milli">500</Frequency>
+	<Frequency type="SamplingIntervalType" multiplier="milli">100</Frequency>
 
 	<sampling-scale>
 		<min-samples>1</min-samples>
