@@ -5,15 +5,42 @@
 		<groupId>com.linkare.maven</groupId>
 		<version>1.0.1</version>
 	</parent>
+
 	<groupId>com.linkare</groupId>
 	<artifactId>rec.web-api</artifactId>
 	<name>rec.web-api</name>
 	<version>1.2.0-SNAPSHOT</version>
+
 	<scm>
 		<connection>scm:svn:https://svn.linkare.com/internal/rec-project/rec/branches/rel-web-api-2.0.x</connection>
 		<developerConnection>scm:svn:https://svn.linkare.com/internal/rec-project/rec/branches/rel-web-api-2.0.x</developerConnection>
 		<url>https://sventon.linkare.com/repos/svnroot/list/internal/rec-project/rec/branches/rel-web-api-2.0.x</url>
 	</scm>
+
+	<dependencies>
+		<dependency>
+			<groupId>javax.activation</groupId>
+			<artifactId>activation</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.ws</groupId>
+			<artifactId>jaxws-ri</artifactId>
+			<version>2.3.3</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>commonj.sdo</groupId>
+			<artifactId>commonj.sdo</artifactId>
+			<version>2.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.xml.bind</groupId>
+			<artifactId>jakarta.xml.bind-api</artifactId>
+			<version>2.3.3</version>
+		  </dependency>
+	</dependencies>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -21,8 +48,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.0</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>11</source>
+					<target>11</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -35,7 +62,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>jaxb2-maven-plugin</artifactId>
-				<version>1.5</version>
+				<version>2.5.0</version>
 				<executions>
 					<execution>
 						<goals>
@@ -79,6 +106,27 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-toolchains-plugin</artifactId>
+				<version>1.0</version>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>toolchain</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<toolchains>
+						<jdk>
+							<version>11.0</version>
+							<vendor>openjdk</vendor>
+						</jdk>
+					</toolchains>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
