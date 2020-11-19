@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name="reCFaceConfig", namespace="http://rec.linkare.com/client/config")
+@XmlRootElement(name="ReCFaceConfig", namespace="http://rec.linkare.com/client/config")
 @XmlAccessorType(XmlAccessType.PROPERTY)
 public class ReCFaceConfig extends AbstractConfigBean {
 
@@ -103,9 +103,18 @@ public class ReCFaceConfig extends AbstractConfigBean {
 	 */
 	public static ReCFaceConfig unmarshall(final InputStream is)
 			throws JAXBException {
-		final JAXBContext jc = JAXBContext.newInstance(ReCFaceConfig.class);
-		final Unmarshaller un = jc.createUnmarshaller();
-		return (ReCFaceConfig) un.unmarshal(is);
+		// Old version
+		//final JAXBContext jc = JAXBContext.newInstance(ReCFaceConfig.class);
+		//final Unmarshaller un = jc.createUnmarshaller();
+		//return (ReCFaceConfig) un.unmarshal(is);
+		// Workaround of unmarshalling exception - Bug 5817
+		JAXBContext ctx = JAXBContext.newInstance(ReCFaceConfig.class);
+	    Unmarshaller unmarshaller = ctx.createUnmarshaller();
+	    SAXParserFactory sax = SAXParserFactory.newInstance();
+	    sax.setNamespaceAware(false); // This line is important!
+	    XMLReader reader = sax.newSAXParser().getXMLReader();
+	    Source source = new SAXSource(reader, is);
+	    return (ReCFaceConfig) unmarshaller.unmarshal(source);
 	}
 
 	// -------------------------------------------------------------------------
