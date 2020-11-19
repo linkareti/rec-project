@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name="reCFaceConfig", namespace="http://rec.linkare.com/client/config")
+@XmlRootElement(name="ReCFaceConfig", namespace="http://rec.linkare.com/client/config")
 @XmlAccessorType(XmlAccessType.PROPERTY)
 public class ReCFaceConfig extends AbstractConfigBean {
 
