@@ -76,9 +76,9 @@
 									<toFile>rec-face-config.xsd</toFile>
 								</transformSchema>
 							</transformSchemas>
-							<includes>
-								<include>com/linkare/rec/web/config/*.java</include>
-							</includes>
+							<sources>
+								<source>${project.basedir}/src/main/java/com/linkare/rec/web/config/</source>
+							</sources>
 							<outputDirectory>${project.build.directory}/schemas</outputDirectory>
 						</configuration>
 					</execution>
