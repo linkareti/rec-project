@@ -1,0 +1,5 @@
+version: '3.5'
+services:
+  elab-webswing:
+    ports:
+      - "8080:8080"

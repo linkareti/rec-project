@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.linkare.maven</groupId>
+        <artifactId>parent</artifactId>
+        <version>1.2.1</version>
+    </parent>
+
+    <groupId>com.linkare.elab</groupId>
+    <artifactId>base</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>New Elab Application</name>
+    <description>New Elab Application</description>
+    <inceptionYear>2020</inceptionYear>
+
+    <properties>
+        <simplifiedGroupId>elab</simplifiedGroupId>
+    </properties>
+
+    <modules>
+        <module>base-images</module>
+        <module>compose</module>
+    </modules>
+
+</project>

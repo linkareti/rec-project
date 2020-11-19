@@ -1,0 +1,6 @@
+version: '3'
+services:
+  webswing:
+    build:
+      context: webswing
+    image: ${repo}/${simplifiedGroupId}/${artifactId}/webswing-2.7.3_jre11:${project.version}
