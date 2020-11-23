@@ -9,12 +9,12 @@
 	<groupId>com.linkare</groupId>
 	<artifactId>rec.web-api</artifactId>
 	<name>rec.web-api</name>
-	<version>2.0.0-SNAPSHOT</version>
+	<version>2.0.0</version>
 
 	<scm>
-		<connection>scm:svn:https://svn.linkare.com/internal/rec-project/rec/branches/rel-web-api-2.0.x</connection>
-		<developerConnection>scm:svn:https://svn.linkare.com/internal/rec-project/rec/branches/rel-web-api-2.0.x</developerConnection>
-		<url>https://sventon.linkare.com/repos/svnroot/list/internal/rec-project/rec/branches/rel-web-api-2.0.x</url>
+		<connection>scm:svn:https://svn.linkare.com/internal/rec-project/rec/tags/rel-web-api-2.0.0</connection>
+		<developerConnection>scm:svn:https://svn.linkare.com/internal/rec-project/rec/tags/rel-web-api-2.0.0</developerConnection>
+		<url>https://sventon.linkare.com/repos/svnroot/list/internal/rec-project/rec/tags/rel-web-api-2.0.0</url>
 	</scm>
 
 	<dependencies>
