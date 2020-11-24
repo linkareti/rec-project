@@ -18,8 +18,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.XMLReader;
 import javax.xml.transform.Source;
+import javax.xml.transform.sax.SAXSource;
+import org.xml.sax.InputSource;
+import javax.xml.parsers.ParserConfigurationException;
+import org.xml.sax.SAXException;
 
-@XmlRootElement
+@XmlRootElement()
 @XmlAccessorType(XmlAccessType.PROPERTY)
 public class ReCFaceConfig extends AbstractConfigBean {
 
@@ -107,17 +111,22 @@ public class ReCFaceConfig extends AbstractConfigBean {
 	public static ReCFaceConfig unmarshall(final InputStream is)
 			throws JAXBException {
 		// Old version
-		final JAXBContext jc = JAXBContext.newInstance(ReCFaceConfig.class);
-		final Unmarshaller un = jc.createUnmarshaller();
-		return (ReCFaceConfig) un.unmarshal(is);
+		//final JAXBContext jc = JAXBContext.newInstance(ReCFaceConfig.class);
+		//final Unmarshaller un = jc.createUnmarshaller();
+		//return (ReCFaceConfig) un.unmarshal(is);
 		// Workaround of unmarshalling exception - Bug 5817
-		//JAXBContext ctx = JAXBContext.newInstance(ReCFaceConfig.class);
-	    //Unmarshaller unmarshaller = ctx.createUnmarshaller();
-	    //SAXParserFactory sax = SAXParserFactory.newInstance();
-	    //sax.setNamespaceAware(false); // This line is important!
-	    //XMLReader reader = sax.newSAXParser().getXMLReader();
-	    //Source source = new SAXSource(reader, is);
-	    //return (ReCFaceConfig) unmarshaller.unmarshal(source);
+		try {
+			JAXBContext ctx = JAXBContext.newInstance(ReCFaceConfig.class);
+			Unmarshaller unmarshaller = ctx.createUnmarshaller();
+			SAXParserFactory sax = SAXParserFactory.newInstance();
+			sax.setNamespaceAware(false); // This line is important!
+			XMLReader reader = sax.newSAXParser().getXMLReader();
+			InputSource sourceIs = new InputSource(is);
+			Source source = new SAXSource(reader, sourceIs);
+			return (ReCFaceConfig) unmarshaller.unmarshal(source);
+		} catch (ParserConfigurationException | SAXException e) {
+			throw new JAXBException(e.getMessage());
+		}
 	}
 
 	// -------------------------------------------------------------------------
