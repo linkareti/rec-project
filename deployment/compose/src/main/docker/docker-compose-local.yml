@@ -4,3 +4,5 @@ services:
     ports:
       - "8080:8080"
       - "8000:8000"
+    # Only for testing purposes, do not keep this forever!
+    network_mode: "host"
