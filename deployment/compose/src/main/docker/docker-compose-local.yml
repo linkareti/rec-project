@@ -1,8 +1,47 @@
 version: '3.5'
 services:
-  elab-webswing:
+  elab-client-webswing:
     ports:
-      - "8080:8080"
-      - "8000:8000"
+      - "18080:8080"
+      - "18000:8000"
     # Only for testing purposes, do not keep this forever!
-    network_mode: "host"
+    #network_mode: "host"
+    #restart: "none"
+
+  elab-server-payara:
+    ports:
+      - "28080:8080"
+      - "24848:4848"
+    #environment:
+    #  JVM_OPTIONS: '-XX\:+UnlockExperimentalVMOptions:-XX\:+UseContainerSupport:-XX\:MaxRAMPercentage=1:-Xms1g:-Xmx2g'
+    #network_mode: "host"
+    #restart: "none"
+
+  rec-database:
+    ports:
+      - "13306:3306"
+    volumes:
+      - ${project.build.directory}/resources/rec-schema.sql:/docker-entrypoint-initdb.d/rec-schema.sql
+    #network_mode: "host"
+    #restart: "none"
+
+  gftimer-database:
+    ports:
+      - "23306:3306"
+    volumes:
+      - ${project.build.directory}/resources/gf_timer-schema.sql:/docker-entrypoint-initdb.d/gf_timer-schema.sql
+    #restart: "none"
+
+secrets:
+   dbrec.secret:
+     file: ${project.build.directory}/resources/rec-db.secret
+   dbgftimer.secret:
+     file: ${project.build.directory}/resources/gftimer-db.secret
+   rdb.secret:
+     file: ${project.build.directory}/resources/root-db.secret
+   as_mail.secret:
+     file: ${project.build.directory}/resources/asadmin_mail.secret
+   as_recdb.secret:
+     file: ${project.build.directory}/resources/asadmin_recdb.secret
+   as_gftimerdb.secret:
+     file: ${project.build.directory}/resources/asadmin_gftimerdb.secret

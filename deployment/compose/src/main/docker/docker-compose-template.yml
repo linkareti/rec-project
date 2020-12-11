@@ -1,5 +1,64 @@
 version: '3.5'
 services:
-  elab-webswing:
+  elab-client-webswing:
     image: ${repo}/${simplifiedGroupId}/base-images/webswing-2.7.3_jre11:${project.version}
     restart: always
+
+  elab-server-payara:
+    image: ${repo}/${simplifiedGroupId}/base-images/payara-5.2020.3-jdk11:${project.version}
+    environment:
+      jvm-options: '-XX\:+UnlockExperimentalVMOptions:-XX\:+UseContainerSupport:-XX\:MaxRAMPercentage=1:-Xms1g:-Xmx2g'
+      REC_DB_HOST: 'rec-database'
+      REC_DB_PORT: '3306'
+      GFTIMER_DB_HOST: 'gftimer-database'
+      GFTIMER_DB_PORT: '3306'
+    restart: always
+    secrets:
+      - as_mail.secret
+      - as_recdb.secret
+      - as_gftimerdb.secret
+    depends_on:
+      - rec-database
+      - gftimer-database
+
+  rec-database:
+    image: docker-thirdparty.linkare.com/mysql:5.7.25
+    secrets:
+      - rdb.secret
+      - dbrec.secret
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: '/run/secrets/rdb.secret'
+      MYSQL_USER: 'rec'
+      MYSQL_PASSWORD_FILE: '/run/secrets/dbrec.secret'
+      MYSQL_DATABASE: 'rec'
+    volumes:
+      - db-rec:/var/lib/mysql:rw
+    restart: always
+
+  gftimer-database:
+    image: docker-thirdparty.linkare.com/mysql:5.7.25
+    secrets:
+      - rdb.secret
+      - dbgftimer.secret
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: '/run/secrets/rdb.secret'
+      MYSQL_USER: 'gftimer'
+      MYSQL_PASSWORD_FILE: '/run/secrets/dbgftimer.secret'
+      MYSQL_DATABASE: 'gftimer'
+    volumes:
+      - db-gftimer:/var/lib/mysql:rw
+    restart: always
+
+secrets:
+   dbrec.secret: {}
+   dbgftimer.secret: {}
+   rdb.secret: {}
+   as_mail.secret: {}
+   as_recdb.secret: {}
+   as_gftimerdb.secret: {}
+ 
+volumes:
+  db-rec:
+    name: db-rec
+  db-gftimer:
+    name: db-gftimer

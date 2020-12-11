@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resources PUBLIC "-//Payara.fish//DTD Payara Server 4 Resource Definitions//EN" "{payaraResourcesDtd}">
+<resources>
+	<!-- JDBC -->
+
+	<!-- REC -->
+	<jdbc-connection-pool validation-table-name="" steady-pool-size="8" allow-non-component-callers="false" statement-timeout-in-seconds="-1" idle-timeout-in-seconds="300" lazy-connection-association="false" max-wait-time-in-millis="60000" connection-creation-retry-attempts="0" lazy-connection-enlistment="false" max-pool-size="1024" datasource-classname="com.mysql.cj.jdbc.MysqlDataSource" res-type="javax.sql.DataSource" max-connection-usage-count="0" name="rec" is-connection-validation-required="false">
+		<property name="serverName" value="rec-database"></property>
+		<property name="User" value="rec"></property>
+		<property name="Password" value="${ALIAS=rec_db}"></property>
+		<property name="portNumber" value="3306"></property>
+		<property name="datasourceName" value="jdbc/rec"></property>
+		<property name="databaseName" value="rec"></property>
+		<property name="default-character-set" value="utf8"></property>
+		<property name="useUnicode" value="true"></property>
+		<property name="useSSL" value="false"></property>
+		<!--property name="networkProtocol" value="allocation"></property-->
+		<property name="networkProtocol" value="tcp"></property>
+	</jdbc-connection-pool>
+
+	<jdbc-resource enabled="true" pool-name="rec" jndi-name="jdbc/rec" />
+
+	<!-- TIMERPOOL -->
+	<jdbc-connection-pool validation-table-name="" steady-pool-size="8" allow-non-component-callers="false" statement-timeout-in-seconds="-1" idle-timeout-in-seconds="300" lazy-connection-association="false" max-wait-time-in-millis="60000" connection-creation-retry-attempts="0" lazy-connection-enlistment="false" max-pool-size="64" datasource-classname="com.mysql.cj.jdbc.MysqlDataSource" res-type="javax.sql.DataSource" max-connection-usage-count="0" name="timer" is-connection-validation-required="false">
+		<property name="serverName" value="gftimer-database"></property>
+		<property name="User" value="gftimer"></property>
+		<property name="Password" value="${ALIAS=gftimer_db}"></property>
+		<property name="portNumber" value="3306"></property>
+		<property name="datasourceName" value="jdbc/__TimerPool"></property>
+		<property name="databaseName" value="gftimer"></property>
+		<property name="default-character-set" value="utf8"></property>
+		<property name="useUnicode" value="true"></property>
+		<property name="networkProtocol" value="tcp"></property>
+		<property name="useSSL" value="false"></property>
+	</jdbc-connection-pool>
+
+	<!--jdbc-resource enabled="true" pool-name="timer" jndi-name="jdbc/__TimerPool" /-->
+
+	<!-- Mail Session -->
+
+	<mail-resource host="smtp.gmail.com" jndi-name="mail/mailSession" from="noreply@linkare.com" user="noreply@linkare.com">
+		<property name="mail.smtp.port" value="587"></property>
+		<property name="mail.smtp.auth" value="true"></property>
+		<property name="mail.smtp.starttls.enable" value="true"></property>
+	</mail-resource>
+
+
+	<!-- JMS Queue -->
+
+	<connector-connection-pool resource-adapter-name="jmsra" name="mailConnectionFactory-Connection-Pool" connection-definition-name="javax.jms.QueueConnectionFactory"></connector-connection-pool>
+
+	<connector-resource pool-name="mailConnectionFactory-Connection-Pool" jndi-name="mailConnectionFactory"></connector-resource>
+
+	<admin-object-resource res-adapter="jmsra" res-type="javax.jms.Queue" jndi-name="jms/MailMessages">
+		<property name="Name" value="MailMessages"></property>
+	</admin-object-resource>
+
+</resources>

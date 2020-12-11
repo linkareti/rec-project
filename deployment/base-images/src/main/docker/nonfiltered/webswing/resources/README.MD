@@ -1,0 +1,1 @@
+# Get zip files from build and not from SCM
