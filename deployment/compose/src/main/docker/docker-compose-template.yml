@@ -8,10 +8,14 @@ services:
     image: ${repo}/${simplifiedGroupId}/base-images/payara-5.2020.3-jdk11:${project.version}
     environment:
       jvm-options: '-XX\:+UnlockExperimentalVMOptions:-XX\:+UseContainerSupport:-XX\:MaxRAMPercentage=1:-Xms1g:-Xmx2g'
-      REC_DB_HOST: 'rec-database'
+      #REC_DB_HOST: 'rec-database'
+      REC_DB_HOST: 'localhost'
       REC_DB_PORT: '3306'
-      GFTIMER_DB_HOST: 'gftimer-database'
-      GFTIMER_DB_PORT: '3306'
+      #GFTIMER_DB_HOST: 'gftimer-database'
+      #GFTIMER_DB_PORT: '3306'
+      #MULTICAST_HOST: 'elab-multicast'
+      MULTICAST_HOST: 'localhost'
+      MULTICAST_PORT: '9001'
     restart: always
     secrets:
       - as_mail.secret
@@ -19,7 +23,8 @@ services:
       - as_gftimerdb.secret
     depends_on:
       - rec-database
-      - gftimer-database
+      - elab-multicast
+      #- gftimer-database
 
   rec-database:
     image: docker-thirdparty.linkare.com/mysql:5.7.25
@@ -35,19 +40,39 @@ services:
       - db-rec:/var/lib/mysql:rw
     restart: always
 
-  gftimer-database:
-    image: docker-thirdparty.linkare.com/mysql:5.7.25
-    secrets:
-      - rdb.secret
-      - dbgftimer.secret
-    environment:
-      MYSQL_ROOT_PASSWORD_FILE: '/run/secrets/rdb.secret'
-      MYSQL_USER: 'gftimer'
-      MYSQL_PASSWORD_FILE: '/run/secrets/dbgftimer.secret'
-      MYSQL_DATABASE: 'gftimer'
-    volumes:
-      - db-gftimer:/var/lib/mysql:rw
-    restart: always
+#  gftimer-database:
+#    image: docker-thirdparty.linkare.com/mysql:5.7.25
+#    secrets:
+#      - rdb.secret
+#      - dbgftimer.secret
+#    environment:
+#      MYSQL_ROOT_PASSWORD_FILE: '/run/secrets/rdb.secret'
+#      MYSQL_USER: 'gftimer'
+#      MYSQL_PASSWORD_FILE: '/run/secrets/dbgftimer.secret'
+#      MYSQL_DATABASE: 'gftimer'
+#    volumes:
+#      - db-gftimer:/var/lib/mysql:rw
+#    restart: always
+
+  elab-multicast:
+    image: ${repo}/${simplifiedGroupId}/base-images/openjdk-11.0.8:${project.version}
+    healthcheck:
+      test: pgrep java
+      interval: 30s
+      timeout: 1s
+      retries: 3
+      start_period: 30s
+
+  elab-hardware-server:
+    image: ${repo}/${simplifiedGroupId}/base-images/openjdk-11.0.8:${project.version}
+    healthcheck:
+      test: pgrep java
+      interval: 30s
+      timeout: 1s
+      retries: 3
+      start_period: 30s
+    depends_on:
+      - elab-multicast
 
 secrets:
    dbrec.secret: {}

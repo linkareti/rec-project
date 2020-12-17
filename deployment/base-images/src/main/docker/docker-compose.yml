@@ -8,3 +8,7 @@ services:
     build:
       context: payara
     image: ${repo}/${simplifiedGroupId}/${artifactId}/payara-5.2020.3-jdk11:${project.version}
+  openjdk11:
+    build:
+      context: openjdk11
+    image: ${repo}/${simplifiedGroupId}/${artifactId}/openjdk-11.0.8:${project.version}

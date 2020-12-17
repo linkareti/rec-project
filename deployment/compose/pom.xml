@@ -35,6 +35,40 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.1.2</version>
+                <executions>
+                    <execution>
+                        <id>copy-thirdparty-dependencies</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <!-- FIXME - Temporary setup for using locally -->
+                                <artifactItem>
+                                    <groupId>com.linkare.elab</groupId>
+                                    <artifactId>multicast</artifactId>
+                                    <version>11.0.0</version>
+                                    <type>zip</type>
+                                    <outputDirectory>${project.build.directory}/resources/multicast</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.linkare.elab</groupId>
+                                    <artifactId>vtiro</artifactId>
+                                    <version>11.0.0</version>
+                                    <type>zip</type>
+                                    <outputDirectory>${project.build.directory}/resources/hardwareserver</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                            <stripVersion>true</stripVersion>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 

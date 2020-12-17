@@ -42,6 +42,30 @@
                                     <type>war</type>
                                     <outputDirectory>${project.build.directory}/payara/resources</outputDirectory>
                                 </artifactItem>
+                                <!-- FIXME - Temporary setup for using locally -->
+                                <!-- Webswing -->
+                                <artifactItem>
+                                    <groupId>com.linkare.elab</groupId>
+                                    <artifactId>client</artifactId>
+                                    <version>11.0.0</version>
+                                    <type>zip</type>
+                                    <outputDirectory>${project.build.directory}/webswing/resources</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.linkare.elab</groupId>
+                                    <artifactId>jarfiles</artifactId>
+                                    <version>11.0.0</version>
+                                    <type>zip</type>
+                                    <outputDirectory>${project.build.directory}/webswing/resources</outputDirectory>
+                                </artifactItem>
+                                <!-- Payara -->
+                                <artifactItem>
+                                    <groupId>com.linkare.elab</groupId>
+                                    <artifactId>rec-web</artifactId>
+                                    <version>11.0.0</version>
+                                    <type>war</type>
+                                    <outputDirectory>${project.build.directory}/payara/resources</outputDirectory>
+                                </artifactItem>
                             </artifactItems>
                             <stripVersion>true</stripVersion>
                         </configuration>
@@ -60,6 +84,13 @@
                                     <version>0.6.1</version>
                                     <type>tar.gz</type>
                                     <outputDirectory>${project.build.directory}/payara/resources</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.github</groupId>
+                                    <artifactId>dockerize-alpine-linux-amd64</artifactId>
+                                    <version>0.6.1</version>
+                                    <type>tar.gz</type>
+                                    <outputDirectory>${project.build.directory}/openjdk11/resources</outputDirectory>
                                 </artifactItem>
                             </artifactItems>
                         </configuration>
