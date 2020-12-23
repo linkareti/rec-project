@@ -3,4 +3,5 @@
     <display toolTipBundleKey="tiro$rec.exp.display.tiro.tip.anim" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.sensor" displayStringBundleKey="tiro$rec.exp.display.tiro.title.anim" classLocationBundleKey="tiro$rec.exp.display.tiro.loc.anim" order="1"/>
     <display toolTipBundleKey="tiro$rec.exp.display.tiro.tip.1" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="tiro$rec.exp.display.tiro.title.1" classLocationBundleKey="tiro$rec.exp.display.tiro.loc.1" order="2"/>
     <localizationBundle name="tiro" location="recresource:///pt/utl/ist/elab/client/vtiro/resources/messages"/>
+    <mediaConfig videoLocation="tiro$rec.exp.tiro.video" offlinePlay="true" canSave="true" order="0"/>
 </apparatus>
