@@ -11,8 +11,7 @@ RETVAL=0
 hardware_server_filepath="${PWD}/vtiro.zip"
 hardware_server_scriptpath="/opt/StartvtiroDriver.sh"
 pid_path_name="/opt/process.pid"
-#multicast_url="elab-multicast:9001"
-multicast_url="localhost:9001"
+multicast_url="elab-multicast:9001"
 cmd="${cmd} -wait tcp://${multicast_url} -timeout 240s"
 cmd="${cmd} ${hardware_server_scriptpath}"
 

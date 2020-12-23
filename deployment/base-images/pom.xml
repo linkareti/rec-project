@@ -13,6 +13,11 @@
     <name>Docker base images</name>
     <description>Docker base images</description>
 
+    <properties>
+        <nginx.version>1.18.0</nginx.version>
+		<nginx.rtmp.module.version>1.2.1</nginx.rtmp.module.version>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
@@ -47,7 +52,7 @@
                                 <artifactItem>
                                     <groupId>com.linkare.elab</groupId>
                                     <artifactId>client</artifactId>
-                                    <version>11.0.0</version>
+                                    <version>11.0.3</version>
                                     <type>zip</type>
                                     <outputDirectory>${project.build.directory}/webswing/resources</outputDirectory>
                                 </artifactItem>
@@ -61,10 +66,27 @@
                                 <!-- Payara -->
                                 <artifactItem>
                                     <groupId>com.linkare.elab</groupId>
-                                    <artifactId>rec-web</artifactId>
-                                    <version>11.0.0</version>
+                                    <artifactId>rec.web</artifactId>
+                                    <version>11.0.3</version>
                                     <type>war</type>
                                     <outputDirectory>${project.build.directory}/payara/resources</outputDirectory>
+                                </artifactItem>
+                                <!-- Streamer -->
+                                <artifactItem>
+                                    <groupId>org.nginx</groupId>
+                                    <artifactId>nginx</artifactId>
+                                    <version>${nginx.version}</version>
+                                    <type>tar.gz</type>
+                                    <outputDirectory>${project.build.directory}/streamer/resources</outputDirectory>
+                                    <destFileName>nginx.tar.gz</destFileName>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.nginx</groupId>
+                                    <artifactId>rtmp-module</artifactId>
+                                    <version>${nginx.rtmp.module.version}</version>
+                                    <type>tar.gz</type>
+                                    <outputDirectory>${project.build.directory}/streamer/resources</outputDirectory>
+                                    <destFileName>nginx-rtmp-module.tar.gz</destFileName>
                                 </artifactItem>
                             </artifactItems>
                             <stripVersion>true</stripVersion>

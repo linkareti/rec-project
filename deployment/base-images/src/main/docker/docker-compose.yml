@@ -12,3 +12,7 @@ services:
     build:
       context: openjdk11
     image: ${repo}/${simplifiedGroupId}/${artifactId}/openjdk-11.0.8:${project.version}
+  nginx:
+    build:
+      context: streamer
+    image: ${repo}/${simplifiedGroupId}/${artifactId}/streamer-nginx-1.18.0:${project.version}

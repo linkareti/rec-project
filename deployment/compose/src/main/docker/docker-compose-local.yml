@@ -1,56 +1,47 @@
 version: '3.5'
 services:
   elab-client-webswing:
-    #ports:
-    #  - "18080:8080"
-    #  - "18000:8000"
-    # Only for testing purposes, do not keep this forever!
-    network_mode: "host"
+    ports:
+      - "18080:8080"
+      - "18000:8000"
     #restart: "none"
 
   elab-server-payara:
-    #ports:
-    #  - "28080:8080"
-    #  - "24848:4848"
-    environment:
-      - JVM_ARGS=-Dcom.sun.management.jmxremote.host=elab-multicast:-Djava.rmi.server.hostname=elab-multicast
-    #environment:
-    #  JVM_OPTIONS: '-XX\:+UnlockExperimentalVMOptions:-XX\:+UseContainerSupport:-XX\:MaxRAMPercentage=1:-Xms1g:-Xmx2g'
-    network_mode: "host"
-    #restart: "none"
+    ports:
+      - "28080:8080"
+      - "24848:4848"
 
   rec-database:
-    #ports:
-    #  - "13306:3306"
+    ports:
+      - "13306:3306"
     volumes:
       - ${project.build.directory}/resources/rec-schema.sql:/docker-entrypoint-initdb.d/rec-schema.sql
-      # FIXME - Workaround for network_mode: "host"
-      - ${project.build.directory}/resources/gf_timer-schema.sql:/docker-entrypoint-initdb.d/gf_timer-schema.sql
-    network_mode: "host"
     #restart: "none"
 
-# FIXME - Workaround for network_mode: "host"
-#  gftimer-database:
-#    ports:
-#      - "23306:3306"
-#    volumes:
-#      - ${project.build.directory}/resources/gf_timer-schema.sql:/docker-entrypoint-initdb.d/gf_timer-schema.sql
-#    #restart: "none"
+  gftimer-database:
+    ports:
+      - "23306:3306"
+    volumes:
+      - ${project.build.directory}/resources/gf_timer-schema.sql:/docker-entrypoint-initdb.d/gf_timer-schema.sql
+    #restart: "none"
 
   elab-multicast:
-  #  ports:
-  #    - "25001:25001"
-  #    - "9001:9001"
+    ports:
+      - "25001:25001"
+      - "9001:9001"
     volumes:
       - ${project.build.directory}/resources/multicast:/startup.d/
-    network_mode: "host"
   
   elab-hardware-server:
     #ports:
     #  - "?:?"
     volumes:
       - ${project.build.directory}/resources/hardwareserver:/startup.d/
-    network_mode: "host"
+
+  elab-streamer-server:
+    ports:
+      - "38080:8080"
+      - "31935:1935"
 
 secrets:
    dbrec.secret:

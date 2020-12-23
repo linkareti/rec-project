@@ -427,3 +427,6 @@ install.dir=/home/elab
 deployment.subdir=/rec-deployment
 ##Define the user to run-as in the daemon startup script
 daemon.user=elab
+
+# Java Installation Path
+jdk.dir=/opt/java/openjdk/jdk11.0.8

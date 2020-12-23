@@ -5,7 +5,7 @@
 
 	<!-- REC -->
 	<jdbc-connection-pool validation-table-name="" steady-pool-size="8" allow-non-component-callers="false" statement-timeout-in-seconds="-1" idle-timeout-in-seconds="300" lazy-connection-association="false" max-wait-time-in-millis="60000" connection-creation-retry-attempts="0" lazy-connection-enlistment="false" max-pool-size="1024" datasource-classname="com.mysql.cj.jdbc.MysqlDataSource" res-type="javax.sql.DataSource" max-connection-usage-count="0" name="rec" is-connection-validation-required="false">
-		<property name="serverName" value="localhost"></property>
+		<property name="serverName" value="rec-database"></property>
 		<property name="User" value="rec"></property>
 		<property name="Password" value="${ALIAS=rec_db}"></property>
 		<property name="portNumber" value="3306"></property>

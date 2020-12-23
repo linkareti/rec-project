@@ -11,8 +11,7 @@ RETVAL=0
 multicast_server_filepath="${PWD}/multicast.zip"
 multicast_server_scriptpath="/opt/StartMultiCastController.sh"
 pid_path_name="/opt/process.pid"
-#multicast_host="elab-multicast"
-multicast_host="localhost"
+multicast_host="elab-multicast"
 multicast_port="9001"
 cmd="${cmd} ${multicast_server_scriptpath}"
 
