@@ -38,7 +38,7 @@ public class MediaSetup {
 			// For VLC - Try to avoid linux crashes
 			if (RuntimeUtil.isNix()) {
 				NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(),"/usr/lib/x86_64-linux-gnu/vlc");
-				Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
+				//Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
 				//LibXUtil.initialise();
 			}
 		} catch (Exception e) {
