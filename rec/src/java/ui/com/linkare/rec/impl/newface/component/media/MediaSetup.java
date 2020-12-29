@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 import com.sun.jna.Native;
+import com.sun.jna.NativeLibrary;
 
 import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.binding.RuntimeUtil;
@@ -36,6 +37,7 @@ public class MediaSetup {
 		try {
 			// For VLC - Try to avoid linux crashes
 			if (RuntimeUtil.isNix()) {
+				NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(),"/usr/lib/x86_64-linux-gnu/vlc");
 				Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
 				//LibXUtil.initialise();
 			}
