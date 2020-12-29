@@ -8,11 +8,14 @@ import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 
+import com.sun.jna.Native;
+
+import uk.co.caprica.vlcj.binding.LibVlc;
+import uk.co.caprica.vlcj.binding.RuntimeUtil;
 import uk.co.caprica.vlcj.factory.MediaPlayerFactory;
 import uk.co.caprica.vlcj.factory.discovery.NativeDiscovery;
 import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
-import uk.co.caprica.vlcj.player.embedded.fullscreen.FullScreenStrategy;
 
 /**
  * Classe que faz todo o setup inicial do módulo de vídeo, extraindo as libs
@@ -29,18 +32,19 @@ public class MediaSetup {
 	private static boolean hasVideoOutput;
 
 	public static final void initializeVideoSubsystem() {
-		/*
+		
 		try {
 			// For VLC - Try to avoid linux crashes
 			if (RuntimeUtil.isNix()) {
-				LibXUtil.initialise();
+				Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
+				//LibXUtil.initialise();
 			}
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, "Unable to initialize LibX", e);
 		} catch (UnsatisfiedLinkError ignoreMaybeNotLinuxArghhhh) {
 			LOGGER.log(Level.FINEST, "Unable to initialize LibX", ignoreMaybeNotLinuxArghhhh);
 		}
-		*/
+		
 		try {
 			// For VLC - Try to discover VLC installations
 			new NativeDiscovery().discover();
