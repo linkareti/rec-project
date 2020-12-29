@@ -6,15 +6,15 @@ import java.util.logging.Logger;
 
 import javax.swing.event.EventListenerList;
 
-import uk.co.caprica.vlcj.player.MediaPlayer;
-import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
-import uk.co.caprica.vlcj.player.MediaPlayerEventListener;
-
 import com.linkare.rec.impl.newface.component.media.events.MediaApplicationEventListener;
 import com.linkare.rec.impl.newface.component.media.events.MediaNotConnectedEvent;
 import com.linkare.rec.impl.newface.component.media.events.MediaStoppedEvent;
 import com.linkare.rec.impl.newface.component.media.events.MediaTimeChangedEvent;
 import com.linkare.rec.impl.newface.component.media.transcoding.TranscodingConfig;
+
+import uk.co.caprica.vlcj.player.base.MediaPlayer;
+import uk.co.caprica.vlcj.player.base.MediaPlayerEventAdapter;
+import uk.co.caprica.vlcj.player.base.MediaPlayerEventListener;
 
 /**
  * Wrapper em volta do JVLC e que contém as funcionalidades de controlo e
@@ -68,10 +68,13 @@ public class VideoViewerController {
 
 	private VideoViewerController() {
 		state=MediaPlayerState.EMPTY;
+		/*
 		mediaListener=getDefaultMediaListener();
 		if(MediaSetup.isVideoSubSystemAvailable()) {
 			MediaSetup.getPlayer().addMediaPlayerEventListener(mediaListener);
+			MediaSetup.getPlayer().
 		}
+		*/
 	}
 
 	/**
@@ -150,7 +153,8 @@ public class VideoViewerController {
 	 * @return
 	 */
 	public String getCurrentMediaURL() {
-		return MediaSetup.getPlayer().mrl();
+		// return MediaSetup.getPlayer().mrl();
+		return MediaSetup.getPlayer().media().info().mrl();
 	}
 
 	/**
@@ -207,7 +211,8 @@ public class VideoViewerController {
 	 * Liga o som se este estiver desligado. Se o som estiver ligado, desliga.
 	 */
 	public void toggleMute() {
-		MediaSetup.getPlayer().mute(!MediaSetup.getPlayer().isMute());
+		//MediaSetup.getPlayer().mute(!MediaSetup.getPlayer().isMute());
+		MediaSetup.getPlayer().audio().setMute(!MediaSetup.getPlayer().audio().isMute());
 	}
 
 	/**
@@ -216,7 +221,8 @@ public class VideoViewerController {
 	 * @param units Valor para o qual se pretende alterar o som, entre 0 e 200.
 	 */
 	public void setVolume(final int units) {
-		MediaSetup.getPlayer().setVolume(units);
+		//MediaSetup.getPlayer().setVolume(units);
+		MediaSetup.getPlayer().audio().setVolume(units);
 	}
 
 	/**
@@ -225,7 +231,8 @@ public class VideoViewerController {
 	 * @return
 	 */
 	public int getVolume() {
-		return MediaSetup.getPlayer().getVolume();
+		//return MediaSetup.getPlayer().getVolume();
+		return MediaSetup.getPlayer().audio().volume();
 	}
 
 	/**
@@ -238,7 +245,8 @@ public class VideoViewerController {
 	 *            1 são ignorados.
 	 */
 	public void setPlayRate(final float rate) {
-		MediaSetup.getPlayer().setRate(rate);
+		//MediaSetup.getPlayer().setRate(rate);
+		MediaSetup.getPlayer().controls().setRate(rate);
 	}
 
 	/**
@@ -255,12 +263,15 @@ public class VideoViewerController {
 			public void run() {
 				if (MediaSetup.getPlayer() != null) {
 					if (state == MediaPlayerState.STOPPED) {
-						MediaSetup.getPlayer().removeMediaPlayerEventListener(mediaListener);
-						MediaSetup.getPlayer().enableOverlay(false);
+						//MediaSetup.getPlayer().removeMediaPlayerEventListener(mediaListener);
+						//MediaSetup.getPlayer().enableOverlay(false);
+						MediaSetup.getPlayer().overlay().enable(false);
 						VideoViewerController.LOGGER.finest("Playing media on EDT: " + mrl);
-						MediaSetup.getPlayer().playMedia(mrl);
-						MediaSetup.getPlayer().enableOverlay(true);
-						MediaSetup.getPlayer().addMediaPlayerEventListener(mediaListener);
+						//MediaSetup.getPlayer().playMedia(mrl);
+						MediaSetup.getPlayer().media().play(mrl, null);
+						//MediaSetup.getPlayer().enableOverlay(true);
+						MediaSetup.getPlayer().overlay().enable(true);
+						//MediaSetup.getPlayer().addMediaPlayerEventListener(mediaListener);
 					} else {
 						VideoViewerController.LOGGER.finest("Pausing media on EDT: " + mrl);
 						pause();
@@ -300,7 +311,8 @@ public class VideoViewerController {
 				state = MediaPlayerState.STOPPED;
 
 				try {
-					MediaSetup.getPlayer().stop();
+					// MediaSetup.getPlayer().stop();
+					MediaSetup.getPlayer().controls().stop();
 				} catch (final Exception e) {
 					LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				}
@@ -329,8 +341,8 @@ public class VideoViewerController {
 
 			@Override
 			public void run() {
-				MediaSetup.getPlayer().pause();
-			}
+				//MediaSetup.getPlayer().pause();
+				MediaSetup.getPlayer().controls().pause();			}
 		};
 
 		// if (!SwingUtilities.isEventDispatchThread()) {
@@ -351,7 +363,8 @@ public class VideoViewerController {
 	 * @return
 	 */
 	public boolean willPlay() {
-		return MediaSetup.getPlayer() != null && MediaSetup.getPlayer().isPlayable();
+		//return MediaSetup.getPlayer() != null && MediaSetup.getPlayer().isPlayable();
+		return MediaSetup.getPlayer() != null && MediaSetup.getPlayer().status().isPlayable();
 	}
 
 	/**
@@ -366,14 +379,14 @@ public class VideoViewerController {
 	 */
 	public void captureScreen(final String fileName, final int width, final int height) {
 		createParentDirs(fileName);
-		MediaSetup.getPlayer().saveSnapshot(new File(fileName), width, height);
+		//MediaSetup.getPlayer().saveSnapshot(new File(fileName), width, height);
 	}
 
 	/**
 	 * Liga/Desliga fullscreen.
 	 */
 	public void toggleFullScreen() {
-		MediaSetup.getPlayer().toggleFullScreen();
+		//MediaSetup.getPlayer().toggleFullScreen();
 	}
 
 	/**
@@ -398,7 +411,8 @@ public class VideoViewerController {
 
 		createParentDirs(destFile);
 
-		MediaSetup.getPlayer().playMedia(MediaSetup.getPlayer().mrl(), sout);
+		//MediaSetup.getPlayer().playMedia(MediaSetup.getPlayer().mrl(), sout);
+		MediaSetup.getPlayer().media().play(mrl, sout);
 	}
 
 	/**
@@ -407,8 +421,10 @@ public class VideoViewerController {
 	public void stopStreaming() {
 
 		String mediaUrl = getMediaURL();
-		MediaSetup.getPlayer().stop();
-		MediaSetup.getPlayer().playMedia(mediaUrl);
+		//MediaSetup.getPlayer().stop();
+		//MediaSetup.getPlayer().playMedia(mediaUrl);
+		MediaSetup.getPlayer().controls().stop();
+		MediaSetup.getPlayer().media().play(mediaUrl);
 
 	}
 
@@ -448,7 +464,8 @@ public class VideoViewerController {
 
 		final long diff = time - absoluteFrame0;
 		final long nextTime = relativeFrame0 + diff;
-		MediaSetup.getPlayer().setTime(nextTime);
+		//MediaSetup.getPlayer().setTime(nextTime);
+		MediaSetup.getPlayer().controls().setTime(nextTime);
 
 		fireMediaTimeChangedEvent(new MediaTimeChangedEvent(this));
 	}
@@ -462,7 +479,8 @@ public class VideoViewerController {
 	 *            positivo (avançar) ou negativo (recuar).
 	 */
 	public void move(final int nFrames) {
-		MediaSetup.getPlayer().skip((long) (nFrames * 1000f / MediaSetup.getPlayer().getFps()));
+		MediaSetup.getPlayer().controls().skipPosition(nFrames * 1000f / 30);;
+		//MediaSetup.getPlayer().skip((long) (nFrames * 1000f / MediaSetup.getPlayer().getFps()));
 		fireMediaTimeChangedEvent(new MediaTimeChangedEvent(this));
 	}
 
@@ -476,7 +494,8 @@ public class VideoViewerController {
 		if (state == MediaPlayerState.STOPPED || state == MediaPlayerState.EMPTY) {
 			return 0L;
 		}
-		return MediaSetup.getPlayer().getTime();
+		//return MediaSetup.getPlayer().getTime();
+		return MediaSetup.getPlayer().status().time();
 	}
 
 	/**
@@ -488,7 +507,8 @@ public class VideoViewerController {
 	public long getTotalMediaTime() {
 
 		if (MediaSetup.getPlayer() != null) {
-			return MediaSetup.getPlayer().getLength();
+			return MediaSetup.getPlayer().status().length();
+			//return MediaSetup.getPlayer().getLength();
 		}
 		return 0;
 	}
@@ -505,7 +525,8 @@ public class VideoViewerController {
 
 		VideoViewerController.LOGGER.fine("TimeChanged event tratado por " + Thread.currentThread());
 		final long newPosition = getNewVideoPosition(pos, max);
-		MediaSetup.getPlayer().setTime(newPosition);
+		//MediaSetup.getPlayer().setTime(newPosition);
+		MediaSetup.getPlayer().controls().setTime(newPosition);
 	}
 
 	/**
@@ -518,7 +539,8 @@ public class VideoViewerController {
 	 */
 	private long getNewVideoPosition(final int pos, final int max) {
 
-		final long movieSize = MediaSetup.getPlayer().getLength();
+		//final long movieSize = MediaSetup.getPlayer().getLength();
+		final long movieSize = MediaSetup.getPlayer().status().length();
 		return (movieSize * pos / max);
 	}
 
@@ -540,7 +562,8 @@ public class VideoViewerController {
 	 */
 	public void setFrame0(final long frame0) {
 
-		relativeFrame0 = MediaSetup.getPlayer().getTime();
+		//relativeFrame0 = MediaSetup.getPlayer().getTime();
+		relativeFrame0 = MediaSetup.getPlayer().status().time();
 		absoluteFrame0 = frame0;
 	}
 
