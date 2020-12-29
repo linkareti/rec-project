@@ -41,7 +41,7 @@ public class MediaSetup {
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, "Unable to initialize LibX", e);
 		} catch (UnsatisfiedLinkError ignoreMaybeNotLinuxArghhhh) {
-			LOGGER.log(Level.FINEST, "Unable to initialize LibX", ignoreMaybeNotLinuxArghhhh);
+			LOGGER.log(Level.SEVERE, "Unable to initialize LibX", ignoreMaybeNotLinuxArghhhh);
 		}
 		
 		try {
@@ -51,7 +51,8 @@ public class MediaSetup {
 			// For VLC - Try to discover VLC installations
 			new NativeDiscovery().discover();
 		} catch (Throwable ignoreDidMyBest) {
-			LOGGER.log(Level.FINEST, "Unable to setup VLC discovery", ignoreDidMyBest);
+			LOGGER.log(Level.SEVERE, "Unable to setup VLC discovery", ignoreDidMyBest);
+			LOGGER.log(Level.SEVERE, "Version is : ", LibVlc.libvlc_get_version());
 		}
 	}
 
