@@ -6,8 +6,9 @@
 
 package pt.utl.ist.elab.client.aleatorio.displays;
 
-import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import javax.swing.SwingConstants;
+
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 
 /**
  * 

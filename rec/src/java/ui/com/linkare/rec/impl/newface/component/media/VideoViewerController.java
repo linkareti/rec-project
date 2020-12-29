@@ -256,7 +256,7 @@ public class VideoViewerController {
 				if (MediaSetup.getPlayer() != null) {
 					if (state == MediaPlayerState.STOPPED) {
 						MediaSetup.getPlayer().removeMediaPlayerEventListener(mediaListener);
-						MediaSetup.getPlayer().enableOverlay(false);
+						MediaSetup.getPlayer().enableOverlay(true);
 						VideoViewerController.LOGGER.finest("Playing media on EDT: " + mrl);
 						MediaSetup.getPlayer().playMedia(mrl);
 						MediaSetup.getPlayer().enableOverlay(true);

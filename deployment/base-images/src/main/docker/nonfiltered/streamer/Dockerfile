@@ -40,6 +40,37 @@ RUN cd /tmp/build/nginx/nginx-1.18.0 && \
         --add-module=/tmp/build/nginx-rtmp-module/nginx-rtmp-module-1.2.1 && \
     make -j $(getconf _NPROCESSORS_ONLN) && \
     make install
+    
+# Install ffmpeg source
+# Original download  http://ffmpeg.org/releases/ffmpeg-4.2.1.tar.gz
+#RUN mkdir -p /tmp/build/ffmpeg
+#COPY resources/ffmpeg.tar.gz /tmp/build/ffmpeg/.
+#RUN cd /tmp/build/ffmpeg && \
+#  tar -zxf ffmpeg.tar.gz && \
+#  rm ffmpeg.tar.gz
+
+# Build ffmpeg
+#RUN cd /tmp/build/ffmpeg/ffmpeg-4.2.1 && \
+#  ./configure \
+#	  --enable-version3 \
+#	  --enable-gpl \
+#	  --enable-small \
+#	  --enable-libx264 \
+#	  --enable-libx265 \
+#	  --enable-libvpx \
+#	  --enable-libtheora \
+#	  --enable-libvorbis \
+#	  --enable-librtmp \
+#	  --enable-postproc \
+#	  --enable-swresample \ 
+#	  --enable-libfreetype \
+#	  --enable-libmp3lame \
+#	  --disable-debug \
+#	  --disable-doc \
+#	  --disable-ffplay \
+#	  --extra-libs="-lpthread -lm" && \
+#	make -j $(getconf _NPROCESSORS_ONLN) && \
+#	make install
 
 # Copy stats.xsl file to nginx html directory and cleaning build files
 RUN cp /tmp/build/nginx-rtmp-module/nginx-rtmp-module-1.2.1/stat.xsl /usr/local/nginx/html/stat.xsl && \
@@ -61,7 +92,7 @@ COPY --from=builder /usr/local /usr/local
 COPY --from=builder /etc/nginx /etc/nginx
 COPY --from=builder /var/log/nginx /var/log/nginx
 COPY --from=builder /var/lock /var/lock
-COPY --from=builder /var/run/nginx /var/run/nginx
+#COPY --from=builder /var/run/nginx /var/run/nginx
 
 # Forward logs to Docker
 RUN ln -sf /dev/stdout /var/log/nginx/access.log && \

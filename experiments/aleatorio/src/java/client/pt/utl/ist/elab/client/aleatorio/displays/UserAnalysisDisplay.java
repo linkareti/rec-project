@@ -6,7 +6,6 @@
 
 package pt.utl.ist.elab.client.aleatorio.displays;
 
-import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,6 +15,8 @@ import javax.imageio.ImageWriteParam;
 import javax.imageio.ImageWriter;
 import javax.swing.JFileChooser;
 import javax.swing.SwingConstants;
+
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 
 /**
  * 
