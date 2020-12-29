@@ -8,7 +8,11 @@ import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 
+import com.sun.jna.Native;
+import com.sun.jna.NativeLibrary;
+
 import uk.co.caprica.vlcj.binding.LibVlc;
+import uk.co.caprica.vlcj.binding.RuntimeUtil;
 import uk.co.caprica.vlcj.factory.MediaPlayerFactory;
 import uk.co.caprica.vlcj.factory.discovery.NativeDiscovery;
 import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
@@ -32,12 +36,14 @@ public class MediaSetup {
 		
 		try {
 			// For VLC - Try to avoid linux crashes
-			/*if (RuntimeUtil.isNix()) {
-				NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(),"/usr/lib/x86_64-linux-gnu/vlc");
-				//Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
+			if (RuntimeUtil.isNix()) {
+				NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(),"/usr/lib/x86_64-linux-gnu");
+				LOGGER.log(Level.SEVERE, "I am here");
+				Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
+				LOGGER.log(Level.SEVERE, "I was also here");
 				//LibXUtil.initialise();
 			}
-			*/
+			
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, "Unable to initialize LibX", e);
 		} catch (UnsatisfiedLinkError ignoreMaybeNotLinuxArghhhh) {
