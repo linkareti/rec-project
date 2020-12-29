@@ -8,11 +8,7 @@ import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 
-import com.sun.jna.Native;
-import com.sun.jna.NativeLibrary;
-
 import uk.co.caprica.vlcj.binding.LibVlc;
-import uk.co.caprica.vlcj.binding.RuntimeUtil;
 import uk.co.caprica.vlcj.factory.MediaPlayerFactory;
 import uk.co.caprica.vlcj.factory.discovery.NativeDiscovery;
 import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
@@ -36,11 +32,12 @@ public class MediaSetup {
 		
 		try {
 			// For VLC - Try to avoid linux crashes
-			if (RuntimeUtil.isNix()) {
+			/*if (RuntimeUtil.isNix()) {
 				NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(),"/usr/lib/x86_64-linux-gnu/vlc");
 				//Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
 				//LibXUtil.initialise();
 			}
+			*/
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, "Unable to initialize LibX", e);
 		} catch (UnsatisfiedLinkError ignoreMaybeNotLinuxArghhhh) {
@@ -48,6 +45,9 @@ public class MediaSetup {
 		}
 		
 		try {
+			boolean found = new NativeDiscovery().discover();
+	        System.out.println("Yes i found it : " + found);
+	        System.out.println("The version is : " + LibVlc.libvlc_get_version());
 			// For VLC - Try to discover VLC installations
 			new NativeDiscovery().discover();
 		} catch (Throwable ignoreDidMyBest) {
@@ -58,12 +58,11 @@ public class MediaSetup {
 	public static void initializeMediaFactory(JFrame window) {
 		LOGGER.finest("Initializing Media Factory!");
 		try {
-			/*
+			
 			mediaPlayerFactory = new MediaPlayerFactory(getDefaultEmbeddedMediaParameters());
-			FullScreenStrategy fullScreenStrategy = new DefaultFullScreenStrategy(window);
-			player = mediaPlayerFactory.newEmbeddedMediaPlayer(fullScreenStrategy);
-			player.setRate(1.f);
-			*/
+			//FullScreenStrategy fullScreenStrategy = new DefaultFullScreenStrategy(window);
+			player = mediaPlayerFactory.mediaPlayers().newEmbeddedMediaPlayer();
+			// player.setRate(1.f);
 			EmbeddedMediaPlayerComponent mediaPlayerComponent = new EmbeddedMediaPlayerComponent();
 			window.setContentPane(mediaPlayerComponent);
 			//player = mediaPlayerComponent.getMediaPlayer();
