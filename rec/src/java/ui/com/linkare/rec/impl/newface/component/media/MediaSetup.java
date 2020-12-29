@@ -8,15 +8,11 @@ import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 
-import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
-import uk.co.caprica.vlcj.discovery.NativeDiscovery;
-import uk.co.caprica.vlcj.player.MediaPlayerFactory;
-import uk.co.caprica.vlcj.player.embedded.DefaultFullScreenStrategy;
+import uk.co.caprica.vlcj.factory.MediaPlayerFactory;
+import uk.co.caprica.vlcj.factory.discovery.NativeDiscovery;
+import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
-import uk.co.caprica.vlcj.player.embedded.FullScreenStrategy;
-import uk.co.caprica.vlcj.player.embedded.videosurface.CanvasVideoSurface;
-import uk.co.caprica.vlcj.runtime.RuntimeUtil;
-import uk.co.caprica.vlcj.runtime.x.LibXUtil;
+import uk.co.caprica.vlcj.player.embedded.fullscreen.FullScreenStrategy;
 
 /**
  * Classe que faz todo o setup inicial do módulo de vídeo, extraindo as libs
@@ -33,6 +29,7 @@ public class MediaSetup {
 	private static boolean hasVideoOutput;
 
 	public static final void initializeVideoSubsystem() {
+		/*
 		try {
 			// For VLC - Try to avoid linux crashes
 			if (RuntimeUtil.isNix()) {
@@ -43,6 +40,7 @@ public class MediaSetup {
 		} catch (UnsatisfiedLinkError ignoreMaybeNotLinuxArghhhh) {
 			LOGGER.log(Level.FINEST, "Unable to initialize LibX", ignoreMaybeNotLinuxArghhhh);
 		}
+		*/
 		try {
 			// For VLC - Try to discover VLC installations
 			new NativeDiscovery().discover();
@@ -54,13 +52,16 @@ public class MediaSetup {
 	public static void initializeMediaFactory(JFrame window) {
 		LOGGER.finest("Initializing Media Factory!");
 		try {
+			/*
 			mediaPlayerFactory = new MediaPlayerFactory(getDefaultEmbeddedMediaParameters());
 			FullScreenStrategy fullScreenStrategy = new DefaultFullScreenStrategy(window);
 			player = mediaPlayerFactory.newEmbeddedMediaPlayer(fullScreenStrategy);
 			player.setRate(1.f);
+			*/
 			EmbeddedMediaPlayerComponent mediaPlayerComponent = new EmbeddedMediaPlayerComponent();
 			window.setContentPane(mediaPlayerComponent);
-			player = mediaPlayerComponent.getMediaPlayer();
+			//player = mediaPlayerComponent.getMediaPlayer();
+			player = mediaPlayerComponent.mediaPlayer();
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, "Could not initialize Video SubSystem", e);
 			return;
@@ -138,8 +139,8 @@ public class MediaSetup {
 			return;
 		}
 		LOGGER.finest("Setting video output canvas!");
-		CanvasVideoSurface canvasVideoSurface = mediaPlayerFactory.newVideoSurface(videoCanvas);
-		player.setVideoSurface(canvasVideoSurface);
+		//CanvasVideoSurface canvasVideoSurface = mediaPlayerFactory.newVideoSurface(videoCanvas);
+		//player.setVideoSurface(canvasVideoSurface);
 		hasVideoOutput = true;
 	}
 	
@@ -149,9 +150,15 @@ public class MediaSetup {
 	 */
 	public static void release() {
 
+		/*
 		if (player != null) {
 			if(player.isPlaying()) {
 				player.stop();
+			}
+		*/
+		if (player != null) {
+			if(player.status().isPlaying()) {
+				player.controls().stop();
 			}
 			player.release();
 		}
