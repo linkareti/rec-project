@@ -19,3 +19,5 @@ COPY --from=base /tmp/jarfiles/ /opt/webswing/jarfiles/
 #RUN sed -i 's/localhost/elab-multicast/g' /opt/webswing/rollpaper/etc/ReCFaceConfig.xml
 
 EXPOSE 8080
+
+#-Djava.util.logging.config.file=/opt/webswing/rollpaper/loggers.config.properties

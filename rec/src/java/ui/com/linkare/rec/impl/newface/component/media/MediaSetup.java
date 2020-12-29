@@ -57,8 +57,9 @@ public class MediaSetup {
 			FullScreenStrategy fullScreenStrategy = new DefaultFullScreenStrategy(window);
 			player = mediaPlayerFactory.newEmbeddedMediaPlayer(fullScreenStrategy);
 			player.setRate(1.f);
-			Overlay overlay = new Overlay(window);
-			player.setOverlay(overlay);
+			EmbeddedMediaPlayerComponent mediaPlayerComponent = new EmbeddedMediaPlayerComponent();
+			window.setContentPane(mediaPlayerComponent);
+			player = mediaPlayerComponent.getMediaPlayer();
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, "Could not initialize Video SubSystem", e);
 			return;

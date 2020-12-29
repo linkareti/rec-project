@@ -52,7 +52,7 @@
                                 <artifactItem>
                                     <groupId>com.linkare.elab</groupId>
                                     <artifactId>client</artifactId>
-                                    <version>11.0.3</version>
+                                    <version>11.0.4</version>
                                     <type>zip</type>
                                     <outputDirectory>${project.build.directory}/webswing/resources</outputDirectory>
                                 </artifactItem>
