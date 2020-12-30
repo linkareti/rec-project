@@ -91,6 +91,7 @@ public class MediaSetup {
 		args.add("--no-snapshot-preview");
 		args.add("--quiet");
 		args.add("--quiet-synchro");
+		args.add("--no-xlib");
 		return args;
 	}
 
