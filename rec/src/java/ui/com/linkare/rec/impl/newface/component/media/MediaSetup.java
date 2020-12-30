@@ -15,8 +15,9 @@ import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.binding.RuntimeUtil;
 import uk.co.caprica.vlcj.factory.MediaPlayerFactory;
 import uk.co.caprica.vlcj.factory.discovery.NativeDiscovery;
-import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
+import uk.co.caprica.vlcj.player.embedded.fullscreen.FullScreenStrategy;
+import uk.co.caprica.vlcj.player.embedded.fullscreen.exclusivemode.ExclusiveModeFullScreenStrategy;
 
 /**
  * Classe que faz todo o setup inicial do módulo de vídeo, extraindo as libs
@@ -65,19 +66,11 @@ public class MediaSetup {
 	public static void initializeMediaFactory(JFrame window) {
 		LOGGER.finest("Initializing Media Factory!");
 		try {
-			
-			// mediaPlayerFactory = new MediaPlayerFactory(getDefaultEmbeddedMediaParameters());
-			//FullScreenStrategy fullScreenStrategy = new DefaultFullScreenStrategy(window);
-			// player = mediaPlayerFactory.mediaPlayers().newEmbeddedMediaPlayer();
-			// player.setRate(1.f);
-			EmbeddedMediaPlayerComponent mediaPlayerComponent = new EmbeddedMediaPlayerComponent();
-			Overlay overlay = new Overlay(window);
-			//window.setContentPane(mediaPlayerComponent);
-			//player = mediaPlayerComponent.getMediaPlayer();
-			player = mediaPlayerComponent.mediaPlayer();
-			player.overlay().set(overlay);
-			window.setVisible(true);
-			overlay.setVisible(true);
+			mediaPlayerFactory = new MediaPlayerFactory(getDefaultEmbeddedMediaParameters());
+			FullScreenStrategy fullScreenStrategy = new ExclusiveModeFullScreenStrategy(window);
+			player = mediaPlayerFactory.mediaPlayers().newEmbeddedMediaPlayer();
+			player.fullScreen().strategy(fullScreenStrategy);
+			player.controls().setRate(1.f);
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, "Could not initialize Video SubSystem", e);
 			return;
