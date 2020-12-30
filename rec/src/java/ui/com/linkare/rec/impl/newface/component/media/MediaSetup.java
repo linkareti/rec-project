@@ -66,15 +66,17 @@ public class MediaSetup {
 		LOGGER.finest("Initializing Media Factory!");
 		try {
 			
-			mediaPlayerFactory = new MediaPlayerFactory(getDefaultEmbeddedMediaParameters());
+			// mediaPlayerFactory = new MediaPlayerFactory(getDefaultEmbeddedMediaParameters());
 			//FullScreenStrategy fullScreenStrategy = new DefaultFullScreenStrategy(window);
-			player = mediaPlayerFactory.mediaPlayers().newEmbeddedMediaPlayer();
+			// player = mediaPlayerFactory.mediaPlayers().newEmbeddedMediaPlayer();
 			// player.setRate(1.f);
 			EmbeddedMediaPlayerComponent mediaPlayerComponent = new EmbeddedMediaPlayerComponent();
-			window.setContentPane(mediaPlayerComponent);
+			Overlay overlay = new Overlay(window);
+			//window.setContentPane(mediaPlayerComponent);
 			//player = mediaPlayerComponent.getMediaPlayer();
 			player = mediaPlayerComponent.mediaPlayer();
-			window.setVisible(true);
+			player.overlay().set(overlay);
+			//window.setVisible(true);
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, "Could not initialize Video SubSystem", e);
 			return;
