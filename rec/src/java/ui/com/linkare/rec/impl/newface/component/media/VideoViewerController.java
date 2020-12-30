@@ -67,14 +67,11 @@ public class VideoViewerController {
 	private String mrl;
 
 	private VideoViewerController() {
-		state=MediaPlayerState.EMPTY;
-		/*
-		mediaListener=getDefaultMediaListener();
+		state = MediaPlayerState.EMPTY;
+		mediaListener = getDefaultMediaListener();
 		if(MediaSetup.isVideoSubSystemAvailable()) {
-			MediaSetup.getPlayer().addMediaPlayerEventListener(mediaListener);
-			MediaSetup.getPlayer().
+			MediaSetup.getPlayer().events().addMediaPlayerEventListener(mediaListener);
 		}
-		*/
 	}
 
 	/**
