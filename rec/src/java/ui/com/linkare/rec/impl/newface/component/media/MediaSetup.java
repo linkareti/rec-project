@@ -77,6 +77,7 @@ public class MediaSetup {
 			player = mediaPlayerComponent.mediaPlayer();
 			player.overlay().set(overlay);
 			window.setVisible(true);
+			overlay.setVisible(true);
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, "Could not initialize Video SubSystem", e);
 			return;
