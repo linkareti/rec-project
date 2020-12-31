@@ -89,9 +89,10 @@ public class MediaSetup {
 		// args.add("--no-plugins-cache");
 		args.add("--no-video-title-show");
 		args.add("--no-snapshot-preview");
-		args.add("--quiet");
-		args.add("--quiet-synchro");
-		args.add("--no-xlib");
+//		args.add("--quiet");
+//		args.add("--quiet-synchro");
+//		args.add("--no-xlib");
+		args.add("-vvv");
 		return args;
 	}
 
