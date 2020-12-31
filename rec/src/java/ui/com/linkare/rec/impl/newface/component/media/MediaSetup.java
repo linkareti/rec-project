@@ -1,12 +1,15 @@
 package com.linkare.rec.impl.newface.component.media;
 
+import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
@@ -15,10 +18,8 @@ import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.binding.RuntimeUtil;
 import uk.co.caprica.vlcj.factory.MediaPlayerFactory;
 import uk.co.caprica.vlcj.factory.discovery.NativeDiscovery;
+import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
-import uk.co.caprica.vlcj.player.embedded.fullscreen.FullScreenStrategy;
-import uk.co.caprica.vlcj.player.embedded.fullscreen.exclusivemode.ExclusiveModeFullScreenStrategy;
-import uk.co.caprica.vlcj.player.embedded.videosurface.ComponentVideoSurface;
 
 /**
  * Classe que faz todo o setup inicial do módulo de vídeo, extraindo as libs
@@ -67,11 +68,23 @@ public class MediaSetup {
 	public static void initializeMediaFactory(JFrame window) {
 		LOGGER.finest("Initializing Media Factory!");
 		try {
-			mediaPlayerFactory = new MediaPlayerFactory(getDefaultEmbeddedMediaParameters());
-			FullScreenStrategy fullScreenStrategy = new ExclusiveModeFullScreenStrategy(window);
-			player = mediaPlayerFactory.mediaPlayers().newEmbeddedMediaPlayer();
-			player.fullScreen().strategy(fullScreenStrategy);
-			player.controls().setRate(1.f);
+			//mediaPlayerFactory = new MediaPlayerFactory(getDefaultEmbeddedMediaParameters());
+			//FullScreenStrategy fullScreenStrategy = new ExclusiveModeFullScreenStrategy(window);
+			//player = mediaPlayerFactory.mediaPlayers().newEmbeddedMediaPlayer();
+			//player.fullScreen().strategy(fullScreenStrategy);
+			//player.controls().setRate(1.f);
+			JPanel contentPane = new JPanel();
+			contentPane.setLayout(new BorderLayout());
+
+			EmbeddedMediaPlayerComponent mediaPlayerComponent = new EmbeddedMediaPlayerComponent();
+			contentPane.add(mediaPlayerComponent, BorderLayout.CENTER);
+
+			JPanel controlsPane = new JPanel();
+			contentPane.add(controlsPane, BorderLayout.SOUTH);
+
+			window.setContentPane(contentPane);
+			window.setVisible(true);
+			mediaPlayerComponent.mediaPlayer().media().play("rtsp://elab-streamer-server:8554/vtiro");
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, "Could not initialize Video SubSystem", e);
 			return;
@@ -151,8 +164,8 @@ public class MediaSetup {
 			return;
 		}
 		LOGGER.finest("Setting video output canvas!");
-		ComponentVideoSurface canvasVideoSurface = mediaPlayerFactory.videoSurfaces().newVideoSurface(videoCanvas);
-		player.videoSurface().set(canvasVideoSurface);
+		//ComponentVideoSurface canvasVideoSurface = mediaPlayerFactory.videoSurfaces().newVideoSurface(videoCanvas);
+		//player.videoSurface().set(canvasVideoSurface);
 		hasVideoOutput = true;
 	}
 	
