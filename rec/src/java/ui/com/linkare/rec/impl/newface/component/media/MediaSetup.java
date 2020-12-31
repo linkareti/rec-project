@@ -18,6 +18,7 @@ import uk.co.caprica.vlcj.factory.discovery.NativeDiscovery;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
 import uk.co.caprica.vlcj.player.embedded.fullscreen.FullScreenStrategy;
 import uk.co.caprica.vlcj.player.embedded.fullscreen.exclusivemode.ExclusiveModeFullScreenStrategy;
+import uk.co.caprica.vlcj.player.embedded.videosurface.ComponentVideoSurface;
 
 /**
  * Classe que faz todo o setup inicial do módulo de vídeo, extraindo as libs
@@ -150,8 +151,8 @@ public class MediaSetup {
 			return;
 		}
 		LOGGER.finest("Setting video output canvas!");
-		//CanvasVideoSurface canvasVideoSurface = mediaPlayerFactory.newVideoSurface(videoCanvas);
-		//player.setVideoSurface(canvasVideoSurface);
+		ComponentVideoSurface canvasVideoSurface = mediaPlayerFactory.videoSurfaces().newVideoSurface(videoCanvas);
+		player.videoSurface().set(canvasVideoSurface);
 		hasVideoOutput = true;
 	}
 	
