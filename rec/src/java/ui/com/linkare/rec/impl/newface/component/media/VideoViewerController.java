@@ -265,6 +265,7 @@ public class VideoViewerController {
 						// finest
 						VideoViewerController.LOGGER.severe("Playing media on EDT: " + mrl);
 						MediaSetup.getPlayer().media().play(mrl, null);
+						MediaSetup.getPlayer().controls().start();
 						MediaSetup.getPlayer().overlay().enable(true);
 						MediaSetup.getPlayer().events().addMediaPlayerEventListener(mediaListener);
 					} else {
