@@ -84,7 +84,8 @@ public class MediaSetup {
 
 			window.setContentPane(contentPane);
 			window.setVisible(true);
-			mediaPlayerComponent.mediaPlayer().media().play("rtsp://elab-streamer-server:8554/vtiro");
+			player = mediaPlayerComponent.mediaPlayer();
+			//mediaPlayerComponent.mediaPlayer().media().play("rtsp://elab-streamer-server:8554/vtiro");
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, "Could not initialize Video SubSystem", e);
 			return;
