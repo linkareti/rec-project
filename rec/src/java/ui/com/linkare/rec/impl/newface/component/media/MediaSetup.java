@@ -167,7 +167,8 @@ public class MediaSetup {
 //		args.add("--quiet");
 //		args.add("--quiet-synchro");
 //		args.add("--no-xlib");
-		args.add("--aout=none");
+//		args.add("--aout=none");
+		args.add("--no-audio");
 		args.add("-vvv");
 		return args;
 	}
