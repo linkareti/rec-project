@@ -82,7 +82,7 @@ public class MediaSetup {
 			// player.controls().setRate(1.f);
 			final JFXPanel fxPanel = new JFXPanel();
 
-	        mediaPlayerFactory = new MediaPlayerFactory();
+	        mediaPlayerFactory = new MediaPlayerFactory(getDefaultEmbeddedMediaParameters());
 	        player = mediaPlayerFactory.mediaPlayers().newEmbeddedMediaPlayer();
 	        player.events().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
 	            @Override
@@ -167,6 +167,7 @@ public class MediaSetup {
 //		args.add("--quiet");
 //		args.add("--quiet-synchro");
 //		args.add("--no-xlib");
+		args.add("--aout=none");
 		args.add("-vvv");
 		return args;
 	}
