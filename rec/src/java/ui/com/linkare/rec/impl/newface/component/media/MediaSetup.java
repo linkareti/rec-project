@@ -1,25 +1,32 @@
 package com.linkare.rec.impl.newface.component.media;
 
-import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
 
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.binding.RuntimeUtil;
 import uk.co.caprica.vlcj.factory.MediaPlayerFactory;
 import uk.co.caprica.vlcj.factory.discovery.NativeDiscovery;
-import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
+import uk.co.caprica.vlcj.player.base.MediaPlayer;
+import uk.co.caprica.vlcj.player.base.MediaPlayerEventAdapter;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
+import uk.co.caprica.vlcj.player.embedded.fullscreen.FullScreenStrategy;
+import uk.co.caprica.vlcj.player.embedded.fullscreen.exclusivemode.ExclusiveModeFullScreenStrategy;
+
+import static uk.co.caprica.vlcj.javafx.videosurface.ImageViewVideoSurfaceFactory.videoSurfaceForImageView;
 
 /**
  * Classe que faz todo o setup inicial do módulo de vídeo, extraindo as libs
@@ -34,6 +41,7 @@ public class MediaSetup {
 	private static MediaPlayerFactory mediaPlayerFactory;
 	private static EmbeddedMediaPlayer player;
 	private static boolean hasVideoOutput;
+    private static ImageView videoImageView;
 
 	public static final void initializeVideoSubsystem() {
 		
@@ -68,23 +76,73 @@ public class MediaSetup {
 	public static void initializeMediaFactory(JFrame window) {
 		LOGGER.finest("Initializing Media Factory!");
 		try {
-			//mediaPlayerFactory = new MediaPlayerFactory(getDefaultEmbeddedMediaParameters());
-			//FullScreenStrategy fullScreenStrategy = new ExclusiveModeFullScreenStrategy(window);
-			//player = mediaPlayerFactory.mediaPlayers().newEmbeddedMediaPlayer();
-			//player.fullScreen().strategy(fullScreenStrategy);
-			//player.controls().setRate(1.f);
-			JPanel contentPane = new JPanel();
-			contentPane.setLayout(new BorderLayout());
+			// mediaPlayerFactory = new MediaPlayerFactory(getDefaultEmbeddedMediaParameters());
+			// FullScreenStrategy fullScreenStrategy = new ExclusiveModeFullScreenStrategy(window);
+			// player.fullScreen().strategy(fullScreenStrategy);
+			// player.controls().setRate(1.f);
+			final JFXPanel fxPanel = new JFXPanel();
 
-			EmbeddedMediaPlayerComponent mediaPlayerComponent = new EmbeddedMediaPlayerComponent();
-			contentPane.add(mediaPlayerComponent, BorderLayout.CENTER);
+	        mediaPlayerFactory = new MediaPlayerFactory();
+	        player = mediaPlayerFactory.mediaPlayers().newEmbeddedMediaPlayer();
+	        player.events().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
+	            @Override
+	            public void playing(MediaPlayer mediaPlayer) {
+	            }
 
-			JPanel controlsPane = new JPanel();
-			contentPane.add(controlsPane, BorderLayout.SOUTH);
+	            @Override
+	            public void paused(MediaPlayer mediaPlayer) {
+	            }
 
-			window.setContentPane(contentPane);
+	            @Override
+	            public void stopped(MediaPlayer mediaPlayer) {
+	            }
+
+	            @Override
+	            public void timeChanged(MediaPlayer mediaPlayer, long newTime) {
+	            }
+	        });
+	        
+	        videoImageView = new ImageView();
+	        videoImageView.setPreserveRatio(true);
+
+	        player.videoSurface().set(videoSurfaceForImageView(videoImageView));
+	       
+	        BorderPane root = new BorderPane();
+	        root.setStyle("-fx-background-color: black;");
+
+	        videoImageView.fitWidthProperty().bind(root.widthProperty());
+	        videoImageView.fitHeightProperty().bind(root.heightProperty());
+
+	        root.widthProperty().addListener((observableValue, oldValue, newValue) -> {
+	            // If you need to know about resizes
+	        });
+
+	        root.heightProperty().addListener((observableValue, oldValue, newValue) -> {
+	            // If you need to know about resizes
+	        });
+
+	        root.setCenter(videoImageView);
+
+	        Scene scene = new Scene(root, 1200, 675, Color.BLACK);
+	        fxPanel.setScene(scene);
+	        //fxPanel.show();
+	        fxPanel.setVisible(true);
+	        
+			window.add(fxPanel);
 			window.setVisible(true);
-			player = mediaPlayerComponent.mediaPlayer();
+			
+			//JPanel contentPane = new JPanel();
+			//contentPane.setLayout(new BorderLayout());
+
+			//EmbeddedMediaPlayerComponent mediaPlayerComponent = new EmbeddedMediaPlayerComponent();
+			//contentPane.add(mediaPlayerComponent, BorderLayout.CENTER);
+
+			//JPanel controlsPane = new JPanel();
+			//contentPane.add(controlsPane, BorderLayout.SOUTH);
+
+			//window.setContentPane(contentPane);
+			//window.setVisible(true);
+			//player = mediaPlayerComponent.mediaPlayer();
 			//mediaPlayerComponent.mediaPlayer().media().play("rtsp://elab-streamer-server:8554/vtiro");
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, "Could not initialize Video SubSystem", e);
@@ -93,6 +151,8 @@ public class MediaSetup {
 			return;
 		}
 	}
+	
+
 
 	/**
 	 * @return
