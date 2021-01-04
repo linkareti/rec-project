@@ -148,6 +148,7 @@ public class MediaSetup {
 			LOGGER.log(Level.SEVERE, "Could not initialize Video SubSystem", e);
 			return;
 		} catch (UnsatisfiedLinkError e) {
+			LOGGER.log(Level.SEVERE, "Returning UnsatisfiedLinkError", e);
 			return;
 		}
 	}
