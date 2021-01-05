@@ -82,7 +82,7 @@
       <SubComponents>
         <Component class="javafx.embed.swing.JFXPanel" name="jfxPanel">
           <Properties>
-            <Property name="background" type="java.awt.Color" resourceKey="jfxPanel.background"/>
+            <Property name="background" type="java.awt.Color" resourceKey="videoCanvas.background"/>
             <Property name="name" type="java.lang.String" value="jfxPanel" noResource="true"/>
           </Properties>
         </Component>
