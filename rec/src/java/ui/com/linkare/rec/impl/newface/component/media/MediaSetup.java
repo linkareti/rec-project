@@ -130,7 +130,7 @@ public class MediaSetup {
 	        videoImageView.setPreserveRatio(true);
 
 	        player.videoSurface().set(videoSurfaceForImageView(videoImageView));
-			window.add(fxPanel);
+	        window.getContentPane().add(fxPanel);
 			window.setVisible(true);
 			
 		    Platform.runLater(new Runnable() {
