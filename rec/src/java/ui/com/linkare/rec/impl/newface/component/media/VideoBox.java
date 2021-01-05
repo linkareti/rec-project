@@ -1,6 +1,7 @@
 package com.linkare.rec.impl.newface.component.media;
 
 import java.awt.Canvas;
+import java.awt.Color;
 
 import com.linkare.rec.impl.newface.component.AbstractContentPane;
 
@@ -21,6 +22,9 @@ public class VideoBox extends AbstractContentPane {
 	/** Creates new form VideoPanel */
 	public VideoBox() {
 		initComponents();
+		jfxPanel.setVisible(true);
+		jfxPanel.setSize(mediaPanel.getWidth(), mediaPanel.getHeight());
+		jfxPanel.setBackground(Color.CYAN);
 	}
 
 	/**
@@ -56,7 +60,7 @@ public class VideoBox extends AbstractContentPane {
 		mediaPanel = new javax.swing.JPanel();
 		//videoCanvas = new java.awt.Canvas();
 		jfxPanel = new JFXPanel();
-		jfxPanel.setVisible(true);
+		//jfxPanel.setVisible(true);
 
 		//videoCanvas.setVisible(true);
 
