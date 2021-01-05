@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
 
+import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
@@ -73,6 +74,29 @@ public class MediaSetup {
 		}
 	}
 
+	private static void initFX(JFXPanel fxPanel) {
+        BorderPane root = new BorderPane();
+        root.setStyle("-fx-background-color: black;");
+
+        videoImageView.fitWidthProperty().bind(root.widthProperty());
+        videoImageView.fitHeightProperty().bind(root.heightProperty());
+
+        root.widthProperty().addListener((observableValue, oldValue, newValue) -> {
+            // If you need to know about resizes
+        });
+
+        root.heightProperty().addListener((observableValue, oldValue, newValue) -> {
+            // If you need to know about resizes
+        });
+
+        root.setCenter(videoImageView);
+        
+        Scene scene = new Scene(root, 1200, 675, Color.BLACK);
+        fxPanel.setScene(scene);
+        //fxPanel.show();
+        fxPanel.setVisible(true);
+	}
+	
 	public static void initializeMediaFactory(JFrame window) {
 		LOGGER.finest("Initializing Media Factory!");
 		try {
@@ -107,29 +131,16 @@ public class MediaSetup {
 
 	        player.videoSurface().set(videoSurfaceForImageView(videoImageView));
 	       
-	        BorderPane root = new BorderPane();
-	        root.setStyle("-fx-background-color: black;");
-
-	        videoImageView.fitWidthProperty().bind(root.widthProperty());
-	        videoImageView.fitHeightProperty().bind(root.heightProperty());
-
-	        root.widthProperty().addListener((observableValue, oldValue, newValue) -> {
-	            // If you need to know about resizes
-	        });
-
-	        root.heightProperty().addListener((observableValue, oldValue, newValue) -> {
-	            // If you need to know about resizes
-	        });
-
-	        root.setCenter(videoImageView);
-
-	        Scene scene = new Scene(root, 1200, 675, Color.BLACK);
-	        fxPanel.setScene(scene);
-	        //fxPanel.show();
-	        fxPanel.setVisible(true);
-	        
 			window.add(fxPanel);
 			window.setVisible(true);
+			
+		    Platform.runLater(new Runnable() {
+		        @Override public void run() {
+		          initFX(fxPanel);        
+		        }
+		      });
+		    
+
 			
 			//JPanel contentPane = new JPanel();
 			//contentPane.setLayout(new BorderLayout());
