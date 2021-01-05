@@ -50,7 +50,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="com.linkare.rec.impl.newface.component.VideoBox" name="videoBox">
+    <Component class="com.linkare.rec.impl.newface.component.media.VideoBox" name="videoBox">
       <Properties>
         <Property name="name" type="java.lang.String" value="videoBox" noResource="true"/>
       </Properties>
