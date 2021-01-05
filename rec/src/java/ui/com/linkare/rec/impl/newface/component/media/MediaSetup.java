@@ -94,7 +94,7 @@ public class MediaSetup {
         
         Scene scene = new Scene(root, 180, 110, Color.RED);
         fxPanel.setScene(scene);
-        fxPanel.show();
+        //fxPanel.show();
         fxPanel.setVisible(true);
 	}
 	
@@ -130,9 +130,14 @@ public class MediaSetup {
 	        videoImageView.setPreserveRatio(true);
 
 	        player.videoSurface().set(videoSurfaceForImageView(videoImageView));
-	        window.getContentPane().add(fxPanel);
-	        window.setSize(180,110);
+	        // jcortes test 20210105
+			//window.getContentPane().add(fxPanel);
+	        window.add(fxPanel);
+	        window.setSize(100,100);
 			window.setVisible(true);
+			window.toFront();
+			window.setAlwaysOnTop(true);
+			// end jcortes test
 			
 		    Platform.runLater(new Runnable() {
 		        @Override public void run() {
