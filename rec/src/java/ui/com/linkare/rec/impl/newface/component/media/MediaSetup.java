@@ -43,6 +43,7 @@ public class MediaSetup {
 	private static EmbeddedMediaPlayer player;
 	private static boolean hasVideoOutput;
     private static ImageView videoImageView;
+    private static JFXPanel fxPanel;
 
 	public static final void initializeVideoSubsystem() {
 		
@@ -104,7 +105,6 @@ public class MediaSetup {
 			// FullScreenStrategy fullScreenStrategy = new ExclusiveModeFullScreenStrategy(window);
 			// player.fullScreen().strategy(fullScreenStrategy);
 			// player.controls().setRate(1.f);
-			final JFXPanel fxPanel = new JFXPanel();
 
 	        mediaPlayerFactory = new MediaPlayerFactory(getDefaultEmbeddedMediaParameters());
 	        player = mediaPlayerFactory.mediaPlayers().newEmbeddedMediaPlayer();
@@ -131,6 +131,7 @@ public class MediaSetup {
 
 	        player.videoSurface().set(videoSurfaceForImageView(videoImageView));
 	        window.getContentPane().add(fxPanel);
+	        window.setSize(180,110);
 			window.setVisible(true);
 			
 		    Platform.runLater(new Runnable() {
@@ -233,11 +234,12 @@ public class MediaSetup {
 		return player;
 	}
 
-	public static void setVideoOutput(Canvas videoCanvas) {
+	public static void setVideoOutput(JFXPanel videoCanvas) {
 		if (hasVideoOutput) {
 			return;
 		}
 		LOGGER.finest("Setting video output canvas!");
+		fxPanel = videoCanvas;
 		//ComponentVideoSurface canvasVideoSurface = mediaPlayerFactory.videoSurfaces().newVideoSurface(videoCanvas);
 		//player.videoSurface().set(canvasVideoSurface);
 		hasVideoOutput = true;

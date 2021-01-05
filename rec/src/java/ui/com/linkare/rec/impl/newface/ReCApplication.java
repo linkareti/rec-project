@@ -131,6 +131,8 @@ import com.linkare.rec.web.config.Lab;
 import com.linkare.rec.web.config.LocalizationBundle;
 import com.linkare.rec.web.config.ReCFaceConfig;
 
+import javafx.embed.swing.JFXPanel;
+
 /**
  * The main class of the application.
  */
@@ -165,7 +167,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	 * 
 	 * @param videoOutput
 	 */
-	void setVideoOutput(final Canvas videoOutput) {
+	void setVideoOutput(final JFXPanel videoOutput) {
 		MediaSetup.setVideoOutput(videoOutput);
 	}
 

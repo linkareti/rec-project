@@ -4,6 +4,8 @@ import java.awt.Canvas;
 
 import com.linkare.rec.impl.newface.component.AbstractContentPane;
 
+import javafx.embed.swing.JFXPanel;
+
 /**
  * Painel de vídeo da aplicação.
  * 
@@ -27,8 +29,8 @@ public class VideoBox extends AbstractContentPane {
 	 * 
 	 * @return
 	 */
-	public Canvas getVideoOutput() {
-		return videoCanvas;
+	public JFXPanel getVideoOutput() {
+		return jfxPanel;
 	}
 
 	/**
@@ -52,9 +54,11 @@ public class VideoBox extends AbstractContentPane {
 	private void initComponents() {
 
 		mediaPanel = new javax.swing.JPanel();
-		videoCanvas = new java.awt.Canvas();
+		//videoCanvas = new java.awt.Canvas();
+		jfxPanel = new JFXPanel();
+		jfxPanel.setVisible(true);
 
-		videoCanvas.setVisible(true);
+		//videoCanvas.setVisible(true);
 
 		final javax.swing.GroupLayout mediaPanelLayout = new javax.swing.GroupLayout(mediaPanel);
 		mediaPanel.setLayout(mediaPanelLayout);
@@ -63,14 +67,14 @@ public class VideoBox extends AbstractContentPane {
 				.addGap(0, 320, Short.MAX_VALUE)
 				.addGroup(
 						mediaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-								videoCanvas, javax.swing.GroupLayout.Alignment.TRAILING,
+								jfxPanel, javax.swing.GroupLayout.Alignment.TRAILING,
 								javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)));
 		mediaPanelLayout.setVerticalGroup(mediaPanelLayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGap(0, 240, Short.MAX_VALUE)
 				.addGroup(
 						mediaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-								videoCanvas, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)));
+								jfxPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)));
 
 		final javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		setLayout(layout);
@@ -84,7 +88,8 @@ public class VideoBox extends AbstractContentPane {
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JPanel mediaPanel;
-	private java.awt.Canvas videoCanvas;
+	//private java.awt.Canvas videoCanvas;
+	private JFXPanel jfxPanel;
 	// End of variables declaration//GEN-END:variables
 
 }

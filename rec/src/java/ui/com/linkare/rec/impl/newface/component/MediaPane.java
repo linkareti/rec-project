@@ -17,6 +17,7 @@ import javax.swing.JDialog;
 
 import com.linkare.rec.impl.newface.ReCApplication;
 import java.awt.Cursor;
+import com.linkare.rec.impl.newface.component.media.VideoBox;
 
 /**
  * 

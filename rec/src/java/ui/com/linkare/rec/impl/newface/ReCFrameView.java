@@ -75,7 +75,7 @@ import com.linkare.rec.impl.newface.component.ResultsPane;
 import com.linkare.rec.impl.newface.component.StatusActionBar;
 import com.linkare.rec.impl.newface.component.UndecoratedDialog;
 import com.linkare.rec.impl.newface.component.UnexpectedErrorPane;
-import com.linkare.rec.impl.newface.component.VideoBox;
+import com.linkare.rec.impl.newface.component.media.VideoBox;
 import com.linkare.rec.impl.newface.component.media.VideoViewerController;
 import com.linkare.rec.impl.newface.utils.LAFConnector;
 import com.linkare.rec.impl.newface.utils.LAFConnector.SpecialELabProperties;
@@ -772,7 +772,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		// Video
 		if (recApplication.isApparatusVideoEnabled() && recApplication.getMediaController() != null) {
 			LOGGER.info("Video is enable for the selected apparatus.");
-			getVideoBox().initializeVideoOutput();
+			//getVideoBox().initializeVideoOutput();
 			setMediaToPlay(recApplication.getCurrentApparatusVideoLocation());
 			recApplication.setVideoOutput( getVideoBox().getVideoOutput());
 			recApplication.playMedia();
@@ -839,7 +839,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
 	private void disconnectFromApparatus() {
 		if (recApplication.isApparatusVideoEnabled() && recApplication.getMediaController() != null) {
-			getVideoBox().destroyVideoOutput();
+			//getVideoBox().destroyVideoOutput();
 		}
 
 		// Reset apparatus actions
@@ -1228,7 +1228,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
 	public void setUserLocale(String locale) {
 		Locale.setDefault(new Locale(locale));
-		getVideoBox().refreshView();
+		//getVideoBox().refreshView();
 		getChatBox().refreshView();
 		getApparatusSelectBox().refreshView();
 		getLoginBox().getContent().refreshView();
