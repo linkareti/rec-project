@@ -58,7 +58,7 @@ public class MediaPane extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        videoBox = new com.linkare.rec.impl.newface.component.VideoBox();
+        videoBox = new com.linkare.rec.impl.newface.component.media.VideoBox();
         chatBox = new com.linkare.rec.impl.newface.component.ChatBox();
         jSeparator1 = new javax.swing.JSeparator();
         clickHereLabel = new javax.swing.JLabel();
@@ -140,7 +140,7 @@ public class MediaPane extends javax.swing.JPanel {
     private com.linkare.rec.impl.newface.component.ChatBox chatBox;
     private javax.swing.JLabel clickHereLabel;
     private javax.swing.JSeparator jSeparator1;
-    private com.linkare.rec.impl.newface.component.VideoBox videoBox;
+    private com.linkare.rec.impl.newface.component.media.VideoBox videoBox;
     // End of variables declaration//GEN-END:variables
 
 }
