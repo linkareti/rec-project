@@ -23,8 +23,11 @@ public class VideoBox extends AbstractContentPane {
 	public VideoBox() {
 		initComponents();
 		jfxPanel.setVisible(true);
-		jfxPanel.setSize(mediaPanel.getWidth(), mediaPanel.getHeight());
-		jfxPanel.setBackground(Color.CYAN);
+		mediaPanel.setVisible(true);
+		mediaPanel.setSize(200,300);
+		jfxPanel.setSize(100,100);
+		jfxPanel.setBackground(Color.GREEN);
+		mediaPanel.setBackground(Color.ORANGE);
 	}
 
 	/**
