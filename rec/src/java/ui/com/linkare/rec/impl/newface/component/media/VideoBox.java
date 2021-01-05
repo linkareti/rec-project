@@ -22,13 +22,13 @@ public class VideoBox extends AbstractContentPane {
 	/** Creates new form VideoPanel */
 	public VideoBox() {
 		initComponents();
-		jfxPanel.setVisible(true);
 		mediaPanel.setVisible(true);
-		mediaPanel.setSize(100,100);
-		jfxPanel.setSize(200,300);
-		jfxPanel.setBackground(Color.GREEN);
+		mediaPanel.setSize(50,50);
 		mediaPanel.setBackground(Color.ORANGE);
-		//mediaPanel.add(jfxPanel);
+		mediaPanel.add(jfxPanel);
+		jfxPanel.setVisible(true);
+		jfxPanel.setSize(50,50);
+		jfxPanel.setBackground(Color.BLACK);
 	}
 
 	/**
