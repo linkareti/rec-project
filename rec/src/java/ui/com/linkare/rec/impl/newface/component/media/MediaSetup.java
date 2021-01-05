@@ -76,7 +76,7 @@ public class MediaSetup {
 
 	private static void initFX(JFXPanel fxPanel) {
         BorderPane root = new BorderPane();
-        root.setStyle("-fx-background-color: black;");
+        root.setStyle("-fx-background-color: green;");
 
         videoImageView.fitWidthProperty().bind(root.widthProperty());
         videoImageView.fitHeightProperty().bind(root.heightProperty());
@@ -91,9 +91,9 @@ public class MediaSetup {
 
         root.setCenter(videoImageView);
         
-        Scene scene = new Scene(root, 1200, 675, Color.BLACK);
+        Scene scene = new Scene(root, 180, 110, Color.RED);
         fxPanel.setScene(scene);
-        //fxPanel.show();
+        fxPanel.show();
         fxPanel.setVisible(true);
 	}
 	
@@ -130,7 +130,6 @@ public class MediaSetup {
 	        videoImageView.setPreserveRatio(true);
 
 	        player.videoSurface().set(videoSurfaceForImageView(videoImageView));
-	       
 			window.add(fxPanel);
 			window.setVisible(true);
 			
