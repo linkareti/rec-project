@@ -24,10 +24,11 @@ public class VideoBox extends AbstractContentPane {
 		initComponents();
 		jfxPanel.setVisible(true);
 		mediaPanel.setVisible(true);
-		mediaPanel.setSize(200,300);
-		jfxPanel.setSize(100,100);
+		mediaPanel.setSize(100,100);
+		jfxPanel.setSize(200,300);
 		jfxPanel.setBackground(Color.GREEN);
 		mediaPanel.setBackground(Color.ORANGE);
+		//mediaPanel.add(jfxPanel);
 	}
 
 	/**
@@ -80,17 +81,19 @@ public class VideoBox extends AbstractContentPane {
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGap(0, 240, Short.MAX_VALUE)
 				.addGroup(
-						mediaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-								jfxPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)));
+						mediaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+							.addComponent(jfxPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+						)
+				);
 
 		final javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-				mediaPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE,
-				javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addComponent(mediaPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE,javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+			);
 		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addComponent(mediaPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-						Short.MAX_VALUE));
+				.addComponent(mediaPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
+			);
 	}// </editor-fold>//GEN-END:initComponents
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
