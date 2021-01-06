@@ -1,5 +1,6 @@
 package com.linkare.rec.impl.newface.component.media;
 
+import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.util.ArrayList;
 import java.util.List;
@@ -140,8 +141,11 @@ public class MediaSetup {
 	        fxPanel.setEnabled(true);
 			fxPanel.setSize(100,100);
 	        
-			mediaPanel.add(fxPanel);
+			mediaPanel.setLayout(new BorderLayout());
+			mediaPanel.setSize(50,50);
+			mediaPanel.add(fxPanel, BorderLayout.EAST);
 			mediaPanel.setVisible(true);
+			mediaPanel.repaint();
 			
 		    Platform.runLater(new Runnable() {
 		        @Override public void run() {
