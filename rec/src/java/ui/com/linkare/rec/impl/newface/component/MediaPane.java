@@ -73,21 +73,21 @@ public class MediaPane extends javax.swing.JPanel {
 
         jSeparator1.setName("jSeparator1"); // NOI18N
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(MediaPane.class);
-        clickHereLabel.setFont(resourceMap.getFont("clickHereLabel.font")); // NOI18N
-        clickHereLabel.setText(resourceMap.getString("clickHereLabel.text")); // NOI18N
-        clickHereLabel.setName("clickHereLabel"); // NOI18N
-        clickHereLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                clickHereLabelMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                clickHereLabelMouseExited(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                clickHereLabelMouseReleased(evt);
-            }
-        });
+//        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(MediaPane.class);
+//        clickHereLabel.setFont(resourceMap.getFont("clickHereLabel.font")); // NOI18N
+//        clickHereLabel.setText(resourceMap.getString("clickHereLabel.text")); // NOI18N
+//        clickHereLabel.setName("clickHereLabel"); // NOI18N
+//        clickHereLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+//            public void mouseEntered(java.awt.event.MouseEvent evt) {
+//                clickHereLabelMouseEntered(evt);
+//            }
+//            public void mouseExited(java.awt.event.MouseEvent evt) {
+//                clickHereLabelMouseExited(evt);
+//            }
+//            public void mouseReleased(java.awt.event.MouseEvent evt) {
+//                clickHereLabelMouseReleased(evt);
+//            }
+//        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
