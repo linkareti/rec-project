@@ -115,6 +115,7 @@ public class MediaSetup {
 	public static void initializeMediaFactory(JFrame window) {
 		LOGGER.finest("Initializing Media Factory!");
 		try {
+			Platform.setImplicitExit(false);
 			final JFXPanel fxPanel = new JFXPanel();
 			
 			// mediaPlayerFactory = new MediaPlayerFactory(getDefaultEmbeddedMediaParameters());
@@ -158,7 +159,7 @@ public class MediaSetup {
 			mediaPanel.setVisible(true);
 			//mediaPanel.repaint();
 			
-			Platform.setImplicitExit(false);
+			
 			
 		    Platform.runLater(new Runnable() {
 		        @Override public void run() {
