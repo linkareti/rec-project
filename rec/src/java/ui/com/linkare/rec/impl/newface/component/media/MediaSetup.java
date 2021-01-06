@@ -152,8 +152,8 @@ public class MediaSetup {
 	        fxPanel.setEnabled(true);
 			fxPanel.setSize(100,100);
 	        
-			//mediaPanel.setLayout(new BorderLayout());
-			//mediaPanel.setSize(50,50);
+			mediaPanel.setLayout(new BorderLayout());
+			mediaPanel.setSize(50,50);
 			mediaPanel.add(fxPanel);
 			mediaPanel.setVisible(true);
 			//mediaPanel.repaint();

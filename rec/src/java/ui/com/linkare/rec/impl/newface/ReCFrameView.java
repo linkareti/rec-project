@@ -124,6 +124,8 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		// connect/disconnect
 		collectInterativeBoxes();
 
+		recApplication.setMediaPanel(getVideoBox().getMediaPanel());
+		
 		// Set frame properties
 		getFrame().setGlassPane(glassPane);
 		getFrame().setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -774,7 +776,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 			LOGGER.info("Video is enable for the selected apparatus.");
 			//getVideoBox().initializeVideoOutput();
 			setMediaToPlay(recApplication.getCurrentApparatusVideoLocation());
-			recApplication.setMediaPanel( getVideoBox().getMediaPanel());
+			
 			recApplication.playMedia();
 		} else {
 			LOGGER.info("Video isn't enable for the selected apparatus.");

@@ -955,7 +955,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 		SYSTEM_EXIT_PREVENTER_SECURITY_MANAGER.setMainApplicationWindow(getMainFrame());
 
-		MediaSetup.initializeMediaFactory(this.getMainFrame());
+		
 	}
 
 	protected void showView() {
@@ -965,6 +965,8 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		final ReCFrameView recView = new ReCFrameView(this);
 		getAppListeners().add(recView);
 
+		MediaSetup.initializeMediaFactory(this.getMainFrame());
+		
 		final Toolkit tk = Toolkit.getDefaultToolkit();
 		final Dimension dimension = tk.getScreenSize();
 		recView.getFrame().setPreferredSize(dimension);
