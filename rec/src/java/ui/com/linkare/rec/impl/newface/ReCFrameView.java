@@ -774,7 +774,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 			LOGGER.info("Video is enable for the selected apparatus.");
 			//getVideoBox().initializeVideoOutput();
 			setMediaToPlay(recApplication.getCurrentApparatusVideoLocation());
-			recApplication.setVideoOutput( getVideoBox().getVideoOutput());
+			recApplication.setMediaPanel( getVideoBox().getMediaPanel());
 			recApplication.playMedia();
 		} else {
 			LOGGER.info("Video isn't enable for the selected apparatus.");

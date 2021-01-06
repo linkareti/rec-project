@@ -25,10 +25,12 @@ public class VideoBox extends AbstractContentPane {
 		mediaPanel.setVisible(true);
 		mediaPanel.setSize(50,50);
 		mediaPanel.setBackground(Color.ORANGE);
+		/* 
 		mediaPanel.add(jfxPanel);
 		jfxPanel.setVisible(true);
 		jfxPanel.setSize(50,50);
 		jfxPanel.setBackground(Color.BLACK);
+		*/
 	}
 
 	/**
@@ -37,9 +39,10 @@ public class VideoBox extends AbstractContentPane {
 	 * 
 	 * @return
 	 */
-	public JFXPanel getVideoOutput() {
-		return jfxPanel;
-	}
+//	 public JFXPanel getVideoOutput() {
+//	
+//		return jfxPanel;
+//	}
 
 	/**
 	 * Altera o tamanho da videobox.
@@ -49,6 +52,10 @@ public class VideoBox extends AbstractContentPane {
 	 */
 	public void changeSize(final int width, final int height) {
 		this.setSize(width, height);
+	}
+
+	public javax.swing.JPanel getMediaPanel() {
+		return mediaPanel;
 	}
 
 	/**
@@ -63,28 +70,28 @@ public class VideoBox extends AbstractContentPane {
 
 		mediaPanel = new javax.swing.JPanel();
 		//videoCanvas = new java.awt.Canvas();
-		jfxPanel = new JFXPanel();
+//		jfxPanel = new JFXPanel();
 		//jfxPanel.setVisible(true);
 
 		//videoCanvas.setVisible(true);
 
-		final javax.swing.GroupLayout mediaPanelLayout = new javax.swing.GroupLayout(mediaPanel);
-		mediaPanel.setLayout(mediaPanelLayout);
-		mediaPanelLayout.setHorizontalGroup(mediaPanelLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGap(0, 320, Short.MAX_VALUE)
-				.addGroup(
-						mediaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-								jfxPanel, javax.swing.GroupLayout.Alignment.TRAILING,
-								javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)));
-		mediaPanelLayout.setVerticalGroup(mediaPanelLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGap(0, 240, Short.MAX_VALUE)
-				.addGroup(
-						mediaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-							.addComponent(jfxPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-						)
-				);
+//		final javax.swing.GroupLayout mediaPanelLayout = new javax.swing.GroupLayout(mediaPanel);
+//		mediaPanel.setLayout(mediaPanelLayout);
+//		mediaPanelLayout.setHorizontalGroup(mediaPanelLayout
+//				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//				.addGap(0, 320, Short.MAX_VALUE)
+//				.addGroup(
+//						mediaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
+//								jfxPanel, javax.swing.GroupLayout.Alignment.TRAILING,
+//								javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)));
+//		mediaPanelLayout.setVerticalGroup(mediaPanelLayout
+//				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//				.addGap(0, 240, Short.MAX_VALUE)
+//				.addGroup(
+//						mediaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//							.addComponent(jfxPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+//						)
+//				);
 
 		final javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		setLayout(layout);
@@ -99,7 +106,7 @@ public class VideoBox extends AbstractContentPane {
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JPanel mediaPanel;
 	//private java.awt.Canvas videoCanvas;
-	private JFXPanel jfxPanel;
+//	private JFXPanel jfxPanel;
 	// End of variables declaration//GEN-END:variables
 
 }

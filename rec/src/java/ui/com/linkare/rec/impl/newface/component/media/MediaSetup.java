@@ -7,6 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
@@ -43,7 +44,8 @@ public class MediaSetup {
 	private static EmbeddedMediaPlayer player;
 	private static boolean hasVideoOutput;
     private static ImageView videoImageView;
-    private static JFXPanel fxPanel;
+    private static JPanel mediaPanel;
+    
 
 	public static final void initializeVideoSubsystem() {
 		
@@ -101,6 +103,8 @@ public class MediaSetup {
 	public static void initializeMediaFactory(JFrame window) {
 		LOGGER.finest("Initializing Media Factory!");
 		try {
+			final JFXPanel fxPanel = new JFXPanel();
+			mediaPanel.add(fxPanel);
 			// mediaPlayerFactory = new MediaPlayerFactory(getDefaultEmbeddedMediaParameters());
 			// FullScreenStrategy fullScreenStrategy = new ExclusiveModeFullScreenStrategy(window);
 			// player.fullScreen().strategy(fullScreenStrategy);
@@ -130,14 +134,9 @@ public class MediaSetup {
 	        videoImageView.setPreserveRatio(true);
 
 	        player.videoSurface().set(videoSurfaceForImageView(videoImageView));
-	        // jcortes test 20210105
-			//window.getContentPane().add(fxPanel);
-	        window.add(fxPanel);
+			window.getContentPane().add(fxPanel);
 	        window.setSize(100,100);
 			window.setVisible(true);
-			window.toFront();
-			window.setAlwaysOnTop(true);
-			// end jcortes test
 			
 		    Platform.runLater(new Runnable() {
 		        @Override public void run() {
@@ -239,12 +238,9 @@ public class MediaSetup {
 		return player;
 	}
 
-	public static void setVideoOutput(JFXPanel videoCanvas) {
-		if (hasVideoOutput) {
-			return;
-		}
+	public static void setMediaPanel(JPanel mediaPanelInput) {
 		LOGGER.finest("Setting video output canvas!");
-		fxPanel = videoCanvas;
+		mediaPanel = mediaPanelInput;
 		//ComponentVideoSurface canvasVideoSurface = mediaPlayerFactory.videoSurfaces().newVideoSurface(videoCanvas);
 		//player.videoSurface().set(canvasVideoSurface);
 		hasVideoOutput = true;

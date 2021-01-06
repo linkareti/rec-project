@@ -68,6 +68,7 @@ import javax.jnlp.BasicService;
 import javax.jnlp.ServiceManager;
 import javax.jnlp.UnavailableServiceException;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.RootPaneContainer;
 import javax.swing.SwingUtilities;
 import javax.xml.bind.JAXBException;
@@ -167,8 +168,8 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	 * 
 	 * @param videoOutput
 	 */
-	void setVideoOutput(final JFXPanel videoOutput) {
-		MediaSetup.setVideoOutput(videoOutput);
+	void setMediaPanel(final JPanel mediaPanel) {
+		MediaSetup.setVideoOutput(mediaPanel);
 	}
 
 	/**
