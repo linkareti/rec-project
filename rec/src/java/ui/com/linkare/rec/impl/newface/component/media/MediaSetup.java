@@ -14,11 +14,15 @@ import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
 
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
+import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.binding.RuntimeUtil;
 import uk.co.caprica.vlcj.factory.MediaPlayerFactory;
@@ -46,6 +50,7 @@ public class MediaSetup {
 	private static boolean hasVideoOutput;
     private static ImageView videoImageView;
     private static JPanel mediaPanel;
+    private static Stage stage;
     
 
 	public static final void initializeVideoSubsystem() {
@@ -79,6 +84,11 @@ public class MediaSetup {
 	}
 
 	private static void initFX(JFXPanel fxPanel) {
+        stage = new Stage();  
+        
+        stage.setTitle("Hello Java FX");  
+        stage.setResizable(true);  
+
         BorderPane root = new BorderPane();
         root.setStyle("-fx-background-color: green;");
 
@@ -95,9 +105,10 @@ public class MediaSetup {
 
         root.setCenter(videoImageView);
         
-        Scene scene = new Scene(root, 180, 110, Color.RED);
+        Scene scene = new Scene(root,80,20);  
+        stage.setScene(scene);                   
+         
         fxPanel.setScene(scene);
-        //fxPanel.show();
         fxPanel.setVisible(true);
 	}
 	
@@ -145,7 +156,7 @@ public class MediaSetup {
 			mediaPanel.setSize(50,50);
 			mediaPanel.add(fxPanel, BorderLayout.EAST);
 			mediaPanel.setVisible(true);
-			mediaPanel.repaint();
+			//mediaPanel.repaint();
 			
 		    Platform.runLater(new Runnable() {
 		        @Override public void run() {
