@@ -137,6 +137,7 @@ public class MediaSetup {
 			//window.getContentPane().add(fxPanel);
 	        //window.setSize(100,100);
 			//window.setVisible(true);
+	        fxPanel.setEnabled(true);
 			
 			mediaPanel.add(fxPanel);
 			mediaPanel.setVisible(true);
