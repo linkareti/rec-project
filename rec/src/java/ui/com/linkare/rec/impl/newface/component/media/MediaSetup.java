@@ -153,7 +153,7 @@ public class MediaSetup {
 			fxPanel.setSize(100,100);
 	        
 			//mediaPanel.setLayout(new BorderLayout());
-			mediaPanel.setSize(50,50);
+			//mediaPanel.setSize(50,50);
 			mediaPanel.add(fxPanel);
 			mediaPanel.setVisible(true);
 			//mediaPanel.repaint();
@@ -183,9 +183,11 @@ public class MediaSetup {
 			//mediaPlayerComponent.mediaPlayer().media().play("rtsp://elab-streamer-server:8554/vtiro");
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, "Could not initialize Video SubSystem", e);
+			e.printStackTrace();
 			return;
 		} catch (UnsatisfiedLinkError e) {
 			LOGGER.log(Level.SEVERE, "Returning UnsatisfiedLinkError", e);
+			e.printStackTrace();
 			return;
 		}
 	}
