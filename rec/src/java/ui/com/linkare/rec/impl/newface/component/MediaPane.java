@@ -33,7 +33,7 @@ public class MediaPane extends javax.swing.JPanel {
 	/** Creates new form MediaPane */
 	public MediaPane() {
 		initComponents();
-		clickHereLabel.setVisible(false);
+//		clickHereLabel.setVisible(false);
 	}
 
 	public ChatBox getChatBox() {
@@ -44,9 +44,9 @@ public class MediaPane extends javax.swing.JPanel {
 		return videoBox;
 	}
 	
-	public javax.swing.JLabel getClickHereLabel() {
-	    return clickHereLabel;
-	}
+//	public javax.swing.JLabel getClickHereLabel() {
+//	    return clickHereLabel;
+//	}
 
 	/**
 	 * This method is called from within the constructor to initialize the form.
@@ -61,7 +61,7 @@ public class MediaPane extends javax.swing.JPanel {
         videoBox = new com.linkare.rec.impl.newface.component.media.VideoBox();
         chatBox = new com.linkare.rec.impl.newface.component.ChatBox();
         jSeparator1 = new javax.swing.JSeparator();
-        clickHereLabel = new javax.swing.JLabel();
+        //clickHereLabel = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(300, 500));
         setMinimumSize(new java.awt.Dimension(212, 398));
@@ -96,18 +96,12 @@ public class MediaPane extends javax.swing.JPanel {
             .addComponent(chatBox, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
             .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
             .addComponent(videoBox, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(clickHereLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
-                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(videoBox, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
-                .addComponent(clickHereLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chatBox, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE))
@@ -138,7 +132,7 @@ public class MediaPane extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.linkare.rec.impl.newface.component.ChatBox chatBox;
-    private javax.swing.JLabel clickHereLabel;
+    //private javax.swing.JLabel clickHereLabel;
     private javax.swing.JSeparator jSeparator1;
     private com.linkare.rec.impl.newface.component.media.VideoBox videoBox;
     // End of variables declaration//GEN-END:variables

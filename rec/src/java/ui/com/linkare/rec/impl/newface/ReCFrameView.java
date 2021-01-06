@@ -800,9 +800,9 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
 		// Goto customizer tab
 		getApparatusTabbedPane().setSelectedTabIndex(ApparatusTabbedPane.TAB_CUSTOMIZER);
-		if (recApplication.getCurrentApparatusVideoLocation() != null) {
-			getLayoutContainerPane().getMediaPane().getClickHereLabel().setVisible(true);
-		}
+//		if (recApplication.getCurrentApparatusVideoLocation() != null) {
+//			getLayoutContainerPane().getMediaPane().getClickHereLabel().setVisible(true);
+//		}
 
 		// Update UserList Pane
 		updateUserListPane();
@@ -858,7 +858,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		getApparatusSelectBox().toggleApparatusStateActionData(true);
 		getApparatusCombo().setEnabled(true);
 		getLayoutContainerPane().disableApparatusTabbedPane();
-		getLayoutContainerPane().getMediaPane().getClickHereLabel().setVisible(false);
+//		getLayoutContainerPane().getMediaPane().getClickHereLabel().setVisible(false);
 		updateStatus(getResourceMap().getString("lblTaskMessage.connectedToLab.text",
 				recApplication.getCurrentLabName()));
 	}
