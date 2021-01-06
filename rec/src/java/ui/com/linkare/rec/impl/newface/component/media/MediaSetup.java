@@ -149,7 +149,6 @@ public class MediaSetup {
 	        player.videoSurface().set(videoSurfaceForImageView(videoImageView));
 			//window.getContentPane().add(fxPanel);
 	        //window.setSize(100,100);
-			//window.setVisible(true);
 	        fxPanel.setEnabled(true);
 			fxPanel.setSize(100,100);
 	        
@@ -160,7 +159,7 @@ public class MediaSetup {
 			//mediaPanel.repaint();
 			
 			
-			
+			window.setVisible(true);
 		    Platform.runLater(new Runnable() {
 		        @Override public void run() {
 		          initFX(fxPanel);        
