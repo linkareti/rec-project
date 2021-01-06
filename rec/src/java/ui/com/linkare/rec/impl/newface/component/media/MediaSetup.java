@@ -158,6 +158,8 @@ public class MediaSetup {
 			mediaPanel.setVisible(true);
 			//mediaPanel.repaint();
 			
+			Platform.setImplicitExit(false);
+			
 		    Platform.runLater(new Runnable() {
 		        @Override public void run() {
 		          initFX(fxPanel);        
