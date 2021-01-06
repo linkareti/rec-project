@@ -262,20 +262,17 @@ public class VideoViewerController {
 					if (state == MediaPlayerState.STOPPED) {
 						MediaSetup.getPlayer().events().removeMediaPlayerEventListener(mediaListener);
 						MediaSetup.getPlayer().overlay().enable(false);
-						// finest
-						VideoViewerController.LOGGER.severe("Playing media on EDT: " + mrl);
+						VideoViewerController.LOGGER.finest("Playing media on EDT: " + mrl);
 						MediaSetup.getPlayer().media().play(mrl);
 						//MediaSetup.getPlayer().controls().start();
 						MediaSetup.getPlayer().overlay().enable(true);
 						MediaSetup.getPlayer().events().addMediaPlayerEventListener(mediaListener);
 					} else {
-						// finest
-						VideoViewerController.LOGGER.severe("Pausing media on EDT: " + mrl);
+						VideoViewerController.LOGGER.finest("Pausing media on EDT: " + mrl);
 						pause();
 					}
 				} else {
-					// warning
-					VideoViewerController.LOGGER.severe("There is no player!");
+					VideoViewerController.LOGGER.warning("There is no player!");
 				}
 			}
 		};

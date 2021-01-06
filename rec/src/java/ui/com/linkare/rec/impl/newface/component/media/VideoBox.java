@@ -24,7 +24,7 @@ public class VideoBox extends AbstractContentPane {
 		initComponents();
 		mediaPanel.setVisible(true);
 		mediaPanel.setSize(50,50);
-		mediaPanel.setBackground(null);
+		mediaPanel.setBackground(Color.BLACK);
 		
 		/* 
 		mediaPanel.add(jfxPanel);

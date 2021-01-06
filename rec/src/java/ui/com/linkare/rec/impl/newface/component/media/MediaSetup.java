@@ -59,27 +59,21 @@ public class MediaSetup {
 			// For VLC - Try to avoid linux crashes
 			if (RuntimeUtil.isNix()) {
 				NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(),"/usr/lib/x86_64-linux-gnu");
-				LOGGER.log(Level.SEVERE, "I am here");
 				Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
-				LOGGER.log(Level.SEVERE, "I was also here");
-				//LibXUtil.initialise();
 			}
 			
 		} catch (Exception e) {
-			LOGGER.log(Level.SEVERE, "Unable to initialize LibX", e);
+			LOGGER.log(Level.FINEST, "Unable to initialize LibX", e);
 		} catch (UnsatisfiedLinkError ignoreMaybeNotLinuxArghhhh) {
-			LOGGER.log(Level.SEVERE, "Unable to initialize LibX", ignoreMaybeNotLinuxArghhhh);
+			LOGGER.log(Level.FINEST, "Unable to initialize LibX", ignoreMaybeNotLinuxArghhhh);
 		}
 		
 		try {
 			boolean found = new NativeDiscovery().discover();
-	        System.out.println("Yes i found it : " + found);
-	        System.out.println("The version is : " + LibVlc.libvlc_get_version());
 			// For VLC - Try to discover VLC installations
 			new NativeDiscovery().discover();
 		} catch (Throwable ignoreDidMyBest) {
-			LOGGER.log(Level.SEVERE, "Unable to setup VLC discovery", ignoreDidMyBest);
-			LOGGER.log(Level.SEVERE, "Version is : ", LibVlc.libvlc_get_version());
+			LOGGER.log(Level.FINEST, "Unable to setup VLC discovery", ignoreDidMyBest);
 		}
 	}
 
