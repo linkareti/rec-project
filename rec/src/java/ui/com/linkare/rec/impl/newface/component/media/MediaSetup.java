@@ -104,7 +104,7 @@ public class MediaSetup {
 		LOGGER.finest("Initializing Media Factory!");
 		try {
 			final JFXPanel fxPanel = new JFXPanel();
-			mediaPanel.add(fxPanel);
+			
 			// mediaPlayerFactory = new MediaPlayerFactory(getDefaultEmbeddedMediaParameters());
 			// FullScreenStrategy fullScreenStrategy = new ExclusiveModeFullScreenStrategy(window);
 			// player.fullScreen().strategy(fullScreenStrategy);
@@ -134,9 +134,12 @@ public class MediaSetup {
 	        videoImageView.setPreserveRatio(true);
 
 	        player.videoSurface().set(videoSurfaceForImageView(videoImageView));
-			window.getContentPane().add(fxPanel);
-	        window.setSize(100,100);
-			window.setVisible(true);
+			//window.getContentPane().add(fxPanel);
+	        //window.setSize(100,100);
+			//window.setVisible(true);
+			
+			mediaPanel.add(fxPanel);
+			mediaPanel.setVisible(true);
 			
 		    Platform.runLater(new Runnable() {
 		        @Override public void run() {
