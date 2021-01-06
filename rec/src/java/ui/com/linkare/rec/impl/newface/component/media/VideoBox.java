@@ -1,11 +1,8 @@
 package com.linkare.rec.impl.newface.component.media;
 
-import java.awt.Canvas;
 import java.awt.Color;
 
 import com.linkare.rec.impl.newface.component.AbstractContentPane;
-
-import javafx.embed.swing.JFXPanel;
 
 /**
  * Painel de vídeo da aplicação.

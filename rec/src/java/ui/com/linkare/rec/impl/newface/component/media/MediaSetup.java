@@ -1,7 +1,8 @@
 package com.linkare.rec.impl.newface.component.media;
 
+import static uk.co.caprica.vlcj.javafx.videosurface.ImageViewVideoSurfaceFactory.videoSurfaceForImageView;
+
 import java.awt.BorderLayout;
-import java.awt.Canvas;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -14,14 +15,10 @@ import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
 
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
-import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.binding.RuntimeUtil;
@@ -30,10 +27,6 @@ import uk.co.caprica.vlcj.factory.discovery.NativeDiscovery;
 import uk.co.caprica.vlcj.player.base.MediaPlayer;
 import uk.co.caprica.vlcj.player.base.MediaPlayerEventAdapter;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
-import uk.co.caprica.vlcj.player.embedded.fullscreen.FullScreenStrategy;
-import uk.co.caprica.vlcj.player.embedded.fullscreen.exclusivemode.ExclusiveModeFullScreenStrategy;
-
-import static uk.co.caprica.vlcj.javafx.videosurface.ImageViewVideoSurfaceFactory.videoSurfaceForImageView;
 
 /**
  * Classe que faz todo o setup inicial do módulo de vídeo, extraindo as libs
