@@ -169,7 +169,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	 * @param videoOutput
 	 */
 	void setMediaPanel(final JPanel mediaPanel) {
-		MediaSetup.setVideoOutput(mediaPanel);
+		MediaSetup.setMediaPanel(mediaPanel);
 	}
 
 	/**
