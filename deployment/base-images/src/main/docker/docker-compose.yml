@@ -1,9 +1,13 @@
 version: '3'
 services:
+  nginx:
+    build:
+      context: streamer
+    image: ${repo}/${simplifiedGroupId}/${artifactId}/streamer-nginx-1.18.0:${project.version}
   webswing:
     build:
       context: webswing
-    image: ${repo}/${simplifiedGroupId}/${artifactId}/webswing-2.7.3_jre11:${project.version}
+    image: ${repo}/${simplifiedGroupId}/${artifactId}/webswing-${webswing.version}-${openjdk.version}:${project.version}
   payara:
     build:
       context: payara
@@ -11,8 +15,8 @@ services:
   openjdk11:
     build:
       context: openjdk11
-    image: ${repo}/${simplifiedGroupId}/${artifactId}/openjdk-11.0.8:${project.version}
-  nginx:
-    build:
-      context: streamer
-    image: ${repo}/${simplifiedGroupId}/${artifactId}/streamer-nginx-1.18.0:${project.version}
+    image: ${repo}/${simplifiedGroupId}/${artifactId}/openjdk-${openjdk.docker.version}:${project.version}
+  #webswing-admin:
+  #  build:
+  #    context: webswing-admin
+  #  image: ${repo}/${simplifiedGroupId}/${artifactId}/webswing-admin-${webswing.version}-${openjdk.version}:${project.version}

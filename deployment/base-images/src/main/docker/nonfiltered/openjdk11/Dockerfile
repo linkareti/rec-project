@@ -1,4 +1,4 @@
-FROM docker-thirdparty.linkare.com/openjdk:11.0.8-jdk-buster
+FROM docker-thirdparty.linkare.com/openjdk:11.0.9.1-jre-buster
 
 # TODO - To be used with multicast server
 

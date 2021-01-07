@@ -4,7 +4,18 @@ services:
     ports:
       - "18080:8080"
       - "18000:8000"
-    #restart: "none"
+    ##restart: "none"
+    ##privileged: true
+    #volumes:
+    #  #- /var/run/docker.sock:/var/run/docker.sock
+    #  - /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket
+
+  # Standalone webswing admin console
+  # webswing-admin:
+  #   ports:
+  #     - "38080:8080"
+  #   environment:
+  #     WEBSWING_PUBLIC_URL: "http://localhost:18080"
 
   elab-server-payara:
     ports:
@@ -40,9 +51,8 @@ services:
 
   elab-streamer-server:
     ports:
-      - "38080:8080"
-      - "31935:1935"
-
+      - "8554:8554"
+      
 secrets:
    dbrec.secret:
      file: ${project.build.directory}/resources/rec-db.secret
@@ -56,3 +66,5 @@ secrets:
      file: ${project.build.directory}/resources/asadmin_recdb.secret
    as_gftimerdb.secret:
      file: ${project.build.directory}/resources/asadmin_gftimerdb.secret
+   webswing-connection.secret:
+     file: ${project.build.directory}/resources/webswing-connection.secret

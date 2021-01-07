@@ -52,7 +52,7 @@
                                 <artifactItem>
                                     <groupId>com.linkare.elab</groupId>
                                     <artifactId>client</artifactId>
-                                    <version>11.0.4</version>
+                                    <version>11.0.61</version>
                                     <type>zip</type>
                                     <outputDirectory>${project.build.directory}/webswing/resources</outputDirectory>
                                 </artifactItem>
@@ -71,23 +71,41 @@
                                     <type>war</type>
                                     <outputDirectory>${project.build.directory}/payara/resources</outputDirectory>
                                 </artifactItem>
-                                <!-- Streamer -->
+                                <!-- https://mvnrepository.com/artifact/org.openjfx/javafx -->
                                 <artifactItem>
-                                    <groupId>org.nginx</groupId>
-                                    <artifactId>nginx</artifactId>
-                                    <version>${nginx.version}</version>
-                                    <type>tar.gz</type>
-                                    <outputDirectory>${project.build.directory}/streamer/resources</outputDirectory>
-                                    <destFileName>nginx.tar.gz</destFileName>
+                                    <groupId>io.openjfx</groupId>
+                                    <artifactId>openjfx</artifactId>
+                                    <version>15.0.1</version>
+                                    <classifier>linux-x64_bin-sdk</classifier>
+                                    <type>zip</type>
+                                    <outputDirectory>${project.build.directory}/webswing/resources</outputDirectory>
+                                    <destFileName>javafx-sdk.zip</destFileName>
                                 </artifactItem>
+                                <!-- <artifactItem>
+                                    <groupId>net.adoptopenjdk.upstream</groupId>
+                                    <artifactId>OpenJDK11U-jdk</artifactId>
+                                    <version>${openjdk.version}</version>
+                                    <classifier>x64_linux</classifier>
+                                    <type>tar.gz</type>
+                                    <outputDirectory>${project.build.directory}/webswing/resources</outputDirectory>
+                                    <destFileName>adopt-openjdk-11.zip</destFileName>
+                                </artifactItem> -->
                                 <artifactItem>
-                                    <groupId>org.nginx</groupId>
-                                    <artifactId>rtmp-module</artifactId>
-                                    <version>${nginx.rtmp.module.version}</version>
-                                    <type>tar.gz</type>
-                                    <outputDirectory>${project.build.directory}/streamer/resources</outputDirectory>
-                                    <destFileName>nginx-rtmp-module.tar.gz</destFileName>
+                                    <groupId>org.webswing</groupId>
+                                    <artifactId>webswing</artifactId>
+                                    <version>${webswing.version}</version>
+                                    <type>zip</type>
+                                    <outputDirectory>${project.build.directory}/webswing/resources</outputDirectory>
+                                    <destFileName>webswing.zip</destFileName>
                                 </artifactItem>
+                                <!-- <artifactItem>
+                                    <groupId>org.webswing</groupId>
+                                    <artifactId>webswing</artifactId>
+                                    <version>${webswing.version}</version>
+                                    <type>zip</type>
+                                    <outputDirectory>${project.build.directory}/webswing-admin/resources</outputDirectory>
+                                    <destFileName>webswing.zip</destFileName>
+                                </artifactItem> -->
                             </artifactItems>
                             <stripVersion>true</stripVersion>
                         </configuration>
@@ -113,6 +131,20 @@
                                     <version>0.6.1</version>
                                     <type>tar.gz</type>
                                     <outputDirectory>${project.build.directory}/openjdk11/resources</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.github</groupId>
+                                    <artifactId>dockerize-alpine-linux-amd64</artifactId>
+                                    <version>0.6.1</version>
+                                    <type>tar.gz</type>
+                                    <outputDirectory>${project.build.directory}/webswing/resources</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.github</groupId>
+                                    <artifactId>dockerize-alpine-linux-amd64</artifactId>
+                                    <version>0.6.1</version>
+                                    <type>tar.gz</type>
+                                    <outputDirectory>${project.build.directory}/webswing-admin/resources</outputDirectory>
                                 </artifactItem>
                             </artifactItems>
                         </configuration>

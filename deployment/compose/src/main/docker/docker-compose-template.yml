@@ -1,8 +1,31 @@
 version: '3.5'
 services:
   elab-client-webswing:
-    image: ${repo}/${simplifiedGroupId}/base-images/webswing-2.7.3_jre11:${project.version}
+    image: ${repo}/${simplifiedGroupId}/base-images/webswing-${webswing.version}-${openjdk.version}:${project.version}
     restart: always
+    environment:
+      XDG_RUNTIME_DIR: '/opt/webswing/.cache/xdgr'
+      WEBSWING_SECRET_FILE: "/run/secrets/webswing-connection.secret"
+      WEBSWING_ADMIN_HOST: "webswing-admin"
+      WEBSWING_ADMIN_PORT: "8080"
+    secrets:
+      - webswing-connection.secret
+    volumes:
+      - ws-logs:/opt/webswing/logs:rw
+  
+  # Standalone webswing admin console
+  # webswing-admin:
+  #   image: ${repo}/${simplifiedGroupId}/base-images/webswing-admin-${webswing.version}-${openjdk.version}:${project.version}
+  #   restart: always
+  #   environment:
+  #     WEBSWING_HOST: "elab-client-webswing"
+  #     WEBSWING_PORT: "8080"
+  #     WEBSWING_WEBSOCKET_PORT: "8080"
+  #     WEBSWING_SECRET_FILE: "/run/secrets/webswing-connection.secret"
+  #   secrets:
+  #     - webswing-connection.secret
+  #   volumes:
+  #     - ws-logs:/var/opt/logs:ro
 
   elab-server-payara:
     image: ${repo}/${simplifiedGroupId}/base-images/payara-5.2020.3-jdk11:${project.version}
@@ -53,7 +76,7 @@ services:
     restart: always
 
   elab-multicast:
-    image: ${repo}/${simplifiedGroupId}/base-images/openjdk-11.0.8:${project.version}
+    image: ${repo}/${simplifiedGroupId}/base-images/openjdk-${openjdk.docker.version}:${project.version}
     healthcheck:
       test: pgrep java
       interval: 30s
@@ -62,7 +85,7 @@ services:
       start_period: 30s
 
   elab-hardware-server:
-    image: ${repo}/${simplifiedGroupId}/base-images/openjdk-11.0.8:${project.version}
+    image: ${repo}/${simplifiedGroupId}/base-images/openjdk-${openjdk.docker.version}:${project.version}
     healthcheck:
       test: pgrep java
       interval: 30s
@@ -76,15 +99,18 @@ services:
     image: ${repo}/${simplifiedGroupId}/base-images/streamer-nginx-1.18.0:${project.version}
 
 secrets:
-   dbrec.secret: {}
-   dbgftimer.secret: {}
-   rdb.secret: {}
-   as_mail.secret: {}
-   as_recdb.secret: {}
-   as_gftimerdb.secret: {}
+  dbrec.secret: {}
+  dbgftimer.secret: {}
+  rdb.secret: {}
+  as_mail.secret: {}
+  as_recdb.secret: {}
+  as_gftimerdb.secret: {}
+  webswing-connection.secret: {}
  
 volumes:
   db-rec:
     name: db-rec
   db-gftimer:
     name: db-gftimer
+  ws-logs:
+    name: webswing-logs

@@ -17,6 +17,9 @@
 
     <properties>
         <simplifiedGroupId>elab</simplifiedGroupId>
+        <webswing.version>2.7.5</webswing.version>
+        <openjdk.version>11.0.9.1</openjdk.version>
+        <openjdk.docker.version>${openjdk.version}-jdk-buster</openjdk.docker.version>
     </properties>
 
     <modules>
