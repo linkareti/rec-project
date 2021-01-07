@@ -2,15 +2,8 @@ FROM docker-thirdparty.linkare.com/busybox:1.31.1 as base
 
 COPY resources/*.zip resources/*.tar.gz /tmp/
 
-RUN mkdir -p /tmp/rollpaper \
-             /tmp/jarfiles \
-             /tmp/javafx/lib \
-             /tmp/webswing \
-    && unzip /tmp/client.zip -d /tmp/ \
-    && unzip /tmp/jarfiles.zip -d /tmp/ \
-    && unzip /tmp/javafx-sdk.zip -d /tmp/ \
+RUN mkdir -p /tmp/webswing \
     && unzip /tmp/webswing.zip -d /tmp/ \
-    && mv /tmp/javafx-sdk*/lib/ /tmp/javafx/lib/ \
     && mv /tmp/webswing-examples*/* /tmp/webswing/
 
 FROM docker-thirdparty.linkare.com/openjdk:11.0.9.1-jdk-buster
@@ -34,12 +27,8 @@ COPY --from=base \
     /tmp/webswing/lang \
     /tmp/webswing/ssl/ /opt/webswing/
 COPY --from=base /tmp/webswing/apps/webapps/admin/ /opt/webswing/apps/webapps/admin/
-COPY resources/webswing.config /opt/webswing/
 COPY resources/webswing.sh /opt/webswing/
-COPY resources/default.xml /opt/webswing/rollpaper/etc/config/
-COPY --from=base /tmp/client/ /opt/webswing/rollpaper/
-COPY --from=base /tmp/jarfiles/ /opt/webswing/jarfiles/
-COPY --from=base /tmp/javafx/lib/ /opt/webswing/javafx/
+COPY resources/default.xml /opt/webswing/openorb/etc/config/
 COPY resources/start.sh /opt/webswing/
 COPY resources/dockerize /usr/local/bin/
 

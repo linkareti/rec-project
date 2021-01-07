@@ -11,5 +11,4 @@ ENV REC_DB_HOST="" \
 COPY --chown=payara:payara resources/start.sh ${SCRIPT_DIR}/init_0_start.sh
 COPY --chown=payara:payara resources/payara-resources.xml ${PAYARA_DIR}/glassfish/domains/production/config/payara-resources.xml
 COPY --chown=payara:payara resources/mysql-connector-java.jar ${PAYARA_DIR}/glassfish/domains/production/lib/mysql-connector-java.jar
-COPY --chown=payara:payara resources/rec.web.war ${HOME_DIR}/deployments/rec.web.war
 COPY resources/dockerize /usr/local/bin/

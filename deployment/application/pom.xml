@@ -1,0 +1,111 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.linkare.elab</groupId>
+        <artifactId>base</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>application</artifactId>
+    <packaging>pom</packaging>
+
+    <name>Application Docker images</name>
+    <description>Application Docker images</description>
+
+    <properties>
+        <openjfx.version>15.0.1</openjfx.version>
+        <org-omg.version>1.4.0</org-omg.version>
+        <jaxb-core.version>2.2.11</jaxb-core.version>
+        <jaxb-api.version>2.2.11</jaxb-api.version>
+        <javax.activation.version>1.1.1</javax.activation.version>
+        <jaxb-impl.version>2.2.11</jaxb-impl.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.1.2</version>
+                <executions>
+                    <execution>
+                        <id>copy-thirdparty-dependencies</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <!-- Payara -->
+                                <artifactItem>
+                                    <groupId>com.linkare.elab</groupId>
+                                    <artifactId>rec.web</artifactId>
+                                    <version>11.0.3</version>
+                                    <type>war</type>
+                                    <outputDirectory>${project.build.directory}/server/resources</outputDirectory>
+                                </artifactItem>
+                                <!-- https://mvnrepository.com/artifact/org.openjfx/javafx -->
+                                <artifactItem>
+                                    <groupId>io.openjfx</groupId>
+                                    <artifactId>openjfx</artifactId>
+                                    <version>${openjfx.version}</version>
+                                    <classifier>linux-x64_bin-sdk</classifier>
+                                    <type>zip</type>
+                                    <outputDirectory>${project.build.directory}/client/resources</outputDirectory>
+                                    <destFileName>javafx-sdk.zip</destFileName>
+                                </artifactItem>
+                                <!-- FIXME - Temporary setup for using locally -->
+                                <!-- Webswing -->
+                                <artifactItem>
+                                    <groupId>com.linkare.elab</groupId>
+                                    <artifactId>client</artifactId>
+                                    <version>11.0.61</version>
+                                    <type>zip</type>
+                                    <outputDirectory>${project.build.directory}/client/resources</outputDirectory>
+                                </artifactItem>
+                                <!-- Dependency libraries needed for running client experiments -->
+                                <artifactItem>
+                                    <groupId>org.openorb</groupId>
+                                    <artifactId>org-omg</artifactId>
+                                    <version>${org-omg.version}</version>
+                                    <type>jar</type>
+                                    <outputDirectory>${project.build.directory}/client/resources/common</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.sun.xml.bind</groupId>
+                                    <artifactId>jaxb-core</artifactId>
+                                    <version>${jaxb-core.version}</version>
+                                    <type>jar</type>
+                                    <outputDirectory>${project.build.directory}/client/resources/common</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>javax.xml.bind</groupId>
+                                    <artifactId>jaxb-api</artifactId>
+                                    <version>${jaxb-api.version}</version>
+                                    <type>jar</type>
+                                    <outputDirectory>${project.build.directory}/client/resources/common</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>javax.activation</groupId>
+                                    <artifactId>activation</artifactId>
+                                    <version>${javax.activation.version}</version>
+                                    <type>jar</type>
+                                    <outputDirectory>${project.build.directory}/client/resources/common</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.sun.xml.bind</groupId>
+                                    <artifactId>jaxb-impl</artifactId>
+                                    <version>${jaxb-impl.version}</version>
+                                    <type>jar</type>
+                                    <outputDirectory>${project.build.directory}/client/resources/common</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                            <stripVersion>true</stripVersion>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

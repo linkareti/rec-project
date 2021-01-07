@@ -1,7 +1,7 @@
 version: '3.5'
 services:
   elab-client-webswing:
-    image: ${repo}/${simplifiedGroupId}/base-images/webswing-${webswing.version}-${openjdk.version}:${project.version}
+    image: ${repo}/${simplifiedGroupId}/elab_client-${webswing.version}-${openjdk.version}:${project.version}
     restart: always
     environment:
       XDG_RUNTIME_DIR: '/opt/webswing/.cache/xdgr'
@@ -28,7 +28,7 @@ services:
   #     - ws-logs:/var/opt/logs:ro
 
   elab-server-payara:
-    image: ${repo}/${simplifiedGroupId}/base-images/payara-5.2020.3-jdk11:${project.version}
+    image: ${repo}/${simplifiedGroupId}/elab_server-${payara.docker.version}:${project.version}
     environment:
       jvm-options: '-XX\:+UnlockExperimentalVMOptions:-XX\:+UseContainerSupport:-XX\:MaxRAMPercentage=1:-Xms1g:-Xmx2g'
       REC_DB_HOST: 'rec-database'

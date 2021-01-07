@@ -20,10 +20,12 @@
         <webswing.version>2.7.5</webswing.version>
         <openjdk.version>11.0.9.1</openjdk.version>
         <openjdk.docker.version>${openjdk.version}-jdk-buster</openjdk.docker.version>
+        <payara.docker.version>5.2020.3-jdk11</payara.docker.version>
     </properties>
 
     <modules>
         <module>base-images</module>
+        <module>application</module>
         <module>compose</module>
     </modules>
 

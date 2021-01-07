@@ -11,7 +11,7 @@ services:
   payara:
     build:
       context: payara
-    image: ${repo}/${simplifiedGroupId}/${artifactId}/payara-5.2020.3-jdk11:${project.version}
+    image: ${repo}/${simplifiedGroupId}/${artifactId}/payara-${payara.docker.version}:${project.version}
   openjdk11:
     build:
       context: openjdk11

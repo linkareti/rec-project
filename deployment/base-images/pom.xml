@@ -40,29 +40,6 @@
                                     <type>jar</type>
                                     <outputDirectory>${project.build.directory}/payara/resources</outputDirectory>
                                 </artifactItem>
-                                <artifactItem>
-                                    <groupId>org.glassfish.ejb</groupId>
-                                    <artifactId>ejb-timer-service-app</artifactId>
-                                    <version>3.1</version>
-                                    <type>war</type>
-                                    <outputDirectory>${project.build.directory}/payara/resources</outputDirectory>
-                                </artifactItem>
-                                <!-- FIXME - Temporary setup for using locally -->
-                                <!-- Webswing -->
-                                <artifactItem>
-                                    <groupId>com.linkare.elab</groupId>
-                                    <artifactId>client</artifactId>
-                                    <version>11.0.61</version>
-                                    <type>zip</type>
-                                    <outputDirectory>${project.build.directory}/webswing/resources</outputDirectory>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>com.linkare.elab</groupId>
-                                    <artifactId>jarfiles</artifactId>
-                                    <version>11.0.0</version>
-                                    <type>zip</type>
-                                    <outputDirectory>${project.build.directory}/webswing/resources</outputDirectory>
-                                </artifactItem>
                                 <!-- Payara -->
                                 <artifactItem>
                                     <groupId>com.linkare.elab</groupId>
@@ -71,25 +48,6 @@
                                     <type>war</type>
                                     <outputDirectory>${project.build.directory}/payara/resources</outputDirectory>
                                 </artifactItem>
-                                <!-- https://mvnrepository.com/artifact/org.openjfx/javafx -->
-                                <artifactItem>
-                                    <groupId>io.openjfx</groupId>
-                                    <artifactId>openjfx</artifactId>
-                                    <version>15.0.1</version>
-                                    <classifier>linux-x64_bin-sdk</classifier>
-                                    <type>zip</type>
-                                    <outputDirectory>${project.build.directory}/webswing/resources</outputDirectory>
-                                    <destFileName>javafx-sdk.zip</destFileName>
-                                </artifactItem>
-                                <!-- <artifactItem>
-                                    <groupId>net.adoptopenjdk.upstream</groupId>
-                                    <artifactId>OpenJDK11U-jdk</artifactId>
-                                    <version>${openjdk.version}</version>
-                                    <classifier>x64_linux</classifier>
-                                    <type>tar.gz</type>
-                                    <outputDirectory>${project.build.directory}/webswing/resources</outputDirectory>
-                                    <destFileName>adopt-openjdk-11.zip</destFileName>
-                                </artifactItem> -->
                                 <artifactItem>
                                     <groupId>org.webswing</groupId>
                                     <artifactId>webswing</artifactId>
@@ -98,14 +56,6 @@
                                     <outputDirectory>${project.build.directory}/webswing/resources</outputDirectory>
                                     <destFileName>webswing.zip</destFileName>
                                 </artifactItem>
-                                <!-- <artifactItem>
-                                    <groupId>org.webswing</groupId>
-                                    <artifactId>webswing</artifactId>
-                                    <version>${webswing.version}</version>
-                                    <type>zip</type>
-                                    <outputDirectory>${project.build.directory}/webswing-admin/resources</outputDirectory>
-                                    <destFileName>webswing.zip</destFileName>
-                                </artifactItem> -->
                             </artifactItems>
                             <stripVersion>true</stripVersion>
                         </configuration>
@@ -138,13 +88,6 @@
                                     <version>0.6.1</version>
                                     <type>tar.gz</type>
                                     <outputDirectory>${project.build.directory}/webswing/resources</outputDirectory>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>com.github</groupId>
-                                    <artifactId>dockerize-alpine-linux-amd64</artifactId>
-                                    <version>0.6.1</version>
-                                    <type>tar.gz</type>
-                                    <outputDirectory>${project.build.directory}/webswing-admin/resources</outputDirectory>
                                 </artifactItem>
                             </artifactItems>
                         </configuration>
