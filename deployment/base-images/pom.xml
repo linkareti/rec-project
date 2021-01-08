@@ -1,10 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.linkare.elab</groupId>
-        <artifactId>base</artifactId>
+        <groupId>com.linkare</groupId>
+        <artifactId>elab</artifactId>
         <version>1.0.0-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
 
     <artifactId>base-images</artifactId>
@@ -12,11 +12,6 @@
 
     <name>Docker base images</name>
     <description>Docker base images</description>
-
-    <properties>
-        <nginx.version>1.18.0</nginx.version>
-		<nginx.rtmp.module.version>1.2.1</nginx.rtmp.module.version>
-    </properties>
 
     <build>
         <plugins>
@@ -38,14 +33,6 @@
                                     <artifactId>mysql-connector-java</artifactId>
                                     <version>8.0.13</version>
                                     <type>jar</type>
-                                    <outputDirectory>${project.build.directory}/payara/resources</outputDirectory>
-                                </artifactItem>
-                                <!-- Payara -->
-                                <artifactItem>
-                                    <groupId>com.linkare.elab</groupId>
-                                    <artifactId>rec.web</artifactId>
-                                    <version>11.0.3</version>
-                                    <type>war</type>
                                     <outputDirectory>${project.build.directory}/payara/resources</outputDirectory>
                                 </artifactItem>
                                 <artifactItem>

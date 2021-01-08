@@ -25,3 +25,38 @@ O processo de release dá-se do seguinte modo:
 10. é marcada uma tag SVN da versão da release;
 11. é enviado um e-mail com o resultado da execução do job de release para a mailing list release@linkare.com;
 12. neste ponto pode-se prosseguir com o deploy do arquivo da release no servidor de produção.
+
+
+=============================
+== Processo de Build Local ==
+=============================
+
+= Build =
+
+$ mvn clean package -Dmaven.test.skip=true -Djarsigner.alias="REC"
+
+= Run =
+
+$ docker-compose -f deployment/compose/target/docker-compose-runner.yml up
+
+= Test =
+
+# Client (webswing)
+http://localhost:18080
+u: user
+p: pwd
+
+# Server (payara)
+http://localhost:28080/rec.web
+
+= Manage =
+
+# Client (webswing)
+http://localhost:18080/admin
+u: admin
+p: pwd
+
+# Server (payara)
+https://localhost:24848
+u: admin
+p: admin

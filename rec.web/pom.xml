@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<artifactId>parent</artifactId>
-		<groupId>com.linkare.maven</groupId>
-		<version>1.0.4</version>
+		<groupId>com.linkare</groupId>
+		<artifactId>elab</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<groupId>com.linkare</groupId>
+	
 	<artifactId>rec.web</artifactId>
 	<packaging>war</packaging>
 	<name>rec.web</name>
+
 	<description>Module containing the web interface of the ReC project, containing also an integration with Moodle</description>
-	<version>1.0.0-SNAPSHOT</version>
+
 	<scm>
 		<connection>scm:svn:https://svn.linkare.com/internal/rec-project/rec/branches/jdk11-migration/rec.web</connection>
 		<developerConnection>scm:svn:https://svn.linkare.com/internal/rec-project/rec/branches/jdk11-migration/rec.web</developerConnection>
@@ -29,11 +31,11 @@
 		<jboss.domain>default</jboss.domain>
 		<!-- The version of Weld extensions in use-->
 		<weld.extensions.version>1.0.0-CR2</weld.extensions.version>
-                <aspectj.version>1.9.5</aspectj.version>
+		<aspectj.version>1.9.5</aspectj.version>
 		<aspectj-maven-plugin.version>1.11</aspectj-maven-plugin.version>
-                <maven.compiler.source>11</maven.compiler.source>
-                <maven.compiler.target>11</maven.compiler.target>
-        <project.build.java.target>11</project.build.java.target>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+		<project.build.java.target>11</project.build.java.target>
 	</properties>
 
 	<dependencyManagement>
@@ -60,7 +62,7 @@
 			<groupId>org.jboss.ejb3</groupId>
 			<artifactId>jboss-ejb3-api</artifactId>
 			<scope>provided</scope>
-			<version>3.1.0</version><!--$NO-MVN-MAN-VER$ -->
+			<version>3.1.0</version>			<!--$NO-MVN-MAN-VER$ -->
 		</dependency>
 		<!-- Common annotations (e.g., @PostConstruct, @PreDestroy, @Generated, 
 			@Resource) -->
@@ -90,27 +92,27 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
-			<version>1.5.10</version><!--$NO-MVN-MAN-VER$-->
+			<version>1.5.10</version>			<!--$NO-MVN-MAN-VER$-->
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>7.1.0</version><!--$NO-MVN-MAN-VER$-->
+			<version>7.1.0</version>			<!--$NO-MVN-MAN-VER$-->
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>javax.el</groupId>
 			<artifactId>el-api</artifactId>
-			<version>2.2</version><!--$NO-MVN-MAN-VER$-->
+			<version>2.2</version>			<!--$NO-MVN-MAN-VER$-->
 		</dependency>
 		<dependency>
 			<groupId>org.glassfish.web</groupId>
 			<artifactId>el-impl</artifactId>
-			<version>2.2</version><!--$NO-MVN-MAN-VER$-->
-		</dependency>	
+			<version>2.2</version>			<!--$NO-MVN-MAN-VER$-->
+		</dependency>
 
 		<dependency>
 			<groupId>org.primefaces</groupId>
@@ -127,29 +129,29 @@
 		<dependency>
 			<groupId>javax.faces</groupId>
 			<artifactId>jsf-api</artifactId>
-			<version>2.0.2-FCS</version><!--$NO-MVN-MAN-VER$-->
+			<version>2.0.2-FCS</version>			<!--$NO-MVN-MAN-VER$-->
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax.faces</groupId>
 			<artifactId>jsf-impl</artifactId>
-			<version>2.0.2-FCS</version><!--$NO-MVN-MAN-VER$-->
+			<version>2.0.2-FCS</version>			<!--$NO-MVN-MAN-VER$-->
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-		    <groupId>javax.xml.bind</groupId>
-		    <artifactId>jaxb-api</artifactId>
-		    <version>2.3.1</version>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.3.1</version>
 		</dependency>
 		<dependency>
-		    <groupId>javax.xml.ws</groupId>
-		    <artifactId>jaxws-api</artifactId>
-		    <version>2.3.1</version>
+			<groupId>javax.xml.ws</groupId>
+			<artifactId>jaxws-api</artifactId>
+			<version>2.3.1</version>
 		</dependency>
 		<dependency>
-		    <groupId>com.sun.xml.bind</groupId>
-		    <artifactId>jaxb-xjc</artifactId>
-		    <version>2.0.5</version>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-xjc</artifactId>
+			<version>2.0.5</version>
 		</dependency>
 		<dependency>
 			<groupId>javax</groupId>
@@ -287,10 +289,10 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-    <groupId>fish.payara.arquillian</groupId>
-    <artifactId>payara-client-ee7</artifactId>
-    <version>2.2</version>
-    <exclusions>
+			<groupId>fish.payara.arquillian</groupId>
+			<artifactId>payara-client-ee7</artifactId>
+			<version>2.2</version>
+			<exclusions>
 				<exclusion>
 					<groupId>org.glassfish.jersey.core</groupId>
 					<artifactId> jersey-client</artifactId>
@@ -312,33 +314,33 @@
 					<artifactId>jersey-media-jaxb</artifactId>
 				</exclusion>
 			</exclusions>
-</dependency>
+		</dependency>
 
-<dependency>
-					<groupId>org.glassfish.jersey.core</groupId>
-					<artifactId> jersey-client</artifactId>
-					<version>2.30.1</version>
-				</dependency>
-				<dependency>
-					<groupId>org.glassfish.jersey.ext.microprofile</groupId>
-					<artifactId>jersey-mp-rest-client</artifactId>
-					<version>2.30.1</version>
-				</dependency>
-				<dependency>
-					<groupId>org.glassfish.jersey.media</groupId>
-					<artifactId>jersey-media-json-jackson</artifactId>
-					<version>2.30.1</version>
-				</dependency>
-				<dependency>
-					<groupId>org.glassfish.jersey.media</groupId>
-					<artifactId>jersey-media-json-processing</artifactId>
-					<version>2.30.1</version>
-				</dependency>
-				<dependency>
-					<groupId>org.glassfish.jersey.media</groupId>
-					<artifactId>jersey-media-jaxb</artifactId>
-					<version>2.30.1</version>
-				</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId> jersey-client</artifactId>
+			<version>2.30.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.ext.microprofile</groupId>
+			<artifactId>jersey-mp-rest-client</artifactId>
+			<version>2.30.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-json-jackson</artifactId>
+			<version>2.30.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-json-processing</artifactId>
+			<version>2.30.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-jaxb</artifactId>
+			<version>2.30.1</version>
+		</dependency>
 
 
 
@@ -386,7 +388,7 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-jdk14</artifactId>
-			<version>1.5.9.RC1</version><!--$NO-MVN-MAN-VER$-->
+			<version>1.5.9.RC1</version>			<!--$NO-MVN-MAN-VER$-->
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -480,21 +482,21 @@
 			</exclusions>
 			<optional>false</optional>
 		</dependency>
-                <dependency>
-		        <groupId>commons-fileupload</groupId>
-		        <artifactId>commons-fileupload</artifactId>
-	        	<version>1.4</version>
-		</dependency>		
-                <!-- AspectJ dependencies -->
-                <dependency>
-                    <groupId>org.aspectj</groupId>
-                    <artifactId>aspectjrt</artifactId>
-                    <version>${aspectj.version}</version>
-                </dependency>
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-		    <artifactId>org.eclipse.persistence.jpa.modelgen.processor</artifactId>
-		    <version>3.0.0-M1</version>
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<!-- AspectJ dependencies -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>${aspectj.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>org.eclipse.persistence.jpa.modelgen.processor</artifactId>
+			<version>3.0.0-M1</version>
 		</dependency>
 	</dependencies>
 	<organization>
@@ -527,14 +529,14 @@
 		<plugins>
 
 
-<plugin>
-    <groupId>org.codehaus.mojo</groupId>
-    <artifactId>versions-maven-plugin</artifactId>
-    <version>2.7</version>
-    <configuration>
-        <generateBackupPoms>false</generateBackupPoms>
-    </configuration>
-</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<version>2.7</version>
+				<configuration>
+					<generateBackupPoms>false</generateBackupPoms>
+				</configuration>
+			</plugin>
 
 
 			<!-- Compiler plugin enforces Java 1.6 compatiblity -->
@@ -543,47 +545,45 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.0</version>
 				<executions>
-				     <execution>
+					<execution>
 						<id>default-compile</id>
 						<phase>compile</phase>
 						<goals>
 							<goal>compile</goal>
 						</goals>
 						<configuration>
-							<argLine>
-							    --illegal-access=permit
+							<argLine> --illegal-access=permit
 							</argLine>
 							<fork>true</fork>
 							<executable>${JAVA_11_HOME}/bin/javac</executable>
 							<compilerVersion>11</compilerVersion>
 							<release>11</release>
-				    	</configuration>
+						</configuration>
 					</execution>
-						<execution>
-							<id>default-testCompile</id>
-							<phase>test-compile</phase>
-							<goals>
-								<goal>testCompile</goal>
-							</goals>
-							<configuration>
-								<argLine>
-								    --illegal-access=permit
-								</argLine>
-								<fork>true</fork>
-								<executable>${JAVA_11_HOME}/bin/javac</executable>
-								<compilerVersion>11</compilerVersion>
-								<release>11</release>
-						    </configuration>
-						</execution>
-						<execution>
-						    <id>compile-project</id>
-							<phase>compile</phase>
-							<goals>
-								<goal>compile</goal>
-							</goals>
-						 </execution>
+					<execution>
+						<id>default-testCompile</id>
+						<phase>test-compile</phase>
+						<goals>
+							<goal>testCompile</goal>
+						</goals>
+						<configuration>
+							<argLine> --illegal-access=permit
+							</argLine>
+							<fork>true</fork>
+							<executable>${JAVA_11_HOME}/bin/javac</executable>
+							<compilerVersion>11</compilerVersion>
+							<release>11</release>
+						</configuration>
+					</execution>
+					<execution>
+						<id>compile-project</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
 				</executions>
-			     
+
 			</plugin>
 			<!-- Eclipse plugin can force download of source and JavaDoc jars -->
 			<plugin>
@@ -613,8 +613,7 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.0.0-M3</version>
 				<configuration>
-					<argLine>
-					    --illegal-access=permit
+					<argLine> --illegal-access=permit
 					</argLine>
 					<fork>true</fork>
 					<executable>${JAVA_11_HOME}/bin/javac</executable>
@@ -624,8 +623,8 @@
 						<include>**/*Test.java</include>
 						<include>**/*Spec.java</include>
 					</includes>
-			        </configuration>
-			    <dependencies>
+				</configuration>
+				<dependencies>
 					<dependency>
 						<groupId>org.apache.maven.surefire</groupId>
 						<artifactId>surefire-junit47</artifactId>
@@ -714,7 +713,7 @@
 				<groupId>com.nickwongdev</groupId>
 				<artifactId>aspectj-maven-plugin</artifactId>
 				<version>1.12.6</version>
-				
+
 				<executions>
 					<execution>
 						<configuration>
@@ -722,22 +721,22 @@
 							<executable>${JAVA_11_HOME}/bin/javac</executable>
 							<compilerVersion>11</compilerVersion>
 							<complianceLevel>11</complianceLevel>
-							<source>11</source> 
-                    		<target>11</target> 
+							<source>11</source>
+							<target>11</target>
 						</configuration>
 						<goals>
-							<goal>compile</goal>       <!-- use this goal to weave all your main classes -->
-							<goal>test-compile</goal>  <!-- use this goal to weave all your test classes -->
+							<goal>compile</goal>							<!-- use this goal to weave all your main classes -->
+							<goal>test-compile</goal>							<!-- use this goal to weave all your test classes -->
 						</goals>
 					</execution>
 				</executions>
-                                <dependencies>
-                                <dependency>
-                                    <groupId>org.aspectj</groupId>
-                                    <artifactId>aspectjtools</artifactId>
-                                    <version>${aspectj.version}</version>
-                                </dependency>
-                    </dependencies> 
+				<dependencies>
+					<dependency>
+						<groupId>org.aspectj</groupId>
+						<artifactId>aspectjtools</artifactId>
+						<version>${aspectj.version}</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 			<plugin>
 				<artifactId>maven-release-plugin</artifactId>
@@ -771,22 +770,22 @@
 				<artifactId>maven-toolchains-plugin</artifactId>
 				<version>1.0</version>
 				<executions>
-				  <execution>
-				    <phase>validate</phase>
-				    <goals>
-				      <goal>toolchain</goal>
-				    </goals>
-				  </execution>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>toolchain</goal>
+						</goals>
+					</execution>
 				</executions>
 				<configuration>
-				  <toolchains>
-				    <jdk>
-				      <version>11.0</version>
-				      <vendor>openjdk</vendor>
-				    </jdk>
-				  </toolchains>
+					<toolchains>
+						<jdk>
+							<version>11.0</version>
+							<vendor>openjdk</vendor>
+						</jdk>
+					</toolchains>
 				</configuration>
-				</plugin>
+			</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
@@ -953,8 +952,8 @@
 					<fork>true</fork>
 					<executable>${JAVA_11_HOME}/bin/javac</executable>
 					<compilerVersion>11</compilerVersion>
-					<source>11</source> 
-                    <target>11</target> 
+					<source>11</source>
+					<target>11</target>
 				</configuration>
 				<reportSets>
 					<reportSet>

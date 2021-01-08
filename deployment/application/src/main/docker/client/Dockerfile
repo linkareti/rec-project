@@ -3,8 +3,9 @@ FROM docker-thirdparty.linkare.com/busybox:1.31.1 as base
 COPY resources/*.zip resources/*.tar.gz /tmp/
 
 RUN mkdir -p /tmp/javafx/lib \
+             /tmp/client/ \
              /tmp/client_final/lib \
-    && unzip /tmp/client.zip -d /tmp/ \
+    && unzip /tmp/client.zip -d /tmp/client/ \
     && unzip /tmp/javafx-sdk.zip -d /tmp/ \
     && mv /tmp/javafx-sdk*/lib/ /tmp/javafx/lib/ \
     && mv /tmp/client/lib/*_sig.jar /tmp/client_final/lib/ \

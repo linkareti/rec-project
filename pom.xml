@@ -1,0 +1,46 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.linkare.maven</groupId>
+        <artifactId>parent</artifactId>
+        <version>1.2.1</version>
+    </parent>
+
+    <!-- New as 01/2021 -->
+    <!-- To allow building with maven (incomplete) -->
+    <groupId>com.linkare</groupId>
+    <artifactId>elab</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>ELAB</name>
+    <description>ELAB</description>
+    <inceptionYear>2020</inceptionYear>
+
+    <properties>
+        <openjfx.version>15.0.1</openjfx.version>
+        <org-omg.version>1.4.0</org-omg.version>
+        <jaxb-core.version>2.2.11</jaxb-core.version>
+        <jaxb-api.version>2.2.11</jaxb-api.version>
+        <javax.activation.version>1.1.1</javax.activation.version>
+        <jaxb-impl.version>2.2.11</jaxb-impl.version>
+        <simplifiedGroupId>elab</simplifiedGroupId>
+        <webswing.version>2.7.5</webswing.version>
+        <openjdk.version>11.0.9.1</openjdk.version>
+        <openjdk.docker.version>${openjdk.version}-jdk-buster</openjdk.docker.version>
+        <payara.docker.version>5.2020.3-jdk11</payara.docker.version>
+        <!-- mvn execution properties -->
+        <build.environment>local</build.environment>
+        <maven.test.skip>true</maven.test.skip>
+        <jarsigner.alias>REC</jarsigner.alias>
+    </properties>
+
+    <modules>
+        <module>rec.build.all</module>
+        <module>rec.web</module>
+        <module>deployment/base-images</module>
+        <module>deployment/application</module>
+        <module>deployment/compose</module>
+    </modules>
+</project>
