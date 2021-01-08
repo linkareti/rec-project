@@ -26,14 +26,13 @@ O processo de release dá-se do seguinte modo:
 11. é enviado um e-mail com o resultado da execução do job de release para a mailing list release@linkare.com;
 12. neste ponto pode-se prosseguir com o deploy do arquivo da release no servidor de produção.
 
-
 =============================
 == Processo de Build Local ==
 =============================
 
 = Build =
 
-$ mvn clean package -Dmaven.test.skip=true -Djarsigner.alias="REC"
+$ mvn clean package -Dmaven.test.skip=true -Djarsigner.alias="REC" -Dbuild.environment=local
 
 = Run =
 
