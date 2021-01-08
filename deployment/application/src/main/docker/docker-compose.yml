@@ -3,8 +3,8 @@ services:
   client:
     build:
       context: client
-    image: ${repo}/${simplifiedGroupId}/elab_client-${webswing.version}-${openjdk.version}:${project.version}
+    image: ${repo}/${simplifiedGroupId}/webswing-${webswing.version}-${openjdk.version}:${project.version}
   server:
     build:
       context: server
-    image: ${repo}/${simplifiedGroupId}/elab_server-${payara.docker.version}:${project.version}
+    image: ${repo}/${simplifiedGroupId}/payara-${payara.docker.version}:${project.version}

@@ -21,11 +21,11 @@ COPY --from=base \
     /tmp/webswing/webswing-server.war \
     /tmp/webswing/webswing.sh \
     /tmp/webswing/webswing.config \
-    /tmp/webswing/jetty.properties \
-    /tmp/webswing/api/ \
-    /tmp/webswing/fonts/ \
-    /tmp/webswing/lang \
-    /tmp/webswing/ssl/ /opt/webswing/
+    /tmp/webswing/jetty.properties /opt/webswing/
+COPY --from=base /tmp/webswing/api/ /opt/webswing/api/
+COPY --from=base /tmp/webswing/fonts/ /opt/webswing/fonts/
+COPY --from=base /tmp/webswing/lang/ /opt/webswing/lang/
+COPY --from=base /tmp/webswing/ssl/ /opt/webswing/ssl/
 COPY --from=base /tmp/webswing/apps/webapps/admin/ /opt/webswing/apps/webapps/admin/
 COPY resources/webswing.sh /opt/webswing/
 COPY resources/default.xml /opt/webswing/openorb/etc/config/
