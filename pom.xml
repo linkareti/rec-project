@@ -34,6 +34,8 @@
         <build.environment>local</build.environment>
         <maven.test.skip>true</maven.test.skip>
         <jarsigner.alias>REC</jarsigner.alias>
+        <!-- mvn plugin versions -->
+        <maven.assembly.plugin.version>3.3.0</maven.assembly.plugin.version>
     </properties>
 
     <modules>
@@ -43,4 +45,17 @@
         <module>deployment/application</module>
         <module>deployment/compose</module>
     </modules>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>${maven.assembly.plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
 </project>

@@ -55,6 +55,11 @@ done < $TARGET_BUILD_PROPERTIES
 
 # Run build process
 ant -f buildall.xml dist.all
+RETVAL=$?
+if [ $RETVAL -ne 0 ]; then
+	printf "${RED}An error occured at build time${NC}\n"
+	exit $RETVAL
+fi
 
 # Package rec.web application
 wget http://e-lab.ist.utl.pt/moodle/wspp/wsdl_pp.php -P rec.web/src/main/resources

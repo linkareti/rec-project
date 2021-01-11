@@ -11,9 +11,9 @@
     </description>
 
     <property environment="env"/>
-    <property file="build.properties" description="general properties for building project"   />
+    <property file="build.properties" description="general properties for building project" />
 
-    
+
     <!--
             =====================================================
             ====================== Generic ======================
@@ -408,8 +408,8 @@
         <path refid="elab.multicastcontroller.libs.classpath" />
         <path refid="elab.compile.multicastcontroller.dependencies.classpath" />
     </path>
-    
-        
+
+
     <!--
             =====================================================
             ===============ReC Entire Project====================
@@ -420,11 +420,11 @@
         <sequential>
             <condition property="jnlpDisabled">
                 <matches string="${codebase}" pattern="file://.*"/>
-            </condition>                        
+            </condition>
             <copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/rec-framework.jnlp" encoding="${copy.encoding}">
                 <filterset begintoken="@" endtoken="@" filtersfile="build.properties" />
             </copy>
-         
+
             <replace file="${elab.client.classes.dir}/rec-framework.jnlp" propertyFile="build.properties" encoding="${copy.encoding}">
                 <replacefilter token="@codebase@" property="codebase"/>
                 <replacefilter token="@rec.title@" property="rec.title" />
@@ -641,7 +641,7 @@
             <antcall target="insert.jnlp.enabled">
                 <param name="jnlp.file.name" value="${elab.client.classes.dir}/elab-client.jnlp"/>
             </antcall>
-                                               
+
             <foreach list="${lab.list}" param="lab.name" target="-add.lab.experiments.to.full.jnlp.compile" parallel="false" />
 
         </sequential>
@@ -672,9 +672,9 @@
         </sequential>
     </macrodef>
 
-<macrodef name="create.jnlp.rec.client.build" description="Create the FullClient JNLP launch file">
+    <macrodef name="create.jnlp.rec.client.build" description="Create the FullClient JNLP launch file">
         <sequential>
-             <condition property="jnlpDisabled">
+            <condition property="jnlpDisabled">
                 <matches string="${codebase}" pattern="file://.*"/>
             </condition>
             <copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${client.build.dir}/rec-framework.jnlp" encoding="${copy.encoding}"/>
@@ -721,7 +721,7 @@
         <sequential>
             <condition property="jnlpDisabled">
                 <matches string="${codebase}" pattern="file://.*"/>
-            </condition>                        
+            </condition>
 
             <copy file="${jnlp.orb.template.file}" overwrite="yes" tofile="${client.build.dir}/openorb.jnlp" encoding="${copy.encoding}"/>
             <replace file="${client.build.dir}/openorb.jnlp" propertyFile="build.properties" encoding="${copy.encoding}">
@@ -797,7 +797,7 @@
             <antcall target="insert.jnlp.enabled">
                 <param name="jnlp.file.name" value="${client.build.dir}/linux-vlc-installer.jnlp"/>
             </antcall>
-                        
+
             <copy file="${jnlp.macinstaller.template.file}" overwrite="yes" tofile="${client.build.dir}/macosx-vlc-installer.jnlp" encoding="${copy.encoding}"/>
             <replace file="${client.build.dir}/macosx-vlc-installer.jnlp" propertyFile="build.properties" encoding="${copy.encoding}">
                 <replacefilter token="@codebase@" property="codebase" />
@@ -826,11 +826,11 @@
                 <replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
                 <replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
                 <replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
-            </replace>            
+            </replace>
             <antcall target="insert.jnlp.enabled">
                 <param name="jnlp.file.name" value="${client.build.dir}/macosx-vlc-installer.jnlp"/>
             </antcall>
-            
+
             <copy file="${jnlp.windowsinstaller.template.file}" overwrite="yes" tofile="${client.build.dir}/windows-vlc-installer.jnlp" encoding="${copy.encoding}"/>
             <replace file="${client.build.dir}/windows-vlc-installer.jnlp" propertyFile="build.properties" encoding="${copy.encoding}">
                 <replacefilter token="@codebase@" property="codebase" />
@@ -863,7 +863,7 @@
             <antcall target="insert.jnlp.enabled">
                 <param name="jnlp.file.name" value="${client.build.dir}/windows-vlc-installer.jnlp"/>
             </antcall>
-            
+
             <copy file="${jnlp.template.file}" overwrite="yes" tofile="${client.build.dir}/elab-client.jnlp" encoding="${copy.encoding}"/>
             <replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Auto Connect ID --&gt;" value="" encoding="${copy.encoding}"/>
             <replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Auto Acquire Result --&gt;" value="" encoding="${copy.encoding}"/>
@@ -897,24 +897,24 @@
             </replace>
 
             <replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" encoding="${copy.encoding}"/>
-            <replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Common --&gt;" value="&lt;jar href=&quot;ELabCommon_sig.jar&quot; /&gt;" encoding="${copy.encoding}"/>            
+            <replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Common --&gt;" value="&lt;jar href=&quot;ELabCommon_sig.jar&quot; /&gt;" encoding="${copy.encoding}"/>
             <antcall target="insert.jnlp.enabled">
                 <param name="jnlp.file.name" value="${client.build.dir}/elab-client.jnlp"/>
             </antcall>
-                                                
+
             <foreach list="${lab.list}" param="lab.name" target="-add.lab.experiments.to.full.jnlp.build" parallel="false" />
 
         </sequential>
     </macrodef>
 
-    <target name="insert.jnlp.enabled" description="Build one experiment, compile, create jnlp, pack and sign driver and client" unless="${jnlpDisabled}" >
-        <sequential>    
+    <target name="insert.jnlp.enabled" description="Build one experiment, compile, create jnlp, pack and sign driver and client" unless="${jnlpDisabled}">
+        <sequential>
             <echo>
                 ******************************************************                
                 Enabled jnlp.packEnabled property in ${jnlp.file.name}                                 
                 ******************************************************                              
-            </echo>     
-                
+            </echo>
+
             <replace file="${jnlp.file.name}" token="&lt;!-- Jnlp pack enabled --&gt;" value="&lt;property name=&quot;jnlp.packEnabled&quot; value=&quot;true&quot; /&gt;" encoding="${copy.encoding}" />
         </sequential>
     </target>
@@ -965,6 +965,9 @@
     <property name="faceconfig.template.file" value="${basedir}/templates/client/ReCFaceConfigTemplate.xml" />
     <property name="faceconfig.lab.template.file" value="${basedir}/templates/client/ReCFaceConfigLabTemplate.xml" />
 
+    <property name="webswing.template.file" value="${basedir}/templates/client/webswingTemplate.config" />
+    <property name="webswing.lab.template.file" value="${basedir}/templates/client/webswingLabTemplate.config" />
+
     <!--MACROS-->
 
 
@@ -979,7 +982,7 @@
 
         <sequential>
             <mkdir dir="@{destination.folder}" />
-            
+
             <jar destfile="@{destination.folder}/@{jar.name}" basedir="@{source.basedir}" excludes="*.jnlp">
                 <manifest>
                     <attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
@@ -1002,28 +1005,28 @@
                 it will originate problems like Found unsigned entry-->
                 <zipfileset file="@{jnlp.file}" fullpath="JNLP-INF/APPLICATION.JNLP"/>
             </jar>
-            
+
         </sequential>
     </macrodef>
-    
+
     <macrodef name="duplicate.jar.include.jnlp" description="Duplicate a JAR and include a jnlp file if included">
         <attribute name="destination.folder" />
         <attribute name="source.jar.name" />
         <attribute name="dest.jar.name" />
         <attribute name="source.basedir" />
-        <attribute name="jnlp.file" default=""/>        
+        <attribute name="jnlp.file" default=""/>
         <sequential>
             <copy file="@{destination.folder}/@{source.jar.name}" tofile="@{destination.folder}/@{dest.jar.name}"/>
-    
+
             <jar update="true" destfile="@{destination.folder}/@{dest.jar.name}">
-<!--                VERY IMPORTANT: ALLWAYS use fullpath="JNLP-INF/APPLICATION.JNLP" DO NOT INCLUDE / before JNLP-INF....
+                <!--                VERY IMPORTANT: ALLWAYS use fullpath="JNLP-INF/APPLICATION.JNLP" DO NOT INCLUDE / before JNLP-INF....
                 it will originate problems like Found unsigned entry-->
                 <zipfileset file="@{destination.folder}/@{jnlp.file}" fullpath="JNLP-INF/APPLICATION.JNLP"/>
             </jar>
-                        
+
         </sequential>
     </macrodef>
-    
+
     <!-- ====
     macrodef: updatemanifest.attributes
     ==== -->
@@ -1045,8 +1048,8 @@
             </jar>
         </sequential>
     </macrodef>
-    
-    
+
+
     <!-- ====
     macrodef: put.jnlp.file
     ==== -->
@@ -1056,14 +1059,14 @@
     <macrodef name="put.jnlp.file" description="Updates new attributes in manifest files">
         <attribute name="jarfilename" />
         <attribute name="jnlpfilename" />
-        
+
         <sequential>
             <echo>
                 ***********************************************
                  Putting @{jnlpfilename} 
                  inside @{jarfilename}
                 ***********************************************
-            </echo>            
+            </echo>
             <jar update="true" destfile="@{jarfilename}">
                 <!--VERY IMPORTANT: ALLWAYS use fullpath="JNLP-INF/APPLICATION.JNLP" DO NOT INCLUDE / before JNLP-INF....
                 it will originate problems like Found unsigned entry-->
@@ -1081,7 +1084,7 @@
     </target>
     <macrodef name="sign.jar.rec" description="Sign a rec jar">
         <attribute name="file" />
-        <sequential>                       
+        <sequential>
             <local name="signed.file" />
             <propertyregex property="signed.file" input="@{file}" regexp="(.*)\.jar$" select="\1_sig.jar" />
             <signjar storetype="${rec.storetype}" keystore="${rec.keystore}" keypass="${rec.keypass}" storepass="${rec.storepass}" alias="${rec.alias}" jar="@{file}" signedjar="${signed.file}">
@@ -1094,7 +1097,7 @@
     </target>
     <macrodef name="sign.jar.elab" description="Sign an elab jar">
         <attribute name="file" />
-        <sequential>            
+        <sequential>
             <local name="signed.file" />
             <propertyregex property="signed.file" input="@{file}" regexp="(.*)\.jar$" select="\1_sig.jar" />
             <signjar storetype="${elab.storetype}" keystore="${elab.keystore}" keypass="${elab.keypass}" storepass="${elab.storepass}" alias="${elab.alias}" jar="@{file}" signedjar="${signed.file}">
@@ -1182,7 +1185,7 @@
 
             <replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="&lt;!--End Lab configuration --&gt;">
                 <replacevalue>
-					<![CDATA[@temporary.lab@
+                    <![CDATA[@temporary.lab@
 			<!--End Lab configuration -->]]></replacevalue>
             </replace>
             <replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="@temporary.lab@" value="${@{lab.name}.faceconfig}" />
@@ -1194,7 +1197,7 @@
             </replace>
 
             <foreach list="${@{lab.name}.experiment.list}" param="experiment.name" parallel="false" target="-add.experiment.faceconfig"/>
-			
+
             <!-- experiment apparatus comments -->
             <replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="&lt;!--Start Apparatus configuration --&gt;" value="&lt;!--Start @{lab.name} Apparatus configuration --&gt;" />
             <replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="&lt;!--End Apparatus configuration --&gt;" value="&lt;!--End @{lab.name} Apparatus configuration --&gt;" />
@@ -1213,10 +1216,70 @@
 
             <replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="&lt;!--End Apparatus configuration --&gt;">
                 <replacevalue>
-					<![CDATA[@temporary.experiment.apparatus@
+                    <![CDATA[@temporary.experiment.apparatus@
 			<!--End Apparatus configuration -->]]></replacevalue>
             </replace>
             <replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="@temporary.experiment.apparatus@" value="${@{experiment.name}.faceconfig}" />
+        </sequential>
+    </macrodef>
+
+    <!-- Webswing config create file -->
+    <macrodef name="create.webswingconfig" description="Create a webswing.config file">
+        <sequential>
+            <copy file="${webswing.template.file}" overwrite="yes" tofile="${build.dir}/webswing.config" />
+
+            <foreach list="${lab.list}" param="lab.name" target="-add.lab.webswingconfig" parallel="false" />
+        </sequential>
+    </macrodef>
+
+    <target name="-add.lab.webswingconfig">
+        <add.lab.webswingconfig lab.name="${lab.name}" />
+    </target>
+    <macrodef name="add.lab.webswingconfig" description="Add the Lab part of the webswing.config file">
+        <attribute name="lab.name" />
+        <sequential>
+            <foreach list="${@{lab.name}.experiment.list}" param="experiment.name" parallel="false" target="-add.experiment.webswingconfig"/>
+
+            <!-- experiment apparatus comments -->
+            <replace file="${build.dir}/webswing.config" token="&lt;!--Start Apparatus configuration --&gt;" value="&lt;!--Start @{lab.name} Apparatus configuration --&gt;" />
+            <replace file="${build.dir}/webswing.config" token="&lt;!--End Apparatus configuration --&gt;" value="&lt;!--End @{lab.name} Apparatus configuration --&gt;" />
+
+        </sequential>
+    </macrodef>
+
+    <target name="-add.experiment.webswingconfig">
+        <add.experiment.webswingconfig experiment.name="${experiment.name}" />
+    </target>
+    <macrodef name="add.experiment.webswingconfig" description="Add each experiment webswing part">
+        <attribute name="experiment.name" />
+        <sequential>
+            <!-- <replace file="${build.dir}/webswing.config" token="@apparatus.id@" value="${@{experiment.name}.apparatus.autoconnect.id}"/> -->
+
+            <loadfile property="@{experiment.name}.webswingconfig" srcFile="${webswing.lab.template.file}" />
+
+            <replace file="${build.dir}/webswing.config" token="&quot;_comment&quot;: &quot;End Lab Configuration&quot;,">
+                <replacevalue>
+                    <![CDATA[@temporary.exp@
+			"_comment": "End Lab Configuration",]]></replacevalue>
+            </replace>
+
+            <replace file="${build.dir}/webswing.config" token="@temporary.exp@" value="${@{experiment.name}.webswingconfig}" />
+
+            <replace file="${build.dir}/webswing.config" propertyFile="build.properties">
+                <replacefilter token="@rec.server@" property="rec.server" />
+                <!-- <replacefilter token="@lab.name@" property="@{lab.name}.rec.web.lab.id" /> -->
+                <replacefilter token="@experiment.name@" value="@{experiment.name}" />
+            </replace>
+
+            <loadproperties srcFile="experiments/@{experiment.name}/etc/build.properties">
+                <filterchain>
+                    <linecontains>
+                        <contains value="@{experiment.name}.apparatus."/>
+                    </linecontains>
+                </filterchain>
+            </loadproperties>
+
+            <replace file="${build.dir}/webswing.config" token="@apparatus.id@" value="${@{experiment.name}.apparatus.autoconnect.id}"/>
         </sequential>
     </macrodef>
 

@@ -1,4 +1,5 @@
 FROM docker-thirdparty.linkare.com/payara/server-full:5.2020.3-jdk11
+#FROM docker-thirdparty.linkare.com/payara/micro:5.2020.7-jdk11
 
 ENV REC_DB_HOST="" \
     REC_DB_PORT="" \

@@ -111,6 +111,8 @@
         </manifest>
 
         <create.faceconfig />
+
+        <create.webswingconfig />
                 
     </target>
 
