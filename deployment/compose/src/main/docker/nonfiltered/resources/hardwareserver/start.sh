@@ -9,11 +9,9 @@ cmd="dockerize "
 PWD="$( cd "$( dirname "$0" )" && pwd )"
 RETVAL=0
 hardware_server_filepath="${PWD}/hardwareserver.zip"
-hardware_server_scriptpath="/opt/StartvtiroDriver.sh"
-pid_path_name="/opt/process.pid"
 multicast_url="elab-multicast:9001"
 cmd="${cmd} -wait tcp://${multicast_url} -timeout 240s"
-cmd="${cmd} ${hardware_server_scriptpath}"
+#cmd="${cmd} ${hardware_server_scriptpath}"
 
 if [ -f "${hardware_server_filepath}" ]; then
     printf "${BLUE}Unzipping ${hardware_server_filepath}${NC}\n"
@@ -23,31 +21,29 @@ else
     exit 1
 fi
 
-# FIXME - Workaround until it is fixed in project!
-printf "${YELLOW}FIXME - Fixing hardwareServer BOOTCLASSPATH, Fix it in original code${NC}\n"
-sed -i 's/export BOOTCLASSPATH=-Xbootclasspath.*/export BOOTCLASSPATH="--illegal-access=permit "/g' ${hardware_server_scriptpath}
+${cmd}
 
-printf "${YELLOW}FIXME - Fixing hardwareServer DRIVER_CLASSPATH, Fix it in original code${NC}\n"
-sed -i '/^export DRIVER_CLASSPATH=/ s/$/:$DRIVER_BASE_DIR\/lib\/openorb_orb_omg-1.4.0.jar/' ${hardware_server_scriptpath}
+pushd /opt
 
 printf "${YELLOW}FIXME - Fixing hardwareServer openorb.xml hostname, Fix it in original code${NC}\n"
 sed -i "s/localhost:9001/${multicast_url}/g" /opt/hardwareserver/etc/openorb.xml
 
-pushd /opt
+for script in Start*.sh ; do
 
-${cmd}
+    # FIXME - Workaround until it is fixed in project!
+    printf "${YELLOW}FIXME - Fixing hardwareServer BOOTCLASSPATH at ${script}, Fix it in original code${NC}\n"
+    sed -i 's/export BOOTCLASSPATH=-Xbootclasspath.*/export BOOTCLASSPATH="--illegal-access=permit "/g' ${script}
 
-#PID=$(cat $pid_path_name)
-#while [ -e /proc/$PID ]
-#do
-#    echo "Process: $PID is still running" > /dev/null
-#    sleep 5
-#done
+    printf "${YELLOW}FIXME - Fixing hardwareServer DRIVER_CLASSPATH at ${script}, Fix it in original code${NC}\n"
+    sed -i '/^export DRIVER_CLASSPATH=/ s/$/:$DRIVER_BASE_DIR\/lib\/openorb_orb_omg-1.4.0.jar/' ${script}
 
-#echo "Process $PID has finished"
+    printf "${BLUE}Starting ${script}${NC}\n"
+    ./${script}
+done
 
 popd
 
+printf "${BLUE}Sleeping until hardware server processes finishes${NC}\n"
 sleep infinity
 
 exit ${RETVAL}

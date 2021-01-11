@@ -10,9 +10,35 @@
             <directory>${project.parent.basedir}/build/java/jars/client</directory>
             <outputDirectory>.</outputDirectory>
             <includes>
-                <include>**/*_sig.jar</include>
-                <include>etc/**</include>
-                <include>images/**</include>
+                <include>*_sig.jar</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/build/java/jars/client/lib</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>*_sig.jar</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/build/java/jars/client/etc</directory>
+            <outputDirectory>etc</outputDirectory>
+            <includes>
+                <include>*.*</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/build/java/jars/client/images</directory>
+            <outputDirectory>images</outputDirectory>
+            <includes>
+                <include>*.*</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/build/java</directory>
+            <outputDirectory>webswing</outputDirectory>
+            <includes>
+                <include>webswing.config</include>
             </includes>
         </fileSet>
     </fileSets>
