@@ -38,14 +38,28 @@ services:
 
   elab-multicast:
     ports:
+      # Basic
       - "25001:25001"
       - "9001:9001"
+      # Intermediate
+      - "25002:25002"
+      - "9002:9002"
+      # Advanced
+      - "25003:25003"
+      - "9003:9003"
     volumes:
       - ${project.build.directory}/resources/multicast:/startup.d/
   
   elab-hardware-server:
-    #ports:
-    #  - "?:?"
+    image: ${repo}/${simplifiedGroupId}/base-images/openjdk-${openjdk.docker.version}:${project.version}
+    healthcheck:
+      test: pgrep java
+      interval: 30s
+      timeout: 1s
+      retries: 3
+      start_period: 30s
+    depends_on:
+      - elab-multicast
     volumes:
       - ${project.build.directory}/resources/hardwareserver:/startup.d/
 

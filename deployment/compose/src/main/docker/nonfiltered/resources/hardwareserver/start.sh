@@ -9,8 +9,8 @@ cmd="dockerize "
 PWD="$( cd "$( dirname "$0" )" && pwd )"
 RETVAL=0
 hardware_server_filepath="${PWD}/hardwareserver.zip"
-multicast_url="elab-multicast:9001"
-cmd="${cmd} -wait tcp://${multicast_url} -timeout 240s"
+#multicast_url="elab-multicast:9001"
+#cmd="${cmd} -wait tcp://${multicast_url} -timeout 240s"
 #cmd="${cmd} ${hardware_server_scriptpath}"
 
 if [ -f "${hardware_server_filepath}" ]; then
@@ -21,29 +21,37 @@ else
     exit 1
 fi
 
-${cmd}
+#${cmd}
 
 pushd /opt
 
-printf "${YELLOW}FIXME - Fixing hardwareServer openorb.xml hostname, Fix it in original code${NC}\n"
-sed -i "s/localhost:9001/${multicast_url}/g" /opt/hardwareserver/etc/openorb.xml
+for zipfile in *.zip; do 
+    dirname=`echo ${zipfile} | cut -d '_' -f 1`
+    if [ ! -d /opt/${dirname} ]; then
+        mkdir -p /opt/${dirname}
+    fi
+    unzip ${zipfile} -d /opt/${dirname}/
 
-for script in Start*.sh ; do
+    pushd /opt/${dirname}/
 
-    # FIXME - Workaround until it is fixed in project!
-    printf "${YELLOW}FIXME - Fixing hardwareServer BOOTCLASSPATH at ${script}, Fix it in original code${NC}\n"
-    sed -i 's/export BOOTCLASSPATH=-Xbootclasspath.*/export BOOTCLASSPATH="--illegal-access=permit "/g' ${script}
+    for script in Start*.sh ; do
 
-    printf "${YELLOW}FIXME - Fixing hardwareServer DRIVER_CLASSPATH at ${script}, Fix it in original code${NC}\n"
-    sed -i '/^export DRIVER_CLASSPATH=/ s/$/:$DRIVER_BASE_DIR\/lib\/openorb_orb_omg-1.4.0.jar/' ${script}
+        # FIXME - Workaround until it is fixed in project!
+        printf "${YELLOW}FIXME - Fixing hardwareServer BOOTCLASSPATH at ${script}, Fix it in original code${NC}\n"
+        sed -i 's/export BOOTCLASSPATH=-Xbootclasspath.*/export BOOTCLASSPATH="--illegal-access=permit "/g' ${script}
 
-    printf "${BLUE}Starting ${script}${NC}\n"
-    ./${script}
+        printf "${YELLOW}FIXME - Fixing hardwareServer DRIVER_CLASSPATH at ${script}, Fix it in original code${NC}\n"
+        sed -i '/^export DRIVER_CLASSPATH=/ s/$/:$DRIVER_BASE_DIR\/lib\/openorb_orb_omg-1.4.0.jar/' ${script}
+
+        printf "${BLUE}Starting ${script}${NC}\n"
+        ./${script}
+    done
+    popd
 done
-
 popd
 
 printf "${BLUE}Sleeping until hardware server processes finishes${NC}\n"
+
 sleep infinity
 
 exit ${RETVAL}

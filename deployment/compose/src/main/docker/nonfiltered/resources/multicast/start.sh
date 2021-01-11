@@ -9,11 +9,11 @@ cmd="dockerize "
 PWD="$( cd "$( dirname "$0" )" && pwd )"
 RETVAL=0
 multicast_server_filepath="${PWD}/multicast.zip"
-multicast_server_scriptpath="/opt/StartMultiCastController.sh"
-pid_path_name="/opt/process.pid"
-multicast_host="elab-multicast"
-multicast_port="9001"
-cmd="${cmd} ${multicast_server_scriptpath}"
+#multicast_server_scriptpath="/opt/StartMultiCastController.sh"
+#pid_path_name="/opt/process.pid"
+#multicast_host="elab-multicast"
+#multicast_port="9001"
+#cmd="${cmd} ${multicast_server_scriptpath}"
 
 if [ -f "${multicast_server_filepath}" ]; then
     printf "${BLUE}Unzipping ${multicast_server_filepath}${NC}\n"
@@ -23,31 +23,27 @@ else
     exit 1
 fi
 
-# FIXME - Workaround until it is fixed in project!
-printf "${YELLOW}FIXME - Fixing multicast MULTICAST_BASE_DIR, Fix it in original code${NC}\n"
-sed -i 's/^export MULTICAST_BASE_DIR=.*/export MULTICAST_BASE_DIR="\/opt\/multicast"/g' ${multicast_server_scriptpath}
-
-printf "${YELLOW}FIXME - Fixing multicast BOOTCLASSPATH, Fix it in original code${NC}\n"
-sed -i 's/export BOOTCLASSPATH=-Xbootclasspath.*/export BOOTCLASSPATH="--illegal-access=permit "/g' ${multicast_server_scriptpath}
-
-printf "${YELLOW}FIXME - Fixing multicast MULTICAST_CLASSPATH, Fix it in original code${NC}\n"
-sed -i '/^export MULTICAST_CLASSPATH=/ s/$/:$MULTICAST_BASE_DIR\/lib\/openorb_orb_omg-1.4.0.jar/' ${multicast_server_scriptpath}
-
-printf "${YELLOW}FIXME - Fixing multicast openorb.xml hostname, Fix it in original code${NC}\n"
-sed -i "s/value=\"localhost\"/value=\"${multicast_host}\"/g" /opt/multicast/etc/openorb.xml
-
 pushd /opt
 
-${cmd}
+for dir in {basic,intermediate,advanced}; do
+    if [ -d ${dir} ]; then
+        pushd ${dir}
 
-#PID=$(cat $pid_path_name)
-#while [ -e /proc/$PID ]
-#do
-#    echo "Process: $PID is still running" > /dev/null
-#    sleep 5
-#done
+        # FIXME - Workaround until it is fixed in project!
+        printf "${YELLOW}FIXME - Fixing multicast MULTICAST_BASE_DIR, Fix it in original code${NC}\n"
+        sed -i "s/^export MULTICAST_BASE_DIR=.*/export MULTICAST_BASE_DIR=\"\/opt\/${dir}\/multicast\"/g" StartMultiCastController.sh
 
-#echo "Process $PID has finished"
+        printf "${YELLOW}FIXME - Fixing multicast BOOTCLASSPATH, Fix it in original code${NC}\n"
+        sed -i 's/export BOOTCLASSPATH=-Xbootclasspath.*/export BOOTCLASSPATH="--illegal-access=permit "/g' StartMultiCastController.sh
+
+        printf "${YELLOW}FIXME - Fixing multicast MULTICAST_CLASSPATH, Fix it in original code${NC}\n"
+        sed -i '/^export MULTICAST_CLASSPATH=/ s/$/:$MULTICAST_BASE_DIR\/lib\/openorb_orb_omg-1.4.0.jar/' StartMultiCastController.sh
+
+        ./StartMultiCastController.sh
+
+        popd
+    fi
+done
 
 popd
 

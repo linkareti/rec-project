@@ -8,7 +8,7 @@
     <fileSets>
         <fileSet>
             <directory>${project.parent.basedir}/build/java/jars/multicast/</directory>
-            <outputDirectory>multicast</outputDirectory>
+            <outputDirectory>basic/multicast</outputDirectory>
             <includes>
                 <include>ELabMulticastController.jar</include>
                 <include>ReCCommon.jar</include>
@@ -18,7 +18,7 @@
         </fileSet>
         <fileSet>
             <directory>${project.parent.basedir}/build/java/jars/multicast/basic</directory>
-            <outputDirectory>multicast</outputDirectory>
+            <outputDirectory>basic/multicast</outputDirectory>
             <includes>
                 <include>etc/**</include>
             </includes>
@@ -28,7 +28,7 @@
         </fileSet>
         <fileSet>
             <directory>${project.parent.basedir}/build/java/jars/multicast/basic</directory>
-            <outputDirectory>multicast</outputDirectory>
+            <outputDirectory>basic/multicast</outputDirectory>
             <includes>
                 <include>etc/jmxremote.password</include>
             </includes>
@@ -36,7 +36,79 @@
         </fileSet>
         <fileSet>
             <directory>${project.parent.basedir}/build/java/jars/multicast/basic</directory>
-            <outputDirectory>.</outputDirectory>
+            <outputDirectory>basic</outputDirectory>
+            <includes>
+                <include>**/*.sh</include>
+            </includes>
+            <fileMode>0755</fileMode>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/build/java/jars/multicast/</directory>
+            <outputDirectory>intermediate/multicast</outputDirectory>
+            <includes>
+                <include>ELabMulticastController.jar</include>
+                <include>ReCCommon.jar</include>
+                <include>ReCMulticastController.jar</include>
+                <include>lib/**</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/build/java/jars/multicast/intermediate</directory>
+            <outputDirectory>intermediate/multicast</outputDirectory>
+            <includes>
+                <include>etc/**</include>
+            </includes>
+            <excludes>
+                <exclude>etc/jmxremote.password</exclude>
+            </excludes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/build/java/jars/multicast/intermediate</directory>
+            <outputDirectory>intermediate/multicast</outputDirectory>
+            <includes>
+                <include>etc/jmxremote.password</include>
+            </includes>
+            <fileMode>0600</fileMode>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/build/java/jars/multicast/intermediate</directory>
+            <outputDirectory>intermediate</outputDirectory>
+            <includes>
+                <include>**/*.sh</include>
+            </includes>
+            <fileMode>0755</fileMode>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/build/java/jars/multicast/</directory>
+            <outputDirectory>advanced/multicast</outputDirectory>
+            <includes>
+                <include>ELabMulticastController.jar</include>
+                <include>ReCCommon.jar</include>
+                <include>ReCMulticastController.jar</include>
+                <include>lib/**</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/build/java/jars/multicast/advanced</directory>
+            <outputDirectory>advanced/multicast</outputDirectory>
+            <includes>
+                <include>etc/**</include>
+            </includes>
+            <excludes>
+                <exclude>etc/jmxremote.password</exclude>
+            </excludes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/build/java/jars/multicast/advanced</directory>
+            <outputDirectory>advanced/multicast</outputDirectory>
+            <includes>
+                <include>etc/jmxremote.password</include>
+            </includes>
+            <fileMode>0600</fileMode>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/build/java/jars/multicast/advanced</directory>
+            <outputDirectory>advanced</outputDirectory>
             <includes>
                 <include>**/*.sh</include>
             </includes>

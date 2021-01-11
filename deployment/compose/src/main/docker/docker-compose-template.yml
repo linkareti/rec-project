@@ -84,17 +84,6 @@ services:
       retries: 3
       start_period: 30s
 
-  elab-hardware-server:
-    image: ${repo}/${simplifiedGroupId}/base-images/openjdk-${openjdk.docker.version}:${project.version}
-    healthcheck:
-      test: pgrep java
-      interval: 30s
-      timeout: 1s
-      retries: 3
-      start_period: 30s
-    depends_on:
-      - elab-multicast
-
   elab-streamer-server:
     image: ${repo}/${simplifiedGroupId}/base-images/streamer-nginx-1.18.0:${project.version}
 

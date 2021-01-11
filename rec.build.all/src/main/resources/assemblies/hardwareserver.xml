@@ -6,7 +6,7 @@
     </formats>
     <includeBaseDirectory>false</includeBaseDirectory>
     <fileSets>
-        <fileSet>
+        <!-- <fileSet>
             <directory>${project.parent.basedir}/build/java/jars/hardwareserver</directory>
             <outputDirectory>hardwareserver</outputDirectory>
             <includes>
@@ -28,6 +28,13 @@
                 <include>**/*.sh</include>
             </includes>
             <fileMode>0755</fileMode>
+        </fileSet> -->
+        <fileSet>
+            <directory>${project.parent.basedir}/dist/java</directory>
+            <outputDirectory>.</outputDirectory>
+            <includes>
+                <include>*HardwareServer_*.zip</include>
+            </includes>
         </fileSet>
     </fileSets>
 </assembly>
