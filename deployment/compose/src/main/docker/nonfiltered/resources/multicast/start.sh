@@ -27,6 +27,12 @@ pushd /opt
 
 for dir in {basic,intermediate,advanced}; do
     if [ -d ${dir} ]; then
+        APPNAME="${dir}"
+        APPCMD="/opt/${dir}/StartMultiCastController.sh"
+        APPUSER="root"
+
+        dockerize -template /templates/app.conf.j2:/etc/supervisor/conf.d/${dir}.conf
+
         pushd ${dir}
 
         # FIXME - Workaround until it is fixed in project!
@@ -39,7 +45,7 @@ for dir in {basic,intermediate,advanced}; do
         printf "${YELLOW}FIXME - Fixing multicast MULTICAST_CLASSPATH, Fix it in original code${NC}\n"
         sed -i '/^export MULTICAST_CLASSPATH=/ s/$/:$MULTICAST_BASE_DIR\/lib\/openorb_orb_omg-1.4.0.jar/' StartMultiCastController.sh
 
-        ./StartMultiCastController.sh
+        #./StartMultiCastController.sh
 
         popd
     fi
@@ -47,6 +53,6 @@ done
 
 popd
 
-sleep infinity
+#sleep infinity
 
 exit ${RETVAL}

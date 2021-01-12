@@ -25,16 +25,23 @@ fi
 
 pushd /opt
 
-for zipfile in *.zip; do 
+for zipfile in *.zip ; do
     dirname=`echo ${zipfile} | cut -d '_' -f 1`
     if [ ! -d /opt/${dirname} ]; then
         mkdir -p /opt/${dirname}
     fi
     unzip ${zipfile} -d /opt/${dirname}/
 
+
     pushd /opt/${dirname}/
 
     for script in Start*.sh ; do
+
+        APPNAME="${dirname}"
+        APPCMD="/opt/${dirname}/${script}"
+        APPUSER="root"
+
+        dockerize -template /templates/app.conf.j2:/etc/supervisor/conf.d/${dirname}.conf
 
         # FIXME - Workaround until it is fixed in project!
         printf "${YELLOW}FIXME - Fixing hardwareServer BOOTCLASSPATH at ${script}, Fix it in original code${NC}\n"
@@ -43,15 +50,14 @@ for zipfile in *.zip; do
         printf "${YELLOW}FIXME - Fixing hardwareServer DRIVER_CLASSPATH at ${script}, Fix it in original code${NC}\n"
         sed -i '/^export DRIVER_CLASSPATH=/ s/$/:$DRIVER_BASE_DIR\/lib\/openorb_orb_omg-1.4.0.jar/' ${script}
 
-        printf "${BLUE}Starting ${script}${NC}\n"
-        ./${script}
+        #printf "${BLUE}Starting ${script}${NC}\n"
+        #./${script}
     done
     popd
 done
 popd
 
-printf "${BLUE}Sleeping until hardware server processes finishes${NC}\n"
-
-sleep infinity
+#printf "${BLUE}Sleeping until hardware server processes finishes${NC}\n"
+#sleep infinity
 
 exit ${RETVAL}

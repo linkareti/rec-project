@@ -84,9 +84,6 @@ services:
       retries: 3
       start_period: 30s
 
-  elab-streamer-server:
-    image: ${repo}/${simplifiedGroupId}/base-images/streamer-nginx-1.18.0:${project.version}
-
 secrets:
   dbrec.secret: {}
   dbgftimer.secret: {}

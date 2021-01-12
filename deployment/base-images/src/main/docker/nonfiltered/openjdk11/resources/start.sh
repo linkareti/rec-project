@@ -4,6 +4,8 @@ GREEN='\033[0;32m'
 BLUE='\033[1;34m'
 NC='\033[0m' # No Color
 
+cmd="dockerize "
+
 for file in /startup.d/*.sh; do
     if [ -f "${file}" ]; then
         if [ ! -x "${file}" ]; then
@@ -14,3 +16,7 @@ for file in /startup.d/*.sh; do
         bash -c ${file}
     fi
 done
+
+cmd="${cmd} /usr/local/bin/supervisord -n -c /etc/supervisor/supervisord.conf"
+
+${cmd}

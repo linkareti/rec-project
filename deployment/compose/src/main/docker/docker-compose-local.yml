@@ -64,6 +64,7 @@ services:
       - ${project.build.directory}/resources/hardwareserver:/startup.d/
 
   elab-streamer-server:
+    image: ${repo}/${simplifiedGroupId}/base-images/streamer-nginx-1.18.0:${project.version}
     ports:
       - "8554:8554"
       

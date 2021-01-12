@@ -1,5 +1,5 @@
 #!/bin/bash
-clear
+#clear
 echo Starting multicast @lab.name@
 
 INITIAL_HEAP_MEM=@multicast.initial.heap@
@@ -43,3 +43,4 @@ java $BOOTCLASSPATH @additional.java.args@ -classpath $RECCLASSPATH:$MULTICAST_C
 
 PID=$!
 echo $PID > multicast_@lab.name@.pid
+wait $PID

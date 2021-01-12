@@ -27,6 +27,7 @@
         <jaxb-impl.version>2.2.11</jaxb-impl.version>
         <simplifiedGroupId>elab</simplifiedGroupId>
         <webswing.version>2.7.5</webswing.version>
+        <openjdk.specific.version>11.0.9.1_1</openjdk.specific.version>
         <openjdk.version>11.0.9.1</openjdk.version>
         <openjdk.docker.version>${openjdk.version}-jdk-buster</openjdk.docker.version>
         <payara.docker.version>5.2020.3-jdk11</payara.docker.version>
@@ -36,6 +37,7 @@
         <jarsigner.alias>REC</jarsigner.alias>
         <!-- mvn plugin versions -->
         <maven.assembly.plugin.version>3.3.0</maven.assembly.plugin.version>
+        <maven.clean.plugin.version>2.4.1</maven.clean.plugin.version>
     </properties>
 
     <modules>
@@ -54,8 +56,33 @@
                     <artifactId>maven-assembly-plugin</artifactId>
                     <version>${maven.assembly.plugin.version}</version>
                 </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>${maven.clean.plugin.version}</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>.</directory>
+                            <includes>
+                                <include>dist/**</include>
+                                <include>build/**</include>
+                                <include>vlcj.git/**</include>
+                                <include>**/wsdl_pp.php*</include>
+                            </includes>
+                            <followSymlinks>false</followSymlinks>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
             </plugins>
         </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+            </plugin>
+        </plugins>
     </build>
 
 </project>

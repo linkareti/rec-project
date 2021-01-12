@@ -43,6 +43,15 @@
                                     <outputDirectory>${project.build.directory}/webswing/resources</outputDirectory>
                                     <destFileName>webswing.zip</destFileName>
                                 </artifactItem>
+                                <artifactItem>
+                                    <groupId>net.adoptopenjdk.upstream</groupId>
+                                    <artifactId>OpenJDK11U-jre</artifactId>
+                                    <version>${openjdk.specific.version}</version>
+                                    <outputDirectory>${project.build.directory}/openjdk11/resources</outputDirectory>
+                                    <type>tar.gz</type>
+                                    <classifier>x64_linux</classifier>
+                                    <destFileName>openjdk11.tar.gz</destFileName>
+                                </artifactItem>
                             </artifactItems>
                             <stripVersion>true</stripVersion>
                         </configuration>
