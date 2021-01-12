@@ -1257,6 +1257,7 @@
             <replace file="${build.dir}/webswing.config" propertyFile="build.properties">
                 <replacefilter token="@rec.server@" property="rec.server" />
                 <replacefilter token="@experiment.name@" value="@{experiment.name}" />
+                <replacefilter token="@client.main-class@" property="client.main-class" />
             </replace>
 
             <loadproperties srcFile="experiments/@{experiment.name}/etc/build.properties">
