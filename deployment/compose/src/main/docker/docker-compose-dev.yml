@@ -1,0 +1,65 @@
+version: '3.5'
+services:
+
+  rec-database:
+    volumes:
+      - /home/linkare/rec-schema.sql:/docker-entrypoint-initdb.d/rec-schema.sql
+
+  gftimer-database:
+    volumes:
+      - /home/linkare/gf_timer-schema.sql:/docker-entrypoint-initdb.d/gf_timer-schema.sql
+
+  elab-multicast:
+    ports:
+      # Basic
+      - "25001:25001"
+      - "9001:9001"
+      # Intermediate
+      - "25002:25002"
+      - "9002:9002"
+      # Advanced
+      - "25003:25003"
+      - "9003:9003"
+    volumes:
+      - /home/linkare/multicast:/startup.d/
+  
+  elab-hardware-server:
+    image: ${repo}/${simplifiedGroupId}/base-images/openjdk-${openjdk.docker.version}:${project.version}
+    healthcheck:
+      test: pgrep java
+      interval: 30s
+      timeout: 1s
+      retries: 3
+      start_period: 30s
+    depends_on:
+      - elab-multicast
+    volumes:
+      - /home/linkare/hardwareserver:/startup.d/
+
+  elab-dev.vps.tecnico.ulisboa.pt:
+    image: docker-thirdparty.linkare.com/httpd:2.4.41
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: unless-stopped
+    volumes:
+      - /home/linkare/vhosts.d:/usr/local/apache2/conf/vhosts.d:ro
+      - /home/linkare/httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - /home/linkare/server.crt:/usr/local/apache2/conf/server.crt
+      - /home/linkare/server.key:/usr/local/apache2/conf/server.key
+      
+secrets:
+   dbrec.secret:
+     file: /home/linkare/rec-db.secret
+   dbgftimer.secret:
+     file: /home/linkare/gftimer-db.secret
+   rdb.secret:
+     file: /home/linkare/root-db.secret
+   as_mail.secret:
+     file: /home/linkare/asadmin_mail.secret
+   as_recdb.secret:
+     file: /home/linkare/asadmin_recdb.secret
+   as_gftimerdb.secret:
+     file: /home/linkare/asadmin_gftimerdb.secret
+   webswing-connection.secret:
+     file: /home/linkare/webswing-connection.secret

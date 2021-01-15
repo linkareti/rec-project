@@ -33,6 +33,19 @@
                             <outputFile>${project.build.directory}/docker-compose-runner.yml</outputFile>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>create-stack-runner-dev</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <workingDirectory>${project.build.directory}</workingDirectory>
+                            <executable>docker-compose</executable>
+                            <commandlineArgs> -f docker-compose-template.yml -f docker-compose-dev.yml --log-level ERROR config </commandlineArgs>
+                            <outputFile>${project.build.directory}/docker-compose-runner-dev.yml</outputFile>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
             <plugin>

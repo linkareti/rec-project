@@ -67,6 +67,16 @@ services:
     image: ${repo}/${simplifiedGroupId}/base-images/streamer-nginx-1.18.0:${project.version}
     ports:
       - "8554:8554"
+
+  elab.dev.linkare.com:
+    image: docker-thirdparty.linkare.com/httpd:2.4.41
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: unless-stopped
+    volumes:
+      - ${project.build.directory}/resources/sample/vhosts.d:/usr/local/apache2/conf/vhosts.d:ro
+      - ${project.build.directory}/resources/sample/httpd.conf:/usr/local/apache2/conf/httpd.conf
       
 secrets:
    dbrec.secret:
