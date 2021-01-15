@@ -59,3 +59,9 @@ p: pwd
 https://localhost:24848
 u: admin
 p: admin
+
+# Debug Options
+-Xrunjdwp:transport=dt_socket,address=*:8000,server=y,suspend=y
+
+# Video streaming
+ffmpeg -i /dev/video0 -framerate 1 -video_size 640x480 -vcodec libx264 -maxrate 768k -bufsize 8080k -g 60 -tune zerolatency -f rtsp rtsp://localhost:8554/vtiro
