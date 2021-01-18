@@ -10,6 +10,14 @@
  */
 
 package com.linkare.rec.impl.newface.component;
+import javax.swing.JPanel;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.Color;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
 
 /**
  * 
@@ -34,6 +42,10 @@ public class NavigationPane extends javax.swing.JPanel {
 	public ExperimentHistoryBox getExperimentHistoryBox() {
 		return experimentHistoryBox;
 	}
+	
+	public CompanyLogo getLogoImageBox() {
+		return logoImageBox;
+	}
 
 	/**
 	 * This method is called from within the constructor to initialize the form.
@@ -47,6 +59,7 @@ public class NavigationPane extends javax.swing.JPanel {
 
 		apparatusSelectBox = new com.linkare.rec.impl.newface.component.ApparatusSelectBox();
 		experimentHistoryBox = new com.linkare.rec.impl.newface.component.ExperimentHistoryBox();
+		logoImageBox = new com.linkare.rec.impl.newface.component.CompanyLogo();
 		separator = new javax.swing.JSeparator();
 
 		setMaximumSize(new java.awt.Dimension(212, 500));
@@ -58,32 +71,35 @@ public class NavigationPane extends javax.swing.JPanel {
 		experimentHistoryBox.setName("experimentHistoryBox"); // NOI18N
 
 		separator.setName("separator"); // NOI18N
+		
+		
 
 		final javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		setLayout(layout);
-		layout.setHorizontalGroup(layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addComponent(separator, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-				.addComponent(apparatusSelectBox, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-				.addComponent(experimentHistoryBox, javax.swing.GroupLayout.Alignment.TRAILING,
-						javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE));
-		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(
-						layout.createSequentialGroup()
-								.addComponent(apparatusSelectBox, javax.swing.GroupLayout.PREFERRED_SIZE, 115,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(separator, javax.swing.GroupLayout.PREFERRED_SIZE, 10,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(experimentHistoryBox, javax.swing.GroupLayout.DEFAULT_SIZE, 341,
-										Short.MAX_VALUE)));
+		layout.setHorizontalGroup(
+			layout.createParallelGroup(Alignment.LEADING)
+				.addComponent(separator, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+				.addComponent(apparatusSelectBox, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+				.addComponent(experimentHistoryBox, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+				.addComponent(logoImageBox, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+		);
+		layout.setVerticalGroup(
+			layout.createParallelGroup(Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+					.addComponent(apparatusSelectBox, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(separator, GroupLayout.PREFERRED_SIZE, 10, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(experimentHistoryBox, GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(layout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(logoImageBox, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)))
+		);
 	}// </editor-fold>//GEN-END:initComponents
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private com.linkare.rec.impl.newface.component.ApparatusSelectBox apparatusSelectBox;
 	private com.linkare.rec.impl.newface.component.ExperimentHistoryBox experimentHistoryBox;
 	private javax.swing.JSeparator separator;
-	// End of variables declaration//GEN-END:variables
-
+	private com.linkare.rec.impl.newface.component.CompanyLogo logoImageBox;
 }
