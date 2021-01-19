@@ -11,13 +11,18 @@
 
 package com.linkare.rec.impl.newface.component;
 
+import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import com.linkare.rec.impl.newface.ReCApplication;
-import java.awt.Cursor;
 import com.linkare.rec.impl.newface.component.media.VideoBox;
+import com.linkare.rec.impl.newface.component.media.VideoViewerController;
 
 /**
  * 
@@ -33,7 +38,7 @@ public class MediaPane extends javax.swing.JPanel {
 	/** Creates new form MediaPane */
 	public MediaPane() {
 		initComponents();
-//		clickHereLabel.setVisible(false);
+        clickHereLabel.setVisible(false);
 	}
 
 	public ChatBox getChatBox() {
@@ -44,9 +49,13 @@ public class MediaPane extends javax.swing.JPanel {
 		return videoBox;
 	}
 	
-//	public javax.swing.JLabel getClickHereLabel() {
-//	    return clickHereLabel;
-//	}
+	public javax.swing.JLabel getClickHereLabel() {
+	    return clickHereLabel;
+	}
+	
+	public JDialog getMaximizedVideoDialog() {
+		return maximizedVideoDialog;
+	}
 
 	/**
 	 * This method is called from within the constructor to initialize the form.
@@ -61,8 +70,10 @@ public class MediaPane extends javax.swing.JPanel {
         videoBox = new com.linkare.rec.impl.newface.component.media.VideoBox();
         chatBox = new com.linkare.rec.impl.newface.component.ChatBox();
         jSeparator1 = new javax.swing.JSeparator();
-        //clickHereLabel = new javax.swing.JLabel();
-
+        clickHereLabel = new javax.swing.JLabel();
+        resourceMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(MediaPane.class);
+        
+        
         setMaximumSize(new java.awt.Dimension(300, 500));
         setMinimumSize(new java.awt.Dimension(212, 398));
         setName("Form"); // NOI18N
@@ -73,54 +84,91 @@ public class MediaPane extends javax.swing.JPanel {
 
         jSeparator1.setName("jSeparator1"); // NOI18N
 
-//        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(MediaPane.class);
-//        clickHereLabel.setFont(resourceMap.getFont("clickHereLabel.font")); // NOI18N
-//        clickHereLabel.setText(resourceMap.getString("clickHereLabel.text")); // NOI18N
-//        clickHereLabel.setName("clickHereLabel"); // NOI18N
-//        clickHereLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-//            public void mouseEntered(java.awt.event.MouseEvent evt) {
-//                clickHereLabelMouseEntered(evt);
-//            }
-//            public void mouseExited(java.awt.event.MouseEvent evt) {
-//                clickHereLabelMouseExited(evt);
-//            }
-//            public void mouseReleased(java.awt.event.MouseEvent evt) {
-//                clickHereLabelMouseReleased(evt);
-//            }
-//        });
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(MediaPane.class);
+        clickHereLabel.setFont(resourceMap.getFont("clickHereLabel.font")); // NOI18N
+        clickHereLabel.setText(resourceMap.getString("clickHereLabel.text")); // NOI18N
+        clickHereLabel.setName("clickHereLabel"); // NOI18N
+        clickHereLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                clickHereLabelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                clickHereLabelMouseExited(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                clickHereLabelMouseReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(chatBox, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
-            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
-            .addComponent(videoBox, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(videoBox, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(chatBox, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE))
+    		layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	    		.addComponent(chatBox, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+	    		.addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+	    		.addComponent(videoBox, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+	    		.addGroup(layout.createSequentialGroup()
+		    		.addContainerGap()
+		    		.addComponent(clickHereLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+		    		.addContainerGap())
+		);
+		layout.setVerticalGroup(
+    		layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+	        		.addComponent(videoBox, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+	        		.addGap(2, 2, 2)
+	        		.addComponent(clickHereLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+	        		.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	        		.addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	        		.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	        		.addComponent(chatBox, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+	
         private void clickHereLabelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickHereLabelMouseReleased
-            if (ReCApplication.getApplication().getCurrentApparatusVideoLocation() != null) {
-        	JDialog dialog = new JDialog();
-        	dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        	dialog.getContentPane().add(new VideoErrorPanel(dialog));
-		dialog.setPreferredSize(new Dimension(441, 185));
-		dialog.setMaximumSize(new Dimension(441, 185));
-		dialog.setMinimumSize(new Dimension(441, 185));
-		dialog.setLocationRelativeTo(null);
-		dialog.setModal(true);
-		dialog.setVisible(true);
-            }
+        	if (maximizedVideoDialog == null) {
+                if (ReCApplication.getApplication().getCurrentApparatusVideoLocation() != null) {
+    	        	maximizedVideoDialog = new JDialog();
+    	        	maximizedVideoDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+    	        	videoContentDialogPanel = new VideoContentDialogPanel(maximizedVideoDialog, ReCApplication.getApplication().getCurrentApparatusVideoLocation());
+    	        	maximizedVideoDialog.getContentPane().add(videoContentDialogPanel);
+    	        	maximizedVideoDialog.setPreferredSize(new Dimension(640, 480));
+    	        	maximizedVideoDialog.setMaximumSize(new Dimension(1920, 1080));
+    	        	maximizedVideoDialog.setMinimumSize(new Dimension(640, 480));
+    	        	maximizedVideoDialog.setLocationRelativeTo(null);
+    	        	maximizedVideoDialog.setModal(true);
+    	        	maximizedVideoDialog.setVisible(true);
+    	        	maximizedVideoDialog.addWindowListener(new WindowAdapter() {
+						@Override
+						public void windowClosing(WindowEvent e) {
+							videoContentDialogPanel.closeWindow();
+							maximizedVideoDialog = null;
+							System.out.println("Resuming main video");
+							// Resume main video
+							if (ReCApplication.getApplication().getMediaController() != null && ReCApplication.getApplication().getMediaController().getMediaURL() != null) {
+								ReCApplication.getApplication().getMediaController().play();
+							}
+						}
+						@Override
+						public void windowOpened(WindowEvent e) {
+							System.out.println("Stopping main video");
+							// Stop main video
+							if (ReCApplication.getApplication().getMediaController() != null && ReCApplication.getApplication().getMediaController().getMediaURL() != null) {
+								ReCApplication.getApplication().getMediaController().stop();
+							}
+						}
+    	        	});
+                }		
+        	} else {
+        		JOptionPane.showMessageDialog(new JFrame(),
+        			resourceMap.getString("clickHereLabel.alreadyMaximized.text"),
+        		    "Info",
+        		    JOptionPane.INFORMATION_MESSAGE);
+        	}
+
         }//GEN-LAST:event_clickHereLabelMouseReleased
+        
+
 
         private void clickHereLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickHereLabelMouseEntered
             setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -129,12 +177,22 @@ public class MediaPane extends javax.swing.JPanel {
         private void clickHereLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickHereLabelMouseExited
             setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }//GEN-LAST:event_clickHereLabelMouseExited
+        
+        public void closeMaximizedVideoDialog() {
+        	if (maximizedVideoDialog != null) {
+        		videoContentDialogPanel.closeWindow();
+        		maximizedVideoDialog = null;
+        	}
+        }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.linkare.rec.impl.newface.component.ChatBox chatBox;
-    //private javax.swing.JLabel clickHereLabel;
+    private javax.swing.JLabel clickHereLabel;
     private javax.swing.JSeparator jSeparator1;
     private com.linkare.rec.impl.newface.component.media.VideoBox videoBox;
+    private JDialog maximizedVideoDialog;
+    private VideoContentDialogPanel videoContentDialogPanel;
+    private org.jdesktop.application.ResourceMap resourceMap;
     // End of variables declaration//GEN-END:variables
 
 }

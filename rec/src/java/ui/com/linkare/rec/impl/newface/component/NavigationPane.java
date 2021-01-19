@@ -81,7 +81,7 @@ public class NavigationPane extends javax.swing.JPanel {
 				.addComponent(separator, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
 				.addComponent(apparatusSelectBox, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
 				.addComponent(experimentHistoryBox, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
-				.addComponent(logoImageBox, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+				//.addComponent(logoImageBox, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
 		);
 		layout.setVerticalGroup(
 			layout.createParallelGroup(Alignment.LEADING)
@@ -92,8 +92,9 @@ public class NavigationPane extends javax.swing.JPanel {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(experimentHistoryBox, GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(layout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(logoImageBox, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)))
+					//.addGroup(layout.createParallelGroup(Alignment.TRAILING)
+					//	.addComponent(logoImageBox, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)))
+					)
 		);
 	}// </editor-fold>//GEN-END:initComponents
 

@@ -77,7 +77,7 @@ public class MediaSetup {
         stage.setResizable(true);  
 
         BorderPane root = new BorderPane();
-        root.setStyle("-fx-background-color: green;");
+        root.setStyle("-fx-background-color: transparent;");
 
         videoImageView.fitWidthProperty().bind(root.widthProperty());
         videoImageView.fitHeightProperty().bind(root.heightProperty());
