@@ -37,16 +37,16 @@ services:
       - /home/linkare/hardwareserver:/startup.d/
 
   elab-dev.vps.tecnico.ulisboa.pt:
-    image: docker-thirdparty.linkare.com/httpd:2.4.41
+    image: ${repo}/${simplifiedGroupId}/httpd-${httpd.version}:${project.version}
     ports:
       - "80:80"
       - "443:443"
     restart: unless-stopped
     volumes:
       - /home/linkare/vhosts.d:/usr/local/apache2/conf/vhosts.d:ro
-      - /home/linkare/httpd.conf:/usr/local/apache2/conf/httpd.conf
-      - /home/linkare/server.crt:/usr/local/apache2/conf/server.crt
-      - /home/linkare/server.key:/usr/local/apache2/conf/server.key
+#      - /home/linkare/httpd.conf:/usr/local/apache2/conf/httpd.conf
+#      - /home/linkare/server.crt:/usr/local/apache2/conf/server.crt
+#      - /home/linkare/server.key:/usr/local/apache2/conf/server.key
       
 secrets:
    dbrec.secret:

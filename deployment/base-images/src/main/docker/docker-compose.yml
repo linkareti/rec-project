@@ -3,7 +3,7 @@ services:
   nginx:
     build:
       context: streamer
-    image: ${repo}/${simplifiedGroupId}/${artifactId}/streamer-nginx-1.18.0:${project.version}
+    image: ${repo}/${simplifiedGroupId}/${artifactId}/streamer:${project.version}
   webswing:
     build:
       context: webswing
@@ -16,6 +16,10 @@ services:
     build:
       context: openjdk11
     image: ${repo}/${simplifiedGroupId}/${artifactId}/openjdk-${openjdk.docker.version}:${project.version}
+  httpd:
+    build:
+      context: httpd
+    image: ${repo}/${simplifiedGroupId}/httpd-${httpd.version}:${project.version}
   #webswing-admin:
   #  build:
   #    context: webswing-admin

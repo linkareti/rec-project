@@ -64,19 +64,19 @@ services:
       - ${project.build.directory}/resources/hardwareserver:/startup.d/
 
   elab-streamer-server:
-    image: ${repo}/${simplifiedGroupId}/base-images/streamer-nginx-1.18.0:${project.version}
+    image: ${repo}/${simplifiedGroupId}/base-images/streamer:${project.version}
     ports:
       - "8554:8554"
 
   elab.dev.linkare.com:
-    image: docker-thirdparty.linkare.com/httpd:2.4.41
+    image: ${repo}/${simplifiedGroupId}/httpd-${httpd.version}:${project.version}
     ports:
       - "80:80"
       - "443:443"
     restart: unless-stopped
     volumes:
       - ${project.build.directory}/resources/sample/vhosts.d:/usr/local/apache2/conf/vhosts.d:ro
-      - ${project.build.directory}/resources/sample/httpd.conf:/usr/local/apache2/conf/httpd.conf
+      #- ${project.build.directory}/resources/sample/httpd.conf:/usr/local/apache2/conf/httpd.conf
       
 secrets:
    dbrec.secret:

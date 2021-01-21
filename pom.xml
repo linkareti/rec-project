@@ -38,6 +38,7 @@
         <!-- mvn plugin versions -->
         <maven.assembly.plugin.version>3.3.0</maven.assembly.plugin.version>
         <maven.clean.plugin.version>2.4.1</maven.clean.plugin.version>
+        <httpd.version>2.4.41</httpd.version>
     </properties>
 
     <modules>
