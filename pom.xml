@@ -42,6 +42,7 @@
     </properties>
 
     <modules>
+        <module>rec</module>
         <module>rec.build.all</module>
         <module>rec.web</module>
         <module>deployment/base-images</module>

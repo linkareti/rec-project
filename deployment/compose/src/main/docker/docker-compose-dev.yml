@@ -23,18 +23,18 @@ services:
     volumes:
       - /home/linkare/multicast:/startup.d/
   
-  elab-hardware-server:
-    image: ${repo}/${simplifiedGroupId}/base-images/openjdk-${openjdk.docker.version}:${project.version}
-    healthcheck:
-      test: pgrep java
-      interval: 30s
-      timeout: 1s
-      retries: 3
-      start_period: 30s
-    depends_on:
-      - elab-multicast
-    volumes:
-      - /home/linkare/hardwareserver:/startup.d/
+  # elab-hardware-server:
+  #   image: ${repo}/${simplifiedGroupId}/base-images/openjdk-${openjdk.docker.version}:${project.version}
+  #   healthcheck:
+  #     test: pgrep java
+  #     interval: 30s
+  #     timeout: 1s
+  #     retries: 3
+  #     start_period: 30s
+  #   depends_on:
+  #     - elab-multicast
+  #   volumes:
+  #     - /home/linkare/hardwareserver:/startup.d/
 
   elab-dev.vps.tecnico.ulisboa.pt:
     image: ${repo}/${simplifiedGroupId}/httpd-${httpd.version}:${project.version}
