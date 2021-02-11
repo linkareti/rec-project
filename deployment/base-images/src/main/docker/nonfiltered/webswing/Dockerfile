@@ -6,30 +6,19 @@ RUN mkdir -p /tmp/webswing \
     && unzip /tmp/webswing.zip -d /tmp/ \
     && mv /tmp/webswing-examples*/* /tmp/webswing/
 
-# FROM docker-thirdparty.linkare.com/debian:buster-slim as vlc-sources
+FROM docker-thirdparty.linkare.com/debian:buster-slim as vlc-sources
 
-# RUN mkdir -p /tmp/vlc-libs/lib \
-#              /tmp/vlc-libs/usr \
-#              /tmp/vlc-libs/lib64 \
-#     && apt-get update \
-#     && apt-get install --no-install-recommends -y vlc
+WORKDIR /
 
-# # To find binaries needed use 'ldd /usr/bin/vlc'
-# RUN cp /usr/lib/x86_64-linux-gnu/libvlc.so.5 \
-#     /usr/lib/x86_64-linux-gnu/libvlccore.so.9 \
-#     /usr/lib/x86_64-linux-gnu/liblz4.so.1 /tmp/vlc-libs/usr/ \
-#     && cp /lib/x86_64-linux-gnu/libpthread.so.0 \ 
-#     /lib/x86_64-linux-gnu/libdl.so.2 \
-#     /lib/x86_64-linux-gnu/libc.so.6 \
-#     /lib/x86_64-linux-gnu/libm.so.6 \
-#     /lib/x86_64-linux-gnu/libidn.so.11 \
-#     /lib/x86_64-linux-gnu/libdbus-1.so.3 \
-#     /lib/x86_64-linux-gnu/libsystemd.so.0 \
-#     /lib/x86_64-linux-gnu/librt.so.1 \
-#     /lib/x86_64-linux-gnu/liblzma.so.5 \
-#     /lib/x86_64-linux-gnu/libgcrypt.so.20 \
-#     /lib/x86_64-linux-gnu/libgpg-error.so.0 /tmp/vlc-libs/lib/ \
-#     && cp /lib64/ld-linux-x86-64.so.2 /tmp/vlc-libs/lib64/
+# Custom package - org.videolan.vlc - vlc-slim_x86_64_linux
+# Check VLC-README.MD
+COPY resources/vlc-slim.tar.gz /tmp/
+
+# Removing plugins.dat to solve stale cache issue
+# main libvlc error: stale plugins cache: modified /usr/lib/x86_64-linux-gnu/vlc/plugins/*
+RUN mkdir -p /tmp/vlc-slim \
+    && tar xvfz /tmp/vlc-slim.tar.gz -C /tmp/vlc-slim/ \
+    && rm -f /tmp/vlc-slim/usr/lib/x86_64-linux-gnu/vlc/plugins/plugins.dat
 
 #FROM docker-thirdparty.linkare.com/openjdk:11.0.9.1-jdk-buster
 FROM docker-thirdparty.linkare.com/openjdk:11.0.9.1-jdk-slim-buster
@@ -57,16 +46,14 @@ COPY resources/default.xml /opt/webswing/openorb/etc/config/
 COPY resources/start.sh /opt/webswing/
 COPY resources/dockerize /usr/local/bin/
 
-#COPY --from=vlc-sources /usr/bin/vlc /usr/bin/
-#COPY --from=vlc-sources /usr/lib/x86_64-linux-gnu/vlc/ /usr/lib/x86_64-linux-gnu/vlc/
-#COPY --from=vlc-sources /usr/share/vlc/ /usr/share/vlc/
-
-#COPY --from=vlc-sources /tmp/vlc-libs/lib /lib/x86_64-linux-gnu/
-#COPY --from=vlc-sources /tmp/vlc-libs/usr /usr/lib/x86_64-linux-gnu/
-#COPY --from=vlc-sources /tmp/vlc-libs/lib64 /lib64/
+# Unpack (custom made) VLC slim and its dependencies
+COPY --from=vlc-sources /tmp/vlc-slim/lib/x86_64-linux-gnu/ /lib/x86_64-linux-gnu/
+COPY --from=vlc-sources /tmp/vlc-slim/usr/bin/vlc /usr/bin/vlc
+COPY --from=vlc-sources /tmp/vlc-slim/usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/
+COPY --from=vlc-sources /tmp/vlc-slim/usr/share/vlc/ /usr/share/vlc/
 
 RUN apt-get update \
-    && apt-get install --no-install-recommends -y vlc xauth xvfb libxrender1 libxtst6 libxext6 fontconfig vim procps net-tools dbus-x11 \
+    && apt-get install --no-install-suggests --no-install-recommends -y xauth xvfb libxrender1 libxtst6 libxext6 fontconfig vim procps net-tools dbus-x11 \
     && rm -rf /var/lib/apt/lists/*
 
 RUN useradd --create-home webswing \

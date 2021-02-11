@@ -39,10 +39,12 @@
         <maven.assembly.plugin.version>3.3.0</maven.assembly.plugin.version>
         <maven.clean.plugin.version>2.4.1</maven.clean.plugin.version>
         <httpd.version>2.4.41</httpd.version>
+        <vlc-slim.version>3.0.12</vlc-slim.version>
     </properties>
 
     <modules>
         <module>rec</module>
+        <module>elab</module>
         <module>rec.build.all</module>
         <module>rec.web</module>
         <module>deployment/base-images</module>

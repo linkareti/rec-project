@@ -37,7 +37,7 @@ services:
       GFTIMER_DB_PORT: '3306'
       MULTICAST_HOST: 'elab-multicast'
       MULTICAST_PORT: '9001'
-    restart: always
+    restart: unless-stopped
     secrets:
       - as_mail.secret
       - as_recdb.secret
@@ -59,7 +59,7 @@ services:
       MYSQL_DATABASE: 'rec'
     volumes:
       - db-rec:/var/lib/mysql:rw
-    restart: always
+    restart: unless-stopped
 
   gftimer-database:
     image: docker-thirdparty.linkare.com/mysql:5.7.25
@@ -73,7 +73,7 @@ services:
       MYSQL_DATABASE: 'gftimer'
     volumes:
       - db-gftimer:/var/lib/mysql:rw
-    restart: always
+    restart: unless-stopped
 
   elab-multicast:
     image: ${repo}/${simplifiedGroupId}/base-images/openjdk-${openjdk.docker.version}:${project.version}
@@ -83,6 +83,7 @@ services:
       timeout: 1s
       retries: 3
       start_period: 30s
+    restart: unless-stopped
 
 secrets:
   dbrec.secret: {}

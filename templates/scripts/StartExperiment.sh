@@ -15,7 +15,11 @@ export DRIVER_ORB_SYSPROPS="-Dopenorb.profile=ReCHardware -Drec.multicastcontrol
 export MEM_SYSPROPS="-Xms$INITIAL_HEAP_MEM -Xmx$MAX_HEAP_MEM"
 export LOG_SYSPROPS="-Djava.util.logging.config.file=$DRIVER_BASE_DIR/etc/loggers.config.properties" 
 export PROCESSINGMANAGER_SYSPROPS="-Drec.processingmanager.threadPool.coresize=@rec.driver.processingmanager.threadpool.coresize@ -Drec.processingmanager.threadPool.maxsize=@rec.driver.processingmanager.threadpool.maxsize@ -Drec.processingmanager.thread.idletime=@rec.processingmanager.thread.idletime@"
-export EXPERIMENT_DRIVER_CLASS="-Dexperiment.driver.class=@experiment.driver.class@"
+
+EXPERIMENT_DRIVER_CLASS="-Dexperiment.driver.class=@experiment.driver.class@"
+# Se não forem detetadas automaticamente portas de serie podera ser configurado abaixo
+#EXPERIMENT_DRIVER_CLASS="${EXPERIMENT_DRIVER_CLASS} -Dgnu.io.rxtx.SerialPorts=@experiment.driver.port@"
+export EXPERIMENT_DRIVER_CLASS
 
 #Define-se o HeadlessToolkit em vez do java.awt.headless=false, porque isso permite que mesmo as experiências que usam JMF possam aceder
 #a um toolkit, mesmo que "virtual". No entanto, isto não resolve o problema de acesso a WebCams, porque nesse caso, infelizmente, JMF precisa
