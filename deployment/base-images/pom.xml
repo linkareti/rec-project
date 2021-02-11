@@ -52,6 +52,15 @@
                                     <classifier>x64_linux</classifier>
                                     <destFileName>openjdk11.tar.gz</destFileName>
                                 </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.videolan</groupId>
+                                    <artifactId>vlc-slim</artifactId>
+                                    <version>${vlc-slim.version}</version>
+                                    <classifier>x86_64-linux-gnu</classifier>
+                                    <type>tar.gz</type>
+                                    <outputDirectory>${project.build.directory}/webswing/resources</outputDirectory>
+                                    <destFileName>vlc-slim.tar.gz</destFileName>
+                                </artifactItem>
                             </artifactItems>
                             <stripVersion>true</stripVersion>
                         </configuration>

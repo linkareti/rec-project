@@ -462,6 +462,7 @@
                 <sysproperty key="rec.processingmanager.thread.idletime" value="${rec.processingmanager.thread.idletime}" />
                 <sysproperty key="experiment.driver.class" value="${experiment.driver.class}" />
                 <sysproperty key="rec.driver.rs232_config_file_path" value="experiments/@{experiment.name}/etc/Rs232Config.xml"/>
+                <sysproperty key="experiment.driver.port" value="${experiment.driver.port}" />
             </java>
         </sequential>
     </macrodef>
@@ -510,6 +511,7 @@
                 <sysproperty key="rec.processingmanager.thread.idletime" value="${rec.processingmanager.thread.idletime}" />
                 <sysproperty key="experiment.driver.class" value="${experiment.driver.class}" />
                 <sysproperty key="rec.driver.rs232_config_file_path" value="experiments/@{experiment.name}/etc/Rs232Config.xml"/>
+                <sysproperty key="experiment.driver.port" value="${experiment.driver.port}" />
             </java>
         </sequential>
     </macrodef>

@@ -63,10 +63,10 @@ services:
     volumes:
       - ${project.build.directory}/resources/hardwareserver:/startup.d/
 
-  elab-streamer-server:
-    image: ${repo}/${simplifiedGroupId}/base-images/streamer:${project.version}
-    ports:
-      - "8554:8554"
+  # elab-streamer-server:
+  #   image: ${repo}/${simplifiedGroupId}/base-images/streamer:${project.version}
+  #   ports:
+  #     - "8554:8554"
 
   elab.dev.linkare.com:
     image: ${repo}/${simplifiedGroupId}/httpd-${httpd.version}:${project.version}
