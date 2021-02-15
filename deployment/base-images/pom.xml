@@ -18,7 +18,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.1.2</version>
                 <executions>
                     <execution>
                         <id>copy-thirdparty-dependencies</id>
@@ -31,7 +30,7 @@
                                 <artifactItem>
                                     <groupId>com.mysql.dev</groupId>
                                     <artifactId>mysql-connector-java</artifactId>
-                                    <version>8.0.13</version>
+                                    <version>${mysql.connector.version}</version>
                                     <type>jar</type>
                                     <outputDirectory>${project.build.directory}/payara/resources</outputDirectory>
                                 </artifactItem>
@@ -76,21 +75,21 @@
                                 <artifactItem>
                                     <groupId>com.github</groupId>
                                     <artifactId>dockerize-alpine-linux-amd64</artifactId>
-                                    <version>0.6.1</version>
+                                    <version>${dockerize.version}</version>
                                     <type>tar.gz</type>
                                     <outputDirectory>${project.build.directory}/payara/resources</outputDirectory>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>com.github</groupId>
                                     <artifactId>dockerize-alpine-linux-amd64</artifactId>
-                                    <version>0.6.1</version>
+                                    <version>${dockerize.version}</version>
                                     <type>tar.gz</type>
                                     <outputDirectory>${project.build.directory}/openjdk11/resources</outputDirectory>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>com.github</groupId>
                                     <artifactId>dockerize-alpine-linux-amd64</artifactId>
-                                    <version>0.6.1</version>
+                                    <version>${dockerize.version}</version>
                                     <type>tar.gz</type>
                                     <outputDirectory>${project.build.directory}/webswing/resources</outputDirectory>
                                 </artifactItem>
