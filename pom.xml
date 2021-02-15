@@ -19,27 +19,33 @@
     <inceptionYear>2020</inceptionYear>
 
     <properties>
-        <openjfx.version>15.0.1</openjfx.version>
+        <!-- mvn dependencies version -->
         <org-omg.version>1.4.0</org-omg.version>
         <jaxb-core.version>2.2.11</jaxb-core.version>
         <jaxb-api.version>2.2.11</jaxb-api.version>
         <javax.activation.version>1.1.1</javax.activation.version>
         <jaxb-impl.version>2.2.11</jaxb-impl.version>
+        <!-- docker related versions -->
         <simplifiedGroupId>elab</simplifiedGroupId>
         <webswing.version>2.7.5</webswing.version>
-        <openjdk.specific.version>11.0.9.1_1</openjdk.specific.version>
+        <payara.docker.version>5.2020.3-jdk11</payara.docker.version>
+        <httpd.version>2.4.41</httpd.version>
+        <dockerize.version>0.6.1</dockerize.version>
         <openjdk.version>11.0.9.1</openjdk.version>
         <openjdk.docker.version>${openjdk.version}-jdk-buster</openjdk.docker.version>
-        <payara.docker.version>5.2020.3-jdk11</payara.docker.version>
+        <openjdk.specific.version>11.0.9.1_1</openjdk.specific.version>
+        <vlc-slim.version>3.0.12</vlc-slim.version>
+        <mysql.connector.version>8.0.13</mysql.connector.version>
+        <openjfx.version>15.0.1</openjfx.version>
         <!-- mvn execution properties -->
         <build.environment>local</build.environment>
         <maven.test.skip>true</maven.test.skip>
         <jarsigner.alias>REC</jarsigner.alias>
         <!-- mvn plugin versions -->
         <maven.assembly.plugin.version>3.3.0</maven.assembly.plugin.version>
-        <maven.clean.plugin.version>2.4.1</maven.clean.plugin.version>
-        <httpd.version>2.4.41</httpd.version>
-        <vlc-slim.version>3.0.12</vlc-slim.version>
+        <maven.clean.plugin.version>3.1.0</maven.clean.plugin.version>
+        <maven.dependency.plugin.version>3.1.2</maven.dependency.plugin.version>
+        <maven.exec.plugin.version>3.0.0</maven.exec.plugin.version>
     </properties>
 
     <modules>
@@ -52,6 +58,35 @@
         <module>deployment/compose</module>
     </modules>
 
+    <dependencyManagement>
+        <dependencies>
+            <!-- Import scope will provide versions for dependencies below. -->
+            <dependency>
+                <groupId>javax.activation</groupId>
+                <artifactId>activation</artifactId>
+                <version>${javax.activation.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-core</artifactId>
+                <!-- <version>2.3.0.1</version> -->
+                <version>${jaxb-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-impl</artifactId>
+                <!-- <version>2.3.1</version> -->
+                <version>${jaxb-impl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+                <!-- <version>2.3.1</version> -->
+                <version>${jaxb-api.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <build>
         <pluginManagement>
             <plugins>
@@ -60,25 +95,35 @@
                     <artifactId>maven-assembly-plugin</artifactId>
                     <version>${maven.assembly.plugin.version}</version>
                 </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-clean-plugin</artifactId>
-                <version>${maven.clean.plugin.version}</version>
-                <configuration>
-                    <filesets>
-                        <fileset>
-                            <directory>.</directory>
-                            <includes>
-                                <include>dist/**</include>
-                                <include>build/**</include>
-                                <include>vlcj.git/**</include>
-                                <include>**/wsdl_pp.php*</include>
-                            </includes>
-                            <followSymlinks>false</followSymlinks>
-                        </fileset>
-                    </filesets>
-                </configuration>
-            </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>${maven.clean.plugin.version}</version>
+                    <configuration>
+                        <filesets>
+                            <fileset>
+                                <directory>.</directory>
+                                <includes>
+                                    <include>dist/**</include>
+                                    <include>build/**</include>
+                                    <include>vlcj.git/**</include>
+                                    <include>**/wsdl_pp.php*</include>
+                                </includes>
+                                <followSymlinks>false</followSymlinks>
+                            </fileset>
+                        </filesets>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>${maven.dependency.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>${maven.exec.plugin.version}</version>
+                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>

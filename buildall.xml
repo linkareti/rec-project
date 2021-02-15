@@ -254,7 +254,6 @@
 					<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" propertyFile="experiments/@{experiment.name}/etc/build.properties">
 						<replacefilter token="@experiment.driver.class@" property="experiment.driver.class" />
 						<replacefilter token="@additional.java.args@" property="additional.java.args" />
-						<replacefilter token="@experiment.driver.port@" property="experiment.driver.port" />
 					</replace>
 
 					<copy file="${templates.dir.scripts}/ExperimentDaemon.sh" overwrite="yes" tofile="${experiments.build.dir}/@{experiment.name}Daemon.sh" />
@@ -286,7 +285,6 @@
 					<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" propertyFile="experiments/@{experiment.name}/etc/build.properties">
 						<replacefilter token="@experiment.driver.class@" property="experiment.driver.class" />
 						<replacefilter token="@additional.java.args@" property="additional.java.args" />
-						<replacefilter token="@experiment.driver.port@" property="experiment.driver.port" />
 					</replace>
 
 					<copy file="${templates.dir.logs}/hardwareserver.loggers.config.properties" overwrite="yes" tofile="${experiments.build.dir}/@{experiment.name}/etc/loggers.config.properties" />
