@@ -7,6 +7,14 @@ NC='\033[0m' # No Color
 
 ENVIRONMENT=$1
 DEBUG=${2:-"false"}
+if [ $(uname -s) == "Darwin" ]; then
+	printf "${BLUE}Running at MacOS, make sure to install gnused (gsed)\n${NC}"
+	printf "${BLUE}\$ brew install gnu-sed\n${NC}"
+	SED="gsed"
+else
+	printf "${BLUE}Running at Linus, make sure to install gnu sed\n${NC}"
+	SED="sed"
+fi
 
 CUR_DIR=$(cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)
 
@@ -53,10 +61,9 @@ while read line; do
 		printf "${BLUE}PROPERTY_NAME_GREP_EXIT_CODE=${PROPERTY_NAME_GREP_EXIT_CODE}\n${NC}"
 		printf "${BLUE}PROPERTY_VALUE=${PROPERTY_VALUE}\n${NC}"
 		printf "${BLUE}line=${line}\n${NC}"
-		echo sed -i "s;^$PROPERTY_NAME.*;$line;" $BUILD_PROPERTIES
 	fi
 	if [[ $PROPERTY_NAME_GREP_EXIT_CODE -eq 0 && -z $PROPERTY_VALUE ]] ; then
-		sed -i "s;^$PROPERTY_NAME.*;$line;" $BUILD_PROPERTIES
+		${SED} -i "s;^$PROPERTY_NAME.*;$line;" $BUILD_PROPERTIES
 	elif [[ $PROPERTY_NAME_GREP_EXIT_CODE -ne 0 ]] ; then
 		echo "$line" >> $BUILD_PROPERTIES
 	fi
