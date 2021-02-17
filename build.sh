@@ -6,6 +6,7 @@ YELLOW='\033[0;33m'
 NC='\033[0m' # No Color
 
 ENVIRONMENT=$1
+DEBUG=${2:-"false"}
 
 CUR_DIR=$(cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)
 
@@ -47,6 +48,12 @@ while read line; do
 	PROPERTY_NAME_GREP_EXIT_CODE=$?
 	# See if the desired property value already has the desired production configuration
 	PROPERTY_VALUE=$(grep "^$line$" $BUILD_PROPERTIES)
+	if [ ${DEBUG} != "false" ]; then
+		printf "${BLUE}PROPERTY_NAME=${PROPERTY_NAME}\n${NC}"
+		printf "${BLUE}PROPERTY_NAME_GREP_EXIT_CODE=${PROPERTY_NAME_GREP_EXIT_CODE}\n${NC}"
+		printf "${BLUE}PROPERTY_VALUE=${PROPERTY_VALUE}\n${NC}"
+		printf "${BLUE}line=${line}\n${NC}"
+	fi
 	if [[ $PROPERTY_NAME_GREP_EXIT_CODE -eq 0 && -z $PROPERTY_VALUE ]] ; then
 		sed -i "s;^$PROPERTY_NAME.*;$line;" $BUILD_PROPERTIES
 	elif [[ $PROPERTY_NAME_GREP_EXIT_CODE -ne 0 ]] ; then
