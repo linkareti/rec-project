@@ -9,12 +9,13 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Error from './pages/Error';
 import Backoffice from './pages/Backoffice';
+import Login from './pages/Login';
+import Loading from './components/Loading';
 
 function AppRouter() {
-  console.log(useKeycloak);
   const { initialized } = useKeycloak();
   if (!initialized) {
-    return <h3>Loading ... !!!</h3>;
+    return <Loading />;
   }
 
   return (
@@ -31,7 +32,11 @@ function AppRouter() {
           roles={['RealmAdmin']}
           path='/backoffice'
           component={Backoffice}
+          redirectPath={'/backoffice'}
         />
+        <Route path='/login/:redirectPath'>
+          <Login></Login>
+        </Route>
 
         {/**Other routes here*/}
         <Route path='*'>
