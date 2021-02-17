@@ -53,6 +53,7 @@ while read line; do
 		printf "${BLUE}PROPERTY_NAME_GREP_EXIT_CODE=${PROPERTY_NAME_GREP_EXIT_CODE}\n${NC}"
 		printf "${BLUE}PROPERTY_VALUE=${PROPERTY_VALUE}\n${NC}"
 		printf "${BLUE}line=${line}\n${NC}"
+		echo sed -i "s;^$PROPERTY_NAME.*;$line;" $BUILD_PROPERTIES
 	fi
 	if [[ $PROPERTY_NAME_GREP_EXIT_CODE -eq 0 && -z $PROPERTY_VALUE ]] ; then
 		sed -i "s;^$PROPERTY_NAME.*;$line;" $BUILD_PROPERTIES
