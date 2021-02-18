@@ -1,0 +1,1 @@
+FROM docker-thirdparty.linkare.com/traefik:2.4.1
