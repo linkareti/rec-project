@@ -78,6 +78,13 @@
                                     <destFileName>hardwareserver.zip</destFileName>
                                     <outputDirectory>${project.build.directory}/resources/hardwareserver</outputDirectory>
                                 </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.linkare</groupId>
+                                    <artifactId>rec.web</artifactId>
+                                    <version>${project.version}</version>
+                                    <type>war</type>
+                                    <outputDirectory>${project.build.directory}/resources</outputDirectory>
+                                </artifactItem>
                             </artifactItems>
                             <stripVersion>true</stripVersion>
                         </configuration>

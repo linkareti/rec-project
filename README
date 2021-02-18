@@ -30,7 +30,7 @@ O processo de release dá-se do seguinte modo:
 == Processo de Build Local ==
 =============================
 
-= Prep =
+= Prep = # FIXME # Update this documentation 
 
 * Configure ~/.m2/toolchains.xml
 
@@ -53,13 +53,22 @@ O processo de release dá-se do seguinte modo:
 
 * Linkare Root Certificate at /opt/java/openjdk/jdk11.0.8/lib/security/cacerts
 
+* If errors occur with docker registries, add ca.crt to:
+/etc/docker/certs.d/nexus.linkare.com
+/etc/docker/certs.d/docker-thirdparty.linkare.com 
+(Or trust linkare certificates system wide)
+
 = Build =
 
 $ mvn clean package -Dmaven.test.skip=true -Djarsigner.alias="REC" -Dbuild.environment=local
 
+# After first build, fastest build (if you do not need to rebuild docker images)
+
+$ mvn clean package -Dmaven.test.skip=true -Djarsigner.alias="REC" -Dbuild.environment=local -DskipDockerBuild
+
 = Run =
 
-$ docker-compose -f deployment/compose/target/docker-compose-runner.yml up
+$ docker-compose -f deployment/compose/target/docker-compose-runner.yml up -d
 
 = Test =
 

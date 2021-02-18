@@ -30,6 +30,9 @@ services:
     ports:
       - "28080:8080"
       - "24848:4848"
+    volumes:
+      # Allow real-time refresh (with rec.web build)
+      - ${project.parent.basedir}/rec.web/target/rec.web.war:/opt/payara/deployments/rec.web.war
     labels:
       - traefik.http.routers.recweb-http.rule=PathPrefix(`/rec.web`)
       - traefik.http.routers.recweb-http.service=recweb-http
@@ -118,7 +121,10 @@ services:
   static-files:
     image: docker-thirdparty.linkare.com/nginx:1.19.6
     volumes:
-      - ${project.build.directory}/resources/etc:/www/data:ro
+      #- ${project.build.directory}/resources/etc:/www/data:ro
+      # Allow real-time refresh (with rec.web build)
+      - ${project.parent.basedir}/rec.web/target/rec.web/client/etc/ReCFaceConfig.xml:/www/data/etc/ReCFaceConfig.xml
+      - ${project.parent.basedir}/rec.web/target/rec.web/client/etc/openorb.xml:/www/data/etc/ReCFaceConfig.xml
       
 secrets:
    dbrec.secret:
