@@ -16,11 +16,15 @@ services:
     build:
       context: openjdk11
     image: ${repo}/${simplifiedGroupId}/${artifactId}/openjdk-${openjdk.docker.version}:${project.version}
-  httpd:
-    build:
-      context: httpd
-    image: ${repo}/${simplifiedGroupId}/httpd-${httpd.version}:${project.version}
+  # httpd:
+  #   build:
+  #     context: httpd
+  #   image: ${repo}/${simplifiedGroupId}/httpd-${httpd.version}:${project.version}
   #webswing-admin:
   #  build:
   #    context: webswing-admin
   #  image: ${repo}/${simplifiedGroupId}/${artifactId}/webswing-admin-${webswing.version}-${openjdk.version}:${project.version}
+  traefik:
+    build:
+      context: traefik
+    image: ${repo}/${simplifiedGroupId}/${artifactId}/traefik-${traefik.version}:${project.version}

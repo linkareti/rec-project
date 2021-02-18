@@ -26,7 +26,7 @@
         <mkdir dir="${rec.common.classes.dir}" />
         <mkdir dir="${rec.common.classes.dir}/META-INF" />
 
-        <javac srcdir="${rec.common.src.java.dir}" destdir="${rec.common.classes.dir}" fork="true" executable="${jdk.dir}/bin/javac" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
+        <javac srcdir="${rec.common.src.java.dir}" destdir="${rec.common.classes.dir}" fork="true" executable="${env.JAVA_HOME}/bin/javac" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
             <include name="**/*.java" />
             <classpath refid="rec.common.libs.classpath" />			
         </javac>
@@ -90,7 +90,7 @@
         <mkdir dir="${rec.client.classes.dir}" />
         <mkdir dir="${rec.client.classes.dir}/META-INF" />
 
-        <javac srcdir="${rec.client.src.java.dir}" destdir="${rec.client.classes.dir}" encoding="${javac.encoding}" fork="true" executable="${jdk.dir}/bin/javac"  debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
+        <javac srcdir="${rec.client.src.java.dir}" destdir="${rec.client.classes.dir}" encoding="${javac.encoding}" fork="true" executable="${env.JAVA_HOME}/bin/javac"  debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
             <include name="**/*.java" />
             <classpath refid="rec.compile.client.classpath" />			
         </javac>
@@ -102,7 +102,7 @@
             </fileset>
         </copy>
 
-        <javac srcdir="${rec.ui.src.java.dir}" destdir="${rec.client.classes.dir}" encoding="${javac.encoding}" fork="true" executable="${jdk.dir}/bin/javac"  debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
+        <javac srcdir="${rec.ui.src.java.dir}" destdir="${rec.client.classes.dir}" encoding="${javac.encoding}" fork="true" executable="${env.JAVA_HOME}/bin/javac"  debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
             <include name="**/*.java" />
             <classpath refid="rec.compile.client.classpath" />			
         </javac>
@@ -181,7 +181,7 @@
         <mkdir dir="${rec.hardwareserver.classes.dir}" />
         <mkdir dir="${rec.hardwareserver.classes.dir}/META-INF" />
 
-        <javac srcdir="${rec.hardwareserver.src.java.dir}" destdir="${rec.hardwareserver.classes.dir}" fork="true" executable="${jdk.dir}/bin/javac"  encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
+        <javac srcdir="${rec.hardwareserver.src.java.dir}" destdir="${rec.hardwareserver.classes.dir}" fork="true" executable="${env.JAVA_HOME}/bin/javac"  encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
             <include name="**/*.java" />
             <classpath refid="rec.compile.hardwareserver.classpath" />			
         </javac>
@@ -259,7 +259,7 @@
         <mkdir dir="${rec.multicast.classes.dir}" />
         <mkdir dir="${rec.multicast.classes.dir}/META-INF" />
 
-        <javac srcdir="${rec.multicast.src.java.dir}" destdir="${rec.multicast.classes.dir}" fork="true" executable="${jdk.dir}/bin/javac"  encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
+        <javac srcdir="${rec.multicast.src.java.dir}" destdir="${rec.multicast.classes.dir}" fork="true" executable="${env.JAVA_HOME}/bin/javac"  encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
             <include name="**/*.java" />
             <classpath refid="rec.compile.multicastcontroller.classpath" />			
         </javac>
