@@ -14,6 +14,11 @@
 		<developerConnection>scm:svn:https://svn.linkare.com/internal/rec-project/rec/trunk/rec.web-api</developerConnection>
 		<url>https://sventon.linkare.com/repos/svnroot/list/internal/rec-project/rec/trunk/rec.web-api</url>
 	</scm>
+
+	<properties>
+        <toolchains.version>11</toolchains.version>
+        <toolchains.provider>openjdk</toolchains.provider>
+	</properties>
 	
 	<dependencies>
 		<dependency>
