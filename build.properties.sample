@@ -430,3 +430,6 @@ daemon.user=elab
 
 # Java Installation Path
 jdk.dir=/opt/java/openjdk/jdk11.0.8
+
+# Rec File Server for static files
+rec.file.server=http://nginx-fileserver:80
