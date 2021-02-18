@@ -32,7 +32,7 @@ O processo de release dá-se do seguinte modo:
 
 = Prep =
 
-* Set toolchains.xml
+* Configure ~/.m2/toolchains.xml
 
 <toolchains>
    <toolchain>
