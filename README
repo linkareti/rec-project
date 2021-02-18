@@ -51,6 +51,8 @@ O processo de release dá-se do seguinte modo:
 
 * JAVA_HOME=/opt/java/openjdk/jdk11.0.8
 
+* Linkare Root Certificate at /opt/java/openjdk/jdk11.0.8/lib/security/cacerts
+
 = Build =
 
 $ mvn clean package -Dmaven.test.skip=true -Djarsigner.alias="REC" -Dbuild.environment=local
