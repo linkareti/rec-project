@@ -37,7 +37,7 @@
         <mkdir dir="${elab.common.classes.dir}" />
         <mkdir dir="${elab.common.classes.dir}/META-INF" />
 
-        <javac srcdir="${elab.common.src.java.dir}" destdir="${elab.common.classes.dir}" fork="true" executable="${jdk.dir}/bin/javac" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
+        <javac srcdir="${elab.common.src.java.dir}" destdir="${elab.common.classes.dir}" fork="true" executable="${env.JAVA_HOME}/bin/javac" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
             <include name="**/*.java" />
             <classpath refid="elab.compile.common.classpath" />			
         </javac>
@@ -71,7 +71,7 @@
         <mkdir dir="${elab.client.classes.dir}" />
         <mkdir dir="${elab.client.classes.dir}/META-INF" />
 
-        <javac srcdir="${elab.client.src.java.dir}" destdir="${elab.client.classes.dir}" fork="true" executable="${jdk.dir}/bin/javac" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
+        <javac srcdir="${elab.client.src.java.dir}" destdir="${elab.client.classes.dir}" fork="true" executable="${env.JAVA_HOME}/bin/javac" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
             <include name="**/*.java" />
             <classpath refid="elab.compile.client.classpath" />			
         </javac>
@@ -83,7 +83,7 @@
             </fileset>
         </copy>
 
-        <javac srcdir="${elab.ui.src.java.dir}" destdir="${elab.client.classes.dir}" fork="true" executable="${jdk.dir}/bin/javac" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
+        <javac srcdir="${elab.ui.src.java.dir}" destdir="${elab.client.classes.dir}" fork="true" executable="${env.JAVA_HOME}/bin/javac" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
             <include name="**/*.java" />
             <classpath refid="elab.compile.client.classpath" />			
         </javac>
@@ -287,7 +287,7 @@
         <mkdir dir="${elab.hardwareserver.classes.dir}" />
         <mkdir dir="${elab.hardwareserver.classes.dir}/META-INF" />
 
-        <javac srcdir="${elab.hardwareserver.src.java.dir}" destdir="${elab.hardwareserver.classes.dir}"  fork="true" executable="${jdk.dir}/bin/javac" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
+        <javac srcdir="${elab.hardwareserver.src.java.dir}" destdir="${elab.hardwareserver.classes.dir}"  fork="true" executable="${env.JAVA_HOME}/bin/javac" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
             <include name="**/*.java" />
             <classpath refid="elab.compile.hardwareserver.classpath" />			
         </javac>
@@ -349,7 +349,7 @@
         <mkdir dir="${elab.multicast.classes.dir}" />
         <mkdir dir="${elab.multicast.classes.dir}/META-INF" />
 
-        <javac srcdir="${elab.multicast.src.java.dir}" destdir="${elab.multicast.classes.dir}" fork="true" executable="${jdk.dir}/bin/javac" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
+        <javac srcdir="${elab.multicast.src.java.dir}" destdir="${elab.multicast.classes.dir}" fork="true" executable="${env.JAVA_HOME}/bin/javac" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
             <include name="**/*.java" />
             <classpath refid="elab.compile.multicastcontroller.classpath" />			
         </javac>

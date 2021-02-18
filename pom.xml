@@ -37,6 +37,7 @@
         <vlc-slim.version>3.0.12</vlc-slim.version>
         <mysql.connector.version>8.0.13</mysql.connector.version>
         <openjfx.version>15.0.1</openjfx.version>
+        <traefik.version>2.4.1</traefik.version>
         <!-- mvn execution properties -->
         <build.environment>local</build.environment>
         <maven.test.skip>true</maven.test.skip>

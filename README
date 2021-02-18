@@ -30,6 +30,27 @@ O processo de release dá-se do seguinte modo:
 == Processo de Build Local ==
 =============================
 
+= Prep =
+
+* Set toolchains.xml
+
+<toolchains>
+   <toolchain>
+       <type>jdk</type>
+       <provides>
+           <vendor>openjdk</vendor>
+           <version>11</version>
+       </provides>
+       <configuration>
+           <jdkHome>/opt/java/openjdk/jdk11.0.8</jdkHome>
+       </configuration>
+   </toolchain>
+</toolchains>
+
+* Ensure wget and gnused installed
+
+* JAVA_HOME=/opt/java/openjdk/jdk11.0.8
+
 = Build =
 
 $ mvn clean package -Dmaven.test.skip=true -Djarsigner.alias="REC" -Dbuild.environment=local
