@@ -118,13 +118,20 @@ services:
       # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock:ro
 
-  static-files:
+  nginx-fileserver:
     image: docker-thirdparty.linkare.com/nginx:1.19.6
     volumes:
       #- ${project.build.directory}/resources/etc:/www/data:ro
       # Allow real-time refresh (with rec.web build)
-      - ${project.parent.basedir}/rec.web/target/rec.web/client/etc/ReCFaceConfig.xml:/www/data/etc/ReCFaceConfig.xml
-      - ${project.parent.basedir}/rec.web/target/rec.web/client/etc/openorb.xml:/www/data/etc/ReCFaceConfig.xml
+      - ${project.parent.basedir}/rec.web/target/rec.web/client/etc:/usr/share/nginx/html/rec.web/client/etc:ro
+    labels:
+      - traefik.http.routers.nginx-http.rule=PathPrefix(`/rec.web/client`)
+      - traefik.http.routers.nginx-http.service=nginx-http
+      - traefik.http.routers.nginx-http.tls=true
+      - traefik.http.routers.nginx-http.middlewares=redirect-to-https
+      - traefik.http.routers.nginx-http.entrypoints=web,web-secure
+      - traefik.http.services.nginx-http.loadbalancer.server.port=80
+      - traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https
       
 secrets:
    dbrec.secret:

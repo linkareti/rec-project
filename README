@@ -97,3 +97,6 @@ p: admin
 
 # Video streaming
 ffmpeg -i /dev/video0 -framerate 1 -video_size 640x480 -vcodec libx264 -maxrate 768k -bufsize 8080k -g 60 -tune zerolatency -f rtsp rtsp://localhost:8554/vtiro
+
+# TODO - Use existent liquibase scripts instead of .sql files
+# TODO - Create liquibase scripts to add development user for rec.web backoffice access
