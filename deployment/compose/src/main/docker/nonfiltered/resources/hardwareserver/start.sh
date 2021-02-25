@@ -40,6 +40,7 @@ for zipfile in *.zip ; do
         APPNAME="${dirname}"
         APPCMD="/opt/${dirname}/${script}"
         APPUSER="root"
+        WORKDIR="/opt/${dirname}/"
 
         dockerize -template /templates/app.conf.j2:/etc/supervisor/conf.d/${dirname}.conf
 
