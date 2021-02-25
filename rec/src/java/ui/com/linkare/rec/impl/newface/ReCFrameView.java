@@ -841,7 +841,6 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
 	private void disconnectFromApparatus() {
 		if (recApplication.isApparatusVideoEnabled() && recApplication.getMediaController() != null) {
-			//getVideoBox().destroyVideoOutput();
 		}
 
 		// Reset apparatus actions
@@ -1233,7 +1232,6 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
 	public void setUserLocale(String locale) {
 		Locale.setDefault(new Locale(locale));
-		//getVideoBox().refreshView();
 		getChatBox().refreshView();
 		getApparatusSelectBox().refreshView();
 		getLoginBox().getContent().refreshView();

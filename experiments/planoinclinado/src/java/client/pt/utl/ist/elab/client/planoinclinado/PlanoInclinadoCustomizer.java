@@ -56,6 +56,8 @@ public class PlanoInclinadoCustomizer extends AbstractCustomizer {
 
         formatterUserPos1.setOverwriteMode(true);
         formatterUserPos2.setOverwriteMode(true);
+        
+        checkNsamples();
 
     }
 
@@ -133,20 +135,25 @@ public class PlanoInclinadoCustomizer extends AbstractCustomizer {
         samplesPanel.setPreferredSize(new java.awt.Dimension(350, 180));
         samplesPanel.setLayout(new java.awt.GridBagLayout());
 
-        sldNumSamples.setMajorTickSpacing(2000);
-        sldNumSamples.setMaximum(10000);
-        sldNumSamples.setMinorTickSpacing(500);
+        sldNumSamples.setMajorTickSpacing(200);
+        sldNumSamples.setMaximum(1000);
+        sldNumSamples.setMinorTickSpacing(50);
         sldNumSamples.setPaintLabels(true);
         sldNumSamples.setPaintTicks(true);
         sldNumSamples.setPaintTrack(false);
         sldNumSamples.setToolTipText("");
-        sldNumSamples.setValue(1000);
+        sldNumSamples.setValue(10);
         sldNumSamples.setMaximumSize(new java.awt.Dimension(1000, 32767));
         sldNumSamples.setMinimumSize(new java.awt.Dimension(255, 80));
         sldNumSamples.setPreferredSize(new java.awt.Dimension(255, 80));
         sldNumSamples.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 sldNumSamplesStateChanged(evt);
+            }
+        });
+        sldNumSamples.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                sldNumSamplesFocusLost(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -157,7 +164,7 @@ public class PlanoInclinadoCustomizer extends AbstractCustomizer {
 
         tfNumSamples.setColumns(4);
         tfNumSamples.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        tfNumSamples.setText("1000");
+        tfNumSamples.setText("10");
         tfNumSamples.setToolTipText("");
         tfNumSamples.setMaximumSize(new java.awt.Dimension(30, 16));
         tfNumSamples.setMinimumSize(new java.awt.Dimension(30, 16));
@@ -246,6 +253,7 @@ public class PlanoInclinadoCustomizer extends AbstractCustomizer {
         tbsPanel.setLayout(new java.awt.GridBagLayout());
 
         sldTbs.setMajorTickSpacing(20);
+        sldTbs.setMinimum(20);
         sldTbs.setMinorTickSpacing(5);
         sldTbs.setPaintLabels(true);
         sldTbs.setPaintTicks(true);
@@ -326,6 +334,10 @@ public class PlanoInclinadoCustomizer extends AbstractCustomizer {
         checkNsamples();
     }//GEN-LAST:event_tfNumSamplesFocusLost
 
+    private void sldNumSamplesFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sldNumSamplesFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sldNumSamplesFocusLost
+
     private void tfTbsFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfAngleFocusLost
     {// GEN-HEADEREND:event_tfAngleFocusLost
         String strTbs = tfTbs.getText();
@@ -333,15 +345,15 @@ public class PlanoInclinadoCustomizer extends AbstractCustomizer {
             return;
         }
         try {
-            int tbs = Integer.parseInt(strTbs);
+            final int tbs = Integer.parseInt(strTbs);
             if (tbs > sldTbs.getMaximum()) {
                 sldTbs.setValue(sldTbs.getMaximum());
                 tfTbs.setText("" + sldTbs.getMaximum());
-            } else if(tbs < 2) {
-                sldTbs.setValue(2);
-                tfTbs.setText("2");
+            } else if(tbs < sldTbs.getMinimum()) {
+                sldTbs.setValue(sldTbs.getMinimum());
+                tfTbs.setText("" + sldTbs.getMinimum());
             } else {
-                tfTbs.setText("" + sldTbs.getValue());
+                 sldTbs.setValue(tbs);
             }
         } catch (Exception e) {
             tfTbs.setText("" + sldTbs.getValue());
@@ -369,10 +381,8 @@ public class PlanoInclinadoCustomizer extends AbstractCustomizer {
 
     private void sldTbsStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldAngleStateChanged
     {// GEN-HEADEREND:event_sldAngleStateChanged
-        if (sldTbs.getValue() < 2) { // the minimum time between samples is actually 2 ms
-            sldTbs.setValue(2);
-        }
         tfTbs.setText("" + sldTbs.getValue());
+        checkNsamples();
 
     }// GEN-LAST:event_sldAngleStateChanged
 
@@ -383,7 +393,8 @@ public class PlanoInclinadoCustomizer extends AbstractCustomizer {
     }// GEN-LAST:event_sldCoilCurrentStateChanged
 
     private void checkNsamples() {
-        lblErrorTooManySamples.setEnabled((sldNumSamples.getValue() * sldTbs.getValue()) > 10000); // checks if the number of samples is too big 
+        lblErrorTooManySamples.setEnabled((sldNumSamples.getValue() * sldTbs.getValue()) > 40000); // checks if the number of samples is too big 
+        lblErrorTooManySamples.setText(ReCResourceBundle.findStringOrDefault("planoinclinado$rec.exp.planoinclinado.lbl.maxsamples","The maximum number of samples is") + " " + (40000/sldTbs.getValue()));
         btnOK.setEnabled(!lblErrorTooManySamples.isEnabled());
     }
 
@@ -393,8 +404,9 @@ public class PlanoInclinadoCustomizer extends AbstractCustomizer {
         tfHeight.setText("100");
         sldTbs.setValue(50);
         tfTbs.setText("50");
-        sldNumSamples.setValue(1000);
-        tfNumSamples.setText("1000");
+        sldNumSamples.setValue(120);
+        tfNumSamples.setText("120");
+        checkNsamples();
     }// GEN-LAST:event_btnDefaultsActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
@@ -451,9 +463,13 @@ public class PlanoInclinadoCustomizer extends AbstractCustomizer {
             sldHeight.setValue(height);
             tfHeight.setText("" + height);
 
-            int freq = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("freq"));
+            int freq = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("tb_samples"));
             sldTbs.setValue(freq);
             tfTbs.setText("" + freq);
+
+            int nSamples = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("n_samples"));
+            sldNumSamples.setValue(nSamples);
+            tfNumSamples.setText("" + nSamples);
 
         }
     }

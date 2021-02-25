@@ -72,8 +72,6 @@ public class MediaPane extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         clickHereLabel = new javax.swing.JLabel();
         resourceMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(MediaPane.class);
-        
-        
         setMaximumSize(new java.awt.Dimension(300, 500));
         setMinimumSize(new java.awt.Dimension(212, 398));
         setName("Form"); // NOI18N

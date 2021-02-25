@@ -1,5 +1,5 @@
 /*
- * Mag3DCustomizer.java
+ * FotovoltaicoCustomizer.java
  *
  * Created on 13 de Outubro de 2017
  */
@@ -163,6 +163,11 @@ public class FotovoltaicoCustomizer extends AbstractCustomizer {
 
         protocolButtonGroup.add(buckFindMaxRadioButton);
         buckFindMaxRadioButton.setText(bundle.getString("rec.exp.fotovoltaico.lbl.protocol.buckfindmax")); // NOI18N
+        buckFindMaxRadioButton.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                buckFindMaxRadioButtonStateChanged(evt);
+            }
+        });
         protocolPanel.add(buckFindMaxRadioButton, new java.awt.GridBagConstraints());
 
         slidersPanel.add(protocolPanel, java.awt.BorderLayout.PAGE_START);
@@ -180,6 +185,7 @@ public class FotovoltaicoCustomizer extends AbstractCustomizer {
         sldAngle.setPaintTrack(false);
         sldAngle.setToolTipText("");
         sldAngle.setValue(0);
+        sldAngle.setEnabled(false);
         sldAngle.setMaximumSize(new java.awt.Dimension(1000, 32767));
         sldAngle.setMinimumSize(new java.awt.Dimension(250, 42));
         sldAngle.setPreferredSize(new java.awt.Dimension(250, 42));
@@ -200,6 +206,7 @@ public class FotovoltaicoCustomizer extends AbstractCustomizer {
         tfAngle.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         tfAngle.setText("0");
         tfAngle.setToolTipText("");
+        tfAngle.setEnabled(false);
         tfAngle.setMaximumSize(new java.awt.Dimension(30, 16));
         tfAngle.setMinimumSize(new java.awt.Dimension(30, 16));
         tfAngle.setPreferredSize(new java.awt.Dimension(37, 16));
@@ -413,7 +420,7 @@ public class FotovoltaicoCustomizer extends AbstractCustomizer {
         }
         try {
             int red = Integer.parseInt(strRedComp);
-            if (red <= sldRedComponent.getMaximum() && red > 0) {
+            if (red <= sldRedComponent.getMaximum() && red >= 0) {
                 sldRedComponent.setValue(red);
             } else {
                 tfRedComponent.setText("" + sldRedComponent.getValue());
@@ -438,7 +445,7 @@ public class FotovoltaicoCustomizer extends AbstractCustomizer {
         }
         try {
             int green = Integer.parseInt(strGreenComp);
-            if (green <= sldGreenComponent.getMaximum() && green > 0) {
+            if (green <= sldGreenComponent.getMaximum() && green >= 0) {
                 sldGreenComponent.setValue(green);
             } else {
                 tfGreenComponent.setText("" + sldGreenComponent.getValue());
@@ -463,7 +470,7 @@ public class FotovoltaicoCustomizer extends AbstractCustomizer {
         }
         try {
             int blue = Integer.parseInt(strBlueComp);
-            if (blue <= sldBlueComponent.getMaximum() && blue > 0) {
+            if (blue <= sldBlueComponent.getMaximum() && blue >= 0) {
                 sldBlueComponent.setValue(blue);
             } else {
                 tfBlueComponent.setText("" + sldBlueComponent.getValue());
@@ -499,7 +506,7 @@ public class FotovoltaicoCustomizer extends AbstractCustomizer {
     }//GEN-LAST:event_angleSweepRadioButtonStateChanged
 
     private void buckSweepRadioButtonStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_buckSweepRadioButtonStateChanged
-        if (buckSweepRadioButton.isSelected()) {
+        if (buckSweepRadioButton.isSelected() || buckFindMaxRadioButton.isSelected()) {
             sldBuck.setEnabled(false);
             tfBuck.setEnabled(false);
         } else {
@@ -507,6 +514,16 @@ public class FotovoltaicoCustomizer extends AbstractCustomizer {
             tfBuck.setEnabled(true);
         }
     }//GEN-LAST:event_buckSweepRadioButtonStateChanged
+
+    private void buckFindMaxRadioButtonStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_buckFindMaxRadioButtonStateChanged
+        if (buckFindMaxRadioButton.isSelected() || buckSweepRadioButton.isSelected()) {
+            sldBuck.setEnabled(false);
+            tfBuck.setEnabled(false);
+        } else {
+            sldBuck.setEnabled(true);
+            tfBuck.setEnabled(true);
+        }
+    }//GEN-LAST:event_buckFindMaxRadioButtonStateChanged
 
     private void tfBuckFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfAngleFocusLost
     {// GEN-HEADEREND:event_tfAngleFocusLost
@@ -568,19 +585,23 @@ public class FotovoltaicoCustomizer extends AbstractCustomizer {
     {// GEN-HEADEREND:event_btnOKActionPerformed
 
         String protocol = "1";
+        int nsamples = 120;
 
         if (buckSweepRadioButton.isSelected()) {
             protocol = "2";
+            nsamples = 100;
         } else if (buckFindMaxRadioButton.isSelected()) {
             protocol = "3";
+            nsamples = 24;
         }
 
         getAcquisitionConfig().getSelectedHardwareParameter("protocol").setParameterValue(protocol);
         getAcquisitionConfig().getSelectedHardwareParameter("red_comp").setParameterValue("" + sldRedComponent.getValue());
-        getAcquisitionConfig().getSelectedHardwareParameter("green_comp").setParameterValue("" + sldBlueComponent.getValue());
+        getAcquisitionConfig().getSelectedHardwareParameter("green_comp").setParameterValue("" + sldGreenComponent.getValue());
         getAcquisitionConfig().getSelectedHardwareParameter("blue_comp").setParameterValue("" + sldBlueComponent.getValue());
-        getAcquisitionConfig().getSelectedHardwareParameter("angle").setParameterValue("" + sldAngle.getValue());
         getAcquisitionConfig().getSelectedHardwareParameter("buck").setParameterValue("" + sldBuck.getValue());
+        getAcquisitionConfig().getSelectedHardwareParameter("angle").setParameterValue("" + sldAngle.getValue());
+        getAcquisitionConfig().setTotalSamples(nsamples);
 
         fireICustomizerListenerDone();
     }// GEN-LAST:event_btnOKActionPerformed
@@ -630,7 +651,7 @@ public class FotovoltaicoCustomizer extends AbstractCustomizer {
     @Override
     public javax.swing.ImageIcon getCustomizerIcon() {
         return new javax.swing.ImageIcon(getClass().getResource(
-                "/pt/utl/ist/elab/client/planoinclinado/resources/fotovoltaico_iconified.gif"));
+                "/pt/utl/ist/elab/client/fotovoltaico/resources/fotovoltaico_iconified.gif"));
     }
 
     @Override

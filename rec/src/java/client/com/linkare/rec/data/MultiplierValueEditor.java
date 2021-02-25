@@ -27,7 +27,6 @@ public class MultiplierValueEditor extends AbstractSelectionListPropertyEditor {
 		addTableValue(Byte.valueOf(Multiplier.mega.getValue()), "M (1E6)", pack + "Multiplier.mega.getValue()");
 		addTableValue(Byte.valueOf(Multiplier.giga.getValue()), "G (1E9)", pack + "Multiplier.giga.getValue()");
 		addTableValue(Byte.valueOf(Multiplier.tera.getValue()), "T (1E12)", pack + "Multiplier.tera.getValue()");
-
 	}
 
 	@Override

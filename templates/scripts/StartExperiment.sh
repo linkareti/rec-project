@@ -1,5 +1,5 @@
 #!/bin/bash
-#clear
+clear
 echo Starting @experiment.name@ Driver
 
 # @ Initializing driver starter script @

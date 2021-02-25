@@ -35,8 +35,6 @@ public class SpinnerModelToBoundedRangeModelAdapter extends SpinnerNumberModel
 	}
 	else
 	    return Integer.valueOf(max);
-	
-	
     }
     
     public Object getPreviousValue()

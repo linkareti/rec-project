@@ -408,8 +408,6 @@
         <path refid="elab.multicastcontroller.libs.classpath" />
         <path refid="elab.compile.multicastcontroller.dependencies.classpath" />
     </path>
-
-
     <!--
             =====================================================
             ===============ReC Entire Project====================
@@ -641,7 +639,6 @@
             <antcall target="insert.jnlp.enabled">
                 <param name="jnlp.file.name" value="${elab.client.classes.dir}/elab-client.jnlp"/>
             </antcall>
-
             <foreach list="${lab.list}" param="lab.name" target="-add.lab.experiments.to.full.jnlp.compile" parallel="false" />
 
         </sequential>
@@ -797,7 +794,6 @@
             <antcall target="insert.jnlp.enabled">
                 <param name="jnlp.file.name" value="${client.build.dir}/linux-vlc-installer.jnlp"/>
             </antcall>
-
             <copy file="${jnlp.macinstaller.template.file}" overwrite="yes" tofile="${client.build.dir}/macosx-vlc-installer.jnlp" encoding="${copy.encoding}"/>
             <replace file="${client.build.dir}/macosx-vlc-installer.jnlp" propertyFile="build.properties" encoding="${copy.encoding}">
                 <replacefilter token="@codebase@" property="codebase" />
@@ -863,7 +859,6 @@
             <antcall target="insert.jnlp.enabled">
                 <param name="jnlp.file.name" value="${client.build.dir}/windows-vlc-installer.jnlp"/>
             </antcall>
-
             <copy file="${jnlp.template.file}" overwrite="yes" tofile="${client.build.dir}/elab-client.jnlp" encoding="${copy.encoding}"/>
             <replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Auto Connect ID --&gt;" value="" encoding="${copy.encoding}"/>
             <replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Auto Acquire Result --&gt;" value="" encoding="${copy.encoding}"/>
@@ -982,7 +977,6 @@
 
         <sequential>
             <mkdir dir="@{destination.folder}" />
-
             <jar destfile="@{destination.folder}/@{jar.name}" basedir="@{source.basedir}" excludes="*.jnlp">
                 <manifest>
                     <attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
@@ -1048,8 +1042,6 @@
             </jar>
         </sequential>
     </macrodef>
-
-
     <!-- ====
     macrodef: put.jnlp.file
     ==== -->
@@ -1059,7 +1051,6 @@
     <macrodef name="put.jnlp.file" description="Updates new attributes in manifest files">
         <attribute name="jarfilename" />
         <attribute name="jnlpfilename" />
-
         <sequential>
             <echo>
                 ***********************************************
@@ -1197,7 +1188,6 @@
             </replace>
 
             <foreach list="${@{lab.name}.experiment.list}" param="experiment.name" parallel="false" target="-add.experiment.faceconfig"/>
-
             <!-- experiment apparatus comments -->
             <replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="&lt;!--Start Apparatus configuration --&gt;" value="&lt;!--Start @{lab.name} Apparatus configuration --&gt;" />
             <replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="&lt;!--End Apparatus configuration --&gt;" value="&lt;!--End @{lab.name} Apparatus configuration --&gt;" />

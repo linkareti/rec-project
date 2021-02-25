@@ -1098,6 +1098,7 @@ public class SCustomizer  extends AbstractCustomizer {
 
 		txtCampoElectricoFinal = new JFormattedTextField(campoElectricoFormatador);
 		txtCampoElectricoFinal.setValue(Double.valueOf(1));
+		txtCampoElectricoFinal.setValue(new Double(1));
 		txtCampoElectricoFinal.setColumns(5);
 		txtCampoElectricoFinal.setMaximumSize(txtFieldDim);
 

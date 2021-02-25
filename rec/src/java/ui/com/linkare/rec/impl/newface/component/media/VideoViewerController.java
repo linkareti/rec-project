@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import javax.swing.event.EventListenerList;
 
+
 import com.linkare.rec.impl.newface.component.media.events.MediaApplicationEventListener;
 import com.linkare.rec.impl.newface.component.media.events.MediaNotConnectedEvent;
 import com.linkare.rec.impl.newface.component.media.events.MediaStoppedEvent;
@@ -374,14 +375,12 @@ public class VideoViewerController {
 	 */
 	public void captureScreen(final String fileName, final int width, final int height) {
 		createParentDirs(fileName);
-		//MediaSetup.getPlayer().saveSnapshot(new File(fileName), width, height);
 	}
 
 	/**
 	 * Liga/Desliga fullscreen.
 	 */
 	public void toggleFullScreen() {
-		//MediaSetup.getPlayer().toggleFullScreen();
 	}
 
 	/**
