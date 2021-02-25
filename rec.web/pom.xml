@@ -63,6 +63,7 @@
 			<artifactId>jboss-ejb3-api</artifactId>
 			<scope>provided</scope>
 			<version>3.1.0</version>			<!--$NO-MVN-MAN-VER$ -->
+
 		</dependency>
 		<!-- Common annotations (e.g., @PostConstruct, @PreDestroy, @Generated, 
 			@Resource) -->
@@ -418,10 +419,6 @@
 			</exclusions>
 			<optional>false</optional>
 		</dependency>
-		<!--dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-jpamodelgen</artifactId>
-                	<version>5.4.21.Final</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>junit</artifactId>

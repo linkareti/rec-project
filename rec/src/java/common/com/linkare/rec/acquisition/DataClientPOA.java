@@ -18,6 +18,7 @@ public abstract class DataClientPOA extends org.omg.PortableServer.Servant imple
 		DataClientPOA._methods.put("hardwareChange", Integer.valueOf(2));
 		DataClientPOA._methods.put("hardwareLockable", Integer.valueOf(3));
 		DataClientPOA._methods.put("receiveMessage", Integer.valueOf(4));
+
 	}
 
 	@Override

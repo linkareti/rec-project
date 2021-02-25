@@ -17,7 +17,6 @@ import javax.swing.JFileChooser;
 import javax.swing.SwingConstants;
 
 import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
-
 /**
  * 
  * @author Pedro Carvalho - LEFT - IST

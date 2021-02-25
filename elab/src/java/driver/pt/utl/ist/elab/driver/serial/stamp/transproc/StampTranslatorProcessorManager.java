@@ -57,6 +57,7 @@ public class StampTranslatorProcessorManager {
 		try {                    
                         final Class<?> c = ClassUtils.findClass(className, StampTranslatorProcessorManager.class.getClassLoader());
 			c.getDeclaredConstructor().newInstance();
+
 		} catch (final Exception e) {
 			LOGGER.log(Level.SEVERE, "Unable to load class:" + className, e);
 		}

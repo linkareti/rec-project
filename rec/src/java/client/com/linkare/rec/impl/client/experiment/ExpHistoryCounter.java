@@ -26,7 +26,6 @@ public class ExpHistoryCounter {
 		final Long counter = ExpHistoryCounter.expCounter.get(apparatusName);
 		final long retorna = counter.longValue();
 		ExpHistoryCounter.expCounter.put(apparatusName, Long.valueOf(retorna + 1));
-
 		return retorna;
 	}
 }

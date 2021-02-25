@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import java.lang.NoSuchMethodException;
 import java.lang.reflect.InvocationTargetException;
 
+
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommandListener;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampProcessor;
@@ -252,6 +253,7 @@ public abstract class AbstractStampDriver<T extends AbstractStampDataSource> ext
 					throw new InstantiationException("Unable to find generic super class of datasource for driver "
 							+ getClass().getName());
 				}
+
 
 			} else {
 				genericSuperType = null;

@@ -133,7 +133,6 @@ import com.linkare.rec.web.config.LocalizationBundle;
 import com.linkare.rec.web.config.ReCFaceConfig;
 
 import javafx.embed.swing.JFXPanel;
-
 /**
  * The main class of the application.
  */
@@ -955,7 +954,6 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 		SYSTEM_EXIT_PREVENTER_SECURITY_MANAGER.setMainApplicationWindow(getMainFrame());
 
-		
 	}
 
 	protected void showView() {
@@ -966,7 +964,6 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		getAppListeners().add(recView);
 
 		MediaSetup.initializeMediaFactory(this.getMainFrame());
-		
 		final Toolkit tk = Toolkit.getDefaultToolkit();
 		final Dimension dimension = tk.getScreenSize();
 		recView.getFrame().setPreferredSize(dimension);

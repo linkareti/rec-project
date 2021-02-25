@@ -186,13 +186,11 @@ public class StatsoundChartDataSetProxy extends org.jfree.data.xy.AbstractXYData
 		}
 		if (getChannelDisplayYArray().length == 0) {
 			if (expDataModel.getValueAt(item, getChannelDisplayY()) == null) {
-				// return Double.valueOf(0);
 				return 0;
 			}
 			return expDataModel.getValueAt(item, getChannelDisplayY()).getValueNumber().doubleValue();
 		} else {
 			if (expDataModel.getValueAt(item, getChannelDisplayAtYArray(series)) == null) {
-				// return Double.valueOf(0);
 				return 0;
 			}
 			return expDataModel.getValueAt(item, getChannelDisplayAtYArray(series)).getValueNumber().doubleValue();

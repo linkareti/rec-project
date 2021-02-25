@@ -2,7 +2,7 @@
 <hardware id="WP_PLANETARIUM" num_channels="5"
 	minfrequency="10Hz" maxfrequency="100Hz">
 	<rs232 baud="115200" stopbits="1" paritybits="0" numbits="8"
-		ports_restrict="/dev/ttyS0">
+		ports_restrict="/dev/ttyUSB0">
 		<parameters>
 			<!-- displacement -->
 			<parameter output="0" input="0" maxvalue="20"

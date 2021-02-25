@@ -2,6 +2,7 @@ package com.linkare.rec.impl.newface.component.media;
 
 import java.awt.Color;
 
+
 import com.linkare.rec.impl.newface.component.AbstractContentPane;
 
 /**
@@ -31,16 +32,7 @@ public class VideoBox extends AbstractContentPane {
 		*/
 	}
 
-	/**
-	 * Devolve o Canvas associado ao painel de vídeo e onde será mostrado o
-	 * output do vídeo.
-	 * 
-	 * @return
-	 */
-//	 public JFXPanel getVideoOutput() {
-//	
-//		return jfxPanel;
-//	}
+
 
 	/**
 	 * Altera o tamanho da videobox.
@@ -55,7 +47,6 @@ public class VideoBox extends AbstractContentPane {
 	public javax.swing.JPanel getMediaPanel() {
 		return mediaPanel;
 	}
-
 	/**
 	 * This method is called from within the constructor to initialize the form.
 	 * WARNING: Do NOT modify this code. The content of this method is always
@@ -103,8 +94,6 @@ public class VideoBox extends AbstractContentPane {
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JPanel mediaPanel;
-	//private java.awt.Canvas videoCanvas;
-//	private JFXPanel jfxPanel;
 	// End of variables declaration//GEN-END:variables
 
 }

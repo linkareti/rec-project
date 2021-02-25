@@ -1,5 +1,5 @@
 #!/bin/bash
-#clear
+clear
 echo Starting multicast @lab.name@
 
 INITIAL_HEAP_MEM=@multicast.initial.heap@

@@ -6,6 +6,7 @@
 
 package com.linkare.rec.impl.utils;
 
+
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -70,6 +71,7 @@ public class ORBBean {
 	private static ORBBean this_object = null;
 
 
+
 	private org.omg.CORBA.ORB the_orb = null;
 
 	private POA dataProducerPOA = null;
@@ -77,6 +79,7 @@ public class ORBBean {
 	private ORBBean() {
 		initORB();
 	}
+
 
 
 	private final java.lang.Object orb_synch = new java.lang.Object();
@@ -87,9 +90,9 @@ public class ORBBean {
 				return;
 			}
 
-
 			final Properties props = System.getProperties();
 			the_orb = ORB.init(new String[] {}, props);
+
 
 			final ORBRunner runner = new ORBRunner(the_orb);
 			try {

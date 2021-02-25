@@ -126,14 +126,14 @@
           <SubComponents>
             <Component class="javax.swing.JSlider" name="sldNumSamples">
               <Properties>
-                <Property name="majorTickSpacing" type="int" value="2000"/>
-                <Property name="maximum" type="int" value="10000"/>
-                <Property name="minorTickSpacing" type="int" value="500"/>
+                <Property name="majorTickSpacing" type="int" value="200"/>
+                <Property name="maximum" type="int" value="1000"/>
+                <Property name="minorTickSpacing" type="int" value="50"/>
                 <Property name="paintLabels" type="boolean" value="true"/>
                 <Property name="paintTicks" type="boolean" value="true"/>
                 <Property name="paintTrack" type="boolean" value="false"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
-                <Property name="value" type="int" value="1000"/>
+                <Property name="value" type="int" value="10"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[1000, 32767]"/>
                 </Property>
@@ -146,6 +146,7 @@
               </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="sldNumSamplesStateChanged"/>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="sldNumSamplesFocusLost"/>
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -157,7 +158,7 @@
               <Properties>
                 <Property name="columns" type="int" value="4"/>
                 <Property name="horizontalAlignment" type="int" value="4"/>
-                <Property name="text" type="java.lang.String" value="1000"/>
+                <Property name="text" type="java.lang.String" value="10"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[30, 16]"/>
@@ -170,8 +171,8 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfNumSamplesActionPerformed"/>
                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tfNumSamplesFocusLost"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfNumSamplesActionPerformed"/>
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -301,6 +302,7 @@
             <Component class="javax.swing.JSlider" name="sldTbs">
               <Properties>
                 <Property name="majorTickSpacing" type="int" value="20"/>
+                <Property name="minimum" type="int" value="20"/>
                 <Property name="minorTickSpacing" type="int" value="5"/>
                 <Property name="paintLabels" type="boolean" value="true"/>
                 <Property name="paintTicks" type="boolean" value="true"/>

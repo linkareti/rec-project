@@ -61,7 +61,6 @@ public class PGCustomizer extends AbstractCustomizer {
 		slidersTLabels.put(Integer.valueOf(110), new JLabel("11.0"));
 		slidersTLabels.put(Integer.valueOf(120), new JLabel("12.0"));
 		slidersTLabels.put(Integer.valueOf(135), new JLabel("13.5"));
-
 		sldAngle.setLabelTable(slidersTLabels);
 	}
 
