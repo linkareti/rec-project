@@ -92,6 +92,15 @@
                                     <type>jar</type>
                                     <outputDirectory>${project.build.directory}/client/resources/common</outputDirectory>
                                 </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.linkare</groupId>
+                                    <artifactId>builder</artifactId>
+                                    <version>${project.version}</version>
+                                    <classifier>multicast</classifier>
+                                    <type>zip</type>
+                                    <destFileName>multicast.zip</destFileName>
+                                    <outputDirectory>${project.build.directory}/multicast/resources</outputDirectory>
+                                </artifactItem>
                             </artifactItems>
                             <stripVersion>true</stripVersion>
                         </configuration>
