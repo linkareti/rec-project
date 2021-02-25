@@ -6,7 +6,7 @@
     </formats>
     <includeBaseDirectory>false</includeBaseDirectory>
     <fileSets>
-        <fileSet>
+        <!-- <fileSet>
             <directory>${project.parent.basedir}/build/java/jars/multicast/</directory>
             <outputDirectory>basic/multicast</outputDirectory>
             <includes>
@@ -113,6 +113,49 @@
                 <include>**/*.sh</include>
             </includes>
             <fileMode>0755</fileMode>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/build/java/jars/multicast/</directory>
+            <outputDirectory>pendulum/multicast</outputDirectory>
+            <includes>
+                <include>ELabMulticastController.jar</include>
+                <include>ReCCommon.jar</include>
+                <include>ReCMulticastController.jar</include>
+                <include>lib/**</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/build/java/jars/multicast/pendulum</directory>
+            <outputDirectory>pendulum/multicast</outputDirectory>
+            <includes>
+                <include>etc/**</include>
+            </includes>
+            <excludes>
+                <exclude>etc/jmxremote.password</exclude>
+            </excludes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/build/java/jars/multicast/pendulum</directory>
+            <outputDirectory>pendulum/multicast</outputDirectory>
+            <includes>
+                <include>etc/jmxremote.password</include>
+            </includes>
+            <fileMode>0600</fileMode>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/build/java/jars/multicast/pendulum</directory>
+            <outputDirectory>pendulum</outputDirectory>
+            <includes>
+                <include>**/*.sh</include>
+            </includes>
+            <fileMode>0755</fileMode>
+        </fileSet> -->
+        <fileSet>
+            <directory>${project.parent.basedir}/dist/java</directory>
+            <outputDirectory>.</outputDirectory>
+            <includes>
+                <include>multicast*.zip</include>
+            </includes>
         </fileSet>
     </fileSets>
 </assembly>
