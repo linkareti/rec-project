@@ -15,5 +15,7 @@ deployment/compose/.settings/
 elab/.settings/
 rec.build.all/.settings/
 rec/.settings/
+rec.web/src/main/resources-rec
+rec.web/src/main/webapp/client
 
 
