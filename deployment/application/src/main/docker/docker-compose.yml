@@ -8,3 +8,7 @@ services:
     build:
       context: server
     image: ${repo}/${simplifiedGroupId}/payara-${payara.docker.version}:${project.version}
+  multicast:
+    build:
+      context: multicast
+    image: ${repo}/${simplifiedGroupId}/multicast:${project.version}
