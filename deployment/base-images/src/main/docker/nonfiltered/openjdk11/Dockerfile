@@ -10,6 +10,7 @@ FROM docker-thirdparty.linkare.com/python:3.9.1-slim-buster
 ENV APPNAME="" \
     APPCMD="" \
     APPUSER="" \
+    WORKDIR="" \
     JAVA_HOME="/opt/java/openjdk11"
 
 ENV PATH=$PATH:${JAVA_HOME}/bin
@@ -26,6 +27,8 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 RUN chmod +x /docker-entrypoint.sh
+
+RUN useradd -m elab
 
 COPY resources/supervisord.conf /etc/supervisor/supervisord.conf
 
