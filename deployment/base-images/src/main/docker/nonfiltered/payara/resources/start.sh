@@ -30,7 +30,6 @@ ASADMIN_BASE_CMD="${PAYARA_DIR}/bin/asadmin --interactive=false --user ${ADMIN_U
 
 # Create password aliases
 echo 'create-password-alias --passwordfile /run/secrets/as_recdb.secret rec_db' >> $POSTBOOT_COMMANDS
-echo 'create-password-alias --passwordfile /run/secrets/as_gftimerdb.secret gftimer_db' >> $POSTBOOT_COMMANDS
 echo 'create-password-alias --passwordfile /run/secrets/as_mail.secret elab_mail' >> $POSTBOOT_COMMANDS
 # Create needed resources
 echo "add-resources ${PAYARA_DIR}/glassfish/domains/production/config/payara-resources.xml" >> $POSTBOOT_COMMANDS

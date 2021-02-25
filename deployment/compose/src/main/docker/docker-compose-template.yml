@@ -12,20 +12,17 @@ services:
       - webswing-connection.secret
     volumes:
       - ws-logs:/opt/webswing/logs:rw
-  
-  # Standalone webswing admin console
-  # webswing-admin:
-  #   image: ${repo}/${simplifiedGroupId}/base-images/webswing-admin-${webswing.version}-${openjdk.version}:${project.version}
-  #   restart: always
-  #   environment:
-  #     WEBSWING_HOST: "elab-client-webswing"
-  #     WEBSWING_PORT: "8080"
-  #     WEBSWING_WEBSOCKET_PORT: "8080"
-  #     WEBSWING_SECRET_FILE: "/run/secrets/webswing-connection.secret"
-  #   secrets:
-  #     - webswing-connection.secret
-  #   volumes:
-  #     - ws-logs:/var/opt/logs:ro
+    labels:
+      # HTTP (80)
+      - "traefik.http.routers.webswing-http.entrypoints=web"
+      - "traefik.http.routers.webswing-http.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.webswing-http.middlewares=webswing-redir-http"
+      - "traefik.http.services.webswing-http.loadbalancer.server.port=8080"
+      - "traefik.http.middlewares.webswing-redir-http.redirectscheme.scheme=https"
+      # HTTPS (443)
+      - "traefik.http.routers.webswing-https.entrypoints=web-secure"
+      - "traefik.http.routers.webswing-https.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.webswing-https.tls=true"
 
   elab-server-payara:
     image: ${repo}/${simplifiedGroupId}/payara-${payara.docker.version}:${project.version}
@@ -33,7 +30,7 @@ services:
       jvm-options: '-XX\:+UnlockExperimentalVMOptions:-XX\:+UseContainerSupport:-XX\:MaxRAMPercentage=1:-Xms1g:-Xmx2g'
       REC_DB_HOST: 'rec-database'
       REC_DB_PORT: '3306'
-      GFTIMER_DB_HOST: 'gftimer-database'
+      GFTIMER_DB_HOST: 'rec-database'
       GFTIMER_DB_PORT: '3306'
       MULTICAST_HOST: 'elab-multicast'
       MULTICAST_PORT: '9001'
@@ -41,11 +38,23 @@ services:
     secrets:
       - as_mail.secret
       - as_recdb.secret
-      - as_gftimerdb.secret
+      # - as_gftimerdb.secret
     depends_on:
       - rec-database
       - elab-multicast
-      - gftimer-database
+      # - gftimer-database
+    labels:
+      # HTTP (80)
+      - "traefik.http.routers.payara-http.entrypoints=web"
+      - "traefik.http.routers.payara-http.rule=PathPrefix(`/rec.web`)"
+      - "traefik.http.routers.payara-http.middlewares=payara-redir-http"
+      - "traefik.http.services.payara-http.loadbalancer.server.port=8080"
+      - "traefik.http.services.payara-http.loadbalancer.healthcheck.path=/rec.web"
+      - "traefik.http.middlewares.payara-redir-http.redirectscheme.scheme=https"  
+      # HTTPS (443)
+      - "traefik.http.routers.payara-https.entrypoints=web-secure"
+      - "traefik.http.routers.payara-https.rule=PathPrefix(`/rec.web`)"
+      - "traefik.http.routers.payara-https.tls=true"
 
   rec-database:
     image: docker-thirdparty.linkare.com/mysql:5.7.25
@@ -61,22 +70,8 @@ services:
       - db-rec:/var/lib/mysql:rw
     restart: unless-stopped
 
-  gftimer-database:
-    image: docker-thirdparty.linkare.com/mysql:5.7.25
-    secrets:
-      - rdb.secret
-      - dbgftimer.secret
-    environment:
-      MYSQL_ROOT_PASSWORD_FILE: '/run/secrets/rdb.secret'
-      MYSQL_USER: 'gftimer'
-      MYSQL_PASSWORD_FILE: '/run/secrets/dbgftimer.secret'
-      MYSQL_DATABASE: 'gftimer'
-    volumes:
-      - db-gftimer:/var/lib/mysql:rw
-    restart: unless-stopped
-
   elab-multicast:
-    image: ${repo}/${simplifiedGroupId}/base-images/openjdk-${openjdk.docker.version}:${project.version}
+    image: ${repo}/${simplifiedGroupId}/multicast:${project.version}
     healthcheck:
       test: pgrep java
       interval: 30s
@@ -85,19 +80,32 @@ services:
       start_period: 30s
     restart: unless-stopped
 
+  reverse-proxy:
+    image: ${repo}/${simplifiedGroupId}/base-images/traefik-${traefik.version}:${project.version}
+    command:
+      - --entrypoints.web.address=:80
+      - --entrypoints.web-secure.address=:443 #Declares the web-secure entrypoint in Traefik
+      - --providers.docker=true
+      - --api.insecure=true
+    ports:
+      - "80:80"
+      - "443:443"
+      # The Web UI (enabled by --api.insecure=true)
+      - "8080:8080"
+    restart: unless-stopped
+    volumes:
+      # So that Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
 secrets:
   dbrec.secret: {}
-  dbgftimer.secret: {}
   rdb.secret: {}
   as_mail.secret: {}
   as_recdb.secret: {}
-  as_gftimerdb.secret: {}
   webswing-connection.secret: {}
  
 volumes:
   db-rec:
     name: db-rec
-  db-gftimer:
-    name: db-gftimer
   ws-logs:
     name: webswing-logs

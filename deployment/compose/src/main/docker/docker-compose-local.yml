@@ -4,27 +4,6 @@ services:
     ports:
       - "18080:8080"
       - "18000:8000"
-    labels:
-      - traefik.http.routers.webswing-http.rule=PathPrefix(`/`)
-      - traefik.http.routers.webswing-http.service=webswing-http
-      - traefik.http.routers.webswing-http.tls=true
-      - traefik.http.routers.webswing-http.middlewares=redirect-to-https
-      - traefik.http.routers.webswing-http.entrypoints=web,web-secure
-      - traefik.http.services.webswing-http.loadbalancer.server.port=8080
-      - traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https
-      #- traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true
-    ##restart: "none"
-    ##privileged: true
-    #volumes:
-    #  #- /var/run/docker.sock:/var/run/docker.sock
-    #  - /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket
-
-  # Standalone webswing admin console
-  # webswing-admin:
-  #   ports:
-  #     - "38080:8080"
-  #   environment:
-  #     WEBSWING_PUBLIC_URL: "http://localhost:18080"
 
   elab-server-payara:
     ports:
@@ -33,28 +12,12 @@ services:
     volumes:
       # Allow real-time refresh (with rec.web build)
       - ${project.parent.basedir}/rec.web/target/rec.web.war:/opt/payara/deployments/rec.web.war
-    labels:
-      - traefik.http.routers.recweb-http.rule=PathPrefix(`/rec.web`)
-      - traefik.http.routers.recweb-http.service=recweb-http
-      - traefik.http.routers.recweb-http.tls=true
-      - traefik.http.routers.recweb-http.middlewares=redirect-to-https
-      - traefik.http.routers.recweb-http.entrypoints=web,web-secure
-      - traefik.http.services.recweb-http.loadbalancer.server.port=8080
-      - traefik.http.services.recweb-http.loadbalancer.healthcheck.path=/rec.web
-      - traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https
-      #- traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true
 
   rec-database:
     ports:
       - "13306:3306"
     volumes:
       - ${project.build.directory}/resources/rec-schema.sql:/docker-entrypoint-initdb.d/rec-schema.sql
-    #restart: "none"
-
-  gftimer-database:
-    ports:
-      - "23306:3306"
-    volumes:
       - ${project.build.directory}/resources/gf_timer-schema.sql:/docker-entrypoint-initdb.d/gf_timer-schema.sql
     #restart: "none"
 
@@ -69,8 +32,6 @@ services:
       # Advanced
       - "25003:25003"
       - "9003:9003"
-    volumes:
-      - ${project.build.directory}/resources/multicast:/startup.d/
   
   elab-hardware-server:
     image: ${repo}/${simplifiedGroupId}/base-images/openjdk-${openjdk.docker.version}:${project.version}
@@ -89,35 +50,7 @@ services:
   #   image: ${repo}/${simplifiedGroupId}/base-images/streamer:${project.version}
   #   ports:
   #     - "8554:8554"
-
-  # elab.dev.linkare.com:
-  #   image: ${repo}/${simplifiedGroupId}/httpd-${httpd.version}:${project.version}
-  #   ports:
-  #     - "80:80"
-  #     - "443:443"
-  #   restart: unless-stopped
-  #   volumes:
-  #     - ${project.build.directory}/resources/sample/vhosts.d:/usr/local/apache2/conf/vhosts.d:ro
-  #     #- ${project.build.directory}/resources/sample/httpd.conf:/usr/local/apache2/conf/httpd.conf
-
-  reverse-proxy:
-    image: ${repo}/${simplifiedGroupId}/base-images/traefik-${traefik.version}:${project.version}
-    #command: --api.insecure=true --providers.docker
-    command:
-      - --entrypoints.web.address=:80
-      - --entrypoints.web-secure.address=:443 #Declares the web-secure entrypoint in Traefik
-      - --providers.docker=true
-      - --api.insecure=true
-    ports:
-      - "80:80"
-      - "443:443"
-      # The Web UI (enabled by --api.insecure=true)
-      - "8080:8080"
-    restart: unless-stopped
-    volumes:
-      # So that Traefik can listen to the Docker events
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-
+  
   nginx-fileserver:
     image: docker-thirdparty.linkare.com/nginx:1.19.6
     volumes:
@@ -125,26 +58,25 @@ services:
       # Allow real-time refresh (with rec.web build)
       - ${project.parent.basedir}/rec.web/target/rec.web/client/etc:/usr/share/nginx/html/rec.web/client/etc:ro
     labels:
-      - traefik.http.routers.nginx-http.rule=PathPrefix(`/rec.web/client`)
-      - traefik.http.routers.nginx-http.service=nginx-http
-      - traefik.http.routers.nginx-http.tls=true
-      - traefik.http.routers.nginx-http.middlewares=redirect-to-https
-      - traefik.http.routers.nginx-http.entrypoints=web,web-secure
-      - traefik.http.services.nginx-http.loadbalancer.server.port=80
-      - traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https
+      # HTTP (80)
+      - "traefik.http.routers.nginx-http.entrypoints=web"
+      - "traefik.http.routers.nginx-http.rule=PathPrefix(`/rec.web/client`)"
+      - "traefik.http.routers.nginx-http.middlewares=nginx-redir-http"
+      - "traefik.http.services.nginx-http.loadbalancer.server.port=80"
+      - "traefik.http.middlewares.nginx-redir-http.redirectscheme.scheme=https"
+      # HTTPS (443)
+      - "traefik.http.routers.nginx-https.entrypoints=web-secure"
+      - "traefik.http.routers.nginx-https.rule=PathPrefix(`/rec.web/client`)"
+      - "traefik.http.routers.nginx-https.tls=true"
       
 secrets:
    dbrec.secret:
      file: ${project.build.directory}/resources/rec-db.secret
-   dbgftimer.secret:
-     file: ${project.build.directory}/resources/gftimer-db.secret
    rdb.secret:
      file: ${project.build.directory}/resources/root-db.secret
    as_mail.secret:
      file: ${project.build.directory}/resources/asadmin_mail.secret
    as_recdb.secret:
      file: ${project.build.directory}/resources/asadmin_recdb.secret
-   as_gftimerdb.secret:
-     file: ${project.build.directory}/resources/asadmin_gftimerdb.secret
    webswing-connection.secret:
      file: ${project.build.directory}/resources/webswing-connection.secret
