@@ -419,22 +419,6 @@
 			</exclusions>
 			<optional>false</optional>
 		</dependency>
-			<exclusions>
-				<exclusion>
-					<artifactId>junit</artifactId>
-					<groupId>junit</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>ejb3-persistence</artifactId>
-					<groupId>org.hibernate</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>commons-logging</artifactId>
-					<groupId>commons-logging</groupId>
-				</exclusion>
-			</exclusions>
-			<optional>false</optional>
-		</dependency-->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
