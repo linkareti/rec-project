@@ -54,7 +54,9 @@ public class LaboratoryController extends AbstractController<Long, Laboratory, L
 
     @Override
     public String create() {
-        getCurrent().setImage(file.getContents());
+        if(getCurrent() != null && file != null && file.getContents().length > 0){
+            getCurrent().setImage(file.getContents());
+        }
         final String result = super.create();
         if (getCurrent().getState().isActive()) {
             LaboratoriesMonitor.getInstance().addOrUpdateLaboratory(getCurrent());
