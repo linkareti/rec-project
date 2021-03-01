@@ -1,19 +1,27 @@
 package com.linkare.rec.web.controller;
 
+import java.io.ByteArrayInputStream;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.component.UIComponent;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.faces.event.ActionEvent;
+import javax.faces.event.PhaseId;
 
 import com.linkare.rec.web.model.Laboratory;
 import com.linkare.rec.web.service.LaboratoryService;
 import com.linkare.rec.web.service.LaboratoryServiceLocal;
-import com.linkare.rec.web.util.LaboratoriesMonitor;
 import com.linkare.rec.web.util.ConstantUtils;
-import javax.faces.event.ActionEvent;
+import com.linkare.rec.web.util.LaboratoriesMonitor;
+
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
+import org.primefaces.model.UploadedFile;
 
 @ManagedBean(name = "laboratoryController")
 @RequestScoped
@@ -22,6 +30,8 @@ public class LaboratoryController extends AbstractController<Long, Laboratory, L
     private static final long serialVersionUID = 1L;
     @EJB(beanInterface = LaboratoryServiceLocal.class)
     private LaboratoryService service;
+
+    private UploadedFile file;
 
     @Override
     public final Laboratory getSelected() {
@@ -44,6 +54,7 @@ public class LaboratoryController extends AbstractController<Long, Laboratory, L
 
     @Override
     public String create() {
+        getCurrent().setImage(file.getContents());
         final String result = super.create();
         if (getCurrent().getState().isActive()) {
             LaboratoriesMonitor.getInstance().addOrUpdateLaboratory(getCurrent());
@@ -53,6 +64,7 @@ public class LaboratoryController extends AbstractController<Long, Laboratory, L
 
     @Override
     public String update() {
+        getCurrent().setImage(file.getContents());
         final String result = super.update();
         if (getCurrent().getState().isActive()) {
             LaboratoriesMonitor.getInstance().addOrUpdateLaboratory(getCurrent());
@@ -76,6 +88,42 @@ public class LaboratoryController extends AbstractController<Long, Laboratory, L
         LaboratoriesMonitor.getInstance().removeLaboratory(getCurrent());
     }
 
+    public UploadedFile getFile() {
+        return file;
+    }
+
+    public void setFile(UploadedFile file) {
+        this.file = file;
+    }
+
+    /**
+     * Method for showing the uploaded image
+     *
+     * @return StreamedContent
+     */
+    public StreamedContent getImageUploaded() {
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
+            // So, we're rendering the HTML. Return a stub StreamedContent so that it will generate right URL.
+            return new DefaultStreamedContent();
+        }
+
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        String laboratoryId = externalContext.getRequestParameterMap().get("laboratory");
+        if (laboratoryId == null || laboratoryId.isEmpty()) {
+            return null;
+        }
+
+        Laboratory laboratory = service.find(Long.valueOf(laboratoryId));
+
+        if (laboratory.getImage() == null || laboratory.getImage().length < 1) {
+            return null;
+        }
+
+        return new DefaultStreamedContent(new ByteArrayInputStream(laboratory.getImage()));
+    }
+
     @FacesConverter(value = "laboratoryConverter", forClass = Laboratory.class)
     public static class LaboratoryConverter implements Converter {
 
@@ -84,8 +132,10 @@ public class LaboratoryController extends AbstractController<Long, Laboratory, L
             if (value == null || value.length() == 0) {
                 return null;
             }
-            LaboratoryController controller = (LaboratoryController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null,
-                    "laboratoryController");
+            LaboratoryController controller =
+                    (LaboratoryController)facesContext.getApplication().getELResolver().getValue(
+                            facesContext.getELContext(), null,
+                            "laboratoryController");
             return controller.service.find(getKey(value));
         }
 
@@ -103,11 +153,12 @@ public class LaboratoryController extends AbstractController<Long, Laboratory, L
                 return null;
             }
             if (object instanceof Laboratory) {
-                Laboratory o = (Laboratory) object;
+                Laboratory o = (Laboratory)object;
                 return getStringKey(o.getIdInternal());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "
-                        + Laboratory.class.getName());
+                throw new IllegalArgumentException(
+                        "object " + object + " is of type " + object.getClass().getName() + "; expected type: "
+                                + Laboratory.class.getName());
             }
         }
     }
