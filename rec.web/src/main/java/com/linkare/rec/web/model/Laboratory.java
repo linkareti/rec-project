@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -21,7 +22,7 @@ import com.linkare.commons.jpa.DefaultDomainObject;
 import com.linkare.commons.utils.EqualityUtils;
 
 /**
- * 
+ *
  * @author Joao
  */
 @Entity
@@ -72,9 +73,19 @@ public class Laboratory extends DefaultDomainObject {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "laboratory")
 	private List<Experiment> experiments = new ArrayList<Experiment>();
 
+	@Column(name = "REC_FACE_CONFIG_URL")
+	private String recFaceConfigUrl;
+
+	@Embedded
+	private GpsCoordinates gpsLocation = new GpsCoordinates();
+
+	@Lob
+	@Column(name = "IMAGE", length = 16384)
+	private byte[] image;
+
 	/**
 	 * Get the value of name
-	 * 
+	 *
 	 * @return the value of name
 	 */
 	public String getName() {
@@ -83,7 +94,7 @@ public class Laboratory extends DefaultDomainObject {
 
 	/**
 	 * Set the value of name
-	 * 
+	 *
 	 * @param name
 	 *            new value of name
 	 */
@@ -93,7 +104,7 @@ public class Laboratory extends DefaultDomainObject {
 
 	/**
 	 * Get the value of description
-	 * 
+	 *
 	 * @return the value of description
 	 */
 	public String getDescription() {
@@ -102,7 +113,7 @@ public class Laboratory extends DefaultDomainObject {
 
 	/**
 	 * Set the value of description
-	 * 
+	 *
 	 * @param description
 	 *            new value of description
 	 */
@@ -112,7 +123,7 @@ public class Laboratory extends DefaultDomainObject {
 
 	/**
 	 * Get the value of state
-	 * 
+	 *
 	 * @return the value of state
 	 */
 	public State getState() {
@@ -121,7 +132,7 @@ public class Laboratory extends DefaultDomainObject {
 
 	/**
 	 * Set the value of state
-	 * 
+	 *
 	 * @param state
 	 *            new value of state
 	 */
@@ -130,7 +141,7 @@ public class Laboratory extends DefaultDomainObject {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return the jmx url
 	 */
 	public String getJmxURL() {
@@ -138,7 +149,7 @@ public class Laboratory extends DefaultDomainObject {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param jmxIP
 	 */
 	public void setJmxURL(String jmxURL) {
@@ -146,7 +157,7 @@ public class Laboratory extends DefaultDomainObject {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return the jmx password
 	 */
 	public String getJmxPass() {
@@ -154,7 +165,7 @@ public class Laboratory extends DefaultDomainObject {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param the
 	 *            new jmx pass
 	 */
@@ -163,7 +174,7 @@ public class Laboratory extends DefaultDomainObject {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return the jmx user
 	 */
 	public String getJmxUser() {
@@ -171,7 +182,7 @@ public class Laboratory extends DefaultDomainObject {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param jmxUser
 	 */
 	public void setJmxUser(String jmxUser) {
@@ -180,7 +191,7 @@ public class Laboratory extends DefaultDomainObject {
 
 	/**
 	 * Get the value of experiments
-	 * 
+	 *
 	 * @return the value of experiments
 	 */
 	@XmlTransient
@@ -190,7 +201,7 @@ public class Laboratory extends DefaultDomainObject {
 
 	/**
 	 * Set the value of experiments
-	 * 
+	 *
 	 * @param experiments
 	 *            new value of experiments
 	 */
@@ -204,6 +215,30 @@ public class Laboratory extends DefaultDomainObject {
 
 	public void setAvailable(boolean available) {
 		this.available = available;
+	}
+
+	public String getRecFaceConfigUrl() {
+		return recFaceConfigUrl;
+	}
+
+	public void setRecFaceConfigUrl(String recFaceConfigUrl) {
+		this.recFaceConfigUrl = recFaceConfigUrl;
+	}
+
+	public GpsCoordinates getGpsLocation() {
+		return gpsLocation;
+	}
+
+	public void setGpsLocation(GpsCoordinates gpsLocation) {
+		this.gpsLocation = gpsLocation;
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 
 	@Override
