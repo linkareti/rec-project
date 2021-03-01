@@ -1,7 +1,7 @@
 version: '3.5'
 services:
   elab-client-webswing:
-    image: ${repo}/${simplifiedGroupId}/webswing-${webswing.version}-${openjdk.version}:${project.version}
+    image: ${repo}/${simplifiedGroupId}/rec.client-${webswing.version}-${openjdk.version}:${project.version}
     restart: always
     environment:
       XDG_RUNTIME_DIR: '/opt/webswing/.cache/xdgr'
@@ -25,7 +25,7 @@ services:
       - "traefik.http.routers.webswing-https.tls=true"
 
   elab-server-payara:
-    image: ${repo}/${simplifiedGroupId}/payara-${payara.docker.version}:${project.version}
+    image: ${repo}/${simplifiedGroupId}/rec.web-${payara.docker.version}:${project.version}
     environment:
       jvm-options: '-XX\:+UnlockExperimentalVMOptions:-XX\:+UseContainerSupport:-XX\:MaxRAMPercentage=1:-Xms1g:-Xmx2g'
       REC_DB_HOST: 'rec-database'
@@ -71,7 +71,7 @@ services:
     restart: unless-stopped
 
   elab-multicast:
-    image: ${repo}/${simplifiedGroupId}/multicast:${project.version}
+    image: ${repo}/${simplifiedGroupId}/rec.multicast-${openjdk.version}:${project.version}
     healthcheck:
       test: pgrep java
       interval: 30s

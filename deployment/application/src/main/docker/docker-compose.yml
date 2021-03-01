@@ -3,12 +3,12 @@ services:
   client:
     build:
       context: client
-    image: ${repo}/${simplifiedGroupId}/webswing-${webswing.version}-${openjdk.version}:${project.version}
+    image: ${repo}/${simplifiedGroupId}/rec.client-${webswing.version}-${openjdk.version}:${project.version}
   server:
     build:
       context: server
-    image: ${repo}/${simplifiedGroupId}/payara-${payara.docker.version}:${project.version}
+    image: ${repo}/${simplifiedGroupId}/rec.web-${payara.docker.version}:${project.version}
   multicast:
     build:
       context: multicast
-    image: ${repo}/${simplifiedGroupId}/multicast:${project.version}
+    image: ${repo}/${simplifiedGroupId}/rec.multicast-${openjdk.version}:${project.version}

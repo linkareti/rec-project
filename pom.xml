@@ -49,6 +49,8 @@
         <maven.clean.plugin.version>3.1.0</maven.clean.plugin.version>
         <maven.dependency.plugin.version>3.1.2</maven.dependency.plugin.version>
         <maven.exec.plugin.version>3.0.0</maven.exec.plugin.version>
+        <repo>docker-repo.elab.linkare.com</repo>
+        <hub>docker-hub.elab.linkare.com</hub>
     </properties>
 
     <modules>
