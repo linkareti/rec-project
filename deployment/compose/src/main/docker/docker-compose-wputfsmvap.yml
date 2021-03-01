@@ -32,7 +32,6 @@ secrets:
   webswing-connection.secret:
     file: /home/linkare/webswing-connection.secret
 
-
 volumes:
   db-rec:
     name: db-rec
