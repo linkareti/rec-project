@@ -2,7 +2,8 @@
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:ui="http://java.sun.com/jsf/facelets"
-        xmlns:p="http://primefaces.org/ui">
+        xmlns:p="http://primefaces.org/ui"
+        enctype="multipart/form-data">
     <p:panel id="panel" header="#{title}" style="margin-bottom:10px;">
         <h:inputHidden id="idInternal"
                        value="#{laboratoryController.selected.idInternal}"
@@ -92,6 +93,56 @@
                                      value="#{laboratoryController.selected.state.active}"
                                      disabled="#{operation == 'view'}"/>
             <p:message for="stateActive" />
+
+            <h:outputLabel value="#{bundle['laboratory.rec.face.config.url']}" for="recFaceConfigUrl" />
+            <p:inputText id="recFaceConfigUrl" value="#{laboratoryController.selected.recFaceConfigUrl}"
+                         title="#{bundle['laboratory.rec.face.config.url']}"
+                         label="#{bundle['laboratory.rec.face.config.url']}"
+                         rendered="#{operation != 'view'}"
+                         style="width: 350px"/>
+            <h:outputText id="recFaceConfigUrlOut" value="#{laboratoryController.selected.recFaceConfigUrl}" rendered="#{operation == 'view'}"/>
+            <p:message for="recFaceConfigUrl" />
+
+            <h:outputLabel value="#{bundle['gps.latitude']}" for="latitude" />
+            <p:inputText id="latitude"
+                         value="#{laboratoryController.selected.gpsLocation.latitude}"
+                         title="#{bundle['gps.latitude']}"
+                         label="#{bundle['gps.latitude']}"
+                         rendered="#{operation != 'view'}"/>
+            <h:outputText id="latitudeOut" value="#{laboratoryController.selected.gpsLocation.latitude}" rendered="#{operation == 'view'}"/>
+            <p:message for="latitude" />
+
+            <h:outputLabel value="#{bundle['gps.longitude']}" for="longitude" />
+            <p:inputText id="longitude"
+                         value="#{laboratoryController.selected.gpsLocation.longitude}"
+                         title="#{bundle['gps.longitude']}"
+                         label="#{bundle['gps.longitude']}"
+                         rendered="#{operation != 'view'}"
+            />
+            <h:outputText id="longitudeOut" value="#{laboratoryController.selected.gpsLocation.longitude}" rendered="#{operation == 'view'}"/>
+            <p:message for="longitude" />
+
+            <h:outputLabel value="#{bundle['laboratory.image']}" for="imageUpload" />
+            <p:fileUpload
+                    id="imageUpload"
+                    value="#{laboratoryController.file}"
+                    mode="simple"
+                    allowTypes="/(\.|\/)(jpe?g|png)$/"
+                    accept=".png, .jpeg, .jpg"
+                    sizeLimit="16384"
+                    title="#{bundle['laboratory.image']}"
+                    label="#{bundle['laboratory.image']}"
+                    rendered="#{operation != 'view'}"
+                    invalidSizeMessage="#{bundle['laboratory.image.error.size']}"
+                    invalidFileMessage="#{bundle['laboratory.image.error.type']}"/>
+
+            <p:graphicImage
+                    id="imageUploadOut"
+                    width="50"
+                    value="#{laboratoryController.imageUploaded}">
+                <f:param name="laboratory" value="#{laboratoryController.selected.idInternal}" />
+            </p:graphicImage>
+            <p:message for="imageUploadOut" />
         </h:panelGrid>
 
         <h:panelGroup rendered="#{operation == 'create'}">
