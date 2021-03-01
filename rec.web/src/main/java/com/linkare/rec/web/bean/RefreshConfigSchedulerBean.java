@@ -7,7 +7,7 @@ import javax.ejb.Schedule;
 public class RefreshConfigSchedulerBean {
 
     //Will run every minute
-    @Schedule(minute = "*", persistent = false)
+    @Schedule(minute = "*", hour="*", persistent = false)
     public void refreshConfigTest() {
         System.out.println("------ refreshConfigTest Acordei -----");
     }
