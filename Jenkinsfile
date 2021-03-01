@@ -111,7 +111,7 @@ properties(
 //     // String linkarePublicKeystorePath = "/var/jenkins_home/certs/linkare_public_codesign.jks"
 //     //def linkarePublicKeystoreAlias = "linkare_public_codesign"
 //     //String teste = "linkare_public_codesign"
-//     // String linkarePublicKeystorePass = "AskPass"
+//     // String linkarePublicKeystorePass = "ESHoJLItJ3"
 //     // String linkarePublicKeystoreType = "JKS"
 // )
 
@@ -156,7 +156,7 @@ node(''){
                 sh """
                     export LNK_PUB_KEYSTORE_PATH="/var/jenkins_home/certs/linkare_public_codesign.jks"
                     export LNK_PUB_KEYSTORE_ALIAS="linkare_public_codesign"
-                    export LNK_PUB_KEYSTORE_PASS="AskPass"
+                    export LNK_PUB_KEYSTORE_PASS="ESHoJLItJ3"
                     export LNK_PUB_KEYSTORE_TYPE="JKS"
                     export JAVA_HOME="/var/jenkins_home/tools/jdk-11.0.2"
                     export PATH="\${PATH}:/var/jenkins_home/tools/hudson.tasks.Ant_AntInstallation/Apache_Ant_1.10.1/bin"
