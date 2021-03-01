@@ -82,6 +82,16 @@
 		<filter-name>SessionTimeoutFilter</filter-name>
 		<url-pattern>*.faces</url-pattern>
 	</filter-mapping>
+	<filter>
+		<filter-name>PrimeFaces FileUpload Filter</filter-name>
+		<filter-class>
+			org.primefaces.webapp.filter.FileUploadFilter
+		</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>PrimeFaces FileUpload Filter</filter-name>
+		<servlet-name>Faces Servlet</servlet-name>
+	</filter-mapping>
 	<error-page>
 		<error-code>403</error-code>
 		<location>/AccessDenied.jsp</location>
