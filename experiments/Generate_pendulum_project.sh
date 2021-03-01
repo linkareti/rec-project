@@ -1,9 +1,26 @@
 #!/bin/bash
-#Copying tamplate project to new project folder
-if [[ ( ! $1 ) || ( ! $2 ) || ( ! $3 ) || ( ! $4 )]]; then
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+BLUE='\033[1;34m'
+YELLOW='\033[0;33m'
+NC='\033[0m' # No Color
+#Create experiment based on template
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+experiment_name=$1
+experiment_id=$2
+experiment_location=$3
+experiment_video=$4
+
+if [[ ( ! $experiment_name ) || ( ! $experiment_id ) || ( ! $experiment_location ) ]]; then
 	echo "Usage:"
 	echo ""
-	echo "Call the script using the SDP name of the Project in first place,the Alias in second place, in third ID and the location of the pendulum to finish , to be analysed, as arguments."
+	echo "./$(basename "$0") <experiment name> <experiment ID> <Location> <Video Location>"
+	echo ""
+	echo "experiment name - Name of the experiment (e.g. worldpendulum)"
+	echo "experiment ID - ID of the experiment (e.g. ELAB_WORLD_PENDULUM_CCVALG)"
+	echo "Location - Pendulum location (e.g. Faro)"
+	echo "(optional) Video Location - URL to the video (e.g. rtsp://elabmc.ist.utl.pt:80/wp_ccvalg.sdp)"
 	echo ""
 	echo "Thank You!"
 	echo "Bye....."
@@ -12,20 +29,72 @@ if [[ ( ! $1 ) || ( ! $2 ) || ( ! $3 ) || ( ! $4 )]]; then
 fi
 
 echo "--------------------------------------------------------"
-#$1 SDP NAME /$2 Alias  /$3 ID /$4 location
-class="$(tr '[:lower:]' '[:upper:]' <<< ${2:0:1})${2:1}"
 
-cp ./worldpendulum_2 ./$2 -r
-find $2 -name 'worldpendulum' -exec rename 's/worldpendulum/'$2'/g' {} + > /dev/null 2>&1
-#find $1 -iname '*world*pendulum*' -exec rename 's/world*pendulum*/'$2'/g' {} + > /dev/null 2>&1
-#find $1 -iname '*world_pendulum*' -exec rename 's/world_pendulum*/'$2'/g' {} + > /dev/null 2>&1
-#find $1 -iname '*worldpendulum*' -exec rename 's/*worldpendulum*/'$2'/g' {} + > /dev/null 2>&1
+pushd ${DIR}
+# Create structure based on template project
+printf "${BLUE}Creating ${experiment_name} based on wptemplate\n${NC}"
+cp -r ./wptemplate ${experiment_name}
+if [ $? -ne 0 ]; then
+	printf "${RED}An error occured while creating ${experiment_name}\n${NC}"
+	exit 1
+else
+	printf "${GREEN}Directory created sucessfully\n${NC}"
+fi
 
-mv ./$2/src/java/client/pt/utl/ist/elab/client/$2/resources/worldpendulum_background.jpg ./$2/src/java/client/pt/utl/ist/elab/client/$2/resources/$2_background.jpg
-mv ./$2/src/java/client/pt/utl/ist/elab/client/$2/resources/worldpendulum_iconified.jpg ./$2/src/java/client/pt/utl/ist/elab/client/$2/resources/$2_iconified.jpg
-find $2 -type f -exec sed -i 's/worldpendulum_ccvalg.sdp/'$1'/g' {} + > /dev/null 2>&1
-find $2 -type f -exec sed -i 's/worldpendulum/'$2'/g' {} + > /dev/null 2>&1
-find $2 -type f -exec sed -i 's/ELAB_WORLD_PENDULUM_CCVALG/'$3'/g' {} + > /dev/null 2>&1
-sed -i 's/Faro/'$4'/g' ./$2/src/java/client/pt/utl/ist/elab/client/$2/resources/messages_en.properties
-sed -i 's/Faro/'$4'/g' ./$2/src/java/client/pt/utl/ist/elab/client/$2/resources/messages.properties
-sed -i 's/Faro/'$4'/g' ./$2/src/java/server/pt/utl/ist/elab/driver/$2/HardwareInfo.xml
+# Replace needed experiment pattern
+printf "${BLUE}Replacing patterns at template files\n${NC}"
+find ${experiment_name} -name 'worldpendulum' -exec rename 's/worldpendulum/'${experiment_name}'/g' {} + > /dev/null 2>&1
+
+# Replace directory names
+for dir in $(find $experiment_name -type d -name worldpendulum); do
+	printf "${BLUE}Renaming $dir into $(dirname $dir)/${experiment_name}\n${NC}"
+	mv $dir $(dirname $dir)/${experiment_name}
+	if [ $? -ne 0 ]; then
+		printf "${RED}An error occured while renaming directories\n${NC}"
+		exit 1
+	else
+		printf "${GREEN}Directory renamed sucessfully\n${NC}"
+	fi
+done
+
+if [ -z ${experiment_video} ]; then
+	printf "${YELLOW}Video URL not defined so setting it blank\n${NC}"
+	find ${experiment_name} -type f -exec sed -i 's#--experiment_video_url--##g' {} + > /dev/null 2>&1
+else
+	printf "${BLUE}Replacing video URL with desired one \n${NC}"
+	find ${experiment_name} -type f -exec sed -i 's#--experiment_video_url--#'$experiment_video'#g' {} + > /dev/null 2>&1
+fi
+
+printf "${BLUE}Replacing experiment name in files\n${NC}"
+find ${experiment_name} -type f -exec sed -i 's/worldpendulum/'${experiment_name}'/g' {} + > /dev/null 2>&1
+printf "${BLUE}Replacing experiment ID in files\n${NC}"
+find ${experiment_name} -type f -exec sed -i 's/ELAB_WORLD_PENDULUM_CCVALG/'${experiment_id}'/g' {} + > /dev/null 2>&1
+
+pushd ${experiment_name}/src/java/
+
+printf "${BLUE}Renaming worldpendulum_background.jpg\n${NC}"
+mv client/pt/utl/ist/elab/client/${experiment_name}/resources/worldpendulum_background.jpg client/pt/utl/ist/elab/client/${experiment_name}/resources/${experiment_name}_background.jpg
+if [ $? -ne 0 ]; then
+	printf "${RED}An error occured while renaming file\n${NC}"
+	exit 1
+else
+	printf "${GREEN}File renamed sucessfully\n${NC}"
+fi
+
+printf "${BLUE}Renaming worldpendulum_iconified.jpg\n${NC}"
+mv client/pt/utl/ist/elab/client/${experiment_name}/resources/worldpendulum_iconified.jpg client/pt/utl/ist/elab/client/${experiment_name}/resources/${experiment_name}_iconified.jpg
+if [ $? -ne 0 ]; then
+	printf "${RED}An error occured while renaming file\n${NC}"
+	exit 1
+else
+	printf "${GREEN}File renamed sucessfully\n${NC}"
+fi
+
+printf "${BLUE}Replacing experiment location (${experiment_location}) in files\n${NC}"
+sed -i 's/Faro/'${experiment_location}'/g' client/pt/utl/ist/elab/client/${experiment_name}/resources/messages_en.properties
+sed -i 's/Faro/'${experiment_location}'/g' client/pt/utl/ist/elab/client/${experiment_name}/resources/messages.properties
+
+printf "${BLUE}Replacing experiment location (${experiment_location}) in HardwareInfo.xml\n${NC}"
+sed -i 's/Faro/'${experiment_location}'/g' server/pt/utl/ist/elab/driver/${experiment_name}/HardwareInfo.xml
+
+popd
