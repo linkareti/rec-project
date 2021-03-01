@@ -58,17 +58,46 @@ for dir in $(find $experiment_name -type d -name worldpendulum); do
 done
 
 if [ -z ${experiment_video} ]; then
-	printf "${YELLOW}Video URL not defined so setting it blank\n${NC}"
+	printf "${YELLOW}######### WARNING #########\n${NC}"
+	printf "${YELLOW}Video URL is not defined\n${NC}"
+	printf "${YELLOW}url.video property is not going to be set\n${NC}"
+	printf "${YELLOW}Keep this information for future reference\n${NC}"
+	printf "${YELLOW}######### WARNING #########\n${NC}"
 	find ${experiment_name} -type f -exec sed -i 's#--experiment_video_url--##g' {} + > /dev/null 2>&1
+	if [ $? -ne 0 ]; then
+		printf "${RED}An error occured while replacing patterns\n${NC}"
+		exit 1
+	else
+		printf "${GREEN}Patterns replaced successfully\n${NC}"
+	fi
 else
 	printf "${BLUE}Replacing video URL with desired one \n${NC}"
 	find ${experiment_name} -type f -exec sed -i 's#--experiment_video_url--#'$experiment_video'#g' {} + > /dev/null 2>&1
+	if [ $? -ne 0 ]; then
+		printf "${RED}An error occured while replacing patterns\n${NC}"
+		exit 1
+	else
+		printf "${GREEN}Patterns replaced successfully\n${NC}"
+	fi
 fi
 
 printf "${BLUE}Replacing experiment name in files\n${NC}"
 find ${experiment_name} -type f -exec sed -i 's/worldpendulum/'${experiment_name}'/g' {} + > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+	printf "${RED}An error occured while replacing patterns\n${NC}"
+	exit 1
+else
+	printf "${GREEN}Patterns replaced successfully\n${NC}"
+fi
+
 printf "${BLUE}Replacing experiment ID in files\n${NC}"
 find ${experiment_name} -type f -exec sed -i 's/ELAB_WORLD_PENDULUM_CCVALG/'${experiment_id}'/g' {} + > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+	printf "${RED}An error occured while replacing patterns\n${NC}"
+	exit 1
+else
+	printf "${GREEN}Patterns replaced successfully\n${NC}"
+fi
 
 pushd ${experiment_name}/src/java/
 
@@ -90,11 +119,31 @@ else
 	printf "${GREEN}File renamed sucessfully\n${NC}"
 fi
 
-printf "${BLUE}Replacing experiment location (${experiment_location}) in files\n${NC}"
+printf "${BLUE}Replacing experiment location (${experiment_location}) in messages_en.properties\n${NC}"
 sed -i 's/Faro/'${experiment_location}'/g' client/pt/utl/ist/elab/client/${experiment_name}/resources/messages_en.properties
+if [ $? -ne 0 ]; then
+	printf "${RED}An error occured while replacing patterns\n${NC}"
+	exit 1
+else
+	printf "${GREEN}Patterns replaced successfully\n${NC}"
+fi
+
+printf "${BLUE}Replacing experiment location (${experiment_location}) in messages.properties\n${NC}"
 sed -i 's/Faro/'${experiment_location}'/g' client/pt/utl/ist/elab/client/${experiment_name}/resources/messages.properties
+if [ $? -ne 0 ]; then
+	printf "${RED}An error occured while replacing patterns\n${NC}"
+	exit 1
+else
+	printf "${GREEN}Patterns replaced successfully\n${NC}"
+fi
 
 printf "${BLUE}Replacing experiment location (${experiment_location}) in HardwareInfo.xml\n${NC}"
 sed -i 's/Faro/'${experiment_location}'/g' server/pt/utl/ist/elab/driver/${experiment_name}/HardwareInfo.xml
+if [ $? -ne 0 ]; then
+	printf "${RED}An error occured while replacing patterns\n${NC}"
+	exit 1
+else
+	printf "${GREEN}Patterns replaced successfully\n${NC}"
+fi
 
 popd
