@@ -5,6 +5,6 @@
     <display toolTipBundleKey="wputfsmvap$display.graph.period.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wputfsmvap$display.graph.period.title" classLocationBundleKey="wputfsmvap$display.graph.period.loc" order="0"/>
     <display toolTipBundleKey="wputfsmvap$display.graph.g.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wputfsmvap$display.graph.g.title" classLocationBundleKey="wputfsmvap$display.graph.g.loc" order="0"/>
     <localizationBundle name="wputfsmvap" location="recresource:///pt/utl/ist/elab/client/wputfsmvap/resources/messages"/>
-    <mediaConfig videoLocation="wputfsmvap$url.video" offlinePlay="true" canSave="true" order="0"/>
+    <mediaConfig videoLocation="wputfsmvap$url.video" offlinePlay="false" canSave="true" order="0"/>
     <webResource toolTipLocationBundleKey="http://groups.ist.utl.pt/wwwelab/wiki/index.php?title=P%C3%AAndulo_Mundial" internalBrowser="false" iconLocationBundleKey="" order="0"/>
 </apparatus>
