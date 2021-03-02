@@ -1,0 +1,10 @@
+
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="wptraining$tip.wptraining" location="ELAB_WORLD_PENDULUM_TRAINING" iconLocationBundleKey="wptraining$icon.wptraining" headerDisplayClassLocationBundleKey="" displayStringBundleKey="wptraining$title.wptraining" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="wptraining$background.wptraining" descriptionStringBundleKey="wptraining$description.wptraining" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="wptraining$customizer.wptraining" order="0">
+    <display toolTipBundleKey="wptraining$display.table.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="wptraining$display.table.title" classLocationBundleKey="wptraining$display.table.loc" order="0"/>
+	<display toolTipBundleKey="wptraining$display.graph.histogram.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wptraining$display.graph.histogram.title" classLocationBundleKey="wptraining$display.graph.histogram.loc" order="0"/>
+    <display toolTipBundleKey="wptraining$display.graph.period.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wptraining$display.graph.period.title" classLocationBundleKey="wptraining$display.graph.period.loc" order="0"/>
+    <display toolTipBundleKey="wptraining$display.graph.g.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wptraining$display.graph.g.title" classLocationBundleKey="wptraining$display.graph.g.loc" order="0"/>
+    <localizationBundle name="wptraining" location="recresource:///pt/utl/ist/elab/client/wptraining/resources/messages"/>
+    <mediaConfig videoLocation="wptraining$url.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="http://groups.ist.utl.pt/wwwelab/wiki/index.php?title=P%C3%AAndulo_Mundial" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+</apparatus>
