@@ -28,3 +28,7 @@ services:
     build:
       context: traefik
     image: ${repo}/${simplifiedGroupId}/${artifactId}/traefik-${traefik.version}:${project.version}
+  liquibase:
+    build:
+      context: liquibase
+    image: ${repo}/${simplifiedGroupId}/${artifactId}/liquibase-${liquibase.version}:${project.version}

@@ -105,6 +105,25 @@
                             <stripVersion>true</stripVersion>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>unpack-thirdparty-dependencies</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>com.linkare</groupId>
+                                    <artifactId>rec.web</artifactId>
+                                    <version>${project.version}</version>
+                                    <classifier>database</classifier>
+                                    <type>zip</type>
+                                    <outputDirectory>${project.build.directory}/upgrade-db/resources/changelog</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
         </plugins>

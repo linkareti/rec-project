@@ -12,3 +12,7 @@ services:
     build:
       context: multicast
     image: ${repo}/${simplifiedGroupId}/rec.multicast-${openjdk.version}:${project.version}
+  liquibase:
+    build:
+      context: upgrade-db
+    image: ${repo}/${simplifiedGroupId}/rec.upgrade-db-${liquibase.version}:${project.version}

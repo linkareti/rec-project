@@ -51,6 +51,8 @@
         <maven.exec.plugin.version>3.0.0</maven.exec.plugin.version>
         <repo>docker-repo.elab.linkare.com</repo>
         <hub>docker-hub.elab.linkare.com</hub>
+        <liquibase.version>3.5.3</liquibase.version>
+        <jdbc.mysql.connector.version>8.0.13</jdbc.mysql.connector.version>
     </properties>
 
     <modules>

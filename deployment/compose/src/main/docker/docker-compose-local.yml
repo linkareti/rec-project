@@ -17,8 +17,8 @@ services:
     ports:
       - "13306:3306"
     volumes:
-      - ${project.build.directory}/resources/rec-schema.sql:/docker-entrypoint-initdb.d/rec-schema.sql
-      - ${project.build.directory}/resources/gf_timer-schema.sql:/docker-entrypoint-initdb.d/gf_timer-schema.sql
+     - ${project.build.directory}/resources/rec-schema.sql:/docker-entrypoint-initdb.d/rec-schema.sql
+     - ${project.build.directory}/resources/gf_timer-schema.sql:/docker-entrypoint-initdb.d/gf_timer-schema.sql
     #restart: "none"
 
   elab-multicast:
@@ -68,6 +68,23 @@ services:
       - "traefik.http.routers.nginx-https.entrypoints=web-secure"
       - "traefik.http.routers.nginx-https.rule=PathPrefix(`/rec.web/client`)"
       - "traefik.http.routers.nginx-https.tls=true"
+
+  # upgrade-db:
+  #   image: ${repo}/${simplifiedGroupId}/rec.upgrade-db-${liquibase.version}:${project.version}
+  #   secrets:
+  #     - dbrec.secret
+  #   environment:
+  #     - TZ=Europe/Lisbon
+  #     - TARGET_DB=rec
+  #     - DB_HOST=rec-database
+  #     - DB_PORT=3306
+  #     - DB_USER=rec
+  #     - DB_PASS_FILE=/run/secrets/dbrec.secret
+  #     #- DUMP_SQL=""
+  #     #- FORCE_UNLOCK=""
+  #     #- RESET_CKSUMS=""
+  #     - LOGGING_LEVEL=info
+  #     - CHANGELOG_FILE=/changelog/db.changelog-master.xml
       
 secrets:
    dbrec.secret:

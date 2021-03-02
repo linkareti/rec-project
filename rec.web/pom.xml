@@ -505,6 +505,10 @@
 				<directory>src/main/resources-rec</directory>
 				<filtering>false</filtering>
 			</resource>
+			<resource>
+				<directory>db</directory>
+				<filtering>false</filtering>
+			</resource>
 		</resources>
 		<finalName>${project.artifactId}</finalName>
 		<plugins>
@@ -773,6 +777,8 @@
                 <configuration>
                     <descriptors>
                         <descriptor>${project.basedir}/src/main/resources/assemblies/client-config.xml</descriptor>
+						<!-- Assembly database changelog files -->
+						<descriptor>${project.basedir}/src/main/resources/assemblies/db.xml</descriptor>
                     </descriptors>
                 </configuration>
                 <executions>
