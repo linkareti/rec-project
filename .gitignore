@@ -25,3 +25,4 @@ rec/lib/java/hardwareserver/*.jar
 build.properties
 /bin/
 .directory
+nbproject
