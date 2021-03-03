@@ -30,6 +30,7 @@
                          style="width: 350px"/>
             <h:outputText id="descriptionOut" value="#{laboratoryController.selected.description}" rendered="#{operation == 'view'}"/>
             <p:message for="description" />
+
             <h:outputLabel value="#{bundle['laboratory.jmx.url']}"
                            for="jmxUrl" />
             <p:inputText id="jmxUrl"
@@ -70,6 +71,7 @@
                          style="width: 350px"/>
             <h:outputText id="stateLabelOut" value="#{laboratoryController.selected.state.label}" rendered="#{operation == 'view'}"/>
             <p:message for="stateLabel" />
+
             <h:outputLabel value="#{bundle['laboratory.state.helpMessage']}"
                            for="stateHelpMessage" />
             <p:inputText id="stateHelpMessage"
@@ -100,8 +102,10 @@
                          label="#{bundle['laboratory.rec.face.config.url']}"
                          rendered="#{operation != 'view'}"
                          style="width: 350px"/>
-            <h:outputText id="recFaceConfigUrlOut" value="#{laboratoryController.selected.recFaceConfigUrl}" rendered="#{operation == 'view'}"/>
-            <p:message for="recFaceConfigUrl" />
+            <h:outputText id="recFaceConfigUrlOut"
+                          value="#{laboratoryController.selected.recFaceConfigUrl}"
+                          rendered="#{operation == 'view'}"/>
+            <p:message for="stateActive" />
 
             <h:outputLabel value="#{bundle['gps.latitude']}" for="latitude" />
             <p:inputText id="latitude"
@@ -109,7 +113,9 @@
                          title="#{bundle['gps.latitude']}"
                          label="#{bundle['gps.latitude']}"
                          rendered="#{operation != 'view'}"/>
-            <h:outputText id="latitudeOut" value="#{laboratoryController.selected.gpsLocation.latitude}" rendered="#{operation == 'view'}"/>
+            <h:outputText id="latitudeOut"
+                          value="#{laboratoryController.selected.gpsLocation.latitude}"
+                          rendered="#{operation == 'view'}"/>
             <p:message for="latitude" />
 
             <h:outputLabel value="#{bundle['gps.longitude']}" for="longitude" />
@@ -117,9 +123,10 @@
                          value="#{laboratoryController.selected.gpsLocation.longitude}"
                          title="#{bundle['gps.longitude']}"
                          label="#{bundle['gps.longitude']}"
-                         rendered="#{operation != 'view'}"
-            />
-            <h:outputText id="longitudeOut" value="#{laboratoryController.selected.gpsLocation.longitude}" rendered="#{operation == 'view'}"/>
+                         rendered="#{operation != 'view'}"/>
+            <h:outputText id="longitudeOut"
+                          value="#{laboratoryController.selected.gpsLocation.longitude}"
+                          rendered="#{operation == 'view'}"/>
             <p:message for="longitude" />
 
             <h:outputLabel value="#{bundle['laboratory.image']}" for="imageUpload" />
@@ -135,14 +142,15 @@
                     rendered="#{operation != 'view'}"
                     invalidSizeMessage="#{bundle['laboratory.image.error.size']}"
                     invalidFileMessage="#{bundle['laboratory.image.error.type']}"/>
-
             <p:graphicImage
                     id="imageUploadOut"
                     width="150"
-                    value="#{laboratoryController.imageUploaded}">
-                <f:param name="laboratory" value="#{laboratoryController.selected.idInternal}" />
+                    value="#{laboratoryController.imageUploaded}"
+                    style="border: solid;"
+                    rendered="#{laboratoryController.imageAvailable}">
+                <f:param name="laboratory" value="#{laboratoryController.selected.idInternal}"/>
             </p:graphicImage>
-            <p:message for="imageUploadOut" />
+            <p:message for="imageUpload" />
         </h:panelGrid>
 
         <h:panelGroup rendered="#{operation == 'create'}">
