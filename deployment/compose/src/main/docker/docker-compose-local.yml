@@ -9,9 +9,11 @@ services:
     ports:
       - "28080:8080"
       - "24848:4848"
+    environment:
+      DEVELOPMENT_MODE: ${development.mode}
     volumes:
       # Allow real-time refresh (with rec.web build)
-      - ${project.parent.basedir}/rec.web/target/rec.web.war:/opt/payara/deployments/rec.web.war
+      - ${project.build.directory}/resources/autodeploy:/autodeploy
 
   rec-database:
     ports:

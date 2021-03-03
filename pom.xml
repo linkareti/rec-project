@@ -53,15 +53,11 @@
         <hub>docker-hub.elab.linkare.com</hub>
         <liquibase.version>3.5.3</liquibase.version>
         <jdbc.mysql.connector.version>8.0.13</jdbc.mysql.connector.version>
+        <development.mode>""</development.mode>
     </properties>
 
     <modules>
-        <module>rec</module>
-        <module>elab</module>
-        <module>rec.build.all</module>
         <module>rec.web</module>
-        <module>deployment/base-images</module>
-        <module>deployment/application</module>
         <module>deployment/compose</module>
     </modules>
 
@@ -140,5 +136,33 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>docker</id>
+            <activation>
+                <property>
+                    <name>!skipDockerBuild</name>
+                </property>
+            </activation>
+            <modules>
+                <module>deployment/base-images</module>
+                <module>deployment/application</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>ant</id>
+            <activation>
+                <property>
+                    <name>!skipAntBuild</name>
+                </property>
+            </activation>
+            <modules>
+                <module>rec</module>
+                <module>elab</module>
+                <module>rec.build.all</module>
+            </modules>
+        </profile>
+    </profiles>
 
 </project>

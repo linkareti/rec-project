@@ -7,9 +7,12 @@ ENV REC_DB_HOST="" \
     GFTIMER_DB_PORT="" \
     JVM_OPTIONS="" \
     MULTICAST_HOST="" \
-    MULTICAST_PORT=""
+    MULTICAST_PORT="" \
+    DEVELOPMENT_MODE=""
 
 COPY --chown=payara:payara resources/start.sh ${SCRIPT_DIR}/init_0_start.sh
 COPY --chown=payara:payara resources/payara-resources.xml ${PAYARA_DIR}/glassfish/domains/production/config/payara-resources.xml
 COPY --chown=payara:payara resources/mysql-connector-java.jar ${PAYARA_DIR}/glassfish/domains/production/lib/mysql-connector-java.jar
 COPY resources/dockerize /usr/local/bin/
+
+VOLUME [ "/autodeploy" ]

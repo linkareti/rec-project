@@ -10,6 +10,21 @@
     <artifactId>application</artifactId>
     <packaging>pom</packaging>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.linkare</groupId>
+            <artifactId>rec.web</artifactId>
+            <version>${project.version}</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>com.linkare</groupId>
+            <artifactId>builder</artifactId>
+            <version>${project.version}</version>
+            <type>pom</type>
+        </dependency>
+    </dependencies>
+
     <name>Application Docker images</name>
     <description>Application Docker images</description>
 
