@@ -11,4 +11,12 @@ import com.linkare.rec.web.model.Laboratory;
  */
 public interface LaboratoryService extends BusinessService<Laboratory, Long> {
     public List<Laboratory> findAllActive();
+
+    /**
+     * Find a laboratory by it's name
+     *
+     * @param name Name of the Laboratory
+     * @return Laboratory
+     */
+    Laboratory findByName(String name);
 }

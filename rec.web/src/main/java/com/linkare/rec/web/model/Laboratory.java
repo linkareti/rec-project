@@ -30,7 +30,8 @@ import com.linkare.commons.utils.EqualityUtils;
 @NamedQueries({
 		@NamedQuery(name = Laboratory.FIND_ALL_QUERYNAME, query = Laboratory.FIND_ALL_QUERY),
 		@NamedQuery(name = Laboratory.COUNT_ALL_QUERYNAME, query = Laboratory.COUNT_ALL_QUERY),
-		@NamedQuery(name = Laboratory.FIND_ALL_ACTIVE_QUERYNAME, query = Laboratory.FIND_ALL_ACTIVE_QUERY) })
+		@NamedQuery(name = Laboratory.FIND_ALL_ACTIVE_QUERYNAME, query = Laboratory.FIND_ALL_ACTIVE_QUERY),
+		@NamedQuery(name = Laboratory.FIND_BY_NAME_QUERYNAME, query = Laboratory.FIND_BY_NAME) })
 @XmlAccessorType(XmlAccessType.PROPERTY)
 public class Laboratory extends DefaultDomainObject {
 
@@ -47,6 +48,10 @@ public class Laboratory extends DefaultDomainObject {
 	public static final String FIND_ALL_ACTIVE_QUERYNAME = "Laboratory.findAllActive";
 
 	public static final String FIND_ALL_ACTIVE_QUERY = "Select l from Laboratory l where l.state.active = true order by l.name";
+
+	public static final String FIND_BY_NAME_QUERYNAME = "Laboratory.findByName";
+
+	public static final String FIND_BY_NAME = "Select l from Laboratory l where l.name = :name";
 
 	@Column(name = "NAME", unique = true, insertable = true, updatable = true)
 	private String name;

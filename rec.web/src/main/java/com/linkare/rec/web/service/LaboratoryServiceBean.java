@@ -8,9 +8,11 @@ import java.util.List;
 
 import javax.ejb.Local;
 import javax.ejb.Stateless;
-import javax.persistence.Query;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import com.linkare.rec.web.model.Laboratory;
 
@@ -65,5 +67,21 @@ public class LaboratoryServiceBean extends BusinessServiceBean<Laboratory, Long>
     public List<Laboratory> findAllActive() {
 	final Query q = getEntityManager().createNamedQuery(FIND_ALL_ACTIVE_QUERYNAME);
 	return q.getResultList();
+    }
+
+    @Override
+    public Laboratory findByName(String name) {
+        TypedQuery<Laboratory> query = getEntityManager().createNamedQuery(Laboratory.FIND_BY_NAME_QUERYNAME,
+                Laboratory.class);
+        query.setParameter("name", name);
+        return getSingleOrNullResult(query);
+    }
+
+    private <T> T getSingleOrNullResult(TypedQuery<T> query) {
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 }
