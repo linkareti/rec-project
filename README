@@ -106,5 +106,10 @@ $ mvn clean package -Dmaven.test.skip=true -Djarsigner.alias="REC" -Dbuild.envir
 Next builds you can run with this command:
 $ mvn clean package -Dmaven.test.skip=true -Djarsigner.alias="REC" -Dbuild.environment=local -DskipDockerBuild -DskipAntBuild -Dhot.deploy.enabled
 
+# Deploy at repository
+$ mvn clean deploy -Dmaven.test.skip=true -Djarsigner.alias="REC" -Dbuild.environment=local
+
 # TODO - Use existent liquibase scripts instead of .sql files
 # TODO - Create liquibase scripts to add development user for rec.web backoffice access
+# Sometimes we need to install librxtx-java
+/usr/share/java/RXTXcomm-2.2pre2.jar
