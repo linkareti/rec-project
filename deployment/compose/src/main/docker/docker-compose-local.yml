@@ -1,11 +1,13 @@
 version: '3.5'
 services:
   elab-client-webswing:
+    image: ${repo}/${simplifiedGroupId}/rec.client-${webswing.version}-${openjdk.version}:${project.version}
     ports:
       - "18080:8080"
       - "18000:8000"
 
   elab-server-payara:
+    image: ${repo}/${simplifiedGroupId}/rec.web-${payara.docker.version}:${project.version}
     ports:
       - "28080:8080"
       - "24848:4848"
@@ -16,6 +18,7 @@ services:
       - ${project.build.directory}/resources/autodeploy:/autodeploy
 
   rec-database:
+    image: ${repo}/${simplifiedGroupId}/rec.database:${project.version}
     ports:
       - "13306:3306"
     volumes:
@@ -24,6 +27,7 @@ services:
     #restart: "none"
 
   elab-multicast:
+    image: ${repo}/${simplifiedGroupId}/rec.multicast-${openjdk.version}:${project.version}
     ports:
       # Basic
       - "25001:25001"
@@ -87,6 +91,9 @@ services:
   #     #- RESET_CKSUMS=""
   #     - LOGGING_LEVEL=info
   #     - CHANGELOG_FILE=/changelog/db.changelog-master.xml
+
+  reverse-proxy:
+    image: ${repo}/${simplifiedGroupId}/base-images/traefik-${traefik.version}:${project.version}
       
 secrets:
    dbrec.secret:
@@ -97,5 +104,3 @@ secrets:
      file: ${project.build.directory}/resources/asadmin_mail.secret
    as_recdb.secret:
      file: ${project.build.directory}/resources/asadmin_recdb.secret
-   webswing-connection.secret:
-     file: ${project.build.directory}/resources/webswing-connection.secret

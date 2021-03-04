@@ -1,17 +1,10 @@
 version: '3.5'
 services:
   elab-client-webswing:
-    image: ${repo}/${simplifiedGroupId}/rec.client-${webswing.version}-${openjdk.version}:${project.version}
+    image: ${hub}/${simplifiedGroupId}/rec.client-${webswing.version}-${openjdk.version}:${project.version}
     restart: always
     environment:
       XDG_RUNTIME_DIR: '/opt/webswing/.cache/xdgr'
-      WEBSWING_SECRET_FILE: "/run/secrets/webswing-connection.secret"
-      WEBSWING_ADMIN_HOST: "webswing-admin"
-      WEBSWING_ADMIN_PORT: "8080"
-    secrets:
-      - webswing-connection.secret
-    volumes:
-      - ws-logs:/opt/webswing/logs:rw
     labels:
       # HTTP (80)
       - "traefik.http.routers.webswing-http.entrypoints=web"
@@ -25,7 +18,7 @@ services:
       - "traefik.http.routers.webswing-https.tls=true"
 
   elab-server-payara:
-    image: ${repo}/${simplifiedGroupId}/rec.web-${payara.docker.version}:${project.version}
+    image: ${hub}/${simplifiedGroupId}/rec.web-${payara.docker.version}:${project.version}
     environment:
       jvm-options: '-XX\:+UnlockExperimentalVMOptions:-XX\:+UseContainerSupport:-XX\:MaxRAMPercentage=1:-Xms1g:-Xmx2g'
       REC_DB_HOST: 'rec-database'
@@ -57,7 +50,7 @@ services:
       - "traefik.http.routers.payara-https.tls=true"
 
   rec-database:
-    image: docker-thirdparty.linkare.com/mysql:5.7.25
+    image: ${hub}/${simplifiedGroupId}/rec.database:${project.version}
     secrets:
       - rdb.secret
       - dbrec.secret
@@ -71,7 +64,7 @@ services:
     restart: unless-stopped
 
   elab-multicast:
-    image: ${repo}/${simplifiedGroupId}/rec.multicast-${openjdk.version}:${project.version}
+    image: ${hub}/${simplifiedGroupId}/rec.multicast-${openjdk.version}:${project.version}
     healthcheck:
       test: pgrep java
       interval: 30s
@@ -81,7 +74,7 @@ services:
     restart: unless-stopped
 
   reverse-proxy:
-    image: ${repo}/${simplifiedGroupId}/base-images/traefik-${traefik.version}:${project.version}
+    image: ${hub}/${simplifiedGroupId}/base-images/traefik-${traefik.version}:${project.version}
     command:
       - --entrypoints.web.address=:80
       - --entrypoints.web-secure.address=:443 #Declares the web-secure entrypoint in Traefik
@@ -102,10 +95,7 @@ secrets:
   rdb.secret: {}
   as_mail.secret: {}
   as_recdb.secret: {}
-  webswing-connection.secret: {}
  
 volumes:
   db-rec:
     name: db-rec
-  ws-logs:
-    name: webswing-logs
