@@ -18,7 +18,7 @@ export PROCESSINGMANAGER_SYSPROPS="-Drec.processingmanager.threadPool.coresize=@
 
 EXPERIMENT_DRIVER_CLASS="-Dexperiment.driver.class=@experiment.driver.class@"
 # Se não forem detetadas automaticamente portas de serie podera ser configurado abaixo
-#EXPERIMENT_DRIVER_CLASS="${EXPERIMENT_DRIVER_CLASS} -Dgnu.io.rxtx.SerialPorts=@experiment.driver.port@"
+EXPERIMENT_DRIVER_CLASS="${EXPERIMENT_DRIVER_CLASS} -Dgnu.io.rxtx.SerialPorts=@experiment.driver.device@"
 export EXPERIMENT_DRIVER_CLASS
 
 #Define-se o HeadlessToolkit em vez do java.awt.headless=false, porque isso permite que mesmo as experiências que usam JMF possam aceder
