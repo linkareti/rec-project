@@ -1,0 +1,1 @@
+FROM docker-thirdparty.linkare.com/mysql:5.7.25

@@ -16,3 +16,7 @@ services:
     build:
       context: upgrade-db
     image: ${repo}/${simplifiedGroupId}/rec.upgrade-db-${liquibase.version}:${project.version}
+  database:
+    build:
+      context: database
+    image: ${repo}/${simplifiedGroupId}/rec.database:${project.version}
