@@ -21,10 +21,10 @@
     <properties>
         <!-- mvn dependencies version -->
         <org-omg.version>1.4.0</org-omg.version>
-        <jaxb-core.version>2.2.11</jaxb-core.version>
-        <jaxb-api.version>2.2.11</jaxb-api.version>
+        <jaxb-core.version>2.3.0.1</jaxb-core.version>
+        <jaxb-api.version>2.3.1</jaxb-api.version>
         <javax.activation.version>1.1.1</javax.activation.version>
-        <jaxb-impl.version>2.2.11</jaxb-impl.version>
+        <jaxb-impl.version>2.3.1</jaxb-impl.version>
         <toolchains.version>11</toolchains.version>
         <toolchains.provider>openjdk</toolchains.provider>
         <!-- docker related versions -->
