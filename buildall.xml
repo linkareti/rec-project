@@ -253,6 +253,7 @@
 					</replace>
 					<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" propertyFile="experiments/@{experiment.name}/etc/build.properties">
 						<replacefilter token="@experiment.driver.class@" property="experiment.driver.class" />
+						<replacefilter token="@experiment.driver.device@" property="experiment.driver.device" />
 						<replacefilter token="@additional.java.args@" property="additional.java.args" />
 					</replace>
 
@@ -284,6 +285,7 @@
 					</replace>
 					<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" propertyFile="experiments/@{experiment.name}/etc/build.properties">
 						<replacefilter token="@experiment.driver.class@" property="experiment.driver.class" />
+						<replacefilter token="@experiment.driver.device@" property="experiment.driver.device" />
 						<replacefilter token="@additional.java.args@" property="additional.java.args" />
 					</replace>
 
