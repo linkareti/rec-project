@@ -1,0 +1,10 @@
+version: '3.5'
+services:
+  elab-streamer-server:
+    image: aler9/rtsp-simple-server
+    container_name: rec-stream-server
+    ports:
+      - "80:80"
+    environment:
+      RTSP_RTSPPORT: 80
+      RTSP_PROTOCOLS: tcp
