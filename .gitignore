@@ -22,6 +22,7 @@ rec.web/src/main/webapp/client
 /target 
 elab/lib/java/driver/RXTXcomm.jar
 rec/lib/java/hardwareserver/*.jar
-build.properties
+/build.properties
 /bin/
-
+.directory
+nbproject

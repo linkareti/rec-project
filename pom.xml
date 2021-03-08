@@ -17,10 +17,10 @@
     <properties>
         <!-- mvn dependencies version -->
         <org-omg.version>1.4.0</org-omg.version>
-        <jaxb-core.version>2.2.11</jaxb-core.version>
-        <jaxb-api.version>2.2.11</jaxb-api.version>
+        <jaxb-core.version>2.3.0.1</jaxb-core.version>
+        <jaxb-api.version>2.3.1</jaxb-api.version>
         <javax.activation.version>1.1.1</javax.activation.version>
-        <jaxb-impl.version>2.2.11</jaxb-impl.version>
+        <jaxb-impl.version>2.3.1</jaxb-impl.version>
         <toolchains.version>11</toolchains.version>
         <toolchains.provider>openjdk</toolchains.provider>
         <!-- docker related versions -->
@@ -36,6 +36,8 @@
         <mysql.connector.version>8.0.13</mysql.connector.version>
         <openjfx.version>15.0.1</openjfx.version>
         <traefik.version>2.4.1</traefik.version>
+        <liquibase.version>3.5.3</liquibase.version>
+        <jdbc.mysql.connector.version>8.0.13</jdbc.mysql.connector.version>
         <!-- mvn execution properties -->
         <build.environment>local</build.environment>
         <maven.test.skip>true</maven.test.skip>
@@ -45,17 +47,20 @@
         <maven.clean.plugin.version>3.1.0</maven.clean.plugin.version>
         <maven.dependency.plugin.version>3.1.2</maven.dependency.plugin.version>
         <maven.exec.plugin.version>3.0.0</maven.exec.plugin.version>
+        <maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
+        <iterator.maven.plugin.version>0.1.0</iterator.maven.plugin.version>
+        <!-- docker related properties-->
+        <development.mode>""</development.mode>
+        <docker.phase.generate-resources>none</docker.phase.generate-resources>
+        <docker.phase.package>none</docker.phase.package>
+        <docker.phase.deploy>none</docker.phase.deploy>
         <repo>docker-repo.elab.linkare.com</repo>
         <hub>docker-hub.elab.linkare.com</hub>
+
     </properties>
 
     <modules>
-        <module>rec</module>
-        <module>elab</module>
-        <module>rec.build.all</module>
         <module>rec.web</module>
-        <module>deployment/base-images</module>
-        <module>deployment/application</module>
         <module>deployment/compose</module>
     </modules>
 
@@ -132,7 +137,90 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${maven-resources-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>copy-docker-build-resources</id>
+                        <phase>${docker.phase.generate-resources}</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/docker</directory>
+                                    <excludes>
+                                        <exclude>nonfiltered/**</exclude>
+                                    </excludes>
+                                    <filtering>true</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>src/main/docker/nonfiltered</directory>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>activate-docker-template-resources</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <file>
+                    <exists>src/main/docker/docker-compose-template.yml</exists>
+                </file>
+            </activation>
+            <properties>
+                <docker.phase.generate-resources>generate-resources</docker.phase.generate-resources>
+            </properties>
+        </profile>
+        <profile>
+            <id>activate-docker-build</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <file>
+                    <exists>src/main/docker/docker-compose.yml</exists>
+                </file>
+            </activation>
+            <properties>
+                <docker.phase.generate-resources>generate-resources</docker.phase.generate-resources>
+                <docker.phase.package>package</docker.phase.package>
+                <docker.phase.deploy>deploy</docker.phase.deploy>
+            </properties>
+        </profile>
+        <profile>
+            <id>docker</id>
+            <activation>
+                <property>
+                    <name>!skipDockerBuild</name>
+                </property>
+            </activation>
+            <modules>
+                <module>deployment/base-images</module>
+                <module>deployment/application</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>ant</id>
+            <activation>
+                <property>
+                    <name>!skipAntBuild</name>
+                </property>
+            </activation>
+            <modules>
+                <module>rec</module>
+                <module>elab</module>
+                <module>rec.build.all</module>
+            </modules>
+        </profile>
+    </profiles>
 
 </project>

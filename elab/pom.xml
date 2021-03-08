@@ -32,8 +32,8 @@
                     <artifactItems>
                         <artifactItem>
                             <groupId>org.rxtx</groupId>
-                            <artifactId>rxtxcomm</artifactId>
-                            <version>2.2pre2</version>
+                            <artifactId>rxtx</artifactId>
+                            <version>2.1.7</version>
                             <overWrite>true</overWrite>
                             <outputDirectory>${project.basedir}/lib/java/driver</outputDirectory>
                             <destFileName>RXTXcomm.jar</destFileName>

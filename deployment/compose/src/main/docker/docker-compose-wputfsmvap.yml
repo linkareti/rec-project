@@ -1,25 +1,19 @@
 version: '3.5'
 services:
-  elab-client-webswing:
-    image: ${hub}/${simplifiedGroupId}/rec.client-${webswing.version}-${openjdk.version}:${project.version}
-
-  elab-server-payara:
-    image: ${hub}/${simplifiedGroupId}/rec.web-${payara.docker.version}:${project.version}
-
   elab-multicast:
-    image: ${hub}/${simplifiedGroupId}/rec.multicast-${openjdk.version}:${project.version}
     ports:
-      - "25001:25001"
+      #- "25001:25001" # Only needed if rec.web outside this server
       - "9001:9001"
-
-  reverse-proxy:
-    image: ${hub}/${simplifiedGroupId}/base-images/traefik-${traefik.version}:${project.version}
+    networks:
+      default: 
+        aliases:
+          - elab-dev.vps.tecnico.ulisboa.pt
 
   rec-database:
     volumes:
       - /home/linkare/rec-schema.sql:/docker-entrypoint-initdb.d/rec-schema.sql:rw
       - /home/linkare/gf_timer-schema.sql:/docker-entrypoint-initdb.d/gf_timer-schema.sql:rw
- 
+
 secrets:
   as_mail.secret:
     file: /home/linkare/asadmin_mail.secret
@@ -29,12 +23,7 @@ secrets:
     file: /home/linkare/rec-db.secret
   rdb.secret:
     file: /home/linkare/root-db.secret
-  webswing-connection.secret:
-    file: /home/linkare/webswing-connection.secret
-
 
 volumes:
   db-rec:
     name: db-rec
-  ws-logs:
-    name: webswing-logs

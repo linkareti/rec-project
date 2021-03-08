@@ -60,6 +60,12 @@
                                     <outputDirectory>${project.build.directory}/webswing/resources</outputDirectory>
                                     <destFileName>vlc-slim.tar.gz</destFileName>
                                 </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.mysql.dev</groupId>
+                                    <artifactId>mysql-connector-java</artifactId>
+                                    <version>${jdbc.mysql.connector.version}</version>
+                                    <outputDirectory>${project.build.directory}/liquibase/resources</outputDirectory>
+                                </artifactItem>
                             </artifactItems>
                             <stripVersion>true</stripVersion>
                         </configuration>
@@ -93,11 +99,57 @@
                                     <type>tar.gz</type>
                                     <outputDirectory>${project.build.directory}/webswing/resources</outputDirectory>
                                 </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.github</groupId>
+                                    <artifactId>dockerize-alpine-linux-amd64</artifactId>
+                                    <version>${dockerize.version}</version>
+                                    <type>tar.gz</type>
+                                    <outputDirectory>${project.build.directory}/liquibase/resources</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.liquibase</groupId>
+                                    <artifactId>liquibase</artifactId>
+                                    <version>${liquibase.version}</version>
+                                    <classifier>bin</classifier>
+                                    <type>tar.gz</type>
+                                    <outputDirectory>${project.build.directory}/liquibase/resources/liquibase</outputDirectory>
+                                </artifactItem>
                             </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>build-docker-images</id>
+                        <phase>${docker.phase.package}</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <workingDirectory>${project.build.directory}</workingDirectory>
+                            <executable>docker-compose</executable>
+                            <commandlineArgs>--project-name ${git.project.prefix} build --force-rm --no-cache</commandlineArgs>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>push-docker-images-to-nexus</id>
+                        <phase>${docker.phase.deploy}</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <workingDirectory>${project.build.directory}</workingDirectory>
+                            <executable>docker-compose</executable>
+                            <commandlineArgs>push</commandlineArgs>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
+
 </project>

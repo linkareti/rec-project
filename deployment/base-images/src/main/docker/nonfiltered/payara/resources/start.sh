@@ -40,4 +40,26 @@ echo "add-resources ${PAYARA_DIR}/glassfish/domains/production/config/payara-res
 echo 'set resources.jdbc-resource.jdbc/__TimerPool.pool-name=rec' >> $POSTBOOT_COMMANDS
 echo 'set resources.mail-resource.mail/mailSession.password=${ALIAS=elab_mail}' >> $POSTBOOT_COMMANDS
 
+if [ "${DEVELOPMENT_MODE}" != "" ]; then
+    printf "${BLUE}Running in development mode:${NC}\n"
+    printf "${BLUE}Adding auto-deploy to POSTBOOT_COMMANDS${NC}\n"
+    echo 'set configs.config.server-config.admin-service.das-config.autodeploy-enabled=true'  >> $POSTBOOT_COMMANDS
+    printf "${BLUE}Creating symlink to rec.web.war file${NC}\n"
+    ln -sfn /autodeploy/rec.web.war /opt/payara/appserver/glassfish/domains/production/autodeploy/rec.web.war
+    if [ $? -ne 0 ]; then
+        printf "${RED}An error occured while trying to create symlink${NC}\n"
+        exit 1
+    else
+        printf "${GREEN}Symlink created successfully${NC}\n"
+    fi
+    printf "${BLUE}Removing default rec.web.war deploy file${NC}\n"
+    rm ${HOME_DIR}/deployments/rec.web.war
+    if [ $? -ne 0 ]; then
+        printf "${RED}An error occured while trying to delete file${NC}\n"
+        exit 1
+    else
+        printf "${GREEN}File deleted successfully${NC}\n"
+    fi
+fi
+
 ${cmd}

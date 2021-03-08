@@ -53,6 +53,12 @@
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
+        <dependency>
+            <groupId>com.linkare</groupId>
+            <artifactId>builder</artifactId>
+            <version>${project.version}</version>
+            <type>pom</type>
+        </dependency>
 		<!-- CDI (JSR-299) -->
 		<dependency>
 			<groupId>javax.enterprise</groupId>
@@ -187,7 +193,7 @@
 		<dependency>
 			<groupId>com.linkare</groupId>
 			<artifactId>jpa.security</artifactId>
-			<version>3.0.1-SNAPSHOT</version>
+			<version>1.0.1</version>
 			<scope>compile</scope>
 			<exclusions>
 				<exclusion>
@@ -217,7 +223,7 @@
 		<dependency>
 			<groupId>com.linkare</groupId>
 			<artifactId>rec-web-api</artifactId>
-			<version>3.0.0</version>
+			<version>3.0.1</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
@@ -507,6 +513,10 @@
 				<directory>src/main/resources-rec</directory>
 				<filtering>false</filtering>
 			</resource>
+			<resource>
+				<directory>db</directory>
+				<filtering>false</filtering>
+			</resource>
 		</resources>
 		<finalName>${project.artifactId}</finalName>
 		<plugins>
@@ -775,6 +785,10 @@
                 <configuration>
                     <descriptors>
                         <descriptor>${project.basedir}/src/main/resources/assemblies/client-config.xml</descriptor>
+						<!-- Assembly database changelog files -->
+						<descriptor>${project.basedir}/src/main/resources/assemblies/db.xml</descriptor>
+						<!-- FIXME - To be used by hotdeploy, permissions issue, please avoid using maven exec plugin with chmod! -->
+						<descriptor>${project.basedir}/src/main/resources/assemblies/autodeploy.xml</descriptor>
                     </descriptors>
                 </configuration>
                 <executions>
