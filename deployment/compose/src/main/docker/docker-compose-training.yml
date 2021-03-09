@@ -1,6 +1,7 @@
 version: '3.5'
 services:
   elab-multicast:
+    container_name: rec-multicast
     ports:
       #- "25001:25001" # Only needed if rec.web outside this server
       - "9001:9001"
@@ -10,9 +11,19 @@ services:
           - elab-dev.vps.tecnico.ulisboa.pt
 
   rec-database:
+    container_name: rec-db
     volumes:
       - /home/linkare/rec-schema.sql:/docker-entrypoint-initdb.d/rec-schema.sql:rw
       - /home/linkare/gf_timer-schema.sql:/docker-entrypoint-initdb.d/gf_timer-schema.sql:rw
+
+  elab-client-webswing:
+    container_name: rec-client
+  
+  elab-server-payara:
+    container_name: rec-web
+
+  reverse-proxy:
+    container_name: rec-proxy
 
 secrets:
   as_mail.secret:

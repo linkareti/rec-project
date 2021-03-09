@@ -10,6 +10,21 @@
     <artifactId>application</artifactId>
     <packaging>pom</packaging>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.linkare</groupId>
+            <artifactId>rec.web</artifactId>
+            <version>${project.version}</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>com.linkare</groupId>
+            <artifactId>builder</artifactId>
+            <version>${project.version}</version>
+            <type>pom</type>
+        </dependency>
+    </dependencies>
+
     <name>Application Docker images</name>
     <description>Application Docker images</description>
 
@@ -122,6 +137,36 @@
                                     <outputDirectory>${project.build.directory}/upgrade-db/resources/changelog</outputDirectory>
                                 </artifactItem>
                             </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>build-docker-images</id>
+                        <phase>${docker.phase.package}</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <workingDirectory>${project.build.directory}</workingDirectory>
+                            <executable>docker-compose</executable>
+                            <commandlineArgs>--project-name ${git.project.prefix} build --force-rm --no-cache</commandlineArgs>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>push-docker-images-to-nexus</id>
+                        <phase>${docker.phase.deploy}</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <workingDirectory>${project.build.directory}</workingDirectory>
+                            <executable>docker-compose</executable>
+                            <commandlineArgs>push</commandlineArgs>
                         </configuration>
                     </execution>
                 </executions>

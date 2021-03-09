@@ -14,6 +14,21 @@
     <name>Elab builder</name>
     <description>Elab Builder</description>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.linkare</groupId>
+            <artifactId>rec</artifactId>
+            <version>${project.version}</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>com.linkare</groupId>
+            <artifactId>elab-deps</artifactId>
+            <version>${project.version}</version>
+            <type>pom</type>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>

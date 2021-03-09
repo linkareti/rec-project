@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.linkare</groupId>
@@ -12,6 +13,21 @@
 
     <name>Docker compose runnables</name>
     <description>Docker compose runnables</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.linkare</groupId>
+            <artifactId>rec.web</artifactId>
+            <version>${project.version}</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>com.linkare</groupId>
+            <artifactId>builder</artifactId>
+            <version>${project.version}</version>
+            <type>pom</type>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
@@ -78,13 +94,6 @@
                                     <destFileName>hardwareserver.zip</destFileName>
                                     <outputDirectory>${project.build.directory}/resources/hardwareserver</outputDirectory>
                                 </artifactItem>
-                                <artifactItem>
-                                    <groupId>com.linkare</groupId>
-                                    <artifactId>rec.web</artifactId>
-                                    <version>${project.version}</version>
-                                    <type>war</type>
-                                    <outputDirectory>${project.build.directory}/resources</outputDirectory>
-                                </artifactItem>
                             </artifactItems>
                             <stripVersion>true</stripVersion>
                         </configuration>
@@ -105,6 +114,14 @@
                                     <classifier>client-config</classifier>
                                     <outputDirectory>${project.build.directory}/payara/resources</outputDirectory>
                                 </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.linkare</groupId>
+                                    <artifactId>rec.web</artifactId>
+                                    <version>${project.version}</version>
+                                    <type>zip</type>
+                                    <classifier>autodeploy</classifier>
+                                    <outputDirectory>${project.build.directory}/resources/autodeploy</outputDirectory>
+                                </artifactItem>
                             </artifactItems>
                         </configuration>
                     </execution>
@@ -113,4 +130,27 @@
         </plugins>
     </build>
 
+    <profiles>
+        <profile>
+            <id>noPurge</id>
+            <activation>
+                <property>
+                    <name>hot.deploy.enabled</name>
+                </property>
+            </activation>
+            <properties>
+                <development.mode>1</development.mode>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-clean-plugin</artifactId>
+                        <configuration>
+                            <excludeDefaultDirectories>true</excludeDefaultDirectories>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

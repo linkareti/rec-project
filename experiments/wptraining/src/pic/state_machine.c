@@ -29,7 +29,7 @@ void state_machine() {
 
 	if(sendIdFlag == 1 && state != STATE_SENDING_DATA) {
 		reset_idmsg_timer();
-		getIDstring_CHAR(buf);		//ELAB_WORLD_PENDULUM_TRAINING, ELAB_WORLD_PENDULUM_PLANETARIUM, etc
+		getIDstring_CHAR(buf);		//ELAB_WORLD_PENDULUM_CCVALG, ELAB_WORLD_PENDULUM_PLANETARIUM, etc
 		if(state == STATE_RESET)           printf("IDS\t%s\tRESETED\r", buf);
 		else if(state == STATE_STOPPED)    printf("IDS\t%s\tSTOPED\r", buf);
 		else if(state == STATE_CONFIGURED) printf("IDS\t%s\tCONFIGURED\r", buf);

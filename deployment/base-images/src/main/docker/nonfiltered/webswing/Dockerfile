@@ -52,10 +52,6 @@ COPY --from=vlc-sources /tmp/vlc-slim/usr/bin/vlc /usr/bin/vlc
 COPY --from=vlc-sources /tmp/vlc-slim/usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/
 COPY --from=vlc-sources /tmp/vlc-slim/usr/share/vlc/ /usr/share/vlc/
 
-RUN apt-get update \
-    && apt-get install --no-install-suggests --no-install-recommends -y xauth xvfb libxrender1 libxtst6 libxext6 fontconfig vim procps net-tools dbus-x11 \
-    && rm -rf /var/lib/apt/lists/*
-
 RUN useradd --create-home webswing \
     && mkdir -p /opt/webswing/.cache/xdgr \
                 /opt/webswing/logs \
@@ -65,15 +61,14 @@ RUN useradd --create-home webswing \
     
 WORKDIR /opt/webswing
 
-USER webswing
-
 EXPOSE 8080 8443 8000
 
 #-Djava.util.logging.config.file=/opt/webswing/rollpaper/etc/loggers.config.properties
 
 CMD [ "/opt/webswing/start.sh" ]
 
+RUN apt-get update \
+    && apt-get install --no-install-suggests --no-install-recommends -y xauth xvfb libxrender1 libxtst6 libxext6 fontconfig vim procps net-tools dbus-x11 \
+    && rm -rf /var/lib/apt/lists/*
 
-
-
-
+USER webswing
