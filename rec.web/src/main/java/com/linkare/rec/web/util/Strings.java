@@ -13,7 +13,7 @@ public final class Strings {
      * Checks if String  is null or empty
      *
      * @param string String
-     * @return
+     * @return true if the String is null or empty
      */
     public static boolean isNullOrEmpty(String string) {
         return string == null || string.isEmpty();
