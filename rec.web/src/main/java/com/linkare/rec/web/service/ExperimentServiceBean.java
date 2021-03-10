@@ -11,7 +11,13 @@ import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
+import com.linkare.rec.web.config.Apparatus;
 import com.linkare.rec.web.model.Experiment;
+import com.linkare.rec.web.model.Laboratory;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -22,7 +28,7 @@ import com.linkare.rec.web.model.Experiment;
 @Stateless(name = "ExperimentService")
 public class ExperimentServiceBean extends BusinessServiceBean<Experiment, Long> implements ExperimentService {
     
-//    private final static Logger LOGGER = LoggerFactory.getLogger(ExperimentServiceBean.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(ExperimentServiceBean.class);
     
     @Override
     public void create(final Experiment experiment) {
@@ -85,5 +91,49 @@ public class ExperimentServiceBean extends BusinessServiceBean<Experiment, Long>
             return null;
         }
 
+    }
+
+    @Override
+    public void createExperimentFromApparatus(Apparatus apparatus, Laboratory laboratory) {
+        Experiment experiment = new Experiment();
+
+        String toolTipBundleKey = apparatus.getToolTipBundleKey();
+        experiment.getState().setHelpMessage(toolTipBundleKey);
+
+        String displayStringBundleKey = apparatus.getDisplayStringBundleKey();
+        experiment.getState().setLabel(displayStringBundleKey);
+        experiment.getState().setUrl(apparatus.getLocation());
+
+        experiment.getState().setActive(true);
+        experiment.setDescription(
+                ReCResourceBundle.findStringOrDefault(displayStringBundleKey, displayStringBundleKey));
+        experiment.setName(
+                ReCResourceBundle.findStringOrDefault(displayStringBundleKey, displayStringBundleKey));
+        experiment.setExternalId(apparatus.getLocation());
+        experiment.setLaboratory(laboratory);
+        create(experiment);
+
+        LOGGER.info("Experiment {} created for Laboratory {}", experiment, laboratory);
+    }
+
+    @Override
+    public Experiment updateExperimentFromApparatus(Experiment experiment, Apparatus apparatus, Laboratory laboratory) {
+        if (experiment.getState().getHelpMessage() == null) {
+            String toolTipBundleKey = apparatus.getToolTipBundleKey();
+            experiment.getState().setHelpMessage(toolTipBundleKey);
+            LOGGER.info("toolTipBundleKey={}", toolTipBundleKey);
+        }
+        if (experiment.getState().getLabel() == null) {
+            experiment.getState().setLabel(apparatus.getDisplayStringBundleKey());
+            LOGGER.info("Experiment Label={}", experiment.getState().getLabel());
+        }
+        if (experiment.getState().getUrl() == null) {
+            experiment.getState().setUrl(apparatus.getLocation());
+            LOGGER.info("Experiment Label={}", experiment.getState().getUrl());
+        }
+        experiment.setLaboratory(laboratory);
+        experiment = edit(experiment);
+        LOGGER.info("Experiment {} updated from apparatus", experiment);
+        return experiment;
     }
 }
