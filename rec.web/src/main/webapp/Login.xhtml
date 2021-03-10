@@ -40,52 +40,17 @@
             </h:form>
             <h:form id="elab_launch_form" styleClass="elab_launch">
                 <h1><h:outputText value="#{bundle['rec.elab.title']}" /></h1>
-                <p:poll update="tabView" interval="10"
-                        listener="#{statusBean.updateLabStatus}" />
-                <p:accordionPanel id="tabView" var="lab" value="#{statusBean.labs}" dynamic="true" cache="true" activeIndex="-1">
-                    <p:ajax event="tabChange" listener="#{statusBean.onTabChange}" update="tableExperiments"/>
-                    <p:tab id="labTab" title="#{lab.description}" 
-                           titletip="#{(lab.available) ? statusBundle['tooltip.lab.available'] : statusBundle['tooltip.lab.unavailable'] }" 
-                           disabled="#{!lab.available}"
-                           titleStyleClass="#{(lab.available) ? 'ui-icon-available' : 'ui-icon-unavailable' }">  
-                        <p:scrollPanel mode="native" styleClass="scrollPanel" rendered="#{!empty statusBean.selectedLab}" >
-                            <p:dataTable id="tableExperiments" var="deployedExp"
-                                         value="#{statusBean.labExperiments}" rendered="#{lab.available}" style="margin-left: 10%">
+                <div>
+                	 <p:dataTable id="tableLabs" var="lab" value="#{statusBean.labs}" style="margin-left: 10%">
                                 <p:column >
-                                    <f:facet name="header">  
-                                        #{bundle['label.experiment.name']}
-                                    </f:facet>
-                                    <h:outputText value="#{deployedExp.experiment.name}" />
+                                   <h:commandButton styleClass="submit"
+                                     action="experiencesLogin"
+                                     value="#{lab.description}" >
+                        				<f:param name="laboratory" value="#{lab.name}" />
+                    			   </h:commandButton>
                                 </p:column>
-                                <p:column style="text-align: center;">
-                                    <f:facet name="header">  
-                                        #{bundle['label.state']}
-                                    </f:facet>
-                                    <h:graphicImage library="images" name="available.gif"
-                                                    rendered="#{deployedExp.labRunning}"
-                                                    title="#{statusBundle['tooltip.experiment.available']}" />
-                                    <h:graphicImage library="images" name="unavailable.gif"
-                                                    rendered="#{!deployedExp.labRunning}"
-                                                    title="#{statusBundle['tooltip.experiment.unavailable']}" />
-                                </p:column>
-                                <p:column style="text-align: center;">
-                                    <f:facet name="header">  
-                                        #{bundle['label.number.user']}
-                                    </f:facet>
-                                    <h:outputText value="#{deployedExp.numberOfUsers}"
-                                                  title="#{statusBundle['tooltip.experiment.users']}" />
-                                </p:column>
-                                <p:column style="width:120px; text-align: center; height: 50%;">
-                                    <a  href="#void" onclick="var dir = location.href.substring(0, location.href.lastIndexOf('/')+1); var url = dir + 'client/#{deployedExp.experiment.state.url}.jnlp'; window.open(url);" download="#{deployedExp.experiment.state.url}.jnlp"
-                                                  title="#{statusBundle['tooltip.experiment.launch']}" 
-                                                  rel="#{statusBundle['tooltip.experiment.launch']}" >
-                                        <h:graphicImage library="images" name="webstart.png" rendered="#{deployedExp.labRunning}"/>
-                                    </a>
-                                </p:column>
-                            </p:dataTable>
-                        </p:scrollPanel>
-                    </p:tab>  
-                </p:accordionPanel>
+                   </p:dataTable>
+                </div>
             </h:form>
             <h:form id="elab_launch_client" styleClass="elab_launch_client">
                 <h1><h:outputText value="#{bundle['rec.elab.title']}" /></h1>

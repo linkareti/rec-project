@@ -45,7 +45,7 @@ public class StatusBean implements Serializable {
     private ExperimentServiceLocal experimentService;
     private Map<String, List<Experiment>> activeExperiment = new HashMap<String, List<Experiment>>();
 
-    public List<MultiThreadLaboratoryWrapper> getLabs() {
+	public List<MultiThreadLaboratoryWrapper> getLabs() {
         if (labs == null) {
             labs = LaboratoriesMonitor.getInstance().getActiveLabs();
         }
@@ -61,46 +61,18 @@ public class StatusBean implements Serializable {
         this.selectedLabExperiments = null;
     }
 
-    public List<DeployedExperiment> getLabExperiments() {
-        getSelectedLab();
-        refreshExperiments();
-        return selectedLabExperiments;
-    }
+//    public List<DeployedExperiment> getLabExperiments() {
+//        getSelectedLab();
+//        refreshExperiments();
+//        return selectedLabExperiments;
+//    }
+//
+//    public void updateLabStatus() {
+//        labs = LaboratoriesMonitor.getInstance().getActiveLabs();
+//        refreshExperiments();
+//    }
 
-    public void updateLabStatus() {
-        labs = LaboratoriesMonitor.getInstance().getActiveLabs();
-        refreshExperiments();
-    }
-
-    public void refreshExperiments() {
-
-        if (selectedLab != null && selectedLab.isAvailable()) {
-            initActiveExperimentMap();
-            selectedLabExperiments = getDeployedExperiment(activeExperiment.get(selectedLab.getName()));
-
-            final MultiThreadLaboratoryWrapper laboratory = laboratoriesMonitor.getLaboratory(selectedLab.getName());
-
-            if (laboratory != null) {
-
-                final Map<String, MultiThreadDeployedExperimentWrapper> liveExperiments = laboratory.getLiveExperiments();
-                if (liveExperiments.size() > 0) {
-                    for (DeployedExperiment experiment : selectedLabExperiments) {
-                        String experimentName = experiment.getExperiment().getExternalId();
-                        MultiThreadDeployedExperimentWrapper mt = liveExperiments.get(experimentName);
-                        if (mt != null) {
-                            experiment.setState(mt.getState());
-                            experiment.setUsersConnected(mt.getUsersConnected());
-                        }
-                    }
-                }
-
-            }
-
-        } else {
-            selectedLabExperiments = Collections.emptyList();
-        }
-    }
-
+    
     private List<DeployedExperiment> getDeployedExperiment(final List<Experiment> experiment) {
         List<DeployedExperiment> result = Collections.emptyList();
 
@@ -126,10 +98,10 @@ public class StatusBean implements Serializable {
         }
     }
 
-    public void onTabChange(TabChangeEvent event) {
-        selectedLab = (MultiThreadLaboratoryWrapper) event.getData();
-        refreshExperiments();
-    }
+//    public void onTabChange(TabChangeEvent event) {
+//        selectedLab = (MultiThreadLaboratoryWrapper) event.getData();
+//        refreshExperiments();
+//    }
 
     public void listenerMethod(ClientInfoDTO clientInfo) {
         for (DeployedExperiment dpExperiment : selectedLabExperiments) {
