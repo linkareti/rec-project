@@ -26,3 +26,4 @@ rec/lib/java/hardwareserver/*.jar
 /bin/
 .directory
 nbproject
+rec.web/src/main/resources/wsdl_pp.php
