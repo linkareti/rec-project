@@ -17,6 +17,15 @@ services:
       - "traefik.http.routers.webswing-https.rule=PathPrefix(`/`)"
       - "traefik.http.routers.webswing-https.tls=true"
 
+  webswing-admin:
+    image: ${hub}/${simplifiedGroupId}/rec.client-admin-${webswing.version}-${openjdk.version}:${project.version}
+    restart: always
+    environment:
+      WEBSWING_HOST: elab-client-webswing
+      WEBSWING_WEBSOCKET_PORT: 8080
+      WEBSWING_SHARED_LOG_DIR: /var/opt/logs
+      WEBSWING_PUBLIC_URL: https://elab.dev.linkare.com
+
   elab-server-payara:
     image: ${hub}/${simplifiedGroupId}/rec.web-${payara.docker.version}:${project.version}
     environment:

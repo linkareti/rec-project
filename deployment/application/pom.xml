@@ -31,6 +31,25 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>com.googlecode.maven-download-plugin</groupId>
+                <artifactId>download-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-openjfx-to-client-resources-dir</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <url>https://gluonhq.com/download/javafx-${openjfx.version}-sdk-linux</url>
+                            <unpack>false</unpack>
+                            <outputDirectory>${project.build.directory}/client/resources</outputDirectory>
+                            <outputFileName>javafx-sdk.zip</outputFileName>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
@@ -50,16 +69,6 @@
                                     <type>war</type>
                                     <outputDirectory>${project.build.directory}/server/resources</outputDirectory>
                                 </artifactItem>
-                                <!-- https://mvnrepository.com/artifact/org.openjfx/javafx -->
-                                <artifactItem>
-                                    <groupId>io.openjfx</groupId>
-                                    <artifactId>openjfx</artifactId>
-                                    <version>${openjfx.version}</version>
-                                    <classifier>linux-x64_bin-sdk</classifier>
-                                    <type>zip</type>
-                                    <outputDirectory>${project.build.directory}/client/resources</outputDirectory>
-                                    <destFileName>javafx-sdk.zip</destFileName>
-                                </artifactItem>
                                 <!-- FIXME - Temporary setup for using locally -->
                                 <!-- Webswing -->
                                 <artifactItem>
@@ -72,13 +81,6 @@
                                     <destFileName>client.zip</destFileName>
                                 </artifactItem>
                                 <!-- Dependency libraries needed for running client experiments -->
-                                <artifactItem>
-                                    <groupId>org.openorb</groupId>
-                                    <artifactId>org-omg</artifactId>
-                                    <version>${org-omg.version}</version>
-                                    <type>jar</type>
-                                    <outputDirectory>${project.build.directory}/client/resources/common</outputDirectory>
-                                </artifactItem>
                                 <artifactItem>
                                     <groupId>com.sun.xml.bind</groupId>
                                     <artifactId>jaxb-core</artifactId>
@@ -135,6 +137,14 @@
                                     <classifier>database</classifier>
                                     <type>zip</type>
                                     <outputDirectory>${project.build.directory}/upgrade-db/resources/changelog</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.linkare</groupId>
+                                    <artifactId>rec</artifactId>
+                                    <version>${project.version}</version>
+                                    <classifier>client-external-libs</classifier>
+                                    <type>zip</type>
+                                    <outputDirectory>${project.build.directory}/client/resources/common</outputDirectory>
                                 </artifactItem>
                             </artifactItems>
                         </configuration>

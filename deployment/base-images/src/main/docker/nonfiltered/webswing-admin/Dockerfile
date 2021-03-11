@@ -15,8 +15,8 @@ ENV WEBSWING_HOST="" \
     WEBSWING_PORT="" \
     WEBSWING_WEBSOCKET_PORT="" \
     WEBSWING_SHARED_LOG_DIR="" \
-    WEBSWING_PUBLIC_URL=""
-
+    WEBSWING_PUBLIC_URL="" \
+    WEBSWING_SECRET=tTDyp4uKbbN6qhjyJ5iBuM8aZWs8aXtn5vwLfOHi3cPkujpDJPoYlo3ChCmhZKjvQ1mZeKefaObuSHOQaB9zBmrmfoyA4ctP20k25sS8emvlSOXv8vFWVFJrxrke0kC6
 
 COPY --from=base /tmp/admin/ /opt/webswing/
 COPY resources/webswing-admin.properties.j2 /templates/
