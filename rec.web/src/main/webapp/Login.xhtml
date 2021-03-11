@@ -9,63 +9,57 @@
     </ui:define>
     <ui:define name="body" id="auth">
         <div id="login">
-            <h:form styleClass="am_login">
-                <h1><h:outputText value="#{bundle['rec.web.title']}" /></h1>
-                <p:focus />
-                <h:panelGrid columns="3">
-                    <h:outputLabel value="#{bundle['user.name']}"/>
-                    <h:inputText id="login" styleClass="username"
-                                 value="#{authenticationBean.username}"
-                                 title="#{bundle['user.username']}" />
-                    <p:tooltip for="login" value="#{bundle['user.username']}" showEffect="fade" hideEffect="fade" />
-                    <h:outputText value="#{bundle['user.login.password']}"/>
-                    <h:inputSecret id="passwd" styleClass="password"
-                                   value="#{authenticationBean.password}"
-                                   title="#{bundle['user.login.password']}" />
-                    <p:tooltip for="passwd" value="#{bundle['user.login.password']}" showEffect="fade" hideEffect="fade" />
-                    <h:outputText value="#{bundle['app.loginDomain']}" />
-                    <h:selectOneMenu id="loginDomain" styleClass="loginDomain"
-                                     value="#{authenticationBean.domain}"
-                                     title="#{bundle['app.loginDomain']}">
-                        <f:selectItems value="#{loginDomainBean.loginDomains}" />
-                    </h:selectOneMenu>
-                    <p:tooltip for="loginDomain" value="#{bundle['app.loginDomain']}" showEffect="fade" hideEffect="fade" />
-                    <br />
-                    <h:panelGroup>
+            <div class="intro">
+                <h1><h:outputText value="#{bundle['rec.elab.title']}" /></h1>
+                <p>Please select a laboratory</p>
+            </div>
+            
+            <div class="elab_launch">
+                <h:form id="elab_launch_form" styleClass="laboratory experiment-select">
+                        <p:dataTable id="tableLabs" var="lab" value="#{statusBean.labs}" emptyMessage="No results to present">
+                               <p:column >
+                                  <h:commandButton styleClass="submit"
+                                    action="experiencesLogin"
+                                    value="#{lab.description}" >
+                                                <f:param name="laboratory" value="#{lab.name}" />
+                                   </h:commandButton>
+                               </p:column>
+                       </p:dataTable>
+                </h:form>
+            </div>
+            
+            <div class="sidemenu">
+                <h:form styleClass="am_login">
+                    <h1><h:outputText value="#{bundle['rec.web.title']}" /></h1>
+                    <h:panelGroup styleClass="login-form">
+                        <h:inputText id="login" styleClass="username"
+                                     value="#{authenticationBean.username}"
+                                     title="#{bundle['user.username']}"/>
+                        <p:watermark for="login" value="#{bundle['user.name']}" />
+                        <h:inputSecret id="passwd" styleClass="password"
+                                       value="#{authenticationBean.password}"
+                                       title="#{bundle['user.login.password']}" />
+                        <p:watermark for="passwd" value="#{bundle['user.login.password']}" />
+                        <h:selectOneMenu id="loginDomain" styleClass="loginDomain"
+                                         value="#{authenticationBean.domain}"
+                                         title="#{bundle['app.loginDomain']}">
+                            <f:selectItems value="#{loginDomainBean.loginDomains}" />
+                        </h:selectOneMenu>
                         <h:commandButton styleClass="submit"
                                          action="#{authenticationBean.login}"
                                          value="#{bundle['operation.login']}" />
                     </h:panelGroup>
-                </h:panelGrid>
-            </h:form>
-            <h:form id="elab_launch_form" styleClass="elab_launch">
-                <h1><h:outputText value="#{bundle['rec.elab.title']}" /></h1>
-                <div>
-                	 <p:dataTable id="tableLabs" var="lab" value="#{statusBean.labs}" style="margin-left: 10%">
-                                <p:column >
-                                   <h:commandButton styleClass="submit"
-                                     action="experiencesLogin"
-                                     value="#{lab.description}" >
-                        				<f:param name="laboratory" value="#{lab.name}" />
-                    			   </h:commandButton>
-                                </p:column>
-                   </p:dataTable>
+                </h:form>
+                <h:form id="elab_launch_client" styleClass="elab_launch_client">
+                    <h1><h:outputText value="#{bundle['rec.elab.title']}" /></h1>
+                    <a href="#void" onclick="var dir = location.href.substring(0, location.href.lastIndexOf('/')+1); var url = dir + 'client/elab-client.jnlp'; window.open(url);" download="elab-client.jnlp">
+                        <h:graphicImage library="images" name="webstart.png"/> 
+                    </a>
+                </h:form>
+                <div id="statusPanelFooter" class="statusPanelFooter">
+                    <!-- <a href="#{request.contextPath}/Faq.faces"><b>#{bundle['page.faq.title']}</b></a> | <a href="#{request.contextPath}/Requirements.faces"><b>#{bundle['page.requirements.title']}</b></a> -->
+                    <a href="#{bundle['page.faq.url']}">#{bundle['page.faq.title']}</a> <span class="separator">·</span> <a href="#{bundle['page.requirements.url']}">#{bundle['page.requirements.title']}</a> <span class="separator">·</span> <a href="mailto:elab@e-escola.pt" target="_blank">#{bundle['page.contact.title']}</a>
                 </div>
-            </h:form>
-            <h:form id="elab_launch_client" styleClass="elab_launch_client">
-                <h1><h:outputText value="#{bundle['rec.elab.title']}" /></h1>
-                <ul>
-                    <li>
-                        <a
-                                href="#void" onclick="var dir = location.href.substring(0, location.href.lastIndexOf('/')+1); var url = dir + 'client/elab-client.jnlp'; window.open(url);" download="elab-client.jnlp">
-
-                            <h:graphicImage library="images" name="webstart.png"/> 
-                        </a></li>
-                </ul>
-            </h:form>
-            <div id="statusPanelFooter" class="statusPanelFooter">
-                <!-- <a href="#{request.contextPath}/Faq.faces"><b>#{bundle['page.faq.title']}</b></a> | <a href="#{request.contextPath}/Requirements.faces"><b>#{bundle['page.requirements.title']}</b></a> -->
-		<a href="#{bundle['page.faq.url']}"><b>#{bundle['page.faq.title']}</b></a> | <a href="#{bundle['page.requirements.url']}"><b>#{bundle['page.requirements.title']}</b></a> | <a href="mailto:elab@e-escola.pt" target="_blank"><b>#{bundle['page.contact.title']}</b></a>
             </div>
         </div>
     </ui:define>
