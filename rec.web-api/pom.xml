@@ -15,6 +15,14 @@
 		<url>https://sventon.linkare.com/repos/svnroot/list/internal/rec-project/rec/trunk/rec.web-api</url>
 	</scm>
 
+	<repositories>
+		<repository>
+			<id>geomajas</id>
+			<name>Geomajas Repository</name>
+			<url>http://maven.geomajas.org/</url>
+		</repository>
+	</repositories>
+
 	<properties>
         <toolchains.version>11</toolchains.version>
         <toolchains.provider>openjdk</toolchains.provider>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+    <parent>
+		<groupId>com.linkare</groupId>
+		<artifactId>elab</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<artifactId>rec.web-thirdparty</artifactId>
+	<packaging>pom</packaging>
+	<name>rec.web-thirdparty</name>
+	<description>Module containing the dependencies needed for rec.web application that resides at another repositories</description>
+
+	<repositories>
+		<repository>
+			<id>primefaces</id>
+			<name>Primefaces Repository</name>
+			<url>https://repository.primefaces.org</url>
+		</repository>
+		<repository>
+			<id>jboss-third-party</id>
+			<name>JBoss 3rd-party Repository</name>
+			<url>https://repository.jboss.org/nexus/content/repositories/thirdparty-releases</url>
+		</repository>
+		<repository>
+			<id>geomajas</id>
+			<name>Geomajas Repository</name>
+			<url>http://maven.geomajas.org</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+		<!-- EJB -->
+		<dependency>
+			<groupId>org.jboss.ejb3</groupId>
+			<artifactId>jboss-ejb3-api</artifactId>
+			<scope>provided</scope>
+			<version>3.1.0</version>			<!--$NO-MVN-MAN-VER$ -->
+		</dependency>
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.faces</groupId>
+			<artifactId>jsf-api</artifactId>
+			<version>2.0.2-FCS</version>			<!--$NO-MVN-MAN-VER$-->
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.faces</groupId>
+			<artifactId>jsf-impl</artifactId>
+			<version>2.0.2-FCS</version>			<!--$NO-MVN-MAN-VER$-->
+			<scope>compile</scope>
+		</dependency>
+		<!-- FIXME - Remove when newer version of rec.web-api is released (dependency there)-->
+		<dependency>
+			<groupId>commonj.sdo</groupId>
+			<artifactId>commonj.sdo</artifactId>
+			<version>2.1.1</version>
+		</dependency>
+	</dependencies>
+</project>

@@ -4,7 +4,7 @@ COPY resources/*.zip resources/*.tar.gz /tmp/
 
 RUN mkdir -p /tmp/jdk11 \
     && tar xvfz /tmp/openjdk11.tar.gz -C /tmp/ \
-    && mv /tmp/openjdk*/* /tmp/jdk11
+    && mv /tmp/jdk*/* /tmp/jdk11
 
 FROM docker-thirdparty.linkare.com/python:3.9.1-slim-buster
 ENV APPNAME="" \

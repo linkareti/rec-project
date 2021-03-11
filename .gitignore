@@ -27,3 +27,4 @@ rec/lib/java/hardwareserver/*.jar
 .directory
 nbproject
 rec.web/src/main/resources/wsdl_pp.php
+rec/lib/java/common/rec-web-api.jar

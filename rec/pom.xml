@@ -14,39 +14,76 @@
     <name>Elab rec project</name>
     <description>Elab rec project</description>
 
-    <dependencies>
-        <dependency>
-            <groupId>javax.activation</groupId>
-            <artifactId>activation</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-        </dependency>
-    </dependencies>
-
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptors>
+                        <!-- FIXME - This dependencies should come from repository, not from GIT! FIX ASAP-->
+                        <descriptor>src/main/resources/assemblies/client.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>assembly-rec-client-files</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>copy-dependencies</id>
+                        <id>copy-thirdparty-dependencies</id>
                         <phase>generate-resources</phase>
                         <goals>
-                            <goal>copy-dependencies</goal>
+                            <goal>copy</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.basedir}/lib/java/hardwareserver</outputDirectory>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>javax.activation</groupId>
+                                    <artifactId>activation</artifactId>
+                                    <version>${javax.activation.version}</version>
+                                    <type>jar</type>
+                                    <outputDirectory>${project.basedir}/lib/java/hardwareserver</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.sun.xml.bind</groupId>
+                                    <artifactId>jaxb-core</artifactId>
+                                    <version>${jaxb-core.version}</version>
+                                    <type>jar</type>
+                                    <outputDirectory>${project.basedir}/lib/java/hardwareserver</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.sun.xml.bind</groupId>
+                                    <artifactId>jaxb-impl</artifactId>
+                                    <version>${jaxb-impl.version}</version>
+                                    <type>jar</type>
+                                    <outputDirectory>${project.basedir}/lib/java/hardwareserver</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>javax.xml.bind</groupId>
+                                    <artifactId>jaxb-api</artifactId>
+                                    <version>${jaxb-api.version}</version>
+                                    <type>jar</type>
+                                    <outputDirectory>${project.basedir}/lib/java/hardwareserver</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.linkare</groupId>
+                                    <artifactId>rec-web-api</artifactId>
+                                    <version>${rec.web-api.version}</version>
+                                    <type>jar</type>
+                                    <outputDirectory>${project.basedir}/lib/java/common</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                            <stripVersion>true</stripVersion>
                         </configuration>
                     </execution>
                 </executions>

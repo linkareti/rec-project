@@ -16,7 +16,7 @@ webswing.websocketUrlLoader.interval = 5
 
 # use this for webswing.websocketUrlLoader.type = (propertyFile|propertyFile_noReload)
 # comma-separated list of websocket URLs to webswing cluster servers
-webswing.server.websocketUrl = ws://elab-client-webswing:8080
+webswing.server.websocketUrl = ws://{{ .Env.WEBSWING_HOST }}:{{ .Env.WEBSWING_WEBSOCKET_PORT }}
 
 # use this for webswing.websocketUrlLoader.type = script
 # script that loads a comma-separated list of websocket URLs

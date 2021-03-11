@@ -20,3 +20,7 @@ services:
     build:
       context: database
     image: ${repo}/${simplifiedGroupId}/rec.database:${project.version}
+  client-admin:
+    build:
+      context: client-admin
+    image: ${repo}/${simplifiedGroupId}/rec.client-admin-${webswing.version}-${openjdk.version}:${project.version}

@@ -21,7 +21,7 @@ export REPOSITORY_SYSPROPS="-Drec.multicast.repository=@rec.multicast.repository
 export SYSPROP_BADWORD_REFRESH_TIME_LAP_MINUTES=-Drec.multicast.badwordmanager.refresh.lap.time.minutes=@rec.multicast.badwordmanager.refresh.lap.time.minutes@
 
 export RECCLASSPATH=$MULTICAST_BASE_DIR/lib/xml-apis.jar:$MULTICAST_BASE_DIR/lib/tools-1.4.0.jar:$MULTICAST_BASE_DIR/lib/openorb_orb-1.4.0.jar:$MULTICAST_BASE_DIR/lib/openorb_pss-1.4.0.jar:$MULTICAST_BASE_DIR/lib/openorb_ots-1.4.0.jar:$MULTICAST_BASE_DIR/lib/logkit.jar:$MULTICAST_BASE_DIR/lib/xercesImpl.jar:$MULTICAST_BASE_DIR/lib/avalon-framework.jar
-export MULTICAST_CLASSPATH=$MULTICAST_BASE_DIR/ReCMulticastController.jar:$MULTICAST_BASE_DIR/ELabMulticastController.jar:$MULTICAST_BASE_DIR/ReCCommon.jar:$MULTICAST_BASE_DIR/lib/rec.web-api.jar:$MULTICAST_BASE_DIR/lib/commons-i18n.jar:$MULTICAST_BASE_DIR/lib/commons-net.jar:$MULTICAST_BASE_DIR/lib/commons-0.0.1.jar:$MULTICAST_BASE_DIR/lib/glassfish/ejb-container.jar:$MULTICAST_BASE_DIR/lib/glassfish/appclient.security.jar:$MULTICAST_BASE_DIR/lib/openorb_orb_omg-1.4.0.jar
+export MULTICAST_CLASSPATH=$MULTICAST_BASE_DIR/ReCMulticastController.jar:$MULTICAST_BASE_DIR/ELabMulticastController.jar:$MULTICAST_BASE_DIR/ReCCommon.jar:$MULTICAST_BASE_DIR/lib/rec-web-api.jar:$MULTICAST_BASE_DIR/lib/commons-i18n.jar:$MULTICAST_BASE_DIR/lib/commons-net.jar:$MULTICAST_BASE_DIR/lib/commons-0.0.1.jar:$MULTICAST_BASE_DIR/lib/glassfish/ejb-container.jar:$MULTICAST_BASE_DIR/lib/glassfish/appclient.security.jar:$MULTICAST_BASE_DIR/lib/openorb_orb_omg-1.4.0.jar
 
 #export DEBUG="-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,address=60002,suspend=n"
 

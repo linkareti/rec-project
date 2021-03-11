@@ -1,7 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    
 
     <!-- New as 01/2021 -->
     <!-- To allow building with maven (incomplete) -->
@@ -21,20 +20,21 @@
         <jaxb-api.version>2.3.1</jaxb-api.version>
         <javax.activation.version>1.1.1</javax.activation.version>
         <jaxb-impl.version>2.3.1</jaxb-impl.version>
+        <rec.web-api.version>3.0.1</rec.web-api.version>
         <toolchains.version>11</toolchains.version>
         <toolchains.provider>openjdk</toolchains.provider>
         <!-- docker related versions -->
         <simplifiedGroupId>elab</simplifiedGroupId>
-        <webswing.version>2.7.5</webswing.version>
+        <webswing.version>20.2.3</webswing.version>
         <payara.docker.version>5.2020.3-jdk11</payara.docker.version>
         <httpd.version>2.4.41</httpd.version>
         <dockerize.version>0.6.1</dockerize.version>
         <openjdk.version>11.0.9.1</openjdk.version>
         <openjdk.docker.version>${openjdk.version}-jdk-buster</openjdk.docker.version>
-        <openjdk.specific.version>11.0.9.1_1</openjdk.specific.version>
+        <openjdk.specific.version>11.0.9.1+1</openjdk.specific.version>
         <vlc-slim.version>3.0.12</vlc-slim.version>
         <mysql.connector.version>8.0.13</mysql.connector.version>
-        <openjfx.version>15.0.1</openjfx.version>
+        <openjfx.version>16</openjfx.version>
         <traefik.version>2.4.1</traefik.version>
         <liquibase.version>3.5.3</liquibase.version>
         <jdbc.mysql.connector.version>8.0.13</jdbc.mysql.connector.version>
@@ -49,6 +49,7 @@
         <maven.exec.plugin.version>3.0.0</maven.exec.plugin.version>
         <maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
         <iterator.maven.plugin.version>0.1.0</iterator.maven.plugin.version>
+        <maven.download.plugin.version>1.5.0</maven.download.plugin.version>
         <!-- docker related properties-->
         <development.mode>""</development.mode>
         <docker.phase.generate-resources>none</docker.phase.generate-resources>
@@ -56,10 +57,10 @@
         <docker.phase.deploy>none</docker.phase.deploy>
         <repo>docker-repo.elab.linkare.com</repo>
         <hub>docker-hub.elab.linkare.com</hub>
-
     </properties>
 
     <modules>
+        <module>rec.web-thirdparty</module>
         <module>rec.web</module>
         <module>deployment/compose</module>
     </modules>
@@ -129,6 +130,12 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>exec-maven-plugin</artifactId>
                     <version>${maven.exec.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <!-- Plugin usado para evitar demasiadas chamadas ao repositorio (maven cache)-->
+                    <groupId>com.googlecode.maven-download-plugin</groupId>
+                    <artifactId>download-maven-plugin</artifactId>
+                    <version>${maven.download.plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
