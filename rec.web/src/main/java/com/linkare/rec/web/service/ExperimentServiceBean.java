@@ -4,7 +4,9 @@ import static com.linkare.rec.web.model.Experiment.COUNT_ALL_QUERYNAME;
 import static com.linkare.rec.web.model.Experiment.FIND_ALL_ACTIVE_QUERYNAME;
 import static com.linkare.rec.web.model.Experiment.FIND_ALL_QUERYNAME;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.Local;
 import javax.ejb.Stateless;
@@ -13,6 +15,7 @@ import javax.persistence.Query;
 
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import com.linkare.rec.web.config.Apparatus;
+import com.linkare.rec.web.config.Lab;
 import com.linkare.rec.web.model.Experiment;
 import com.linkare.rec.web.model.Laboratory;
 
@@ -94,7 +97,70 @@ public class ExperimentServiceBean extends BusinessServiceBean<Experiment, Long>
     }
 
     @Override
-    public void createExperimentFromApparatus(Apparatus apparatus, Laboratory laboratory) {
+    public void createOrUpdateFromLab(Laboratory laboratory, Lab lab) {
+        List<Experiment> experiments = findExperimentsActiveByLaboratory(laboratory.getName());
+
+        LOGGER.info("Found {} experiments for laboratory {}", experiments.size(), laboratory);
+        Map<String, Experiment> experimentMap = new HashMap<>();
+        Map<String, Apparatus> apparatusMap = new HashMap<>();
+
+        experiments.forEach(experiment -> experimentMap.put(experiment.getExternalId(), experiment));
+        lab.getApparatus().forEach(apparatus -> apparatusMap.put(apparatus.getLocation(), apparatus));
+
+        LOGGER.info("Lab {} has {} apparatus ", lab.getLabId(), lab.getApparatus().size());
+
+        //Update or create experiments
+        apparatusMap.forEach((key, apparatus) -> {
+            Experiment experiment = experimentMap.get(key);
+            try {
+                if (experiment != null) {
+                    updateFromApparatus(experiment, apparatus, laboratory);
+                    edit(experiment);
+                } else {
+                    create(createFromApparatus(apparatus, laboratory));
+                }
+            } catch (Exception e) {
+                LOGGER.error("Problem while saving experiment {}", experiment, e);
+            }
+        });
+
+        //Inactivate experiments
+        experimentMap.forEach((key, value) -> {
+            if (!apparatusMap.containsKey(key)) {
+                inactivateExperiment(value);
+            }
+        });
+    }
+
+    @Override
+    public void inactivateAll(Laboratory laboratory) {
+        List<Experiment> experiments = findExperimentsActiveByLaboratory(laboratory.getName());
+        experiments.forEach(this::inactivateExperiment);
+    }
+
+    private void inactivateExperiment(Experiment experiment) {
+        experiment.getState().setActive(false);
+        LOGGER.info("Experiment {} was inactivated", experiment);
+    }
+
+    private static void updateFromApparatus(Experiment experiment, Apparatus apparatus, Laboratory laboratory){
+        if (experiment.getState().getHelpMessage() == null) {
+            String toolTipBundleKey = apparatus.getToolTipBundleKey();
+            experiment.getState().setHelpMessage(toolTipBundleKey);
+            LOGGER.info("toolTipBundleKey={}", toolTipBundleKey);
+        }
+        if (experiment.getState().getLabel() == null) {
+            experiment.getState().setLabel(apparatus.getDisplayStringBundleKey());
+            LOGGER.info("Experiment Label={}", experiment.getState().getLabel());
+        }
+        if (experiment.getState().getUrl() == null) {
+            experiment.getState().setUrl(apparatus.getLocation());
+            LOGGER.info("Experiment Label={}", experiment.getState().getUrl());
+        }
+        experiment.setLaboratory(laboratory);
+    }
+
+    private static Experiment createFromApparatus(Apparatus apparatus, Laboratory laboratory) {
         Experiment experiment = new Experiment();
 
         String toolTipBundleKey = apparatus.getToolTipBundleKey();
@@ -111,29 +177,6 @@ public class ExperimentServiceBean extends BusinessServiceBean<Experiment, Long>
                 ReCResourceBundle.findStringOrDefault(displayStringBundleKey, displayStringBundleKey));
         experiment.setExternalId(apparatus.getLocation());
         experiment.setLaboratory(laboratory);
-        create(experiment);
-
-        LOGGER.info("Experiment {} created for Laboratory {}", experiment, laboratory);
-    }
-
-    @Override
-    public Experiment updateExperimentFromApparatus(Experiment experiment, Apparatus apparatus, Laboratory laboratory) {
-        if (experiment.getState().getHelpMessage() == null) {
-            String toolTipBundleKey = apparatus.getToolTipBundleKey();
-            experiment.getState().setHelpMessage(toolTipBundleKey);
-            LOGGER.info("toolTipBundleKey={}", toolTipBundleKey);
-        }
-        if (experiment.getState().getLabel() == null) {
-            experiment.getState().setLabel(apparatus.getDisplayStringBundleKey());
-            LOGGER.info("Experiment Label={}", experiment.getState().getLabel());
-        }
-        if (experiment.getState().getUrl() == null) {
-            experiment.getState().setUrl(apparatus.getLocation());
-            LOGGER.info("Experiment Label={}", experiment.getState().getUrl());
-        }
-        experiment.setLaboratory(laboratory);
-        experiment = edit(experiment);
-        LOGGER.info("Experiment {} updated from apparatus", experiment);
         return experiment;
     }
 }
