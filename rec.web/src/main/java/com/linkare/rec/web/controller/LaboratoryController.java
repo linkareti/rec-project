@@ -273,8 +273,8 @@ public class LaboratoryController extends AbstractController<Long, Laboratory, L
 
     private void checkCoordinates(Laboratory laboratory){
         if (laboratory.getGpsLocation().getLatitude() == null || laboratory.getGpsLocation().getLongitude() == null) {
-            warningMessage("Invalid Gps Location", "Laboratories with invalid gps locations will not be shown on the " +
-                    "map");
+            warningMessage("Invalid Gps Location",
+                    "Laboratories with invalid gps locations will not be shown on the map");
         }
     }
 
