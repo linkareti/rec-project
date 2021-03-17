@@ -103,38 +103,49 @@
                          rendered="#{operation != 'view'}"
                          style="width: 350px"/>
             <h:outputText id="recFaceConfigUrlOut"
-                          value="#{laboratoryController.selected.recFaceConfigUrl}"
+                          value="#{empty laboratoryController.selected.recFaceConfigUrl ? 'N/A' : laboratoryController.selected.recFaceConfigUrl}"
                           rendered="#{operation == 'view'}"/>
             <p:message for="recFaceConfigUrl" />
 
-            <h:outputLabel value="#{bundle['gps.latitude']}" for="latitude" />
+            <h:outputLabel value="#{bundle['gps.latitude']}" for="latitude"/>
             <p:inputText id="latitude"
                          value="#{laboratoryController.selected.gpsLocation.latitude}"
                          title="#{bundle['gps.latitude']}"
                          label="#{bundle['gps.latitude']}"
                          rendered="#{operation != 'view'}"/>
             <h:outputText id="latitudeOut"
-                          value="#{laboratoryController.selected.gpsLocation.latitude}"
+                          value="#{laboratoryController.selected.gpsLocation.latitude != null ? laboratoryController.selected.gpsLocation.latitude : 'N/A'}"
                           rendered="#{operation == 'view'}"/>
-            <p:message for="latitude" />
+            <p:message for="latitude"/>
 
-            <h:outputLabel value="#{bundle['gps.longitude']}" for="longitude" />
+            <h:outputLabel value="#{bundle['gps.longitude']}" for="longitude"/>
             <p:inputText id="longitude"
                          value="#{laboratoryController.selected.gpsLocation.longitude}"
                          title="#{bundle['gps.longitude']}"
                          label="#{bundle['gps.longitude']}"
                          rendered="#{operation != 'view'}"/>
             <h:outputText id="longitudeOut"
-                          value="#{laboratoryController.selected.gpsLocation.longitude}"
+                          value="#{laboratoryController.selected.gpsLocation.longitude != null ? laboratoryController.selected.gpsLocation.longitude : 'N/A'}"
                           rendered="#{operation == 'view'}"/>
-            <p:message for="longitude" />
+            <p:message for="longitude"/>
 
-            <h:outputLabel value="#{bundle['laboratory.image']}" for="imageUpload" />
+            <br/>
+            <h:outputText
+                    value="Laboratories with invalid gps locations will not be shown on the map"
+                    rendered="#{operation != 'view'}"
+                    styleClass="warning-message-info"/>
+            <h:outputText
+                    value=" "
+                    rendered="#{operation == 'view'}"/>
+            <br/>
+
+            <h:outputLabel value="#{bundle['laboratory.image']}"
+                           for="imageUpload"/>
             <p:fileUpload
                     id="imageUpload"
                     value="#{laboratoryController.file}"
                     mode="simple"
-                    allowTypes="/(\.|\/)(jpe?g|png)$/"
+                    allowTypes="/(\.|\/)(gif|jpe?g|png)$/i"
                     accept=".png, .jpeg, .jpg"
                     sizeLimit="16384"
                     title="#{bundle['laboratory.image']}"
@@ -142,15 +153,18 @@
                     rendered="#{operation != 'view'}"
                     invalidSizeMessage="#{bundle['laboratory.image.error.size']}"
                     invalidFileMessage="#{bundle['laboratory.image.error.type']}"/>
+            <p:message for="imageUpload"
+                       rendered="#{operation != 'view'}"/>
+
+            <h:outputText value=""
+                          rendered="#{operation != 'view'}"/>
             <p:graphicImage
                     id="imageUploadOut"
-                    width="150"
                     value="#{laboratoryController.imageUploaded}"
-                    style="border: solid;"
+                    styleClass="small-image"
                     rendered="#{laboratoryController.imageAvailable}">
                 <f:param name="laboratory" value="#{laboratoryController.selected.idInternal}"/>
             </p:graphicImage>
-            <p:message for="imageUpload" />
         </h:panelGrid>
 
         <h:panelGroup rendered="#{operation == 'create'}">
