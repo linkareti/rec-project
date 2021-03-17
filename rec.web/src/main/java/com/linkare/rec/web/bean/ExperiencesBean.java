@@ -11,6 +11,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.linkare.rec.web.model.DeployedExperiment;
 import com.linkare.rec.web.model.Experiment;
 import com.linkare.rec.web.service.ExperimentServiceLocal;
@@ -32,22 +34,28 @@ public class ExperiencesBean {
 	@EJB
     private ExperimentServiceLocal experimentService; 
 	
-	public List<DeployedExperiment> getExperiments() {
+    public MultiThreadLaboratoryWrapper getLaboratory(){
 		
-		Map<String,String> params = 
+		if(laboratory ==null) {
+			Map<String,String> params = 
                 FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-		String laboratoryName = params.get("laboratory");
+			String labName = params.get("laboratory");
 		
-		if(laboratoryName!=null && !laboratoryName.isEmpty()) {
-			laboratory = LaboratoriesMonitor.getInstance().getLaboratory(laboratoryName);
-			refreshExperiments();
+			if(StringUtils.isNotEmpty(labName)) {
+				laboratory = LaboratoriesMonitor.getInstance().getLaboratory(labName);
+				refreshExperiments();
+			}
 		}
+		return laboratory;
+    }
+	
+	public List<DeployedExperiment> getExperiments() {
 		
 		return selectedLabExperiments;
 
 	}
 	
-	public void refreshExperiments() {
+	private void refreshExperiments() {
 
         if (laboratory != null && laboratory.isAvailable()) {
             initActiveExperimentMap();
@@ -73,7 +81,7 @@ public class ExperiencesBean {
         }
     }
 
-    public void initActiveExperimentMap() {
+    private void initActiveExperimentMap() {
 
         if (laboratory != null) {
             final List<Experiment> labExperiments = activeExperiment.get(laboratory.getName());
@@ -97,5 +105,8 @@ public class ExperiencesBean {
 
         return result;
     }
-   
+    
+    public String backingAction() {
+    	return "logout";
+    }
 }

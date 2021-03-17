@@ -24,13 +24,18 @@ import com.linkare.rec.web.mbean.IMultiCastControllerMXBean;
 import com.linkare.rec.web.mbean.NotificationTypeEnum;
 import com.linkare.rec.web.model.DeployedExperiment;
 import com.linkare.rec.web.model.Experiment;
+import com.linkare.rec.web.model.GpsCoordinates;
 import com.linkare.rec.web.model.HardwareState;
 import com.linkare.rec.web.model.Laboratory;
 import com.linkare.rec.web.service.ExperimentService;
+
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import org.apache.commons.collections.buffer.CircularFifoBuffer;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 public class MultiThreadLaboratoryWrapper {
 
@@ -407,6 +412,30 @@ public class MultiThreadLaboratoryWrapper {
 
 	public String getStateLabel() {
 		return underlyingLaboratory.getState().getLabel();
+	}
+	
+	public StreamedContent getLaboratoryImage() {
+		
+		StreamedContent imageStream = null;
+				
+		if (underlyingLaboratory.getImage() != null && underlyingLaboratory.getImage().length >= 1) {
+			new DefaultStreamedContent(new ByteArrayInputStream(underlyingLaboratory.getImage()));
+		}
+		
+		return imageStream;
+	}
+	
+	public GpsCoordinates getCoordinates() {
+		return underlyingLaboratory.getGpsLocation();
+	}
+	
+	public boolean isImageAvailable() {
+		return underlyingLaboratory.getImage() != null 
+			&& underlyingLaboratory.getImage().length >= 1;
+	}
+	
+	public boolean isCoordinateAvailable() {
+		return underlyingLaboratory.getGpsLocation() != null;
 	}
 
 	public void sendMessage(final ClientInfoDTO user, final String clientTo,

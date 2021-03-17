@@ -8,6 +8,11 @@
         <h:outputText value="#{bundle['page.login.title']}"></h:outputText>
     </ui:define>
     <ui:define name="body" id="auth">
+    	<div>
+    		<h:outputText value="#{experiencesBean.laboratory.name}"/>
+    		<h:outputText value="numero de experiencias: "/>
+    		<h:outputText value="#{experiencesBean.experiments.size()}"/>
+    	</div>
         <div id="login">
             <h:form styleClass="am_login">
                 <h1><h:outputText value="#{bundle['rec.web.title']}" /></h1>
@@ -74,7 +79,7 @@
                             </a>
                        </p:column>
                     </p:dataTable>
-                    <h:commandLink onclick="history.go(-1)" value="Back" />
+                    <h:commandButton value="Back" action="#{experiencesBean.backingAction}"/>
             </h:form>
             <h:form id="elab_launch_client" styleClass="elab_launch_client">
                 <h1><h:outputText value="#{bundle['rec.elab.title']}" /></h1>

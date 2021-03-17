@@ -8,6 +8,10 @@
         <h:outputText value="#{bundle['page.login.title']}"></h:outputText>
     </ui:define>
     <ui:define name="body" id="auth">
+    	<div>
+    		<h:outputText value = "Numero de laboratórios: "/>
+    		<h:outputText value = "#{statusBean.labs.size()}"/>
+    	</div>
         <div id="login">
             <h:form styleClass="am_login">
                 <h1><h:outputText value="#{bundle['rec.web.title']}" /></h1>
@@ -40,17 +44,43 @@
             </h:form>
             <h:form id="elab_launch_form" styleClass="elab_launch">
                 <h1><h:outputText value="#{bundle['rec.elab.title']}" /></h1>
-                <div>
-                	 <p:dataTable id="tableLabs" var="lab" value="#{statusBean.labs}" style="margin-left: 10%">
-                                <p:column >
-                                   <h:commandButton styleClass="submit"
-                                     action="experiencesLogin"
-                                     value="#{lab.description}" >
+                <p:tabView>
+                	<p:tab title="Laboratory">
+                		<div>
+                			<p:dataTable id="tableLabs" var="lab" value="#{statusBean.labs}" style="margin-left: 10%">
+                        		<p:column >
+                            		<h:outputText value="#{lab.name}"/>
+                                	<h:commandButton styleClass="submit"
+                                     	action="experiencesLogin"
+                                     	value="#{lab.description}" >
                         				<f:param name="laboratory" value="#{lab.name}" />
-                    			   </h:commandButton>
-                                </p:column>
-                   </p:dataTable>
-                </div>
+                    				</h:commandButton>
+                    				<h:outputText value="#{lab.coordinateAvailable}"/>
+                            	</p:column>
+                            	<p:column rendered="#{lab.imageAvailable}">
+                           			<p:graphicImage
+										id="imageUploadOut"
+										width="150"
+										value="#{lab.LaboratoryImage}"
+										style="border: solid;"/>
+									<h:outputText value="#{lab.imageAvailable}"/>
+								</p:column>
+								<p:column rendered="#{lab.coordinateAvailable}">
+									<h:outputText value=" Latitude "/>
+									<h:outputText value="#{lab.gpsLocation.latitude}"/>
+									<h:outputText value=" Longitude "/>
+									<h:outputText value="#{lab.gpsLocation.longitude}"/>
+								</p:column>
+                   			</p:dataTable>
+                		</div>
+                	</p:tab>
+                	<p:tab title="Locations">
+                		<h:outputText value="Ipsum" />
+                	</p:tab>
+                	<p:tab title="Other">
+                		<h:outputText value="Dolor" />
+                	</p:tab>
+                </p:tabView>
             </h:form>
             <h:form id="elab_launch_client" styleClass="elab_launch_client">
                 <h1><h:outputText value="#{bundle['rec.elab.title']}" /></h1>
