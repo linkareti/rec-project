@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletContext;
@@ -30,6 +31,7 @@ import com.linkare.rec.web.model.Laboratory;
 import com.linkare.rec.web.model.State;
 import com.linkare.rec.web.service.ExperimentServiceLocal;
 import com.linkare.rec.web.service.LaboratoryServiceLocal;
+import com.linkare.rec.web.util.Strings;
 
 public class LaboratoriesLoader implements ServletContextListener {
 
@@ -116,16 +118,18 @@ public class LaboratoriesLoader implements ServletContextListener {
 				createLaboratoryFromLab(lab);
 				System.out.println("Lab="+lab);
 				
-			} else {
+			} else if(Strings.isNullOrEmpty(dbLab.getRecFaceConfigUrl())) {
 				changedLabs.put(labId, dbLab);
 				updateLaboratoryFromLab(dbLab, lab);
+			} else {
+				System.out.println("Will not update dbLab=" + dbLab + " because it has a RecFaceConfigUrl configured");
 			}
 		}
 
 		for (Laboratory laboratory : dbLabs) {
-			if (!changedLabs.containsKey(laboratory.getName())) {
+			if (!changedLabs.containsKey(laboratory.getName()) && Strings.isNullOrEmpty(
+					laboratory.getRecFaceConfigUrl())) {
 				inactivateLaboratory(laboratory);
-
 			}
 		}
 
