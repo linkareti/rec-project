@@ -148,7 +148,6 @@ public class LaboratoryController extends AbstractController<Long, Laboratory, L
         }
 
         Lab lab = LaboratoryServiceBean.findCorrespondingLab(laboratory, config).orElseThrow();
-
         experimentService.createOrUpdateFromLab(laboratory, lab);
     }
 
@@ -188,11 +187,6 @@ public class LaboratoryController extends AbstractController<Long, Laboratory, L
 
     private void errorMessage(String summary, String message) {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                summary, message));
-    }
-
-    private void warningMessage(String summary, String message) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
                 summary, message));
     }
 
@@ -256,7 +250,7 @@ public class LaboratoryController extends AbstractController<Long, Laboratory, L
     /**
      * For rendering the image
      *
-     * @return trye if there is an image present to be displayed
+     * @return true if there is an image present to be displayed
      */
     public boolean isImageAvailable() {
         if (getCurrent() != null) {
@@ -273,8 +267,8 @@ public class LaboratoryController extends AbstractController<Long, Laboratory, L
 
     private void checkCoordinates(Laboratory laboratory){
         if (laboratory.getGpsLocation().getLatitude() == null || laboratory.getGpsLocation().getLongitude() == null) {
-            warningMessage("Invalid Gps Location", "Laboratories with invalid gps locations will not be shown on the " +
-                    "map");
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
+                    "Invalid Gps Location", "Laboratories with invalid gps locations will not be shown on the map"));
         }
     }
 

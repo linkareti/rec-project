@@ -865,3 +865,44 @@ a .experiment-title {
 .experiment-select .ui-datatable .ui-datatable-data td {
     padding: 5px 10px 3px;
 }
+
+#center {
+    max-height: 100%;
+    margin: 0;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#left_col {
+    float: none;
+    display: inline-block;
+    clear: none;
+    margin: 0;
+    vertical-align: top;
+}
+
+#right_col {
+    float: none;
+    display: inline-block;
+    margin: 0;
+    clear: none;
+    vertical-align: top;
+}
+
+.backoffice {
+    max-width: 1280px;
+    margin: 20px auto;
+}
+
+.warning-message-info {
+    font-size: 0.9rem;
+    font-style: italic;
+    color: #c62828;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.small-image {
+    border: solid;
+    width: 150px
+}

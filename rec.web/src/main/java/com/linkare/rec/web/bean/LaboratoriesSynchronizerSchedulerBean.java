@@ -38,10 +38,10 @@ public class LaboratoriesSynchronizerSchedulerBean {
     private RecFaceConfigClientCache recClient;
 
     /**
-     * Method that will run every two hours, has the responsibility of fetching a list of laboratories and synchonize
+     * Method that will run every two hours, has the responsibility of fetching a list of laboratories and synchronize
      * the information with the remote rec face config
      */
-    @Schedule(hour = "*/2", minute = "0", persistent = false, info = "Every two hours")
+    @Schedule(hour = "*/2", persistent = false, info = "Every two hours")
     public void synchronizeLaboratories() {
         LOGGER.info("RefreshConfigSchedulerBean is up looking for laboratories to synchronize...");
         List<Laboratory> laboratories = service.findAllLaboratoriesWithRecConfigUrl();
