@@ -5,6 +5,12 @@ services:
     ports:
       - "18080:8080"
       - "18000:8000"
+  
+  webswing-admin:
+    image: ${repo}/${simplifiedGroupId}/rec.client-admin-${webswing.version}-${openjdk.version}:${project.version}
+    ports:
+      - "38080:8080"
+      - "38000:8000"
 
   elab-server-payara:
     image: ${repo}/${simplifiedGroupId}/rec.web-${payara.docker.version}:${project.version}

@@ -1,9 +1,7 @@
 package com.linkare.rec.web.controller;
 
 import java.io.ByteArrayInputStream;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -20,13 +18,12 @@ import javax.faces.event.ActionEvent;
 import javax.faces.event.PhaseId;
 import javax.inject.Inject;
 
-import com.linkare.rec.web.config.Apparatus;
 import com.linkare.rec.web.config.Lab;
 import com.linkare.rec.web.config.ReCFaceConfig;
-import com.linkare.rec.web.model.Experiment;
 import com.linkare.rec.web.model.Laboratory;
 import com.linkare.rec.web.service.ExperimentServiceLocal;
 import com.linkare.rec.web.service.LaboratoryService;
+import com.linkare.rec.web.service.LaboratoryServiceBean;
 import com.linkare.rec.web.service.LaboratoryServiceLocal;
 import com.linkare.rec.web.service.RecFaceConfigClientCache;
 import com.linkare.rec.web.util.ConstantUtils;
@@ -125,6 +122,7 @@ public class LaboratoryController extends AbstractController<Long, Laboratory, L
         if (file != null && file.getContents().length > 0) {
             laboratory.setImage(file.getContents());
         }
+        checkCoordinates(laboratory);
         String result = super.create();
 
         createAndUpdateExperiments(laboratory);
@@ -149,13 +147,9 @@ public class LaboratoryController extends AbstractController<Long, Laboratory, L
             return;
         }
 
-        Lab lab = config.getLab()
-                .stream()
-                .filter(x -> x.getLabId().equals(laboratory.getName()))
-                .findFirst()
-                .orElseThrow();
+        Lab lab = LaboratoryServiceBean.findCorrespondingLab(laboratory, config).orElseThrow();
 
-        saveExperiments(lab, laboratory);
+        experimentService.createOrUpdateFromLab(laboratory, lab);
     }
 
     private boolean checkCreateForm(Laboratory lab) {
@@ -197,6 +191,11 @@ public class LaboratoryController extends AbstractController<Long, Laboratory, L
                 summary, message));
     }
 
+    private void warningMessage(String summary, String message) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
+                summary, message));
+    }
+
     private void updateValuesFromRecConfig(Laboratory laboratory) {
         if (Strings.isNullOrEmpty(laboratory.getRecFaceConfigUrl())) {
             LOG.info("No recFaceConfigUrl provided for laboratory {}", laboratory);
@@ -205,9 +204,7 @@ public class LaboratoryController extends AbstractController<Long, Laboratory, L
 
         ReCFaceConfig config = recClient.getConfig(laboratory.getRecFaceConfigUrl());
 
-        Optional<Lab> labOp = config.getLab().stream()
-                .filter(x -> x.getLabId().equals(laboratory.getName()))
-                .findFirst();
+        Optional<Lab> labOp = LaboratoryServiceBean.findCorrespondingLab(laboratory, config);
         if (labOp.isPresent()) {
             laboratory.getState().setUrl(labOp.get().getLocation());
         } else {
@@ -227,6 +224,7 @@ public class LaboratoryController extends AbstractController<Long, Laboratory, L
             laboratory.setImage(service.find(laboratory.getIdInternal()).getImage());
         }
 
+        checkCoordinates(laboratory);
         updateValuesFromRecConfig(laboratory);
         final String result = super.update();
         createAndUpdateExperiments(laboratory);
@@ -273,43 +271,11 @@ public class LaboratoryController extends AbstractController<Long, Laboratory, L
                 .collect(Collectors.toList());
     }
 
-    private void saveExperiments(Lab lab, Laboratory laboratory) {
-        List<Experiment> experiments = experimentService.findExperimentsActiveByLaboratory(lab.getLabId());
-        LOG.info("Found {} experiments for laboratory {}", experiments.size(), laboratory);
-        Map<String, Experiment> experimentMap = new HashMap<>();
-        Map<String, Apparatus> apparatusMap = new HashMap<>();
-
-        experiments.forEach(experiment -> experimentMap.put(experiment.getExternalId(), experiment));
-        lab.getApparatus().forEach(apparatus -> apparatusMap.put(apparatus.getLocation(), apparatus));
-
-        LOG.info("Remote Lab {} information has {} apparatus ", lab.getLabId(), lab.getApparatus().size());
-
-        //Update or create experiments
-        apparatusMap.forEach((key, apparatus) -> {
-            Experiment experiment = experimentMap.get(key);
-            try {
-                if (experiment != null) {
-                    experimentService.updateExperimentFromApparatus(experiment, apparatus, laboratory);
-                } else {
-                    experimentService.createExperimentFromApparatus(apparatus, laboratory);
-                }
-            } catch (Exception e) {
-                LOG.error("Problem while saving experiment {}", experiment, e);
-            }
-        });
-
-        //Inactivate experiments
-        experimentMap.forEach((key, value) -> {
-            if (!apparatusMap.containsKey(key)) {
-                inactivateExperiment(value);
-            }
-        });
-    }
-
-    private void inactivateExperiment(Experiment experiment) {
-        experiment.getState().setActive(false);
-        experimentService.edit(experiment);
-        LOG.info("Experiment {} was inactivated", experiment);
+    private void checkCoordinates(Laboratory laboratory){
+        if (laboratory.getGpsLocation().getLatitude() == null || laboratory.getGpsLocation().getLongitude() == null) {
+            warningMessage("Invalid Gps Location", "Laboratories with invalid gps locations will not be shown on the " +
+                    "map");
+        }
     }
 
     @FacesConverter(value = "laboratoryConverter", forClass = Laboratory.class)

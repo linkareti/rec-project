@@ -1,0 +1,19 @@
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+    <!-- FIXME - This dependencies should come from repository, not from GIT! FIX ASAP-->
+    <id>client-external-libs</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <fileSets>
+        <fileSet>
+            <directory>${project.basedir}/lib/java/common</directory>
+            <outputDirectory>.</outputDirectory>
+            <includes>
+                <include>openorb_orb_omg*.jar</include>
+            </includes>
+            <fileMode>0664</fileMode>
+        </fileSet>
+    </fileSets>
+</assembly>

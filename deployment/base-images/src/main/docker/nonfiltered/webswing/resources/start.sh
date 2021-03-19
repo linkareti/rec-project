@@ -35,6 +35,11 @@ file_env 'WEBSWING_SECRET'
 
 cmd="dockerize "
 
+if [ -f "/templates/webswing.properties.j2" ]; then
+    printf "${BLUE}Templating /templates/webswing.properties.j2 into /opt/webswing/webswing.properties${NC}\n"
+    cmd="${cmd} -template /templates/webswing.properties.j2:/opt/webswing/webswing.properties"
+fi
+
 cmd="${cmd} /opt/webswing/webswing.sh start"
 
 ${cmd}

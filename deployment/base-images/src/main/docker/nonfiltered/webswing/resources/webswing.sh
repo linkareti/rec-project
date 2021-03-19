@@ -7,6 +7,7 @@
 # WEBSWING_OPTS
 # WEBSWING_JAVA_HOME
 # WEBSWING_JAVA_OPTS
+# WEBSWING_LOG_FILE
 # WEBSWING_PID_FILE
 # 
 # for example: 
@@ -16,6 +17,7 @@ export HOME=`dirname $0`
 export OPTS="-h 0.0.0.0 -j $HOME/jetty.properties -c $HOME/webswing.config"
 export JAVA_HOME=$JAVA_HOME
 export JAVA_OPTS=-Xmx2g
+export LOG=$HOME/webswing.out
 export PID_PATH_NAME=$HOME/webswing.pid
 
 if [ -n "$WEBSWING_HOME" ]; then
@@ -30,9 +32,12 @@ fi
 if [ -n "$WEBSWING_JAVA_OPTS" ]; then
     JAVA_OPTS=$WEBSWING_JAVA_OPTS
 fi 
+if [ -n "$WEBSWING_LOG_FILE" ]; then
+    LOG=$WEBSWING_LOG_FILE
+fi 
 if [ -n "$WEBSWING_PID_FILE" ]; then
     PID_PATH_NAME=$WEBSWING_PID_FILE
-fi
+fi 
 
 if [ -z `command -v $0` ]; then 
     CURRENTDIR=`pwd`
@@ -97,6 +102,7 @@ case "$1" in
             echo "OPTS:$OPTS"
             echo "JAVA_HOME:$JAVA_HOME"
             echo "JAVA_OPTS:$JAVA_OPTS"
+            echo "LOG:$LOG"
             echo "PID:$PID_PATH_NAME"
             echo "Webswing STARTING"
             if [ -a /tmp/.X99-lock ]; then

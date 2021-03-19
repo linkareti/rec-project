@@ -31,7 +31,8 @@ import com.linkare.commons.utils.EqualityUtils;
 		@NamedQuery(name = Laboratory.FIND_ALL_QUERYNAME, query = Laboratory.FIND_ALL_QUERY),
 		@NamedQuery(name = Laboratory.COUNT_ALL_QUERYNAME, query = Laboratory.COUNT_ALL_QUERY),
 		@NamedQuery(name = Laboratory.FIND_ALL_ACTIVE_QUERYNAME, query = Laboratory.FIND_ALL_ACTIVE_QUERY),
-		@NamedQuery(name = Laboratory.FIND_BY_NAME_QUERYNAME, query = Laboratory.FIND_BY_NAME) })
+		@NamedQuery(name = Laboratory.FIND_BY_NAME_QUERYNAME, query = Laboratory.FIND_BY_NAME),
+		@NamedQuery(name = Laboratory.FIND_BY_ALL_WITH_REC_FACE_CONFIG_URLNAME, query = Laboratory.FIND_BY_ALL_WITH_REC_FACE_CONFIG_URL) })
 @XmlAccessorType(XmlAccessType.PROPERTY)
 public class Laboratory extends DefaultDomainObject {
 
@@ -52,6 +53,13 @@ public class Laboratory extends DefaultDomainObject {
 	public static final String FIND_BY_NAME_QUERYNAME = "Laboratory.findByName";
 
 	public static final String FIND_BY_NAME = "Select l from Laboratory l where l.name = :name";
+
+	public static final String FIND_BY_ALL_WITH_REC_FACE_CONFIG_URLNAME = "Laboratory.findAllLaboratoriesWithRecConfigUrl";
+
+	public static final String FIND_BY_ALL_WITH_REC_FACE_CONFIG_URL =
+			"SELECT l FROM Laboratory l WHERE l.recFaceConfigUrl IS NOT NULL AND l.recFaceConfigUrl != ''";
+
+
 
 	@Column(name = "NAME", unique = true, insertable = true, updatable = true)
 	private String name;
