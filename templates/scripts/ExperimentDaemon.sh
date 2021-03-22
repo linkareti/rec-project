@@ -5,7 +5,7 @@
 
 
 EXPERIMENT_NAME=@experiment.name@
-CURDIR=`pwd`
+CURDIR=$(cd `dirname $0` && pwd)
 CURUSER=`id -nu`
 ADDITIONAL_SERVICE_START="@additional.service.start.script@"
 ADDITIONAL_SERVICE_STOP="@additional.service.stop.script@"
@@ -30,7 +30,7 @@ start() {
 	if [ "x$ADDITIONAL_SERVICE_START" != "x" ]; then
 		echo "Starting additional service '$ADDITIONAL_SERVICE_START'..."
 		cd $CURDIR
-		nohup $ADDITIONAL_SERVICE_START 2>&1 >/dev/null 2>/dev/null
+		nohup $ADDITIONAL_SERVICE_START 2>&1 >/dev/null 2>/dev/null &
 		if [ $? -eq 0 ]; then
 			echo "OK"
 		else
