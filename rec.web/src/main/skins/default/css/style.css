@@ -804,7 +804,6 @@ a .experiment-title {
 /* CARD LIST */
 
 #login .experiment-select div {
-    display: inline-block;
     font-weight: normal;
 }
 
@@ -1050,4 +1049,12 @@ a .experiment-title {
 a.ui-panel-titlebar-icon.ui-corner-all.ui-state-default {
     background: none;
     border: 0;
+}
+
+#login .ui-tabs .ui-tabs-nav li, #login .ui-tabs.ui-tabs-top .ui-tabs-nav li {
+    margin: 0 8px 0 0px;
+}
+
+#login ul {
+    margin: 0;
 }

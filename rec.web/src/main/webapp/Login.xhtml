@@ -1,41 +1,66 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui"
-                template="/nomenu-template.xhtml">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui" template="/nomenu-template.xhtml">
     <ui:define name="title">
         <h:outputText value="#{bundle['page.login.title']}"></h:outputText>
     </ui:define>
     <ui:define name="body" id="auth">
-    	<div>
-    		<h:outputText value = "Numero de laboratórios: "/>
-    		<h:outputText value = "#{statusBean.labs.size()}"/>
-    	</div>
         <div id="login">
             <div class="intro">
-                <h1><h:outputText value="#{bundle['rec.elab.title']}" /></h1>
+                <h1>
+                    <h:outputText value="#{bundle['rec.elab.title']}" />
+                </h1>
                 <p>Please select a laboratory</p>
             </div>
-            
+
             <div class="elab_launch">
-                <h:form id="elab_launch_top" styleClass="laboratory experiment-select">
-                        <p:dataTable id="tableLabs" var="lab" value="#{statusBean.labs}" emptyMessage="No results to present">
-                               <p:column >
-                                  <h:commandButton styleClass="submit"
-                                    action="experiencesLogin"
-                                    value="#{lab.description}" >
-                                                <f:param name="laboratory" value="#{lab.name}" />
-                                   </h:commandButton>
-                               </p:column>
-                       </p:dataTable>
+                <h:form id="elab_launch_form" styleClass="laboratory experiment-select">
+                    <p:tabView>
+                        <p:tab title="Grid">
+                            <h3><h:outputText value="#{statusBean.labs.size()}" /><h:outputText value=" laboratories" /></h3>
+                                <p:dataGrid id="tableLabs" var="lab" value="#{statusBean.labs}" columns="3" emptyMessage="No results to present">
+                                    <p:column>
+                                        <div class="card">
+                                            <div class="card-img">
+                                                <h:panelGroup rendered="#{lab.imageAvailable}">
+                                                    <div id="imageUploadOut" class="lab-img" style="background-image: url(#{lab.LaboratoryImage});"></div>
+                                                    <!--<p:graphicImage id="imageUploadOut" width="150" value="#{lab.LaboratoryImage}"/>
+                                                    <h:outputText value="#{lab.imageAvailable}" />-->
+                                                </h:panelGroup>
+                                                <h:panelGroup rendered="#{!lab.imageAvailable}">
+                                                    <div class="lab-no-img"></div>
+                                                </h:panelGroup>
+                                            </div>
+                                            <div class="card-content">
+                                                <h:outputText value="#{lab.name}" />
+                                                <h:outputText value="#{lab.description}" />
+                                                <br/>
+                                                <h:commandButton styleClass="submit" action="experiencesLogin"
+                                                    value="#{lab.description}">
+                                                    <f:param name="laboratory" value="#{lab.name}" />
+                                                </h:commandButton>
+                                                <h:outputText value="#{lab.coordinateAvailable}" />
+                                                <h:panelGroup rendered="#{lab.coordinateAvailable}">
+                                                    <h:outputText value=" Latitude " />
+                                                    <h:outputText value="#{lab.gpsLocation.latitude}" />
+                                                    <h:outputText value=" Longitude " />
+                                                    <h:outputText value="#{lab.gpsLocation.longitude}" />
+                                                </h:panelGroup>
+                                            </div>    
+                                        </div>
+                                    </p:column>
+                                </p:dataGrid>
+                        </p:tab>
+                        <p:tab title="Map">
+                            <h:outputText value="Dolor" />
+                        </p:tab>
+                    </p:tabView>
                 </h:form>
             </div>
             <div class="sidemenu">
-            <h:form styleClass="am_login">
-            	<h:panelGrid>
-                	<h1><h:outputText value="#{bundle['rec.web.title']}" /></h1>
-                	<h:panelGroup styleClass="login-form">
+                <h:form styleClass="am_login">
+                    <h1><h:outputText value="#{bundle['rec.web.title']}" /></h1>
+                    <h:panelGroup styleClass="login-form">
                         <h:inputText id="login" styleClass="username"
                                      value="#{authenticationBean.username}"
                                      title="#{bundle['user.username']}"/>
@@ -53,62 +78,17 @@
                                          action="#{authenticationBean.login}"
                                          value="#{bundle['operation.login']}" />
                     </h:panelGroup>
-                </h:panelGrid>
-            </h:form>
-            <h:form id="elab_launch_form" styleClass="elab_launch">
-                <h1><h:outputText value="#{bundle['rec.elab.title']}" /></h1>
-                <p:tabView>
-                	<p:tab title="Laboratory">
-                		<div>
-                			<p:dataTable id="tableLabs" var="lab" value="#{statusBean.labs}" style="margin-left: 10%">
-                        		<p:column >
-                            		<h:outputText value="#{lab.name}"/>
-                                	<h:commandButton styleClass="submit"
-                                     	action="experiencesLogin"
-                                     	value="#{lab.description}" >
-                        				<f:param name="laboratory" value="#{lab.name}" />
-                    				</h:commandButton>
-                    				<h:outputText value="#{lab.coordinateAvailable}"/>
-                            	</p:column>
-                            	<p:column rendered="#{lab.imageAvailable}">
-                           			<p:graphicImage
-										id="imageUploadOut"
-										width="150"
-										value="#{lab.LaboratoryImage}"
-										style="border: solid;"/>
-									<h:outputText value="#{lab.imageAvailable}"/>
-								</p:column>
-								<p:column rendered="#{lab.coordinateAvailable}">
-									<h:outputText value=" Latitude "/>
-									<h:outputText value="#{lab.gpsLocation.latitude}"/>
-									<h:outputText value=" Longitude "/>
-									<h:outputText value="#{lab.gpsLocation.longitude}"/>
-								</p:column>
-                   			</p:dataTable>
-                		</div>
-                	</p:tab>
-                	<p:tab title="Locations">
-                		<h:outputText value="Ipsum" />
-                	</p:tab>
-                	<p:tab title="Other">
-                		<h:outputText value="Dolor" />
-                	</p:tab>
-                </p:tabView>
-            </h:form>
-            <h:form id="elab_launch_client" styleClass="elab_launch_client">
-                <h1><h:outputText value="#{bundle['rec.elab.title']}" /></h1>
-                <ul>
-                    <li>
-                        <a href="#void" onclick="var dir = location.href.substring(0, location.href.lastIndexOf('/')+1); var url = dir + 'client/elab-client.jnlp'; window.open(url);" download="elab-client.jnlp">
-                        	<h:graphicImage library="images" name="webstart.png"/> 
-                        </a>
-                    </li>
-                </ul>
-            </h:form>
-            </div>
-            <div id="statusPanelFooter" class="statusPanelFooter">
-                <!-- <a href="#{request.contextPath}/Faq.faces"><b>#{bundle['page.faq.title']}</b></a> | <a href="#{request.contextPath}/Requirements.faces"><b>#{bundle['page.requirements.title']}</b></a> -->
-				<a href="#{bundle['page.faq.url']}"><b>#{bundle['page.faq.title']}</b></a> | <a href="#{bundle['page.requirements.url']}"><b>#{bundle['page.requirements.title']}</b></a> | <a href="mailto:elab@e-escola.pt" target="_blank"><b>#{bundle['page.contact.title']}</b></a>
+                </h:form>
+                <h:form id="elab_launch_client" styleClass="elab_launch_client">
+                    <h1><h:outputText value="#{bundle['rec.elab.title']}" /></h1>
+                    <a href="#void" onclick="var dir = location.href.substring(0, location.href.lastIndexOf('/')+1); var url = dir + 'client/elab-client.jnlp'; window.open(url);" download="elab-client.jnlp">
+                        <h:graphicImage library="images" name="webstart.png"/> 
+                    </a>
+                </h:form>
+                <div id="statusPanelFooter" class="statusPanelFooter">
+                    <!-- <a href="#{request.contextPath}/Faq.faces"><b>#{bundle['page.faq.title']}</b></a> | <a href="#{request.contextPath}/Requirements.faces"><b>#{bundle['page.requirements.title']}</b></a> -->
+                    <a href="#{bundle['page.faq.url']}">#{bundle['page.faq.title']}</a> <span class="separator">·</span> <a href="#{bundle['page.requirements.url']}">#{bundle['page.requirements.title']}</a> <span class="separator">·</span> <a href="mailto:elab@e-escola.pt" target="_blank">#{bundle['page.contact.title']}</a>
+                </div>
             </div>
         </div>
     </ui:define>
