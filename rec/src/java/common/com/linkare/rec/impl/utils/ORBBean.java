@@ -14,6 +14,8 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.media.TimeBase;
+
 import org.omg.BiDirPolicy.BIDIRECTIONAL_POLICY_TYPE;
 import org.omg.BiDirPolicy.BOTH;
 import org.omg.CORBA.Any;
@@ -24,6 +26,8 @@ import org.omg.CORBA.SetOverrideType;
 import org.omg.CORBA.ORBPackage.InvalidName;
 import org.omg.CORBA.portable.Delegate;
 import org.omg.CORBA.portable.ObjectImpl;
+import org.omg.Messaging.RELATIVE_REQ_TIMEOUT_POLICY_TYPE;
+import org.omg.Messaging.RELATIVE_RT_TIMEOUT_POLICY_TYPE;
 import org.omg.CosNaming.NameComponent;
 import org.omg.CosNaming.NamingContextExt;
 import org.omg.CosNaming.NamingContextExtHelper;
@@ -38,6 +42,7 @@ import org.omg.PortableServer.Servant;
 import org.omg.PortableServer.ServantManager;
 import org.omg.PortableServer.ServantRetentionPolicyValue;
 import org.omg.PortableServer.ThreadPolicyValue;
+import org.omg.TimeBase.TimeTHelper;
 
 import com.linkare.rec.acquisition.MultiCastController;
 import com.linkare.rec.acquisition.MultiCastControllerHelper;
@@ -182,6 +187,21 @@ public class ORBBean {
 			return bidirpol;
 		}
 	}
+	
+	private Policy getRoundTripTimeOutPolicy() {
+		try {
+
+			final Any any = getORB().create_any();
+			TimeTHelper.insert(any, 30 * 1000 * 10000);// 30 seconds*ms*(10.000 units of 100 ns)
+			return getORB().create_policy(RELATIVE_RT_TIMEOUT_POLICY_TYPE.value, any); //RoundTrip TimeOut
+
+		} catch (final Exception e) {
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
+		}
+
+	}
+	
+
 
 	public synchronized POA getDataProducerPOA(final ServantManager deactivator) throws Exception {
 		synchronized (orb_synch) {
@@ -196,6 +216,7 @@ public class ORBBean {
 
 					poa_policies = new Policy[] {
 							getBidirPolicy(),
+							getRoundTripTimeOutPolicy(),
 							rootPOA.create_id_assignment_policy(IdAssignmentPolicyValue.USER_ID),
 							rootPOA.create_id_uniqueness_policy(IdUniquenessPolicyValue.UNIQUE_ID),
 							rootPOA.create_implicit_activation_policy(ImplicitActivationPolicyValue.NO_IMPLICIT_ACTIVATION),
@@ -232,6 +253,7 @@ public class ORBBean {
 
 					poa_policies = new Policy[] {
 							getBidirPolicy(),
+							getRoundTripTimeOutPolicy(),
 							rootPOA.create_id_assignment_policy(IdAssignmentPolicyValue.USER_ID),
 							rootPOA.create_id_uniqueness_policy(IdUniquenessPolicyValue.UNIQUE_ID),
 							rootPOA.create_implicit_activation_policy(ImplicitActivationPolicyValue.NO_IMPLICIT_ACTIVATION),
@@ -267,6 +289,7 @@ public class ORBBean {
 
 					poa_policies = new Policy[] {
 							getBidirPolicy(),
+							getRoundTripTimeOutPolicy(),
 							rootPOA.create_id_assignment_policy(IdAssignmentPolicyValue.SYSTEM_ID),
 							rootPOA.create_id_uniqueness_policy(IdUniquenessPolicyValue.UNIQUE_ID),
 							rootPOA.create_implicit_activation_policy(ImplicitActivationPolicyValue.IMPLICIT_ACTIVATION),
