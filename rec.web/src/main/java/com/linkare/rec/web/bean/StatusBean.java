@@ -4,7 +4,6 @@ import com.linkare.jsf.utils.JsfUtil;
 import com.linkare.rec.web.ClientInfoDTO;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,11 +17,10 @@ import com.linkare.rec.web.model.Experiment;
 import com.linkare.rec.web.service.ExperimentServiceLocal;
 import com.linkare.rec.web.util.ConstantUtils;
 import com.linkare.rec.web.util.LaboratoriesMonitor;
-import com.linkare.rec.web.util.MultiThreadDeployedExperimentWrapper;
 import com.linkare.rec.web.util.MultiThreadLaboratoryWrapper;
 import java.util.HashSet;
 import java.util.Set;
-import org.primefaces.event.TabChangeEvent;
+
 
 /**
  * Defines of the operations to retrieve the existing laboratories and it's status, and also which experiments are in each laboratory, their status, number of
@@ -40,16 +38,20 @@ public class StatusBean implements Serializable {
     private List<MultiThreadLaboratoryWrapper> labs;
     private MultiThreadLaboratoryWrapper selectedLab;
     private List<DeployedExperiment> selectedLabExperiments;
-    private LaboratoriesMonitor laboratoriesMonitor = LaboratoriesMonitor.getInstance();
     @EJB
     private ExperimentServiceLocal experimentService;
     private Map<String, List<Experiment>> activeExperiment = new HashMap<String, List<Experiment>>();
 
 	public List<MultiThreadLaboratoryWrapper> getLabs() {
+		
+		List<MultiThreadLaboratoryWrapper> returnableLabs = new ArrayList<MultiThreadLaboratoryWrapper>(); 
+		
         if (labs == null) {
             labs = LaboratoriesMonitor.getInstance().getActiveLabs();
         }
-        return labs;
+        returnableLabs.addAll(labs);
+        
+        return returnableLabs;
     }
 
     public MultiThreadLaboratoryWrapper getSelectedLab() {
@@ -61,33 +63,6 @@ public class StatusBean implements Serializable {
         this.selectedLabExperiments = null;
     }
 
-//    public List<DeployedExperiment> getLabExperiments() {
-//        getSelectedLab();
-//        refreshExperiments();
-//        return selectedLabExperiments;
-//    }
-//
-//    public void updateLabStatus() {
-//        labs = LaboratoriesMonitor.getInstance().getActiveLabs();
-//        refreshExperiments();
-//    }
-
-    
-    private List<DeployedExperiment> getDeployedExperiment(final List<Experiment> experiment) {
-        List<DeployedExperiment> result = Collections.emptyList();
-
-        if (!experiment.isEmpty()) {
-            result = new ArrayList<DeployedExperiment>(experiment.size());
-            for (final Experiment exp : experiment) {
-                DeployedExperiment deployed = new DeployedExperiment();
-                deployed.setExperiment(exp);
-                result.add(deployed);
-            }
-        }
-
-        return result;
-    }
-
     public void initActiveExperimentMap() {
 
         if (selectedLab != null) {
@@ -97,11 +72,6 @@ public class StatusBean implements Serializable {
             }
         }
     }
-
-//    public void onTabChange(TabChangeEvent event) {
-//        selectedLab = (MultiThreadLaboratoryWrapper) event.getData();
-//        refreshExperiments();
-//    }
 
     public void listenerMethod(ClientInfoDTO clientInfo) {
         for (DeployedExperiment dpExperiment : selectedLabExperiments) {
