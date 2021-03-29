@@ -51,7 +51,11 @@ public class ExperiencesBean {
 	
 	public List<DeployedExperiment> getExperiments() {
 		
-		return selectedLabExperiments;
+		List<DeployedExperiment> returnableSelectedLabExperiments = new ArrayList<DeployedExperiment>();
+				
+		returnableSelectedLabExperiments.addAll(selectedLabExperiments);
+		
+		return returnableSelectedLabExperiments;
 
 	}
 	
