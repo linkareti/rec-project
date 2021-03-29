@@ -199,8 +199,8 @@ public class ORBBean {
 			} catch (final Exception e) {
 				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 			}
-			return rttpol;
 		}
+		return rttpol;
 	}
 
 	public synchronized POA getDataProducerPOA(final ServantManager deactivator) throws Exception {
