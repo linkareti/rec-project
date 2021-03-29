@@ -17,12 +17,31 @@
     </h:head>
     <h:body>
         <p:growl id="msg" showDetail="true" globalOnly="true" />
+        <p:dialog header="#{bundle['rec.web.title']}" widgetVar="dlg" resizable="false">
+            <h:form styleClass="am_login">
+                <h:panelGroup styleClass="login-form">
+                    <h:inputText id="login" styleClass="username" value="#{authenticationBean.username}"
+                        title="#{bundle['user.username']}" />
+                    <p:watermark for="login" value="#{bundle['user.name']}" />
+                    <h:inputSecret id="passwd" styleClass="password" value="#{authenticationBean.password}"
+                        title="#{bundle['user.login.password']}" />
+                    <p:watermark for="passwd" value="#{bundle['user.login.password']}" />
+                    <h:selectOneMenu id="loginDomain" styleClass="loginDomain"
+                        value="#{authenticationBean.domain}" title="#{bundle['app.loginDomain']}">
+                        <f:selectItems value="#{loginDomainBean.loginDomains}" />
+                    </h:selectOneMenu>
+                    <h:commandButton styleClass="submit" action="#{authenticationBean.login}"
+                        value="#{bundle['operation.login']}" />
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
         <div class="wrapper">
             <div class="header">
                 <div class="content clearfix">
                     <a href="#{request.contextPath}/index.jsp"> 
                         <h:graphicImage library="images" name="elab_logo.png" /> 
                     </a>
+                    <p:commandButton styleClass="login-btn" value="#{bundle['rec.web.title']}" type="button" onclick="dlg.show()" />
                 </div>
 
             </div>

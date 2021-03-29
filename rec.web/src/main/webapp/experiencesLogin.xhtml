@@ -10,11 +10,14 @@
                 <h1>
                     <h:outputText value="#{experiencesBean.laboratory.name}" />
                 </h1>
-                <p>Please select an experiment</p>
+                <p><h:outputText value="#{bundle['experiment.page.select']}" /></p>
             </div>
             <div class="elab_launch">
                 <h:form id="elab_launch_form" styleClass="experiment-select">
-                    <h3><h:outputText value="#{experiencesBean.experiments.size()}" /><h:outputText value=" experiments" /></h3>
+                    <h2><h:outputText value="#{experiencesBean.experiments.size()} " />
+                        <h:outputText rendered="#{experiencesBean.experiments.size() eq 1}" value="#{bundle['experiment.number.singular']}" /> 
+                        <h:outputText rendered="#{experiencesBean.experiments.size() ne 1}" value="#{bundle['experiment.number.multiple']}" />  
+                    </h2>
                     <p:dataTable id="tableExperiments" var="deployedExp"
                              value="#{experiencesBean.experiments}" emptyMessage="No results to present">
                            <p:column>
@@ -28,10 +31,9 @@
                                         <div class="col-b">
                                             <span class="experiment-users">
                                                 <h:outputText value="#{deployedExp.numberOfUsers}" title="#{statusBundle['tooltip.experiment.users']}" />
-                                                <h:outputText value=" users"/> 
+                                                <h:outputText value=" #{bundle['label.users']}"/> 
                                             </span>
-                                            <h:outputText value="Online" styleClass="experiment-status-on"/>
-
+                                            <h:outputText value="#{bundle['status.online']}"  styleClass="experiment-status-on"/>
                                         </div>
                                     </a>
                                 </h:panelGroup>
@@ -40,51 +42,19 @@
                                         <h:outputText value="#{deployedExp.experiment.name}" styleClass="experiment-title"/>
                                     </div>
                                     <div class="col-b">
-                                        <h:outputText value="Offline" styleClass="experiment-status-off"/>
+                                        <h:outputText value="#{bundle['status.offline']}" styleClass="experiment-status-off"/>
                                     </div>
                                 </h:panelGroup>
                             </p:column>
                         </p:dataTable>
-                    <h:commandButton value="Back" action="#{experiencesBean.backingAction}" styleClass="back-button"/>
+                    <h:commandButton value="#{bundle['operation.back']}" action="#{experiencesBean.backingAction}" styleClass="back-button"/>
                 </h:form>
             </div>
             <div class="sidemenu">
-                <h:form styleClass="am_login">
-                    <h1>
-                        <h:outputText value="#{bundle['rec.web.title']}" />
-                    </h1>
-                    <h:panelGroup styleClass="login-form">
-                        <h:inputText id="login" styleClass="username" value="#{authenticationBean.username}"
-                            title="#{bundle['user.username']}" />
-                        <p:watermark for="login" value="#{bundle['user.name']}" />
-                        <h:inputSecret id="passwd" styleClass="password" value="#{authenticationBean.password}"
-                            title="#{bundle['user.login.password']}" />
-                        <p:watermark for="passwd" value="#{bundle['user.login.password']}" />
-                        <h:selectOneMenu id="loginDomain" styleClass="loginDomain"
-                            value="#{authenticationBean.domain}" title="#{bundle['app.loginDomain']}">
-                            <f:selectItems value="#{loginDomainBean.loginDomains}" />
-                        </h:selectOneMenu>
-                        <h:commandButton styleClass="submit" action="#{authenticationBean.login}"
-                            value="#{bundle['operation.login']}" />
-                    </h:panelGroup>
-                </h:form>
-                <h:form id="elab_launch_client" styleClass="elab_launch_client">
-                    <h1>
-                        <h:outputText value="#{bundle['rec.elab.title']}" />
-                    </h1>
-                    <a href="#void"
-                        onclick="var dir = location.href.substring(0, location.href.lastIndexOf('/')+1); var url = dir + 'client/elab-client.jnlp'; window.open(url);"
-                        download="elab-client.jnlp">
-                        <h:graphicImage library="images" name="webstart.png" />
-                    </a>
-                </h:form>
                 <div id="statusPanelFooter" class="statusPanelFooter">
-                    <!-- <a href="#{request.contextPath}/Faq.faces"><b>#{bundle['page.faq.title']}</b></a> | <a href="#{request.contextPath}/Requirements.faces"><b>#{bundle['page.requirements.title']}</b></a> -->
-                    <a href="#{bundle['page.faq.url']}">#{bundle['page.faq.title']}</a> <span
-                        class="separator">·</span> <a
-                        href="#{bundle['page.requirements.url']}">#{bundle['page.requirements.title']}</a> <span
-                        class="separator">·</span> <a href="mailto:elab@e-escola.pt"
-                        target="_blank">#{bundle['page.contact.title']}</a>
+                    <a href="#{bundle['page.faq.url']}">#{bundle['page.faq.title']}</a>
+                    <a href="#{bundle['page.requirements.url']}">#{bundle['page.requirements.title']}</a>
+                    <a href="mailto:elab@e-escola.pt" target="_blank">#{bundle['page.contact.title']}</a>
                 </div>
             </div>
         </div>

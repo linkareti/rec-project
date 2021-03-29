@@ -172,7 +172,7 @@ html, body {
     color: #455660; 
 }
 
-#login form.am_login {
+form.am_login {
     border: medium dotted #E5E5E5;
     display: inline-block;
     float: right;
@@ -191,7 +191,7 @@ html, body {
     color: #4F4F4F; 
 }
 
-#login form.am_login h1 {
+form.am_login h1 {
     text-align: center;
     color: #455660;
 }
@@ -489,13 +489,14 @@ body {
 .content, #nav {
     padding: 0;
     margin: 0 auto;
-    max-width: 1280px;
+    max-width: 1250px;
     width: 100%;
 }
 
 .welcome, .logout {
     margin: 0;
-    padding: 8px;
+    padding: 11px 8px 8px;
+    color: #4caf50;
 }
 
 .welcome {
@@ -514,10 +515,17 @@ body {
     margin: 10px 0 10px;
 }
 
-
 #login .intro h1 {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+    margin-top: 0;
     font-weight: bold;
+    color: #666;
+}
+
+.elab_launch h2 {
+    font-size: 1.3rem;
+    font-weight: normal;
+    color: #666;
 }
 
 .intro {
@@ -530,8 +538,7 @@ body {
 }
 
 .intro p {
-    font-size: 1.2rem;
-    line-height: 1.4rem;
+    font-size: 1rem;
     color: #666;
     margin-bottom: 5px;
 }
@@ -566,7 +573,7 @@ body #login .elab_launch {
     width: 100%;
 }
 
-#login form.am_login {
+form.am_login {
     background: none;
     border: 0;
     border-radius: 5px;
@@ -584,7 +591,13 @@ body #login .elab_launch {
     /* display: none; */
 }
 
-#login form.am_login, #login form.elab_launch_client {
+body .ui-dialog .ui-dialog-titlebar {
+    background: white;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+}
+
+form.am_login, #login form.elab_launch_client {
     float: none;
     vertical-align: top;
     width: 100%;
@@ -592,7 +605,7 @@ body #login .elab_launch {
     text-align: left;
 }
 
-#login form.am_login h1, #login form.elab_launch_client h1 {
+form.am_login h1, #login form.elab_launch_client h1 {
     font-weight: normal;
     font-size: 1.3rem;
     text-align: left;
@@ -600,7 +613,7 @@ body #login .elab_launch {
     color: #666;
 }
 
-#login form.am_login input {
+form.am_login input {
     width: 147px;
     padding-left: 5px;
     font-weight: normal;
@@ -612,7 +625,7 @@ body #login .elab_launch {
     border-radius: 3px;
 }
 
-#login form.am_login input.submit {
+form.am_login input.submit {
     float: none;
     width: auto;
     padding: 0 20px;
@@ -621,11 +634,11 @@ body #login .elab_launch {
     cursor: pointer;
 }
 
-#login form.am_login input.submit:hover {
+form.am_login input.submit:hover {
     background: #e0e0e0;
 }
 
-#login form.am_login select {
+form.am_login select {
     width: 156px;
     padding-left: 2px;
     margin: 0 0 10px;
@@ -636,22 +649,25 @@ body #login .elab_launch {
 
 .statusPanelFooter {
     text-align: left;
-    border-top: 1px solid #dee2e6;
-    padding: 20px 0;
+    border-left: 1px solid #dee2e6;
+    padding: 11px 0 1px;
     margin: 20px 0;
 }
 
 .statusPanelFooter a {
-    color: #666;
-}
-
-span.separator {
-    color: #999;
+    color: #4caf50;
+    background: none;
+    font-weight: normal;
+    margin-bottom: 11px;
+    padding: 1px 11px;
+    font-size: 1.1rem;
+    display: block;
 }
 
 #login .ui-tabs {
     background: none;
     border: 0;
+    margin: 15px 0;
 }
 
 #login .ui-tabs-nav {
@@ -680,8 +696,9 @@ span.separator {
     display: inline-block;
     border-color: #dee2e6;
     top: 0;
-    margin-bottom: -1px;
+    margin-bottom: 0;
     background: none;
+    border-bottom: 2px solid #4caf50;
 }
 
 #login .ui-tabs .ui-tabs-nav li.ui-tabs-selected a:after {
@@ -710,7 +727,7 @@ span.separator {
 }
 
 #login .ui-tabs .ui-tabs-nav li.ui-tabs-selected a, #login .ui-tabs .ui-tabs-nav li.ui-tabs-selected a:hover {
-    color: #333;
+    font-weight: bold;
     background: none;
 }
 
@@ -808,7 +825,7 @@ a .experiment-title {
 }
 
 #login .experiment-select .ui-datatable {
-    margin: 20px 0 50px;
+    margin: 20px 0 25px;
     border: 1px solid #e0e0e0;
 }
 
@@ -850,10 +867,12 @@ a .experiment-title {
     cursor: pointer;
     font-size: 1.3rem;
     font-weight: normal;
+    outline: 0 !important;
 }
 
 .experiment-select .submit:hover, .experiment-select a:hover .experiment-title {
     color: black;
+    outline: 0 !important;
 }
 
 .ui-datatable-data-empty td {
@@ -886,7 +905,7 @@ a .experiment-title {
 }
 
 .experiment-select .ui-datatable .ui-datatable-data td {
-    padding: 5px 10px 3px;
+    padding: 5px 10px;
 }
 
 #center {
@@ -953,12 +972,22 @@ a .experiment-title {
     display: none;
 }
 
+#left_col ul {
+    margin: 0;
+    padding: 0;
+    border-left: 2px solid #ccc;
+}
+
+#left_col ul li {
+    padding: 0px;
+    margin: 0;
+}
+
 #left_col ul li a {
     background: none;
     font-weight: normal;
-    border-left: 2px solid #ccc;
     margin-bottom: 11px;
-    padding: 1px 5px;
+    padding: 1px 10px;
     font-size: 1.1rem;
 }
 
@@ -1053,8 +1082,35 @@ a.ui-panel-titlebar-icon.ui-corner-all.ui-state-default {
 
 #login .ui-tabs .ui-tabs-nav li, #login .ui-tabs.ui-tabs-top .ui-tabs-nav li {
     margin: 0 8px 0 0px;
+    border: 0;
+    box-shadow: none;
 }
 
 #login ul {
     margin: 0;
+}
+
+input.back-button {
+    padding: 0 20px;
+    background: #e9e9e9;
+    height: 28px;
+    cursor: pointer;
+    font-weight: normal;
+    margin: 0 0 10px;
+    border: 1px solid #999;
+    border-radius: 3px;
+}
+
+.login-btn {
+    float: right;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background: none;
+}
+
+.login-btn span.ui-button-text {
+    padding: 11px 8px 8px;
+    font-size: 1rem;
+    color: #4caf50;
 }
