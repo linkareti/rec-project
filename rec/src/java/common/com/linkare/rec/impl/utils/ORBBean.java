@@ -189,7 +189,7 @@ public class ORBBean {
 	}
 
 	private Policy rttpol = null;
-	
+
 	private Policy getRoundTripTimeOutPolicy() {
 		synchronized (orb_synch) {
 			if (rttpol == null) {
@@ -197,6 +197,9 @@ public class ORBBean {
 					final Any any = getORB().create_any();
 					TimeTHelper.insert(any, Integer.valueOf(System.getProperty("corba.rt.timeout", "30")) * 1000 * 10000);// 30 seconds*ms*(10.000 units of 100 ns)
 					rttpol = getORB().create_policy(RELATIVE_RT_TIMEOUT_POLICY_TYPE.value, any); //RoundTrip TimeOut
+
+					final PolicyManager opm = (PolicyManager) getORB().resolve_initial_references("ORBPolicyManager");
+					opm.set_policy_overrides(new Policy[] { rttpol }, SetOverrideType.ADD_OVERRIDE);
 				} catch (final Exception e) {
 					LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				}
