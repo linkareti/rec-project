@@ -26,7 +26,6 @@ import org.omg.CORBA.SetOverrideType;
 import org.omg.CORBA.ORBPackage.InvalidName;
 import org.omg.CORBA.portable.Delegate;
 import org.omg.CORBA.portable.ObjectImpl;
-import org.omg.Messaging.RELATIVE_REQ_TIMEOUT_POLICY_TYPE;
 import org.omg.Messaging.RELATIVE_RT_TIMEOUT_POLICY_TYPE;
 import org.omg.CosNaming.NameComponent;
 import org.omg.CosNaming.NamingContextExt;
@@ -109,6 +108,8 @@ public class ORBBean {
 				the_orb = ORB.init(applet, null);
 			} else {
 				final Properties props = System.getProperties();
+				props.put( "org.openorb.PI.FeatureInitializerClass."
+						+ "org.openorb.orb.messaging.MessagingInitializer", "" );
 				the_orb = ORB.init(new String[] {}, props);
 			}
 
