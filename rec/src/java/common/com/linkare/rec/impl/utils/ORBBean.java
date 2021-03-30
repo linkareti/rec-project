@@ -196,10 +196,10 @@ public class ORBBean {
 				try {
 					final Any any = getORB().create_any();
 					LOGGER.log(Level.SEVERE, "Printing stuff");
-					LOGGER.log(Level.SEVERE, Integer.valueOf(System.getProperty("corba.rt.timeout", "30")) * 1000 * 10000);
-					LOGGER.log(Level.SEVERE, 30 * 1000 * 10000);
-					LOGGER.log(Level.SEVERE, RELATIVE_RT_TIMEOUT_POLICY_TYPE.value);
-					LOGGER.log(Level.SEVERE, any);
+					LOGGER.log(Level.SEVERE, (String) Integer.valueOf(System.getProperty("corba.rt.timeout", "30")) * 1000 * 10000);
+					LOGGER.log(Level.SEVERE, (String) 30 * 1000 * 10000);
+					LOGGER.log(Level.SEVERE, (String) RELATIVE_RT_TIMEOUT_POLICY_TYPE.value);
+					LOGGER.log(Level.SEVERE, (String) any);
 					LOGGER.log(Level.SEVERE, "End printing stuff");
 					TimeTHelper.insert(any, 30 * 1000 * 10000);// 30 seconds*ms*(10.000 units of 100 ns)
 					rttpol = getORB().create_policy(RELATIVE_RT_TIMEOUT_POLICY_TYPE.value, any); //RoundTrip TimeOut
