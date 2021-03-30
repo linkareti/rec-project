@@ -1,6 +1,8 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui" template="/nomenu-template.xhtml">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" template="/nomenu-template.xhtml">
     <ui:define name="title">
         <h:outputText value="#{bundle['page.login.title']}"></h:outputText>
     </ui:define>
@@ -10,44 +12,57 @@
                 <h1>
                     <h:outputText value="#{experiencesBean.laboratory.name}" />
                 </h1>
-                <p><h:outputText value="#{bundle['experiment.page.select']}" /></p>
+                <p>
+                    <h:outputText value="#{bundle['experiment.page.select']}" />
+                </p>
             </div>
             <div class="elab_launch">
                 <h:form id="elab_launch_form" styleClass="experiment-select">
-                    <h2><h:outputText value="#{experiencesBean.experiments.size()} " />
-                        <h:outputText rendered="#{experiencesBean.experiments.size() eq 1}" value="#{bundle['experiment.number.singular']}" /> 
-                        <h:outputText rendered="#{experiencesBean.experiments.size() ne 1}" value="#{bundle['experiment.number.multiple']}" />  
+                    <h2>
+                        <h:outputText value="#{experiencesBean.experiments.size()} " />
+                        <h:outputText rendered="#{experiencesBean.experiments.size() eq 1}"
+                            value="#{bundle['experiment.number.singular']}" />
+                        <h:outputText rendered="#{experiencesBean.experiments.size() ne 1}"
+                            value="#{bundle['experiment.number.multiple']}" />
                     </h2>
-                    <p:dataTable id="tableExperiments" var="deployedExp"
-                             value="#{experiencesBean.experiments}" emptyMessage="No results to present">
-                           <p:column>
-                                <h:panelGroup rendered="#{deployedExp.labRunning}">
-                                    <a href="#void" onclick="var dir = location.href.substring(0, location.href.lastIndexOf('/')+1); var url = dir + 'client/#{deployedExp.experiment.state.url}.jnlp'; window.open(url);" download="#{deployedExp.experiment.state.url}.jnlp"
-                                                title="#{statusBundle['tooltip.experiment.launch']}" 
-                                                rel="#{statusBundle['tooltip.experiment.launch']}">
-                                        <div class="col-a">
-                                                <h:outputText value="#{deployedExp.experiment.name}" styleClass="experiment-title"/>
-                                        </div>
-                                        <div class="col-b">
-                                            <span class="experiment-users">
-                                                <h:outputText value="#{deployedExp.numberOfUsers}" title="#{statusBundle['tooltip.experiment.users']}" />
-                                                <h:outputText value=" #{bundle['label.users']}"/> 
-                                            </span>
-                                            <h:outputText value="#{bundle['status.online']}"  styleClass="experiment-status-on"/>
-                                        </div>
-                                    </a>
-                                </h:panelGroup>
-                                <h:panelGroup rendered="#{!deployedExp.labRunning}">
+                    <p:dataTable id="tableExperiments" var="deployedExp" value="#{experiencesBean.experiments}"
+                        emptyMessage="No results to present">
+                        <p:column>
+                            <h:panelGroup rendered="#{deployedExp.labRunning}">
+                                <a href="#void"
+                                    onclick="var dir = location.href.substring(0, location.href.lastIndexOf('/')+1); var url = dir + 'client/#{deployedExp.experiment.state.url}.jnlp'; window.open(url);"
+                                    download="#{deployedExp.experiment.state.url}.jnlp"
+                                    title="#{statusBundle['tooltip.experiment.launch']}"
+                                    rel="#{statusBundle['tooltip.experiment.launch']}">
                                     <div class="col-a">
-                                        <h:outputText value="#{deployedExp.experiment.name}" styleClass="experiment-title"/>
+                                        <h:outputText value="#{deployedExp.experiment.name}"
+                                            styleClass="experiment-title" />
                                     </div>
                                     <div class="col-b">
-                                        <h:outputText value="#{bundle['status.offline']}" styleClass="experiment-status-off"/>
+                                        <span class="experiment-users">
+                                            <h:outputText value="#{deployedExp.numberOfUsers}"
+                                                title="#{statusBundle['tooltip.experiment.users']}" />
+                                            <h:outputText value=" #{bundle['label.users']}" />
+                                        </span>
+                                        <h:outputText value="#{bundle['status.online']}"
+                                            styleClass="experiment-status-on" />
                                     </div>
-                                </h:panelGroup>
-                            </p:column>
-                        </p:dataTable>
-                    <h:commandButton value="#{bundle['operation.back']}" action="#{experiencesBean.backingAction}" styleClass="back-button"/>
+                                </a>
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{!deployedExp.labRunning}">
+                                <div class="col-a">
+                                    <h:outputText value="#{deployedExp.experiment.name}"
+                                        styleClass="experiment-title" />
+                                </div>
+                                <div class="col-b">
+                                    <h:outputText value="#{bundle['status.offline']}"
+                                        styleClass="experiment-status-off" />
+                                </div>
+                            </h:panelGroup>
+                        </p:column>
+                    </p:dataTable>
+                    <h:commandButton value="#{bundle['operation.back']}" action="#{experiencesBean.backingAction}"
+                        styleClass="back-button" />
                 </h:form>
             </div>
             <div class="sidemenu">
