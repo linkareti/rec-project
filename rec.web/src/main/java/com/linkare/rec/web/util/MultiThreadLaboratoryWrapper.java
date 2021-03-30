@@ -11,6 +11,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentSkipListSet;
 
+import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseId;
 import javax.naming.NamingException;
 
 import org.slf4j.Logger;
@@ -414,16 +416,9 @@ public class MultiThreadLaboratoryWrapper {
 		return underlyingLaboratory.getState().getLabel();
 	}
 	
-	public StreamedContent getLaboratoryImage() {
-		
-		StreamedContent imageStream = null;
-				
-		if (underlyingLaboratory.getImage() != null && underlyingLaboratory.getImage().length >= 1) {
-			new DefaultStreamedContent(new ByteArrayInputStream(underlyingLaboratory.getImage()));
-		}
-		
-		return imageStream;
-	}
+	
+	
+	
 	
 	public GpsCoordinates getCoordinates() {
 		return underlyingLaboratory.getGpsLocation();

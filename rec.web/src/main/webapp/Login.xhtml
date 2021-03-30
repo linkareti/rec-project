@@ -34,8 +34,15 @@
                                     <div class="card">
                                         <div class="card-img">
                                             <h:panelGroup rendered="#{lab.imageAvailable}">
-                                                <div id="imageUploadOut" class="lab-img"
-                                                    style="background-image: url();"></div>
+                                            		<p:graphicImage
+									                    id="imageUploadOut"
+									                    value="#{statusBean.laboratoryImage}"
+									                    styleClass="small-image"
+									                    rendered="#{lab.imageAvailable}">
+									               <f:param name="labId" value="#{lab.idInternal}" />
+									            </p:graphicImage>
+                                            
+                                               
                                             </h:panelGroup>
                                             <h:panelGroup rendered="#{!lab.imageAvailable}">
                                                 <div class="lab-no-img"></div>
@@ -51,6 +58,8 @@
                                     </div>
                                 </p:column>
                             </p:dataGrid>
+                          
+                            
                         </p:tab>
                         <p:tab title="Map">
                             Lorem ipsum

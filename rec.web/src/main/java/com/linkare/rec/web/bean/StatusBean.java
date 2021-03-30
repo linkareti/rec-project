@@ -8,16 +8,32 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+import java.io.ByteArrayInputStream;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
+import javax.faces.event.PhaseId;
+import javax.faces.context.ExternalContext;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
+import org.primefaces.model.UploadedFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 import com.linkare.rec.web.model.DeployedExperiment;
+import com.linkare.rec.web.util.Strings;
 import com.linkare.rec.web.model.Experiment;
 import com.linkare.rec.web.service.ExperimentServiceLocal;
 import com.linkare.rec.web.util.ConstantUtils;
 import com.linkare.rec.web.util.LaboratoriesMonitor;
 import com.linkare.rec.web.util.MultiThreadLaboratoryWrapper;
+import com.linkare.rec.web.service.LaboratoryService;
+import com.linkare.rec.web.service.LaboratoryServiceBean;
+import javax.faces.context.FacesContext;
+import com.linkare.rec.web.service.LaboratoryServiceLocal;
+import com.linkare.rec.web.model.Laboratory;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,7 +47,7 @@ import java.util.Set;
  * 
  */
 @ManagedBean(name = "statusBean")
-@ViewScoped
+@RequestScoped
 public class StatusBean implements Serializable {
 
     private static final long serialVersionUID = 9112911612244451634L;
@@ -40,7 +56,13 @@ public class StatusBean implements Serializable {
     private List<DeployedExperiment> selectedLabExperiments;
     @EJB
     private ExperimentServiceLocal experimentService;
+    
+    @EJB(beanInterface = LaboratoryServiceLocal.class)
+    private LaboratoryService service;
+    
     private Map<String, List<Experiment>> activeExperiment = new HashMap<String, List<Experiment>>();
+    
+    private static final Logger LOG = LoggerFactory.getLogger(StatusBean.class.getName());
 
 	public List<MultiThreadLaboratoryWrapper> getLabs() {
 		
@@ -72,6 +94,37 @@ public class StatusBean implements Serializable {
             }
         }
     }
+    
+    
+   
+    
+    
+    public StreamedContent getLaboratoryImage() {
+        
+    	  FacesContext context = FacesContext.getCurrentInstance();
+
+          if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
+              // So, we're rendering the HTML. Return a stub StreamedContent so that it will generate right URL.
+              return new DefaultStreamedContent();
+          }
+    	
+    	ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        String laboratoryId = externalContext.getRequestParameterMap().get("labId");
+        if (Strings.isNullOrEmpty(laboratoryId)) {
+        	LOG.warn("Something went wrong, no parameter laboratory in image request");
+            return null;
+        }
+
+        Laboratory laboratory = service.find(Long.valueOf(laboratoryId));
+
+        if (laboratory.getImage() == null || laboratory.getImage().length < 1) {
+            return null;
+        }
+        return new DefaultStreamedContent(new ByteArrayInputStream(laboratory.getImage()));
+    }
+    
+    
+    
 
     public void listenerMethod(ClientInfoDTO clientInfo) {
         for (DeployedExperiment dpExperiment : selectedLabExperiments) {
