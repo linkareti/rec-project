@@ -194,7 +194,8 @@ public class ORBBean {
 		if (rttpol == null) {
 			try {
 				final Any any = getORB().create_any();
-				TimeTHelper.insert(any, Integer.valueOf(System.getProperty("corba.rt.timeout", "30")) * 1000 * 10000);// 30 seconds*ms*(10.000 units of 100 ns)
+				//TimeTHelper.insert(any, Integer.valueOf(System.getProperty("corba.rt.timeout", "30")) * 1000 * 10000);// 30 seconds*ms*(10.000 units of 100 ns)
+				any.insert_longlong(Integer.valueOf(System.getProperty("corba.rt.timeout", "30")) * 1000 * 10000);
 				rttpol = getORB().create_policy(RELATIVE_RT_TIMEOUT_POLICY_TYPE.value, any); //RoundTrip TimeOut
 			} catch (final Exception e) {
 				LOGGER.log(Level.SEVERE, e.getMessage(), e);
