@@ -35,18 +35,17 @@
                                     <div class="card">
                                         <div class="card-img">
                                             <h:panelGroup rendered="#{lab.imageAvailable}">
-                                            		<p:graphicImage
-									                    id="imageUploadOut"
-									                    value="#{statusBean.laboratoryImage}"
-									                    styleClass="small-image"
-									                    rendered="#{lab.imageAvailable}">
+                                                <p:graphicImage
+                                                    id="imageUploadOut"
+                                                    value="#{statusBean.laboratoryImage}"
+                                                    styleClass="lab-image" style="background-image: url(#{statusBean.laboratoryImage});">
 									               <f:param name="labId" value="#{lab.idInternal}" />
 									            </p:graphicImage>
-                                            
-                                               
                                             </h:panelGroup>
                                             <h:panelGroup rendered="#{!lab.imageAvailable}">
-                                                <div class="lab-no-img"></div>
+                                                <div class="lab-no-img">
+                                                    <h:outputText value="#{lab.description}" />
+                                                </div>
                                             </h:panelGroup>
                                         </div>
                                         <div class="card-content">
@@ -59,10 +58,23 @@
                                     </div>
                                 </p:column>
                             </p:dataGrid>
-                          
-                            
                         </p:tab>
-                        <p:tab id ="secondTab" title="Map">
+                        <p:tab title="List">
+                            <p:dataTable var="lab" value="#{statusBean.labs}" emptyMessage="No results to present">
+                                <p:column>
+                                    <div class="col-a">
+                                        <h:commandButton styleClass="submit" action="experiencesLogin"
+                                                value="#{lab.description}">
+                                                <f:param name="laboratory" value="#{lab.name}" />
+                                            </h:commandButton>
+                                    </div>
+                                    <div class="col-b">
+                                        <h:outputText value="#{lab.name}" />
+                                    </div>     
+                                </p:column>
+                            </p:dataTable>
+                        </p:tab>
+                        <p:tab id="secondTab" title="Map">
                            <div id="map" style="width: 800px; height: 600px"></div>
                         </p:tab>
                     </p:tabView>
@@ -133,10 +145,5 @@
 	  }   
 	  
       </script>
-      
-      
-  
-  
-      
     </ui:define>
 </ui:composition>
