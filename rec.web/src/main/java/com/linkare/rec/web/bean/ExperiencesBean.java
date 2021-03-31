@@ -8,7 +8,7 @@ import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import org.apache.commons.lang.StringUtils;
@@ -25,7 +25,7 @@ import com.linkare.rec.web.util.MultiThreadLaboratoryWrapper;
 * @author Nuno Simões - Linkare TI
 */
 @ManagedBean(name = "experiencesBean")
-@SessionScoped
+@RequestScoped
 public class ExperiencesBean {
 	
 	private MultiThreadLaboratoryWrapper laboratory;

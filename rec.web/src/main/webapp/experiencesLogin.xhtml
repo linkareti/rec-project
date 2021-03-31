@@ -61,7 +61,7 @@
                             </h:panelGroup>
                         </p:column>
                     </p:dataTable>
-                    <h:commandButton value="#{bundle['operation.back']}" action="#{experiencesBean.backingAction}"
+                    <h:commandButton value="#{bundle['operation.back']}" onclick="window.history.back();return false;"
                         styleClass="back-button" />
                 </h:form>
             </div>
