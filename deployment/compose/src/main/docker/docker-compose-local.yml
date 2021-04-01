@@ -17,8 +17,10 @@ services:
     ports:
       - "28080:8080"
       - "24848:4848"
+      - "29009:9009"
     environment:
       DEVELOPMENT_MODE: ${development.mode}
+      PAYARA_ARGS: "--debug"
     volumes:
       # Allow real-time refresh (with rec.web build)
       - ${project.build.directory}/resources/autodeploy:/autodeploy
