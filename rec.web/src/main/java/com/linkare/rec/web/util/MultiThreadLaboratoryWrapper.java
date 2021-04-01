@@ -1,5 +1,6 @@
 package com.linkare.rec.web.util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -10,13 +11,10 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentSkipListSet;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import javax.faces.context.FacesContext;
-import javax.faces.event.PhaseId;
 import javax.naming.NamingException;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.linkare.rec.web.ClientInfoDTO;
 import com.linkare.rec.web.MultiCastControllerNotifInfoDTO;
@@ -31,20 +29,15 @@ import com.linkare.rec.web.model.HardwareState;
 import com.linkare.rec.web.model.Laboratory;
 import com.linkare.rec.web.service.ExperimentService;
 
-import java.io.ByteArrayInputStream;
-import java.util.ArrayList;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
 import org.apache.commons.collections.buffer.CircularFifoBuffer;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MultiThreadLaboratoryWrapper {
 
 	private static final int MESSAGE_QUEUE_MAX_SIZE = 100;
 
-	private final static Logger LOGGER = LoggerFactory
-			.getLogger(MultiThreadLaboratoryWrapper.class);
+	private final static Logger LOGGER = LoggerFactory.getLogger(MultiThreadLaboratoryWrapper.class);
 	private final Laboratory underlyingLaboratory;
 	private final ConcurrentMap<String, MultiThreadDeployedExperimentWrapper> deployedExperimentsMap;
 	private final Set<String> usersSet;
@@ -218,26 +211,22 @@ public class MultiThreadLaboratoryWrapper {
 				.get(externalID);
 
 		if (multiThreadDeployedExperimentWrapper == null) {
-			loadExperimentFromBD(externalID,
-					getDeployedExperimentFrom(registeredHardware));
+			loadExperimentFromBD(externalID, getDeployedExperimentFrom(registeredHardware));
 		}
 
 		return deployedExperimentsMap.get(externalID);
 	}
 
-	private void loadExperimentFromBD(final String externalID,
-			final DeployedExperiment deployedExperiment) {
+	private void loadExperimentFromBD(final String externalID, final DeployedExperiment deployedExperiment) {
 
 		synchronized (this) {
-			MultiThreadDeployedExperimentWrapper experiment = deployedExperimentsMap
-					.get(externalID);
+			MultiThreadDeployedExperimentWrapper experiment = deployedExperimentsMap.get(externalID);
 			if (experiment == null) {
 				final Experiment findByExternalID = getExperimentFromBD(externalID);
 				if (findByExternalID != null) {
 					deployedExperiment.setExperiment(findByExternalID);
 					deployedExperimentsMap.put(externalID,
-							new MultiThreadDeployedExperimentWrapper(
-									deployedExperiment));
+							new MultiThreadDeployedExperimentWrapper(deployedExperiment));
 				}
 			}
 		}
