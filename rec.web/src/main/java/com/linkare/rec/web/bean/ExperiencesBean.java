@@ -5,10 +5,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.apache.commons.lang.StringUtils;
@@ -25,7 +26,7 @@ import com.linkare.rec.web.util.MultiThreadLaboratoryWrapper;
 * @author Nuno Simões - Linkare TI
 */
 @ManagedBean(name = "experiencesBean")
-@RequestScoped
+@ViewScoped
 public class ExperiencesBean {
 	
 	private MultiThreadLaboratoryWrapper laboratory;
@@ -34,8 +35,10 @@ public class ExperiencesBean {
 	@EJB
     private ExperimentServiceLocal experimentService; 
 	
+	private static final Logger LOG = LoggerFactory.getLogger(ExperiencesBean.class.getName());
+
+	
     public MultiThreadLaboratoryWrapper getLaboratory(){
-		
 		if(laboratory ==null) {
 			Map<String,String> params = 
                 FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();

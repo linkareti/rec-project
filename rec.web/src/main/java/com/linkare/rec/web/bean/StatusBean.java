@@ -20,7 +20,7 @@ import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import javax.faces.bean.ManagedProperty;
 
 import com.linkare.rec.web.model.DeployedExperiment;
 import com.linkare.rec.web.util.Strings;
@@ -76,6 +76,18 @@ public class StatusBean implements Serializable {
         return returnableLabs;
     }
 
+	@ManagedProperty("#{param.laboratory}")
+    private String laboratory;
+ 
+    public String getLaboratory() {
+        return laboratory;
+    }
+    
+    public void setLaboratory(String laboratory) {
+    	this.laboratory= laboratory;
+    }
+	
+	
     public MultiThreadLaboratoryWrapper getSelectedLab() {
         return selectedLab;
     }
@@ -96,7 +108,10 @@ public class StatusBean implements Serializable {
     }
     
     
-   
+    public String openExperiment() {
+        String param1 = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("laboratory");
+        return "experiencesLogin?faces-redirect=true&includeViewParams=true&laboratory=" + param1;
+    }
     
     
     public StreamedContent getLaboratoryImage() {

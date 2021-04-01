@@ -20,6 +20,8 @@
 
             <div class="elab_launch">
                 <h:form id="elab_launch_form" styleClass="laboratory experiment-select">
+                <p:remoteCommand name="rc"  action="#{statusBean.openExperiment}"/>
+                
                     <h2>
                         <h:outputText value="#{statusBean.labs.size()} " />
                         <h:outputText rendered="#{statusBean.labs.size() == 1}"
@@ -93,14 +95,14 @@
         
 	  <script type="text/javascript">
 	  
-	  function setMapVisibility(visibility){
-          if(visibility){
-              document.getElementById("map").style.display="block";
-          }else{
-              document.getElementById("map").style.display="none";
-          }
+	  function test() {
+		    var message = "LAB_ME_INTERMEDIATE";
+		    rc({laboratory:message});
+		}
 
-          }
+
+	  
+	  
 	  function tabShowed(index){
 			if (index.attr("id").split(":")[2]=='secondTab'){
 				if($("#map").children().size()===0){

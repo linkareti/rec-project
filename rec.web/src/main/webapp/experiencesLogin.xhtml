@@ -19,6 +19,7 @@
             <div class="elab_launch">
                 <h:form id="elab_launch_form" styleClass="experiment-select">
                     <h2>
+                    	  <h:inputHidden id="laboratoryName"  value="#{experiencesBean.laboratory.name}"/>
                         <h:outputText value="#{experiencesBean.experiments.size()} " />
                         <h:outputText rendered="#{experiencesBean.experiments.size() eq 1}"
                             value="#{bundle['experiment.number.singular']}" />
