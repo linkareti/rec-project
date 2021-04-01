@@ -23,8 +23,9 @@ rec.web/src/main/webapp/client
 elab/lib/java/driver/RXTXcomm.jar
 rec/lib/java/hardwareserver/*.jar
 /build.properties
-/bin/
 .directory
 nbproject
 rec.web/src/main/resources/wsdl_pp.php
 rec/lib/java/common/rec-web-api.jar
+*.iml
+.idea
