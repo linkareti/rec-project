@@ -5,6 +5,8 @@ services:
     ports:
       - "18080:8080"
       - "18000:8000"
+    volumes:
+      - rec-static-files:/opt/webswing/apps/webapps/elab/etc:rw
   
   webswing-admin:
     image: ${repo}/${simplifiedGroupId}/rec.client-admin-${webswing.version}-${openjdk.version}:${project.version}
@@ -70,7 +72,8 @@ services:
     volumes:
       #- ${project.build.directory}/resources/etc:/www/data:ro
       # Allow real-time refresh (with rec.web build)
-      - ${project.parent.basedir}/rec.web/target/rec.web/client/etc:/usr/share/nginx/html/rec.web/client/etc:ro
+      - rec-static-files:/usr/share/nginx/html/rec.web/client/etc:ro
+      #- ${project.parent.basedir}/rec.web/target/rec.web/client/etc:/usr/share/nginx/html/rec.web/client/etc:ro
     labels:
       # HTTP (80)
       - "traefik.http.routers.nginx-http.entrypoints=web"
@@ -112,3 +115,6 @@ secrets:
      file: ${project.build.directory}/resources/asadmin_mail.secret
    as_recdb.secret:
      file: ${project.build.directory}/resources/asadmin_recdb.secret
+
+volumes:
+  rec-static-files: {}
