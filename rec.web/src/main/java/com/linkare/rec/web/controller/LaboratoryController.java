@@ -147,8 +147,12 @@ public class LaboratoryController extends AbstractController<Long, Laboratory, L
             return;
         }
 
-        Lab lab = LaboratoryServiceBean.findCorrespondingLab(laboratory, config).orElseThrow();
-        experimentService.createOrUpdateFromLab(laboratory, lab);
+        Optional<Lab> lab = LaboratoryServiceBean.findCorrespondingLab(laboratory, config).stream().findFirst();
+        if (lab.isPresent()) {
+            experimentService.createOrUpdateFromLab(laboratory, lab.get());
+        } else {
+            errorMessage("Something is wrong", "Could not find the laboratory in remove configuration file");
+        }
     }
 
     private boolean checkCreateForm(Laboratory lab) {
@@ -221,6 +225,8 @@ public class LaboratoryController extends AbstractController<Long, Laboratory, L
         checkCoordinates(laboratory);
         updateValuesFromRecConfig(laboratory);
         final String result = super.update();
+
+        laboratory = service.findByName(laboratory.getName());
         createAndUpdateExperiments(laboratory);
 
         if (laboratory.getState().isActive()) {

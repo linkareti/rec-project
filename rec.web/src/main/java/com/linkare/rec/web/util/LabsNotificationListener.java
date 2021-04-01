@@ -16,11 +16,9 @@ import com.linkare.rec.web.mbean.IMultiCastControllerMXBean;
 import com.linkare.rec.web.model.Laboratory;
 
 /**
- * 
  * This class is responsible for receiving jmx notifications and doing the correct forwarding of it.
- * 
+ *
  * @author Artur Correia - Linkare TI
- * 
  */
 public class LabsNotificationListener {
 
@@ -31,79 +29,80 @@ public class LabsNotificationListener {
     private volatile boolean destroy;
 
     public LabsNotificationListener() throws NamingException {
-	this.labs = new ConcurrentHashMap<String, MultiThreadLaboratoryWrapper>();
-	this.destroy = false;
+        this.labs = new ConcurrentHashMap<>();
+        this.destroy = false;
     }
 
     public void initLab(final MbeanProxy<IMultiCastControllerMXBean, Laboratory> labProxy) {
-	if (labProxy != null) {
-	    try {
-		labs.put(labProxy.getEntity().getName(), new MultiThreadLaboratoryWrapper(labProxy));
-	    } catch (Exception e) {
-		LOGGER.error("Error creating wrapper for laboratory: " + labProxy.getEntity().getName(), e);
-	    }
-	}
+        if (labProxy != null) {
+            try {
+                labs.put(labProxy.getEntity().getName(), new MultiThreadLaboratoryWrapper(labProxy));
+            } catch (Exception e) {
+                LOGGER.error("Error creating wrapper for laboratory: " + labProxy.getEntity().getName(), e);
+            }
+        }
     }
 
     public NotificationListener getNotificationListener() {
-	return new NotificationListener() {
+        return new NotificationListener() {
 
-	    public void handleNotification(Notification notification, Object handback) {
+            public void handleNotification(Notification notification, Object handback) {
 
-		try {
+                try {
 
-		    if (isToCancel()) {
-			return;
-		    }
+                    if (isToCancel()) {
+                        return;
+                    }
 
-		    if (notification.getUserData() instanceof MultiCastControllerNotifInfoDTO) {
+                    if (notification.getUserData() instanceof MultiCastControllerNotifInfoDTO) {
 
-			final MultiCastControllerNotifInfoDTO notifInfo = (MultiCastControllerNotifInfoDTO) notification.getUserData();
+                        final MultiCastControllerNotifInfoDTO notifInfo =
+                                (MultiCastControllerNotifInfoDTO)notification.getUserData();
 
-			if (isToCancel()) {
-			    return;
-			}
+                        if (isToCancel()) {
+                            return;
+                        }
 
-			LabsNotificationListener.this.handleNotification(notifInfo, notification.getSequenceNumber());
+                        LabsNotificationListener.this.handleNotification(notifInfo, notification.getSequenceNumber());
 
-		    }
+                    }
 
-		} catch (Throwable e) {
-		    LOGGER.error(e.getMessage(), e);
-		}
-	    }
-	};
+                } catch (Throwable e) {
+                    LOGGER.error(e.getMessage(), e);
+                }
+            }
+        };
     }
 
     public void handleNotification(final MultiCastControllerNotifInfoDTO notifInfo, final long notifSequenceNumber) {
-	if (notifInfo == null) {
-	    return;
-	}
+        if (notifInfo == null) {
+            return;
+        }
 
-	final MultiThreadLaboratoryWrapper lab = labs.get(notifInfo.getLabID());
+        final MultiThreadLaboratoryWrapper lab = labs.get(notifInfo.getLabID());
 
-	if (lab == null) {
-	    LOGGER.warn("Lab not found for labID: {}. Discarding notification received!", notifInfo.getLabID());
-	    return;
-	}
+        if (lab == null) {
+            LOGGER.warn("Lab not found for labID: {}. Discarding notification received!", notifInfo.getLabID());
+            return;
+        }
 
-	lab.refreshFromNotif(notifInfo, notifSequenceNumber);
+        lab.refreshFromNotif(notifInfo, notifSequenceNumber);
     }
 
     public void destroy() {
-	destroy = true;
+        destroy = true;
     }
 
     private boolean isToCancel() {
-	return destroy;
+        return destroy;
     }
 
     public MultiThreadLaboratoryWrapper getLaboratory(final String labID) {
-	return labs.get(labID);
+        return labs.get(labID);
     }
-    
-    public Collection<MultiThreadLaboratoryWrapper> getLaboratories(){
-	return labs.values();
+
+    public Collection<MultiThreadLaboratoryWrapper> getLaboratories() {
+        return labs.values();
     }
 
 }
