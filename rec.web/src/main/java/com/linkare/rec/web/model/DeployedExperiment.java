@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
  */
 public class DeployedExperiment {
 
+	private String urlExperiment;
     private Experiment experiment;
     private HardwareState state;
     private Set<String> usersConnected;
@@ -31,7 +32,18 @@ public class DeployedExperiment {
     public DeployedExperiment() {
     }
 
-    public Experiment getExperiment() {
+    
+   
+    
+    public String getUrlExperiment() {
+		return urlExperiment;
+	}
+
+	public void setUrlExperiment(String urlExperiment) {
+		this.urlExperiment = urlExperiment;
+	}
+
+	public Experiment getExperiment() {
         return experiment;
     }
 

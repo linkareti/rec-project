@@ -31,9 +31,7 @@
                         emptyMessage="No results to present">
                         <p:column>
                             <h:panelGroup rendered="#{deployedExp.labRunning}">
-                                <a href="#void"
-                                    onclick="var dir = location.href.substring(0, location.href.lastIndexOf('/')+1); var url = dir + 'client/#{deployedExp.experiment.state.url}.jnlp'; window.open(url);"
-                                    download="#{deployedExp.experiment.state.url}.jnlp"
+                                <a href="#{deployedExp.urlExperiment}"  target="_blank"
                                     title="#{statusBundle['tooltip.experiment.launch']}"
                                     rel="#{statusBundle['tooltip.experiment.launch']}">
                                     <div class="col-a">

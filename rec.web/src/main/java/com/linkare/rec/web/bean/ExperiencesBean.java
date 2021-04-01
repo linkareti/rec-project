@@ -11,6 +11,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -62,6 +63,10 @@ public class ExperiencesBean {
 
 	}
 	
+	
+	
+	
+	
 	private void refreshExperiments() {
 
         if (laboratory != null && laboratory.isAvailable()) {
@@ -74,13 +79,19 @@ public class ExperiencesBean {
                 final Map<String, MultiThreadDeployedExperimentWrapper> liveExperiments = laboratory.getLiveExperiments();
                 
                 if (liveExperiments.size() > 0) {
+                	
+                	String prefix = getClientPrefix();
+                    
+                	
                     for (DeployedExperiment experiment : selectedLabExperiments) {
                         String experimentName = experiment.getExperiment().getExternalId();
                         MultiThreadDeployedExperimentWrapper mt = liveExperiments.get(experimentName);
                         if (mt != null) {
-                        	LOG.info("entrei aqui");
                             experiment.setState(mt.getState());
                             experiment.setUsersConnected(mt.getUsersConnected());
+                            experiment.setUrlExperiment(prefix+experiment.getExperiment().getExternalId().toLowerCase());
+                            
+                            
                         }
                     }
                 }
@@ -91,6 +102,19 @@ public class ExperiencesBean {
             selectedLabExperiments = Collections.emptyList();
         }
     }
+
+	private String getClientPrefix() {
+		String recFaceConfig = selectedLabExperiments.get(0).getExperiment().getLaboratory().getRecFaceConfigUrl();
+		String prefix;
+		if(StringUtils.isNotEmpty(recFaceConfig)) {
+			prefix = recFaceConfig.substring(0,recFaceConfig.indexOf("rec.web"));
+		}else {
+			HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+			String requestUrl= request.getRequestURL().toString();
+			prefix = requestUrl.substring(0,requestUrl.indexOf("rec.web"));
+		}
+		return prefix;
+	}
 
     private void initActiveExperimentMap() {
 
