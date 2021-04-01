@@ -37,8 +37,7 @@ public class MultiThreadLaboratoryWrapper {
 
 	private static final int MESSAGE_QUEUE_MAX_SIZE = 100;
 
-	private final static Logger LOGGER = LoggerFactory
-			.getLogger(MultiThreadLaboratoryWrapper.class);
+	private final static Logger LOGGER = LoggerFactory.getLogger(MultiThreadLaboratoryWrapper.class);
 	private final Laboratory underlyingLaboratory;
 	private final ConcurrentMap<String, MultiThreadDeployedExperimentWrapper> deployedExperimentsMap;
 	private final Set<String> usersSet;
