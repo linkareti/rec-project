@@ -50,7 +50,7 @@ public class LaboratoriesSynchronizerSchedulerBean {
             return;
         }
         LOGGER.info("Found {} laboratories to synchronize. Start synchronizing..." ,laboratories.size());
-        laboratories.forEach(this::handleUpdateLaboratory);
+        //laboratories.forEach(this::handleUpdateLaboratory);
     }
 
     private void handleUpdateLaboratory(Laboratory laboratory) {
