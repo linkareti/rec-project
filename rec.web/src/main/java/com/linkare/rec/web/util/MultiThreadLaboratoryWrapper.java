@@ -63,6 +63,9 @@ public class MultiThreadLaboratoryWrapper {
 		init();
 	}
 
+	
+	
+	
 	private void init() {
 		synchronized (this) {
 
@@ -386,6 +389,10 @@ public class MultiThreadLaboratoryWrapper {
 
 	public String getName() {
 		return underlyingLaboratory.getName();
+	}
+	
+	public void setName(String name) {
+		 underlyingLaboratory.setName(name);
 	}
 
 	public void setAvailable(final boolean available) {

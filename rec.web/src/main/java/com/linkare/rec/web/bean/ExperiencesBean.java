@@ -48,12 +48,24 @@ public class ExperiencesBean {
 			if(StringUtils.isNotEmpty(labName)) {
 				laboratory = LaboratoriesMonitor.getInstance().getLaboratory(labName);
 				refreshExperiments();
+				
 			}
 		}
 		return laboratory;
     }
+    
+    
+    
 	
+	public void setLaboratory(MultiThreadLaboratoryWrapper laboratory) {
+		this.laboratory = laboratory;
+	}
+
+
+
+
 	public List<DeployedExperiment> getExperiments() {
+		getLaboratory();
 		
 		List<DeployedExperiment> returnableSelectedLabExperiments = new ArrayList<DeployedExperiment>();
 				
@@ -65,12 +77,9 @@ public class ExperiencesBean {
 	
 	
 	
-	
-	
 	private void refreshExperiments() {
 
         if (laboratory != null && laboratory.isAvailable()) {
-        	LOG.info("LAB is active");
             initActiveExperimentMap();
             selectedLabExperiments = getDeployedExperiment(activeExperiment.get(laboratory.getName()));
 
@@ -98,10 +107,15 @@ public class ExperiencesBean {
             }
 
         } else {
-        	LOG.info("LAB not active");
             selectedLabExperiments = Collections.emptyList();
         }
     }
+	
+	 public void updateExperiments() {
+		 	laboratory = LaboratoriesMonitor.getInstance().getLaboratory(laboratory.getName());
+	        refreshExperiments();
+	    }
+	
 
 	private String getClientPrefix() {
 		String recFaceConfig = selectedLabExperiments.get(0).getExperiment().getLaboratory().getRecFaceConfigUrl();
@@ -134,7 +148,6 @@ public class ExperiencesBean {
             for (final Experiment exp : experiment) {
                 DeployedExperiment deployed = new DeployedExperiment();
                 deployed.setExperiment(exp);
-                LOG.info(exp.getState().toString());
                 result.add(deployed);
             }
         }

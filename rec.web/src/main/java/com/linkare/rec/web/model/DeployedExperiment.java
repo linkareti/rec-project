@@ -72,7 +72,6 @@ public class DeployedExperiment {
     }
 
     public boolean isLabRunning() {
-    	LOG.info("state--->"+  (state));
         return (state != null);
     }
 

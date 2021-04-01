@@ -27,6 +27,8 @@
                         <h:outputText rendered="#{experiencesBean.experiments.size() ne 1}"
                             value="#{bundle['experiment.number.multiple']}" />
                     </h2>
+                    <p:poll update="tableExperiments" interval="10"
+                        listener="#{experiencesBean.updateExperiments}" />
                     <p:dataTable id="tableExperiments" var="deployedExp" value="#{experiencesBean.experiments}"
                         emptyMessage="No results to present">
                         <p:column>
