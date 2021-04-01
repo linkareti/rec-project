@@ -65,17 +65,20 @@ public class ExperiencesBean {
 	private void refreshExperiments() {
 
         if (laboratory != null && laboratory.isAvailable()) {
+        	LOG.info("LAB is active");
             initActiveExperimentMap();
             selectedLabExperiments = getDeployedExperiment(activeExperiment.get(laboratory.getName()));
 
             if (laboratory != null) {
 
                 final Map<String, MultiThreadDeployedExperimentWrapper> liveExperiments = laboratory.getLiveExperiments();
+                
                 if (liveExperiments.size() > 0) {
                     for (DeployedExperiment experiment : selectedLabExperiments) {
                         String experimentName = experiment.getExperiment().getExternalId();
                         MultiThreadDeployedExperimentWrapper mt = liveExperiments.get(experimentName);
                         if (mt != null) {
+                        	LOG.info("entrei aqui");
                             experiment.setState(mt.getState());
                             experiment.setUsersConnected(mt.getUsersConnected());
                         }
@@ -84,6 +87,7 @@ public class ExperiencesBean {
             }
 
         } else {
+        	LOG.info("LAB not active");
             selectedLabExperiments = Collections.emptyList();
         }
     }
@@ -106,6 +110,7 @@ public class ExperiencesBean {
             for (final Experiment exp : experiment) {
                 DeployedExperiment deployed = new DeployedExperiment();
                 deployed.setExperiment(exp);
+                LOG.info(exp.getState().toString());
                 result.add(deployed);
             }
         }

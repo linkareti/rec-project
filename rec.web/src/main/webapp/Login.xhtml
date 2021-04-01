@@ -1,9 +1,6 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core" 
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:c="http://java.sun.com/jsp/jstl/core"
-                xmlns:p="http://primefaces.org/ui" template="/nomenu-template.xhtml">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:p="http://primefaces.org/ui" template="/nomenu-template.xhtml">
     <ui:define name="title">
         <h:outputText value="#{bundle['page.login.title']}"></h:outputText>
     </ui:define>
@@ -30,19 +27,18 @@
                             value="#{bundle['laboratory.number.multiple']}" />
                     </h2>
                     <p:tabView onTabShow="tabShowed(index)">
-                        <p:tab id ="firstTab" title="Grid">
+                        <p:tab id="firstTab" title="Grid">
                             <p:dataGrid id="tableLabs" var="lab" value="#{statusBean.labs}" columns="3"
                                 emptyMessage="No results to present">
                                 <p:column>
                                     <div class="card">
                                         <div class="card-img">
                                             <h:panelGroup rendered="#{lab.imageAvailable}">
-                                                <p:graphicImage
-                                                    id="imageUploadOut"
-                                                    value="#{statusBean.laboratoryImage}"
-                                                    styleClass="lab-image" style="background-image: url(#{statusBean.laboratoryImage});">
-									               <f:param name="labId" value="#{lab.idInternal}" />
-									            </p:graphicImage>
+                                                <p:graphicImage id="imageUploadOut"
+                                                    value="#{statusBean.laboratoryImage}" styleClass="lab-image"
+                                                    style="background-image: url(#{statusBean.laboratoryImage});">
+                                                    <f:param name="labId" value="#{lab.idInternal}" />
+                                                </p:graphicImage>
                                             </h:panelGroup>
                                             <h:panelGroup rendered="#{!lab.imageAvailable}">
                                                 <div class="lab-no-img">
@@ -66,23 +62,23 @@
                                 <p:column>
                                     <div class="col-a">
                                         <h:commandButton styleClass="submit" action="experiencesLogin"
-                                                value="#{lab.description}">
-                                                <f:param name="laboratory" value="#{lab.name}" />
-                                            </h:commandButton>
+                                            value="#{lab.description}">
+                                            <f:param name="laboratory" value="#{lab.name}" />
+                                        </h:commandButton>
                                     </div>
                                     <div class="col-b">
                                         <h:outputText value="#{lab.name}" />
-                                    </div>     
+                                    </div>
                                 </p:column>
                             </p:dataTable>
                         </p:tab>
                         <p:tab id="secondTab" title="Map">
-                           <div id="map" style="width: 800px; height: 600px"></div>
+                            <div id="map" style="width: 800px; height: 600px"></div>
                         </p:tab>
                     </p:tabView>
                 </h:form>
             </div>
-            
+
             <div class="sidemenu">
                 <div id="statusPanelFooter" class="statusPanelFooter">
                     <a href="#{bundle['page.faq.url']}">#{bundle['page.faq.title']}</a>
@@ -91,61 +87,87 @@
                 </div>
             </div>
         </div>
-        
-        
-	  <script type="text/javascript">
-	  
-	  function test() {
-		    var message = "LAB_ME_INTERMEDIATE";
-		    rc({laboratory:message});
-		}
 
 
-	  
-	  
-	  function tabShowed(index){
-			if (index.attr("id").split(":")[2]=='secondTab'){
-				if($("#map").children().size()===0){
-					var map = new ol.Map({
-					       target: 'map',
-					       layers: [
-					         new ol.layer.Tile({
-					           source: new ol.source.OSM()
-					         })
-					       ],
-					       view: new ol.View({
-					         center: ol.proj.fromLonLat([37.41, 8.82]),
-					         zoom: 4
-					       })
-					});
-			      var markers = new ol.layer.Vector({
-			    	  source: new ol.source.Vector(),
-			    	  style: new ol.style.Style({
-			    	    image: new ol.style.Icon({
-			    	      anchor: [0.5, 1],
-			    	      src: 'javax.faces.resource/chat.png.faces?ln=images'
-			    	    })
-			    	  })
-			    	});
-			    	map.addLayer(markers);
-					   
-			  
-					var coordinates =[];
-					<c:forEach var="lab" items="#{statusBean.labs}">
-							 
-						coordinates.push([#{lab.coordinates.longitude}, #{lab.coordinates.latitude}]);
-				  	</c:forEach> 
-				  
-				  
-				  	coordinates.forEach(coordinate=> {
-					  var marker = new ol.Feature(new ol.geom.Point(ol.proj.fromLonLat([coordinate[0],coordinate[1]])));
-				    	markers.getSource().addFeature(marker);
-				  	});			
-				}
-	    
-			}
-	  }   
-	  
-      </script>
+
+        <script type="text/javascript">
+        
+        
+        var teste;
+
+            function tabShowed(index) {
+                if (index.attr("id").split(":")[2] == 'secondTab') {
+                    if ($("#map").children().size() === 0) {
+                        var map = new ol.Map({
+                            target: 'map',
+                            layers: [
+                                new ol.layer.Tile({
+                                    source: new ol.source.OSM()
+                                })
+                            ],
+                            view: new ol.View({
+                                center: ol.proj.fromLonLat([21.26,-40.22]),
+                                zoom: 2
+                            })
+                        });
+                        teste=map;
+
+                        var markers = new ol.layer.Vector({
+                            source: new ol.source.Vector(),
+                            style: new ol.style.Style({
+                                image: new ol.style.Icon({
+                                    anchor: [0.5, 1],
+                                    src: 'javax.faces.resource/location.svg.faces?ln=images'
+                                })
+                            })
+                        });
+
+                        map.addLayer(markers);
+
+
+                        var coordinates = [];
+                        <c:forEach var="lab" items="#{statusBean.labs}">
+                            
+                            coordinates.push({
+                                labId: "#{lab.name}",
+                                coord: [#{lab.coordinates.longitude}, #{lab.coordinates.latitude}]
+                            });
+				  	    </c:forEach >
+
+                        coordinates.forEach(coordinate => {
+                            const {labId, coord} = coordinate;
+                            console.log("Creating Marker for " + labId);
+                            var marker = new ol.Feature(new ol.geom.Point(ol.proj.fromLonLat([coord[0], coord[1]])));
+                            marker.setId(labId)
+                            marker.name=labId;
+                            markers.getSource().addFeature(marker);
+                        });
+
+                        var handleMarkerClickEvent = function (pixel) {
+                            markers.getFeatures(pixel).then(function (features) {
+                                var feature = features.length ? features[0] : undefined;
+                                console.log(features)
+                                if (features.length) {
+                                    console.log("Feature name :"+feature.name);
+                                    console.log("Feature id :"+feature.getId());
+                                    rc({laboratory:feature.getId()});
+                                    
+                                }
+                            });
+                        };
+
+
+                        map.on('click', function (evt) {
+                            if (evt.dragging) {
+                                return;
+                            }
+                            var pixel = map.getEventPixel(evt.originalEvent);
+                            handleMarkerClickEvent(pixel);
+                        });
+                    }
+                }
+            }
+
+        </script>
     </ui:define>
 </ui:composition>

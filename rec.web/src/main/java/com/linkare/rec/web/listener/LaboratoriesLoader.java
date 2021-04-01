@@ -164,7 +164,6 @@ public class LaboratoriesLoader implements ServletContextListener {
         // 2. activate experiments found
         // 3. change experiment to the correct lab
         for (Experiment experiment : experiments) {
-            LOGGER.info("Entra no For ");
             Apparatus correspondingApparatus = allApparatuses.get(experiment.getExternalId());
             experiment.getState().setActive(correspondingApparatus != null);
             if (correspondingApparatus != null) {
