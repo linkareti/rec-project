@@ -8,11 +8,14 @@ ENV REC_DB_HOST="" \
     JVM_OPTIONS="" \
     MULTICAST_HOST="" \
     MULTICAST_PORT="" \
-    DEVELOPMENT_MODE=""
+    DEVELOPMENT_MODE="" \
+    DEBUG=""
 
 COPY --chown=payara:payara resources/start.sh ${SCRIPT_DIR}/init_0_start.sh
 COPY --chown=payara:payara resources/payara-resources.xml ${PAYARA_DIR}/glassfish/domains/production/config/payara-resources.xml
 COPY --chown=payara:payara resources/mysql-connector-java.jar ${PAYARA_DIR}/glassfish/domains/production/lib/mysql-connector-java.jar
 COPY resources/dockerize /usr/local/bin/
+
+EXPOSE 9009 4848 8080
 
 VOLUME [ "/autodeploy" ]

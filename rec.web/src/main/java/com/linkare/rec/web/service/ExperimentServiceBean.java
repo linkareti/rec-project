@@ -82,7 +82,7 @@ public class ExperimentServiceBean extends BusinessServiceBean<Experiment, Long>
 
     @SuppressWarnings("unchecked")
     public List<Experiment> findExperimentsActiveByLaboratory(String labName) {
-	return getEntityManager().createNamedQuery(Experiment.FIND_BY_ACTIVE_LAB).setParameter(Experiment.LABORATORY, labName).getResultList();
+	    return getEntityManager().createNamedQuery(Experiment.FIND_BY_ACTIVE_LAB).setParameter(Experiment.LABORATORY, labName).getResultList();
     }
 
     @Override
@@ -117,7 +117,11 @@ public class ExperimentServiceBean extends BusinessServiceBean<Experiment, Long>
                     updateFromApparatus(experiment, apparatus, laboratory);
                     edit(experiment);
                 } else {
-                    create(createFromApparatus(apparatus, laboratory));
+                    if(findByExternalID(apparatus.getLocation()) == null){
+                        create(createFromApparatus(apparatus, laboratory));
+                    }else{
+                        //TODO what to do in this situation?
+                    }
                 }
             } catch (Exception e) {
                 LOGGER.error("Problem while saving experiment {}", experiment, e);
