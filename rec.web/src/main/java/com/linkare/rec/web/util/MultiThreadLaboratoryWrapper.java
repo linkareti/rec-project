@@ -49,14 +49,13 @@ public class MultiThreadLaboratoryWrapper {
 	private final CircularFifoBuffer messageQueue;
 	private final ReadWriteLock readWriteLock;
 
-	public MultiThreadLaboratoryWrapper(
-			final MbeanProxy<IMultiCastControllerMXBean, Laboratory> labMBeanPRoxy)
+	public MultiThreadLaboratoryWrapper(final MbeanProxy<IMultiCastControllerMXBean, Laboratory> labMBeanPRoxy)
 			throws NamingException {
 		this.underlyingLaboratory = labMBeanPRoxy.getEntity();
 		this.mbeanProxy = labMBeanPRoxy.getMbeanInterface();
 		this.experimentService = JndiHelper.getExperimentService();
-		this.deployedExperimentsMap = new ConcurrentHashMap<String, MultiThreadDeployedExperimentWrapper>();
-		this.usersSet = new ConcurrentSkipListSet<String>();
+		this.deployedExperimentsMap = new ConcurrentHashMap<>();
+		this.usersSet = new ConcurrentSkipListSet<>();
 		readWriteLock = new ReentrantReadWriteLock();
 		messageQueue = new CircularFifoBuffer(MESSAGE_QUEUE_MAX_SIZE);
 		new ArrayList<RecChatMessageDTO>();
@@ -94,7 +93,7 @@ public class MultiThreadLaboratoryWrapper {
 		Set<String> usersSet = Collections.emptySet();
 
 		if (!labUsers.isEmpty()) {
-			usersSet = new HashSet<String>(labUsers.size());
+			usersSet = new HashSet<>(labUsers.size());
 
 			for (final ClientInfoDTO clientInfoDTO : labUsers) {
 				usersSet.add(clientInfoDTO.getUserName());
@@ -132,8 +131,7 @@ public class MultiThreadLaboratoryWrapper {
 
 		if (deployedExperimentWrapper == null) {
 			addHardware(getRemoteHardware(experimentID));
-			deployedExperimentWrapper = deployedExperimentsMap
-					.get(experimentID);
+			deployedExperimentWrapper = deployedExperimentsMap.get(experimentID);
 		}
 
 		if (deployedExperimentWrapper != null) {
@@ -199,10 +197,8 @@ public class MultiThreadLaboratoryWrapper {
 	private DeployedExperiment getDeployedExperimentFrom(
 			final RegisteredHardwareDTO registeredHardwareDTO) {
 		final DeployedExperiment deployedExperiment = new DeployedExperiment();
-		deployedExperiment.setState(HardwareState
-				.valueOfCode(registeredHardwareDTO.getStateCode()));
-		deployedExperiment.setUsersConnected(registeredHardwareDTO
-				.getUsersConnected());
+		deployedExperiment.setState(HardwareState.valueOfCode(registeredHardwareDTO.getStateCode()));
+		deployedExperiment.setUsersConnected(registeredHardwareDTO.getUsersConnected());
 		return deployedExperiment;
 	}
 
@@ -364,7 +360,7 @@ public class MultiThreadLaboratoryWrapper {
 	}
 
 	private Experiment getExperimentFromBD(final String externalID) {
-		return experimentService.findByExternalID(externalID);
+		return experimentService.findByExternalID(externalID, underlyingLaboratory);
 	}
 
 	public Map<String, MultiThreadDeployedExperimentWrapper> getLiveExperiments() {

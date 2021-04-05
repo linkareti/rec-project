@@ -18,7 +18,7 @@ public interface ExperimentService extends BusinessService<Experiment, Long> {
     
     public List<Experiment> findExperimentsActiveByLaboratory(String labName);
 
-    public Experiment findByExternalID(final String externalID);
+    public Experiment findByExternalID(final String externalID, Laboratory laboratory);
 
     /**
      * Update and creates new Experiments based on the apparatus of the Lab

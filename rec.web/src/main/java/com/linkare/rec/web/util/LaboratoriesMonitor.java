@@ -16,14 +16,13 @@ import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PreDestroy;
 
-import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.linkare.rec.web.mbean.IMultiCastControllerMXBean;
 import com.linkare.rec.web.mbean.MBeanObjectNameFactory;
 import com.linkare.rec.web.model.Laboratory;
 import com.linkare.rec.web.service.LaboratoryService;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class is responsible for the monitoring of jmx connections
@@ -141,17 +140,12 @@ public final class LaboratoriesMonitor {
     }
 
     private void connectWithLabs(boolean isToForceInitialization) {
-
         for (final Entry<String, LabJMXConnetionHandler> lab : labsJMXConnectionHandler.entrySet()) {
-
             if (isToCancel()) {
                 return;
             }
-
             final JMXConnectionHandler jmxConnectionHandler = lab.getValue().getJmxConnectionHandler();
-
-            if (jmxConnectionHandler
-                    .initJMXConnectorIfNotAlreadyRegistered(getNotifListener())
+            if (jmxConnectionHandler.initJMXConnectorIfNotAlreadyRegistered(getNotifListener())
                     || isToForceInitialization) {
                 labsNotificationListener.initLab(getMBeanProxy(lab.getValue()));
             }
