@@ -1,32 +1,25 @@
 version: '3.5'
 services:
-  elab-client-webswing:
-    image: ${hub}/${simplifiedGroupId}/rec.client-${webswing.version}-${openjdk.version}:${project.version}
-    restart: always
-    environment:
-      XDG_RUNTIME_DIR: '/opt/webswing/.cache/xdgr'
-    labels:
-      # HTTP (80)
-      - "traefik.http.routers.webswing-http.entrypoints=web"
-      - "traefik.http.routers.webswing-http.rule=PathPrefix(`/`)"
-      - "traefik.http.routers.webswing-http.middlewares=webswing-redir-http"
-      - "traefik.http.services.webswing-http.loadbalancer.server.port=8080"
-      - "traefik.http.middlewares.webswing-redir-http.redirectscheme.scheme=https"
-      # HTTPS (443)
-      - "traefik.http.routers.webswing-https.entrypoints=web-secure"
-      - "traefik.http.routers.webswing-https.rule=PathPrefix(`/`)"
-      - "traefik.http.routers.webswing-https.tls=true"
-
-  webswing-admin:
-    image: ${hub}/${simplifiedGroupId}/rec.client-admin-${webswing.version}-${openjdk.version}:${project.version}
-    restart: always
-    environment:
-      WEBSWING_HOST: elab-client-webswing
-      WEBSWING_WEBSOCKET_PORT: 8080
-      WEBSWING_SHARED_LOG_DIR: /var/opt/logs
-      WEBSWING_PUBLIC_URL: https://elab.dev.linkare.com
+  reverse-proxy:
+    container_name: rec.proxy
+    image: ${hub}/${simplifiedGroupId}/base-images/traefik-${traefik.version}:${project.version}
+    command:
+      - --entrypoints.web.address=:80
+      - --entrypoints.web-secure.address=:443 #Declares the web-secure entrypoint in Traefik
+      - --providers.docker=true
+      - --api.insecure=true
+    ports:
+      - "80:80"
+      - "443:443"
+      # The Web UI (enabled by --api.insecure=true)
+      - "8080:8080"
+    restart: unless-stopped
+    volumes:
+      # So that Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock:ro
 
   elab-server-payara:
+    container_name: rec.web
     image: ${hub}/${simplifiedGroupId}/rec.web-${payara.docker.version}:${project.version}
     environment:
       jvm-options: '-XX\:+UnlockExperimentalVMOptions:-XX\:+UseContainerSupport:-XX\:MaxRAMPercentage=1:-Xms1g:-Xmx2g'
@@ -34,8 +27,7 @@ services:
       REC_DB_PORT: '3306'
       GFTIMER_DB_HOST: 'rec-database'
       GFTIMER_DB_PORT: '3306'
-      MULTICAST_HOST: 'elab-multicast'
-      MULTICAST_PORT: '9001'
+      CONTAINERS_MULTICAST: 'elab-multicast:9001'
     restart: unless-stopped
     secrets:
       - as_mail.secret
@@ -59,6 +51,7 @@ services:
       - "traefik.http.routers.payara-https.tls=true"
 
   rec-database:
+    container_name: rec.db
     image: ${hub}/${simplifiedGroupId}/rec.database:${project.version}
     secrets:
       - rdb.secret
@@ -71,33 +64,6 @@ services:
     volumes:
       - db-rec:/var/lib/mysql:rw
     restart: unless-stopped
-
-  elab-multicast:
-    image: ${hub}/${simplifiedGroupId}/rec.multicast-${openjdk.version}:${project.version}
-    healthcheck:
-      test: pgrep java
-      interval: 30s
-      timeout: 1s
-      retries: 3
-      start_period: 30s
-    restart: unless-stopped
-
-  reverse-proxy:
-    image: ${hub}/${simplifiedGroupId}/base-images/traefik-${traefik.version}:${project.version}
-    command:
-      - --entrypoints.web.address=:80
-      - --entrypoints.web-secure.address=:443 #Declares the web-secure entrypoint in Traefik
-      - --providers.docker=true
-      - --api.insecure=true
-    ports:
-      - "80:80"
-      - "443:443"
-      # The Web UI (enabled by --api.insecure=true)
-      - "8080:8080"
-    restart: unless-stopped
-    volumes:
-      # So that Traefik can listen to the Docker events
-      - /var/run/docker.sock:/var/run/docker.sock:ro
 
 secrets:
   dbrec.secret: {}

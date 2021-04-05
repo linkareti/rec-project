@@ -1,7 +1,7 @@
 version: '3.5'
 services:
-  elab-client-webswing:
-    container_name: rec.client
+  elab-client-webswing-client:
+    container_name: client_webswing
     image: ${repo}/${simplifiedGroupId}/rec.client-${webswing.version}-${openjdk.version}:${project.version}
     restart: unless-stopped
     environment:
@@ -9,52 +9,33 @@ services:
     labels:
       # HTTP (80)
       - "traefik.http.routers.webswing-http.entrypoints=web"
-      - "traefik.http.routers.webswing-http.rule=PathPrefix(`/tiro_v1.0`)"
+      - "traefik.http.routers.webswing-http.rule=PathPrefix(`/tiro_v2.0`)"
       - "traefik.http.routers.webswing-http.middlewares=webswing-redir-http"
       - "traefik.http.services.webswing-http.loadbalancer.server.port=8080"
       - "traefik.http.middlewares.webswing-redir-http.redirectscheme.scheme=https"
       # HTTPS (443)
       - "traefik.http.routers.webswing-https.entrypoints=web-secure"
-      - "traefik.http.routers.webswing-https.rule=PathPrefix(`/tiro_v1.0/`)"
+      - "traefik.http.routers.webswing-https.rule=PathPrefix(`/tiro_v2.0/`)"
       - "traefik.http.routers.webswing-https.tls=true"
+    volumes:
+      - rec-static-files:/opt/webswing/apps/webapps/elab/etc:rw
     networks:
-      - server
-  
-  webswing-admin:
+      - client
+
+  webswing-admin-client:
     image: ${repo}/${simplifiedGroupId}/rec.client-admin-${webswing.version}-${openjdk.version}:${project.version}
+    container_name: client_webswing_admin
     restart: unless-stopped
     environment:
-      WEBSWING_HOST: elab-client-webswing
+      WEBSWING_HOST: elab-client-webswing-client
       WEBSWING_WEBSOCKET_PORT: 8080
       WEBSWING_SHARED_LOG_DIR: /var/opt/logs
       WEBSWING_PUBLIC_URL: https://elab.dev.linkare.com
     networks:
-      - server
+      - client
 
-  elab-server-payara:
-    image: ${repo}/${simplifiedGroupId}/rec.web-${payara.docker.version}:${project.version}
-    environment:
-      DEVELOPMENT_MODE: ${development.mode}
-      PAYARA_ARGS: "--debug"
-    volumes:
-      # Allow real-time refresh (with rec.web build)
-      - ${project.build.directory}/resources/autodeploy:/autodeploy
-    networks:
-      - server
-
-  rec-database:
-    image: ${repo}/${simplifiedGroupId}/rec.database:${project.version}
-    ports:
-      - "13306:3306"
-    volumes:
-     - ${project.build.directory}/resources/rec-schema.sql:/docker-entrypoint-initdb.d/rec-schema.sql
-     - ${project.build.directory}/resources/gf_timer-schema.sql:/docker-entrypoint-initdb.d/gf_timer-schema.sql
-    #restart: "none"
-    networks:
-      - server
-
-  elab-multicast:
-    container_name: rec.multicast
+  elab-multicast-client:
+    container_name: client_multicast
     healthcheck:
       test: pgrep java
       interval: 30s
@@ -63,16 +44,16 @@ services:
       start_period: 30s
     restart: unless-stopped
     environment:
-      APPNAME: 'basic'
+      APPNAME: 'intermediate'
       APPUSER: 'elab'
-      WORKDIR: '/home/elab/rec-deployment/basic'
-      LABORATORY_NAMES: 'basic'
+      WORKDIR: '/home/elab/rec-deployment/intermediate'
+      LABORATORY_NAMES: 'intermediate'
     image: ${repo}/${simplifiedGroupId}/rec.multicast-${openjdk.version}:${project.version}
     networks:
-      - server
-  
-  elab-hardwareserver:
-    container_name: rec.hardwareserver
+      - client
+
+  elab-hardwareserver-client:
+    container_name: client_hardwareserver
     image: ${repo}/${simplifiedGroupId}/base-images/openjdk-${openjdk.docker.version}:${project.version}
     healthcheck:
       test: pgrep java
@@ -83,15 +64,39 @@ services:
     volumes:
       - ${project.build.directory}/resources/hardwareserver:/startup.d/
     networks:
-      - server
+      - client
     environment:
-      CONTAINERS_MULTICAST: 'elab-multicast:9001'
-      EXPERIMENT_NAMES: 'vtiroHardwareServer'
+      CONTAINERS_MULTICAST: 'elab-multicast-client:9002'
+      EXPERIMENT_NAMES: 'vtiro2HardwareServer'
 
   # elab-streamer-server:
   #   image: ${repo}/${simplifiedGroupId}/base-images/streamer:${project.version}
   #   ports:
   #     - "8554:8554"
+  
+  nginx-fileserver:
+    container_name: client_static_files
+    image: ${public.repo}/nginx:1.19.6
+    volumes:
+      #- ${project.build.directory}/resources/etc:/www/data:ro
+      # Allow real-time refresh (with rec.web build)
+      - rec-static-files:/usr/share/nginx/html/rec.web/client/etc:ro
+      #- ${project.parent.basedir}/rec.web/target/rec.web/client/etc:/usr/share/nginx/html/rec.web/client/etc:ro
+    labels:
+      # HTTP (80)
+      - "traefik.http.routers.nginx-http.entrypoints=web"
+      - "traefik.http.routers.nginx-http.rule=PathPrefix(`/rec.web/client`)"
+      - "traefik.http.routers.nginx-http.middlewares=nginx-redir-http"
+      - "traefik.http.services.nginx-http.loadbalancer.server.port=80"
+      - "traefik.http.middlewares.nginx-redir-http.redirectscheme.scheme=https"
+      # HTTPS (443)
+      - "traefik.http.routers.nginx-https.entrypoints=web-secure"
+      - "traefik.http.routers.nginx-https.rule=PathPrefix(`/rec.web/client`)"
+      - "traefik.http.routers.nginx-https.tls=true"
+    networks:
+      client:
+        aliases:
+          - elab.dev.linkare.com
 
   # upgrade-db:
   #   image: ${repo}/${simplifiedGroupId}/rec.upgrade-db-${liquibase.version}:${project.version}
@@ -112,9 +117,13 @@ services:
 
   reverse-proxy:
     image: ${repo}/${simplifiedGroupId}/base-images/traefik-${traefik.version}:${project.version}
+
+  elab-server-payara:
+    environment:
+      CONTAINERS_MULTICAST: 'elab-multicast:9001 elab-multicast:25001 elab-multicast-client:9002 elab-multicast-client:25002'
     networks:
-      - server
-      
+      - client
+
 secrets:
    dbrec.secret:
      file: ${project.build.directory}/resources/rec-db.secret
@@ -125,5 +134,8 @@ secrets:
    as_recdb.secret:
      file: ${project.build.directory}/resources/asadmin_recdb.secret
 
+volumes:
+  rec-static-files: {}
+
 networks:
-  server: {}
+  client: {}

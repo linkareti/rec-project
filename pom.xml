@@ -57,6 +57,8 @@
         <docker.phase.deploy>none</docker.phase.deploy>
         <repo>docker-repo.elab.linkare.com</repo>
         <hub>docker-hub.elab.linkare.com</hub>
+        <git.project.prefix>rec</git.project.prefix>
+        <public.repo>docker-thirdparty.linkare.com</public.repo>
     </properties>
 
     <modules>

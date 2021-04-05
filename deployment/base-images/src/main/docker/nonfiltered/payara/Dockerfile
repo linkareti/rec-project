@@ -6,8 +6,7 @@ ENV REC_DB_HOST="" \
     GFTIMER_DB_HOST="" \
     GFTIMER_DB_PORT="" \
     JVM_OPTIONS="" \
-    MULTICAST_HOST="" \
-    MULTICAST_PORT="" \
+    CONTAINERS_MULTICAST="" \
     DEVELOPMENT_MODE="" \
     DEBUG=""
 

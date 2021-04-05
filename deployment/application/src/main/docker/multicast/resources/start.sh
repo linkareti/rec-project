@@ -5,7 +5,7 @@ BLUE='\033[1;34m'
 YELLOW='\033[0;33m'
 NC='\033[0m' # No Color
 
-cmd="dockerize "
+#cmd="dockerize "
 PWD="$( cd "$( dirname "$0" )" && pwd )"
 RETVAL=0
 multicast_server_filepath="${PWD}/multicast.zip"
@@ -45,7 +45,15 @@ for zip in *.zip; do
     APPUSER="elab"
     WORKDIR="${deployment_dir}/${lab_type}"
 
-    cmd="${cmd} -template /templates/app.conf.j2:/etc/supervisor/conf.d/${lab_type}.conf"
+    if [ "${LABORATORY_NAMES}" != "" ]; then
+      for laboratory in ${LABORATORY_NAMES}; do
+        if [ "${laboratory}" == "${lab_type}" ]; then
+          dockerize -template /templates/app.conf.j2:/etc/supervisor/conf.d/${lab_type}.conf
+        fi
+      done
+    else
+      dockerize -template /templates/app.conf.j2:/etc/supervisor/conf.d/${lab_type}.conf
+    fi
 
 done
 
@@ -54,6 +62,6 @@ popd
 chown -R elab ${deployment_dir}
 # FIXME - Add validation
 
-${cmd}
+#${cmd}
 
 exit ${RETVAL}

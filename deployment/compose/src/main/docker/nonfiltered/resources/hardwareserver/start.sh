@@ -42,7 +42,21 @@ for zipfile in *.zip ; do
         APPUSER="root"
         WORKDIR="/opt/${dirname}/"
 
-        dockerize -template /templates/app.conf.j2:/etc/supervisor/conf.d/${dirname}.conf
+        if [ "${CONTAINERS_MULTICAST}" != "" ]; then
+	        for container in ${CONTAINERS_MULTICAST}; do
+            cmd="$cmd -wait tcp://${container} -timeout 240s"
+	        done
+        fi
+
+        if [ "${EXPERIMENT_NAMES}" != "" ]; then
+          for experiment in ${EXPERIMENT_NAMES}; do
+            if [ "${experiment}" == "${dirname}" ]; then
+              dockerize -template /templates/app.conf.j2:/etc/supervisor/conf.d/${dirname}.conf
+            fi
+          done
+        else
+          dockerize -template /templates/app.conf.j2:/etc/supervisor/conf.d/${dirname}.conf
+        fi
 
         # FIXME - Workaround until it is fixed in project!
         printf "${YELLOW}FIXME - Fixing hardwareServer BOOTCLASSPATH at ${script}, Fix it in original code${NC}\n"
@@ -60,5 +74,7 @@ popd
 
 #printf "${BLUE}Sleeping until hardware server processes finishes${NC}\n"
 #sleep infinity
+
+${cmd}
 
 exit ${RETVAL}

@@ -15,8 +15,10 @@ if [ "${GFTIMER_DB_HOST}" != "" -a "${GFTIMER_DB_PORT}" != "" ]; then
     cmd="$cmd -wait tcp://${GFTIMER_DB_HOST}:${GFTIMER_DB_PORT} -timeout 240s"
 fi
 
-if [ "${MULTICAST_HOST}" != "" -a "${MULTICAST_PORT}" != "" ]; then
-    cmd="$cmd -wait tcp://${MULTICAST_HOST}:${MULTICAST_PORT} -timeout 240s"
+if [ "${CONTAINERS_MULTICAST}" != "" ]; then
+	for container in ${CONTAINERS_MULTICAST}; do
+    cmd="$cmd -wait tcp://${container} -timeout 240s"
+	done
 fi
 
 if [ -z $PREBOOT_COMMANDS ]; then echo "Variable PREBOOT_COMMANDS is not set."; exit 1; fi
