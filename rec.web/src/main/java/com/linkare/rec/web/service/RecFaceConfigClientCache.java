@@ -47,9 +47,9 @@ public class RecFaceConfigClientCache {
                 try {
                     configs.put(url, RecFaceConfigClient.getRecFaceConfig(url));
                 } catch (IOException e) {
-                    LOG.warn("Problem communicating with URL {}", url, e);
+                    LOG.error("Problem communicating with URL " + url, (Throwable)e);
                 } catch (JAXBException e) {
-                    LOG.warn("Unable to unmarshall information coming from URL {}", url, e);
+                    LOG.error("Unable to unmarshall information coming from URL " + url,  (Throwable)e);
                 }
             }
         }
