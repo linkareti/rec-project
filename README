@@ -100,6 +100,13 @@ p: admin
 # Video streaming
 ffmpeg -i /dev/video0 -framerate 1 -video_size 640x480 -vcodec libx264 -maxrate 768k -bufsize 8080k -g 60 -tune zerolatency -f rtsp rtsp://localhost:8554/vtiro
 
+#
+# Optional
+#
+
+# Local architecture with 2 experiments (server side and client side)
+$ mvn clean package -Dmaven.test.skip=true -Djarsigner.alias="REC" -Dbuild.environment=local-client
+
 # rec.web hot Deploy usage
 
 Firt you need to build:
@@ -111,7 +118,10 @@ $ mvn clean package -Dmaven.test.skip=true -Djarsigner.alias="REC" -Dbuild.envir
 # Deploy at repository
 $ mvn clean deploy -Dmaven.test.skip=true -Djarsigner.alias="REC" -Dbuild.environment=local -Drepo=docker.io -Dhub=docker.io
 
+
 # TODO - Use existent liquibase scripts instead of .sql files
 # TODO - Create liquibase scripts to add development user for rec.web backoffice access
+
+
 # Sometimes we need to install librxtx-java
 /usr/share/java/RXTXcomm-2.2pre2.jar
