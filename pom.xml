@@ -35,7 +35,7 @@
         <vlc-slim.version>3.0.12</vlc-slim.version>
         <mysql.connector.version>8.0.13</mysql.connector.version>
         <openjfx.version>16</openjfx.version>
-        <traefik.version>2.4.1</traefik.version>
+        <traefik.version>2.4.8</traefik.version>
         <liquibase.version>3.5.3</liquibase.version>
         <jdbc.mysql.connector.version>8.0.13</jdbc.mysql.connector.version>
         <!-- mvn execution properties -->
