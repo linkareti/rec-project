@@ -1,38 +1,42 @@
 version: '3.5'
 services:
-  elab-client-webswing-client:
+  client-side-webswing:
     container_name: client_webswing
     image: ${repo}/${simplifiedGroupId}/rec.client-${webswing.version}-${openjdk.version}:${project.version}
     restart: unless-stopped
     environment:
       XDG_RUNTIME_DIR: '/opt/webswing/.cache/xdgr'
     labels:
+      - "traefik.docker.network=client"
       # HTTP (80)
-      - "traefik.http.routers.webswing-http.entrypoints=web"
-      - "traefik.http.routers.webswing-http.rule=PathPrefix(`/tiro_v2.0`)"
-      - "traefik.http.routers.webswing-http.middlewares=webswing-redir-http"
-      - "traefik.http.services.webswing-http.loadbalancer.server.port=8080"
-      - "traefik.http.middlewares.webswing-redir-http.redirectscheme.scheme=https"
+      - "traefik.http.routers.webswing2-http.entrypoints=web"
+      - "traefik.http.routers.webswing2-http.rule=PathPrefix(`/tiro_v2.0`)"
+      - "traefik.http.routers.webswing2-http.middlewares=webswing2-http-redir"
+      - "traefik.http.services.webswing2-http.loadbalancer.server.port=8080"
+      - "traefik.http.middlewares.webswing2-http-redir.redirectscheme.scheme=https"
+      - "traefik.http.services.batata2.loadbalancer.healthcheck.path=/tiro_v2.0"
       # HTTPS (443)
-      - "traefik.http.routers.webswing-https.entrypoints=web-secure"
-      - "traefik.http.routers.webswing-https.rule=PathPrefix(`/tiro_v2.0/`)"
-      - "traefik.http.routers.webswing-https.tls=true"
+      - "traefik.http.routers.webswing2-https.entrypoints=web-secure"
+      - "traefik.http.routers.webswing2-https.rule=PathPrefix(`/tiro_v2.0`)"
+      - "traefik.http.routers.webswing2-https.tls=true"
     volumes:
       - rec-static-files:/opt/webswing/apps/webapps/elab/etc:rw
     networks:
       - client
 
-  webswing-admin-client:
+  client-side-webswing-admin:
     image: ${repo}/${simplifiedGroupId}/rec.client-admin-${webswing.version}-${openjdk.version}:${project.version}
     container_name: client_webswing_admin
     restart: unless-stopped
     environment:
-      WEBSWING_HOST: elab-client-webswing-client
+      WEBSWING_HOST: client-side-webswing
       WEBSWING_WEBSOCKET_PORT: 8080
       WEBSWING_SHARED_LOG_DIR: /var/opt/logs
       WEBSWING_PUBLIC_URL: https://elab.dev.linkare.com
     networks:
       - client
+    labels:
+      - "traefik.docker.network=client"
 
   elab-multicast-client:
     container_name: client_multicast
@@ -51,6 +55,8 @@ services:
     image: ${repo}/${simplifiedGroupId}/rec.multicast-${openjdk.version}:${project.version}
     networks:
       - client
+    labels:
+      - "traefik.docker.network=client"
 
   elab-hardwareserver-client:
     container_name: client_hardwareserver
@@ -68,6 +74,8 @@ services:
     environment:
       CONTAINERS_MULTICAST: 'elab-multicast-client:9002'
       EXPERIMENT_NAMES: 'vtiro2HardwareServer'
+    labels:
+      - "traefik.docker.network=client"
 
   # elab-streamer-server:
   #   image: ${repo}/${simplifiedGroupId}/base-images/streamer:${project.version}
@@ -83,16 +91,17 @@ services:
       - rec-static-files:/usr/share/nginx/html/rec.web/client/etc:ro
       #- ${project.parent.basedir}/rec.web/target/rec.web/client/etc:/usr/share/nginx/html/rec.web/client/etc:ro
     labels:
+      - "traefik.docker.network=client"
       # HTTP (80)
       - "traefik.http.routers.nginx-http.entrypoints=web"
       - "traefik.http.routers.nginx-http.rule=PathPrefix(`/rec.web/client`)"
-      - "traefik.http.routers.nginx-http.middlewares=nginx-redir-http"
+      #- "traefik.http.routers.nginx-http.middlewares=nginx-redir-http"
       - "traefik.http.services.nginx-http.loadbalancer.server.port=80"
-      - "traefik.http.middlewares.nginx-redir-http.redirectscheme.scheme=https"
-      # HTTPS (443)
-      - "traefik.http.routers.nginx-https.entrypoints=web-secure"
-      - "traefik.http.routers.nginx-https.rule=PathPrefix(`/rec.web/client`)"
-      - "traefik.http.routers.nginx-https.tls=true"
+      #- "traefik.http.middlewares.nginx-redir-http.redirectscheme.scheme=https"
+      ## HTTPS (443)
+      #- "traefik.http.routers.nginx-https.entrypoints=web-secure"
+      #- "traefik.http.routers.nginx-https.rule=PathPrefix(`/rec.web/client`)"
+      #- "traefik.http.routers.nginx-https.tls=true"
     networks:
       client:
         aliases:
@@ -117,6 +126,14 @@ services:
 
   reverse-proxy:
     image: ${repo}/${simplifiedGroupId}/base-images/traefik-${traefik.version}:${project.version}
+    command:
+      - --entrypoints.web.address=:80
+      - --entrypoints.web-secure.address=:443 #Declares the web-secure entrypoint in Traefik
+      - --providers.docker=true
+      - --api.insecure=true
+      - --log.level=DEBUG
+    networks:
+      - client
 
   elab-server-payara:
     environment:
@@ -138,4 +155,5 @@ volumes:
   rec-static-files: {}
 
 networks:
-  client: {}
+  client:
+    name: client

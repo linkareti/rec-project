@@ -7,15 +7,17 @@ services:
     environment:
       XDG_RUNTIME_DIR: '/opt/webswing/.cache/xdgr'
     labels:
+      - "traefik.docker.network=server"
       # HTTP (80)
       - "traefik.http.routers.webswing-http.entrypoints=web"
       - "traefik.http.routers.webswing-http.rule=PathPrefix(`/tiro_v1.0`)"
-      - "traefik.http.routers.webswing-http.middlewares=webswing-redir-http"
+      - "traefik.http.routers.webswing-http.middlewares=webswing-http-redir"
       - "traefik.http.services.webswing-http.loadbalancer.server.port=8080"
-      - "traefik.http.middlewares.webswing-redir-http.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.webswing-http-redir.redirectscheme.scheme=https"
+      - "traefik.http.services.batata1.loadbalancer.healthcheck.path=/tiro_v1.0"
       # HTTPS (443)
       - "traefik.http.routers.webswing-https.entrypoints=web-secure"
-      - "traefik.http.routers.webswing-https.rule=PathPrefix(`/tiro_v1.0/`)"
+      - "traefik.http.routers.webswing-https.rule=PathPrefix(`/tiro_v1.0`)"
       - "traefik.http.routers.webswing-https.tls=true"
     networks:
       - server
@@ -41,6 +43,8 @@ services:
       - ${project.build.directory}/resources/autodeploy:/autodeploy
     networks:
       - server
+    labels:
+      - "traefik.docker.network=server"
 
   rec-database:
     image: ${repo}/${simplifiedGroupId}/rec.database:${project.version}
@@ -126,4 +130,5 @@ secrets:
      file: ${project.build.directory}/resources/asadmin_recdb.secret
 
 networks:
-  server: {}
+  server:
+    name: server
