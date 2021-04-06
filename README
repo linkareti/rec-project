@@ -81,6 +81,8 @@ p: pwd
 
 # Server (payara)
 http://localhost:28080/rec.web
+u: admin
+p: teste
 
 = Manage =
 
@@ -118,10 +120,8 @@ $ mvn clean package -Dmaven.test.skip=true -Djarsigner.alias="REC" -Dbuild.envir
 # Deploy at repository
 $ mvn clean deploy -Dmaven.test.skip=true -Djarsigner.alias="REC" -Dbuild.environment=local -Drepo=docker.io -Dhub=docker.io
 
-
-# TODO - Use existent liquibase scripts instead of .sql files
-# TODO - Create liquibase scripts to add development user for rec.web backoffice access
-
+# TODO - Add validation to new liquibase scripts
+# TODO - Add context to user creation (dev)
 
 # Sometimes we need to install librxtx-java
 /usr/share/java/RXTXcomm-2.2pre2.jar

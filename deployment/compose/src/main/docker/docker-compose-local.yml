@@ -50,9 +50,9 @@ services:
     image: ${repo}/${simplifiedGroupId}/rec.database:${project.version}
     ports:
       - "13306:3306"
-    volumes:
-     - ${project.build.directory}/resources/rec-schema.sql:/docker-entrypoint-initdb.d/rec-schema.sql
-     - ${project.build.directory}/resources/gf_timer-schema.sql:/docker-entrypoint-initdb.d/gf_timer-schema.sql
+    #volumes:
+    # - ${project.build.directory}/resources/rec-schema.sql:/docker-entrypoint-initdb.d/rec-schema.sql
+    # - ${project.build.directory}/resources/gf_timer-schema.sql:/docker-entrypoint-initdb.d/gf_timer-schema.sql
     #restart: "none"
     networks:
       - server
@@ -97,22 +97,26 @@ services:
   #   ports:
   #     - "8554:8554"
 
-  # upgrade-db:
-  #   image: ${repo}/${simplifiedGroupId}/rec.upgrade-db-${liquibase.version}:${project.version}
-  #   secrets:
-  #     - dbrec.secret
-  #   environment:
-  #     - TZ=Europe/Lisbon
-  #     - TARGET_DB=rec
-  #     - DB_HOST=rec-database
-  #     - DB_PORT=3306
-  #     - DB_USER=rec
-  #     - DB_PASS_FILE=/run/secrets/dbrec.secret
-  #     #- DUMP_SQL=""
-  #     #- FORCE_UNLOCK=""
-  #     #- RESET_CKSUMS=""
-  #     - LOGGING_LEVEL=info
-  #     - CHANGELOG_FILE=/changelog/db.changelog-master.xml
+  upgrade-db:
+    image: ${repo}/${simplifiedGroupId}/rec.upgrade-db-${liquibase.version}:${project.version}
+    secrets:
+      - dbrec.secret
+    environment:
+      - TZ=Europe/Lisbon
+      - TARGET_DB=rec
+      - DB_HOST=rec-database
+      - DB_PORT=3306
+      - DB_USER=rec
+      - DB_PASS_FILE=/run/secrets/dbrec.secret
+      #- DUMP_SQL=""
+      #- FORCE_UNLOCK=""
+      #- RESET_CKSUMS=""
+      - LOGGING_LEVEL=info
+      - CHANGELOG_FILE=/db/changelog/db.changelog-master.xml
+    depends_on:
+      - rec-database
+    networks:
+      - server
 
   reverse-proxy:
     image: ${repo}/${simplifiedGroupId}/base-images/traefik-${traefik.version}:${project.version}
