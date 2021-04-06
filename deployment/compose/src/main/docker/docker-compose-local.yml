@@ -14,7 +14,7 @@ services:
       - "traefik.http.routers.webswing-http.middlewares=webswing-http-redir"
       - "traefik.http.services.webswing-http.loadbalancer.server.port=8080"
       - "traefik.http.middlewares.webswing-http-redir.redirectscheme.scheme=https"
-      - "traefik.http.services.batata1.loadbalancer.healthcheck.path=/tiro_v1.0"
+      - "traefik.http.services.webswing-http.loadbalancer.healthcheck.path=/tiro_v1.0"
       # HTTPS (443)
       - "traefik.http.routers.webswing-https.entrypoints=web-secure"
       - "traefik.http.routers.webswing-https.rule=PathPrefix(`/tiro_v1.0`)"
