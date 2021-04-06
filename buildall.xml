@@ -162,7 +162,7 @@
 				<replacefilter token="@rec.multicast.processingmanager.threadpool.maxsize@" property="rec.multicast.processingmanager.threadpool.maxsize" />
 				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
 				<replacefilter token="@com.sun.management.jmxremote.port@" property="@{lab.name}.rec.multicastcontroller.jmxremote.port" />
-				<replacefilter token="@java.rmi.server.hostname@" property="java.rmi.server.hostname" />
+				<replacefilter token="@java.rmi.server.hostname@" property="@{lab.name}.multicast.controller.host" />
 				<replacefilter token="@rec.multicast.repository@" property="rec.multicast.repository" />
 				<replacefilter token="@rec.multicast.badwordmanager.refresh.lap.time.minutes@" property="rec.multicast.badwordmanager.refresh.lap.time.minutes" />
 				<replacefilter token="@install.dir@" value="${install.dir}"/>
@@ -193,7 +193,7 @@
 				<replacefilter token="@rec.multicast.processingmanager.threadpool.maxsize@" property="rec.multicast.processingmanager.threadpool.maxsize" />
 				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
 				<replacefilter token="@com.sun.management.jmxremote.port@" property="@{lab.name}.rec.multicastcontroller.jmxremote.port" />
-				<replacefilter token="@java.rmi.server.hostname@" property="java.rmi.server.hostname" />
+				<replacefilter token="@java.rmi.server.hostname@" property="@{lab.name}.multicast.controller.host" />
 				<replacefilter token="@rec.multicast.repository@" property="rec.multicast.repository" />
 				<replacefilter token="@rec.multicast.badwordmanager.refresh.lap.time.minutes@" property="rec.multicast.badwordmanager.refresh.lap.time.minutes" />
 				<replacefilter token="@install.dir@" value="${install.dir}"/>
