@@ -93,7 +93,6 @@
                                     <groupId>org.liquibase</groupId>
                                     <artifactId>liquibase-core</artifactId>
                                     <version>${liquibase.version}</version>
-                                    <classifier>bin</classifier>
                                     <type>tar.gz</type>
                                     <outputDirectory>${project.build.directory}/liquibase/resources/liquibase</outputDirectory>
                                 </artifactItem>

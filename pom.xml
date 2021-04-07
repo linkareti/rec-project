@@ -36,7 +36,7 @@
         <mysql.connector.version>8.0.13</mysql.connector.version>
         <openjfx.version>16</openjfx.version>
         <traefik.version>2.4.8</traefik.version>
-        <liquibase.version>3.5.3</liquibase.version>
+        <liquibase.version>4.3.2</liquibase.version>
         <jdbc.mysql.connector.version>8.0.13</jdbc.mysql.connector.version>
         <!-- mvn execution properties -->
         <build.environment>local</build.environment>

@@ -49,16 +49,4 @@
 			<column name="IMAGE" type="MEDIUMBLOB"/>
 		</addColumn>
 	</changeSet>
-	<changeSet id="2021-04-06-DROP_UNIQUE_CONSTRAINT_IN_EXPERIMENT" author="jcortes">
-		<dropUniqueConstraint constraintName="EXTERNAL_ID"
-							  schemaName="rec"
-							  tableName="EXPERIMENT"
-							  uniqueColumns="EXTERNAL_ID"/>
-	</changeSet>
-	<changeSet id="2021-04-06-ADD_UNIQUE_CONSTRAINT_IN_EXPERIMENT" author="jcortes">
-		<addUniqueConstraint  columnNames="EXTERNAL_ID, KEY_LABORATORY"
-							  constraintName="EXTERNAL_ID_LABORATORY_UN"
-							  schemaName="rec"
-							  tableName="EXPERIMENT"/>
-	</changeSet>
 </databaseChangeLog>

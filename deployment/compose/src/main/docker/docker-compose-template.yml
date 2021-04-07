@@ -70,14 +70,15 @@ services:
     secrets:
       - dbrec.secret
     environment:
-      - TZ=Europe/Lisbon
-      - TARGET_DB=rec
-      - DB_HOST=rec-database
-      - DB_PORT=3306
-      - DB_USER=rec
-      - DB_PASS_FILE=/run/secrets/dbrec.secret
-      - LOGGING_LEVEL=info
-      - CHANGELOG_FILE=/db/changelog/db.changelog-master.xml
+      TZ: 'Europe/Lisbon'
+      TARGET_DB: 'rec'
+      DB_HOST: 'rec-database'
+      DB_PORT: '3306'
+      DB_USER: 'rec'
+      DB_PASS_FILE: '/run/secrets/dbrec.secret'
+      LOGGING_LEVEL: 'info'
+      CHANGELOG_FILE: 'db.changelog-master.xml'
+      CLASSPATH: '/changelog'
     depends_on:
       - rec-database
 

@@ -11,7 +11,8 @@ ENV TZ=Europe/Lisbon \
     FORCE_UNLOCK="" \
     RESET_CKSUMS="" \
     LOGGING_LEVEL=info \
-    CHANGELOG_FILE=/changelog/db.changelog-master.xml \
+    CLASSPATH=/changelog \
+    CHANGELOG_FILE=db.changelog-master.xml \
     UPDATE_TO_TAG=""
 
 #

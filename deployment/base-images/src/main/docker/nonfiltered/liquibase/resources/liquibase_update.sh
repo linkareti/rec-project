@@ -10,22 +10,22 @@ fi
 
 if [ "${RESET_CKSUMS}" != "" ]; then
     printf "${BLUE}Resetting checksums${NC}\n"
-    liquibase --driver=$driver --changeLogFile=$CHANGELOG_FILE --url=$url --username=$DB_USER --password=$DB_PASS --logLevel=$LOGGING_LEVEL --contexts=$DB_CONTEXT clearCheckSums
+    liquibase --classpath=${CLASSPATH} --driver=$driver --changeLogFile=$CHANGELOG_FILE --url=$url --username=$DB_USER --password=$DB_PASS --logLevel=$LOGGING_LEVEL --contexts=$DB_CONTEXT clearCheckSums
 fi
 
 if [ "${DUMP_SQL}" != "" ]; then
     printf "${BLUE}Dumping SQL file with instructions to run${NC}\n"
-    liquibase --driver=$driver --changeLogFile=$CHANGELOG_FILE --url=$url --username=$DB_USER --password=$DB_PASS --logLevel=$LOGGING_LEVEL updateSQL
+    liquibase --classpath=${CLASSPATH} --driver=$driver --changeLogFile=$CHANGELOG_FILE --url=$url --username=$DB_USER --password=$DB_PASS --logLevel=$LOGGING_LEVEL updateSQL
 elif [ "${UPDATE_TO_TAG}" != "" ]; then
     printf "${BLUE}Running liquibase update instructions to tag ${UPDATE_TO_TAG} ${NC}\n"
-    liquibase --driver=$driver --changeLogFile=$CHANGELOG_FILE --url=$url --username=$DB_USER --password=$DB_PASS --logLevel=$LOGGING_LEVEL --contexts=$DB_CONTEXT updateToTag ${UPDATE_TO_TAG}
+    liquibase --classpath=${CLASSPATH} --driver=$driver --changeLogFile=$CHANGELOG_FILE --url=$url --username=$DB_USER --password=$DB_PASS --logLevel=$LOGGING_LEVEL --contexts=$DB_CONTEXT updateToTag ${UPDATE_TO_TAG}
 else
 
     if [ "${FORCE_UNLOCK}" != "" ]; then
         printf "${BLUE}Force liquibase database unlock${NC}\n"
-        liquibase --driver=$driver --changeLogFile=$CHANGELOG_FILE --url=$url --username=$DB_USER --password=$DB_PASS --logLevel=$LOGGING_LEVEL releaseLocks
+        liquibase --classpath=${CLASSPATH} --driver=$driver --changeLogFile=$CHANGELOG_FILE --url=$url --username=$DB_USER --password=$DB_PASS --logLevel=$LOGGING_LEVEL releaseLocks
     fi
 
     printf "${BLUE}Running liquibase update instructions${NC}\n"
-    liquibase --driver=$driver --changeLogFile=$CHANGELOG_FILE --url=$url --username=$DB_USER --password=$DB_PASS --logLevel=$LOGGING_LEVEL --contexts=$DB_CONTEXT update
+    liquibase --classpath=${CLASSPATH} --driver=$driver --changeLogFile=$CHANGELOG_FILE --url=$url --username=$DB_USER --password=$DB_PASS --logLevel=$LOGGING_LEVEL --contexts=$DB_CONTEXT update
 fi

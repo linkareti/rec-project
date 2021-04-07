@@ -5,7 +5,6 @@
 
     <!-- The files for current version of the application should be included
         in this dataset -->
-    <include file="ddl_update_georeferencing.xml" relativeToChangelogFile="true" />
-    <include file="ddl_update_experiment-constraints.xml" relativeToChangelogFile="true" />
-    <include file="dml_update_admin-auth.xml" relativeToChangelogFile="true" />
+    <include file="base.xml" relativeToChangelogFile="true"/>
+    <include file="changeset-2012-07-27.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
