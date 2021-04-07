@@ -47,8 +47,6 @@ echo 'create-password-alias --passwordfile /run/secrets/as_mail.secret elab_mail
 echo "add-resources ${PAYARA_DIR}/glassfish/domains/production/config/payara-resources.xml" >> $POSTBOOT_COMMANDS
 
 # Update existent resources
-# FIXME - Workaround for network_mode: "host"
-#echo 'set resources.jdbc-resource.jdbc/__TimerPool.pool-name=timer' >> $POSTBOOT_COMMANDS
 echo 'set resources.jdbc-resource.jdbc/__TimerPool.pool-name=rec' >> $POSTBOOT_COMMANDS
 echo 'set resources.mail-resource.mail/mailSession.password=${ALIAS=elab_mail}' >> $POSTBOOT_COMMANDS
 

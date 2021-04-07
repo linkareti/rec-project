@@ -33,11 +33,10 @@ services:
     secrets:
       - as_mail.secret
       - as_recdb.secret
-      # - as_gftimerdb.secret
     depends_on:
       - rec-database
       - elab-multicast
-      # - gftimer-database
+      - rec-upgrade-db
     labels:
       # HTTP (80)
       - "traefik.http.routers.payara-http.entrypoints=web"

@@ -97,10 +97,10 @@ services:
   rec-upgrade-db:
     image: ${repo}/${simplifiedGroupId}/rec.upgrade-db-${liquibase.version}:${project.version}
     environment:
-      #- DUMP_SQL=""
-      #- FORCE_UNLOCK=""
-      #- RESET_CKSUMS=""
-      - DB_CONTEXT=dev
+      #DUMP_SQL: 1
+      #FORCE_UNLOCK: 1
+      #RESET_CKSUMS: 1
+      DB_CONTEXT: 'dev'
     networks:
       - server
 

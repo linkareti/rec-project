@@ -1,6 +1,15 @@
 FROM docker-thirdparty.linkare.com/payara/server-full:5.2020.3-jdk11
 #FROM docker-thirdparty.linkare.com/payara/micro:5.2020.7-jdk11
 
+USER root
+
+# FIXME - Binary needed to check other docker container up (upgrade-db)
+RUN apt-get update && apt-get install -y \
+  iputils-ping \
+  && rm -rf /var/lib/apt/lists/*
+
+USER payara
+
 ENV REC_DB_HOST="" \
     REC_DB_PORT="" \
     GFTIMER_DB_HOST="" \
