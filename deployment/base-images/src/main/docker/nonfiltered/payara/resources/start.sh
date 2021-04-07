@@ -72,4 +72,28 @@ if [ "${DEVELOPMENT_MODE}" != "" ]; then
     fi
 fi
 
+# Remove expired certificates
+keytool -storepass changeit -list -v -keystore ${PAYARA_DIR}/glassfish/domains/production/config/cacerts.jks | grep 'Alias\|Valid' | awk 'BEGIN { vflen=length("Alias name: "); ulen=length("until: ") } /^Alias name:/ { a=substr($0,vflen+1); } /^Valid from:/ { f=substr($0,vflen+1,index($0, "until: ")-vflen-2) ; u=substr($0,index($0, "until:")+ulen);print "'name';"a",'from';"f",'until';"u"";}' | while read output_line ; do
+  cert_alias=$(echo ${output_line} | cut -d ',' -f1 | cut -d ';' -f2)
+  expiry=$(echo ${output_line} | cut -d ',' -f3 | cut -d ';' -f2)
+  current_date=$(date)
+  expiry_epoch=$(date "+%s" -d "${expiry}")
+  current_date_epoch=$(date "+%s" -d "${current_date}")
+  if [ ${current_date_epoch} -gt ${expiry_epoch} ] ; then
+    printf "${BLUE}Deleting expired certificate alias : ${cert_alias} (${expiry})${NC}\n"
+    keytool -storepass changeit -delete -noprompt -keystore ${PAYARA_DIR}/glassfish/domains/production/config/cacerts.jks -alias "${cert_alias}"
+    if [ $? -ne 0 ]; then
+      printf "${RED}An error occured with certificate alias ${cert_alias} deletion${NC}\n"
+      RETVAL=1
+    else
+      printf "${GREEN}Alias ${cert_alias} deleted successfully${NC}\n"
+    fi
+  fi
+done
+
+if [ ${RETVAL} -ne 0 ]; then
+  printf "${RED}An error occured with expired certificate alias removal${NC}\n"
+  exit 1
+fi
+
 ${cmd}
