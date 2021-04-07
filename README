@@ -120,8 +120,5 @@ $ mvn clean package -Dmaven.test.skip=true -Djarsigner.alias="REC" -Dbuild.envir
 # Deploy at repository
 $ mvn clean deploy -Dmaven.test.skip=true -Djarsigner.alias="REC" -Dbuild.environment=local -Drepo=docker.io -Dhub=docker.io
 
-# TODO - Add validation to new liquibase scripts
-# TODO - Add context to user creation (dev)
-
 # Sometimes we need to install librxtx-java
 /usr/share/java/RXTXcomm-2.2pre2.jar
