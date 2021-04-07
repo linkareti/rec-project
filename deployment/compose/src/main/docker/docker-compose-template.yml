@@ -28,6 +28,7 @@ services:
       GFTIMER_DB_HOST: 'rec-database'
       GFTIMER_DB_PORT: '3306'
       CONTAINERS_MULTICAST: 'elab-multicast:9001'
+      CONTAINERS_UPGRADE_DB: 'rec-upgrade-db'
     restart: unless-stopped
     secrets:
       - as_mail.secret
@@ -64,6 +65,22 @@ services:
     volumes:
       - db-rec:/var/lib/mysql:rw
     restart: unless-stopped
+
+  rec-upgrade-db:
+    image: ${hub}/${simplifiedGroupId}/rec.upgrade-db-${liquibase.version}:${project.version}
+    secrets:
+      - dbrec.secret
+    environment:
+      - TZ=Europe/Lisbon
+      - TARGET_DB=rec
+      - DB_HOST=rec-database
+      - DB_PORT=3306
+      - DB_USER=rec
+      - DB_PASS_FILE=/run/secrets/dbrec.secret
+      - LOGGING_LEVEL=info
+      - CHANGELOG_FILE=/db/changelog/db.changelog-master.xml
+    depends_on:
+      - rec-database
 
 secrets:
   dbrec.secret: {}

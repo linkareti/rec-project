@@ -8,7 +8,8 @@ ENV REC_DB_HOST="" \
     JVM_OPTIONS="" \
     CONTAINERS_MULTICAST="" \
     DEVELOPMENT_MODE="" \
-    DEBUG=""
+    DEBUG="" \
+    CONTAINERS_UPGRADE_DB=""
 
 COPY --chown=payara:payara resources/start.sh ${SCRIPT_DIR}/init_0_start.sh
 COPY --chown=payara:payara resources/payara-resources.xml ${PAYARA_DIR}/glassfish/domains/production/config/payara-resources.xml

@@ -21,6 +21,16 @@ if [ "${CONTAINERS_MULTICAST}" != "" ]; then
 	done
 fi
 
+if [ "${CONTAINERS_UPGRADE_DB}" != "" ]; then
+	for container in ${CONTAINERS_UPGRADE_DB}; do
+		while ping -c1 ${container} &>/dev/null; do
+	   		printf "${BLUE}Sleeping 1s while waiting for container '${container}' to end!${NC}\n";
+	   		sleep 1;
+		done
+	done
+	printf "${GREEN}Containers ${CONTAINERS_UPGRADE_DB} finished...${NC}\n";
+fi
+
 if [ -z $PREBOOT_COMMANDS ]; then echo "Variable PREBOOT_COMMANDS is not set."; exit 1; fi
 if [ -z $POSTBOOT_COMMANDS ]; then echo "Variable POSTBOOT_COMMANDS is not set."; exit 1; fi
 

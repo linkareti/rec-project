@@ -1,10 +1,5 @@
 version: '3.5'
 services:
-  rec-database:
-    volumes:
-      - /home/linkare/rec-schema.sql:/docker-entrypoint-initdb.d/rec-schema.sql
-      - /home/linkare/gf_timer-schema.sql:/docker-entrypoint-initdb.d/gf_timer-schema.sql
-
   elab-multicast:
     container_name: rec.multicast
     image: ${hub}/${simplifiedGroupId}/rec.multicast-${openjdk.version}:${project.version}
@@ -63,5 +58,3 @@ secrets:
      file: /home/linkare/secrets/asadmin_mail.secret
    as_recdb.secret:
      file: /home/linkare/secrets/asadmin_recdb.secret
-   webswing-connection.secret:
-     file: /home/linkare/secrets/webswing-connection.secret
