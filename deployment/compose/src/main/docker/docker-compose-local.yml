@@ -35,6 +35,8 @@ services:
 
   elab-server-payara:
     image: ${repo}/${simplifiedGroupId}/rec.web-${payara.docker.version}:${project.version}
+    ports:
+      - "29009:9009"
     environment:
       DEVELOPMENT_MODE: ${development.mode}
       PAYARA_ARGS: "--debug"
