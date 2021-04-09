@@ -245,6 +245,10 @@ public final class LaboratoriesMonitor {
         }
     }
 
+    public void forceConnectWithLabs() {
+        connectWithLabs(true);
+    }
+
     private boolean needRefresh(final Laboratory lab) {
         final LabJMXConnetionHandler labJMXConnetionHandler = labsJMXConnectionHandler
                 .get(lab.getName());
@@ -260,6 +264,12 @@ public final class LaboratoriesMonitor {
     public void removeLaboratory(final Laboratory lab) {
         if (lab != null) {
             labsJMXConnectionHandler.remove(lab.getName());
+        }
+    }
+    public void updateLaboratory(final Laboratory lab) {
+        if (lab != null) {
+            LabJMXConnetionHandler labJMXConnetionHandler = labsJMXConnectionHandler.get(lab.getName());
+            labsJMXConnectionHandler.put(lab.getName(), createLabJMXConnectionHandler(lab));
         }
     }
 

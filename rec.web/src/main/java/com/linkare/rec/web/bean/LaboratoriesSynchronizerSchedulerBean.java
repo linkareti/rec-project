@@ -18,6 +18,7 @@ import com.linkare.rec.web.service.LaboratoryService;
 import com.linkare.rec.web.service.LaboratoryServiceBean;
 import com.linkare.rec.web.service.LaboratoryServiceLocal;
 import com.linkare.rec.web.service.RecFaceConfigClientCache;
+import com.linkare.rec.web.util.LaboratoriesMonitor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,7 +51,7 @@ public class LaboratoriesSynchronizerSchedulerBean {
             return;
         }
         LOGGER.info("Found {} laboratories to synchronize. Start synchronizing..." ,laboratories.size());
-        //laboratories.forEach(this::handleUpdateLaboratory);
+        laboratories.forEach(this::handleUpdateLaboratory);
     }
 
     private void handleUpdateLaboratory(Laboratory laboratory) {
@@ -63,14 +64,17 @@ public class LaboratoriesSynchronizerSchedulerBean {
 
         Optional<Lab> lab = LaboratoryServiceBean.findCorrespondingLab(laboratory, config);
         if(lab.isPresent()){
-            service.updateFromRecFaceConfig(laboratory, lab.get());
+            var updatedLaboratory = service.updateFromRecFaceConfig(laboratory, lab.get());
             LOGGER.info("Laboratory {} was successfully updated", laboratory);
             experimentService.createOrUpdateFromLab(laboratory, lab.get());
+            var dbLab = service.find(updatedLaboratory.getIdInternal());
+            LaboratoriesMonitor.getInstance().updateLaboratory(dbLab);
         } else {
             LOGGER.info("Could not find corresponding remote Lab for Laboratory {}, inactivating it", laboratory);
             laboratory.getState().setActive(false);
             service.edit(laboratory);
             experimentService.inactivateAll(laboratory);
+            LaboratoriesMonitor.getInstance().removeLaboratory(laboratory);
         }
     }
 }
