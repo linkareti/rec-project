@@ -139,7 +139,7 @@
                 </plugins>
             </build>
         </profile>
-        <profile>
+<!--        <profile>
             <id>clean-docker</id>
             <activation>
                 <property>
@@ -167,7 +167,7 @@
                     </plugin>
                 </plugins>
             </build>
-        </profile>
+        </profile>-->
         <profile>
             <id>local</id>
             <activation>
