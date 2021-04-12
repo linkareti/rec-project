@@ -2,7 +2,7 @@ version: '3.5'
 services:
   reverse-proxy:
     container_name: rec.proxy
-    image: ${hub}/${simplifiedGroupId}/base-images/traefik-${traefik.version}:${project.version}
+    image: ${hub}/${simplifiedGroupId}/${laboratory}/traefik-${traefik.version}:${project.version}
     command:
       - --entrypoints.web.address=:80
       - --entrypoints.web-secure.address=:443 #Declares the web-secure entrypoint in Traefik
@@ -17,77 +17,3 @@ services:
     volumes:
       # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock:ro
-
-  elab-server-payara:
-    container_name: rec.web
-    image: ${hub}/${simplifiedGroupId}/rec.web-${payara.docker.version}:${project.version}
-    environment:
-      jvm-options: '-XX\:+UnlockExperimentalVMOptions:-XX\:+UseContainerSupport:-XX\:MaxRAMPercentage=1:-Xms1g:-Xmx2g'
-      REC_DB_HOST: 'rec-database'
-      REC_DB_PORT: '3306'
-      GFTIMER_DB_HOST: 'rec-database'
-      GFTIMER_DB_PORT: '3306'
-      CONTAINERS_MULTICAST: 'elab-multicast:9001'
-      CONTAINERS_UPGRADE_DB: 'rec-upgrade-db'
-    restart: unless-stopped
-    secrets:
-      - as_mail.secret
-      - as_recdb.secret
-    depends_on:
-      - rec-database
-      - elab-multicast
-      - rec-upgrade-db
-    labels:
-      # HTTP (80)
-      - "traefik.http.routers.payara-http.entrypoints=web"
-      - "traefik.http.routers.payara-http.rule=PathPrefix(`/rec.web`)"
-      - "traefik.http.routers.payara-http.middlewares=payara-redir-http"
-      - "traefik.http.services.payara-http.loadbalancer.server.port=8080"
-      - "traefik.http.services.payara-http.loadbalancer.healthcheck.path=/rec.web"
-      - "traefik.http.middlewares.payara-redir-http.redirectscheme.scheme=https"  
-      # HTTPS (443)
-      - "traefik.http.routers.payara-https.entrypoints=web-secure"
-      - "traefik.http.routers.payara-https.rule=PathPrefix(`/rec.web`)"
-      - "traefik.http.routers.payara-https.tls=true"
-
-  rec-database:
-    container_name: rec.db
-    image: ${hub}/${simplifiedGroupId}/rec.database:${project.version}
-    secrets:
-      - rdb.secret
-      - dbrec.secret
-    environment:
-      MYSQL_ROOT_PASSWORD_FILE: '/run/secrets/rdb.secret'
-      MYSQL_USER: 'rec'
-      MYSQL_PASSWORD_FILE: '/run/secrets/dbrec.secret'
-      MYSQL_DATABASE: 'rec'
-    volumes:
-      - db-rec:/var/lib/mysql:rw
-    restart: unless-stopped
-
-  rec-upgrade-db:
-    image: ${hub}/${simplifiedGroupId}/rec.upgrade-db-${liquibase.version}:${project.version}
-    secrets:
-      - dbrec.secret
-    environment:
-      TZ: 'Europe/Lisbon'
-      TARGET_DB: 'rec'
-      DB_HOST: 'rec-database'
-      DB_PORT: '3306'
-      DB_USER: 'rec'
-      DB_PASS_FILE: '/run/secrets/dbrec.secret'
-      LOGGING_LEVEL: 'info'
-      CHANGELOG_FILE: 'db.changelog-master.xml'
-      CLASSPATH: '/changelog'
-    depends_on:
-      - rec-database
-
-secrets:
-  dbrec.secret: {}
-  rdb.secret: {}
-  as_mail.secret: {}
-  as_recdb.secret: {}
- 
-volumes:
-  db-rec:
-    name: db-rec

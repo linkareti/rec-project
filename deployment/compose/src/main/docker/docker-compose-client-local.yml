@@ -2,10 +2,13 @@ version: '3.5'
 services:
   client-side-webswing:
     container_name: client_webswing
-    image: ${repo}/${simplifiedGroupId}/rec.client-${webswing.version}-${openjdk.version}:${project.version}
+    image: ${repo}/${simplifiedGroupId}/${laboratory}/webswing-${webswing.version}-${openjdk.version}:${project.version}
     restart: unless-stopped
+    ports:
+      - "28081:8080"
     environment:
       XDG_RUNTIME_DIR: '/opt/webswing/.cache/xdgr'
+      WEBSWING_ADMIN_CONSOLE_URL: 'http://localhost:38081'
     labels:
       - "traefik.docker.network=client"
       # HTTP (80)
@@ -25,14 +28,16 @@ services:
       - client
 
   client-side-webswing-admin:
-    image: ${repo}/${simplifiedGroupId}/rec.client-admin-${webswing.version}-${openjdk.version}:${project.version}
+    image: ${repo}/${simplifiedGroupId}/${laboratory}/webswing-admin-${webswing.version}-${openjdk.version}:${project.version}
     container_name: client_webswing_admin
     restart: unless-stopped
+    ports:
+      - "38081:8080"
     environment:
       WEBSWING_HOST: client-side-webswing
       WEBSWING_WEBSOCKET_PORT: 8080
       WEBSWING_SHARED_LOG_DIR: /var/opt/logs
-      WEBSWING_PUBLIC_URL: https://elab.dev.linkare.com
+      WEBSWING_PUBLIC_URL: http://localhost:28081
     networks:
       - client
     labels:
@@ -52,7 +57,7 @@ services:
       APPUSER: 'elab'
       WORKDIR: '/home/elab/rec-deployment/intermediate'
       LABORATORY_NAMES: 'intermediate'
-    image: ${repo}/${simplifiedGroupId}/rec.multicast-${openjdk.version}:${project.version}
+    image: ${repo}/${simplifiedGroupId}/${laboratory}/rec.multicast-${openjdk.version}:${project.version}
     networks:
       - client
     labels:
@@ -60,7 +65,7 @@ services:
 
   elab-hardwareserver-client:
     container_name: client_hardwareserver
-    image: ${repo}/${simplifiedGroupId}/base-images/openjdk-${openjdk.docker.version}:${project.version}
+    image: ${repo}/${simplifiedGroupId}/${laboratory}/openjdk-${openjdk.docker.version}:${project.version}
     healthcheck:
       test: pgrep java
       interval: 30s
@@ -125,7 +130,7 @@ services:
   #     - CHANGELOG_FILE=/changelog/db.changelog-master.xml
 
   reverse-proxy:
-    image: ${repo}/${simplifiedGroupId}/base-images/traefik-${traefik.version}:${project.version}
+    image: ${repo}/${simplifiedGroupId}/${laboratory}/traefik-${traefik.version}:${project.version}
     command:
       - --entrypoints.web.address=:80
       - --entrypoints.web-secure.address=:443 #Declares the web-secure entrypoint in Traefik
