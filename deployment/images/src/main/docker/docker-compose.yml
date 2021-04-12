@@ -1,0 +1,38 @@
+version: '3'
+services:
+  webswing:
+    build:
+      context: webswing
+    image: ${repo}/${simplifiedGroupId}/${laboratory}/webswing-${webswing.version}-${openjdk.version}:${project.version}
+  webswing-admin:
+    build:
+      context: webswing-admin
+    image: ${repo}/${simplifiedGroupId}/${laboratory}/webswing-admin-${webswing.version}-${openjdk.version}:${project.version}
+  traefik:
+    build:
+      context: traefik
+    image: ${repo}/${simplifiedGroupId}/${laboratory}/traefik-${traefik.version}:${project.version}
+  payara:
+    build:
+      context: payara
+    image: ${repo}/${simplifiedGroupId}/${laboratory}/rec.web-payara-${payara.docker.version}:${project.version}
+  upgrade-db:
+    build:
+      context: upgrade-db
+    image: ${repo}/${simplifiedGroupId}/${laboratory}/rec.upgrade-db-liquibase-${liquibase.version}:${project.version}
+  mysql-server:
+    build:
+      context: mysql-server
+    image: ${repo}/${simplifiedGroupId}/${laboratory}/mysql-server-${mysql.version}:${project.version}
+  streamer:
+    build:
+      context: streamer
+    image: ${repo}/${simplifiedGroupId}/${laboratory}/streamer:${project.version}
+  multicast:
+    build:
+      context: multicast
+    image: ${repo}/${simplifiedGroupId}/${laboratory}/rec.multicast-${openjdk.version}:${project.version}
+  openjdk11:
+    build:
+      context: openjdk11
+    image: ${repo}/${simplifiedGroupId}/${laboratory}/openjdk-${openjdk.docker.version}:${project.version}

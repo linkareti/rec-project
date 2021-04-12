@@ -1,1 +1,0 @@
-FROM ${repo}/${simplifiedGroupId}/base-images/webswing-admin-${webswing.version}-${openjdk.version}:${project.version}

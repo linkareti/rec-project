@@ -37,7 +37,9 @@
         <openjfx.version>16</openjfx.version>
         <traefik.version>2.4.8</traefik.version>
         <liquibase.version>4.3.2</liquibase.version>
-        <jdbc.mysql.connector.version>8.0.13</jdbc.mysql.connector.version>
+        <mysql.version>5.7.25</mysql.version>
+        <busybox.version>1.31.1</busybox.version>
+        <python.docker.version>3.9.1-slim-buster</python.docker.version>
         <!-- mvn execution properties -->
         <build.environment>local</build.environment>
         <maven.test.skip>true</maven.test.skip>
@@ -59,6 +61,8 @@
         <hub>docker-hub.elab.linkare.com</hub>
         <git.project.prefix>rec</git.project.prefix>
         <public.repo>docker-thirdparty.linkare.com</public.repo>
+        <laboratory>default</laboratory>
+        <pack.docker.images>false</pack.docker.images>
     </properties>
 
     <modules>
@@ -213,8 +217,7 @@
                 </property>
             </activation>
             <modules>
-                <module>deployment/base-images</module>
-                <module>deployment/application</module>
+                <module>deployment/images</module>
             </modules>
         </profile>
         <profile>

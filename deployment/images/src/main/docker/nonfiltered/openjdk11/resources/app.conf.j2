@@ -1,0 +1,9 @@
+[program:{{ .Env.APPNAME }}]
+command={{ .Env.APPCMD }}
+stdout_logfile=/dev/fd/1
+stdout_logfile_maxbytes=0
+redirect_stderr=true
+autorestart=true
+startsecs=1
+user={{ .Env.APPUSER }}
+directory={{ .Env.WORKDIR }}
