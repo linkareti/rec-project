@@ -122,3 +122,26 @@ $ mvn clean deploy -Dmaven.test.skip=true -Djarsigner.alias="REC" -Dbuild.enviro
 
 # Sometimes we need to install librxtx-java
 /usr/share/java/RXTXcomm-2.2pre2.jar
+
+# Ommited steps at IST wiki:
+
+== rec.web (recommended only for testing locally)==
+
+* Docker (20.10+)
+* docker-compose (1.25.4+)
+
+* Optional (rec.web)
+    $ scp deployment/images/target/rec.web.tar multicast-server-name:/tmp/
+    $ scp deployment/images/target/rec.web-upgrade-db.tar multicast-server-name:/tmp/
+    $ scp deployment/images/target/rec.web-db.tar multicast-server-name:/tmp/
+    $ scp deployment/compose/target/docker-compose-rec.web.yml multicast-server-name:/tmp/
+
+* Optional (rec.web)
+    $ sudo -u elab docker load --input /tmp/rec.web.tar
+    $ sudo -u elab docker load --input /tmp/rec.web-upgrade-db.tar
+    $ sudo -u elab docker load --input /tmp/rec.web-db.tar
+    $ sudo -u elab echo AS_ADMIN_ALIASPASSWORD=askPass > /home/elab/asadmin_mail.secret
+    $ sudo -u elab echo AS_ADMIN_ALIASPASSWORD=rec > /home/elab/asadmin_recdb.secret
+    $ sudo -u elab echo rec > /home/elab/rec-db.secret
+    $ sudo -u elab echo root > /home/elab/root-db.secret
+    $ sudo -u elab docker-compose -f /home/elab/docker-compose-template.yml -f /home/elab/docker-compose-pendulum.yml -f /home/elab/docker-compose-rec.yml config > /home/elab/docker-compose.yml
