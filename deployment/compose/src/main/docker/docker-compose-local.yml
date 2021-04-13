@@ -1,47 +1,35 @@
 version: '3.5'
 services:
   elab-client-webswing:
-    container_name: rec.client
-    image: ${repo}/${simplifiedGroupId}/${laboratory}/webswing-${webswing.version}-${openjdk.version}:${project.version}
-    restart: unless-stopped
+    image: ${repo}/${simplifiedGroupId}/webswing-${webswing.version}-${openjdk.version}:${project.version}
     ports:
       - "28080:8080"
     environment:
-      XDG_RUNTIME_DIR: '/opt/webswing/.cache/xdgr'
-      WEBSWING_ADMIN_CONSOLE_URL: 'http://localhost:38080'
+      WEBSWING_ADMIN_CONSOLE_URL: http://localhost:38080
     labels:
       - "traefik.docker.network=server"
       # HTTP (80)
-      - "traefik.http.routers.webswing-http.entrypoints=web"
       - "traefik.http.routers.webswing-http.rule=PathPrefix(`/tiro_v1.0`)"
-      - "traefik.http.routers.webswing-http.middlewares=webswing-http-redir"
-      - "traefik.http.services.webswing-http.loadbalancer.server.port=8080"
-      - "traefik.http.middlewares.webswing-http-redir.redirectscheme.scheme=https"
       - "traefik.http.services.webswing-http.loadbalancer.healthcheck.path=/tiro_v1.0"
       # HTTPS (443)
-      - "traefik.http.routers.webswing-https.entrypoints=web-secure"
       - "traefik.http.routers.webswing-https.rule=PathPrefix(`/tiro_v1.0`)"
-      - "traefik.http.routers.webswing-https.tls=true"
     networks:
       - server
   
   webswing-admin:
-    image: ${repo}/${simplifiedGroupId}/${laboratory}/webswing-admin-${webswing.version}-${openjdk.version}:${project.version}
-    restart: unless-stopped
+    image: ${repo}/${simplifiedGroupId}/webswing-admin-${webswing.version}-${openjdk.version}:${project.version}
     ports:
       - "38080:8080"
     environment:
-      WEBSWING_HOST: elab-client-webswing
-      WEBSWING_WEBSOCKET_PORT: 8080
-      WEBSWING_SHARED_LOG_DIR: /var/opt/logs
       WEBSWING_PUBLIC_URL: http://localhost:28080
     networks:
       - server
 
   elab-server-payara:
     container_name: rec.web
-    image: ${repo}/${simplifiedGroupId}/${laboratory}/rec.web-payara-${payara.docker.version}:${project.version}
+    image: ${repo}/${simplifiedGroupId}/rec.web-payara-${payara.docker.version}:${project.version}
     ports:
+      # Debug
       - "29009:9009"
     environment:
       DEVELOPMENT_MODE: ${development.mode}
@@ -82,7 +70,7 @@ services:
 
   rec-database:
     container_name: rec.db
-    image: ${repo}/${simplifiedGroupId}/${laboratory}/mysql-server-${mysql.version}:${project.version}
+    image: ${repo}/${simplifiedGroupId}/mysql-server-${mysql.version}:${project.version}
     ports:
       - "13306:3306"
     #restart: "none"
@@ -101,26 +89,17 @@ services:
     restart: unless-stopped
 
   elab-multicast:
-    container_name: rec.multicast
-    healthcheck:
-      test: pgrep java
-      interval: 30s
-      timeout: 1s
-      retries: 3
-      start_period: 30s
-    restart: unless-stopped
     environment:
       APPNAME: 'basic'
-      APPUSER: 'elab'
       WORKDIR: '/home/elab/rec-deployment/basic'
       LABORATORY_NAMES: 'basic'
-    image: ${repo}/${simplifiedGroupId}/${laboratory}/rec.multicast-${openjdk.version}:${project.version}
+    image: ${repo}/${simplifiedGroupId}/rec.multicast-${openjdk.version}:${project.version}
     networks:
       - server
   
   elab-hardwareserver:
     container_name: rec.hardwareserver
-    image: ${repo}/${simplifiedGroupId}/${laboratory}/openjdk-${openjdk.docker.version}:${project.version}
+    image: ${repo}/${simplifiedGroupId}/openjdk-${openjdk.docker.version}:${project.version}
     healthcheck:
       test: pgrep java
       interval: 30s
@@ -141,7 +120,7 @@ services:
   #     - "8554:8554"
 
   rec-upgrade-db:
-    image: ${repo}/${simplifiedGroupId}/${laboratory}/rec.upgrade-db-liquibase-${liquibase.version}:${project.version}
+    image: ${repo}/${simplifiedGroupId}/rec.upgrade-db-liquibase-${liquibase.version}:${project.version}
     environment:
       #DUMP_SQL: 1
       #FORCE_UNLOCK: 1
@@ -164,7 +143,7 @@ services:
       - rec-database
 
   reverse-proxy:
-    image: ${repo}/${simplifiedGroupId}/${laboratory}/traefik-${traefik.version}:${project.version}
+    image: ${repo}/${simplifiedGroupId}/traefik-${traefik.version}:${project.version}
     networks:
       - server
       

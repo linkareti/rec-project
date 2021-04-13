@@ -2,7 +2,7 @@ version: '3.5'
 services:
   reverse-proxy:
     container_name: rec.proxy
-    image: ${hub}/${simplifiedGroupId}/${laboratory}/traefik-${traefik.version}:${project.version}
+    image: ${hub}/${simplifiedGroupId}/traefik-${traefik.version}:${project.version}
     command:
       - --entrypoints.web.address=:80
       - --entrypoints.web-secure.address=:443 #Declares the web-secure entrypoint in Traefik
@@ -17,3 +17,44 @@ services:
     volumes:
       # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  elab-multicast:
+    container_name: rec.multicast
+    healthcheck:
+      test: pgrep java
+      interval: 30s
+      timeout: 1s
+      retries: 3
+      start_period: 30s
+    restart: unless-stopped
+    environment:
+      APPUSER: elab
+    image: ${hub}/${simplifiedGroupId}/rec.multicast-${openjdk.version}:${project.version}
+
+  elab-client-webswing:
+    container_name: rec.client
+    image: ${repo}/${simplifiedGroupId}/webswing-${webswing.version}-${openjdk.version}:${project.version}
+    restart: unless-stopped
+    environment:
+      XDG_RUNTIME_DIR: '/opt/webswing/.cache/xdgr'
+    labels:
+      # HTTP (80)
+      - "traefik.http.routers.webswing-http.entrypoints=web"
+      - "traefik.http.routers.webswing-http.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.webswing-http.middlewares=webswing-http-redir"
+      - "traefik.http.services.webswing-http.loadbalancer.server.port=8080"
+      - "traefik.http.middlewares.webswing-http-redir.redirectscheme.scheme=https"
+      # HTTPS (443)
+      - "traefik.http.routers.webswing-https.entrypoints=web-secure"
+      - "traefik.http.routers.webswing-https.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.webswing-https.tls=true"
+
+  webswing-admin:
+    container_name: rec.client-admin
+    image: ${repo}/${simplifiedGroupId}/webswing-admin-${webswing.version}-${openjdk.version}:${project.version}
+    restart: unless-stopped
+    environment:
+      WEBSWING_HOST: elab-client-webswing
+      WEBSWING_WEBSOCKET_PORT: 8080
+      WEBSWING_SHARED_LOG_DIR: /var/opt/logs
+      WEBSWING_PUBLIC_URL: https://elab.dev.linkare.com

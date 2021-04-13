@@ -1,15 +1,6 @@
 version: '3.5'
 services:
   elab-multicast:
-    container_name: rec.multicast
-    image: ${hub}/${simplifiedGroupId}/${laboratory}/rec.multicast-${openjdk.version}:${project.version}
-    healthcheck:
-      test: pgrep java
-      interval: 30s
-      timeout: 1s
-      retries: 3
-      start_period: 30s
-    restart: unless-stopped
     ports:
       # Basic
       - "25001:25001"
@@ -20,34 +11,6 @@ services:
       # Advanced
       - "25003:25003"
       - "9003:9003"
-
-  elab-client-webswing:
-    container_name: rec.client
-    image: ${hub}/${simplifiedGroupId}/${laboratory}/webswing-${webswing.version}-${openjdk.version}:${project.version}
-    restart: unless-stopped
-    environment:
-      XDG_RUNTIME_DIR: '/opt/webswing/.cache/xdgr'
-    labels:
-      # HTTP (80)
-      - "traefik.http.routers.webswing-http.entrypoints=web"
-      - "traefik.http.routers.webswing-http.rule=PathPrefix(`/`)"
-      - "traefik.http.routers.webswing-http.middlewares=webswing-redir-http"
-      - "traefik.http.services.webswing-http.loadbalancer.server.port=8080"
-      - "traefik.http.middlewares.webswing-redir-http.redirectscheme.scheme=https"
-      # HTTPS (443)
-      - "traefik.http.routers.webswing-https.entrypoints=web-secure"
-      - "traefik.http.routers.webswing-https.rule=PathPrefix(`/`)"
-      - "traefik.http.routers.webswing-https.tls=true"
-
-  webswing-admin:
-    container_name: rec.client-admin
-    image: ${hub}/${simplifiedGroupId}/${laboratory}/webswing-admin-${webswing.version}-${openjdk.version}:${project.version}
-    restart: unless-stopped
-    environment:
-      WEBSWING_HOST: elab-client-webswing
-      WEBSWING_WEBSOCKET_PORT: 8080
-      WEBSWING_SHARED_LOG_DIR: /var/opt/logs
-      WEBSWING_PUBLIC_URL: https://elab.dev.linkare.com
       
 secrets:
    dbrec.secret:

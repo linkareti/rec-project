@@ -2,7 +2,7 @@ version: '3.5'
 services:
   client-side-webswing:
     container_name: client_webswing
-    image: ${repo}/${simplifiedGroupId}/${laboratory}/webswing-${webswing.version}-${openjdk.version}:${project.version}
+    image: ${repo}/${simplifiedGroupId}/webswing-${webswing.version}-${openjdk.version}:${project.version}
     restart: unless-stopped
     ports:
       - "28081:8080"
@@ -28,7 +28,7 @@ services:
       - client
 
   client-side-webswing-admin:
-    image: ${repo}/${simplifiedGroupId}/${laboratory}/webswing-admin-${webswing.version}-${openjdk.version}:${project.version}
+    image: ${repo}/${simplifiedGroupId}/webswing-admin-${webswing.version}-${openjdk.version}:${project.version}
     container_name: client_webswing_admin
     restart: unless-stopped
     ports:
@@ -57,7 +57,7 @@ services:
       APPUSER: 'elab'
       WORKDIR: '/home/elab/rec-deployment/intermediate'
       LABORATORY_NAMES: 'intermediate'
-    image: ${repo}/${simplifiedGroupId}/${laboratory}/rec.multicast-${openjdk.version}:${project.version}
+    image: ${repo}/${simplifiedGroupId}/rec.multicast-${openjdk.version}:${project.version}
     networks:
       - client
     labels:
@@ -65,7 +65,7 @@ services:
 
   elab-hardwareserver-client:
     container_name: client_hardwareserver
-    image: ${repo}/${simplifiedGroupId}/${laboratory}/openjdk-${openjdk.docker.version}:${project.version}
+    image: ${repo}/${simplifiedGroupId}/openjdk-${openjdk.docker.version}:${project.version}
     healthcheck:
       test: pgrep java
       interval: 30s
@@ -130,7 +130,7 @@ services:
   #     - CHANGELOG_FILE=/changelog/db.changelog-master.xml
 
   reverse-proxy:
-    image: ${repo}/${simplifiedGroupId}/${laboratory}/traefik-${traefik.version}:${project.version}
+    image: ${repo}/${simplifiedGroupId}/traefik-${traefik.version}:${project.version}
     command:
       - --entrypoints.web.address=:80
       - --entrypoints.web-secure.address=:443 #Declares the web-secure entrypoint in Traefik
