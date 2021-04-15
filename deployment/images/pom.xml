@@ -293,7 +293,7 @@
                         </goals>
                         <configuration>
                             <url>
-                                https://storage.googleapis.com/builds.webswing.org/releases/webswing-${webswing.version}.zip
+                                https://docker-hub.elab.linkare.com/nexus/repository/thirdparty/org/webswing/webswing/${webswing.version}/webswing-${webswing.version}-distribution.zip
                             </url>
                             <unpack>false</unpack>
                             <outputDirectory>${project.build.directory}/webswing/resources</outputDirectory>
@@ -308,7 +308,7 @@
                         </goals>
                         <configuration>
                             <url>
-                                https://storage.googleapis.com/builds.webswing.org/releases/webswing-${webswing.version}.zip
+                                https://docker-hub.elab.linkare.com/nexus/repository/thirdparty/org/webswing/webswing/${webswing.version}/webswing-${webswing.version}-distribution.zip
                             </url>
                             <unpack>false</unpack>
                             <outputDirectory>${project.build.directory}/webswing-admin/resources</outputDirectory>
