@@ -3,9 +3,9 @@ services:
   elab-client-webswing:
     image: ${repo}/${simplifiedGroupId}/webswing-${webswing.version}-${openjdk.version}:${project.version}
     ports:
-      - "28080:8080"
+      - "38080:8080"
     environment:
-      WEBSWING_ADMIN_CONSOLE_URL: http://localhost:38080
+      WEBSWING_ADMIN_CONSOLE_URL: http://localhost:48080
     labels:
       - "traefik.docker.network=server"
       # HTTP (80)
@@ -19,9 +19,9 @@ services:
   webswing-admin:
     image: ${repo}/${simplifiedGroupId}/webswing-admin-${webswing.version}-${openjdk.version}:${project.version}
     ports:
-      - "38080:8080"
+      - "48080:8080"
     environment:
-      WEBSWING_PUBLIC_URL: http://localhost:28080
+      WEBSWING_PUBLIC_URL: http://localhost:38080
     networks:
       - server
 
@@ -31,6 +31,8 @@ services:
     ports:
       # Debug
       - "29009:9009"
+      - "24848:4848"
+      - "28080:8080"
     environment:
       DEVELOPMENT_MODE: ${development.mode}
       PAYARA_ARGS: "--debug"
