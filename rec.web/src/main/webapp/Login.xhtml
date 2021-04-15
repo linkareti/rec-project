@@ -35,9 +35,9 @@
                                         <div class="card-img">
                                             <h:panelGroup rendered="#{lab.imageAvailable}">
                                                 <p:graphicImage id="imageUploadOut"
-                                                    value="#{statusBean.laboratoryImage}" styleClass="lab-image"
+                                                    value="#{laboratoryController.imageUploaded}" styleClass="lab-image"
                                                     style="background-image: url(#{statusBean.laboratoryImage});">
-                                                    <f:param name="labId" value="#{lab.idInternal}" />
+                                                    <f:param name="laboratory" value="#{lab.idInternal}" />
                                                 </p:graphicImage>
                                             </h:panelGroup>
                                             <h:panelGroup rendered="#{!lab.imageAvailable}">

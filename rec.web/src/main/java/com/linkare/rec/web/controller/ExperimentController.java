@@ -8,8 +8,10 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
 
 import com.linkare.jsf.utils.JsfUtil;
+import com.linkare.rec.web.bean.LaboratoriesSynchronizerSchedulerBean;
 import com.linkare.rec.web.model.Experiment;
 import com.linkare.rec.web.service.ExperimentService;
 import com.linkare.rec.web.service.ExperimentServiceLocal;
@@ -23,6 +25,9 @@ public class ExperimentController extends AbstractController<Long, Experiment, E
 
     @EJB(beanInterface = ExperimentServiceLocal.class)
     private ExperimentService service;
+
+    @Inject
+    LaboratoriesSynchronizerSchedulerBean synchronizer;
 
     public final Experiment getSelected() {
         if (getCurrent() == null) {
@@ -40,6 +45,10 @@ public class ExperimentController extends AbstractController<Long, Experiment, E
     public final String prepareCreate() {
         setCurrent(new Experiment());
         return ConstantUtils.CREATE;
+    }
+
+    public final void syncAll() {
+        synchronizer.forceSynchronization();
     }
 
     public SelectItem[] getActiveItemsAvailableSelectOne() {

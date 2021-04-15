@@ -18,6 +18,7 @@ import javax.faces.event.ActionEvent;
 import javax.faces.event.PhaseId;
 import javax.inject.Inject;
 
+import com.linkare.rec.web.bean.LaboratoriesSynchronizerSchedulerBean;
 import com.linkare.rec.web.config.Lab;
 import com.linkare.rec.web.config.ReCFaceConfig;
 import com.linkare.rec.web.model.Laboratory;
@@ -51,6 +52,9 @@ public class LaboratoryController extends AbstractController<Long, Laboratory, L
 
     @Inject
     RecFaceConfigClientCache recClient;
+
+    @Inject
+    LaboratoriesSynchronizerSchedulerBean synchronizer;
 
     private UploadedFile file;
 
@@ -276,6 +280,13 @@ public class LaboratoryController extends AbstractController<Long, Laboratory, L
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
                     "Invalid Gps Location", "Laboratories with invalid gps locations will not be shown on the map"));
         }
+    }
+
+    /**
+     * Force synchronize all laboratories and experiments from the Remote rec face configs
+     */
+    public void syncAll(){
+        synchronizer.forceSynchronization();
     }
 
     @FacesConverter(value = "laboratoryConverter", forClass = Laboratory.class)

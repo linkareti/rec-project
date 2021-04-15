@@ -28,6 +28,7 @@ import org.slf4j.LoggerFactory;
 public class LaboratoriesSynchronizerSchedulerBean {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LaboratoriesSynchronizerSchedulerBean.class);
+    private static final Object block = new Object();
 
     @EJB(beanInterface = LaboratoryServiceLocal.class)
     private LaboratoryService service;
@@ -45,13 +46,23 @@ public class LaboratoriesSynchronizerSchedulerBean {
     @Schedule(hour = "*/2", persistent = false, info = "Every two hours")
     public void synchronizeLaboratories() {
         LOGGER.info("RefreshConfigSchedulerBean is up looking for laboratories to synchronize...");
-        List<Laboratory> laboratories = service.findAllLaboratoriesWithRecConfigUrl();
-        if(laboratories.isEmpty()){
-            LOGGER.info("No laboratories to synchronize...");
-            return;
+        handleSynchronization();
+    }
+
+    public void forceSynchronization() {
+        handleSynchronization();
+    }
+
+    private void handleSynchronization(){
+        synchronized (block) {
+            List<Laboratory> laboratories = service.findAllLaboratoriesWithRecConfigUrl();
+            if (laboratories.isEmpty()) {
+                LOGGER.info("No laboratories to synchronize...");
+                return;
+            }
+            LOGGER.info("Found {} laboratories to synchronize. Start synchronizing...", laboratories.size());
+            laboratories.forEach(this::handleUpdateLaboratory);
         }
-        LOGGER.info("Found {} laboratories to synchronize. Start synchronizing..." ,laboratories.size());
-        laboratories.forEach(this::handleUpdateLaboratory);
     }
 
     private void handleUpdateLaboratory(Laboratory laboratory) {

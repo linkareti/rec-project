@@ -1,41 +1,41 @@
 package com.linkare.rec.web.bean;
 
-import com.linkare.jsf.utils.JsfUtil;
-import com.linkare.rec.web.ClientInfoDTO;
+import java.io.ByteArrayInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-
-import java.io.ByteArrayInputStream;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.event.PhaseId;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
-import org.primefaces.model.UploadedFile;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseId;
 
+import com.linkare.jsf.utils.JsfUtil;
+import com.linkare.rec.web.ClientInfoDTO;
 import com.linkare.rec.web.model.DeployedExperiment;
-import com.linkare.rec.web.util.Strings;
 import com.linkare.rec.web.model.Experiment;
+import com.linkare.rec.web.model.Laboratory;
 import com.linkare.rec.web.service.ExperimentServiceLocal;
+import com.linkare.rec.web.service.LaboratoryService;
+import com.linkare.rec.web.service.LaboratoryServiceLocal;
 import com.linkare.rec.web.util.ConstantUtils;
 import com.linkare.rec.web.util.LaboratoriesMonitor;
+import com.linkare.rec.web.util.MultiThreadDeployedExperimentWrapper;
 import com.linkare.rec.web.util.MultiThreadLaboratoryWrapper;
-import com.linkare.rec.web.service.LaboratoryService;
-import com.linkare.rec.web.service.LaboratoryServiceBean;
-import javax.faces.context.FacesContext;
-import com.linkare.rec.web.service.LaboratoryServiceLocal;
-import com.linkare.rec.web.model.Laboratory;
-import java.util.HashSet;
-import java.util.Set;
+import com.linkare.rec.web.util.Strings;
+
+import org.primefaces.event.TabChangeEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -47,13 +47,14 @@ import java.util.Set;
  * 
  */
 @ManagedBean(name = "statusBean")
-@RequestScoped
+@ViewScoped
 public class StatusBean implements Serializable {
 
     private static final long serialVersionUID = 9112911612244451634L;
     private List<MultiThreadLaboratoryWrapper> labs;
     private MultiThreadLaboratoryWrapper selectedLab;
     private List<DeployedExperiment> selectedLabExperiments;
+    private LaboratoriesMonitor laboratoriesMonitor = LaboratoriesMonitor.getInstance();
     @EJB
     private ExperimentServiceLocal experimentService;
     
@@ -76,7 +77,6 @@ public class StatusBean implements Serializable {
         return returnableLabs;
     }
 
-	@ManagedProperty("#{param.laboratory}")
     private String laboratory;
  
     public String getLaboratory() {
@@ -95,6 +95,61 @@ public class StatusBean implements Serializable {
     public void setSelectedLab(MultiThreadLaboratoryWrapper selectedLab) {
         this.selectedLab = selectedLab;
         this.selectedLabExperiments = null;
+    }
+
+    public List<DeployedExperiment> getLabExperiments() {
+        getSelectedLab();
+        refreshExperiments();
+        return selectedLabExperiments;
+    }
+
+    public void updateLabStatus() {
+        labs = LaboratoriesMonitor.getInstance().getActiveLabs();
+        refreshExperiments();
+    }
+
+    public void refreshExperiments() {
+
+        if (selectedLab != null && selectedLab.isAvailable()) {
+            initActiveExperimentMap();
+            selectedLabExperiments = getDeployedExperiment(activeExperiment.get(selectedLab.getName()));
+
+            final MultiThreadLaboratoryWrapper laboratory = laboratoriesMonitor.getLaboratory(selectedLab.getName());
+
+            if (laboratory != null) {
+
+                final Map<String, MultiThreadDeployedExperimentWrapper> liveExperiments = laboratory.getLiveExperiments();
+                if (liveExperiments.size() > 0) {
+                    for (DeployedExperiment experiment : selectedLabExperiments) {
+                        String experimentName = experiment.getExperiment().getExternalId();
+                        MultiThreadDeployedExperimentWrapper mt = liveExperiments.get(experimentName);
+                        if (mt != null) {
+                            experiment.setState(mt.getState());
+                            experiment.setUsersConnected(mt.getUsersConnected());
+                        }
+                    }
+                }
+
+            }
+
+        } else {
+            selectedLabExperiments = Collections.emptyList();
+        }
+    }
+
+    private List<DeployedExperiment> getDeployedExperiment(final List<Experiment> experiment) {
+        List<DeployedExperiment> result = Collections.emptyList();
+
+        if (!experiment.isEmpty()) {
+            result = new ArrayList<DeployedExperiment>(experiment.size());
+            for (final Experiment exp : experiment) {
+                DeployedExperiment deployed = new DeployedExperiment();
+                deployed.setExperiment(exp);
+                result.add(deployed);
+            }
+        }
+
+        return result;
     }
 
     public void initActiveExperimentMap() {
@@ -136,6 +191,11 @@ public class StatusBean implements Serializable {
             return null;
         }
         return new DefaultStreamedContent(new ByteArrayInputStream(laboratory.getImage()));
+    }
+
+    public void onTabChange(TabChangeEvent event) {
+        selectedLab = (MultiThreadLaboratoryWrapper) event.getData();
+        refreshExperiments();
     }
     
     
