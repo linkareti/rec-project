@@ -1,0 +1,38 @@
+version: '3'
+services:
+  webswing:
+    build:
+      context: webswing
+    image: ${repo}/${simplifiedGroupId}/webswing-${webswing.version}-${openjdk.version}:${project.version}
+  webswing-admin:
+    build:
+      context: webswing-admin
+    image: ${repo}/${simplifiedGroupId}/webswing-admin-${webswing.version}-${openjdk.version}:${project.version}
+  traefik:
+    build:
+      context: traefik
+    image: ${repo}/${simplifiedGroupId}/traefik-${traefik.version}:${project.version}
+  payara:
+    build:
+      context: payara
+    image: ${repo}/${simplifiedGroupId}/rec.web-payara-${payara.docker.version}:${project.version}
+  upgrade-db:
+    build:
+      context: upgrade-db
+    image: ${repo}/${simplifiedGroupId}/rec.upgrade-db-liquibase-${liquibase.version}:${project.version}
+  mysql-server:
+    build:
+      context: mysql-server
+    image: ${repo}/${simplifiedGroupId}/mysql-server-${mysql.version}:${project.version}
+  streamer:
+    build:
+      context: streamer
+    image: ${repo}/${simplifiedGroupId}/streamer:${project.version}
+  multicast:
+    build:
+      context: multicast
+    image: ${repo}/${simplifiedGroupId}/rec.multicast-${openjdk.version}:${project.version}
+  openjdk11:
+    build:
+      context: openjdk11
+    image: ${repo}/${simplifiedGroupId}/openjdk-${openjdk.docker.version}:${project.version}

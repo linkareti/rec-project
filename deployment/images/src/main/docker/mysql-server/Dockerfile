@@ -1,0 +1,1 @@
+FROM ${public.repo}/mysql:${mysql.version}

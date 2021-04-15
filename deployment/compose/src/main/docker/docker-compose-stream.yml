@@ -1,7 +1,7 @@
 version: '3.5'
 services:
   elab-streamer-server:
-    image: aler9/rtsp-simple-server
+    image: ${hub}/${simplifiedGroupId}/streamer:${project.version}
     container_name: rec-stream-server
     ports:
       - "80:80"

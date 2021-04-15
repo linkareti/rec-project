@@ -1,0 +1,83 @@
+version: '3.5'
+services:
+  elab-server-payara:
+    container_name: rec.web
+    image: ${repo}/${simplifiedGroupId}/rec.web-payara-${payara.docker.version}:${project.version}
+    environment:
+      jvm-options: '-XX\:+UnlockExperimentalVMOptions:-XX\:+UseContainerSupport:-XX\:MaxRAMPercentage=1:-Xms1g:-Xmx2g'
+      REC_DB_HOST: 'rec-database'
+      REC_DB_PORT: '3306'
+      GFTIMER_DB_HOST: 'rec-database'
+      GFTIMER_DB_PORT: '3306'
+      CONTAINERS_UPGRADE_DB: 'rec-upgrade-db'
+    labels:
+      - "traefik.docker.network=server"
+      # HTTP (80)
+      - "traefik.http.routers.payara-http.entrypoints=web"
+      - "traefik.http.routers.payara-http.rule=PathPrefix(`/rec.web`)"
+      - "traefik.http.routers.payara-http.middlewares=payara-redir-http"
+      - "traefik.http.services.payara-http.loadbalancer.server.port=8080"
+      - "traefik.http.services.payara-http.loadbalancer.healthcheck.path=/rec.web"
+      - "traefik.http.middlewares.payara-redir-http.redirectscheme.scheme=https"
+      # HTTPS (443)
+      - "traefik.http.routers.payara-https.entrypoints=web-secure"
+      - "traefik.http.routers.payara-https.rule=PathPrefix(`/rec.web`)"
+      - "traefik.http.routers.payara-https.tls=true"
+    depends_on:
+      - rec-database
+      - rec-upgrade-db
+    restart: unless-stopped
+    secrets:
+      - as_mail.secret
+      - as_recdb.secret
+
+  rec-database:
+    container_name: rec.db
+    image: ${repo}/${simplifiedGroupId}/mysql-server-${mysql.version}:${project.version}
+    secrets:
+      - rdb.secret
+      - dbrec.secret
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: '/run/secrets/rdb.secret'
+      MYSQL_USER: 'rec'
+      MYSQL_PASSWORD_FILE: '/run/secrets/dbrec.secret'
+      MYSQL_DATABASE: 'rec'
+    volumes:
+      - db-rec:/var/lib/mysql:rw
+    restart: unless-stopped
+
+  rec-upgrade-db:
+    image: ${repo}/${simplifiedGroupId}/rec.upgrade-db-liquibase-${liquibase.version}:${project.version}
+    environment:
+      #DUMP_SQL: 1
+      #FORCE_UNLOCK: 1
+      #RESET_CKSUMS: 1
+      DB_CONTEXT: 'dev'
+      TZ: 'Europe/Lisbon'
+      TARGET_DB: 'rec'
+      DB_HOST: 'rec-database'
+      DB_PORT: '3306'
+      DB_USER: 'rec'
+      DB_PASS_FILE: '/run/secrets/dbrec.secret'
+      LOGGING_LEVEL: 'info'
+      CHANGELOG_FILE: 'db.changelog-master.xml'
+      CLASSPATH: '/changelog'
+    restart: unless-stopped
+    secrets:
+      - dbrec.secret
+    depends_on:
+      - rec-database
+
+secrets:
+  dbrec.secret:
+    file: /home/elab/rec-db.secret
+  rdb.secret:
+    file: /home/elab/root-db.secret
+  as_mail.secret:
+    file: /home/elab/asadmin_mail.secret
+  as_recdb.secret:
+    file: /home/elab/asadmin_recdb.secret
+
+volumes:
+  db-rec:
+    name: db-rec

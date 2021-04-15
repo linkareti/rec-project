@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+	<changeSet id="2021-04-06-DROP_UNIQUE_CONSTRAINT_IN_EXPERIMENT" author="jcortes">
+		<dropUniqueConstraint constraintName="EXTERNAL_ID"
+							  schemaName="rec"
+							  tableName="EXPERIMENT"
+							  uniqueColumns="EXTERNAL_ID"/>
+	</changeSet>
+	<changeSet id="2021-04-06-ADD_UNIQUE_CONSTRAINT_IN_EXPERIMENT" author="jcortes">
+		<addUniqueConstraint  columnNames="EXTERNAL_ID, KEY_LABORATORY"
+							  constraintName="EXTERNAL_ID_LABORATORY_UN"
+							  schemaName="rec"
+							  tableName="EXPERIMENT"/>
+	</changeSet>
+</databaseChangeLog>

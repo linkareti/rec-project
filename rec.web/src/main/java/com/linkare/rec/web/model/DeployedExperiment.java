@@ -3,6 +3,8 @@ package com.linkare.rec.web.model;
 import com.linkare.rec.web.RecChatMessageDTO;
 import java.util.HashSet;
 import java.util.Set;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Represents an experiment deployed on a laboratory. Contains all the information about the experiment, its current state, users currently connected and other
@@ -13,10 +15,12 @@ import java.util.Set;
  */
 public class DeployedExperiment {
 
+	private String urlExperiment;
     private Experiment experiment;
     private HardwareState state;
     private Set<String> usersConnected;
     private RecChatMessageDTO recChatMessages;
+    private static final Logger LOG = LoggerFactory.getLogger(DeployedExperiment.class.getName());
 
     public DeployedExperiment(final DeployedExperiment experiment) {
         this.experiment = experiment.getExperiment();
@@ -28,7 +32,18 @@ public class DeployedExperiment {
     public DeployedExperiment() {
     }
 
-    public Experiment getExperiment() {
+    
+   
+    
+    public String getUrlExperiment() {
+		return urlExperiment;
+	}
+
+	public void setUrlExperiment(String urlExperiment) {
+		this.urlExperiment = urlExperiment;
+	}
+
+	public Experiment getExperiment() {
         return experiment;
     }
 

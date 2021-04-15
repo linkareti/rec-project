@@ -9,11 +9,6 @@ services:
         aliases:
           - elab-dev.vps.tecnico.ulisboa.pt
 
-  rec-database:
-    volumes:
-      - /home/linkare/rec-schema.sql:/docker-entrypoint-initdb.d/rec-schema.sql:rw
-      - /home/linkare/gf_timer-schema.sql:/docker-entrypoint-initdb.d/gf_timer-schema.sql:rw
-
 secrets:
   as_mail.secret:
     file: /home/linkare/asadmin_mail.secret

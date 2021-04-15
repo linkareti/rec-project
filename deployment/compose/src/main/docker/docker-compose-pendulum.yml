@@ -1,0 +1,28 @@
+version: '3.5'
+services:
+  reverse-proxy:
+    image: ${repo}/${simplifiedGroupId}/traefik-${traefik.version}:${project.version}
+
+  elab-multicast:
+    image: ${repo}/${simplifiedGroupId}/rec.multicast-${openjdk.version}:${project.version}
+    ports:
+      - "25001:25001"
+      - "9001:9001"
+    environment:
+      APPNAME: pendulum
+      WORKDIR: /home/elab/rec-deployment/pendulum
+      LABORATORY_NAMES: pendulum
+
+  elab-client-webswing:
+    image: ${repo}/${simplifiedGroupId}/webswing-${webswing.version}-${openjdk.version}:${project.version}
+    ports:
+      - "28080:8080"
+    environment:
+      WEBSWING_ADMIN_CONSOLE_URL: http://localhost:38080
+
+  webswing-admin:
+    image: ${repo}/${simplifiedGroupId}/webswing-admin-${webswing.version}-${openjdk.version}:${project.version}
+    ports:
+      - "38080:8080"
+    environment:
+      WEBSWING_PUBLIC_URL: http://localhost:28080

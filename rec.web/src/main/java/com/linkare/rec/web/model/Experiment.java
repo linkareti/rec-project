@@ -16,21 +16,24 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.linkare.commons.jpa.DefaultDomainObject;
 
 /**
- * 
+ *
  * @author Joao
  * @author Bruno Catarino - Linkare TI
  */
 @Entity
-@Table(name = "EXPERIMENT")
+@Table(name = "EXPERIMENT", uniqueConstraints = {
+        @UniqueConstraint(columnNames = { "EXTERNAL_ID", "KEY_LABORATORY" }, name = "EXTERNAL_ID_LABORATORY_UN") })
 @NamedQueries( { @NamedQuery(name = Experiment.FIND_ALL_QUERYNAME, query = "Select e from Experiment e"),
 	@NamedQuery(name = Experiment.COUNT_ALL_QUERYNAME, query = "Select count(e) from Experiment e"),
 	@NamedQuery(name = Experiment.FIND_ALL_ACTIVE_QUERYNAME, query = "Select e from Experiment e where e.state.active = true order by e.name"),
 	@NamedQuery(name = Experiment.FIND_BY_ACTIVE_LAB, query = Experiment.FIND_BY_ACTIVE_LAB_QRY),
-	@NamedQuery(name = Experiment.FIND_BY_EXTERNAL_ID, query = Experiment.FIND_BY_EXTERNAL_ID_QRY)})
+	@NamedQuery(name = Experiment.FIND_BY_EXTERNAL_ID, query = Experiment.FIND_BY_EXTERNAL_ID_QRY),
+	@NamedQuery(name = Experiment.FIND_BY_LABORATORY_QUERYNAME, query = Experiment.FIND_BY_LABORATORY_QRY)})
 public class Experiment extends DefaultDomainObject {
 
     private static final long serialVersionUID = 1L;
@@ -51,10 +54,16 @@ public class Experiment extends DefaultDomainObject {
 
     public static final String EXTERNAL_ID_QRY_PARAM = "externalId";
 
-    public static final String FIND_BY_EXTERNAL_ID_QRY = "Select e from Experiment e where e.externalId = :" + EXTERNAL_ID_QRY_PARAM;
+    public static final String FIND_BY_EXTERNAL_ID_QRY =
+            "Select e from Experiment e where e.externalId = :" + EXTERNAL_ID_QRY_PARAM + " AND e.laboratory = :" +
+                    LABORATORY;
+
+    public static final String FIND_BY_LABORATORY_QUERYNAME = "Experiment.findByLaboratory";
+    public static final String FIND_BY_LABORATORY_QRY = "SELECT e FROM Experiment e WHERE e.laboratory=:" + LABORATORY;
+
 
     @Basic
-    @Column(name = "EXTERNAL_ID", insertable = true, updatable = true, unique = true)
+    @Column(name = "EXTERNAL_ID", insertable = true, updatable = true)
     private String externalId;
 
     @Basic
@@ -92,7 +101,7 @@ public class Experiment extends DefaultDomainObject {
 
     /**
      * Get the value of name
-     * 
+     *
      * @return the value of name
      */
     public String getName() {
@@ -101,7 +110,7 @@ public class Experiment extends DefaultDomainObject {
 
     /**
      * Set the value of name
-     * 
+     *
      * @param name
      *            new value of name
      */
@@ -111,7 +120,7 @@ public class Experiment extends DefaultDomainObject {
 
     /**
      * Get the value of description
-     * 
+     *
      * @return the value of description
      */
     public String getDescription() {
@@ -120,7 +129,7 @@ public class Experiment extends DefaultDomainObject {
 
     /**
      * Set the value of description
-     * 
+     *
      * @param description
      *            new value of description
      */
@@ -130,7 +139,7 @@ public class Experiment extends DefaultDomainObject {
 
     /**
      * Get the value of laboratory
-     * 
+     *
      * @return value of laboratory
      */
     public Laboratory getLaboratory() {
@@ -139,7 +148,7 @@ public class Experiment extends DefaultDomainObject {
 
     /**
      * Set the value of laboratory
-     * 
+     *
      * @param laboratory
      *            new value of laboratory
      */
@@ -149,7 +158,7 @@ public class Experiment extends DefaultDomainObject {
 
     /**
      * Get the value of reservations
-     * 
+     *
      * @return value of reservations
      */
     public List<Reservation> getReservations() {
@@ -158,7 +167,7 @@ public class Experiment extends DefaultDomainObject {
 
     /**
      * Set the value of reservations
-     * 
+     *
      * @param reservations
      *            new value of reservations
      */
@@ -172,7 +181,7 @@ public class Experiment extends DefaultDomainObject {
 
     /**
      * Get value of statee
-     * 
+     *
      * @return value of statee
      */
     public State getState() {
@@ -181,7 +190,7 @@ public class Experiment extends DefaultDomainObject {
 
     /**
      * Set the value of statee
-     * 
+     *
      * @param statee
      *            new value of statee
      */

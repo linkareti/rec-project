@@ -16,3 +16,6 @@ mvn liquibase:rollback -P<profile> (where profile may be dev, qa and prod) \
 -Dliquibase.rollbackTag=<tag of the script, if you have specified one>
 -Dliquibase.rollbackCount=<number of changesets to rollback>
 -Dliquibase.rollbackDate=dd-MMM-yyyy of the set to rollback) 
+
+# UPDATE since version 2.0.x
+Liquibase interaction directly with docker arquitecture

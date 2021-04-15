@@ -172,7 +172,7 @@ html, body {
     color: #455660; 
 }
 
-#login form.am_login {
+form.am_login {
     border: medium dotted #E5E5E5;
     display: inline-block;
     float: right;
@@ -191,7 +191,7 @@ html, body {
     color: #4F4F4F; 
 }
 
-#login form.am_login h1 {
+form.am_login h1 {
     text-align: center;
     color: #455660;
 }
@@ -462,4 +462,679 @@ html, body {
 
 .hide-column-names table thead tr {
     display: none;
+}
+
+
+/* 2021 UPDATE - XAVIER  */
+
+body {
+    background: white;
+}
+
+.header {
+    background: white;
+    height: auto;
+    padding: 7px 0;
+}
+
+.header img {
+    max-width: 130px;
+}
+
+.wrapper {
+    background: #f8f9fa;
+    min-height: auto;
+}
+
+.content, #nav {
+    padding: 0;
+    margin: 0 auto;
+    max-width: 1250px;
+    width: 100%;
+}
+
+.welcome, .logout {
+    margin: 0;
+    padding: 11px 8px 8px;
+    color: #4caf50;
+}
+
+.welcome {
+    display: none;
+}
+
+#nav a {
+    font-weight: normal !important;
+    text-decoration: underline !important;
+}
+
+.main h1:first-child {
+    font-size: 1.8rem;
+    font-weight: normal;
+    color: #666;
+    margin: 10px 0 10px;
+}
+
+#login .intro h1 {
+    font-size: 1.3rem;
+    margin-top: 0;
+    font-weight: bold;
+    color: #666;
+    text-transform: uppercase;
+}
+
+.elab_launch h2 {
+    font-size: 1.3rem;
+    font-weight: normal;
+    color: #666;
+}
+
+.intro {
+    width: 14%;
+    margin: 30px 3% 30px 0;
+    float: none;
+    height: auto;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.intro p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+body #login .elab_launch {
+    overflow: auto;
+    width: 65%;
+    margin: 30px 0 30px;
+    float: none;
+    height: auto;
+    display: inline-block;
+    vertical-align: top;
+    padding-right: 3%;
+}
+
+.sidemenu {
+    display: inline-block;
+    width: 14%;
+    vertical-align: top;
+    margin-top: 35px;
+}
+
+.footer.content {
+    padding: 10px 0 20px;
+}
+
+.footer-bar {
+    background: white;
+    height: auto;
+    overflow: visible;
+    position: relative;
+    width: 100%;
+}
+
+form.am_login {
+    background: none;
+    border: 0;
+    border-radius: 5px;
+    padding: 0;
+    margin: 0;
+}
+
+#login form.elab_launch_client {
+    background: none;
+    border: 0;
+    border-top: 1px solid #dee2e6;
+    border-radius: 0;
+    padding: 20px 0 0;
+    margin: 20px 0 0;
+    /* display: none; */
+}
+
+body .ui-dialog .ui-dialog-titlebar {
+    background: white;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+}
+
+form.am_login, #login form.elab_launch_client {
+    float: none;
+    vertical-align: top;
+    width: 100%;
+    height: auto;
+    text-align: left;
+}
+
+form.am_login h1, #login form.elab_launch_client h1 {
+    font-weight: normal;
+    font-size: 1.3rem;
+    text-align: left;
+    margin: 0 0 15px;
+    color: #666;
+}
+
+form.am_login input {
+    width: 147px;
+    padding-left: 5px;
+    font-weight: normal;
+    margin: 0 0 10px;
+    display: block;
+    height: 24px;
+    background: #fff;
+    border: 1px solid #999;
+    border-radius: 3px;
+}
+
+form.am_login input.submit {
+    float: none;
+    width: auto;
+    padding: 0 20px;
+    background: #e9e9e9;
+    height: 28px;
+    cursor: pointer;
+}
+
+form.am_login input.submit:hover {
+    background: #e0e0e0;
+}
+
+form.am_login select {
+    width: 156px;
+    padding-left: 2px;
+    margin: 0 0 10px;
+    height: 28px;
+    border: 1px solid #999;
+    border-radius: 3px;
+}
+
+.statusPanelFooter {
+    text-align: left;
+    border-left: 1px solid #dee2e6;
+    padding: 11px 0 1px;
+    margin: 20px 0;
+}
+
+.statusPanelFooter a {
+    color: #4caf50;
+    background: none;
+    font-weight: normal;
+    margin-bottom: 11px;
+    padding: 1px 11px;
+    font-size: 1.1rem;
+    display: block;
+}
+
+#login .ui-tabs {
+    background: none;
+    border: 0;
+    margin: 15px 0;
+}
+
+#login .ui-tabs-nav {
+    padding: 0;
+    background: none;
+    overflow: hidden;
+    position: relative;
+}
+
+#login .ui-tabs-nav:before {
+    content: "";
+    background: #dee2e6;
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    z-index: 0;
+    width: 100%;
+    height: 1px;
+}
+
+#login .ui-tabs .ui-tabs-panel {
+    padding: 0;
+}
+
+#login .ui-tabs .ui-tabs-nav li, #login .ui-tabs.ui-tabs-top .ui-tabs-nav li.ui-tabs-selected {
+    display: inline-block;
+    border-color: #dee2e6;
+    top: 0;
+    margin-bottom: 0;
+    background: none;
+    border-bottom: 2px solid #4caf50;
+}
+
+#login .ui-tabs .ui-tabs-nav li.ui-tabs-selected a:after {
+    content: "";
+    background: #F8F9FA;
+    position: absolute;
+    bottom: 1px;
+    left: 0;
+    z-index: 999;
+    width: 100%;
+    height: 1px;
+}
+
+#login .ui-tabs .ui-tabs-nav li a {
+    padding: 8px 25px;
+    font-weight: normal;
+    display: inline-block;
+    color: #4caf50;
+    text-shadow: none;
+    font-size: 1.2rem;
+}
+
+#login .ui-tabs .ui-tabs-nav li a:hover {
+    color: #4caf50;
+    background: #f5f5f5;
+}
+
+#login .ui-tabs .ui-tabs-nav li.ui-tabs-selected a, #login .ui-tabs .ui-tabs-nav li.ui-tabs-selected a:hover {
+    font-weight: bold;
+    background: none;
+}
+
+.ui-tabs .ui-tabs-panel, .ui-tabs .ui-tabs-panel .ui-panel, .ui-tabs .ui-tabs-panel .ui-panel-content, .ui-tabs .ui-tabs-panel .ui-datagrid-content {
+    border-width: 0;
+    padding: 0;
+    background: none;
+}
+
+#login .ui-tabs table {
+    font-weight: bold;
+    padding: 0;
+    margin-left: 0;
+}
+
+/* CARDS */
+
+#login .ui-tabs .ui-datagrid-column {
+    vertical-align: top;
+    width: 33.333%;
+    padding: 12px 12px;
+}
+
+.card {
+    font-weight: normal;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,0.125);
+    border-radius: 5px;
+    max-width: 250px;
+    margin: 20px 0 50px;
+}
+
+.card button {
+    background: none;
+    border: 0;
+    padding: 0;
+    display: list-item;
+    margin: 0 0 5px;
+    text-decoration: underline;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+.card-img {
+    height: 140px;
+    background: #e0e0e0;
+}
+
+.card-content {
+    padding: 10px 10px 15px;
+    color: #999;
+}
+
+.lab-image {
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.lab-no-img {
+    padding: 55px 10px;
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+
+.experiment-title {
+    font-size: 1.3rem;
+    color: #999;
+    line-height: 2;
+    text-transform: uppercase;
+}
+
+a .experiment-title {
+    color: #333;
+    text-decoration: none;
+}
+
+.experiment-users {
+    margin: 0 7px;
+    line-height: 1.8rem;
+    color: #666;
+}
+
+.experiment-status-on, .experiment-status-off {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: white;
+    font-size: 1rem;
+    background: #4caf50;
+    display: inline-block;
+    padding: 2px 5px;
+    border-radius: 5px;
+    min-width: 58px;
+    text-align: center;
+}
+
+.experiment-status-off {
+    color: #d32f2f;
+    background: #eee;
+}
+
+/* CARD LIST */
+
+#login .experiment-select div {
+    font-weight: normal;
+}
+
+#login .experiment-select .ui-datatable {
+    margin: 20px 0 25px;
+    border: 1px solid #e0e0e0;
+}
+
+#login .experiment-select table {
+    table-layout: fixed;
+    margin: 0;
+}
+
+#login .experiment-select thead {
+    display: none;
+}
+
+.experiment-select a, .experiment-select a .experiment-title {
+    text-decoration: none !important;
+    font-weight: bold;
+    color: #4caf50;
+}
+
+.experiment-select .ui-dt-c {
+    width: 100%;
+}
+
+.experiment-select table tr {
+    background: none !important;
+    border-color: white;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.experiment-select table tr:last-child {
+    border: 0 white;
+}
+
+.experiment-select .submit {
+    background: none;
+    border: 0;
+    padding: 0;
+    width: 100%;
+    text-align: left;
+    float: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 1.3rem;
+    font-weight: bold;
+    outline: 0 !important;
+    color: #4caf50;
+}
+
+.experiment-select .submit:hover, .experiment-select a:hover .experiment-title,
+.experiment-select a:hover, .experiment-select a:hover .experiment-title {
+    color: #388e3c;
+    outline: 0 !important;
+}
+
+.ui-datatable-data-empty td {
+    background: white;
+    padding: 70px 0 !important;
+    text-align: center;
+    font-style: italic;
+    font-size: 1.2rem;
+}
+
+.col-a, .col-b {
+    width: 49.5%;
+    display: inline-block;
+}
+
+.col-b {
+    text-align: right;
+}
+
+.clearfix:after {
+    height: 0;
+}
+
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+    box-shadow: none;
+}
+
+.laboratory.experiment-select .ui-datatable .ui-datatable-data td {
+    padding: 9px 10px 5px;
+}
+
+.experiment-select .ui-datatable .ui-datatable-data td {
+    padding: 5px 10px;
+}
+
+#center {
+    max-height: 100%;
+    margin: 0;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#left_col {
+    float: none;
+    display: inline-block;
+    clear: none;
+    margin: 0;
+    vertical-align: top;
+    margin-right: 2%;
+}
+
+#right_col {
+    float: none;
+    display: inline-block;
+    margin: 0;
+    width: 18%;
+    margin-left: 2%;
+    clear: none;
+    vertical-align: top;
+}
+
+.backoffice {
+    max-width: 1280px;
+    margin: 20px auto;
+}
+
+.warning-message-info {
+    font-size: 0.9rem;
+    font-style: italic;
+    color: #c62828;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.small-image {
+    border: solid;
+    width: 150px
+}
+
+.ui-panel.dark {
+    background: none;
+}
+
+.ui-panel.dark .ui-panel-titlebar {
+    background: none;
+    border: 0;
+    padding: 5px;
+    font-weight: normal;
+}
+
+.ui-panel.dark .ui-panel-content {
+    padding: 5px;
+    color: #777;
+}
+
+#login form.elab_launch_client, #center .ui-datatable .ui-paginator-top {
+    display: none;
+}
+
+#left_col ul {
+    margin: 0;
+    padding: 0;
+    border-left: 2px solid #ccc;
+}
+
+#left_col ul li {
+    padding: 0px;
+    margin: 0;
+}
+
+#left_col ul li a {
+    background: none;
+    font-weight: normal;
+    margin-bottom: 11px;
+    padding: 1px 10px;
+    font-size: 1.1rem;
+}
+
+#center .ui-datatable .ui-paginator, #center .ui-datatable .ui-paginator {
+    padding: 2px;
+    background: none;
+    border: 0;
+}
+
+.ui-paginator-page.ui-state-active {
+    background: none;
+}
+
+#center .ui-paginator.ui-paginator-bottom {
+    text-align: center;
+    color: #999;
+}
+
+#center .ui-datatable th, #center .ui-datatable tfoot td {
+    background: none;
+    border: none;
+    text-align: left;
+    font-weight: normal;
+    text-transform: uppercase;
+    box-shadow: none;
+    font-size: 1rem;
+    text-shadow: none;
+}
+
+#center .ui-datatable .ui-column-filter {
+    margin: 0 5px;
+    box-shadow: none;
+    display: inline-block;
+    padding: 1px 4px;
+    font-weight: normal;
+}
+
+#center .ui-button-text-only {
+    float: none;
+    width: auto;
+    padding: 0 20px;
+    background: #e9e9e9;
+    height: 30px;
+    cursor: pointer;
+    box-shadow: none;
+    margin: 15px 0;
+    text-shadow: none;
+}
+
+#center .ui-panel-titlebar.ui-widget-header {
+    background: none;
+    border: 0;
+    font-size: 1.2rem;
+}
+
+#center .ui-state-highlight {
+    background: #e0e0e0;
+    color: #333;
+    text-shadow: none;
+}
+
+#center .ui-datatable .ui-datatable-data td {
+    border: 0;
+}
+
+#center tbody td:last-child {
+    color: #999;
+    text-align: right;
+}
+
+#center tbody.ui-datatable-data-empty td {
+    text-align: center;
+}
+
+#center tbody td {
+    height: 26px;
+    text-shadow: none;
+}
+
+#center table tr {
+    cursor: default !important;
+}
+
+#center tbody tr {
+    border: 1px solid #ccc;
+}
+
+a.ui-panel-titlebar-icon.ui-corner-all.ui-state-default {
+    background: none;
+    border: 0;
+}
+
+#login .ui-tabs .ui-tabs-nav li, #login .ui-tabs.ui-tabs-top .ui-tabs-nav li {
+    margin: 0 8px 0 0px;
+    border: 0;
+    box-shadow: none;
+}
+
+#login ul {
+    margin: 0;
+}
+
+input.back-button {
+    padding: 0 20px;
+    background: #e9e9e9;
+    height: 28px;
+    cursor: pointer;
+    font-weight: normal;
+    margin: 0 0 10px;
+    border: 1px solid #999;
+    border-radius: 3px;
+}
+
+.login-btn {
+    float: right;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background: none;
+}
+
+.login-btn span.ui-button-text {
+    padding: 11px 8px 8px;
+    font-size: 1rem;
+    color: #4caf50;
+}
+
+#map {
+    width: 100%; 
+    height: 500px;
+    padding: 20px 0;
 }

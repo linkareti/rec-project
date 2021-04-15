@@ -1,105 +1,153 @@
 version: '3.5'
 services:
   elab-client-webswing:
-    image: ${repo}/${simplifiedGroupId}/rec.client-${webswing.version}-${openjdk.version}:${project.version}
-    ports:
-      - "18080:8080"
-      - "18000:8000"
-  
-  webswing-admin:
-    image: ${repo}/${simplifiedGroupId}/rec.client-admin-${webswing.version}-${openjdk.version}:${project.version}
+    image: ${repo}/${simplifiedGroupId}/webswing-${webswing.version}-${openjdk.version}:${project.version}
     ports:
       - "38080:8080"
-      - "38000:8000"
+    environment:
+      WEBSWING_ADMIN_CONSOLE_URL: http://localhost:48080
+    labels:
+      - "traefik.docker.network=server"
+      # HTTP (80)
+      - "traefik.http.routers.webswing-http.rule=PathPrefix(`/tiro_v1.0`)"
+      - "traefik.http.services.webswing-http.loadbalancer.healthcheck.path=/tiro_v1.0"
+      # HTTPS (443)
+      - "traefik.http.routers.webswing-https.rule=PathPrefix(`/tiro_v1.0`)"
+    networks:
+      - server
+  
+  webswing-admin:
+    image: ${repo}/${simplifiedGroupId}/webswing-admin-${webswing.version}-${openjdk.version}:${project.version}
+    ports:
+      - "48080:8080"
+    environment:
+      WEBSWING_PUBLIC_URL: http://localhost:38080
+    networks:
+      - server
 
   elab-server-payara:
-    image: ${repo}/${simplifiedGroupId}/rec.web-${payara.docker.version}:${project.version}
+    container_name: rec.web
+    image: ${repo}/${simplifiedGroupId}/rec.web-payara-${payara.docker.version}:${project.version}
     ports:
-      - "28080:8080"
+      # Debug
+      - "29009:9009"
       - "24848:4848"
+      - "28080:8080"
     environment:
       DEVELOPMENT_MODE: ${development.mode}
+      PAYARA_ARGS: "--debug"
+      jvm-options: '-XX\:+UnlockExperimentalVMOptions:-XX\:+UseContainerSupport:-XX\:MaxRAMPercentage=1:-Xms1g:-Xmx2g'
+      REC_DB_HOST: 'rec-database'
+      REC_DB_PORT: '3306'
+      GFTIMER_DB_HOST: 'rec-database'
+      GFTIMER_DB_PORT: '3306'
+      CONTAINERS_MULTICAST: 'elab-multicast:9001'
+      CONTAINERS_UPGRADE_DB: 'rec-upgrade-db'
     volumes:
       # Allow real-time refresh (with rec.web build)
       - ${project.build.directory}/resources/autodeploy:/autodeploy
+    networks:
+      - server
+    labels:
+      - "traefik.docker.network=server"
+      # HTTP (80)
+      - "traefik.http.routers.payara-http.entrypoints=web"
+      - "traefik.http.routers.payara-http.rule=PathPrefix(`/rec.web`)"
+      - "traefik.http.routers.payara-http.middlewares=payara-redir-http"
+      - "traefik.http.services.payara-http.loadbalancer.server.port=8080"
+      - "traefik.http.services.payara-http.loadbalancer.healthcheck.path=/rec.web"
+      - "traefik.http.middlewares.payara-redir-http.redirectscheme.scheme=https"
+      # HTTPS (443)
+      - "traefik.http.routers.payara-https.entrypoints=web-secure"
+      - "traefik.http.routers.payara-https.rule=PathPrefix(`/rec.web`)"
+      - "traefik.http.routers.payara-https.tls=true"
+    depends_on:
+      - rec-database
+      - elab-multicast
+      - rec-upgrade-db
+    restart: unless-stopped
+    secrets:
+      - as_mail.secret
+      - as_recdb.secret
 
   rec-database:
-    image: ${repo}/${simplifiedGroupId}/rec.database:${project.version}
+    container_name: rec.db
+    image: ${repo}/${simplifiedGroupId}/mysql-server-${mysql.version}:${project.version}
     ports:
       - "13306:3306"
-    volumes:
-     - ${project.build.directory}/resources/rec-schema.sql:/docker-entrypoint-initdb.d/rec-schema.sql
-     - ${project.build.directory}/resources/gf_timer-schema.sql:/docker-entrypoint-initdb.d/gf_timer-schema.sql
     #restart: "none"
+    networks:
+      - server
+    secrets:
+      - rdb.secret
+      - dbrec.secret
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: '/run/secrets/rdb.secret'
+      MYSQL_USER: 'rec'
+      MYSQL_PASSWORD_FILE: '/run/secrets/dbrec.secret'
+      MYSQL_DATABASE: 'rec'
+    volumes:
+      - db-rec:/var/lib/mysql:rw
+    restart: unless-stopped
 
   elab-multicast:
+    environment:
+      APPNAME: 'basic'
+      WORKDIR: '/home/elab/rec-deployment/basic'
+      LABORATORY_NAMES: 'basic'
     image: ${repo}/${simplifiedGroupId}/rec.multicast-${openjdk.version}:${project.version}
-    ports:
-      # Basic
-      - "25001:25001"
-      - "9001:9001"
-      # Intermediate
-      - "25002:25002"
-      - "9002:9002"
-      # Advanced
-      - "25003:25003"
-      - "9003:9003"
+    networks:
+      - server
   
-  elab-hardware-server:
-    image: ${repo}/${simplifiedGroupId}/base-images/openjdk-${openjdk.docker.version}:${project.version}
+  elab-hardwareserver:
+    container_name: rec.hardwareserver
+    image: ${repo}/${simplifiedGroupId}/openjdk-${openjdk.docker.version}:${project.version}
     healthcheck:
       test: pgrep java
       interval: 30s
       timeout: 1s
       retries: 3
       start_period: 30s
-    depends_on:
-      - elab-multicast
     volumes:
       - ${project.build.directory}/resources/hardwareserver:/startup.d/
+    networks:
+      - server
+    environment:
+      CONTAINERS_MULTICAST: 'elab-multicast:9001'
+      EXPERIMENT_NAMES: 'vtiroHardwareServer'
 
   # elab-streamer-server:
   #   image: ${repo}/${simplifiedGroupId}/base-images/streamer:${project.version}
   #   ports:
   #     - "8554:8554"
-  
-  nginx-fileserver:
-    image: docker-thirdparty.linkare.com/nginx:1.19.6
-    volumes:
-      #- ${project.build.directory}/resources/etc:/www/data:ro
-      # Allow real-time refresh (with rec.web build)
-      - ${project.parent.basedir}/rec.web/target/rec.web/client/etc:/usr/share/nginx/html/rec.web/client/etc:ro
-    labels:
-      # HTTP (80)
-      - "traefik.http.routers.nginx-http.entrypoints=web"
-      - "traefik.http.routers.nginx-http.rule=PathPrefix(`/rec.web/client`)"
-      - "traefik.http.routers.nginx-http.middlewares=nginx-redir-http"
-      - "traefik.http.services.nginx-http.loadbalancer.server.port=80"
-      - "traefik.http.middlewares.nginx-redir-http.redirectscheme.scheme=https"
-      # HTTPS (443)
-      - "traefik.http.routers.nginx-https.entrypoints=web-secure"
-      - "traefik.http.routers.nginx-https.rule=PathPrefix(`/rec.web/client`)"
-      - "traefik.http.routers.nginx-https.tls=true"
 
-  # upgrade-db:
-  #   image: ${repo}/${simplifiedGroupId}/rec.upgrade-db-${liquibase.version}:${project.version}
-  #   secrets:
-  #     - dbrec.secret
-  #   environment:
-  #     - TZ=Europe/Lisbon
-  #     - TARGET_DB=rec
-  #     - DB_HOST=rec-database
-  #     - DB_PORT=3306
-  #     - DB_USER=rec
-  #     - DB_PASS_FILE=/run/secrets/dbrec.secret
-  #     #- DUMP_SQL=""
-  #     #- FORCE_UNLOCK=""
-  #     #- RESET_CKSUMS=""
-  #     - LOGGING_LEVEL=info
-  #     - CHANGELOG_FILE=/changelog/db.changelog-master.xml
+  rec-upgrade-db:
+    image: ${repo}/${simplifiedGroupId}/rec.upgrade-db-liquibase-${liquibase.version}:${project.version}
+    environment:
+      #DUMP_SQL: 1
+      #FORCE_UNLOCK: 1
+      #RESET_CKSUMS: 1
+      DB_CONTEXT: 'dev'
+      TZ: 'Europe/Lisbon'
+      TARGET_DB: 'rec'
+      DB_HOST: 'rec-database'
+      DB_PORT: '3306'
+      DB_USER: 'rec'
+      DB_PASS_FILE: '/run/secrets/dbrec.secret'
+      LOGGING_LEVEL: 'info'
+      CHANGELOG_FILE: 'db.changelog-master.xml'
+      CLASSPATH: '/changelog'
+    networks:
+      - server
+    secrets:
+      - dbrec.secret
+    depends_on:
+      - rec-database
 
   reverse-proxy:
-    image: ${repo}/${simplifiedGroupId}/base-images/traefik-${traefik.version}:${project.version}
+    image: ${repo}/${simplifiedGroupId}/traefik-${traefik.version}:${project.version}
+    networks:
+      - server
       
 secrets:
    dbrec.secret:
@@ -110,3 +158,11 @@ secrets:
      file: ${project.build.directory}/resources/asadmin_mail.secret
    as_recdb.secret:
      file: ${project.build.directory}/resources/asadmin_recdb.secret
+
+networks:
+  server:
+    name: server
+
+volumes:
+  db-rec:
+    name: db-rec

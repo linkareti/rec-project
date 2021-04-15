@@ -10,7 +10,7 @@
     <ui:define name="body">
         <h:form id="labs_status_form" styleClass="elab_launch">
             <h1><h:outputText value="#{bundle['rec.elab.title']}" /></h1>
-            <p:poll update="tabView" interval="60"
+            <p:poll update="tabView" interval="10"
                     listener="#{statusBean.updateLabStatus}" />
             <p:accordionPanel id="tabView" var="lab" value="#{statusBean.labs}" dynamic="true" cache="true" activeIndex="-1">
                 <p:ajax event="tabChange" listener="#{statusBean.onTabChange}" update="tableExperiments"/>

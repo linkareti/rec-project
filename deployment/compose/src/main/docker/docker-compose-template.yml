@@ -1,89 +1,8 @@
 version: '3.5'
 services:
-  elab-client-webswing:
-    image: ${hub}/${simplifiedGroupId}/rec.client-${webswing.version}-${openjdk.version}:${project.version}
-    restart: always
-    environment:
-      XDG_RUNTIME_DIR: '/opt/webswing/.cache/xdgr'
-    labels:
-      # HTTP (80)
-      - "traefik.http.routers.webswing-http.entrypoints=web"
-      - "traefik.http.routers.webswing-http.rule=PathPrefix(`/`)"
-      - "traefik.http.routers.webswing-http.middlewares=webswing-redir-http"
-      - "traefik.http.services.webswing-http.loadbalancer.server.port=8080"
-      - "traefik.http.middlewares.webswing-redir-http.redirectscheme.scheme=https"
-      # HTTPS (443)
-      - "traefik.http.routers.webswing-https.entrypoints=web-secure"
-      - "traefik.http.routers.webswing-https.rule=PathPrefix(`/`)"
-      - "traefik.http.routers.webswing-https.tls=true"
-
-  webswing-admin:
-    image: ${hub}/${simplifiedGroupId}/rec.client-admin-${webswing.version}-${openjdk.version}:${project.version}
-    restart: always
-    environment:
-      WEBSWING_HOST: elab-client-webswing
-      WEBSWING_WEBSOCKET_PORT: 8080
-      WEBSWING_SHARED_LOG_DIR: /var/opt/logs
-      WEBSWING_PUBLIC_URL: https://elab.dev.linkare.com
-
-  elab-server-payara:
-    image: ${hub}/${simplifiedGroupId}/rec.web-${payara.docker.version}:${project.version}
-    environment:
-      jvm-options: '-XX\:+UnlockExperimentalVMOptions:-XX\:+UseContainerSupport:-XX\:MaxRAMPercentage=1:-Xms1g:-Xmx2g'
-      REC_DB_HOST: 'rec-database'
-      REC_DB_PORT: '3306'
-      GFTIMER_DB_HOST: 'rec-database'
-      GFTIMER_DB_PORT: '3306'
-      MULTICAST_HOST: 'elab-multicast'
-      MULTICAST_PORT: '9001'
-    restart: unless-stopped
-    secrets:
-      - as_mail.secret
-      - as_recdb.secret
-      # - as_gftimerdb.secret
-    depends_on:
-      - rec-database
-      - elab-multicast
-      # - gftimer-database
-    labels:
-      # HTTP (80)
-      - "traefik.http.routers.payara-http.entrypoints=web"
-      - "traefik.http.routers.payara-http.rule=PathPrefix(`/rec.web`)"
-      - "traefik.http.routers.payara-http.middlewares=payara-redir-http"
-      - "traefik.http.services.payara-http.loadbalancer.server.port=8080"
-      - "traefik.http.services.payara-http.loadbalancer.healthcheck.path=/rec.web"
-      - "traefik.http.middlewares.payara-redir-http.redirectscheme.scheme=https"  
-      # HTTPS (443)
-      - "traefik.http.routers.payara-https.entrypoints=web-secure"
-      - "traefik.http.routers.payara-https.rule=PathPrefix(`/rec.web`)"
-      - "traefik.http.routers.payara-https.tls=true"
-
-  rec-database:
-    image: ${hub}/${simplifiedGroupId}/rec.database:${project.version}
-    secrets:
-      - rdb.secret
-      - dbrec.secret
-    environment:
-      MYSQL_ROOT_PASSWORD_FILE: '/run/secrets/rdb.secret'
-      MYSQL_USER: 'rec'
-      MYSQL_PASSWORD_FILE: '/run/secrets/dbrec.secret'
-      MYSQL_DATABASE: 'rec'
-    volumes:
-      - db-rec:/var/lib/mysql:rw
-    restart: unless-stopped
-
-  elab-multicast:
-    image: ${hub}/${simplifiedGroupId}/rec.multicast-${openjdk.version}:${project.version}
-    healthcheck:
-      test: pgrep java
-      interval: 30s
-      timeout: 1s
-      retries: 3
-      start_period: 30s
-    restart: unless-stopped
-
   reverse-proxy:
-    image: ${hub}/${simplifiedGroupId}/base-images/traefik-${traefik.version}:${project.version}
+    container_name: rec.proxy
+    image: ${hub}/${simplifiedGroupId}/traefik-${traefik.version}:${project.version}
     command:
       - --entrypoints.web.address=:80
       - --entrypoints.web-secure.address=:443 #Declares the web-secure entrypoint in Traefik
@@ -99,12 +18,43 @@ services:
       # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock:ro
 
-secrets:
-  dbrec.secret: {}
-  rdb.secret: {}
-  as_mail.secret: {}
-  as_recdb.secret: {}
- 
-volumes:
-  db-rec:
-    name: db-rec
+  elab-multicast:
+    container_name: rec.multicast
+    healthcheck:
+      test: pgrep java
+      interval: 30s
+      timeout: 1s
+      retries: 3
+      start_period: 30s
+    restart: unless-stopped
+    environment:
+      APPUSER: elab
+    image: ${hub}/${simplifiedGroupId}/rec.multicast-${openjdk.version}:${project.version}
+
+  elab-client-webswing:
+    container_name: rec.client
+    image: ${repo}/${simplifiedGroupId}/webswing-${webswing.version}-${openjdk.version}:${project.version}
+    restart: unless-stopped
+    environment:
+      XDG_RUNTIME_DIR: '/opt/webswing/.cache/xdgr'
+    labels:
+      # HTTP (80)
+      - "traefik.http.routers.webswing-http.entrypoints=web"
+      - "traefik.http.routers.webswing-http.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.webswing-http.middlewares=webswing-http-redir"
+      - "traefik.http.services.webswing-http.loadbalancer.server.port=8080"
+      - "traefik.http.middlewares.webswing-http-redir.redirectscheme.scheme=https"
+      # HTTPS (443)
+      - "traefik.http.routers.webswing-https.entrypoints=web-secure"
+      - "traefik.http.routers.webswing-https.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.webswing-https.tls=true"
+
+  webswing-admin:
+    container_name: rec.client-admin
+    image: ${repo}/${simplifiedGroupId}/webswing-admin-${webswing.version}-${openjdk.version}:${project.version}
+    restart: unless-stopped
+    environment:
+      WEBSWING_HOST: elab-client-webswing
+      WEBSWING_WEBSOCKET_PORT: 8080
+      WEBSWING_SHARED_LOG_DIR: /var/opt/logs
+      WEBSWING_PUBLIC_URL: https://elab.dev.linkare.com

@@ -1,5 +1,6 @@
 package com.linkare.rec.web.util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -10,11 +11,10 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentSkipListSet;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import javax.naming.NamingException;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.linkare.rec.web.ClientInfoDTO;
 import com.linkare.rec.web.MultiCastControllerNotifInfoDTO;
@@ -24,20 +24,20 @@ import com.linkare.rec.web.mbean.IMultiCastControllerMXBean;
 import com.linkare.rec.web.mbean.NotificationTypeEnum;
 import com.linkare.rec.web.model.DeployedExperiment;
 import com.linkare.rec.web.model.Experiment;
+import com.linkare.rec.web.model.GpsCoordinates;
 import com.linkare.rec.web.model.HardwareState;
 import com.linkare.rec.web.model.Laboratory;
 import com.linkare.rec.web.service.ExperimentService;
-import java.util.ArrayList;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
+
 import org.apache.commons.collections.buffer.CircularFifoBuffer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MultiThreadLaboratoryWrapper {
 
 	private static final int MESSAGE_QUEUE_MAX_SIZE = 100;
 
-	private final static Logger LOGGER = LoggerFactory
-			.getLogger(MultiThreadLaboratoryWrapper.class);
+	private final static Logger LOGGER = LoggerFactory.getLogger(MultiThreadLaboratoryWrapper.class);
 	private final Laboratory underlyingLaboratory;
 	private final ConcurrentMap<String, MultiThreadDeployedExperimentWrapper> deployedExperimentsMap;
 	private final Set<String> usersSet;
@@ -49,20 +49,22 @@ public class MultiThreadLaboratoryWrapper {
 	private final CircularFifoBuffer messageQueue;
 	private final ReadWriteLock readWriteLock;
 
-	public MultiThreadLaboratoryWrapper(
-			final MbeanProxy<IMultiCastControllerMXBean, Laboratory> labMBeanPRoxy)
+	public MultiThreadLaboratoryWrapper(final MbeanProxy<IMultiCastControllerMXBean, Laboratory> labMBeanPRoxy)
 			throws NamingException {
 		this.underlyingLaboratory = labMBeanPRoxy.getEntity();
 		this.mbeanProxy = labMBeanPRoxy.getMbeanInterface();
 		this.experimentService = JndiHelper.getExperimentService();
-		this.deployedExperimentsMap = new ConcurrentHashMap<String, MultiThreadDeployedExperimentWrapper>();
-		this.usersSet = new ConcurrentSkipListSet<String>();
+		this.deployedExperimentsMap = new ConcurrentHashMap<>();
+		this.usersSet = new ConcurrentSkipListSet<>();
 		readWriteLock = new ReentrantReadWriteLock();
 		messageQueue = new CircularFifoBuffer(MESSAGE_QUEUE_MAX_SIZE);
 		new ArrayList<RecChatMessageDTO>();
 		init();
 	}
 
+	
+	
+	
 	private void init() {
 		synchronized (this) {
 
@@ -91,7 +93,7 @@ public class MultiThreadLaboratoryWrapper {
 		Set<String> usersSet = Collections.emptySet();
 
 		if (!labUsers.isEmpty()) {
-			usersSet = new HashSet<String>(labUsers.size());
+			usersSet = new HashSet<>(labUsers.size());
 
 			for (final ClientInfoDTO clientInfoDTO : labUsers) {
 				usersSet.add(clientInfoDTO.getUserName());
@@ -129,8 +131,7 @@ public class MultiThreadLaboratoryWrapper {
 
 		if (deployedExperimentWrapper == null) {
 			addHardware(getRemoteHardware(experimentID));
-			deployedExperimentWrapper = deployedExperimentsMap
-					.get(experimentID);
+			deployedExperimentWrapper = deployedExperimentsMap.get(experimentID);
 		}
 
 		if (deployedExperimentWrapper != null) {
@@ -196,10 +197,8 @@ public class MultiThreadLaboratoryWrapper {
 	private DeployedExperiment getDeployedExperimentFrom(
 			final RegisteredHardwareDTO registeredHardwareDTO) {
 		final DeployedExperiment deployedExperiment = new DeployedExperiment();
-		deployedExperiment.setState(HardwareState
-				.valueOfCode(registeredHardwareDTO.getStateCode()));
-		deployedExperiment.setUsersConnected(registeredHardwareDTO
-				.getUsersConnected());
+		deployedExperiment.setState(HardwareState.valueOfCode(registeredHardwareDTO.getStateCode()));
+		deployedExperiment.setUsersConnected(registeredHardwareDTO.getUsersConnected());
 		return deployedExperiment;
 	}
 
@@ -211,26 +210,22 @@ public class MultiThreadLaboratoryWrapper {
 				.get(externalID);
 
 		if (multiThreadDeployedExperimentWrapper == null) {
-			loadExperimentFromBD(externalID,
-					getDeployedExperimentFrom(registeredHardware));
+			loadExperimentFromBD(externalID, getDeployedExperimentFrom(registeredHardware));
 		}
 
 		return deployedExperimentsMap.get(externalID);
 	}
 
-	private void loadExperimentFromBD(final String externalID,
-			final DeployedExperiment deployedExperiment) {
+	private void loadExperimentFromBD(final String externalID, final DeployedExperiment deployedExperiment) {
 
 		synchronized (this) {
-			MultiThreadDeployedExperimentWrapper experiment = deployedExperimentsMap
-					.get(externalID);
+			MultiThreadDeployedExperimentWrapper experiment = deployedExperimentsMap.get(externalID);
 			if (experiment == null) {
 				final Experiment findByExternalID = getExperimentFromBD(externalID);
 				if (findByExternalID != null) {
 					deployedExperiment.setExperiment(findByExternalID);
 					deployedExperimentsMap.put(externalID,
-							new MultiThreadDeployedExperimentWrapper(
-									deployedExperiment));
+							new MultiThreadDeployedExperimentWrapper(deployedExperiment));
 				}
 			}
 		}
@@ -365,7 +360,7 @@ public class MultiThreadLaboratoryWrapper {
 	}
 
 	private Experiment getExperimentFromBD(final String externalID) {
-		return experimentService.findByExternalID(externalID);
+		return experimentService.findByExternalID(externalID, underlyingLaboratory);
 	}
 
 	public Map<String, MultiThreadDeployedExperimentWrapper> getLiveExperiments() {
@@ -391,6 +386,10 @@ public class MultiThreadLaboratoryWrapper {
 	public String getName() {
 		return underlyingLaboratory.getName();
 	}
+	
+	public void setName(String name) {
+		 underlyingLaboratory.setName(name);
+	}
 
 	public void setAvailable(final boolean available) {
 		isAvailable = available;
@@ -407,6 +406,23 @@ public class MultiThreadLaboratoryWrapper {
 
 	public String getStateLabel() {
 		return underlyingLaboratory.getState().getLabel();
+	}
+	
+	
+	
+	
+	
+	public GpsCoordinates getCoordinates() {
+		return underlyingLaboratory.getGpsLocation();
+	}
+	
+	public boolean isImageAvailable() {
+		return underlyingLaboratory.getImage() != null 
+			&& underlyingLaboratory.getImage().length >= 1;
+	}
+	
+	public boolean isCoordinateAvailable() {
+		return underlyingLaboratory.getGpsLocation() != null;
 	}
 
 	public void sendMessage(final ClientInfoDTO user, final String clientTo,

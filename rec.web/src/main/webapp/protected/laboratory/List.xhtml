@@ -48,6 +48,7 @@
 
             </p:dataTable>
             <p:commandButton id="cmdButtonCreate" action="#{laboratoryController.prepareCreate}" value="#{bundle['operation.create']}" ajax="false"/>
+            <p:commandButton id="cmdButtonSync" action="#{laboratoryController.syncAll}" value="Synchronize" ajax="false"/>
         </h:form>
     </ui:define>
 </ui:composition>

@@ -1,28 +1,42 @@
 package com.linkare.rec.web.bean;
 
-import com.linkare.jsf.utils.JsfUtil;
-import com.linkare.rec.web.ClientInfoDTO;
+import java.io.ByteArrayInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseId;
 
+import com.linkare.jsf.utils.JsfUtil;
+import com.linkare.rec.web.ClientInfoDTO;
 import com.linkare.rec.web.model.DeployedExperiment;
 import com.linkare.rec.web.model.Experiment;
+import com.linkare.rec.web.model.Laboratory;
 import com.linkare.rec.web.service.ExperimentServiceLocal;
+import com.linkare.rec.web.service.LaboratoryService;
+import com.linkare.rec.web.service.LaboratoryServiceLocal;
 import com.linkare.rec.web.util.ConstantUtils;
 import com.linkare.rec.web.util.LaboratoriesMonitor;
 import com.linkare.rec.web.util.MultiThreadDeployedExperimentWrapper;
 import com.linkare.rec.web.util.MultiThreadLaboratoryWrapper;
-import java.util.HashSet;
-import java.util.Set;
+import com.linkare.rec.web.util.Strings;
+
 import org.primefaces.event.TabChangeEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 /**
  * Defines of the operations to retrieve the existing laboratories and it's status, and also which experiments are in each laboratory, their status, number of
@@ -43,15 +57,37 @@ public class StatusBean implements Serializable {
     private LaboratoriesMonitor laboratoriesMonitor = LaboratoriesMonitor.getInstance();
     @EJB
     private ExperimentServiceLocal experimentService;
+    
+    @EJB(beanInterface = LaboratoryServiceLocal.class)
+    private LaboratoryService service;
+    
     private Map<String, List<Experiment>> activeExperiment = new HashMap<String, List<Experiment>>();
+    
+    private static final Logger LOG = LoggerFactory.getLogger(StatusBean.class.getName());
 
-    public List<MultiThreadLaboratoryWrapper> getLabs() {
+	public List<MultiThreadLaboratoryWrapper> getLabs() {
+		
+		List<MultiThreadLaboratoryWrapper> returnableLabs = new ArrayList<MultiThreadLaboratoryWrapper>(); 
+		
         if (labs == null) {
             labs = LaboratoriesMonitor.getInstance().getActiveLabs();
         }
-        return labs;
+        returnableLabs.addAll(labs);
+        
+        return returnableLabs;
     }
 
+    private String laboratory;
+ 
+    public String getLaboratory() {
+        return laboratory;
+    }
+    
+    public void setLaboratory(String laboratory) {
+    	this.laboratory= laboratory;
+    }
+	
+	
     public MultiThreadLaboratoryWrapper getSelectedLab() {
         return selectedLab;
     }
@@ -125,11 +161,45 @@ public class StatusBean implements Serializable {
             }
         }
     }
+    
+    
+    public String openExperiment() {
+        String param1 = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("laboratory");
+        return "experiencesLogin?faces-redirect=true&includeViewParams=true&laboratory=" + param1;
+    }
+    
+    
+    public StreamedContent getLaboratoryImage() {
+        
+    	  FacesContext context = FacesContext.getCurrentInstance();
+
+          if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
+              // So, we're rendering the HTML. Return a stub StreamedContent so that it will generate right URL.
+              return new DefaultStreamedContent();
+          }
+    	
+    	ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        String laboratoryId = externalContext.getRequestParameterMap().get("labId");
+        if (Strings.isNullOrEmpty(laboratoryId)) {
+        	LOG.warn("Something went wrong, no parameter laboratory in image request");
+            return null;
+        }
+
+        Laboratory laboratory = service.find(Long.valueOf(laboratoryId));
+
+        if (laboratory.getImage() == null || laboratory.getImage().length < 1) {
+            return null;
+        }
+        return new DefaultStreamedContent(new ByteArrayInputStream(laboratory.getImage()));
+    }
 
     public void onTabChange(TabChangeEvent event) {
         selectedLab = (MultiThreadLaboratoryWrapper) event.getData();
         refreshExperiments();
     }
+    
+    
+    
 
     public void listenerMethod(ClientInfoDTO clientInfo) {
         for (DeployedExperiment dpExperiment : selectedLabExperiments) {
