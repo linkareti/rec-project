@@ -293,7 +293,7 @@
                         </goals>
                         <configuration>
                             <url>
-                                https://docker-hub.elab.linkare.com/nexus/repository/thirdparty/org/webswing/webswing-examples-eval/${webswing.version}/webswing-examples-eval-${webswing.version}-distribution.zip
+                                https://docker-hub.elab.linkare.com/nexus/repository/thirdparty/org/webswing/webswing//${webswing.version}/webswing-${webswing.version}-distribution.zip
                             </url>
                             <unpack>false</unpack>
                             <outputDirectory>${project.build.directory}/webswing/resources</outputDirectory>
