@@ -173,7 +173,7 @@
             <activation>
                 <property>
                     <name>build.environment</name>
-                    <value>!local-client</value>
+                    <value>local</value>
                 </property>
             </activation>
             <build>
@@ -224,6 +224,38 @@
                                     <workingDirectory>${project.build.directory}</workingDirectory>
                                     <executable>docker-compose</executable>
                                     <commandlineArgs> -f docker-compose-template.yml -f docker-compose-local.yml -f docker-compose-client-local.yml --log-level ERROR config </commandlineArgs>
+                                    <outputFile>${project.build.directory}/docker-compose-runner.yml</outputFile>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>pendulum</id>
+            <activation>
+                <property>
+                    <name>build.environment</name>
+                    <value>pendulum</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>create-stack-runner-pendulum</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <workingDirectory>${project.build.directory}</workingDirectory>
+                                    <executable>docker-compose</executable>
+                                    <commandlineArgs> -f docker-compose-template.yml -f docker-compose-pendulum.yml --log-level ERROR config </commandlineArgs>
                                     <outputFile>${project.build.directory}/docker-compose-runner.yml</outputFile>
                                 </configuration>
                             </execution>
