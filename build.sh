@@ -77,6 +77,6 @@ if [ $RETVAL -ne 0 ]; then
 fi
 
 # Package rec.web application
-wget http://e-lab.ist.utl.pt/moodle/wspp/wsdl_pp.php -P rec.web/src/main/resources
+#wget http://e-lab.ist.utl.pt/moodle/wspp/wsdl_pp.php -P rec.web/src/main/resources
 
 popd
